@@ -1,0 +1,21 @@
+{
+	"name": "siiges-services",
+	"workspaces": [
+		"packages/*"
+	],
+	"version": "1.0.0",
+	"description": "This monorepo is for the managing of backend services",
+	"main": "src/index.js",
+	"private": true,
+	"repository": {
+    "type": "git",
+    "url": "https://github.com/subsesjal/siiges-services.git"
+  },
+	"scripts": {
+		"bootstrap": "yarn install -W && lerna bootstrap"
+	},
+	"devDependencies": {
+		"lerna": "5.1.6",
+		"nx": "14.4.0"
+	}
+}
