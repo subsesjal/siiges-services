@@ -1,0 +1,26 @@
+{
+	"name": "@siiges-services/api-gateway",
+	"version": "1.0.0",
+	"description": "This package is for manage the rutes of the api",
+	"author": "cetherdev <robert.hct@gmail.com>",
+	"homepage": "https://github.com/robertotorres-dev/siiges-services#readme",
+	"license": "ISC",
+	"main": "src/index.js",
+	"directories": {
+		"src": "src",
+		"test": "__tests__"
+	},
+	"files": [
+		"src",
+		"__tests__"
+	],
+	"scripts": {
+		"test": "echo \"Error: run tests from root\" && exit 1"
+	},
+	"bugs": {
+		"url": "https://github.com/robertotorres-dev/siiges-services/issues"
+	},
+	"dependencies": {
+		"@siiges-services/authentication": "^1.0.0"
+	}
+}
