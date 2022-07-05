@@ -1,7 +1,6 @@
-'use strict';
+// Internal dependencies
+const HttpServer = require('./drivers/http/server');
 
-module.exports = apiGateway;
-
-function apiGateway() {
-    // TODO
-}
+HttpServer.start().catch((err) =>
+	console.error('Something went wrong when running server', err)
+);
