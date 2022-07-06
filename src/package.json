@@ -8,13 +8,15 @@
 	"main": "src/index.js",
 	"private": true,
 	"repository": {
-    "type": "git",
-    "url": "https://github.com/subsesjal/siiges-services.git"
-  },
+		"type": "git",
+		"url": "https://github.com/subsesjal/siiges-services.git"
+	},
 	"scripts": {
 		"bootstrap": "yarn install -W && lerna bootstrap"
 	},
 	"devDependencies": {
+		"eslint": "^7.32.0",
+		"eslint-config-airbnb-base": "^15.0.0",
 		"lerna": "5.1.6",
 		"nx": "14.4.0"
 	}
