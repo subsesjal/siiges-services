@@ -17,6 +17,7 @@ module.exports = {
   coveragePathIgnorePatterns: [
     '/node_modules/',
     '<rootDir>/__tests__/testUtils.js',
+    '<rootDir>/packages/*/__tests__/testUtils.js',
   ],
 
   // Indicates which provider should be used to instrument code for coverage
@@ -30,7 +31,8 @@ module.exports = {
   // The paths to modules that run some code to configure or set up the
   // testing environment before each test
   setupFiles: [
-    '<rootDir>/__tests__/setupTest.js',
+    '<rootDir>/packages/api-gateway/__tests__/setupTest.js',
+    '<rootDir>/packages/authentication/__tests__/setupTest.js',
   ],
   // The glob patterns Jest uses to detect test files
   testMatch: [
