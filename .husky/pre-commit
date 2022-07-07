@@ -1,5 +1,6 @@
 #!/bin/sh
 # A simple script with a function...
+. "$(dirname -- "$0")/_/husky.sh"
 CURRENT_PATH="$PWD"
 PATH_TO_PACKAGES="$CURRENT_PATH/packages"
 PATH_TO_ROOT_FROM_PACKAGES="../.."
@@ -26,13 +27,13 @@ set_changes_in_package()
 }
 
 pre_commit_checks()
-{  
+{
   cd ${PATH_TO_PACKAGES}/${current_package} && yarn precommit
   cd ${PATH_TO_ROOT_FROM_PACKAGES}
 }
 
 run_commit_checks()
-{ 
+{
   if [ ${#files_changed} -gt ${NO_CHANGES} ]
   then
     pre_commit_checks
@@ -50,7 +51,7 @@ pre_commit()
   done
 }
 
-main() 
+main()
 {
   set_file_list
   set_package_list
