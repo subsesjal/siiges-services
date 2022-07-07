@@ -23,7 +23,7 @@
 		"lint:fix": "eslint --fix .",
 		"test": "jest",
 		"test:watch": "jest --watch",
-		"precommit": "yarn lint && yarn jest" 
+		"precommit": "yarn lint && yarn test"
   },
   "bugs": {
     "url": "https://github.com/robertotorres-dev/siiges-services/issues"
