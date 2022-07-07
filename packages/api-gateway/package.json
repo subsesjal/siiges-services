@@ -15,8 +15,11 @@
 		"__tests__"
 	],
 	"scripts": {
+		"lint": "eslint .",
+		"lint:fix": "eslint --fix .",
 		"test": "jest",
-		"test:watch": "jest --watch"
+		"test:watch": "jest --watch",
+		"precommit": "yarn lint && yarn jest" 
 	},
 	"bugs": {
 		"url": "https://github.com/robertotorres-dev/siiges-services/issues"
