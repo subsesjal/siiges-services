@@ -6,7 +6,7 @@ const getById = (getByIdQuery) => async (id) => {
   console.log(`result: ${result} and id: ${id}`);
 	if (!result) {
 		throw boom.notFound(
-			`[geolocation:getPlace]: No place found with id: ${id}`
+			`[usuarios:getusuarioById]: Usuario no encontrado con id: ${id}`
 		);
 	}
 	return result;
