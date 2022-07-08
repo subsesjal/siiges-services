@@ -5,5 +5,7 @@ function errorHandler(error, reply) {
 			.send(error.output.payload);
 	}
 
-  return reply.code(500).send({error: error.message, stack: error.stack})
+	return reply.code(500).send({ error: error.message, stack: error.stack });
 }
+
+module.exports = errorHandler;

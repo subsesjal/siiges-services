@@ -1,5 +1,5 @@
 // External dependencies
-const Autoload = require('@fastify/autoload');
+const autoLoad = require('@fastify/autoload');
 const Fastify = require('fastify');
 const cors = require('@fastify/cors');
 const path = require('path');
@@ -37,12 +37,13 @@ const fastify = Fastify({
 fastify.decorate('hasRole', authDecorators.hasRole);
  */
 
-fastify.register(Autoload, {
+fastify.register(autoLoad, {
 	dir: path.join(__dirname, 'routes'),
 	ignorePattern: /.*(schema).*/,
+	options: { prefix: 'api/v1' },
 });
 
-//fastify.register(Autoload, { dir: path.join(__dirname, 'plugin') });
+fastify.register(autoLoad, { dir: path.join(__dirname, 'plugin') });
 
 async function start() {
 	try {

@@ -1,0 +1,28 @@
+{
+	"name": "@siiges-services/usuario",
+	"version": "1.0.0",
+	"description": "This package handle all about users enpoints",
+	"author": "cetherdev <robert.hct@gmail.com>",
+	"homepage": "https://github.com/robertotorres-dev/siiges-services#readme",
+	"license": "ISC",
+	"main": "src/index.js",
+	"directories": {
+		"src": "src"
+	},
+	"files": [
+		"src"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/robertotorres-dev/siiges-services.git"
+	},
+	"scripts": {
+		"test": "echo \"Error: run tests from root\" && exit 1"
+	},
+	"bugs": {
+		"url": "https://github.com/robertotorres-dev/siiges-services/issues"
+	}
+}
