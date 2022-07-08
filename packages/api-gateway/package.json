@@ -15,12 +15,11 @@
 		"__tests__"
 	],
 	"scripts": {
-		"start:dev": "nodemon src/index.js",
-		"inspect": "node --inspect src/index.js",
-		"test": "jest --runInBand",
-		"test:watch": "jest --watch",
 		"lint": "eslint .",
-		"lint:fix": "eslint . --fix"
+		"lint:fix": "eslint --fix .",
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"precommit": "yarn lint && yarn test"
 	},
 	"bugs": {
 		"url": "https://github.com/robertotorres-dev/siiges-services/issues"

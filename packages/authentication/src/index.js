@@ -1,7 +1,5 @@
-'use strict';
+function authentication() {
+  // TODO
+}
 
 module.exports = authentication;
-
-function authentication() {
-    // TODO
-}

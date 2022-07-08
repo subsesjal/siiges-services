@@ -1,8 +1,9 @@
-const { usuariosAdapter } = require('../../adapters');
+//const { usuarioAdapter } = require('../../adapters')
 
 async function usuarioRouter(fastify) {
-	//await fastify.get('/', usuariosAdapter.getUsuarios);
-	await fastify.get('/:usuarioId', usuariosAdapter.getUsuarioById);
+	await fastify.get('/', async (request, reply) => {
+		return { hello: 'world' };
+	});
 }
 
 module.exports = usuarioRouter;
