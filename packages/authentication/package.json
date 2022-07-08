@@ -1,27 +1,29 @@
 {
-  "name": "@siiges-services/usuario",
+  "name": "@siiges-services/authentication",
   "version": "1.0.0",
-  "description": "This package handle all about users enpoints",
+  "description": "This package handle all about authentication",
   "author": "cetherdev <robert.hct@gmail.com>",
   "homepage": "https://github.com/robertotorres-dev/siiges-services#readme",
   "license": "ISC",
   "main": "src/index.js",
   "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "lib"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
+		"src": "src",
+		"test": "__tests__"
+	},
+	"files": [
+		"src",
+		"__tests__"
+	],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/robertotorres-dev/siiges-services.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "lint": "eslint .",
+		"lint:fix": "eslint --fix .",
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"precommit": "yarn lint && yarn test"
   },
   "bugs": {
     "url": "https://github.com/robertotorres-dev/siiges-services/issues"
