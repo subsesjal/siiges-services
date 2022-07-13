@@ -1,8 +1,8 @@
 // External dependencies
 const { join } = require('path');
 // Internal dependecies
-const environmentVars = require('../config/environment');
-const { environments } = require('./utils/constants');
+const environmentVars = require('../../config/environment');
+const { environments } = require('./constants');
 
 const envIsDevelopment = () => {
   if (environmentVars.NODE_ENV === environments.DEV) {
