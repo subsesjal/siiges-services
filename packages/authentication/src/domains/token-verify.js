@@ -7,7 +7,7 @@ const { environmentVars } = require('../../config/index');
 
 const verifyToken = (token) => {
   try {
-    jwt.verify(token, environmentVars.tokenPublicKey);
+    jwt.verify(token, environmentVars.jwtSecret);
   } catch (error) {
     Logger.error(`Invalid token \nerror: ${error}`);
   }

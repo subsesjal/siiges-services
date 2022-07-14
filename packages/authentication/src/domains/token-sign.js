@@ -7,7 +7,7 @@ const { environmentVars } = require('../../config/index');
 const signToken = (informationObj, algorithm) => {
   const token = jwt.sign(
     informationObj,
-    environmentVars.tokenPrivateKey,
+    environmentVars.jwtSecret,
     { algorithm },
   );
 
