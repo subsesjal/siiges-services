@@ -1,9 +1,7 @@
-const { softwareEnvironments } = require('./constants');
-const dotenvPath = require('./dotenv-path');
+const constants = require('./constants');
 const Logger = require('./logger');
 
 module.exports = {
-  softwareEnvironments,
-  dotenvPath,
+  constants,
   Logger,
 };

@@ -3,6 +3,4 @@ const softwareEnvironments = {
   PROD: 'production',
 };
 
-module.exports = {
-  environments: softwareEnvironments,
-};
+module.exports = softwareEnvironments;
