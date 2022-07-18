@@ -1,17 +1,17 @@
-const { usuariosAdapter } = require("../../adapters");
-const { getUsuarioSchema, createUsuarioSchema } = require("./schema");
+const { usuariosAdapter } = require('../../adapters');
+const { getUsuarioSchema, createUsuarioSchema } = require('./schema');
 
 async function usuarioRouter(fastify) {
-  await fastify.get("/", usuariosAdapter.find);
+  await fastify.get('/', usuariosAdapter.find);
   await fastify.get(
-    "/:usuarioId",
+    '/:usuarioId',
     { schema: getUsuarioSchema },
-    usuariosAdapter.findOne
+    usuariosAdapter.findOne,
   );
   await fastify.post(
-    "/",
+    '/',
     { schema: createUsuarioSchema },
-    usuariosAdapter.create
+    usuariosAdapter.create,
   );
 }
 
