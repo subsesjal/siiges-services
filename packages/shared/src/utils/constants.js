@@ -1,7 +1,8 @@
-const environments = {
+const softwareEnvironments = {
   DEV: 'development',
+  PROD: 'production',
 };
 
 module.exports = {
-  environments,
+  environments: softwareEnvironments,
 };
