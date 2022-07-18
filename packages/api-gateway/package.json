@@ -1,46 +1,48 @@
 {
-	"name": "@siiges-services/api-gateway",
-	"version": "1.0.0",
-	"description": "This package is for manage the rutes of the api",
-	"author": "cetherdev <robert.hct@gmail.com>",
-	"homepage": "https://github.com/robertotorres-dev/siiges-services#readme",
-	"license": "ISC",
-	"main": "src/index.js",
-	"directories": {
-		"src": "src",
-		"test": "__tests__"
-	},
-	"files": [
-		"src",
-		"__tests__"
-	],
-	"scripts": {
+  "name": "@siiges-services/api-gateway",
+  "version": "1.0.0",
+  "description": "This package is for manage the rutes of the api",
+  "author": "cetherdev <robert.hct@gmail.com>",
+  "homepage": "https://github.com/robertotorres-dev/siiges-services#readme",
+  "license": "ISC",
+  "main": "src/index.js",
+  "directories": {
+    "src": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "src",
+    "__tests__"
+  ],
+  "scripts": {
     "start:dev": "nodemon src/index.js",
-		"inspect": "node --inspect src/index.js",
-		"lint": "eslint .",
-		"lint:fix": "eslint --fix .",
-		"test": "jest",
-		"test:watch": "jest --watch",
-		"precommit": "yarn lint && yarn test"
-	},
-	"bugs": {
-		"url": "https://github.com/robertotorres-dev/siiges-services/issues"
-	},
-	"dependencies": {
-		"@fastify/autoload": "^5.0.0",
-		"@fastify/cors": "^8.0.0",
-		"@hapi/boom": "^10.0.0",
-		"@siiges-services/authentication": "^1.0.0",
-		"@siiges-services/usuario": "^1.0.0",
-		"fastify": "^4.2.0",
-		"sequelize": "^6.21.2"
-	},
-	"devDependencies": {
-		"eslint": "^8.12.0",
-		"eslint-config-airbnb-base": "^15.0.0",
-		"eslint-plugin-import": "^2.25.2",
-		"jest": "^27.5.1",
-		"jest-mongoose-mock": "^1.2.0",
-		"nodemon": "^2.0.15"
-	}
+    "inspect": "node --inspect src/index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "precommit": "yarn lint && yarn test"
+  },
+  "bugs": {
+    "url": "https://github.com/robertotorres-dev/siiges-services/issues"
+  },
+  "dependencies": {
+    "@fastify/autoload": "^5.0.0",
+    "@fastify/cors": "^8.0.0",
+    "@fastify/helmet": "^9.1.0",
+    "@hapi/boom": "^10.0.0",
+    "@siiges-services/authentication": "^1.0.0",
+    "@siiges-services/core": "^1.0.0",
+    "@siiges-services/usuario": "^1.0.0",
+    "fastify": "^4.2.0",
+    "sequelize": "^6.21.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.12.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "jest": "^27.5.1",
+    "jest-mongoose-mock": "^1.2.0",
+    "nodemon": "^2.0.15"
+  }
 }
