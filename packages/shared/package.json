@@ -29,5 +29,8 @@
   },
   "bugs": {
     "url": "https://github.com/subsesjal/siiges-services/issues"
+  },
+  "dependencies": {
+    "winston": "^3.8.1"
   }
 }
