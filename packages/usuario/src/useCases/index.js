@@ -1,5 +1,7 @@
-const { getById } = require('./getById');
+const { findOne, find, create } = require('./usuarios');
 
 module.exports = {
-	getById,
+  findOne,
+  find,
+  create,
 };

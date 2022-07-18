@@ -1,0 +1,6 @@
+module.exports = {
+  config: './config/mysql.js',
+  "models-path": "./src/drivers/db/models",
+  "migrations-path": "./src/drivers/db/migrations",
+  "seeders-path": "./src/drivers/db/seeders",
+};

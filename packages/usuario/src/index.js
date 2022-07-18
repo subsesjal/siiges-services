@@ -2,18 +2,22 @@
  * @description Export all features and business rules from the package
  */
 
-// Services
-const boom = require('@hapi/boom');
-//const { getById } = require('./useCases');
-
 // Domains
-//const { getUsuarioQuery } = require('./domains');
+const { findQuery, findOneQuery, createQuery } = require('./domains');
 
 // Services
-const { getById } = require('./useCases');
+const { find, findOne, create } = require('./useCases');
 
-const { getByIdQuery } = require('./domains');
+// Models
+const usuarioModel = require('./drivers/db/models/usuario');
 
 module.exports = {
-	getById: getById(getByIdQuery),
+  methods: {
+    find: find(findQuery),
+    findOne: findOne(findOneQuery),
+    create: create(createQuery),
+  },
+  models: {
+    usuario: usuarioModel,
+  },
 };

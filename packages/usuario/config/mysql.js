@@ -1,4 +1,5 @@
-const { config } = require('@siiges-services/core');
-const { development, production } = config.mysqlConf;
+const { configs } = require('@siiges-services/core');
+
+const { development, production } = configs.mysqlConfig;
 
 module.exports = { development, production };

@@ -1,21 +1,15 @@
 // Drivers
-//const { drivers } = require('@siiges-services/core');
-//const sequalize = require('../drivers/mysql/connection');
+// const { drivers } = require('@siiges-services/core');
+const sequelize = require('../drivers/db/connection');
 
 // Domains
-const getByIdQuery = require('./getById');
-const createUsuario = require('./create');
-const updateUsuario = require('./update');
-const removeUsuario = require('./delete');
-const listUsuarios = require('./list');
+const { findQuery, findOneQuery, createQuery } = require('./usuarios');
 
 // define the target model
-//const usuarioModel = sequalize.model('Usuario');
+const usuarioModel = sequelize.model('Usuario');
 
 module.exports = {
-	getByIdQuery: getByIdQuery(),
-	/* create: createUsuario(usuarioModel),
-	update: updateUsuario(usuarioModel),
-	remove: removeUsuario(usuarioModel),
-	list: listUsuarios(usuarioModel), */
+  findOneQuery: findOneQuery(usuarioModel),
+  findQuery: findQuery(usuarioModel),
+  createQuery: createQuery(usuarioModel),
 };

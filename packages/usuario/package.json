@@ -22,12 +22,21 @@
   },
   "scripts": {
     "lint": "eslint .",
-		"lint:fix": "eslint --fix .",
-		"test": "jest",
-		"test:watch": "jest --watch",
-		"precommit": "yarn lint && yarn test"
+    "lint:fix": "eslint --fix .",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "precommit": "yarn lint && yarn test",
+    "migrations:generate": "sequelize-cli migration:generate --name",
+    "migrations:run": "sequelize-cli db:migrate",
+    "migrations:revert": "sequelize-cli db:migrate:undo",
+    "migrations:delete": "sequelize-cli db:migrate:undo:all"
   },
   "bugs": {
     "url": "https://github.com/robertotorres-dev/siiges-services/issues"
+  },
+  "dependencies": {
+    "@hapi/boom": "^10.0.0",
+    "@siiges-services/core": "^1.0.0",
+    "sequelize": "^6.21.3"
   }
 }
