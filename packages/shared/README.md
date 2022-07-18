@@ -13,12 +13,37 @@ If not run `lerna add @siiges-services/shared scoope=@siiges-services/your-packa
 
 This package contain code that will be useful in all packages.
 
-In this moments here are 3 useful tools
+In this moments here are 2 useful tools
 
+
+## Logger
+
+Utility to display project state information. To import it in your current file
+
+```
+const { Logger } = require('@siiges-services/shared');
+```
+## Constants
+
+This package have a set of Constans usefull in all the project.
+- **softwareEnvironments** This is object where you can add or get supported environments in this project.
+- **dotenvPath**  This is the path where the file .env will be storage.
+**Note:** This file will not be .env it's going to be production.env or development.env depending on which environment we are running the project.
+
+To import all of them in your current file write
+
+```
+const { constants } = require('@siiges-services/shared');
+
+// If you just want one of them you could use destructuring object
+const { softwareEnvironments } = require('@siiges-services/shared');
+const { dotenvPath } = require('@siiges-services/shared');
+
+```
 
 ### softwareEnvironments
 
-This is object where you can add or get supported environments in this project. To import it in your current file
+ To import it in your current file
 
 ```
 const { softwareEnvironments } = require('@siiges-services/shared');
@@ -26,22 +51,15 @@ const { softwareEnvironments } = require('@siiges-services/shared');
 
 ### dotenvPath
 
-This is the path where the file .env will be storage. To import it in your current file
+ To import it in your current file
 
 ```
 const { dotenvPath } = require('@siiges-services/shared');
 ```
 
-**Note:** This file will not be .env it's going to be production.env or development.env depending on which environment we are running the project.
 
-### Logger
 
-Utility to display project state information. To import it in your current file
-
-```
-const { Logger } = require('@siiges-services/shared');
-```
-### Import all utilities
+## Import all utilities
 Also you an import all utilities and acces to them like an object
 
 ```
