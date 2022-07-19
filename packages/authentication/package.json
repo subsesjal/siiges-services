@@ -7,25 +7,28 @@
   "license": "ISC",
   "main": "src/index.js",
   "directories": {
-		"src": "src",
-		"test": "__tests__"
-	},
-	"files": [
-		"src",
-		"__tests__"
-	],
+    "src": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "src",
+    "__tests__"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/robertotorres-dev/siiges-services.git"
   },
   "scripts": {
     "lint": "eslint .",
-		"lint:fix": "eslint --fix .",
-		"test": "jest",
-		"test:watch": "jest --watch",
-		"precommit": "yarn lint && yarn test"
+    "lint:fix": "eslint --fix .",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "precommit": "yarn lint && yarn test"
   },
   "bugs": {
     "url": "https://github.com/robertotorres-dev/siiges-services/issues"
+  },
+  "dependencies": {
+    "@siiges-services/shared": "^0.0.1"
   }
 }
