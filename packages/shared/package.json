@@ -7,11 +7,12 @@
   "license": "MIT",
   "main": "src/index.js",
   "directories": {
-    "lib": "lib",
+    "src": "src",
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "src",
+    "__tests__"
   ],
   "publishConfig": {
     "access": "public"

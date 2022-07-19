@@ -1,18 +1,20 @@
 // External dependencies
-const Autoload = require('@fastify/autoload');
+const autoLoad = require('@fastify/autoload');
+const helmet = require('@fastify/helmet');
 const Fastify = require('fastify');
 const cors = require('@fastify/cors');
 const path = require('path');
+const { serverHost, whiteList, serverPort } = require('../../../config/environment');
 
 // Internal dependencies
-//const authDecorators = require('./decorators/auth');
+// const authDecorators = require('./decorators/auth');
 
-//Setup
+// Setup
 const isTestEnv = process.env.NODE_ENV === 'test';
 
 const fastify = Fastify({
-	// Disable logs in test enviroment
-	logger: !isTestEnv,
+  // Disable logs in test enviroment
+  logger: !isTestEnv,
 });
 
 // Avoid loading swagger when running tests
@@ -21,42 +23,47 @@ const fastify = Fastify({
   fastify.register(Swagger, swaggerOptions);
 } */
 
-/* fastify.register(cors, {
-	origin: (origin, cb) => {
-		const { hostname } = new URL(origin);
-		if (hostname === 'localhost') {
-			cb(null, true);
-			return;
-		}
-		cb(new Error('Not allowed'), false);
-	},
-}); */
+const options = {
+  origin: (origin, cb) => {
+    if (whiteList.includes(origin)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Not allowed'), false);
+    }
+  },
+};
+
+fastify.register(cors, {
+  options,
+});
 
 // Decorators for authorization
 /* fastify.decorate('hasPermissions', authDecorators.hasPermissions);
 fastify.decorate('hasRole', authDecorators.hasRole);
  */
+fastify.register(helmet);
 
-fastify.register(Autoload, {
-	dir: path.join(__dirname, 'routes'),
-	ignorePattern: /.*(schema).*/,
+fastify.register(autoLoad, {
+  dir: path.join(__dirname, 'routes'),
+  ignorePattern: /.*(schema).*/,
+  options: { prefix: 'api/v1' },
 });
 
-//fastify.register(Autoload, { dir: path.join(__dirname, 'plugin') });
+fastify.register(autoLoad, { dir: path.join(__dirname, 'plugin') });
 
 async function start() {
-	try {
-		await fastify.listen({
-			port: process.env.SERVER_PORT || 3000,
-			host: 'localhost',
-		});
-	} catch (error) {
-		fastify.log.error(`[http-server]: Error with ${error.message} has happend`);
-		process.exit(1);
-	}
+  try {
+    await fastify.listen({
+      port: serverPort,
+      host: serverHost,
+    });
+  } catch (error) {
+    fastify.log.error(`[http-server]: Error with ${error.message} has happend`);
+    process.exit(1);
+  }
 }
 
 module.exports = {
-	start,
-	fastify,
+  start,
+  fastify,
 };

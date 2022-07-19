@@ -1,7 +1,7 @@
 {
-  "name": "@siiges-services/authentication",
+  "name": "@siiges-services/core",
   "version": "1.0.0",
-  "description": "This package handle all about authentication",
+  "description": "This package has the core libs",
   "author": "cetherdev <robert.hct@gmail.com>",
   "homepage": "https://github.com/robertotorres-dev/siiges-services#readme",
   "license": "MIT",
@@ -14,6 +14,9 @@
     "src",
     "__tests__"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/robertotorres-dev/siiges-services.git"
@@ -29,6 +32,8 @@
     "url": "https://github.com/robertotorres-dev/siiges-services/issues"
   },
   "dependencies": {
-    "@siiges-services/shared": "^0.0.1"
+    "@siiges-services/shared": "^0.0.1",
+    "dotenv": "^16.0.1",
+    "sequelize": "^6.21.3"
   }
 }
