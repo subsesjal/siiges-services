@@ -1,18 +1,18 @@
 const boom = require('@hapi/boom');
 
-const find = (findQuery) => async () => {
-  const rta = await findQuery();
-  return rta;
+const findAll = (findAllQuery) => async () => {
+  const usuarios = await findAllQuery();
+  return usuarios;
 };
 
 const findOne = (findOneQuery) => async (id) => {
-  const rta = await findOneQuery(id);
-  if (!rta) {
+  const usuario = await findOneQuery(id);
+  if (!usuario) {
     throw boom.notFound(
       `[usuarios:finOne]: Usuario no encontrado con id: ${id}`,
     );
   }
-  return rta;
+  return usuario;
 };
 
 const create = (createQuery) => async (data) => {
@@ -21,7 +21,7 @@ const create = (createQuery) => async (data) => {
 };
 
 module.exports = {
-  find,
+  findAll,
   findOne,
   create,
 };

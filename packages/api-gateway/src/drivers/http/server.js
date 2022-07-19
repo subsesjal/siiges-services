@@ -4,6 +4,7 @@ const helmet = require('@fastify/helmet');
 const Fastify = require('fastify');
 const cors = require('@fastify/cors');
 const path = require('path');
+const { serverHost, whiteList, serverPort } = require('../../../config/environment');
 
 // Internal dependencies
 // const authDecorators = require('./decorators/auth');
@@ -22,7 +23,6 @@ const fastify = Fastify({
   fastify.register(Swagger, swaggerOptions);
 } */
 
-const whiteList = ['http://localhost:3000'];
 const options = {
   origin: (origin, cb) => {
     if (whiteList.includes(origin)) {
@@ -54,8 +54,8 @@ fastify.register(autoLoad, { dir: path.join(__dirname, 'plugin') });
 async function start() {
   try {
     await fastify.listen({
-      port: process.env.SERVER_PORT || 3000,
-      host: 'localhost',
+      port: serverPort,
+      host: serverHost,
     });
   } catch (error) {
     fastify.log.error(`[http-server]: Error with ${error.message} has happend`);

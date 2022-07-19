@@ -4,7 +4,7 @@
   "description": "This package handle all about authentication",
   "author": "cetherdev <robert.hct@gmail.com>",
   "homepage": "https://github.com/robertotorres-dev/siiges-services#readme",
-  "license": "ISC",
+  "license": "MIT",
   "main": "src/index.js",
   "directories": {
     "src": "src",

@@ -4,14 +4,15 @@
   "description": "This package handle all about users enpoints",
   "author": "cetherdev <robert.hct@gmail.com>",
   "homepage": "https://github.com/robertotorres-dev/siiges-services#readme",
-  "license": "ISC",
+  "license": "MIT",
   "main": "src/index.js",
   "directories": {
-    "lib": "lib",
+    "src": "src",
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "src",
+    "__tests__"
   ],
   "publishConfig": {
     "access": "public"

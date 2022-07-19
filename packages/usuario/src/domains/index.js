@@ -3,13 +3,13 @@
 const sequelize = require('../drivers/db/connection');
 
 // Domains
-const { findQuery, findOneQuery, createQuery } = require('./usuarios');
+const { findAllQuery, findOneQuery, createQuery } = require('./usuarios');
 
 // define the target model
 const usuarioModel = sequelize.model('Usuario');
 
 module.exports = {
   findOneQuery: findOneQuery(usuarioModel),
-  findQuery: findQuery(usuarioModel),
+  findAllQuery: findAllQuery(usuarioModel),
   createQuery: createQuery(usuarioModel),
 };

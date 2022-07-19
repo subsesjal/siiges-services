@@ -20,7 +20,7 @@ const isProdEnvironment = () => {
 
 const setPath = (filename) => {
   if (isDevEnvironment || isProdEnvironment) {
-    const localPath = join(__dirname, '../../..', filename);
+    const localPath = join(__dirname, '../../../../..', filename);
     return localPath;
   }
 

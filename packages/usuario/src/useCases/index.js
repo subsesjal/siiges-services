@@ -1,7 +1,7 @@
-const { findOne, find, create } = require('./usuarios');
+const { findOne, findAll, create } = require('./usuarios');
 
 module.exports = {
   findOne,
-  find,
+  findAll,
   create,
 };

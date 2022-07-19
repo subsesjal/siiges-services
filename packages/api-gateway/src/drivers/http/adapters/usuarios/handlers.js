@@ -1,11 +1,11 @@
 const errorHandler = require('../../utils/errorHandler');
 
 // usuario services
-async function find(req, reply) {
+async function findAll(req, reply) {
   try {
     req.log.info('[http-server]: Getting usuarios list: ');
 
-    const usuarios = await this.usuarioServices.methods.find();
+    const usuarios = await this.usuarioServices.methods.findAll();
 
     return reply
       .code(200)
@@ -49,7 +49,7 @@ async function create(req, reply) {
 }
 
 module.exports = {
-  find,
+  findAll,
   findOne,
   create,
 };

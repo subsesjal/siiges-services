@@ -1,7 +1,5 @@
-const { join } = require('path');
-const dotenv = require('dotenv');
-
-dotenv.config({ path: join(__dirname, '/../../../.env') });
+const { constants } = require('@siiges-services/shared');
+require('dotenv').config({ path: constants.dotenvPath });
 
 const mysql = {
   dbAdmin: 'mysql',

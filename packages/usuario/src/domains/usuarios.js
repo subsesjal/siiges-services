@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
 
-const findQuery = (usuarioModel) => async () => {
-  const rta = await usuarioModel.findAll({
+const findAllQuery = (usuarioModel) => async () => {
+  const usuarios = await usuarioModel.findAll({
     where: {
       deletedAt: {
         [Op.is]: null,
@@ -15,12 +15,12 @@ const findQuery = (usuarioModel) => async () => {
     ], */
   });
 
-  return rta;
+  return usuarios;
 };
 
 const findOneQuery = (usuarioModel) => async (id) => {
-  const rta = await usuarioModel.findByPk(id);
-  return rta;
+  const usuario = await usuarioModel.findByPk(id);
+  return usuario;
 };
 
 const createQuery = (usuarioModel) => async (data) => {
@@ -29,7 +29,7 @@ const createQuery = (usuarioModel) => async (data) => {
 };
 
 module.exports = {
-  findQuery,
+  findAllQuery,
   findOneQuery,
   createQuery,
 };
