@@ -37,6 +37,7 @@
   "dependencies": {
     "@hapi/boom": "^10.0.0",
     "@siiges-services/core": "^1.0.0",
+    "@siiges-services/shared": "^0.0.1",
     "sequelize": "^6.21.3"
   }
 }
