@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "start:dev": "nodemon src/index.js",
-    "inspect": "set NODE_ENV='development' && node --inspect src/index.js",
+    "inspect": "node --inspect src/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "jest",
