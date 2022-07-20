@@ -28,10 +28,12 @@
     "husky": "^8.0.1",
     "jest": "^28.1.2",
     "lerna": "5.1.6",
+    "nodemon": "^2.0.19",
     "nx": "14.4.0",
     "sequelize-cli": "^6.4.1"
   },
   "dependencies": {
+    "@hapi/boom": "^10.0.0",
     "dotenv": "^16.0.1",
     "mysql2": "^2.3.3",
     "sequelize": "^6.21.3"
