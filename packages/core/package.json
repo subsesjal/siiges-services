@@ -32,8 +32,6 @@
     "url": "https://github.com/robertotorres-dev/siiges-services/issues"
   },
   "dependencies": {
-    "@siiges-services/shared": "^0.0.1",
-    "dotenv": "^16.0.1",
-    "sequelize": "^6.21.3"
+    "@siiges-services/shared": "^0.0.1"
   }
 }
