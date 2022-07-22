@@ -1,11 +1,8 @@
 // configs
-const mysqlConfig = require('../config/mysql');
+const mysqlConfig = require('../config/config');
 
 // drivers
-const sequelize = require('./drivers/mysql/connection');
-
-// utils
-// const enviroment = require("./utils/environment");
+const sequelize = require('./drivers/db/connection');
 
 module.exports = {
   configs: {
@@ -14,7 +11,4 @@ module.exports = {
   drivers: {
     sequelize,
   },
-  /* utils: {
-    enviroment,
-  }, */
 };

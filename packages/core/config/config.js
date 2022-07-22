@@ -10,17 +10,6 @@ const mysql = {
   dbName: process.env.DB_NAME,
 };
 
-const USER = encodeURIComponent(mysql.dbUser);
-const PASSWORD = encodeURIComponent(mysql.dbPassword);
-const URI = `${mysql.dbAdmin}://${USER}:${PASSWORD}@${mysql.dbHost}:${mysql.dbPort}/${mysql.dbName}`;
-
 module.exports = {
-  development: {
-    url: URI,
-    dialect: 'mysql',
-  },
-  production: {
-    url: URI,
-    dialect: 'mysql',
-  },
+  mysql,
 };

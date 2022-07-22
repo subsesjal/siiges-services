@@ -3,21 +3,24 @@
  */
 
 // Domains
-const { findAllQuery, findOneQuery, createQuery } = require('./domains');
+const {
+  findAllQuery,
+  findOneDetailedQuery,
+  findOneQuery,
+  createQuery,
+} = require('./domains');
 
 // Services
-const { findAll, findOne, create } = require('./useCases');
-
-// Models
-const usuarioModel = require('./drivers/db/models/usuario');
+const {
+  findAllUsuarios,
+  findOneUsuarioDetailed,
+  findOneUsuario,
+  createUsuario,
+} = require('./useCases');
 
 module.exports = {
-  methods: {
-    findAll: findAll(findAllQuery),
-    findOne: findOne(findOneQuery),
-    create: create(createQuery),
-  },
-  models: {
-    usuario: usuarioModel,
-  },
+  findAllUsuarios: findAllUsuarios(findAllQuery),
+  findOneUsuario: findOneUsuario(findOneQuery),
+  findOneUsuarioDetailed: findOneUsuarioDetailed(findOneDetailedQuery),
+  createUsuario: createUsuario(createQuery),
 };

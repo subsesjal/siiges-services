@@ -1,37 +1,23 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const USUARIO_TABLE = 'usuarios';
+const ROL_TABLE = 'roles';
 
-const UsuarioSchema = {
+const RolSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  usuario: {
+  nombre: {
     allowNull: false,
     type: DataTypes.STRING,
     unique: true,
   },
-  email: {
+  descripcion: {
     allowNull: false,
     type: DataTypes.STRING,
     unique: true,
-  },
-  contrasena: {
-    allowNull: false,
-    type: DataTypes.STRING,
-  },
-  estatus: {
-    allowNull: false,
-    type: DataTypes.INTEGER,
-    defaultValue: 1,
-  },
-  tokenNotificaciones: {
-    allowNull: true,
-    type: DataTypes.STRING,
-    field: 'token_notificaciones',
   },
   createdAt: {
     allowNull: false,
@@ -53,19 +39,22 @@ const UsuarioSchema = {
   },
 };
 
-class Usuario extends Model {
-  static associate() {
-    //
+class Rol extends Model {
+  static associate(models) {
+    this.hasOne(models.Usuario, {
+      as: 'usuario',
+      foreignKey: 'rolId',
+    });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: USUARIO_TABLE,
-      modelName: 'Usuario',
+      tableName: ROL_TABLE,
+      modelName: 'Rol',
       timestamps: false,
     };
   }
 }
 
-module.exports = { USUARIO_TABLE, UsuarioSchema, Usuario };
+module.exports = { ROL_TABLE, RolSchema, Rol };
