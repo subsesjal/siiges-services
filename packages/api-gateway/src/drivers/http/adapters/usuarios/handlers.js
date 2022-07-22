@@ -5,7 +5,7 @@ async function findAll(req, reply) {
   try {
     req.log.info('[http-server]: Getting usuarios list: ');
 
-    const usuarios = await this.usuarioServices.methods.findAll();
+    const usuarios = await this.usuarioServices.findAllUsuarios();
 
     return reply
       .code(200)
@@ -21,7 +21,23 @@ async function findOne(req, reply) {
     const { usuarioId } = req.params;
     req.log.info(`[http-server]: Getting usuario: ${usuarioId}`);
 
-    const usuario = await this.usuarioServices.methods.findOne(usuarioId);
+    const usuario = await this.usuarioServices.findOneUsuario(usuarioId);
+
+    return reply
+      .code(200)
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ data: usuario });
+  } catch (error) {
+    return errorHandler(error, reply);
+  }
+}
+
+async function findOneDetailed(req, reply) {
+  try {
+    const { usuarioId } = req.params;
+    req.log.info(`[http-server]: Getting usuario: ${usuarioId}`);
+
+    const usuario = await this.usuarioServices.findOneUsuarioDetailed(usuarioId);
 
     return reply
       .code(200)
@@ -37,7 +53,7 @@ async function create(req, reply) {
     const { body } = req;
     req.log.info('[http-server]: Creating usuario');
 
-    const newUsuario = await this.usuarioServices.methods.create(body);
+    const newUsuario = await this.usuarioServices.createUsuario(body);
 
     return reply
       .code(201)
@@ -51,5 +67,6 @@ async function create(req, reply) {
 module.exports = {
   findAll,
   findOne,
+  findOneDetailed,
   create,
 };

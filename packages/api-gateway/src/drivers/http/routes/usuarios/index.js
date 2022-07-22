@@ -8,6 +8,11 @@ async function usuarioRouter(fastify) {
     { schema: getUsuarioSchema },
     usuariosAdapter.findOne,
   );
+  await fastify.get(
+    '/:usuarioId/detalle',
+    { schema: getUsuarioSchema },
+    usuariosAdapter.findOneDetailed,
+  );
   await fastify.post(
     '/',
     { schema: createUsuarioSchema },
