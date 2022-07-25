@@ -1,3 +1,5 @@
-const environmentVars = require('./environment');
+const envVars = require('./env-vars');
 
-module.exports = environmentVars;
+module.exports = {
+  envVars,
+};
