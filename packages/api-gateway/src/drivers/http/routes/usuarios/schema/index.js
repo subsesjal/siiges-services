@@ -17,28 +17,32 @@ const createUsuarioSchema = {
   body: {
     type: 'object',
     properties: {
+      rolId: {
+        type: 'number',
+        description: 'role of a user',
+      },
       usuario: {
         type: 'string',
         minLength: 3,
         maxLength: 25,
         description: 'usuario',
       },
-      email: { type: 'string', description: 'email of user' },
+      correo: { type: 'string', description: 'email of user' },
       contrasena: {
         type: 'string',
         minLength: 6,
         maxLength: 20,
         description: 'user id',
       },
-      /* estatus: {
-        type: "number",
+      estatus: {
+        type: 'number',
         minimum: 1,
         maximum: 2,
-        description: "estatus disable or active (1/2)",
-      }, */
+        description: 'estatus to disable or active (1/2)',
+      },
       token_notificaciones: { type: 'string' },
     },
-    required: ['usuario', 'email', 'contrasena'],
+    required: ['rolId', 'usuario', 'correo', 'contrasena'],
   },
 };
 
