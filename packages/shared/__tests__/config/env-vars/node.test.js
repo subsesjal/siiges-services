@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 // Internal dependencies
-const testNodeEnvs = require('../../testNodeEnvs');
+const testNodeEnvs = require('../../test-environments');
 
 describe('given a programmer who need to know node environment', () => {
   beforeAll(() => {
@@ -8,6 +8,7 @@ describe('given a programmer who need to know node environment', () => {
   });
 
   describe('when NODE_ENV is defined', () => {
+    // we need to mock NODE_ENV before node module call
     process.env.NODE_ENV = testNodeEnvs.FAKE;
     const node = require('../../../config/env-vars/node');
     test('then node.env should be a string', () => {
