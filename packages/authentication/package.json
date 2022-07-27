@@ -29,6 +29,7 @@
     "url": "https://github.com/robertotorres-dev/siiges-services/issues"
   },
   "dependencies": {
-    "@siiges-services/shared": "^0.0.1"
+    "@siiges-services/shared": "^0.0.1",
+    "jsonwebtoken": "^8.5.1"
   }
 }
