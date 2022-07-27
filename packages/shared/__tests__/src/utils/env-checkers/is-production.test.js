@@ -1,55 +1,34 @@
 /* eslint-disable global-require */
 // Internal dependencies
-const testNodeEnvs = require('../../../test-environments');
+const {
+  injectionVars,
+  nodeEnv,
+} = require('../../../auxiliary-constants');
 
-const orginalEnvVars = process.env;
-
-afterAll(() => {
-  process.env = orginalEnvVars;
-});
+const { isProdEnvironment } = jest.requireActual('../../../../src/utils/env-checkers');
 
 describe('Given a call to isProdEnvironment function', () => {
-  beforeEach(() => {
-    jest.resetModules();
-  });
-
-  describe('when node is set in development', () => {
+  describe("when it's pass a  var with string 'production'", () => {
     test('then it should return false', () => {
-      // setting a fake node env value
-      process.env.NODE_ENV = testNodeEnvs.DEV;
-      const { isProdEnvironment } = jest.requireActual('../../../../src/utils/env-checkers');
-
-      expect(isProdEnvironment()).toBe(false);
+      expect(isProdEnvironment(nodeEnv.PROD)).toBe(true);
     });
   });
 
-  describe('when node is set in production', () => {
+  describe("when it's pass a  number var", () => {
     test('then it should return true', () => {
-      // setting a fake node env value
-      process.env.NODE_ENV = testNodeEnvs.PROD;
-      const { isProdEnvironment } = jest.requireActual('../../../../src/utils/env-checkers');
-
-      expect(isProdEnvironment()).toBe(true);
+      expect(isProdEnvironment(injectionVars.number)).toBe(false);
     });
   });
 
-  describe('when node is neither production or development', () => {
+  describe('when the string is different to production', () => {
     test('then it should return false', () => {
-      // setting a fake node env value
-      process.env.NODE_ENV = testNodeEnvs.FAKE;
-      const { isProdEnvironment } = jest.requireActual('../../../../src/utils/env-checkers');
-
-      expect(isProdEnvironment()).toBe(false);
+      expect(isProdEnvironment(injectionVars.string)).toBe(false);
     });
   });
 
-  describe('when node is not set', () => {
+  describe('when the var is undefined', () => {
     test('then it should return false', () => {
-      // setting a fake node env value
-      process.env.NODE_ENV = testNodeEnvs.UNDEFINED;
-      const { isProdEnvironment } = jest.requireActual('../../../../src/utils/env-checkers');
-
-      expect(isProdEnvironment()).toBe(false);
+      expect(isProdEnvironment(injectionVars.UNDEFINED)).toBe(false);
     });
   });
 });
