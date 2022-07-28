@@ -1,4 +1,5 @@
 const { Op } = require('sequelize');
+const boom = require('@hapi/boom');
 
 const findAllQuery = (usuarioModel) => async () => {
   const usuarios = await usuarioModel.findAll({
@@ -93,9 +94,45 @@ const createQuery = (usuarioModel) => async (data) => {
   return newUsuario;
 };
 
+const updateQuery = (usuarioModel, personaModel) => async (id, changes) => {
+  const usuario = await usuarioModel.findByPk(id, {
+    where: {
+      deletedAt: {
+        [Op.is]: null,
+      },
+    },
+  });
+
+  if (!usuario) {
+    throw boom.notFound(
+      `[usuarios:finOne]: Usuario no encontrado con id: ${id}`,
+    );
+  }
+
+  const persona = await personaModel.findByPk(usuario.personaId, {
+    where: {
+      deletedAt: {
+        [Op.is]: null,
+      },
+    },
+  });
+
+  const updatedAt = new Date().toISOString();
+
+  const usuarioChanges = { ...changes, updatedAt };
+  const personaChanges = { ...changes.persona, updatedAt };
+
+  const usuarioUpdated = await usuario.update(usuarioChanges);
+  const personaUpdated = await persona.update(personaChanges);
+  usuarioUpdated.dataValues.persona = personaUpdated;
+
+  return usuarioUpdated;
+};
+
 module.exports = {
   findAllQuery,
   findOneQuery,
   findOneDetailedQuery,
   createQuery,
+  updateQuery,
 };

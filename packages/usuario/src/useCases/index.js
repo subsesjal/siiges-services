@@ -3,6 +3,7 @@ const {
   findOneUsuarioDetailed,
   findAllUsuarios,
   createUsuario,
+  updateUsuario,
 } = require('./usuarios');
 
 module.exports = {
@@ -10,4 +11,5 @@ module.exports = {
   findOneUsuarioDetailed,
   findAllUsuarios,
   createUsuario,
+  updateUsuario,
 };

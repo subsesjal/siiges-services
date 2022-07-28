@@ -30,9 +30,15 @@ const createUsuario = (createQuery) => async (data) => {
   return newUsuario;
 };
 
+const updateUsuario = (updateQuery) => async (id, data) => {
+  const usuario = await updateQuery(id, data);
+  return usuario;
+};
+
 module.exports = {
   findAllUsuarios,
   findOneUsuario,
   findOneUsuarioDetailed,
   createUsuario,
+  updateUsuario,
 };
