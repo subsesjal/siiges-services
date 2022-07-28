@@ -4,7 +4,12 @@ const helmet = require('@fastify/helmet');
 const Fastify = require('fastify');
 const cors = require('@fastify/cors');
 const path = require('path');
-const { serverHost, whiteList, serverPort } = require('../../../config/environment');
+const {
+	serverHost,
+	whiteList,
+	serverPort,
+} = require('../../../config/environment');
+const { Logger } = require('@siiges-services/shared');
 
 // Internal dependencies
 // const authDecorators = require('./decorators/auth');
@@ -13,8 +18,8 @@ const { serverHost, whiteList, serverPort } = require('../../../config/environme
 const isTestEnv = process.env.NODE_ENV === 'test';
 
 const fastify = Fastify({
-  // Disable logs in test enviroment
-  logger: !isTestEnv,
+	// Disable logs in test enviroment
+	logger: !isTestEnv,
 });
 
 // Avoid loading swagger when running tests
@@ -24,17 +29,17 @@ const fastify = Fastify({
 } */
 
 const options = {
-  origin: (origin, cb) => {
-    if (whiteList.includes(origin)) {
-      cb(null, true);
-    } else {
-      cb(new Error('Not allowed'), false);
-    }
-  },
+	origin: (origin, cb) => {
+		if (whiteList.includes(origin)) {
+			cb(null, true);
+		} else {
+			cb(new Error('Not allowed'), false);
+		}
+	},
 };
 
 fastify.register(cors, {
-  options,
+	options,
 });
 
 // Decorators for authorization
@@ -44,26 +49,30 @@ fastify.decorate('hasRole', authDecorators.hasRole);
 fastify.register(helmet);
 
 fastify.register(autoLoad, {
-  dir: path.join(__dirname, 'routes'),
-  ignorePattern: /.*(schema).*/,
-  options: { prefix: 'api/v1' },
+	dir: path.join(__dirname, 'routes'),
+	ignorePattern: /.*(schema).*/,
+	options: { prefix: 'api/v1' },
 });
 
 fastify.register(autoLoad, { dir: path.join(__dirname, 'plugin') });
 
 async function start() {
-  try {
-    await fastify.listen({
-      port: serverPort,
-      host: serverHost,
-    });
-  } catch (error) {
-    fastify.log.error(`[http-server]: Error with ${error.message} has happend`);
-    process.exit(1);
-  }
+	await fastify.listen(
+		{
+			port: serverPort,
+			host: serverHost,
+		},
+		(err, address) => {
+			if (err) {
+				Logger.error(`[http-server]: Error with ${err.message} has happend`);
+				process.exit(1);
+			}
+			Logger.info(`Server listening at ${address}`);
+		}
+	);
 }
 
 module.exports = {
-  start,
-  fastify,
+	start,
+	fastify,
 };

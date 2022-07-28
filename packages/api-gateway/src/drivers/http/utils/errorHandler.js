@@ -14,12 +14,12 @@ function boomErrorhandler(error, reply) {
 function errorHandler(error, reply) {
   if (error instanceof ValidationError) {
     const boomError = boom.conflict('There was a conflict', error);
-    errorHandler(boomError, reply);
+    boomErrorhandler(boomError, reply);
   }
 
   if (error instanceof ConnectionRefusedError) {
     const boomError = boom.serverUnavailable('Connection Refused error', error);
-    errorHandler(boomError, reply);
+    boomErrorhandler(boomError, reply);
   }
 
   if (error.isBoom) {
