@@ -129,10 +129,43 @@ const updateQuery = (usuarioModel, personaModel) => async (id, changes) => {
   return usuarioUpdated;
 };
 
+const deleteQuery = (usuarioModel, personaModel) => async (id) => {
+  const usuario = await usuarioModel.findByPk(id, {
+    where: {
+      deletedAt: {
+        [Op.is]: null,
+      },
+    },
+  });
+
+  if (!usuario) {
+    throw boom.notFound(
+      `[usuarios:finOne]: Usuario no encontrado con id: ${id}`,
+    );
+  }
+
+  const persona = await personaModel.findByPk(usuario.personaId, {
+    where: {
+      deletedAt: {
+        [Op.is]: null,
+      },
+    },
+  });
+
+  const deletedAt = new Date().toISOString();
+
+  const usuarioDeleted = await usuario.update({ deletedAt });
+  const personaDeleted = await persona.update({ deletedAt });
+  usuarioDeleted.dataValues.persona = personaDeleted;
+
+  return usuarioDeleted;
+};
+
 module.exports = {
   findAllQuery,
   findOneQuery,
   findOneDetailedQuery,
   createQuery,
   updateQuery,
+  deleteQuery,
 };
