@@ -8,6 +8,7 @@ const {
   findOneDetailedQuery,
   findOneQuery,
   createQuery,
+  updateQuery,
 } = require('./domains');
 
 // Services
@@ -16,6 +17,7 @@ const {
   findOneUsuarioDetailed,
   findOneUsuario,
   createUsuario,
+  updateUsuario,
 } = require('./useCases');
 
 module.exports = {
@@ -23,4 +25,5 @@ module.exports = {
   findOneUsuario: findOneUsuario(findOneQuery),
   findOneUsuarioDetailed: findOneUsuarioDetailed(findOneDetailedQuery),
   createUsuario: createUsuario(createQuery),
+  updateUsuario: updateUsuario(updateQuery),
 };
