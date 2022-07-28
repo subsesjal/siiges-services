@@ -10,6 +10,7 @@ const {
   findOneDetailedQuery,
   createQuery,
   updateQuery,
+  deleteQuery,
 } = require('./usuarios');
 
 // define the target model
@@ -22,4 +23,5 @@ module.exports = {
   findAllQuery: findAllQuery(usuarioModel),
   createQuery: createQuery(usuarioModel),
   updateQuery: updateQuery(usuarioModel, personaModel),
+  deleteQuery: deleteQuery(usuarioModel, personaModel),
 };

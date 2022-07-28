@@ -4,6 +4,7 @@ const {
   findAllUsuarios,
   createUsuario,
   updateUsuario,
+  deleteUsuario,
 } = require('./usuarios');
 
 module.exports = {
@@ -12,4 +13,5 @@ module.exports = {
   findAllUsuarios,
   createUsuario,
   updateUsuario,
+  deleteUsuario,
 };

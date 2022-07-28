@@ -31,8 +31,13 @@ const createUsuario = (createQuery) => async (data) => {
 };
 
 const updateUsuario = (updateQuery) => async (id, data) => {
-  const usuario = await updateQuery(id, data);
-  return usuario;
+  const usuarioUpdated = await updateQuery(id, data);
+  return usuarioUpdated;
+};
+
+const deleteUsuario = (deleteQuery) => async (id) => {
+  const usuarioDeleted = await deleteQuery(id);
+  return usuarioDeleted;
 };
 
 module.exports = {
@@ -41,4 +46,5 @@ module.exports = {
   findOneUsuarioDetailed,
   createUsuario,
   updateUsuario,
+  deleteUsuario,
 };
