@@ -4,7 +4,12 @@ const helmet = require('@fastify/helmet');
 const Fastify = require('fastify');
 const cors = require('@fastify/cors');
 const path = require('path');
-const { serverHost, whiteList, serverPort } = require('../../../config/environment');
+const { Logger } = require('@siiges-services/shared');
+const {
+  serverHost,
+  whiteList,
+  serverPort,
+} = require('../../../config/environment');
 
 // Internal dependencies
 // const authDecorators = require('./decorators/auth');
@@ -52,15 +57,19 @@ fastify.register(autoLoad, {
 fastify.register(autoLoad, { dir: path.join(__dirname, 'plugin') });
 
 async function start() {
-  try {
-    await fastify.listen({
+  await fastify.listen(
+    {
       port: serverPort,
       host: serverHost,
-    });
-  } catch (error) {
-    fastify.log.error(`[http-server]: Error with ${error.message} has happend`);
-    process.exit(1);
-  }
+    },
+    (err, address) => {
+      if (err) {
+        Logger.error(`[http-server]: Error with ${err.message} has happend`);
+        process.exit(1);
+      }
+      Logger.info(`Server listening at ${address}`);
+    },
+  );
 }
 
 module.exports = {

@@ -1,10 +1,10 @@
+const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../utils/errorHandler');
 
 // usuario services
 async function findAllUsuarios(req, reply) {
   try {
-    req.log.info('[http-server]: Getting usuarios list: ');
-
+    Logger.info('[usuarios]: Getting usuarios list');
     const usuarios = await this.usuarioServices.findAllUsuarios();
 
     return reply
@@ -19,8 +19,8 @@ async function findAllUsuarios(req, reply) {
 async function findOneUsuario(req, reply) {
   try {
     const { usuarioId } = req.params;
-    req.log.info(`[http-server]: Getting usuario: ${usuarioId}`);
 
+    Logger.info(`[usuarios]: Getting usuario ${usuarioId}`);
     const usuario = await this.usuarioServices.findOneUsuario(usuarioId);
 
     return reply
@@ -35,8 +35,8 @@ async function findOneUsuario(req, reply) {
 async function findOneDetailedUsuario(req, reply) {
   try {
     const { usuarioId } = req.params;
-    req.log.info(`[http-server]: Getting usuario: ${usuarioId}`);
 
+    Logger.info(`[usuarios]: Getting usuario: ${usuarioId}`);
     const usuario = await this.usuarioServices.findOneUsuarioDetailed(
       usuarioId,
     );
@@ -53,8 +53,8 @@ async function findOneDetailedUsuario(req, reply) {
 async function createUsuario(req, reply) {
   try {
     const { body } = req;
-    req.log.info('[http-server]: Creating usuario');
 
+    Logger.info('[usuarios]: Creating usuario');
     const newUsuario = await this.usuarioServices.createUsuario(body);
 
     return reply
@@ -70,8 +70,8 @@ async function updateUsuario(req, reply) {
   try {
     const { usuarioId } = req.params;
     const { body } = req;
-    req.log.info('[http-server]: Updating usuario');
 
+    Logger.info('[usuarios]: Updating usuario');
     const usuarioUpdated = await this.usuarioServices.updateUsuario(
       usuarioId,
       body,
@@ -89,8 +89,8 @@ async function updateUsuario(req, reply) {
 async function deleteUsuario(req, reply) {
   try {
     const { usuarioId } = req.params;
-    req.log.info('[http-server]: Deleting usuario');
 
+    Logger.info(`[usuarios]: Deleting usuario: ${usuarioId}`);
     const usuarioDeleted = await this.usuarioServices.deleteUsuario(usuarioId);
 
     return reply
