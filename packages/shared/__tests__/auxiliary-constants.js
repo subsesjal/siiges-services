@@ -3,7 +3,7 @@ const { faker } = require('@faker-js/faker');
 
 const injectionVars = {
   string: faker.word.noun(),
-  number: faker.random.numeric(),
+  number: faker.datatype.number(),
   UNDEFINED: undefined,
   bool: faker.datatype.boolean(),
 };
@@ -11,6 +11,8 @@ const injectionVars = {
 const nodeEnv = {
   DEV: 'development',
   PROD: 'production',
+  FAKE: faker.word.noun(),
+  UNDEFINED: undefined,
 };
 
 module.exports = {

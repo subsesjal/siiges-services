@@ -4,7 +4,7 @@ const {
   nodeEnv,
 } = require('../../../auxiliary-constants');
 
-const { isDevEnvironment } = jest.requireActual('../../../../src/utils/env-checkers');
+const { isDevEnvironment } = jest.requireActual('../../../../src/utils/checkers');
 
 describe('Given a call to isDeVEnvironment function', () => {
   describe("when it's pass a  var with string 'development'", () => {

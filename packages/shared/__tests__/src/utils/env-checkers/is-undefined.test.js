@@ -1,7 +1,7 @@
 // Internal dependencies
 const { injectionVars } = require('../../../auxiliary-constants');
 
-const { isUndefined } = jest.requireActual('../../../../src/utils/env-checkers');
+const { isUndefined } = jest.requireActual('../../../../src/utils/checkers');
 
 describe('Given a call to isUndefined function', () => {
   describe("when it's pass a  var with a string", () => {

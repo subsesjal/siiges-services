@@ -5,7 +5,7 @@ const {
   nodeEnv,
 } = require('../../../auxiliary-constants');
 
-const { isProdEnvironment } = jest.requireActual('../../../../src/utils/env-checkers');
+const { isProdEnvironment } = jest.requireActual('../../../../src/utils/checkers');
 
 describe('Given a call to isProdEnvironment function', () => {
   describe("when it's pass a  var with string 'production'", () => {
