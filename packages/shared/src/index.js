@@ -1,7 +1,7 @@
 const utils = require('./utils');
-const { dotenv } = require('./adapters');
+const adapters = require('./adapters');
 
 module.exports = {
   utils,
-  dotenv,
+  adapters,
 };
