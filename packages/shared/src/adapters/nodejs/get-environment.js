@@ -1,19 +1,19 @@
 // Internal dependencies
-const { env } = require('../../../config/env-vars/nodejs');
+const { nodeEnv } = require('../../../config/nodejs');
 const {
   isUndefined,
   isProdEnvironment,
   isDevEnvironment,
 } = require('../../utils/checkers');
 
-const getEnvironment = () => {
-  if (isUndefined(env)) {
+function getEnvironment() {
+  if (isUndefined(nodeEnv)) {
     throw ReferenceError('reference to undefined property "NODE_ENV"');
-  } else if (!isProdEnvironment(env) && !isDevEnvironment(env)) {
+  } else if (!isProdEnvironment(nodeEnv) && !isDevEnvironment(nodeEnv)) {
     throw new TypeError('Invalid assignment to const "NODE_ENV"');
   }
 
-  return env;
-};
+  return nodeEnv;
+}
 
 module.exports = getEnvironment;
