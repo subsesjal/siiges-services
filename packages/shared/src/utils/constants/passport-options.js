@@ -1,9 +1,9 @@
 // External dependencies
 const { ExtractJwt } = require('passport-jwt');
 // Internal dependencies
-const { getJwtSecret } = require('../../adapters/passport');
+const getEnvironmentVar = require('../../adapters/environment-vars/get-environment-var');
 
 module.exports = {
-  jwtSecret: getJwtSecret(),
+  jwtSecret: getEnvironmentVar('JWT_SECRET'),
   jwtFromRequestFunction: ExtractJwt.fromAuthHeaderAsBearerToken,
 };
