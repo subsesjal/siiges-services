@@ -1,5 +1,7 @@
-const envVars = require('./env-vars');
+const environmentVarsObject = require('./env-vars');
+const nodejsInfo = require('./nodejs');
 
 module.exports = {
-  envVars,
+  environmentVarsObject,
+  nodejsInfo,
 };

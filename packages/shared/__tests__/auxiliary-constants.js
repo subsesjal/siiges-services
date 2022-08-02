@@ -1,7 +1,13 @@
 // External dependencies
 const { faker } = require('@faker-js/faker');
 
-const injectionVars = {
+const environmentVarsDeclared = [
+  { jwtSecret: 'JWT_SECRET' },
+  { frontPassword: 'FRONT_PASSWORD' },
+  { frontHashAlgorithm: 'FRONT_HASH_ALGORITHM' },
+];
+
+const fakeData = {
   string: faker.word.noun(),
   number: faker.datatype.number(),
   UNDEFINED: undefined,
@@ -16,6 +22,7 @@ const nodeEnv = {
 };
 
 module.exports = {
-  injectionVars,
+  fakeData,
   nodeEnv,
+  environmentVarsDeclared,
 };
