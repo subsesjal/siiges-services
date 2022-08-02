@@ -1,9 +1,11 @@
 // Internal dependencies
-const { environmentVarsObject } = require('../../../config');
+const { configPath } = require('../dotenv');
 const { isUndefined } = require('../../utils/checkers');
 
+configPath();
+
 function getEnvironmentVar(keyName) {
-  const environmentVar = environmentVarsObject[keyName];
+  const environmentVar = process.env[keyName];
   if (isUndefined(environmentVar)) {
     throw ReferenceError(`reference to undefined property "${keyName}"`);
   }

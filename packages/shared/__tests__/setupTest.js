@@ -11,11 +11,6 @@ jest.mock('../src/adapters/nodejs', () => ({
   getEnvironment: jest.fn(),
 }));
 
-jest.mock('../src/adapters/passport', () => ({
-  __esmodule: true,
-  getJwtSecret: jest.fn(),
-}));
-
 jest.mock('../src/adapters/dotenv/set-path', () => (
   jest.fn()
 ));
