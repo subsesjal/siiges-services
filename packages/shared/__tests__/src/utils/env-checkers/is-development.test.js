@@ -1,6 +1,6 @@
 // Internal dependencies
 const {
-  injectionVars,
+  fakeData,
   nodeEnv,
 } = require('../../../auxiliary-constants');
 
@@ -15,19 +15,19 @@ describe('Given a call to isDeVEnvironment function', () => {
 
   describe("when it's pass a  number var", () => {
     test('then it should return false', () => {
-      expect(isDevEnvironment(injectionVars.number)).toBe(false);
+      expect(isDevEnvironment(fakeData.number)).toBe(false);
     });
   });
 
   describe('when the var has a stirng different to development', () => {
     test('then it should return false', () => {
-      expect(isDevEnvironment(injectionVars.string)).toBe(false);
+      expect(isDevEnvironment(fakeData.string)).toBe(false);
     });
   });
 
   describe('when the var is undefined', () => {
     test('then it should return false', () => {
-      expect(isDevEnvironment(injectionVars.UNDEFINED)).toBe(false);
+      expect(isDevEnvironment(fakeData.UNDEFINED)).toBe(false);
     });
   });
 });

@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 // Internal dependencies
 const {
-  injectionVars,
+  fakeData,
   nodeEnv,
 } = require('../../../auxiliary-constants');
 
@@ -16,19 +16,19 @@ describe('Given a call to isProdEnvironment function', () => {
 
   describe("when it's pass a  number var", () => {
     test('then it should return true', () => {
-      expect(isProdEnvironment(injectionVars.number)).toBe(false);
+      expect(isProdEnvironment(fakeData.number)).toBe(false);
     });
   });
 
   describe('when the string is different to production', () => {
     test('then it should return false', () => {
-      expect(isProdEnvironment(injectionVars.string)).toBe(false);
+      expect(isProdEnvironment(fakeData.string)).toBe(false);
     });
   });
 
   describe('when the var is undefined', () => {
     test('then it should return false', () => {
-      expect(isProdEnvironment(injectionVars.UNDEFINED)).toBe(false);
+      expect(isProdEnvironment(fakeData.UNDEFINED)).toBe(false);
     });
   });
 });

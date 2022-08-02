@@ -1,5 +1,4 @@
-const { faker } = require('@faker-js/faker');
-const { environmentVarsDeclared, fakeData } = require('../../../auxiliary-constants');
+const { fakeData } = require('../../../auxiliary-constants');
 
 const getEnvironmentVarModule = '../../../../src/adapters/environment-vars/get-environment-var';
 const checkersModule = '../../../../src/utils/checkers';
@@ -16,21 +15,18 @@ a valid key name as an argument value`, () => {
       ...originalEnv,
     };
   });
-  const tmpObject = faker.helpers.arrayElement(environmentVarsDeclared);
-  const randomKeyName = Object.keys(tmpObject);
-  const randomEnvironmentVar = Object.values(tmpObject);
 
   describe('When environment variable is set', () => {
     process.env = {
       ...originalEnv,
-      [randomEnvironmentVar]: fakeData.string,
+      [fakeData.techWord]: fakeData.string,
     };
 
     const getEnvironmentVar = jest.requireActual(getEnvironmentVarModule);
     const { isUndefined } = jest.requireMock(checkersModule);
     test('then we should get environment var value', () => {
       isUndefined.mockReturnValueOnce(false);
-      const returnValue = getEnvironmentVar(randomKeyName);
+      const returnValue = getEnvironmentVar(fakeData.techWord);
 
       expect(returnValue).toBe(fakeData.string);
     });
@@ -42,9 +38,9 @@ a valid key name as an argument value`, () => {
 
       const { isUndefined } = jest.requireMock(checkersModule);
       isUndefined.mockReturnValue(true);
-      expect(() => getEnvironmentVar(randomKeyName)).toThrow(ReferenceError);
-      expect(() => getEnvironmentVar(randomKeyName))
-        .toThrow(`reference to undefined property "${randomKeyName}"`);
+      expect(() => getEnvironmentVar(fakeData.techWord)).toThrow(ReferenceError);
+      expect(() => getEnvironmentVar(fakeData.techWord))
+        .toThrow(`reference to undefined property "${fakeData.techWord}"`);
     });
   });
 });
