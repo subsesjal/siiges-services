@@ -30,6 +30,7 @@
     "@fastify/autoload": "^5.0.0",
     "@fastify/cors": "^8.0.0",
     "@fastify/helmet": "^9.1.0",
+    "@fastify/swagger": "^7.4.1",
     "@siiges-services/authentication": "^1.0.0",
     "@siiges-services/core": "^1.0.0",
     "@siiges-services/shared": "^0.0.1",

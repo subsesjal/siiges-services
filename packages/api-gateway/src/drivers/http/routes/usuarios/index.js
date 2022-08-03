@@ -1,20 +1,25 @@
 const { usuariosAdapter } = require('../../adapters');
+
 const {
+  getUsuariosSchema,
   getUsuarioSchema,
+  getUsuarioDetalleSchema,
   createUsuarioSchema,
   updateUsuarioSchema,
+  deleteUsuarioSchema,
 } = require('./schema');
 
-async function usuarioRouter(fastify) {
-  await fastify.get('/', usuariosAdapter.findAllUsuarios);
+async function usuarioRouter(fastify, opts, next) {
+  await fastify.get(
+    '/',
+    { schema: getUsuariosSchema },
+    usuariosAdapter.findAllUsuarios,
+  );
 
   await fastify.get(
     '/:usuarioId',
     {
       schema: getUsuarioSchema,
-      validatorCompiler: ({
-        schema, method, url, httpPart, // eslint-disable-line no-unused-vars
-      }) => (data) => schema.validate(data, { abortEarly: false }),
     },
     usuariosAdapter.findOneUsuario,
   );
@@ -22,10 +27,7 @@ async function usuarioRouter(fastify) {
   await fastify.get(
     '/:usuarioId/detalle',
     {
-      schema: getUsuarioSchema,
-      validatorCompiler: ({
-        schema, method, url, httpPart, // eslint-disable-line no-unused-vars
-      }) => (data) => schema.validate(data, { abortEarly: false }),
+      schema: getUsuarioDetalleSchema,
     },
     usuariosAdapter.findOneDetailedUsuario,
   );
@@ -34,9 +36,6 @@ async function usuarioRouter(fastify) {
     '/',
     {
       schema: createUsuarioSchema,
-      validatorCompiler: ({
-        schema, method, url, httpPart, // eslint-disable-line no-unused-vars
-      }) => (data) => schema.validate(data, { abortEarly: false }),
     },
     usuariosAdapter.createUsuario,
   );
@@ -45,9 +44,6 @@ async function usuarioRouter(fastify) {
     '/:usuarioId',
     {
       schema: updateUsuarioSchema,
-      validatorCompiler: ({
-        schema, method, url, httpPart, // eslint-disable-line no-unused-vars
-      }) => (data) => schema.validate(data, { abortEarly: false }),
     },
     usuariosAdapter.updateUsuario,
   );
@@ -55,13 +51,12 @@ async function usuarioRouter(fastify) {
   await fastify.delete(
     '/:usuarioId',
     {
-      schema: getUsuarioSchema,
-      validatorCompiler: ({
-        schema, method, url, httpPart, // eslint-disable-line no-unused-vars
-      }) => (data) => schema.validate(data, { abortEarly: false }),
+      schema: deleteUsuarioSchema,
     },
     usuariosAdapter.deleteUsuario,
   );
+
+  next();
 }
 
 module.exports = usuarioRouter;
