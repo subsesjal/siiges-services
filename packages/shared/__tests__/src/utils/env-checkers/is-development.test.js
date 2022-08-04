@@ -1,55 +1,33 @@
-/* eslint-disable global-require */
 // Internal dependencies
-const testNodeEnvs = require('../../../test-environments');
+const {
+  fakeData,
+  nodeEnv,
+} = require('../../../auxiliary-constants');
 
-const orginalEnvVars = process.env;
-
-afterAll(() => {
-  process.env = orginalEnvVars;
-});
+const { isDevEnvironment } = jest.requireActual('../../../../src/utils/checkers');
 
 describe('Given a call to isDeVEnvironment function', () => {
-  beforeEach(() => {
-    jest.resetModules();
-  });
-
-  describe('when node is set in development', () => {
-    // setting a fake node env value
-    process.env.NODE_ENV = testNodeEnvs.DEV;
-    const { isDevEnvironment } = jest.requireActual('../../../../src/utils/env-checkers');
-
+  describe("when it's pass a  var with string 'development'", () => {
     test('then it should return true', () => {
-      expect(isDevEnvironment()).toBe(true);
+      expect(isDevEnvironment(nodeEnv.DEV)).toBe(true);
     });
   });
 
-  describe('when node is set in production', () => {
+  describe("when it's pass a  number var", () => {
     test('then it should return false', () => {
-      // setting a fake node env value
-      process.env.NODE_ENV = testNodeEnvs.PROD;
-      const { isDevEnvironment } = jest.requireActual('../../../../src/utils/env-checkers');
-
-      expect(isDevEnvironment()).toBe(false);
+      expect(isDevEnvironment(fakeData.number)).toBe(false);
     });
   });
 
-  describe('when node is neither production or development', () => {
+  describe('when the var has a stirng different to development', () => {
     test('then it should return false', () => {
-      // setting a fake node env value
-      process.env.NODE_ENV = testNodeEnvs.FAKE;
-      const { isDevEnvironment } = jest.requireActual('../../../../src/utils/env-checkers');
-
-      expect(isDevEnvironment()).toBe(false);
+      expect(isDevEnvironment(fakeData.string)).toBe(false);
     });
   });
 
-  describe('when node is not set', () => {
+  describe('when the var is undefined', () => {
     test('then it should return false', () => {
-      // setting a fake node env value
-      process.env.NODE_ENV = testNodeEnvs.UNDEFINED;
-      const { isDevEnvironment } = jest.requireActual('../../../../src/utils/env-checkers');
-
-      expect(isDevEnvironment()).toBe(false);
+      expect(isDevEnvironment(fakeData.UNDEFINED)).toBe(false);
     });
   });
 });

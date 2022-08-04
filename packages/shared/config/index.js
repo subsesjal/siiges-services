@@ -1,5 +1,5 @@
-const envVars = require('./env-vars');
+const nodejsInfo = require('./nodejs');
 
 module.exports = {
-  envVars,
+  nodejsInfo,
 };
