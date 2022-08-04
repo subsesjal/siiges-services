@@ -1,5 +1,7 @@
-const environmentVars = require('./environment');
+const jwtSecret = require('./jwt-secret');
+const frontAuth = require('./front-auth');
 
 module.exports = {
-  environmentVars,
+  jwtSecret,
+  frontAuth,
 };

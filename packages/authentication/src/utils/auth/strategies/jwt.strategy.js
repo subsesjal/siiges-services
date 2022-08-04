@@ -2,8 +2,8 @@
 const { Strategy } = require('passport-jwt');
 
 // Internal dependencies
-const { jwtOptions } = require('../../constants');
+const { jwtSecret } = require('../../../../config');
 
-const JwtStrategy = new Strategy(jwtOptions, (payload, done) => done(null, payload));
+const JwtStrategy = new Strategy(jwtSecret, (payload, done) => done(null, payload));
 
 module.exports = JwtStrategy;
