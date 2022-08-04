@@ -1,8 +1,6 @@
-const {
-  usuario,
-  persona,
-  general,
-} = require('./generalSchema');
+const { persona } = require('./properties/persona');
+const { responseProperties } = require('./properties/responseProperties');
+const { usuario } = require('./properties/usuario');
 
 const updateUsuarioSchema = {
   tags: ['Usuario'],
@@ -11,33 +9,18 @@ const updateUsuarioSchema = {
   params: {
     type: 'object',
     properties: {
-      usuarioId: usuario.usuarioId,
+      usuarioId: { type: 'integer' },
     },
     required: ['usuarioId'],
   },
   body: {
     type: 'object',
     properties: {
-      rolId: usuario.rolId,
-      usuario: usuario.usuario,
-      correo: usuario.correo,
-      estatus: usuario.estatus,
-      actualizado: usuario.actualizado,
+      ...usuario,
       persona: {
         type: 'object',
         properties: {
-          nombre: persona.nombre,
-          apellidoPaterno: persona.apellidoPaterno,
-          apellidoMaterno: persona.apellidoMaterno,
-          fechaNacimiento: persona.fechaNacimiento,
-          sexo: persona.sexo,
-          nacionalidad: persona.nacionalidad,
-          telefono: persona.telefono,
-          celular: persona.celular,
-          curp: persona.curp,
-          rfc: persona.rfc,
-          ine: persona.ine,
-          fotografia: persona.fotografia,
+          ...persona,
         },
       },
     },
@@ -49,31 +32,15 @@ const updateUsuarioSchema = {
         data: {
           type: 'object',
           properties: {
-            id: usuario.id,
-            rolId: usuario.rolId,
-            usuario: usuario.usuario,
-            correo: usuario.correo,
-            estatus: usuario.estatus,
-            createdAt: general.createdAt,
-            updatedAt: general.updatedAt,
+            id: { type: 'integer' },
+            ...usuario,
+            ...responseProperties,
             persona: {
               type: 'object',
               properties: {
-                id: persona.id,
-                nombre: persona.nombre,
-                apellidoPaterno: persona.apellidoPaterno,
-                apellidoMaterno: persona.apellidoMaterno,
-                fechaNacimiento: persona.fechaNacimiento,
-                sexo: persona.sexo,
-                nacionalidad: persona.nacionalidad,
-                telefono: persona.telefono,
-                celular: persona.celular,
-                curp: persona.curp,
-                rfc: persona.rfc,
-                ine: persona.ine,
-                fotografia: persona.fotografia,
-                createdAt: general.createdAt,
-                updatedAt: general.updatedAt,
+                id: { type: 'integer' },
+                ...persona,
+                ...responseProperties,
               },
             },
           },

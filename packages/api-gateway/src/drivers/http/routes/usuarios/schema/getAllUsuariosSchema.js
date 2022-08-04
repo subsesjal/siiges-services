@@ -1,5 +1,6 @@
-const { usuario, general } = require('./generalSchema');
-const personaResponseSchema = require('./personaResponseSchema');
+const { persona } = require('./properties/persona');
+const { responseProperties } = require('./properties/responseProperties');
+const { usuario } = require('./properties/usuario');
 
 const getAllUsuariosSchema = {
   tags: ['Usuario'],
@@ -13,14 +14,16 @@ const getAllUsuariosSchema = {
           items: {
             type: 'object',
             properties: {
-              id: usuario.id,
-              rolId: usuario.rolId,
-              usuario: usuario.usuario,
-              correo: usuario.correo,
-              estatus: usuario.estatus,
-              createdAt: general.createdAt,
-              updatedAt: general.updatedAt,
-              persona: personaResponseSchema,
+              id: { type: 'integer' },
+              ...usuario,
+              ...responseProperties,
+              persona: {
+                type: 'object',
+                properties: {
+                  ...persona,
+                  ...responseProperties,
+                },
+              },
             },
           },
         },

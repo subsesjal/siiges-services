@@ -1,8 +1,9 @@
-const {
-  usuario,
-  general,
-} = require('./generalSchema');
-const personaDetalleResponseSchema = require('./personaDetalleResponseSchema');
+const { usuario } = require('./properties/usuario');
+const { persona } = require('./properties/persona');
+const { domicilio } = require('./properties/domicilio');
+const { municipio } = require('./properties/municipio');
+const { estado } = require('./properties/estado');
+const { responseProperties } = require('./properties/responseProperties');
 
 const getUsuarioDetalleSchema = {
   tags: ['Usuario'],
@@ -11,7 +12,7 @@ const getUsuarioDetalleSchema = {
     title: 'getUsuarioDetalleSchema',
     type: 'object',
     properties: {
-      usuarioId: usuario.usuarioId,
+      usuarioId: { type: 'integer' },
     },
     required: ['usuarioId'],
   },
@@ -22,14 +23,41 @@ const getUsuarioDetalleSchema = {
         data: {
           type: 'object',
           properties: {
-            id: usuario.id,
-            rolId: usuario.rolId,
-            usuario: usuario.usuario,
-            correo: usuario.correo,
-            estatus: usuario.estatus,
-            createdAt: general.createdAt,
-            updatedAt: general.updatedAt,
-            persona: personaDetalleResponseSchema,
+            id: { type: 'integer' },
+            ...usuario,
+            ...responseProperties,
+            persona: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...persona,
+                ...responseProperties,
+                domicilio: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'integer' },
+                    ...domicilio,
+                    ...responseProperties,
+                    municipio: {
+                      type: 'object',
+                      properties: {
+                        id: { type: 'integer' },
+                        ...municipio,
+                        ...responseProperties,
+                      },
+                    },
+                    estado: {
+                      type: 'object',
+                      properties: {
+                        id: { type: 'integer' },
+                        ...estado,
+                        ...responseProperties,
+                      },
+                    },
+                  },
+                },
+              },
+            },
           },
         },
       },
