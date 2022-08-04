@@ -1,11 +1,10 @@
-const { constants } = require('@siiges-services/shared');
-require('dotenv').config({ path: constants.dotenvPath });
+const { dotenv } = require('@siiges-services/shared');
 
-const whiteListStr = process.env.WHITE_LIST;
+const whiteListStr = dotenv.getEnvironmentVar('WHITE_LIST');
 const whiteList = whiteListStr.split(',');
 
 module.exports = {
-  serverHost: process.env.SERVER_HOST,
-  serverPort: process.env.SERVER_PORT,
+  serverHost: dotenv.getEnvironmentVar('SERVER_HOST'),
+  serverPort: dotenv.configPath('SERVER_PORT'),
   whiteList,
 };
