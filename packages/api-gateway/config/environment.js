@@ -5,6 +5,6 @@ const whiteList = whiteListStr.split(',');
 
 module.exports = {
   serverHost: dotenv.getEnvironmentVar('SERVER_HOST'),
-  serverPort: dotenv.configPath('SERVER_PORT'),
+  serverPort: dotenv.getEnvironmentVar('SERVER_PORT'),
   whiteList,
 };
