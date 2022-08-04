@@ -4,7 +4,7 @@ const { nodeEnv } = require('../../../auxiliary-constants');
 const dotenv = jest.requireMock('dotenv');
 const setPath = jest.requireMock('../../../../src/adapters/dotenv/set-path');
 
-const configPathModule = '../../../../src/adapters/dotenv';
+const configPathModule = '../../../../src/adapters/dotenv/config-path';
 const nodejsModule = '../../../../src/adapters/nodejs';
 const checkersModule = '../../../../src/utils/checkers';
 
@@ -13,7 +13,7 @@ describe('Given a call to configPath function', () => {
     jest.resetModules();
   });
   describe('When node environment is set in development mode', () => {
-    const { configPath } = jest.requireActual(configPathModule);
+    const configPath = jest.requireActual(configPathModule);
     const { getEnvironment } = jest.requireMock(nodejsModule);
 
     const filename = 'development.env';
@@ -28,7 +28,7 @@ describe('Given a call to configPath function', () => {
   });
 
   describe('When node environment is set in production mode', () => {
-    const { configPath } = jest.requireActual(configPathModule);
+    const configPath = jest.requireActual(configPathModule);
     const { getEnvironment } = jest.requireMock(nodejsModule);
 
     const filename = 'production.env';
@@ -50,8 +50,8 @@ describe('Given a call to configPath function', () => {
       } = jest.requireMock(checkersModule);
       isDevEnvironment.mockReturnValue(false);
       isProdEnvironment.mockReturnValue(false);
+      const configPath = jest.requireActual(configPathModule);
 
-      const { configPath } = jest.requireActual(configPathModule);
       expect(configPath).toThrow(TypeError);
       expect(configPath).toThrow('Invalid assignment to const "NODE_ENV"');
     });
@@ -62,9 +62,10 @@ describe('Given a call to configPath function', () => {
       jest.unmock(nodejsModule);
       const { isUndefined } = jest.requireMock(checkersModule);
       isUndefined.mockReturnValue(true);
-      const { configPath } = jest.requireActual(configPathModule);
-      expect(() => configPath()).toThrow(ReferenceError);
-      expect(() => configPath()).toThrow('reference to undefined property "NODE_ENV"');
+      const configPath = jest.requireActual(configPathModule);
+
+      expect(configPath).toThrow(ReferenceError);
+      expect(configPath).toThrow('reference to undefined property "NODE_ENV"');
     });
   });
 });

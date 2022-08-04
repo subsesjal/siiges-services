@@ -1,6 +1,6 @@
 const { fakeData } = require('../../../auxiliary-constants');
 
-const getEnvironmentVarModule = '../../../../src/adapters/environment-vars/get-environment-var';
+const getEnvironmentVarModule = '../../../../src/adapters/dotenv/get-environment-var';
 const checkersModule = '../../../../src/utils/checkers';
 const originalEnv = process.env;
 

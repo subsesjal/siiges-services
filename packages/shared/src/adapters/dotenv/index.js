@@ -1,6 +1,6 @@
 // Internal dependendencies
-const configPath = require('./config-path');
+const getEnvironmentVar = require('./get-environment-var');
 
 module.exports = {
-  configPath,
+  getEnvironmentVar,
 };

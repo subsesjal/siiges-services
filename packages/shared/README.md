@@ -6,53 +6,76 @@
 
 2. Run `yarn bootstrap` in your root folder
 
-3. Check if your package has linked this package. To do that go to its package.json file and there in depencies section should be listed `@siiges-services/shared`.
+3. Check if your package has linked this package. To do that go to it's package.json file and there in depencies section should be listed `@siiges-services/shared`.
 If not run `lerna add @siiges-services/shared scoope=@siiges-services/your-package-name`
 
 ## Usage
 
 This package contain code that will be useful in all packages.
 
-In this moments here are 2 useful modules
+In this moments here are 5 useful modules
 
-
-## Utils
-
-Module which have three more modules within:
-
-### checkers
-Set of 4 functions:
+## checkers
+Module with a set of 4 functions:
 
 Import  them to your package:
 ```
-const checkers = require('@siiges-services/shared/utils/checkers');
+const { checkers }= require('@siiges-services/shared');
 ```
 
-- isString: take one argument and check if its a string (return true) or not (return false).
+### isString
+This function  takes one argument and check if it's a string (return true) or not (return false).
 Import  it to your package:
 ```
-const { isString } = require('@siiges-services/shared/utils/checkers');
+const { checkers } = require('@siiges-services/shared/utils/checkers');
+
+const string = 'Will return true'
+const number = 23
+
+checkers.isString(string); // return true
+checkers.isString(number); // return false
 ```
 
-- isUndefined take one argument and check if its a undefined (return true) or not (return false).
+### isUndefined
+This function takes one argument and check if it's a undefined (return true) or not (return false).
 Import  it to your package:
 ```
-const { isUndefined } = require('@siiges-services/shared/utils/checkers');
+const { checkers } = require('@siiges-services/shared');
+
+const UNDEFINED = undefined;
+const string = 'return false'
+
+checkers.isUndefined(UNDEFINED) // return true
+checkers.isUndefinedd(string) // return false
 ```
 
-- isProduction: take a string as argument and check if it's equal to 'production' (return true) or not (return false). Useful to check node environment
+### isProdEnvironment
+This function takes a string as argument and check if it's equal to 'production' (return true) or not (return false). Useful to check node environment
 Import  it to your package:
 ```
-const { isProduction } = require('@siiges-services/shared/utils/checkers');
+const { checkers } = require('@siiges-services/shared');
+
+const prod = 'prudction';
+const dev = 'development';
+
+checkers.isProdEnvironment(pord) // return true
+checkers.isProdEnvironment(dev) // return false
 ```
 
-- isDevelopment: take a string as argument and check if it's equal to 'development' (return true) or not (return false). Useful to check node environment
+### isDevEnvironment
+This function takes a string as argument and check if it's equal to 'development' (return true) or not (return false). Useful to check node environment
 Import  it to your package:
 ```
-const { isDevelopment } = require('@siiges-services/shared/utils/checkers');
+const { checkers } = require('@siiges-services/shared');
+
+const prod = 'prudction';
+const dev = 'development';
+
+checkers.isDevEnvironment(pord) // return false
+checkers.isDevEnvironment(dev) // return true
 ```
 
-### Logger
+## Logger
 
 Utility to display project state information. To import it in your current file
 
@@ -60,49 +83,47 @@ Utility to display project state information. To import it in your current file
 const { Logger } = require('@siiges-services/shared/utils');
 ```
 
-### Constants
+## Constants
 
 This package have a set of Constans usefull in all the project.
-- **softwareEnvironments** This is object where you can add or get supported environments in this project.
+
+### softwareEnvironments
+This is object where you can add or get supported environments in this project.
 To import all of them in your current file write
 
 ```
-const { constants } = require('@siiges-services/shared/utils');
+const { constants } = require('@siiges-services/shared');
 
 ```
 
-## Adapters
-Module which have three more modules within:
+## dotenv
+Module with 2 function wich configure dotenv package. So when you need to get environment vars import it.
 
-### dotenv
-Module with one function wich configure dotenv package. So when you need to get environment vars import it.
 
-- config-path: take no arguments and congifigure dotenv package. Configurations made by this function:
+###  getEnvironmentVar
+This function takes an environment var name as argument and get it's value.
+**Note** if the environment var is not set (undefined) is going to throw Reference error
+**Note** use this function to get your environment vars instead of process.env to prevent errors.
+**Note** here I configured dotenv so configure dot env is not necessary anymore
+**dotenv configurations**
 1. Our file .env will be in the root directory of this monorepo
 2. We are not going to user .env file, instead we are going to use development.env or production.env depending on node configurations.
 Use  it in your package:
 ```
-const { dotenv } = require('@siiges-services/shared/adapter');
-
-dotenv.configPath();
+const { dotenv } require('@siiges-services/shared/adapter');
+const myValue = dotenv.getEnvironmentVar(ENV_VAR_NAME);
 ```
-### nodejs
+
+## nodejs
 Module with one function wich get you the current node environment
--getEnvironment: takes no argument and return node environment.
+
+### getEnvironment
+This function takes no argument and return the current node environment.
 **Note** if node environment is set different to development or production, this functions will throw TypeError function.
 **Note** if node environment is not set (undefined), this function will throw a reference error.
 Use  it in your package:
 ```
-const { nodejs } = require('@siiges-services/shared/adapter');
+const { nodejs } = require('@siiges-services/shared');
 
 const environment = nodejs.getEnvironment();
-```
-### environment-vars
-Module with one function, which get an environment variable
-- getEnvironmentVar take an environment var name as argument and get its environment value.
-**Note** if the environment var is not set (undefined) is going to throw Reference error
-**Note** use this function to get your environment vars instead of process.env to prevent errors.
-```
-const { getEnvironmentVar } require('@siiges-services/shared/adapter');
-const myValue = getEnvironmentVar(ENV_VAR_NAME);
 ```

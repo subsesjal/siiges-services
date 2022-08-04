@@ -1,5 +1,5 @@
 // Internal dependencies
-const { configPath } = require('../dotenv');
+const configPath = require('./config-path');
 const { isUndefined } = require('../../utils/checkers');
 
 configPath();
