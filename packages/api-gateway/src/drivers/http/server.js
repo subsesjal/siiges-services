@@ -1,7 +1,7 @@
 // External dependencies
-const autoLoad = require('@fastify/autoload');
-const helmet = require('@fastify/helmet');
 const Fastify = require('fastify');
+const AutoLoad = require('@fastify/autoload');
+const helmet = require('@fastify/helmet');
 const cors = require('@fastify/cors');
 const path = require('path');
 const { Logger } = require('@siiges-services/shared');
@@ -11,22 +11,20 @@ const {
   serverPort,
 } = require('../../../config/environment');
 
-// Internal dependencies
-// const authDecorators = require('./decorators/auth');
-
-// Setup
-const isTestEnv = process.env.NODE_ENV === 'test';
-
 const fastify = Fastify({
-  // Disable logs in test enviroment
-  logger: !isTestEnv,
+  ajv: {
+    customOptions: {
+      allErrors: true,
+    },
+  },
+  logger: true,
 });
 
-// Avoid loading swagger when running tests
-/* if (!isTestEnv) {
-  // Swagger needs to be loaded before the routes
-  fastify.register(Swagger, swaggerOptions);
-} */
+fastify.register(helmet);
+
+fastify.register(AutoLoad, {
+  dir: path.join(__dirname, 'plugins'),
+});
 
 const options = {
   origin: (origin, cb) => {
@@ -42,21 +40,13 @@ fastify.register(cors, {
   options,
 });
 
-// Decorators for authorization
-/* fastify.decorate('hasPermissions', authDecorators.hasPermissions);
-fastify.decorate('hasRole', authDecorators.hasRole);
- */
-fastify.register(helmet);
-
-fastify.register(autoLoad, {
+fastify.register(AutoLoad, {
   dir: path.join(__dirname, 'routes'),
   ignorePattern: /.*(schema).*/,
   options: { prefix: 'api/v1' },
 });
 
-fastify.register(autoLoad, { dir: path.join(__dirname, 'plugin') });
-
-async function start() {
+const start = async () => {
   await fastify.listen(
     {
       port: serverPort,
@@ -70,9 +60,6 @@ async function start() {
       Logger.info(`Server listening at ${address}`);
     },
   );
-}
-
-module.exports = {
-  start,
-  fastify,
 };
+
+module.exports = { start, fastify };

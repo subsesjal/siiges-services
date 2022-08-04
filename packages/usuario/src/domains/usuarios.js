@@ -19,8 +19,9 @@ const findAllQuery = (usuarioModel) => async () => {
 };
 
 const findOneQuery = (usuarioModel) => async (id) => {
-  const usuario = await usuarioModel.findByPk(id, {
+  const usuario = await usuarioModel.findOne({
     where: {
+      id,
       deletedAt: {
         [Op.is]: null,
       },
@@ -31,12 +32,14 @@ const findOneQuery = (usuarioModel) => async (id) => {
       },
     ],
   });
+
   return usuario;
 };
 
 const findOneDetailedQuery = (usuarioModel) => async (id) => {
-  const usuario = await usuarioModel.findByPk(id, {
+  const usuario = await usuarioModel.findOne({
     where: {
+      id,
       deletedAt: {
         [Op.is]: null,
       },
@@ -95,8 +98,9 @@ const createQuery = (usuarioModel) => async (data) => {
 };
 
 const updateQuery = (usuarioModel, personaModel) => async (id, changes) => {
-  const usuario = await usuarioModel.findByPk(id, {
+  const usuario = await usuarioModel.findOne({
     where: {
+      id,
       deletedAt: {
         [Op.is]: null,
       },
@@ -109,13 +113,20 @@ const updateQuery = (usuarioModel, personaModel) => async (id, changes) => {
     );
   }
 
-  const persona = await personaModel.findByPk(usuario.personaId, {
+  const persona = await personaModel.findOne({
     where: {
+      id: usuario.personaId,
       deletedAt: {
         [Op.is]: null,
       },
     },
   });
+
+  if (!persona) {
+    throw boom.notFound(
+      `[usuarios:finOne]: Usuario-persona no encontrado con id: ${usuario.personaId}`,
+    );
+  }
 
   const updatedAt = new Date().toISOString();
 
@@ -130,8 +141,9 @@ const updateQuery = (usuarioModel, personaModel) => async (id, changes) => {
 };
 
 const deleteQuery = (usuarioModel, personaModel) => async (id) => {
-  const usuario = await usuarioModel.findByPk(id, {
+  const usuario = await usuarioModel.findOne({
     where: {
+      id,
       deletedAt: {
         [Op.is]: null,
       },
@@ -144,13 +156,20 @@ const deleteQuery = (usuarioModel, personaModel) => async (id) => {
     );
   }
 
-  const persona = await personaModel.findByPk(usuario.personaId, {
+  const persona = await personaModel.findOne({
     where: {
+      id: usuario.personaId,
       deletedAt: {
         [Op.is]: null,
       },
     },
   });
+
+  if (!persona) {
+    throw boom.notFound(
+      `[usuarios:finOne]: Usuario-persona no encontrado con id: ${usuario.personaId}`,
+    );
+  }
 
   const deletedAt = new Date().toISOString();
 
