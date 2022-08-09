@@ -19,7 +19,7 @@ const EstadoSchema = {
       key: 'id',
     },
   },
-  estado: {
+  nombre: {
     allowNull: false,
     type: DataTypes.STRING,
   },
