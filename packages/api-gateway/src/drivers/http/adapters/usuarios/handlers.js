@@ -71,7 +71,7 @@ async function updateUsuario(req, reply) {
     Logger.info('[usuarios]: Updating usuario');
 
     const { usuarioId } = req.params;
-    const { fotoPerfil, planMejora, ...data } = req.body;
+    const { fotoPerfil, ...data } = req.body;
 
     let usuarioUpdated = await this.usuarioServices.updateUsuario(
       usuarioId,
@@ -91,17 +91,6 @@ async function updateUsuario(req, reply) {
           },
         });
       }
-    }
-
-    if (planMejora) {
-      files.push({
-        file: planMejora,
-        dataFile: {
-          tipoEntidad: 'PROGRAMA',
-          entidadId: usuarioId,
-          tipoDocumento: 'PLAN_MEJORA',
-        },
-      });
     }
 
     const filesUploaded = await this.fileServices.upload(files);
