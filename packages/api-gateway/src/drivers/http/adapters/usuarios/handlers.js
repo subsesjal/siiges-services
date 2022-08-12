@@ -80,17 +80,15 @@ async function updateUsuario(req, reply) {
 
     const files = [];
 
-    if (fotoPerfil) {
-      if (usuarioUpdated.personaId) {
-        files.push({
-          file: fotoPerfil,
-          dataFile: {
-            tipoEntidad: 'PERSONA',
-            entidadId: usuarioUpdated.personaId,
-            tipoDocumento: 'FOTOGRAFIA_PERSONA',
-          },
-        });
-      }
+    if (fotoPerfil && usuarioUpdated.personaId) {
+      files.push({
+        file: fotoPerfil,
+        dataFile: {
+          tipoEntidad: 'PERSONA',
+          entidadId: usuarioUpdated.personaId,
+          tipoDocumento: 'FOTOGRAFIA_PERSONA',
+        },
+      });
     }
 
     const filesUploaded = await this.fileServices.upload(files);
