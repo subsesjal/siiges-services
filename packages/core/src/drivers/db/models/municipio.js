@@ -19,7 +19,7 @@ const MunicipioSchema = {
       key: 'id',
     },
   },
-  municipio: {
+  nombre: {
     allowNull: false,
     type: DataTypes.STRING,
   },

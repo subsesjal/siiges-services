@@ -1,0 +1,15 @@
+id,nombre,descripcion,created_at
+1,nuevo,Usuario Nuevo,2018-09-12 18:00:00
+2,admin,Administrador,2018-09-12 18:00:00
+3,representante,Representante Legal,2018-09-12 18:00:00
+4,gestor,Gestor,2018-09-12 18:00:00
+5,evaluador,Evaluador,2018-09-12 18:00:00
+6,inspector,Inspector,2018-09-12 18:00:00
+7,control_documental,Revisión de documentos,2018-09-17 19:00:00
+8,sicyt_lectura,Sicyt de consulta,2018-09-17 18:00:00
+9,sicyt_editar,Sicyt para editar,2018-09-17 18:00:00
+10,comite_evaluacion,Comité de evaluación,2018-11-11 8:00:00
+11,jefe_inspector,Jefe de inspectores,2018-11-11 8:00:00
+12,ce_ies,Control Escolar IES,2018-11-11 8:00:00
+13,ce_sicyt,Control Escolar SICYT,2018-11-11 8:00:00
+14,equiv_sicyt,Equivalencias SICYT,2021-01-22 14:27:58
