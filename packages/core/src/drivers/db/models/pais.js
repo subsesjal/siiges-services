@@ -9,7 +9,7 @@ const PaisSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  pais: {
+  nombre: {
     allowNull: false,
     type: DataTypes.STRING,
     unique: true,
@@ -17,7 +17,6 @@ const PaisSchema = {
   codigo: {
     allowNull: false,
     type: DataTypes.STRING,
-    unique: true,
   },
   createdAt: {
     allowNull: false,
