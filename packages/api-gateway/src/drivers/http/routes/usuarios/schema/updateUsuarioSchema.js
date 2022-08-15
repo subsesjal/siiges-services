@@ -17,6 +17,9 @@ const updateUsuarioSchema = {
     type: 'object',
     properties: {
       ...usuario,
+      fotoPerfil: {
+        type: 'object',
+      },
       persona: {
         type: 'object',
         properties: {

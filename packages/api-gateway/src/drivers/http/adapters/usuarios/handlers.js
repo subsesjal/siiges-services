@@ -68,13 +68,34 @@ async function createUsuario(req, reply) {
 
 async function updateUsuario(req, reply) {
   try {
-    const { usuarioId } = req.params;
-    const { body } = req;
-
     Logger.info('[usuarios]: Updating usuario');
-    const usuarioUpdated = await this.usuarioServices.updateUsuario(
+
+    const { usuarioId } = req.params;
+    const { fotoPerfil, ...data } = req.body;
+
+    let usuarioUpdated = await this.usuarioServices.updateUsuario(
       usuarioId,
-      body,
+      data,
+    );
+
+    const files = [];
+
+    if (fotoPerfil && usuarioUpdated.personaId) {
+      files.push({
+        file: fotoPerfil,
+        dataFile: {
+          tipoEntidad: 'PERSONA',
+          entidadId: usuarioUpdated.personaId,
+          tipoDocumento: 'FOTOGRAFIA_PERSONA',
+        },
+      });
+    }
+
+    const filesUploaded = await this.fileServices.upload(files);
+
+    usuarioUpdated = await this.usuarioServices.updateUsuario(
+      usuarioId,
+      { persona: { fotografia: filesUploaded.fotografia.path } },
     );
 
     return reply
