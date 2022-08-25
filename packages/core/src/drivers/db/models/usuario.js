@@ -38,7 +38,6 @@ const UsuarioSchema = {
   correo: {
     allowNull: false,
     type: DataTypes.STRING,
-    unique: true,
   },
   contrasena: {
     allowNull: false,
@@ -48,6 +47,11 @@ const UsuarioSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
     defaultValue: 1,
+  },
+  actualizado: {
+    allowNull: false,
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
   },
   tokenNotificaciones: {
     type: DataTypes.STRING,
