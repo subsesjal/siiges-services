@@ -71,31 +71,11 @@ async function updateUsuario(req, reply) {
     Logger.info('[usuarios]: Updating usuario');
 
     const { usuarioId } = req.params;
-    const { fotoPerfil, ...data } = req.body;
+    const { ...data } = req.body;
 
-    let usuarioUpdated = await this.usuarioServices.updateUsuario(
+    const usuarioUpdated = await this.usuarioServices.updateUsuario(
       usuarioId,
       data,
-    );
-
-    const files = [];
-
-    if (fotoPerfil && usuarioUpdated.personaId) {
-      files.push({
-        file: fotoPerfil,
-        dataFile: {
-          tipoEntidad: 'PERSONA',
-          entidadId: usuarioUpdated.personaId,
-          tipoDocumento: 'FOTOGRAFIA_PERSONA',
-        },
-      });
-    }
-
-    const filesUploaded = await this.fileServices.upload(files);
-
-    usuarioUpdated = await this.usuarioServices.updateUsuario(
-      usuarioId,
-      { persona: { fotografia: filesUploaded.fotografia.path } },
     );
 
     return reply
