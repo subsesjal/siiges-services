@@ -25,6 +25,7 @@ module.exports = {
           path.join(__dirname, 'packages/authentication'),
           path.join(__dirname, 'packages/usuario'),
           path.join(__dirname, 'packages/api-gateway'),
+          path.join(__dirname, 'packages/files'),
         ],
       },
     ],
