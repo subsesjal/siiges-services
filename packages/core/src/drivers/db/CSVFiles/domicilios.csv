@@ -1,0 +1,2 @@
+id,municipio_id,estado_id,calle,numero_exterior,numero_interior,colonia,codigo_postal,latitud,longitud,created_at
+1,532,14,SIN DATO,SIN DATO,NULL,SIN DATO,0,NULL,NULL,2022-08-10 17:55:02
