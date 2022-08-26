@@ -1,0 +1,38 @@
+{
+  "name": "@siiges-services/files",
+  "version": "1.0.0",
+  "description": "This package is to manage files",
+  "author": "cetherdev <robert.hct@gmail.com>",
+  "homepage": "https://github.com/robertotorres-dev/siiges-services#readme",
+  "license": "MIT",
+  "main": "src/index.js",
+  "directories": {
+    "src": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "src",
+    "__tests__"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robertotorres-dev/siiges-services.git"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "precommit": "yarn lint && yarn test"
+  },
+  "bugs": {
+    "url": "https://github.com/robertotorres-dev/siiges-services/issues"
+  },
+  "dependencies": {
+    "@siiges-services/core": "^1.0.0",
+    "mime-types": "^2.1.35"
+  }
+}
