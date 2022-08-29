@@ -60,9 +60,9 @@ const uploadFile = (createQuery, updateQuery, findOneByParamsQuery) => async (da
   const writtenBus = await writeBus(file, tipoDocumento, tipoEntidad, previousFile);
 
   const data = {
-    tipoEntidad: tipoEntidadItem.id,
+    tipoEntidadId: tipoEntidadItem.id,
     entidadId,
-    tipoDocumento: tipoDocumentoItem.id,
+    tipoDocumentoId: tipoDocumentoItem.id,
     nombre: writtenBus,
     ubicacion: `/uploads/${tipoEntidadItem.name}/${tipoDocumentoItem.name}/${(writtenBus)}`,
   };

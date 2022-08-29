@@ -9,20 +9,20 @@ const FileSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  tipoEntidad: {
+  tipoEntidadId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'tipo_entidad',
+    field: 'tipo_entidad_id',
   },
   entidadId: {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'entidad_id',
   },
-  tipoDocumento: {
+  tipoDocumentoId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'tipo_documento',
+    field: 'tipo_documento_id',
   },
   nombre: {
     allowNull: false,

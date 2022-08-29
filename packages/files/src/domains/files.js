@@ -1,12 +1,12 @@
 const { Op } = require('sequelize');
 const boom = require('@hapi/boom');
 
-const findOneByParamsQuery = (fileModel) => async (tipoEntidad, entidadId, tipoDocumento) => {
+const findOneByParamsQuery = (fileModel) => async (tipoEntidadId, entidadId, tipoDocumentoId) => {
   const file = await fileModel.findOne({
     where: {
-      tipoEntidad,
+      tipoEntidadId,
       entidadId,
-      tipoDocumento,
+      tipoDocumentoId,
       deletedAt: {
         [Op.is]: null,
       },
