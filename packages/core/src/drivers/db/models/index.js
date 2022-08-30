@@ -6,6 +6,10 @@ const { Estado, EstadoSchema } = require('./estado');
 const { Municipio, MunicipioSchema } = require('./municipio');
 const { Domicilio, DomicilioSchema } = require('./domicilio');
 const { File, FileSchema } = require('./file');
+const { TipoInmueble, TipoInmuebleSchema } = require('./tipoInmueble');
+const { Institucion, InstitucionSchema } = require('./institucion');
+const { Plantel, PlantelSchema } = require('./plantel');
+const { RatificacionNombre, RatificacionNombreSchema } = require('./ratificacionNombre');
 
 function setupModels(sequelize) {
   Rol.init(RolSchema, Rol.config(sequelize));
@@ -16,6 +20,10 @@ function setupModels(sequelize) {
   Persona.init(PersonaSchema, Persona.config(sequelize));
   Usuario.init(UsuarioSchema, Usuario.config(sequelize));
   File.init(FileSchema, File.config(sequelize));
+  Institucion.init(InstitucionSchema, Institucion.config(sequelize));
+  TipoInmueble.init(TipoInmuebleSchema, TipoInmueble.config(sequelize));
+  Plantel.init(PlantelSchema, Plantel.config(sequelize));
+  RatificacionNombre.init(RatificacionNombreSchema, RatificacionNombre.config(sequelize));
 
   Rol.associate(sequelize.models);
   Pais.associate(sequelize.models);
@@ -25,6 +33,10 @@ function setupModels(sequelize) {
   Persona.associate(sequelize.models);
   Usuario.associate(sequelize.models);
   File.associate(sequelize.models);
+  Institucion.associate(sequelize.models);
+  TipoInmueble.associate(sequelize.models);
+  Plantel.associate(sequelize.models);
+  RatificacionNombre.associate(sequelize.models);
 }
 
 module.exports = setupModels;
