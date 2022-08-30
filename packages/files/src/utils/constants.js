@@ -1,4 +1,4 @@
-const TIPO_ENTIDAD = [
+const tipoEntidadObj = [
   {
     id: 1,
     name: 'INSTITUCION',
@@ -37,7 +37,7 @@ const TIPO_ENTIDAD = [
   },
 ];
 
-const TIPO_DOCUMENTO = [
+const tipoDocumentoObj = [
   {
     id: 1,
     name: 'LOGOTIPO',
@@ -192,4 +192,4 @@ const TIPO_DOCUMENTO = [
   },
 ];
 
-module.exports = { TIPO_ENTIDAD, TIPO_DOCUMENTO };
+module.exports = { tipoEntidadObj, tipoDocumentoObj };
