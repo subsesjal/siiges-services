@@ -1,7 +1,7 @@
 const multer = require('fastify-multer'); // or import multer from 'fastify-multer'
 const boom = require('@hapi/boom');
 const { filesAdapter } = require('../../adapters');
-const { tipoExtension } = require('../../utils/constants');
+const { tipoExtension, maxFileSize } = require('../../utils/constants');
 
 const storage = multer.diskStorage({
   filename(req, file, cb) {
@@ -12,11 +12,7 @@ const storage = multer.diskStorage({
 const fileFilter = (req, file, cb) => {
   const tipoExtensionFiltered = tipoExtension.find((item) => item.mimeType === file.mimetype);
   if (!tipoExtensionFiltered) {
-    cb(null, () => {
-      throw boom.unsupportedMediaType(
-        '[files:uploadFile]: that media is not supported',
-      );
-    });
+    cb(boom.unsupportedMediaType('[files:uploadFile]: that media is not supported'));
   } else if (tipoExtensionFiltered) {
     cb(null, true);
   }
@@ -25,7 +21,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage,
   limits: {
-    fileSize: 3 * 1024 * 1024,
+    fileSize: maxFileSize,
   },
   fileFilter,
 });

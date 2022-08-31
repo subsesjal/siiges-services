@@ -13,4 +13,6 @@ const tipoExtension = [
   },
 ];
 
-module.exports = { tipoExtension };
+const maxFileSize = 3 * 1024 * 1024;
+
+module.exports = { tipoExtension, maxFileSize };
