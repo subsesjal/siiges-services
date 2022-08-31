@@ -6,17 +6,21 @@ const fakeData = {
   number: faker.datatype.number(),
   UNDEFINED: undefined,
   bool: faker.datatype.boolean(),
-  techWord: faker.hacker.ingverb(),
+  NULL: null,
 };
 
 const nodeEnv = {
   DEV: 'development',
   PROD: 'production',
+  TEST: 'test',
   FAKE: faker.word.noun(),
   UNDEFINED: undefined,
 };
 
+const techWord = faker.hacker.ingverb();
+
 module.exports = {
   fakeData,
   nodeEnv,
+  techWord,
 };
