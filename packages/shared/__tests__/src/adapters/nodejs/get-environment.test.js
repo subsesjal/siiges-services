@@ -43,12 +43,31 @@ describe('given call to getEnvironment function', () => {
     });
   });
 
+  describe('when node is set with test environment', () => {
+    test('then we should get "test" string', () => {
+      process.env.NODE_ENV = nodeEnv.TEST;
+
+      const { isTestEnvironment } = jest.requireMock(envCheckersModule);
+      const { getEnvironment } = jest.requireActual(getEnvironmentModules);
+
+      isTestEnvironment.mockReturnValueOnce(true);
+      const returnValue = getEnvironment();
+      expect(returnValue).toBe(nodeEnv.TEST);
+    });
+  });
+
   describe(`when node is set neither development nor
   production environment`, () => {
-    process.env.NODE_ENV = nodeEnv.FAKE;
-    test('then we should get a type error with message', () => {
+    test('then we should get eror with TypeError constructor', () => {
+      process.env.NODE_ENV = nodeEnv.FAKE;
       const { getEnvironment } = jest.requireActual(getEnvironmentModules);
+
       expect(getEnvironment).toThrow(TypeError);
+    });
+    test('then we should get a message error', () => {
+      process.env.NODE_ENV = nodeEnv.FAKE;
+      const { getEnvironment } = jest.requireActual(getEnvironmentModules);
+
       expect(getEnvironment).toThrow('Invalid assignment to const "NODE_ENV"');
     });
   });
