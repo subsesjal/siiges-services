@@ -1,71 +1,56 @@
+// External dependencies
+const dotenv = require('dotenv');
 // Internal dependencies
+const configPath = require('../../../../src/adapters/dotenv/config-path');
 const { nodeEnv } = require('../../../auxiliary-constants');
+const { getEnvironment } = require('../../../../src/adapters/nodejs');
+const setPath = require('../../../../src/adapters/dotenv/set-path');
 
-const dotenv = jest.requireMock('dotenv');
-const setPath = jest.requireMock('../../../../src/adapters/dotenv/set-path');
-
-const configPathModule = '../../../../src/adapters/dotenv/config-path';
-const nodejsModule = '../../../../src/adapters/nodejs';
-const checkersModule = '../../../../src/utils/checkers';
+jest.mock('../../../../src/adapters/dotenv/set-path', () => jest.fn());
+jest.mock('../../../../src/adapters/nodejs', () => ({
+  getEnvironment: jest.fn(),
+}));
+jest.mock('dotenv', () => ({
+  config: jest.fn(),
+}));
 
 describe('Given a call to configPath function', () => {
-  beforeEach(() => {
-    jest.resetModules();
-  });
   describe('When node environment is set in development mode', () => {
-    const configPath = jest.requireActual(configPathModule);
-    const { getEnvironment } = jest.requireMock(nodejsModule);
-
     const filename = 'development.env';
-    test('then getEnvironment and setPath should have benn called', () => {
+    test('THEN setPath should have been called', () => {
       getEnvironment.mockReturnValue(nodeEnv.DEV);
-      configPath();
 
-      expect(getEnvironment).toHaveBeenCalled();
+      configPath();
       expect(setPath).toHaveBeenCalledWith(filename);
+    });
+
+    test('Then dotenv.config should have been called', () => {
+      getEnvironment.mockReturnValue(nodeEnv.DEV);
+
+      configPath();
       expect(dotenv.config).toHaveBeenCalled();
     });
   });
 
   describe('When node environment is set in production mode', () => {
-    const configPath = jest.requireActual(configPathModule);
-    const { getEnvironment } = jest.requireMock(nodejsModule);
-
     const filename = 'production.env';
-    test('then getEnvironment and setPath should have benn called', () => {
+    test('THEN getEnvironment should have been called', () => {
+      configPath();
+
+      expect(getEnvironment).toHaveBeenCalled();
+    });
+
+    test('THEN setPath should have been called', () => {
       getEnvironment.mockReturnValue(nodeEnv.PROD);
       configPath();
-      expect(getEnvironment).toHaveBeenCalled();
+
       expect(setPath).toHaveBeenCalledWith(filename);
+    });
+
+    test('THEN dotenv.config should have been called', () => {
+      getEnvironment.mockReturnValue(nodeEnv.PROD);
+      configPath();
       expect(dotenv.config).toHaveBeenCalled();
-    });
-  });
-
-  describe('When node environment is neither development or production', () => {
-    test('then configPath should throw TypeError', () => {
-      jest.unmock(nodejsModule);
-      const {
-        isDevEnvironment,
-        isProdEnvironment,
-      } = jest.requireMock(checkersModule);
-      isDevEnvironment.mockReturnValue(false);
-      isProdEnvironment.mockReturnValue(false);
-      const configPath = jest.requireActual(configPathModule);
-
-      expect(configPath).toThrow(TypeError);
-      expect(configPath).toThrow('Invalid assignment to const "NODE_ENV"');
-    });
-  });
-
-  describe('When node environment is not set', () => {
-    test('then configPath should throw Reference error', () => {
-      jest.unmock(nodejsModule);
-      const { isUndefined } = jest.requireMock(checkersModule);
-      isUndefined.mockReturnValue(true);
-      const configPath = jest.requireActual(configPathModule);
-
-      expect(configPath).toThrow(ReferenceError);
-      expect(configPath).toThrow('reference to undefined property "NODE_ENV"');
     });
   });
 });
