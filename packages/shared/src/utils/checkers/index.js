@@ -1,12 +1,27 @@
 // Internal dependencies
 const isDevEnvironment = require('./is-development');
 const isProdEnvironment = require('./is-production');
-const isString = require('./is-string');
-const isUndefined = require('./is-undefined');
+const isTestEnvironment = require('./is-test');
+const isThisDatatype = require('./is-this-datatype');
+const { isFalsy, isTruthy } = require('./truthy-falsy');
+const { isNumber, isNotNumber } = require('./number');
+const { isString, isNotString } = require('./string');
+const { isNull, isNotNull } = require('./null');
+const { isUndefined, isDefined } = require('./undefined');
 
 module.exports = {
   isDevEnvironment,
   isProdEnvironment,
+  isTestEnvironment,
+  isTruthy,
+  isFalsy,
+  isNumber,
+  isNotNumber,
   isString,
+  isNotString,
+  isThisDatatype,
+  isNull,
+  isNotNull,
+  isDefined,
   isUndefined,
 };
