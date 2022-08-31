@@ -1,12 +1,12 @@
 /* eslint-disable no-undef */
 const boom = require('@hapi/boom');
-const { TIPO_ENTIDAD, TIPO_DOCUMENTO } = require('../utils/constants');
+const { tipoEntidadObj, tipoDocumentoObj } = require('../utils/constants');
 const { writeBus, deleteBus } = require('../utils/manageFiles');
 
 const findOneByParams = (findOneByParamsQuery) => async (dataFile) => {
   const { tipoEntidad, entidadId, tipoDocumento } = dataFile;
-  const tipoEntidadItem = TIPO_ENTIDAD.find((item) => item.name === tipoEntidad);
-  const tipoDocumentoItem = TIPO_DOCUMENTO.find((item) => item.name === tipoDocumento);
+  const tipoEntidadItem = tipoEntidadObj.find((item) => item.name === tipoEntidad);
+  const tipoDocumentoItem = tipoDocumentoObj.find((item) => item.name === tipoDocumento);
 
   if (!tipoEntidadItem) {
     throw boom.badRequest(
@@ -37,8 +37,8 @@ const findOneByParams = (findOneByParamsQuery) => async (dataFile) => {
 
 const uploadFile = (createQuery, updateQuery, findOneByParamsQuery) => async (dataFile, file) => {
   const { tipoEntidad, entidadId, tipoDocumento } = dataFile;
-  const tipoEntidadItem = TIPO_ENTIDAD.find((item) => item.name === tipoEntidad);
-  const tipoDocumentoItem = TIPO_DOCUMENTO.find((item) => item.name === tipoDocumento);
+  const tipoEntidadItem = tipoEntidadObj.find((item) => item.name === tipoEntidad);
+  const tipoDocumentoItem = tipoDocumentoObj.find((item) => item.name === tipoDocumento);
   if (!tipoEntidadItem) {
     throw boom.badRequest(
       '[files:uploadFile]: body must have required property tipoEntidad',
@@ -78,8 +78,8 @@ const uploadFile = (createQuery, updateQuery, findOneByParamsQuery) => async (da
 
 const deleteByParams = (deleteQuery, findOneByParamsQuery) => async (dataFile) => {
   const { tipoEntidad, entidadId, tipoDocumento } = dataFile;
-  const tipoEntidadItem = TIPO_ENTIDAD.find((item) => item.name === tipoEntidad);
-  const tipoDocumentoItem = TIPO_DOCUMENTO.find((item) => item.name === tipoDocumento);
+  const tipoEntidadItem = tipoEntidadObj.find((item) => item.name === tipoEntidad);
+  const tipoDocumentoItem = tipoDocumentoObj.find((item) => item.name === tipoDocumento);
 
   if (!tipoEntidadItem) {
     throw boom.badRequest(
