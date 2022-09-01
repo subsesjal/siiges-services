@@ -1,10 +1,13 @@
-const { checkers, Logger, constants } = require('./utils');
+const {
+  checkers, Logger, constants, validate,
+} = require('./utils');
 const { dotenv, nodejs } = require('./adapters');
 
 module.exports = {
-  constants,
-  Logger,
   checkers,
+  constants,
   dotenv,
+  Logger,
   nodejs,
+  validate,
 };
