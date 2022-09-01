@@ -8,6 +8,9 @@ module.exports = {
   configs: {
     mysqlConfig,
   },
+  models: {
+    ...sequelize.models,
+  },
   drivers: {
     sequelize,
   },
