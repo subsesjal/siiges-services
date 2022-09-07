@@ -1,8 +1,7 @@
 // External dependencies
 const { validate } = require('@siiges-services/shared');
 // Internal dependencies
-const hashMD5 = require('./hashes');
-const hmac = require('./hmacs');
+const { hashMD5, hmac } = require('../../drivers/crypto');
 
 function getUserEncryptAlgorithm(passwordUpdated) {
   validate({
