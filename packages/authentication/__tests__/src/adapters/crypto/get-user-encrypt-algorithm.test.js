@@ -3,7 +3,7 @@ const { validate, Logger } = require('@siiges-services/shared');
 // Internal dependencies
 const { fakeBasicData } = require('../../../auxiliary-constants');
 const { hashMD5, hmac } = require('../../../../src/drivers/crypto');
-const { getUserEncryptAlgorithm } = require('../../../../src/use-cases/crypto');
+const { getUserEncryptAlgorithm } = require('../../../../src/adapters/crypto');
 
 jest.mock('@siiges-services/shared', () => {
   const originalModules = jest.requireActual('@siiges-services/shared');
