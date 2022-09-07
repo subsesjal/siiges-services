@@ -1,15 +1,4 @@
-jest.mock('@siiges-services/shared', () => ({
-  __esmodule: true,
-  checkers: {
-    isString: jest.fn(),
-    isUndefined: jest.fn(),
-  },
-  dotenv: {
-    getEnvironmentVar: jest.fn(),
-  },
-}));
+const { join } = require('path');
+const dotenv = require('dotenv');
 
-jest.mock('dotenv', () => ({
-  __esmodule: true,
-  config: jest.fn(),
-}));
+dotenv.config({ path: join(__dirname, '../../..', 'test.env') });

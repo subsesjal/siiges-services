@@ -1,6 +1,7 @@
 const { dotenv } = require('@siiges-services/shared');
 
 module.exports = {
-  hashAlgorithm: dotenv.getEnvironmentVar('FRONT_HASH_ALGORITHM'),
-  password: dotenv.getEnvironmentVar('FRONT_PASSWORD'),
+  password: dotenv.getEnvironmentVar(
+    'AUTH_FRONT_PASSWORD',
+  ),
 };
