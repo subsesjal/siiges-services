@@ -4,7 +4,7 @@ const {
 } = require('../../../auxiliary-constants');
 const {
   signToken,
-} = require('../../../../src/domains/jwt/sign-token');
+} = require('../../../../src/use-cases/jwt/sign-token');
 
 describe('Given a call to signMachineToken', () => {
   describe('When payloadObjet is defined', () => {

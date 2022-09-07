@@ -7,7 +7,7 @@ const {
 } = require('../../../../auxiliary-constants');
 const {
   createUserTokenPayload,
-} = require('../../../../../src/domains/jwt/create-token-payloads');
+} = require('../../../../../src/use-cases/jwt/create-token-payloads');
 
 jest.mock('@siiges-services/shared', () => {
   const originalModule = jest.requireActual('@siiges-services/shared');

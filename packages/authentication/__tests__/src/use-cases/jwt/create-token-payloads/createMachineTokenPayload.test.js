@@ -4,7 +4,7 @@ const { Logger, validate } = require('@siiges-services/shared');
 const { fakeExpirationTimeToken } = require('../../../../auxiliary-constants');
 const {
   createMachineTokenPayload,
-} = require('../../../../../src/domains/jwt/create-token-payloads');
+} = require('../../../../../src/use-cases/jwt/create-token-payloads');
 
 jest.mock('@siiges-services/shared', () => {
   const originalModule = jest.requireActual('@siiges-services/shared');
