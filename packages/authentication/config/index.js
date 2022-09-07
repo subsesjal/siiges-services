@@ -1,7 +1,9 @@
-const jwtSecret = require('./jwt-secret');
 const frontAuth = require('./front-auth');
+const jwtParams = require('./jwt-params');
+const crypto = require('./crypto');
 
 module.exports = {
-  jwtSecret,
   frontAuth,
+  jwtParams,
+  crypto,
 };
