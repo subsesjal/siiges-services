@@ -1,8 +1,7 @@
-// configs
+// Internal dependencies
 const mysqlConfig = require('../config/config');
-
-// drivers
 const sequelize = require('./drivers/db/connection');
+const dbAdapters = require('./adapters/db');
 
 module.exports = {
   configs: {
@@ -14,4 +13,5 @@ module.exports = {
   drivers: {
     sequelize,
   },
+  queries: { ...dbAdapters },
 };
