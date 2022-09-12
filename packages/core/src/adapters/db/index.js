@@ -10,4 +10,5 @@ module.exports = {
   createQuery,
   findOneQuery,
   findAllQuery,
+  updateQuery,
 };

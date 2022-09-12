@@ -6,6 +6,10 @@ const deleteQuery = (model) => async (identifierObj) => {
   const deletedAt = new Date().toISOString();
 
   const entryDeleted = await update(identifierObj, { deletedAt });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 54af6d9 (feat(core/adapters):  refactor core adapters to be more general)
   return entryDeleted;
 };
 
