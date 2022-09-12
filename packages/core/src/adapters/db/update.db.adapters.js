@@ -3,10 +3,10 @@ const boom = require('@hapi/boom');
 // Internal dependencies
 const findOneQuery = require('./find-one.db.adapter');
 
-const updateQuery = (model) => async (id, changes) => {
+const updateQuery = (model) => async (id, changes, include) => {
   const tableName = model.getTableName();
   const findOne = findOneQuery(model);
-  const actualEntry = await findOne({ id });
+  const actualEntry = await findOne({ id }, { include });
 
   if (!actualEntry) {
     throw boom.notFound(
