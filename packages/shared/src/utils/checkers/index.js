@@ -8,7 +8,7 @@ const { isNumber, isNotNumber } = require('./number');
 const { isString, isNotString } = require('./string');
 const { isNull, isNotNull } = require('./null');
 const { isUndefined, isDefined } = require('./undefined');
-const { ensureEntryWasFounded } = require('./db.checkers.utils');
+const { throwErrorIfDataIsFalsy } = require('./db.checkers.utils');
 
 module.exports = {
   isDevEnvironment,
@@ -25,5 +25,5 @@ module.exports = {
   isNotNull,
   isDefined,
   isUndefined,
-  ensureEntryWasFounded,
+  throwErrorIfDataIsFalsy,
 };

@@ -1,5 +1,5 @@
 const boom = require('@hapi/boom');
-const { isNull } = require('./null');
+const { isFalsy } = require('./truthy-falsy');
 
 function entryNotFounded(table, identifierObj) {
   throw boom.notFound(
@@ -7,10 +7,10 @@ function entryNotFounded(table, identifierObj) {
   );
 }
 
-function ensureEntryWasFounded(entry, table, identifierObj) {
-  if (isNull(entry)) entryNotFounded(table, identifierObj);
+function throwErrorIfDataIsFalsy(entry, table, identifierObj) {
+  if (isFalsy(entry)) entryNotFounded(table, identifierObj);
 }
 
 module.exports = {
-  ensureEntryWasFounded,
+  throwErrorIfDataIsFalsy,
 };
