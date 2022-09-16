@@ -1,19 +1,14 @@
 // External dependencies
-const boom = require('@hapi/boom');
+const { checkers } = require('@siiges-services/shared');
 // Internal dependencies
 const findOneQuery = require('./find-one.db.adapter');
 
-const updateQuery = (model) => async (identifierObj, changes, include) => {
+const findAndUpdateQuery = (model) => async (identifierObj, changes) => {
   const tableName = model.getTableName();
   const findOne = findOneQuery(model);
-  const actualEntry = await findOne({ ...identifierObj }, { include });
+  const actualEntry = await findOne({ ...identifierObj }, {});
 
-  if (!actualEntry) {
-    throw boom.notFound(
-      `[${tableName}:finOne]: We couldn't find any entry with identifier ${identifierObj} in \
-${tableName} table`,
-    );
-  }
+  checkers.throwErrorIfDataIsFalsy(actualEntry, tableName, identifierObj);
 
   const updatedAt = new Date().toISOString();
   const entryChanges = { ...changes, updatedAt };
@@ -22,4 +17,15 @@ ${tableName} table`,
   return entryUpdated;
 };
 
-module.exports = updateQuery;
+const updateQuery = (model) => async (changes) => {
+  const updatedAt = new Date().toISOString();
+  const entryChanges = { ...changes, updatedAt };
+  const entryUpdated = await model.update(entryChanges, {});
+
+  return entryUpdated;
+};
+
+module.exports = {
+  findAndUpdateQuery,
+  updateQuery,
+};
