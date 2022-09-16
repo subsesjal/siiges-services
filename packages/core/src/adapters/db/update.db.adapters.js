@@ -16,4 +16,6 @@ const updateQuery = (model) => async (identifierObj, changes) => {
   return entryUpdated;
 };
 
-module.exports = updateQuery;
+module.exports = {
+  updateQuery,
+};

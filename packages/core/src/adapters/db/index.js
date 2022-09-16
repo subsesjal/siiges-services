@@ -1,8 +1,8 @@
 const createQuery = require('./create.adapters');
-const deleteQuery = require('./delete.db.adapters');
+const { deleteQuery } = require('./delete.db.adapters');
 const findOneQuery = require('./find-one.db.adapter');
 const findAllQuery = require('./find-all.db.adapter');
-const updateQuery = require('./update.db.adapters');
+const { updateQuery } = require('./update.db.adapters');
 
 module.exports = {
   deleteQuery,
@@ -10,5 +10,4 @@ module.exports = {
   createQuery,
   findOneQuery,
   findAllQuery,
-  updateQuery,
 };
