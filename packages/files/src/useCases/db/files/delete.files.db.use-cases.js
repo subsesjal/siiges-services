@@ -8,4 +8,4 @@ const deleteFile = (deleteFileQuery) => async (identifierObj) => {
   return fileDeleted;
 };
 
-module.exports =
+module.exports = deleteFile;
