@@ -1,11 +1,9 @@
-const {
-  findOneByParams,
-  uploadFile,
-  deleteByParams,
-} = require('./files');
+const deleteFile = require('./delete.fies.use-cases');
+const uploadFile = require('./upload.files.use-cases');
+const { findOneFileByParams } = require('./db');
 
 module.exports = {
-  findOneByParams,
+  deleteFile,
+  findOneFileByParams,
   uploadFile,
-  deleteByParams,
 };

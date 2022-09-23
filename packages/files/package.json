@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@siiges-services/core": "^1.0.0",
+    "@siiges-services/shared": "^0.0.1",
     "mime-types": "^2.1.35"
   }
 }
