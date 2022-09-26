@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
 
-const findAllQuery = (usuarioModel) => async (attributes, include) => {
-  const usuarios = await usuarioModel.findAll({
+const findAllQuery = (model) => async (attributes, include) => {
+  const result = await model.findAll({
     attributes,
     where: {
       deletedAt: {
@@ -11,7 +11,7 @@ const findAllQuery = (usuarioModel) => async (attributes, include) => {
     include,
   });
 
-  return usuarios;
+  return result;
 };
 
 module.exports = findAllQuery;
