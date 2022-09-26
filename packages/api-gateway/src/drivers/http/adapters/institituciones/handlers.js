@@ -2,15 +2,15 @@ const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../utils/errorHandler');
 
 // usuario services
-async function findAllUsuarios(req, reply) {
+async function findAllInstituciones(req, reply) {
   try {
-    Logger.info('[usuarios]: Getting usuarios list');
-    const usuarios = await this.usuarioServices.findAllUsers();
+    Logger.info('[instituciones]: Getting instituciones list');
+    const instituciones = await this.institucionServices.findAllInstituciones();
 
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: usuarios });
+      .send({ data: instituciones });
   } catch (error) {
     return errorHandler(error, reply);
   }
@@ -137,7 +137,7 @@ async function deleteUsuario(req, reply) {
 }
 
 module.exports = {
-  findAllUsuarios,
+  findAllInstituciones,
   findOneUsuario,
   findOneDetailedUsuario,
   createUsuario,
