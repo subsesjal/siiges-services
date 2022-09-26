@@ -61,8 +61,6 @@ async function updateInstitucion(req, reply) {
       data,
     );
 
-    console.log(institucionUpdated);
-
     return reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
@@ -77,7 +75,9 @@ async function deleteInstitucion(req, reply) {
     const { institucionId } = req.params;
 
     Logger.info(`[instituciones]: Deleting institucion: ${institucionId}`);
-    const institucionDeleted = await this.institucionesServices.deleteInstitucion(institucionId);
+    const institucionDeleted = await this.institucionServices.deleteInstitucion({
+      id: institucionId,
+    });
 
     return reply
       .code(201)
