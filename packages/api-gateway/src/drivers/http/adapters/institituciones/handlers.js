@@ -21,7 +21,7 @@ async function findOneInstitucion(req, reply) {
     const { institucionId } = req.params;
 
     Logger.info(`[instituciones]: Getting institución ${institucionId}`);
-    const institucion = await this.institucionesServices.findOneInstitucion(institucionId);
+    const institucion = await this.institucionServices.findOneInstitucion(institucionId);
 
     return reply
       .code(200)
@@ -37,7 +37,8 @@ async function createInstitucion(req, reply) {
     const { body } = req;
 
     Logger.info('[instituciones]: Creating institucion');
-    const newInstitucion = await this.institucionesServices.createInstitucion(body);
+
+    const newInstitucion = await this.institucionServices.createInstitucion(body);
 
     return reply
       .code(201)

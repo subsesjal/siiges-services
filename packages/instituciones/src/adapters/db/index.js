@@ -14,7 +14,7 @@ const {
 module.exports = {
   findOneInstitucionQuery: findOneQuery(Institucion),
   findAllInstitucionesQuery: findAllQuery(Institucion),
-  createQuery: createQuery(Institucion),
+  createInstitucionQuery: createQuery(Institucion),
   deleteQuery: deleteQuery(Institucion),
   updateQuery: updateQuery(Institucion),
 };
