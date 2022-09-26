@@ -56,10 +56,12 @@ async function updateInstitucion(req, reply) {
     const { institucionId } = req.params;
     const { ...data } = req.body;
 
-    const institucionUpdated = await this.institucionesServices.updateInstitucion(
-      institucionId,
+    const institucionUpdated = await this.institucionServices.updateInstitucion(
+      { id: institucionId },
       data,
     );
+
+    console.log(institucionUpdated);
 
     return reply
       .code(201)

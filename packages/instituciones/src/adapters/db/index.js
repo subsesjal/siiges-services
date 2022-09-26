@@ -15,6 +15,6 @@ module.exports = {
   findOneInstitucionQuery: findOneQuery(Institucion),
   findAllInstitucionesQuery: findAllQuery(Institucion),
   createInstitucionQuery: createQuery(Institucion),
+  updateInstitucionQuery: updateQuery(Institucion),
   deleteQuery: deleteQuery(Institucion),
-  updateQuery: updateQuery(Institucion),
 };
