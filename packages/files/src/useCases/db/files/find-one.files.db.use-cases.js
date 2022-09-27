@@ -1,10 +1,10 @@
 // External dependencies
 const { checkers } = require('@siiges-services/shared');
 // Internal dependencies
-const getIdentifierObj = require('./get-identifier-obj.files.db.use-cases');
+const { getFileIdentifierObj } = require('./get-identifier-obj.files.db.use-cases');
 
 const findOneFileByParams = (findOneQuery) => async (fileData, attributes, include) => {
-  const identifierObj = getIdentifierObj(fileData);
+  const identifierObj = getFileIdentifierObj(fileData);
 
   const file = await findOneQuery({
     ...identifierObj,

@@ -5,19 +5,20 @@ const { findOneDocumentType } = require('../document-type');
 const { findOneEntityType } = require('../entity-type');
 
 const getFileIdentifierObj = (findEntityType, findDocumentType) => async (fileData) => {
-  const { tipoEntidad, entidadId, tipoDocumento } = fileData;
+  // eslint-disable-next-line camelcase
+  const { tipoEntidad, entidad_id, tipoDocumento } = fileData;
 
   const tipoEntidadItem = await findEntityType(tipoEntidad);
   const tipoDocumentoItem = await findDocumentType(tipoDocumento);
 
   checkers.throwErrorIfDataIsFalsy(tipoEntidadItem, 'files', 'tipoEntidad');
-  checkers.throwErrorIfDataIsFalsy(entidadId, 'files', 'entidadId');
+  checkers.throwErrorIfDataIsFalsy(entidad_id, 'files', 'entidadId');
   checkers.throwErrorIfDataIsFalsy(tipoDocumentoItem, 'files', 'tipoDocumento');
 
   return {
-    entidadId,
-    tipoEntidadId: tipoEntidadItem.id,
-    tipoDocumentoId: tipoDocumentoItem.id,
+    entidad_id,
+    tipo_entidad_id: tipoEntidadItem.id,
+    tipo_documento_id: tipoDocumentoItem.id,
   };
 };
 

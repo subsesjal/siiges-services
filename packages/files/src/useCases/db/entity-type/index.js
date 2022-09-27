@@ -1,8 +1,8 @@
 // External dependencies
-const { queries } = require('@siiges-services/core');
+const { findOneQueryEntityType } = require('../../../adapters/db/entity-type.db.adapters');
 // Internal dependencies
 const findOneEntityType = require('./find-one.entity-type.db.use-cases');
 
 module.exports = {
-  findOneEntityType: findOneEntityType(queries.findOneQuery),
+  findOneEntityType: findOneEntityType(findOneQueryEntityType),
 };
