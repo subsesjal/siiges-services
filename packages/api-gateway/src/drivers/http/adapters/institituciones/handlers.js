@@ -93,8 +93,31 @@ async function findAllPlantelesInstitucion(req, reply) {
     const { institucionId } = req.params;
 
     Logger.info(`[instituciones]: Getting institucion with id ${institucionId} and its planteles list`);
-    const plantelesInstitucion = await this.institucionesServices.findAllPlantelesInstitucion(
-      institucionId,
+
+    const opts = [
+      {
+        association: 'planteles',
+        include:
+        [
+          {
+            association: 'domicilio',
+            include: [
+              {
+                association: 'estado',
+              },
+              {
+                association: 'municipio',
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+    const plantelesInstitucion = await this.institucionServices.findOneInstitucion(
+      { id: institucionId },
+      '',
+      opts,
     );
 
     return reply
@@ -111,10 +134,17 @@ async function createPlantelInstitucion(req, reply) {
     const { institucionId } = req.params;
     const { body } = req;
 
+    const opts = [
+      {
+        association: 'domicilio',
+      },
+    ];
+
     Logger.info('[instituciones]: Creating plantel in institucion');
-    const newPlantel = await this.institucionesServices.createPlantelInstitucion(
+    const newPlantel = await this.institucionServices.createPlantelInstitucion(
       institucionId,
       body,
+      opts,
     );
 
     return reply
