@@ -23,6 +23,7 @@ function createInclude(includeList) {
   if (checkers.isFalsy(includeList)) return includeList;
 
   return includeList.map((include) => {
+    if (checkers.isDefined(include?.include)) return createInclude(include.include);
     const localInclude = getIncludeObj(include);
     return addDeleteAt(localInclude);
   });
