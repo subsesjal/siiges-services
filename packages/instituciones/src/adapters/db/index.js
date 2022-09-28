@@ -3,6 +3,7 @@ const { drivers, queries } = require('@siiges-services/core');
 
 const { Institucion } = drivers.sequelize.models;
 const { Plantel } = drivers.sequelize.models;
+const { Domicilio } = drivers.sequelize.models;
 
 const {
   findOneQuery,
@@ -18,5 +19,9 @@ module.exports = {
   createInstitucionQuery: createQuery(Institucion),
   updateInstitucionQuery: updateQuery(Institucion),
   deleteInstitucionQuery: deleteQuery(Institucion),
-  createPlantelInstitucionQuery: createQuery(Plantel),
+  findOnePlantelQuery: findOneQuery(Plantel),
+  createPlantelQuery: createQuery(Plantel),
+  updatePlantelQuery: updateQuery(Plantel),
+  deletePlantelQuery: deleteQuery(Plantel),
+  updateDomicilioQuery: updateQuery(Domicilio),
 };

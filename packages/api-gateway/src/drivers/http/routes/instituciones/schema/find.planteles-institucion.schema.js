@@ -5,7 +5,7 @@ const { municipio } = require('./properties/municipio');
 const { estado } = require('./properties/estado');
 const { responseProperties } = require('./properties/responseProperties');
 
-const getPlantelesInstitucionSchema = {
+const findPlantelesInstitucionSchema = {
   tags: ['Plantel'],
   description: 'Given a institucion id, then return a institucion and its planteles of database.',
   params: {
@@ -27,8 +27,8 @@ const getPlantelesInstitucionSchema = {
             usuarioId: { type: 'integer' },
             ...institucion,
             ...responseProperties,
-            plantel: {
-              type: 'object',
+            planteles: {
+              type: 'array',
               properties: {
                 id: { type: 'integer' },
                 ...plantel,
@@ -66,4 +66,4 @@ const getPlantelesInstitucionSchema = {
   },
 };
 
-module.exports = getPlantelesInstitucionSchema;
+module.exports = findPlantelesInstitucionSchema;

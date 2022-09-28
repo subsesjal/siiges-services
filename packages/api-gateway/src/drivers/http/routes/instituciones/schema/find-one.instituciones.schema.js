@@ -1,7 +1,7 @@
 const { institucion } = require('./properties/institucion');
 const { responseProperties } = require('./properties/responseProperties');
 
-const getInstitucionSchema = {
+const findOneInstitucionSchema = {
   tags: ['Institucion'],
   description: 'Given a institucion id, then return a institucion of database.',
   params: {
@@ -30,4 +30,4 @@ const getInstitucionSchema = {
   },
 };
 
-module.exports = getInstitucionSchema;
+module.exports = findOneInstitucionSchema;

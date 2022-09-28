@@ -1,7 +1,7 @@
 const { institucion } = require('./properties/institucion');
 const { responseProperties } = require('./properties/responseProperties');
 
-const getAllInstitucionesSchema = {
+const findAllInstitucionesSchema = {
   tags: ['Institucion'],
   description: 'Return a list of instituciones.',
   response: {
@@ -25,4 +25,4 @@ const getAllInstitucionesSchema = {
   },
 };
 
-module.exports = getAllInstitucionesSchema;
+module.exports = findAllInstitucionesSchema;

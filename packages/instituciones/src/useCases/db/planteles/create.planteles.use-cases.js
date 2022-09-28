@@ -1,6 +1,6 @@
 const { checkers } = require('@siiges-services/shared');
 
-const createPlantelInstitucion = (findOneInstitucionQuery, createPlantelQuery) => async (
+const createPlantel = (findOneInstitucionQuery, createPlantelQuery) => async (
   identifierObj,
   data,
   include,
@@ -14,4 +14,4 @@ const createPlantelInstitucion = (findOneInstitucionQuery, createPlantelQuery) =
   return newPlantelInstitucion;
 };
 
-module.exports = createPlantelInstitucion;
+module.exports = createPlantel;

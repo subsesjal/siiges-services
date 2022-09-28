@@ -1,26 +1,29 @@
 const { institucionesAdapter } = require('../../adapters');
 
 const {
-  getAllInstitucionesSchema,
+  findAllInstitucionesSchema,
+  findOneInstitucionSchema,
+  findPlantelesInstitucionSchema,
+  findOnePlantelSchema,
   createInstitucionSchema,
-  getInstitucionSchema,
+  createPlantelSchema,
   updateInstitucionSchema,
+  updatePlantelSchema,
   deleteInstitucionSchema,
-  getPlantelesInstitucionSchema,
-  createPlantelInstitucionSchema,
+  deletePlantelSchema,
 } = require('./schema');
 
 async function institucionRouter(fastify, opts, next) {
   await fastify.get(
     '/',
-    { schema: getAllInstitucionesSchema },
+    { schema: findAllInstitucionesSchema },
     institucionesAdapter.findAllInstituciones,
   );
 
   await fastify.get(
     '/:institucionId',
     {
-      schema: getInstitucionSchema,
+      schema: findOneInstitucionSchema,
     },
     institucionesAdapter.findOneInstitucion,
   );
@@ -52,37 +55,42 @@ async function institucionRouter(fastify, opts, next) {
   await fastify.get(
     '/:institucionId/planteles',
     {
-      schema: getPlantelesInstitucionSchema,
+      schema: findPlantelesInstitucionSchema,
     },
-    institucionesAdapter.findAllPlantelesInstitucion,
+    institucionesAdapter.findPlantelesInstitucion,
+  );
+
+  await fastify.get(
+    '/:institucionId/planteles/:plantelId',
+    {
+      schema: findOnePlantelSchema,
+    },
+    institucionesAdapter.findOnePlantel,
   );
 
   await fastify.post(
     '/:institucionId/planteles',
     {
-      schema: createPlantelInstitucionSchema,
+      schema: createPlantelSchema,
     },
-    institucionesAdapter.createPlantelInstitucion,
-  );
-
-  /*
-  await fastify.get(
-    '/:usuarioId/detalle',
-    {
-      schema: getUsuarioDetalleSchema,
-    },
-    usuariosAdapter.findOneDetailedUsuario,
+    institucionesAdapter.createPlantel,
   );
 
   await fastify.patch(
-    '/:usuarioId',
+    '/:institucionId/planteles/:plantelId',
     {
-      schema: updateUsuarioSchema,
+      schema: updatePlantelSchema,
     },
-    usuariosAdapter.updateUsuario,
+    institucionesAdapter.updatePlantel,
   );
 
-  */
+  await fastify.delete(
+    '/:institucionId/planteles/:plantelId',
+    {
+      schema: deletePlantelSchema,
+    },
+    institucionesAdapter.deletePlantel,
+  );
 
   next();
 }

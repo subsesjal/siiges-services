@@ -4,29 +4,16 @@ const { municipio } = require('./properties/municipio');
 const { estado } = require('./properties/estado');
 const { responseProperties } = require('./properties/responseProperties');
 
-const createPlantelInstitucionSchema = {
-  tags: ['Institucion'],
-  description: 'Given an object with plantel required data, then save a plantel in database.',
+const findOnePlantelSchema = {
+  tags: ['Plantel'],
+  description: 'Given a plantel id and a institucion id, then return a plantel from database.',
   params: {
     type: 'object',
     properties: {
       institucionId: { type: 'integer' },
+      plantelId: { type: 'integer' },
     },
-    required: ['institucionId'],
-  },
-  body: {
-    type: 'object',
-    properties: {
-      ...plantel,
-      domicilio: {
-        type: 'object',
-        properties: {
-          ...domicilio,
-        },
-        required: ['municipioId', 'estadoId', 'calle', 'numeroExterior', 'colonia', 'codigoPostal'],
-      },
-    },
-    required: ['domicilio', 'tipoInmuebleId', 'correo1', 'correo2'],
+    required: ['institucionId', 'plantelId'],
   },
   response: {
     201: {
@@ -69,4 +56,4 @@ const createPlantelInstitucionSchema = {
   },
 };
 
-module.exports = createPlantelInstitucionSchema;
+module.exports = findOnePlantelSchema;

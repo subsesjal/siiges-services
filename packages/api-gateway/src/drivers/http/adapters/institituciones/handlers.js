@@ -21,7 +21,7 @@ async function findOneInstitucion(req, reply) {
     const { institucionId } = req.params;
 
     Logger.info(`[instituciones]: Getting institución ${institucionId}`);
-    const institucion = await this.institucionServices.findOneInstitucion(institucionId);
+    const institucion = await this.institucionServices.findOneInstitucion({ id: institucionId });
 
     return reply
       .code(200)
@@ -88,36 +88,14 @@ async function deleteInstitucion(req, reply) {
   }
 }
 
-async function findAllPlantelesInstitucion(req, reply) {
+async function findPlantelesInstitucion(req, reply) {
   try {
     const { institucionId } = req.params;
 
     Logger.info(`[instituciones]: Getting institucion with id ${institucionId} and its planteles list`);
 
-    const opts = [
-      {
-        association: 'planteles',
-        include:
-        [
-          {
-            association: 'domicilio',
-            include: [
-              {
-                association: 'estado',
-              },
-              {
-                association: 'municipio',
-              },
-            ],
-          },
-        ],
-      },
-    ];
-
-    const plantelesInstitucion = await this.institucionServices.findOneInstitucion(
+    const plantelesInstitucion = await this.institucionServices.findPlantelesInstitucion(
       { id: institucionId },
-      '',
-      opts,
     );
 
     return reply
@@ -129,19 +107,38 @@ async function findAllPlantelesInstitucion(req, reply) {
   }
 }
 
-async function createPlantelInstitucion(req, reply) {
+async function findOnePlantel(req, reply) {
+  try {
+    const { institucionId, plantelId } = req.params;
+
+    Logger.info(`[instituciones]: Getting plantel ${plantelId}`);
+
+    const plantel = await this.institucionServices.findOnePlantel({
+      institucionId,
+      plantelId,
+    });
+
+    return reply
+      .code(200)
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ data: plantel });
+  } catch (error) {
+    return errorHandler(error, reply);
+  }
+}
+
+async function createPlantel(req, reply) {
   try {
     const { institucionId } = req.params;
     const { body } = req;
 
+    Logger.info('[instituciones]: Creating plantel in institucion');
+
     const opts = [
-      {
-        association: 'domicilio',
-      },
+      { association: 'domicilio' },
     ];
 
-    Logger.info('[instituciones]: Creating plantel in institucion');
-    const newPlantel = await this.institucionServices.createPlantelInstitucion(
+    const newPlantel = await this.institucionServices.createPlantel(
       institucionId,
       body,
       opts,
@@ -156,32 +153,55 @@ async function createPlantelInstitucion(req, reply) {
   }
 }
 
-/*
-async function findOneDetailedUsuario(req, reply) {
+async function updatePlantel(req, reply) {
   try {
-    const { usuarioId } = req.params;
+    const { institucionId, plantelId } = req.params;
+    const { body } = req;
 
-    Logger.info(`[usuarios]: Getting usuario: ${usuarioId}`);
-    const usuario = await this.usuarioServices.findOneUsuarioDetailed(
-      usuarioId,
+    Logger.info('[instituciones]: Creating plantel in institucion');
+    const newPlantel = await this.institucionServices.updatePlantel(
+      { institucionId, plantelId },
+      body,
     );
 
     return reply
-      .code(200)
+      .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: usuario });
+      .send({ data: newPlantel });
   } catch (error) {
     return errorHandler(error, reply);
   }
 }
- */
+
+async function deletePlantel(req, reply) {
+  try {
+    const { institucionId, plantelId } = req.params;
+
+    Logger.info(`[instituciones]: Deleting plantel ${plantelId}`);
+
+    const plantel = await this.institucionServices.deletePlantel({
+      institucionId,
+      plantelId,
+    });
+
+    return reply
+      .code(200)
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ data: plantel });
+  } catch (error) {
+    return errorHandler(error, reply);
+  }
+}
 
 module.exports = {
   findAllInstituciones,
   findOneInstitucion,
+  findPlantelesInstitucion,
   createInstitucion,
   updateInstitucion,
   deleteInstitucion,
-  findAllPlantelesInstitucion,
-  createPlantelInstitucion,
+  findOnePlantel,
+  createPlantel,
+  updatePlantel,
+  deletePlantel,
 };

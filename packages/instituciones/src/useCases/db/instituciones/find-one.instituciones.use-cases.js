@@ -7,6 +7,7 @@ const findOneInstitucion = (findOneInstitucionQuery) => async (
 ) => {
   const institucion = await findOneInstitucionQuery(identifierObj, { attributes, include });
   checkers.throwErrorIfDataIsFalsy(institucion);
+
   return institucion;
 };
 
