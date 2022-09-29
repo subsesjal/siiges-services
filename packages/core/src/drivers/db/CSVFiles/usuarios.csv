@@ -1,5 +1,5 @@
-id,rol_id,persona_id,usuario,correo,contrasena,estatus,actualizado,token_notificaciones,created_at,updated_at,deleted_at
-1,2,1,esau,esau@gmail.com,asd2314,1,1,NULL,2022-09-05 18:16:04,2022-09-07 21:30:06,NULL
-2,2,2,Ivan,ivan.narvaez@gmail.com,asd2314,1,1,NULL,2022-09-07 21:28:31,NULL,2022-09-07 21:30:26
-3,2,3,richi,richi.hct@gmail.com,asd2314,1,1,NULL,2022-09-26 19:00:49,2022-09-26 21:35:21,NULL
-4,2,4,lupita,lupita.hct@gmail.com,asd2314,1,1,NULL,2022-09-26 19:09:41,NULL,NULL
+id,rol_id,persona_id,usuario,correo,contrasena,estatus,actualizado,token_notificaciones,created_at
+1,2,1,esau,esau@gmail.com,asd2314,1,1,,2022-09-05 18:16:04
+2,2,2,Ivan,ivan.narvaez@gmail.com,asd2314,1,1,,2022-09-07 21:28:31
+3,2,3,richi,richi.hct@gmail.com,asd2314,1,1,,2022-09-26 19:00:49
+4,2,4,lupita,lupita.hct@gmail.com,asd2314,1,1,,2022-09-26 19:09:41
