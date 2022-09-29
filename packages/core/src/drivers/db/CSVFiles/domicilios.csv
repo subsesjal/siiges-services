@@ -1,2 +1,7 @@
 id,municipio_id,estado_id,calle,numero_exterior,numero_interior,colonia,codigo_postal,latitud,longitud,created_at
-1,532,14,SIN DATO,SIN DATO,NULL,SIN DATO,0,NULL,NULL,2022-08-10 17:55:02
+1,532,14,SIN DATO,SIN DATO,,SIN DATO,0,,,2022-08-10 17:55:02
+2,532,14,Av. Faro,1450,,Verde Valle,44550,,,2022-09-07 22:41:31
+3,532,14,Av. Farolito,1450,,Verde Valle,44550,,,2022-09-07 22:46:08
+4,532,14,Av. Faro,1450,,Verde Valle,44550,,,2022-09-27 2:05:43
+5,532,14,Av. Adolfo Lopez Mateos,1450,,Verde Valle,44550,,,2022-09-27 18:25:50
+6,532,14,Av. Adolfo Lopez Mateos,1450,,Verde Valle,44550,,,2022-09-28 2:22:19
