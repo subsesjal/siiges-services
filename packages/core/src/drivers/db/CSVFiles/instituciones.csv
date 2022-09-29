@@ -1,0 +1,4 @@
+id,usuario_id,nombre,razon_social,clave_ies,historia,vision,mision,valores_institucionales,created_at,updated_at,deleted_at
+1,1,Institución 1,Razon Social,IES,historia de la institucion,vision de la institcuon,mision de la institcuon,NULL,2022-09-06 17:25:38,2022-09-27 16:58:11,NULL
+2,1,Institución 2,Razon Social,IES,historia de la institucion,vision de la institcuon,mision de la institcuon,NULL,2022-09-06 17:26:17,NULL,NULL
+3,1,Institución 3,Razon Social institucion,IES,historia de la institucion,vision de la institcuon,mision de la institcuon,NULL,2022-09-26 21:03:07,2022-09-27 18:41:57,NULL
