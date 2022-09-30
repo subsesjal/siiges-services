@@ -1,0 +1,46 @@
+version: '3.3'
+
+volumes:
+  mysql: {}
+
+services:
+  mysql_service:
+    image: mysql:8.0.29
+    environment:
+      - MYSQL_DATABASE=siiges_dev
+      - MYSQL_USER=db_user
+      - MYSQL_PASSWORD=db_password
+      - MYSQL_ROOT_PASSWORD=root123
+      - MYSQL_PORT=3306
+    volumes:
+      - mysql:/var/lib/mysql
+    restart: unless-stopped
+
+  phpmyadmin_service:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      #- PMA_ARBITRARY=1
+      - MYSQL_ROOT_PASSWORD=root123
+      - PMA_HOST=mysql
+    ports:
+      - '8077:80'
+    depends_on:
+      - mysql_service
+    restart: always
+
+  server:
+    build:
+      context: .
+    restart: on-failure
+    command: "bash -c \"cd ./packages/api-gateway && yarn start:dev\""
+    tty: true
+    stdin_open: true
+    ports:
+      - 3000:3000
+    env_file:
+      - production.env
+    volumes:
+      - /usr/src/app
+    depends_on:
+      - mysql_service
+
