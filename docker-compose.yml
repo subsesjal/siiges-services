@@ -40,7 +40,7 @@ services:
     env_file:
       - production.env
     volumes:
-      - /usr/src/app
+      - .:/usr/src/app
     depends_on:
       - mysql_service
 
