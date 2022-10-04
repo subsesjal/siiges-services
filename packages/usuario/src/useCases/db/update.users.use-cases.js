@@ -1,5 +1,5 @@
-const updateUser = (updateQuery) => async (identifierObj, data, include) => {
-  const usuarioUpdated = await updateQuery(identifierObj, data, include);
+const updateUser = (updateQuery) => async (identifierObj, data) => {
+  const usuarioUpdated = await updateQuery(identifierObj, data);
   return usuarioUpdated;
 };
 
