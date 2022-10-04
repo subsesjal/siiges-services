@@ -107,3 +107,8 @@ dist
 mysql_data
 .vscode
 public
+
+#docker
+docker-compose.yml
+.dockerignore
+Dockerfile
