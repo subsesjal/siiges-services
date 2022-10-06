@@ -1,4 +1,4 @@
-const createQuery = (model) => async (data, include) => {
+const createQuery = (model) => async (data, include = undefined) => {
   const newEntry = await model.create(data, {
     include,
   });
