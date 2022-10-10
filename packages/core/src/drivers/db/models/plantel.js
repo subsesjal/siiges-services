@@ -90,7 +90,6 @@ class Plantel extends Model {
   static associate(models) {
     this.belongsTo(models.Institucion, { as: 'institucion' });
     this.belongsTo(models.Domicilio, { as: 'domicilio' });
-    this.belongsTo(models.Persona, { as: 'persona' });
     this.belongsTo(models.TipoInmueble, { as: 'tipoInmueble' });
   }
 
