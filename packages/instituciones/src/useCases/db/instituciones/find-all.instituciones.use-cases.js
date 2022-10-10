@@ -1,6 +1,3 @@
-const findAllInstituciones = (findAllInstitucionesQuery) => async () => {
-  const instituciones = await findAllInstitucionesQuery();
-  return instituciones;
-};
+const findAllInstituciones = (findAllInstitucionesQuery) => async () => findAllInstitucionesQuery();
 
 module.exports = findAllInstituciones;

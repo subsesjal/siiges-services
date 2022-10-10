@@ -1,11 +1,11 @@
 const { checkers } = require('@siiges-services/shared');
 
 const createPlantel = (findOneInstitucionQuery, createPlantelQuery) => async (
-  identifierObj,
+  id,
   data,
   include,
 ) => {
-  const institucion = await findOneInstitucionQuery({ id: identifierObj });
+  const institucion = await findOneInstitucionQuery({ id });
   checkers.throwErrorIfDataIsFalsy(institucion);
 
   const newData = { institucionId: institucion.id, ...data };
