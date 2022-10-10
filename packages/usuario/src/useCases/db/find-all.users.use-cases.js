@@ -1,5 +1,9 @@
 const findAllUsers = (findAllQuery) => async () => {
-  const users = await findAllQuery();
+  const include = [
+    { association: 'persona' },
+  ];
+
+  const users = await findAllQuery({ include });
   return users;
 };
 

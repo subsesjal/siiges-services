@@ -45,26 +45,7 @@ async function findOneDetailedUsuario(req, reply) {
 
     Logger.info(`[usuarios]: Getting usuario: ${usuarioId}`);
 
-    const opts = [
-      {
-        association: 'persona',
-        include: [
-          {
-            association: 'domicilio',
-            include: [
-              {
-                association: 'estado',
-              },
-              {
-                association: 'municipio',
-              },
-            ],
-          },
-        ],
-      },
-    ];
-
-    const usuario = await this.usuarioServices.findOneUser({ id: usuarioId }, '', opts);
+    const usuario = await this.usuarioServices.findOneUserDetail({ id: usuarioId });
 
     return reply
       .code(200)
@@ -81,14 +62,7 @@ async function createUsuario(req, reply) {
 
     Logger.info('[usuarios]: Creating usuario');
 
-    const opts = [
-      {
-        association: 'persona',
-        include: ['domicilio'],
-      },
-    ];
-
-    const newUsuario = await this.usuarioServices.createUser(body, opts);
+    const newUsuario = await this.usuarioServices.createUser(body);
 
     return reply
       .code(201)
@@ -125,7 +99,7 @@ async function deleteUsuario(req, reply) {
     const { usuarioId } = req.params;
 
     Logger.info(`[usuarios]: Deleting usuario: ${usuarioId}`);
-    const usuarioDeleted = await this.usuarioServices.deleteUsuario(usuarioId);
+    const usuarioDeleted = await this.usuarioServices.deleteUser(usuarioId);
 
     return reply
       .code(201)
