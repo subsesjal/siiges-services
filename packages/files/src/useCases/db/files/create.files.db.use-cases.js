@@ -1,9 +1,9 @@
 // External dependencies
 const { checkers } = require('@siiges-services/shared');
 
-const createFile = (createFileQuery) => async (identifierObj) => {
-  const fileCreated = await createFileQuery(identifierObj);
-  checkers.throwErrorIfDataIsFalsy(fileCreated, 'files', identifierObj);
+const createFile = (createFileQuery) => async (data) => {
+  const fileCreated = await createFileQuery(data);
+  checkers.throwErrorIfDataIsFalsy(fileCreated, 'files', data);
 
   return fileCreated;
 };
