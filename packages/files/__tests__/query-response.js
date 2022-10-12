@@ -2,12 +2,12 @@ const { faker } = require('@faker-js/faker');
 
 const file = {
   id: faker.datatype.number(),
-  entidad_id: faker.datatype.number(),
-  tipo_entidad_id: faker.datatype.number(),
+  entidadId: faker.datatype.number(),
+  tipoEntidadId: faker.datatype.number(),
   nombre: faker.system.fileName(),
   ubicacion: faker.system.filePath(),
-  created_at: faker.date.past(),
-  update_at: faker.date.recent(),
+  createdAt: faker.date.past(),
+  updateAt: faker.date.recent(),
 };
 
 const documentType = {
@@ -21,9 +21,9 @@ const entityType = {
 };
 
 const identifierObj = {
-  entidad_id: faker.datatype.number(),
-  tipo_entidad_id: entityType.id,
-  tipo_documento_id: documentType.id,
+  entidadId: faker.datatype.number(),
+  tipoEntidadId: entityType.id,
+  tipoDocumentoId: documentType.id,
 };
 
 module.exports = {
