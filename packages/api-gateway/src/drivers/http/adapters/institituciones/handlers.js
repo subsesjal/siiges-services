@@ -130,7 +130,7 @@ async function findOnePlantel(req, reply) {
 async function createPlantel(req, reply) {
   try {
     const { institucionId } = req.params;
-    const { body } = req;
+    const { body } = req.body;
 
     Logger.info('[instituciones]: Creating plantel in institucion');
 
@@ -156,7 +156,7 @@ async function createPlantel(req, reply) {
 async function updatePlantel(req, reply) {
   try {
     const { institucionId, plantelId } = req.params;
-    const { body } = req;
+    const { body } = req.body;
 
     Logger.info('[instituciones]: Creating plantel in institucion');
     const newPlantel = await this.institucionServices.updatePlantel(
@@ -193,6 +193,48 @@ async function deletePlantel(req, reply) {
   }
 }
 
+async function createRatificacionNombre(req, reply) {
+  try {
+    const { institucionId } = req.params;
+    const { body } = req;
+
+    Logger.info('[instituciones]: Creating ratificacion de nombre');
+
+    const ratificacionNombre = await this.institucionServices.createRatificacionNombre(
+      institucionId,
+      body,
+    );
+
+    return reply
+      .code(200)
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ data: ratificacionNombre });
+  } catch (error) {
+    return errorHandler(error, reply);
+  }
+}
+
+async function updateRatificacionNombre(req, reply) {
+  try {
+    const { institucionId, ratificacionId } = req.params;
+    const { body } = req;
+
+    Logger.info('[instituciones]: Creating ratificacion de nombre');
+
+    const ratificacionNombre = await this.institucionServices.updateRatificacionNombre(
+      { institucionId, ratificacionId },
+      body,
+    );
+
+    return reply
+      .code(200)
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ data: ratificacionNombre });
+  } catch (error) {
+    return errorHandler(error, reply);
+  }
+}
+
 module.exports = {
   findAllInstituciones,
   findOneInstitucion,
@@ -204,4 +246,6 @@ module.exports = {
   createPlantel,
   updatePlantel,
   deletePlantel,
+  createRatificacionNombre,
+  updateRatificacionNombre,
 };

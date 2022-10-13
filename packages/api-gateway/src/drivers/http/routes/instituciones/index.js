@@ -11,6 +11,8 @@ const {
   updatePlantelSchema,
   deleteInstitucionSchema,
   deletePlantelSchema,
+  createRatificacionNombreSchema,
+  updateRatificacionNombreSchema,
 } = require('./schema');
 
 async function institucionRouter(fastify, opts, next) {
@@ -90,6 +92,22 @@ async function institucionRouter(fastify, opts, next) {
       schema: deletePlantelSchema,
     },
     institucionesAdapter.deletePlantel,
+  );
+
+  await fastify.post(
+    '/:institucionId/ratificaciones',
+    {
+      schema: createRatificacionNombreSchema,
+    },
+    institucionesAdapter.createRatificacionNombre,
+  );
+
+  await fastify.patch(
+    '/:institucionId/ratificaciones/:ratificacionId',
+    {
+      schema: updateRatificacionNombreSchema,
+    },
+    institucionesAdapter.updateRatificacionNombre,
   );
 
   next();

@@ -49,7 +49,8 @@ const RatificacionNombreSchema = {
     defaultValue: false,
   },
   fechaAutorizacion: {
-    type: DataTypes.STRING,
+    type: DataTypes.DATE,
+    field: 'fecha_autorizacion',
   },
   createdAt: {
     allowNull: false,

@@ -1,4 +1,5 @@
 const { institucion } = require('./properties/institucion');
+const { ratificacionNombre } = require('./properties/ratificacionNombre');
 const { responseProperties } = require('./properties/responseProperties');
 
 const createInstitucionSchema = {
@@ -9,6 +10,12 @@ const createInstitucionSchema = {
     properties: {
       usuarioId: { type: 'integer' },
       ...institucion,
+      ratificacionesNombre: {
+        type: 'object',
+        properties: {
+          ...ratificacionNombre,
+        },
+      },
     },
   },
   response: {
@@ -22,6 +29,14 @@ const createInstitucionSchema = {
             usuarioId: { type: 'integer' },
             ...institucion,
             ...responseProperties,
+            ratificacionesNombre: {
+              type: 'array',
+              properties: {
+                id: { type: 'integer' },
+                ...ratificacionNombre,
+                ...responseProperties,
+              },
+            },
           },
         },
       },

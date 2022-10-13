@@ -8,6 +8,7 @@ const updateInstitucionSchema = require('./update.institucion.schema');
 const updatePlantelSchema = require('./update.plantel.schema');
 const deleteInstitucionSchema = require('./delete.institucion.schema');
 const deletePlantelSchema = require('./delete.plantel.schema');
+const createRatificacionNombreSchema = require('./create.ratificacionNombre.schema');
 
 module.exports = {
   findAllInstitucionesSchema,
@@ -20,4 +21,5 @@ module.exports = {
   updatePlantelSchema,
   deleteInstitucionSchema,
   deletePlantelSchema,
+  createRatificacionNombreSchema,
 };
