@@ -62,7 +62,7 @@ async function updateInstitucion(req, reply) {
     );
 
     return reply
-      .code(201)
+      .code(204)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: institucionUpdated });
   } catch (error) {
@@ -80,7 +80,7 @@ async function deleteInstitucion(req, reply) {
     });
 
     return reply
-      .code(201)
+      .code(204)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: institucionDeleted });
   } catch (error) {
@@ -165,7 +165,7 @@ async function updatePlantel(req, reply) {
     );
 
     return reply
-      .code(201)
+      .code(204)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: newPlantel });
   } catch (error) {
@@ -185,7 +185,7 @@ async function deletePlantel(req, reply) {
     });
 
     return reply
-      .code(200)
+      .code(204)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: plantel });
   } catch (error) {
@@ -206,7 +206,7 @@ async function createRatificacionNombre(req, reply) {
     );
 
     return reply
-      .code(200)
+      .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: ratificacionNombre });
   } catch (error) {
@@ -227,7 +227,47 @@ async function updateRatificacionNombre(req, reply) {
     );
 
     return reply
+      .code(204)
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ data: ratificacionNombre });
+  } catch (error) {
+    return errorHandler(error, reply);
+  }
+}
+
+async function findOneRatificacionNombre(req, reply) {
+  try {
+    const { institucionId, ratificacionId } = req.params;
+
+    Logger.info(`[instituciones]: Getting ratificacion ${ratificacionId}`);
+
+    const plantel = await this.institucionServices.findOneRatificacionNombre({
+      institucionId,
+      ratificacionId,
+    });
+
+    return reply
       .code(200)
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ data: plantel });
+  } catch (error) {
+    return errorHandler(error, reply);
+  }
+}
+
+async function deleteRatificacionNombre(req, reply) {
+  try {
+    const { institucionId, ratificacionId } = req.params;
+
+    Logger.info(`[instituciones]: Deleting ratificacion ${ratificacionId}`);
+
+    const ratificacionNombre = await this.institucionServices.deleteRatificacionNombre({
+      institucionId,
+      ratificacionId,
+    });
+
+    return reply
+      .code(204)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: ratificacionNombre });
   } catch (error) {
@@ -246,6 +286,8 @@ module.exports = {
   createPlantel,
   updatePlantel,
   deletePlantel,
+  findOneRatificacionNombre,
   createRatificacionNombre,
   updateRatificacionNombre,
+  deleteRatificacionNombre,
 };

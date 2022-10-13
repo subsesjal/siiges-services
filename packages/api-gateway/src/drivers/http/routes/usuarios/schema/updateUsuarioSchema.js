@@ -29,7 +29,7 @@ const updateUsuarioSchema = {
     },
   },
   response: {
-    201: {
+    204: {
       type: 'object',
       properties: {
         data: {

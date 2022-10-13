@@ -25,6 +25,8 @@ module.exports = {
   updatePlantelQuery: updateQuery(Plantel),
   deletePlantelQuery: deleteQuery(Plantel),
   updateDomicilioQuery: updateQuery(Domicilio),
+  findOneRatificacionQuery: findOneQuery(RatificacionNombre),
   createRatificacionQuery: createQuery(RatificacionNombre),
   updateRatificacionQuery: updateQuery(RatificacionNombre),
+  deleteRatificacionQuery: deleteQuery(RatificacionNombre),
 };

@@ -1,31 +1,34 @@
 const { institucion } = require('./properties/institucion');
+const { ratificacionNombre } = require('./properties/ratificacionNombre');
 const { responseProperties } = require('./properties/responseProperties');
 
-const deleteInstitucionSchema = {
-  tags: ['Institucion'],
-  description: 'Given a institucionId, then delete Institución in database.',
+const updateRatificacionNombreSchema = {
+  tags: ['Ratificacion'],
+  description: 'Given a ratificacion id and a institucion id, then return the ratificacion of institucion in database.',
   params: {
     type: 'object',
     properties: {
       institucionId: { type: 'integer' },
+      ratificacionId: { type: 'integer' },
     },
-    required: ['institucionId'],
+    required: ['institucionId', 'ratificacionId'],
   },
   response: {
-    204: {
+    200: {
       type: 'object',
       properties: {
         data: {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            usuarioId: { type: 'integer' },
-            ...institucion,
+            ...ratificacionNombre,
             ...responseProperties,
-            persona: {
+            institucion: {
               type: 'object',
               properties: {
                 id: { type: 'integer' },
+                usuarioId: { type: 'integer' },
+                ...institucion,
                 ...responseProperties,
               },
             },
@@ -36,4 +39,4 @@ const deleteInstitucionSchema = {
   },
 };
 
-module.exports = deleteInstitucionSchema;
+module.exports = updateRatificacionNombreSchema;

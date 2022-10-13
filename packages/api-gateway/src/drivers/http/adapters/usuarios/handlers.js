@@ -86,7 +86,7 @@ async function updateUsuario(req, reply) {
     );
 
     return reply
-      .code(201)
+      .code(204)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: usuarioUpdated });
   } catch (error) {
@@ -102,7 +102,7 @@ async function deleteUsuario(req, reply) {
     const usuarioDeleted = await this.usuarioServices.deleteUser(usuarioId);
 
     return reply
-      .code(201)
+      .code(204)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: usuarioDeleted });
   } catch (error) {

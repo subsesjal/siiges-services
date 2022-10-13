@@ -9,8 +9,10 @@ const {
   updatePlantelQuery,
   deletePlantelQuery,
   updateDomicilioQuery,
+  findOneRatificacionQuery,
   createRatificacionQuery,
   updateRatificacionQuery,
+  deleteRatificacionQuery,
 } = require('../adapters/db');
 
 const findAllInstituciones = require('./db/instituciones/find-all.instituciones.use-cases');
@@ -23,8 +25,10 @@ const createPlantel = require('./db/planteles/create.planteles.use-cases');
 const findOnePlantel = require('./db/planteles/find-one.planteles.use-case');
 const updatePlantel = require('./db/planteles/update.planteles.use-cases');
 const deletePlantel = require('./db/planteles/delete.planteles.use-cases');
+const findOneRatificacion = require('./db/ratificaciones/find-one.ratificaciones.use-case');
 const createRatificacion = require('./db/ratificaciones/create.ratificaciones.use-cases');
 const updateRatificacion = require('./db/ratificaciones/update.ratificacion.use-case');
+const deleteRatificacion = require('./db/ratificaciones/delete.ratificaciones.use-cases');
 
 module.exports = {
   findAllInstituciones: findAllInstituciones(findAllInstitucionesQuery),
@@ -46,8 +50,10 @@ module.exports = {
     findOnePlantelQuery,
     updateDomicilioQuery,
   ),
-  deletePlantel: deletePlantel(
-    deletePlantelQuery,
+  deletePlantel: deletePlantel(deletePlantelQuery),
+  findOneRatificacionNombre: findOneRatificacion(
+    findOneInstitucionQuery,
+    findOneRatificacionQuery,
   ),
   createRatificacionNombre: createRatificacion(
     findOneInstitucionQuery,
@@ -57,4 +63,5 @@ module.exports = {
     findOneInstitucionQuery,
     updateRatificacionQuery,
   ),
+  deleteRatificacionNombre: deleteRatificacion(deleteRatificacionQuery),
 };
