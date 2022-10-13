@@ -12,6 +12,9 @@
     "url": "https://github.com/subsesjal/siiges-services.git"
   },
   "scripts": {
+    "seeds:run": "cd packages/core && sequelize-cli db:seed:all --debug",
+    "migrations:run": "cd packages/core && sequelize-cli db:migrate",
+    "start:dev": "yarn migrations:run && yarn seeds:run && node packages/api-gateway/src/index.js",
     "bootstrap": "yarn install -W && lerna bootstrap",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",

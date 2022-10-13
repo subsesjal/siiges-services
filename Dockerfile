@@ -8,7 +8,6 @@ COPY yarn.lock ./
 COPY . .
 
 RUN yarn bootstrap
+RUN yarn migrations:run
 
 EXPOSE 3000
-
-CMD ["node", "packages/api-gateway/src/index.js"]
