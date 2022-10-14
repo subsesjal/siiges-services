@@ -8,6 +8,5 @@ COPY yarn.lock ./
 COPY . .
 
 RUN yarn bootstrap
-RUN yarn migrations:run
 
 EXPOSE 3000
