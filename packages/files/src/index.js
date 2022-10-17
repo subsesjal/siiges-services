@@ -2,13 +2,15 @@
  * @description Export all features and business rules from the package
  */
 const {
-  uploadFile,
   deleteFile,
-  findOneFileByParams,
+  findOneFile,
+  getFileIdentifierObj,
+  uploadFile,
 } = require('./useCases');
 
 module.exports = {
-  uploadFile,
   deleteFile,
-  findOneFileByParams,
+  findOneFile,
+  getFileIdentifierObj,
+  uploadFile,
 };
