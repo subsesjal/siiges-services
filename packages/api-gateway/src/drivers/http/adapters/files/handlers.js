@@ -13,7 +13,8 @@ async function findOneFile(req, reply) {
     }
     Logger.info(`[files]: Getting files ${data.tipoDocumento} with entidadId ${data.entidadId}`);
 
-    const file = await this.filesServices.findOneFile(data);
+    const identifierObj = await this.filesServices.getFileIdentifierObj(data);
+    const file = await this.filesServices.findOneFile(identifierObj);
 
     return reply
       .code(200)

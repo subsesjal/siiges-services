@@ -1,6 +1,6 @@
-const findOneFileByParams = (findOneQuery) => (identifierObj, attributes, include) => findOneQuery(
+const findOneFile = (findOneQuery) => async (identifierObj, attributes, include) => findOneQuery(
   { ...identifierObj },
   { attributes, include },
 );
 
-module.exports = findOneFileByParams;
+module.exports = findOneFile;
