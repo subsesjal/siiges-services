@@ -5,7 +5,7 @@ jest.mock('../../../../../src/useCases/db/files/get-identifier-obj.files.db.use-
   getFileIdentifierObj: jest.fn(),
 }));
 
-describe('Given a call to findOneFileByParams', () => {
+describe('Given a call to findOneFile', () => {
   beforeEach(() => {
     jest.resetModules();
   });
@@ -14,8 +14,8 @@ describe('Given a call to findOneFileByParams', () => {
       const { findOneFileQuery } = jest.requireMock('../../../../../src/adapters/db/files.db.adapters');
       findOneFileQuery.mockReturnValueOnce(null);
 
-      const { findOneFileByParams } = jest.requireActual('../../../../../src/useCases/db/files');
-      const returnValue = findOneFileByParams();
+      const { findOneFile } = jest.requireActual('../../../../../src/useCases/db/files');
+      const returnValue = await findOneFile();
 
       expect(returnValue).toBe(null);
     });
@@ -26,9 +26,9 @@ describe('Given a call to findOneFileByParams', () => {
       const { findOneFileQuery } = jest.requireMock('../../../../../src/adapters/db/files.db.adapters');
       findOneFileQuery.mockReturnValueOnce(file);
 
-      const { findOneFileByParams } = jest.requireActual('../../../../../src/useCases/db/files');
+      const { findOneFile } = jest.requireActual('../../../../../src/useCases/db/files');
 
-      const returnValue = await findOneFileByParams();
+      const returnValue = await findOneFile();
       expect(returnValue).toMatchObject(file);
     });
   });
