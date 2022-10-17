@@ -1,5 +1,5 @@
 // Internal dependencies
-const { updateQuery } = require('./update.db.adapters');
+const updateQuery = require('./update.db.adapters');
 
 const deleteQuery = (model) => async (identifierObj) => {
   const update = updateQuery(model);
