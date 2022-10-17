@@ -3,7 +3,7 @@ const { isFalsy } = require('./truthy-falsy');
 
 function entryNotFounded(table, identifierObj) {
   throw boom.notFound(
-    `[${table}:findOne]: can't find user with identifier: ${identifierObj}`,
+    `[${table}:findOne]: can't find ${table} with identifier: ${identifierObj}`,
   );
 }
 
