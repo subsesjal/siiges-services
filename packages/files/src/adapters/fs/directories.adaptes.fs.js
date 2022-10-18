@@ -2,25 +2,25 @@ const path = require('path');
 const fs = require('fs');
 const fsp = require('fs/promises');
 
-async function existFileDir(dirFilePath) {
+async function existDir(dirFilePath) {
   const statsPath = await fsp.stat(dirFilePath);
-  const isDirectory = statsPath.isDirectory();
 
+  const isDirectory = statsPath.isDirectory();
   const existPath = fs.existsSync(dirFilePath);
 
   return isDirectory && existPath;
 }
 
-async function notExistFileDir(dirFilePath) {
-  return !existFileDir(dirFilePath);
+async function notExistDir(dirFilePath) {
+  return !existDir(dirFilePath);
 }
 
-async function makeFileDir(dirFilePath) {
+async function createDir(dirFilePath) {
   await fsp.mkdir(dirFilePath, { recursive: true });
 }
 
-async function createFileDirIfNotExist(dirFilePath) {
-  if (notExistFileDir(dirFilePath)) makeFileDir(dirFilePath);
+async function createDirIfNotExist(dirFilePath) {
+  if (notExistDir(dirFilePath)) createDir(dirFilePath);
 }
 
 function getFileDirPath(tipoEntidad, tipoDocumento) {
@@ -28,6 +28,6 @@ function getFileDirPath(tipoEntidad, tipoDocumento) {
 }
 
 module.exports = {
-  createFileDirIfNotExist,
+  createDirIfNotExist,
   getFileDirPath,
 };

@@ -1,14 +1,14 @@
-const fs = require('../../adapters/fs');
+const { directory, file } = require('../../adapters/fs');
 
-const writeBus = async (file, { tipoDocumento, tipoEntidad }, previousFile = undefined) => {
-  const dirFilePath = fs.getFileDirPath(tipoEntidad, tipoDocumento);
-  const fileName = fs.getFileName(tipoDocumento, file);
+const writeBus = async (currentFile, { tipoDocumento, tipoEntidad }, previousFile = undefined) => {
+  const dirFilePath = directory.createPath(tipoEntidad, tipoDocumento);
+  const fileName = file.createName(tipoDocumento, currentFile);
   const filePath = `${dirFilePath}/${fileName}`;
   const fileToUnlinkPath = `${dirFilePath}/${previousFile}`;
 
-  fs.createFileDirIfNotExist(dirFilePath);
-  fs.unlinkFileIfFileNameIsDefined(file, fileToUnlinkPath);
-  fs.createFileIfNotExist(file, fileName, filePath);
+  directory.createIfNotExist(dirFilePath);
+  file.unlinkIfNameIsDefined(currentFile, fileToUnlinkPath);
+  file.createIfNotExist(currentFile, fileName, filePath);
 
   return fileName;
 };

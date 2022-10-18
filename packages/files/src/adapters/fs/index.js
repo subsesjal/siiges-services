@@ -1,9 +1,7 @@
-const filesModule = require('./files.adapters.fs');
-const directoriesModule = require('./directories.adaptes.fs');
-const unlinkFileIfFileNameIsDefined = require('./unlink-file.adapters.fs');
+const file = require('./files');
+const directory = require('./directories');
 
 module.exports = {
-  ...filesModule,
-  ...directoriesModule,
-  unlinkFileIfFileNameIsDefined,
+  file,
+  directory,
 };

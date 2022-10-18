@@ -25,6 +25,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "jest",
+    "test:debug": "jest --runInBand",
     "test:watch": "jest --watch",
     "precommit": "yarn lint && yarn test"
   },

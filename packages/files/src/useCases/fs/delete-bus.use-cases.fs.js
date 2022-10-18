@@ -1,8 +1,8 @@
-const fs = require('../../adapters/fs');
+const { directory, file } = require('../../adapters/fs');
 
-const deleteBus = async (file = undefined) => {
-  const filePath = fs.getDirFilePath(file);
-  fs.unlinkFileIfFileNameIsDefined(file, filePath);
+const deleteBus = async (currentFile = undefined) => {
+  const filePath = directory.createPath(currentFile);
+  await file.unlinkIfNameIsDefined(currentFile, filePath);
 };
 
 module.exports = deleteBus;

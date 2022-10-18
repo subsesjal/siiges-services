@@ -5,6 +5,7 @@ const { findOneDocumentType } = require('../document-type');
 const { findOneEntityType } = require('../entity-type');
 
 const getFileIdentifierObj = (findEntityType, findDocumentType) => async (fileData) => {
+  // eslint-disable-next-line camelcase
   const { tipoEntidad, entidadId, tipoDocumento } = fileData;
 
   const tipoEntidadItem = await findEntityType(tipoEntidad);
