@@ -58,11 +58,11 @@ async function findOneDetailedUsuario(req, reply) {
 
 async function createUsuario(req, reply) {
   try {
-    const { body } = req;
+    const { ...data } = req.body;
 
     Logger.info('[usuarios]: Creating usuario');
 
-    const newUsuario = await this.usuarioServices.createUser(body);
+    const newUsuario = await this.usuarioServices.createUser(data);
 
     return reply
       .code(201)
