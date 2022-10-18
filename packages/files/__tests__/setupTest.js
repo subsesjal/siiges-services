@@ -1,8 +1,8 @@
 jest.mock('@siiges-services/shared', () => {
   const originalModule = jest.requireActual('@siiges-services/shared');
   return {
-    ...originalModule,
     __esmodule: true,
+    ...originalModule,
     checkers: {
       ...originalModule.checkers,
       isDefined: jest.fn(),

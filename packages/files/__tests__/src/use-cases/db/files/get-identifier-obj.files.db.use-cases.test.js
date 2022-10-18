@@ -14,7 +14,7 @@ describe('Given a call to findOneEntityType', () => {
       findOneQueryDocumentType.mockReturnValueOnce(null);
       findOneQueryEntityType.mockReturnValueOnce(documentType);
 
-      const { getFileIdentifierObj } = jest.requireActual('../../../../../src/useCases/db/files/get-identifier-obj.files.db.use-cases');
+      const getFileIdentifierObj = jest.requireActual('../../../../../src/useCases/db/files/get-identifier-obj.files.db.use-cases');
 
       getFileIdentifierObj(fileData).catch((error) => expect(error).toBe(Error));
     });
@@ -28,7 +28,7 @@ describe('Given a call to findOneEntityType', () => {
       findOneQueryDocumentType.mockReturnValueOnce(entityType);
       findOneQueryEntityType.mockReturnValueOnce(null);
 
-      const { getFileIdentifierObj } = jest.requireActual('../../../../../src/useCases/db/files/get-identifier-obj.files.db.use-cases');
+      const getFileIdentifierObj = jest.requireActual('../../../../../src/useCases/db/files/get-identifier-obj.files.db.use-cases');
 
       getFileIdentifierObj(fileData).catch((error) => expect(error).toBe(Error));
     });
@@ -42,7 +42,7 @@ describe('Given a call to findOneEntityType', () => {
       findOneQueryDocumentType.mockReturnValueOnce(documentType);
       findOneQueryEntityType.mockReturnValueOnce(entityType);
 
-      const { getFileIdentifierObj } = jest.requireActual('../../../../../src/useCases/db/files/get-identifier-obj.files.db.use-cases');
+      const getFileIdentifierObj = jest.requireActual('../../../../../src/useCases/db/files/get-identifier-obj.files.db.use-cases');
 
       fileData.entidadId = false;
       getFileIdentifierObj(fileData).catch((error) => expect(error).toBe(Error));
@@ -57,7 +57,7 @@ describe('Given a call to findOneEntityType', () => {
       findOneQueryDocumentType.mockReturnValueOnce(documentType);
       findOneQueryEntityType.mockReturnValueOnce(entityType);
 
-      const { getFileIdentifierObj } = jest.requireActual('../../../../../src/useCases/db/files/get-identifier-obj.files.db.use-cases');
+      const getFileIdentifierObj = jest.requireActual('../../../../../src/useCases/db/files/get-identifier-obj.files.db.use-cases');
 
       fileData.entidadId = identifierObj.entidadId;
       const returnObj = await getFileIdentifierObj(fileData);
