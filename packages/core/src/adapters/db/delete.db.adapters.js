@@ -1,5 +1,11 @@
 // Internal dependencies
-const updateQuery = require('./update.db.adapters');
+const { updateQuery, updateAndFindQuery } = require('./update.db.adapters');
+
+const deleteAndFindQuery = (model) => async (identifierObj) => {
+  const update = updateAndFindQuery(model);
+  const deletedAt = new Date().toISOString();
+  await update(identifierObj, { deletedAt });
+};
 
 const deleteQuery = (model) => async (identifierObj) => {
   const update = updateQuery(model);
@@ -9,4 +15,7 @@ const deleteQuery = (model) => async (identifierObj) => {
   return entryDeleted;
 };
 
-module.exports = deleteQuery;
+module.exports = {
+  deleteQuery,
+  deleteAndFindQuery,
+};
