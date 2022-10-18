@@ -7,12 +7,12 @@ const {
   findOneQuery,
   createQuery,
   deleteQuery,
-  updateQuery,
+  updateAndFindQuery,
 } = queries;
 
 module.exports = {
   findOneFileQuery: findOneQuery(File),
   createFileQuery: createQuery(File),
-  updateFileQuery: updateQuery(File),
+  updateFileQuery: updateAndFindQuery(File),
   deleteFileQuery: deleteQuery(File),
 };
