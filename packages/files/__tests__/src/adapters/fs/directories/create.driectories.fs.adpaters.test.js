@@ -2,7 +2,7 @@
 const fsp = require('fs/promises');
 // Internal dependencies
 const { notExist } = require('../../../../../src/adapters/fs/directories/exist.directories.fs.adapters');
-const { createIfNotExist } = require('../../../../../src/adapters/fs/directories/create.driectories.fs.adpaters');
+const { createIfNotExist } = require('../../../../../src/adapters/fs/directories/create.directories.fs.adpaters');
 
 jest.mock('../../../../../src/adapters/fs/directories/exist.directories.fs.adapters', () => ({
   notExist: jest.fn(),
