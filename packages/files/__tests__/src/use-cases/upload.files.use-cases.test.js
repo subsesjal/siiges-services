@@ -39,7 +39,7 @@ jest.spyOn(fileModule, 'createIfNotExist');
 
 const throwErrorIfDataIsFalsy = jest.spyOn(checkers, 'throwErrorIfDataIsFalsy');
 const createFile = jest.spyOn(db, 'createFile');
-const findOneFileByParams = jest.spyOn(db, 'findOneFileByParams');
+const findOneFile = jest.spyOn(db, 'findOneFile');
 const getFileIdentifierObj = jest.spyOn(db, 'getFileIdentifierObj');
 const updateFile = jest.spyOn(db, 'updateFile');
 const writeBus = jest.spyOn(fsModule, 'writeBus');
@@ -48,8 +48,12 @@ const fileUploaded = faker.datatype.string();
 const notFoundResponse = null;
 const previousFileNotFound = null;
 const previousFile = file;
-const tipoDocumentoCheck = [documentType, 'files', 'tipoDocumento'];
-const tipoEntidadCheck = [entityType, 'files', 'tipoEntidad'];
+const tipoDocumentoCheck = [documentType, 'tipoDocumento', fileData.tipoDocumento];
+const tipoEntidadCheck = [entityType, 'tipoEntidad', fileData.tipoEntidad];
+
+writeBus.mockImplementation(jest.fn());
+updateFile.mockImplementation(jest.fn());
+createFile.mockImplementation(jest.fn());
 
 describe('Given a fileData', () => {
   describe("When the object doen't have tipoEntidad, entidadId and tipoDocumentoId properties", () => {
@@ -67,13 +71,14 @@ describe('Given a fileData', () => {
   describe(`When this object have tipoEntidad, entidadId and tipoDocumentoId propeties,
 but there isn't a tipoEntidad with tipoEntidadId`, () => {
     test('Then it should call getFileIdentifierObj', () => {
-      uploadFile(fileData).catch(
+      getFileIdentifierObj.mockImplementationOnce(() => identifierObj);
+      uploadFile(fileData).then(
         () => expect(db.getFileIdentifierObj).toHaveBeenCalledWith(fileData),
       );
     });
 
     test('THEN it should call checkers.throwErrorIfDataIsFalsy function', () => {
-      findOneEntityType.mockReturnValueOnce(notFoundResponse);
+      findOneEntityType.mockReturnValueOnce(entityType);
       findOneDocumentType.mockReturnValueOnce(documentType);
       throwErrorIfDataIsFalsy.mockImplementationOnce(jest.fn()).mockImplementationOnce(jest.fn());
 
@@ -83,12 +88,16 @@ but there isn't a tipoEntidad with tipoEntidadId`, () => {
         ).toHaveBeenNthCalledWith(3, ...tipoDocumentoCheck),
       );
     });
-
-    test('THEN it should throw an error', () => {
-      findOneEntityType.mockReturnValueOnce(notFoundResponse);
+    test('THEN it should call checkers.throwErrorIfDataIsFalsy function', () => {
+      findOneEntityType.mockReturnValueOnce(entityType);
       findOneDocumentType.mockReturnValueOnce(documentType);
+      throwErrorIfDataIsFalsy.mockImplementationOnce(jest.fn()).mockImplementationOnce(jest.fn());
 
-      uploadFile(fileData).catch((error) => expect(error).toBe(Error));
+      uploadFile(fileData).then(
+        () => expect(
+          checkers.throwErrorIfDataIsFalsy,
+        ).toHaveBeenNthCalledWith(3, ...tipoDocumentoCheck),
+      );
     });
 
     test('THEN it should call boom.notFound function', () => {
@@ -97,24 +106,33 @@ but there isn't a tipoEntidad with tipoEntidadId`, () => {
 
       uploadFile(fileData).catch(() => expect(boom.notFound).toHaveBeenCalled());
     });
+
+    test('THEN it should throw an error', () => {
+      findOneEntityType.mockReturnValueOnce(notFoundResponse);
+      findOneDocumentType.mockReturnValueOnce(documentType);
+
+      uploadFile(fileData).catch((error) => expect(error).toBe(Error));
+    });
   });
 
   describe(`When this object have tipoEntidad, entidadId and tipoDocumentoId propeties,
 but there isn't a tipoDocumento with tipoDocumentoId`, () => {
     test('Then it should call getFileIdentifierObj', () => {
-      uploadFile(fileData).catch(
+      getFileIdentifierObj.mockImplementationOnce(() => identifierObj);
+      uploadFile(fileData).then(
         () => expect(db.getFileIdentifierObj).toHaveBeenCalledWith(fileData),
       );
     });
 
     test('THEN it should call checkers.throwErrorIfDataIsFalsy function', () => {
       findOneEntityType.mockReturnValueOnce(entityType);
-      findOneDocumentType.mockReturnValueOnce(notFoundResponse);
+      findOneDocumentType.mockReturnValueOnce(documentType);
 
-      uploadFile(fileData).catch(
+      uploadFile(fileData).then(
         () => expect(checkers.throwErrorIfDataIsFalsy).toHaveBeenCalledWith(...tipoEntidadCheck),
       );
     });
+
     test('THEN it should throw an error', () => {
       findOneEntityType.mockReturnValueOnce(entityType);
       findOneDocumentType.mockReturnValueOnce(notFoundResponse);
@@ -132,41 +150,41 @@ but there isn't a tipoDocumento with tipoDocumentoId`, () => {
 
   describe(`When this object have tipoEntidad, entidadId and tipoDocumentoId propeties,
 but there is no file with this values`, () => {
+    beforeEach(() => {
+      getFileIdentifierObj.mockImplementationOnce(() => identifierObj);
+    });
+
     test('Then it should call getFileIdentifierObj', () => {
-      uploadFile(fileData).catch(
+      uploadFile(fileData).then(
         () => expect(db.getFileIdentifierObj).toHaveBeenCalledWith(fileData),
       );
     });
-    test('THEN it should call db.findOneFileByParamsa', () => {
-      getFileIdentifierObj.mockImplementationOnce(() => identifierObj);
-      uploadFile(fileData).catch(() => expect(db.findOneFileByParams).toHaveBeenCalled());
+
+    test('THEN it should call db.findOneFile', () => {
+      uploadFile(fileData).catch(() => expect(db.findOneFile).toHaveBeenCalled());
     });
 
     test('THEN it should call checkers.throwErrorifIsFalsy', () => {
       jest.isolateModules(() => {
         const { findOneFileQuery } = jest.requireMock('../../../src/adapters/db/files.db.adapters');
 
-        getFileIdentifierObj.mockImplementationOnce(() => identifierObj);
         findOneFileQuery.mockReturnValue(notFoundResponse);
-
         uploadFile(fileData).catch(() => expect(
-          db.findOneFileByParams,
+          db.findOneFile,
         ).toHaveReturnedWith(notFoundResponse));
       });
     });
 
     test('THEN it should call writeBus', () => {
-      getFileIdentifierObj.mockImplementationOnce(() => identifierObj);
-      findOneFileByParams.mockImplementationOnce(() => previousFileNotFound);
+      findOneFile.mockImplementationOnce(() => previousFileNotFound);
 
-      uploadFile(fileData, fileUploaded).catch(() => expect(
+      uploadFile(fileData, fileUploaded).then(() => expect(
         fsModule.writeBus,
       ).toHaveBeenCalledWith(fileUploaded, fileData, undefined));
     });
 
     test('THEN it should call upload db.createFile function', () => {
-      getFileIdentifierObj.mockImplementationOnce(() => identifierObj);
-      findOneFileByParams.mockImplementationOnce(() => previousFileNotFound);
+      findOneFile.mockImplementationOnce(() => previousFileNotFound);
       writeBus.mockImplementationOnce(() => fileName);
       createFile.mockImplementationOnce(jest.fn());
 
@@ -174,32 +192,32 @@ but there is no file with this values`, () => {
         db.createFile,
       ).toHaveBeenCalledWith(uploadFileData));
     });
+
     test('THEN it should return an object with fileData information', () => {
-      jest.isolateModules(() => {
-        const { createFileQuery } = jest.requireMock('../../../src/adapters/db/files.db.adapters');
+      findOneFile.mockImplementationOnce(() => previousFileNotFound);
+      writeBus.mockImplementationOnce(() => fileName);
+      createFile.mockReturnValue(fileData);
 
-        getFileIdentifierObj.mockImplementationOnce(() => identifierObj);
-        findOneFileByParams.mockImplementationOnce(() => previousFileNotFound);
-        writeBus.mockImplementationOnce(() => fileName);
-        createFileQuery.mockReturnValue(fileData);
-
-        uploadFile(fileData).then((data) => expect(
-          data,
-        ).toMatchObject(fileData));
-      });
+      uploadFile(fileData).then((data) => expect(
+        data,
+      ).toMatchObject(fileData));
     });
   });
 
   describe(`When this object have tipoEntidad, entidadId and tipoDocumentoId propeties,
 but there is a file with this values`, () => {
+    beforeEach(() => {
+      getFileIdentifierObj.mockImplementationOnce(() => identifierObj);
+    });
+
     test('Then it should call getFileIdentifierObj', () => {
-      uploadFile(fileData).catch(
+      uploadFile(fileData).then(
         () => expect(db.getFileIdentifierObj).toHaveBeenCalledWith(fileData),
       );
     });
-    test('THEN it should call db.findOneFileByParamsa', () => {
-      getFileIdentifierObj.mockImplementationOnce(() => identifierObj);
-      uploadFile(fileData).catch(() => expect(db.findOneFileByParams).toHaveBeenCalled());
+
+    test('THEN it should call db.findOneFile', () => {
+      uploadFile(fileData).then(() => expect(db.findOneFile).toHaveBeenCalled());
     });
 
     test('THEN it should call checkers.throwErrorifIsFalsy', () => {
@@ -210,14 +228,13 @@ but there is a file with this values`, () => {
         findOneFileQuery.mockReturnValue(previousFile);
 
         uploadFile(fileData).catch(() => expect(
-          db.findOneFileByParams,
+          db.findOneFile,
         ).toHaveReturnedWith(previousFile));
       });
     });
 
     test('THEN it should call writeBus', () => {
-      getFileIdentifierObj.mockImplementationOnce(() => identifierObj);
-      findOneFileByParams.mockImplementationOnce(() => previousFile);
+      findOneFile.mockImplementationOnce(() => previousFile);
 
       uploadFile(fileData, fileUploaded).catch(() => expect(
         fsModule.writeBus,
@@ -225,8 +242,7 @@ but there is a file with this values`, () => {
     });
 
     test('THEN it should call upload db.createFile function', () => {
-      getFileIdentifierObj.mockImplementationOnce(() => identifierObj);
-      findOneFileByParams.mockImplementationOnce(() => previousFile);
+      findOneFile.mockImplementationOnce(() => previousFile);
       writeBus.mockImplementationOnce(() => fileName);
       updateFile.mockImplementationOnce(jest.fn());
 
@@ -234,19 +250,15 @@ but there is a file with this values`, () => {
         db.updateFile,
       ).toHaveBeenCalledWith(previousFile.id, uploadFileData));
     });
+
     test('THEN it should return an object with fileData information', () => {
-      jest.isolateModules(() => {
-        const { updateFileQuery } = jest.requireMock('../../../src/adapters/db/files.db.adapters');
+      findOneFile.mockImplementationOnce(() => previousFile);
+      writeBus.mockImplementationOnce(() => fileName);
+      updateFile.mockReturnValue(fileData);
 
-        getFileIdentifierObj.mockImplementationOnce(() => identifierObj);
-        findOneFileByParams.mockImplementationOnce(() => previousFile);
-        writeBus.mockImplementationOnce(() => fileName);
-        updateFileQuery.mockReturnValue(fileData);
-
-        uploadFile(fileData).then((data) => expect(
-          data,
-        ).toMatchObject(fileData));
-      });
+      uploadFile(fileData).then((data) => expect(
+        data,
+      ).toMatchObject(fileData));
     });
   });
 });
