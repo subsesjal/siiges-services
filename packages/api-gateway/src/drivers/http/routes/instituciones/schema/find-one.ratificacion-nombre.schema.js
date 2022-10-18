@@ -2,16 +2,16 @@ const { institucion } = require('./properties/institucion');
 const { ratificacionNombre } = require('./properties/ratificacionNombre');
 const { responseProperties } = require('./properties/responseProperties');
 
-const findOneInstitucionSchema = {
-  tags: ['Institucion'],
-  description: 'Given a institucion id, then return a institucion of database.',
+const updateRatificacionNombreSchema = {
+  tags: ['Ratificacion'],
+  description: 'Given a ratificacion id and a institucion id, then return the ratificacion of institucion in database.',
   params: {
-    title: 'getInstitucionSchema',
     type: 'object',
     properties: {
       institucionId: { type: 'integer' },
+      ratificacionId: { type: 'integer' },
     },
-    required: ['institucionId'],
+    required: ['institucionId', 'ratificacionId'],
   },
   response: {
     200: {
@@ -21,14 +21,14 @@ const findOneInstitucionSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            usuarioId: { type: 'integer' },
-            ...institucion,
+            ...ratificacionNombre,
             ...responseProperties,
-            ratificacionesNombre: {
-              type: 'array',
+            institucion: {
+              type: 'object',
               properties: {
                 id: { type: 'integer' },
-                ...ratificacionNombre,
+                usuarioId: { type: 'integer' },
+                ...institucion,
                 ...responseProperties,
               },
             },
@@ -39,4 +39,4 @@ const findOneInstitucionSchema = {
   },
 };
 
-module.exports = findOneInstitucionSchema;
+module.exports = updateRatificacionNombreSchema;

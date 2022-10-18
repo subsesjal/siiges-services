@@ -1,5 +1,8 @@
 const createInstitucion = (createQuery) => async (data) => {
-  const newInstitucion = await createQuery(data);
+  const include = [{ association: 'ratificacionesNombre' }];
+
+  const newInstitucion = await createQuery(data, include);
+
   return newInstitucion;
 };
 

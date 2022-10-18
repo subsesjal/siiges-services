@@ -34,11 +34,11 @@ async function findOneInstitucion(req, reply) {
 
 async function createInstitucion(req, reply) {
   try {
-    const { body } = req;
+    const { ...data } = req.body;
 
     Logger.info('[instituciones]: Creating institucion');
 
-    const newInstitucion = await this.institucionServices.createInstitucion(body);
+    const newInstitucion = await this.institucionServices.createInstitucion(data);
 
     return reply
       .code(201)
@@ -62,7 +62,7 @@ async function updateInstitucion(req, reply) {
     );
 
     return reply
-      .code(201)
+      .code(204)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: institucionUpdated });
   } catch (error) {
@@ -80,7 +80,7 @@ async function deleteInstitucion(req, reply) {
     });
 
     return reply
-      .code(201)
+      .code(204)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: institucionDeleted });
   } catch (error) {
@@ -130,7 +130,7 @@ async function findOnePlantel(req, reply) {
 async function createPlantel(req, reply) {
   try {
     const { institucionId } = req.params;
-    const { body } = req;
+    const { ...data } = req.body;
 
     Logger.info('[instituciones]: Creating plantel in institucion');
 
@@ -140,7 +140,7 @@ async function createPlantel(req, reply) {
 
     const newPlantel = await this.institucionServices.createPlantel(
       institucionId,
-      body,
+      data,
       opts,
     );
 
@@ -156,16 +156,16 @@ async function createPlantel(req, reply) {
 async function updatePlantel(req, reply) {
   try {
     const { institucionId, plantelId } = req.params;
-    const { body } = req;
+    const { ...data } = req.body;
 
     Logger.info('[instituciones]: Creating plantel in institucion');
     const newPlantel = await this.institucionServices.updatePlantel(
       { institucionId, plantelId },
-      body,
+      data,
     );
 
     return reply
-      .code(201)
+      .code(204)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: newPlantel });
   } catch (error) {
@@ -185,9 +185,91 @@ async function deletePlantel(req, reply) {
     });
 
     return reply
+      .code(204)
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ data: plantel });
+  } catch (error) {
+    return errorHandler(error, reply);
+  }
+}
+
+async function createRatificacionNombre(req, reply) {
+  try {
+    const { institucionId } = req.params;
+    const { ...data } = req.body;
+
+    Logger.info('[instituciones]: Creating ratificacion de nombre');
+
+    const ratificacionNombre = await this.institucionServices.createRatificacionNombre(
+      institucionId,
+      data,
+    );
+
+    return reply
+      .code(201)
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ data: ratificacionNombre });
+  } catch (error) {
+    return errorHandler(error, reply);
+  }
+}
+
+async function updateRatificacionNombre(req, reply) {
+  try {
+    const { institucionId, ratificacionId } = req.params;
+    const { ...data } = req.body;
+
+    Logger.info('[instituciones]: Creating ratificacion de nombre');
+
+    const ratificacionNombre = await this.institucionServices.updateRatificacionNombre(
+      { institucionId, ratificacionId },
+      data,
+    );
+
+    return reply
+      .code(204)
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ data: ratificacionNombre });
+  } catch (error) {
+    return errorHandler(error, reply);
+  }
+}
+
+async function findOneRatificacionNombre(req, reply) {
+  try {
+    const { institucionId, ratificacionId } = req.params;
+
+    Logger.info(`[instituciones]: Getting ratificacion ${ratificacionId}`);
+
+    const plantel = await this.institucionServices.findOneRatificacionNombre({
+      institucionId,
+      ratificacionId,
+    });
+
+    return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: plantel });
+  } catch (error) {
+    return errorHandler(error, reply);
+  }
+}
+
+async function deleteRatificacionNombre(req, reply) {
+  try {
+    const { institucionId, ratificacionId } = req.params;
+
+    Logger.info(`[instituciones]: Deleting ratificacion ${ratificacionId}`);
+
+    const ratificacionNombre = await this.institucionServices.deleteRatificacionNombre({
+      institucionId,
+      ratificacionId,
+    });
+
+    return reply
+      .code(204)
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ data: ratificacionNombre });
   } catch (error) {
     return errorHandler(error, reply);
   }
@@ -204,4 +286,8 @@ module.exports = {
   createPlantel,
   updatePlantel,
   deletePlantel,
+  findOneRatificacionNombre,
+  createRatificacionNombre,
+  updateRatificacionNombre,
+  deleteRatificacionNombre,
 };
