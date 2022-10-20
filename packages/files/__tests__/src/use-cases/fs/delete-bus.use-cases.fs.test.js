@@ -11,12 +11,6 @@ jest.mock('fs/promises', () => ({
   unlink: jest.fn(),
 }));
 
-jest.mock('@siiges-services/shared', () => ({
-  checkers: {
-    isDefined: jest.fn(),
-  },
-}));
-
 jest.mock('../../../../src/adapters/fs', () => {
   const originalModule = jest.requireActual('../../../../src/adapters/fs');
   return {
