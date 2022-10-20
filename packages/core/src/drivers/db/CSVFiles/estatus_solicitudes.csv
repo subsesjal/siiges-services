@@ -1,0 +1,14 @@
+id,nombre,descripcion,created_at
+1,COMPLETAR SOLICITUD,Solicitud en proceso de llenado,2018-08-07 3:00:00
+2,REVISIÓN DE DOCUMENTACIÓN,Solicitud en revisión de documentación,2018-08-07 3:00:00
+3,ENTREGAR DOCUMENTOS EN FÍSICOS,Cita generada y a la espera de entregar los formatos FDA01 FDA02 y FDA03,2018-08-07 3:00:00
+4,ASIGNACIÓN TÉCNICO-CURRICULAR,Progama en lista de espera para la asignación de un evaluador.,2018-08-07 3:00:00
+5,EVALUACIÓN TÉCNICO-CURRICULAR,Programa de estudios en proceso de la evaluación técnico-curricular.,2018-08-07 3:00:00
+6,ASIGNACIÓN INSPECCIÓN FÍSICA,Programa en espera de asignación de inspector(es) para realizar la inspección física en el plantel que se imparte el programa.,2018-08-07 3:00:00
+7,INSPECCIÓN FÍSICA,Programa en proceso de la inspección física,2018-08-07 3:00:00
+8,REVISIÓN DEL EXPEDIENTE,Programa bajo revisión del expediente,2018-08-07 3:00:00
+9,ACUERDO EN IMPRESIÓN,Programa en proceso de impresión del certifficado,2018-08-07 3:00:00
+10,RECOGER ACUERDO,Certifficado a la espera de ser recogido por el representante legal de la institución,2018-08-07 3:00:00
+11,RVOE ENTREGADO,Programa con RVOE activo,2018-08-07 3:00:00
+100,SOLICITUD RECHAZADA,Solicitud rechazada,2018-08-07 3:00:00
+200,ATENDER OBSERVACIONES,Atender las observaciones,2018-08-07 3:00:00

@@ -13,6 +13,15 @@ const updateQuery = (model) => async (identifierObj, changes, dbParams = {}) => 
       where: getWhere(identifierObj, isDeleting),
     },
   );
+};
+
+const updateAndFindQuery = (model) => async (identifierObj, changes, dbParams = {}) => {
+  const { isDeleteing = false } = dbParams;
+  const update = updateQuery(model);
+  const findOne = findOneQuery(model);
+
+  await update(identifierObj, changes);
+  const entryUpdated = await findOne(identifierObj, isDeleteing);
 
   return updatedAt;
 };

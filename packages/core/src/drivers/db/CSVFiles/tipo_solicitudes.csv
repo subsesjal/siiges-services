@@ -1,0 +1,4 @@
+id,nombre,descripcion,created_at
+1,Nueva solicitud,Trámite para un nuevo RVOE,2018-08-08 0:00:00
+2,Refrendo del plan de estudios,Refrendo a planes y programas de estudios,2018-08-08 0:00:00
+3,Cambio domicilio,Cambio de domicilio de un RVOE ya existente,2018-08-08 0:00:00
