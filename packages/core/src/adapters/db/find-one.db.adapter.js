@@ -3,7 +3,7 @@ const { createInclude, getWhere } = require('../utils');
 
 const findOneQuery = (model) => async (identifierObj, dbParams = {}) => {
   const {
-    attributes = undefined, include = undefined, strict = true, isDeleting = true,
+    attributes = undefined, include = undefined, strict = true, isDeleting = false,
   } = dbParams;
 
   return model.findOne({
