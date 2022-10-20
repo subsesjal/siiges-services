@@ -16,12 +16,12 @@ function getUbication({ tipoEntidad, tipoDocumento }, fileName) {
   return `/uploads/${tipoEntidad}/${tipoDocumento}/${(fileName)}`;
 }
 
-async function uploadFile(fileData, fileUploaded) {
-  const identifierObj = await db.getFileIdentifierObj(fileData);
+async function uploadFile(fileMetdata, fileUploaded) {
+  const identifierObj = await db.getFileIdentifierObj(fileMetdata);
   const previousFile = await db.findOneFile(identifierObj);
-  const fileName = await fs.writeBus(fileUploaded, fileData, previousFile?.nombre);
+  const fileName = await fs.writeBus(fileUploaded, fileMetdata, previousFile);
 
-  const ubication = getUbication(fileData, fileName);
+  const ubication = getUbication(fileMetdata, fileName);
   const data = createData(identifierObj, fileName, ubication);
 
   if (previousFile) return db.updateFile(previousFile.id, data);
