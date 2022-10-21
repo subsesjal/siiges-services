@@ -75,9 +75,9 @@ async function deleteFile(req, reply) {
     const fileDeleted = await this.filesServices.deleteFile(data);
 
     return reply
-      .code(204)
+      .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: fileDeleted });
+      .send(fileDeleted);
   } catch (error) {
     return errorHandler(error, reply);
   }
