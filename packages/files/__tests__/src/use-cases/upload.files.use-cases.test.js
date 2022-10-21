@@ -180,7 +180,7 @@ but there is no file with this values`, () => {
 
       uploadFile(fileData, fileUploaded).then(() => expect(
         fsModule.writeBus,
-      ).toHaveBeenCalledWith(fileUploaded, fileData, undefined));
+      ).toHaveBeenCalledWith(fileUploaded, fileData, previousFileNotFound));
     });
 
     test('THEN it should call upload db.createFile function', () => {

@@ -6,7 +6,7 @@ const { File } = drivers.sequelize.models;
 const {
   findOneQuery,
   createQuery,
-  deleteQuery,
+  deleteAndFindQuery,
   updateAndFindQuery,
 } = queries;
 
@@ -14,5 +14,5 @@ module.exports = {
   findOneFileQuery: findOneQuery(File),
   createFileQuery: createQuery(File),
   updateFileQuery: updateAndFindQuery(File),
-  deleteFileQuery: deleteQuery(File),
+  deleteFileQuery: deleteAndFindQuery(File),
 };

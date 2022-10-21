@@ -30,6 +30,7 @@ jest.spyOn(directory, 'createIfNotExist');
 jest.spyOn(fileModule, 'createName').mockImplementation(() => fileName);
 jest.spyOn(fileModule, 'unlinkIfNameIsDefined');
 jest.spyOn(fileModule, 'createIfNotExist');
+jest.spyOn(fileModule, 'createPath').mockImplementation(() => `${dirFilePath}/undefined`);
 
 const currentFile = faker.datatype.json();
 const tipoDocumento = faker.system.commonFileType();
@@ -61,7 +62,7 @@ describe('Given a tipoDocumento and tipoEntidad', () => {
     writeBus(currentFile, { tipoDocumento, tipoEntidad })
       .then(() => expect(
         fileModule.unlinkIfNameIsDefined,
-      ).toHaveBeenCalledWith(currentFile, fileToUnlikPath));
+      ).toHaveBeenCalledWith(undefined, fileToUnlikPath));
   });
 
   test('THEN it should call file.createIfNotExist', () => {

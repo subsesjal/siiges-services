@@ -11,7 +11,6 @@ const getFileIdentifierObj = async (fileData) => {
 tipoEntidad ${tipoEntidad}
 entidadId ${entidadId}
 tipoDocumento ${tipoDocumento}`);
-
   const tipoEntidadItem = await findOneEntityType(tipoEntidad);
   const tipoDocumentoItem = await findOneDocumentType(tipoDocumento);
 
