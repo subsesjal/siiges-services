@@ -13,6 +13,10 @@ const { RatificacionNombre, RatificacionNombreSchema } = require('./ratificacion
 const { TipoSolicitud, TipoSolicitudSchema } = require('./tipoSolicitud');
 const { EstatusSolicitud, EstatusSolicitudSchema } = require('./estatusSolicitud');
 const { Solicitud, SolicitudSchema } = require('./solicitud');
+const { Ciclo, CicloSchema } = require('./ciclo');
+const { Modalidad, ModalidadSchema } = require('./modalidad');
+const { Nivel, NivelSchema } = require('./nivel');
+const { Programa, ProgramaSchema } = require('./programa');
 
 function setupModels(sequelize) {
   Rol.init(RolSchema, Rol.config(sequelize));
@@ -30,6 +34,10 @@ function setupModels(sequelize) {
   TipoSolicitud.init(TipoSolicitudSchema, TipoSolicitud.config(sequelize));
   EstatusSolicitud.init(EstatusSolicitudSchema, EstatusSolicitud.config(sequelize));
   Solicitud.init(SolicitudSchema, Solicitud.config(sequelize));
+  Ciclo.init(CicloSchema, Ciclo.config(sequelize));
+  Modalidad.init(ModalidadSchema, Modalidad.config(sequelize));
+  Nivel.init(NivelSchema, Nivel.config(sequelize));
+  Programa.init(ProgramaSchema, Programa.config(sequelize));
 
   Rol.associate(sequelize.models);
   Pais.associate(sequelize.models);
@@ -46,6 +54,10 @@ function setupModels(sequelize) {
   TipoSolicitud.associate(sequelize.models);
   EstatusSolicitud.associate(sequelize.models);
   Solicitud.associate(sequelize.models);
+  Ciclo.associate(sequelize.models);
+  Modalidad.associate(sequelize.models);
+  Nivel.associate(sequelize.models);
+  Programa.associate(sequelize.models);
 }
 
 module.exports = setupModels;

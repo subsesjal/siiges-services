@@ -13,6 +13,10 @@ const { RATIFICACION_NOMBRE_TABLE, RatificacionNombreSchema } = require('../mode
 const { ESTATUS_SOLICITUD_TABLE, EstatusSolicitudSchema } = require('../models/estatusSolicitud');
 const { TIPO_SOLICITUD_TABLE, TipoSolicitudSchema } = require('../models/tipoSolicitud');
 const { SOLICITUD_TABLE, SolicitudSchema } = require('../models/solicitud');
+const { CICLO_TABLE, CicloSchema } = require('../models/ciclo');
+const { MODALIDAD_TABLE, ModalidadSchema } = require('../models/modalidad');
+const { NIVEL_TABLE, NivelSchema } = require('../models/nivel');
+const { PROGRAMA_TABLE, ProgramaSchema } = require('../models/programa');
 
 module.exports = {
   async up(queryInterface) {
@@ -31,6 +35,10 @@ module.exports = {
     await queryInterface.createTable(ESTATUS_SOLICITUD_TABLE, EstatusSolicitudSchema);
     await queryInterface.createTable(TIPO_SOLICITUD_TABLE, TipoSolicitudSchema);
     await queryInterface.createTable(SOLICITUD_TABLE, SolicitudSchema);
+    await queryInterface.createTable(CICLO_TABLE, CicloSchema);
+    await queryInterface.createTable(MODALIDAD_TABLE, ModalidadSchema);
+    await queryInterface.createTable(NIVEL_TABLE, NivelSchema);
+    await queryInterface.createTable(PROGRAMA_TABLE, ProgramaSchema);
   },
 
   async down(queryInterface) {
@@ -49,5 +57,9 @@ module.exports = {
     await queryInterface.dropTable(ESTATUS_SOLICITUD_TABLE);
     await queryInterface.dropTable(TIPO_SOLICITUD_TABLE);
     await queryInterface.dropTable(SOLICITUD_TABLE);
+    await queryInterface.dropTable(CICLO_TABLE);
+    await queryInterface.dropTable(MODALIDAD_TABLE);
+    await queryInterface.dropTable(NIVEL_TABLE);
+    await queryInterface.dropTable(PROGRAMA_TABLE);
   },
 };

@@ -64,11 +64,13 @@ const UsuarioSchema = {
     defaultValue: Sequelize.NOW,
   },
   updatedAt: {
+    allowNull: true,
     type: DataTypes.DATE,
     field: 'updated_at',
     defaultValue: null,
   },
   deletedAt: {
+    allowNull: true,
     type: DataTypes.DATE,
     field: 'deleted_at',
     defaultValue: null,
