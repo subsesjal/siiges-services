@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes, Sequelize } = require('sequelize');
 const { USUARIO_TABLE } = require('./usuario');
 
 const REPRESENTANTE_TABLE = 'Representante';
@@ -10,6 +10,7 @@ const RepresentanteSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
+
   usuarioId: {
     allowNull: false,
     type: DataTypes.INTEGER,
@@ -19,6 +20,14 @@ const RepresentanteSchema = {
       key: 'id',
     },
   },
+
+  createdAt: {
+    allowNull: false,
+    type: DataTypes.DATE,
+    field: 'created_at',
+    defaultValue: Sequelize.NOW,
+  },
+
   updatedAt: {
     type: DataTypes.DATE,
     field: 'updated_at',
@@ -33,10 +42,7 @@ const RepresentanteSchema = {
 
 class Representante extends Model {
   static associate(models) {
-    this.hasOne(models.Usuario, {
-      as: 'usuario',
-      foreignKey: 'rolId',
-    });
+    this.belongsTo(models.Usuario, { as: 'usuario' });
   }
 
   static config(sequelize) {
