@@ -105,10 +105,6 @@ const ProgramaSchema = {
     type: DataTypes.STRING,
     field: 'seguimiento_egresados',
   },
-  totalAlumnosOtrosRvoes: {
-    type: DataTypes.INTEGER,
-    field: 'total_alumnos_otros_rvoes',
-  },
   conveniosVinculacion: {
     type: DataTypes.STRING,
     field: 'convenios_vinculacion',
@@ -121,9 +117,9 @@ const ProgramaSchema = {
     type: DataTypes.STRING,
     field: 'estudio_oferta_demanda',
   },
-  lineasGeneracionAplicacionConocimiento: {
+  lgac: {
     type: DataTypes.STRING,
-    field: 'lineas_generacion_aplicacion_conocimiento',
+    field: 'lgac',
   },
   necesidadProfesional: {
     type: DataTypes.STRING,
@@ -189,13 +185,9 @@ const ProgramaSchema = {
     type: DataTypes.STRING,
     field: 'objetivo_general',
   },
-  ovjetivosParticulares: {
+  objetivosParticulares: {
     type: DataTypes.STRING,
     field: 'objetivos_particulares',
-  },
-  otrosRvoes: {
-    type: DataTypes.STRING,
-    field: 'otros_rvoes',
   },
   calificacionMinima: {
     type: DataTypes.INTEGER,
