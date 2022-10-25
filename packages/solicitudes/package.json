@@ -1,0 +1,39 @@
+{
+  "name": "@siiges-services/solicitudes",
+  "version": "1.0.0",
+  "description": "create logic of siiges procedures",
+  "keywords": [
+    "solicitudes",
+    "procedures"
+  ],
+  "author": "Hector Esau <hecttoressau@gmail.com>",
+  "homepage": "http://src/index.js",
+  "license": "MIT",
+  "main": "src/index.js",
+  "directories": {
+    "src": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "src",
+    "__tests__"
+
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/subsesjal/siiges-services.git"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "precommit": "yarn lint && yarn test"
+  },
+  "bugs": {
+    "url": "https://github.com/subsesjal/siiges-services/issues"
+  }
+}
