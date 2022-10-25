@@ -1,5 +1,6 @@
-const { Model, DataTypes } = require('sequelize');
-const { USUARIO_TABLE } = require('./persona');
+const { Model, DataTypes, Sequelize } = require('sequelize');
+const { PERSONA_TABLE } = require('./persona');
+const { SOLICITUD_TABLE } = require('./solicitud');
 
 const DILIGENCIA_TABLE = 'diligencia';
 
@@ -10,26 +11,44 @@ const DiligenciaSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
+
+  solicitudId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'solicitud_id',
+    references: {
+      model: SOLICITUD_TABLE,
+      key: 'id',
+    },
+  },
+
   personaId: {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'persona_id',
     references: {
-      model: USUARIO_TABLE,
+      model: PERSONA_TABLE,
       key: 'id',
     },
   },
 
-  startTime: {
+  horaInicio: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'start_time',
+    field: 'hora_inicio',
   },
 
-  endTieme: {
+  horaFin: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'start_time',
+    field: 'hora_fin',
+  },
+
+  createdAt: {
+    allowNull: false,
+    type: DataTypes.DATE,
+    field: 'created_at',
+    defaultValue: Sequelize.NOW,
   },
 
   updatedAt: {
@@ -46,17 +65,15 @@ const DiligenciaSchema = {
 
 class Diligencia extends Model {
   static associate(models) {
-    this.hasOne(models.Usuario, {
-      as: 'usuario',
-      foreignKey: 'rolId',
-    });
+    this.belongsTo(models.Persona, { as: 'persona' });
+    this.belongsTo(models.Solicitud, { as: 'solicitud' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
       tableName: DILIGENCIA_TABLE,
-      modelName: 'Representante',
+      modelName: 'diligencia',
       timestamps: false,
     };
   }
