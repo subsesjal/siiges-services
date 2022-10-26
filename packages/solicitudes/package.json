@@ -17,7 +17,6 @@
   "files": [
     "src",
     "__tests__"
-
   ],
   "publishConfig": {
     "access": "public"
@@ -35,5 +34,9 @@
   },
   "bugs": {
     "url": "https://github.com/subsesjal/siiges-services/issues"
+  },
+  "dependencies": {
+    "@siiges-services/core": "^1.0.0",
+    "@siiges-services/shared": "^0.0.1"
   }
 }
