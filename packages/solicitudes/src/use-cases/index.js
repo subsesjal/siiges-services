@@ -1,9 +1,9 @@
-const diligencia = require('./diligencia');
-const institucion = require('./institucion');
-const representante = require('./representante');
+const diligence = require('./diligencia');
+const institution = require('./institucion');
+const representative = require('./representante');
 
 module.exports = {
-  diligencia,
-  institucion,
-  representante,
+  diligence,
+  institution,
+  representative,
 };
