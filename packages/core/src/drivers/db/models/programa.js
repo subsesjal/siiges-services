@@ -92,7 +92,6 @@ const ProgramaSchema = {
     field: 'acuerdo_rvoe',
   },
   nombre: {
-    allowNull: false,
     type: DataTypes.STRING,
   },
   tipo: {

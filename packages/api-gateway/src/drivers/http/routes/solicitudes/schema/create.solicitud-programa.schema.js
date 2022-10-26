@@ -1,5 +1,6 @@
 const { solicitud } = require('./properties/solicitud');
 const { programa } = require('./properties/programa');
+const { responseProperties } = require('./properties/responseProperties');
 
 const createSolicitudProgramaSchema = {
   tags: ['Solicitudes'],
@@ -16,7 +17,30 @@ const createSolicitudProgramaSchema = {
         required: ['cicloId', 'nivelId', 'modalidadId', 'plantelId'],
       },
     },
-    required: ['tipoSolicitudId', 'usuarioId', 'estatusSolicitudId'],
+    required: ['tipoSolicitudId', 'usuarioId', 'estatusSolicitudId', 'programa'],
+  },
+  response: {
+    201: {
+      type: 'object',
+      properties: {
+        data: {
+          type: 'object',
+          properties: {
+            id: { type: 'integer' },
+            ...solicitud,
+            ...responseProperties,
+            programa: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...programa,
+                ...responseProperties,
+              },
+            },
+          },
+        },
+      },
+    },
   },
 };
 

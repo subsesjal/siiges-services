@@ -8,5 +8,5 @@ const {
 } = queries;
 
 module.exports = {
-  createInstitucionQuery: createQuery(Solicitud),
+  createSolicitudQuery: createQuery(Solicitud),
 };
