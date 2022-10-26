@@ -1,8 +1,8 @@
 /**
  * @description Export all features and business rules from the package
  */
+const useCases = require('./use-cases');
 
-// Services
-const userQueries = require('./useCases');
-
-module.exports = { ...userQueries };
+module.exports = {
+  ...useCases,
+};
