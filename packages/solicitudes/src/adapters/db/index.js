@@ -1,7 +1,7 @@
 // External dependencies
-const { drivers, queries } = require('@siiges-services/core');
+const { models, queries } = require('@siiges-services/core');
 
-const { Solicitud } = drivers.sequelize.models;
+const { Solicitud } = models;
 
 const {
   createQuery,
