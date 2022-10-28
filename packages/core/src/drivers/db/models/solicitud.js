@@ -81,8 +81,8 @@ class Solicitud extends Model {
     this.belongsTo(models.TipoSolicitud, { as: 'tipoSolicitud' });
     this.belongsTo(models.Usuario, { as: 'usuario' });
     this.belongsTo(models.EstatusSolicitud, { as: 'estatusSolicitud' });
-    this.hasOne(models.Programa, { as: 'programa', foreignKey: 'solicitud_id' });
-    this.hasMany(models.Diligencia, { as: 'diligencias', foreignKey: 'solicitud_id' });
+    this.hasOne(models.Programa, { as: 'programa', foreignKey: 'solicitudId' });
+    this.hasMany(models.Diligencia, { as: 'diligencias', foreignKey: 'solicitudId' });
   }
 
   static config(sequelize) {
