@@ -17,6 +17,22 @@ async function findAllUsuarios(req, reply) {
   }
 }
 
+async function findAllUsuarioUsuarios(req, reply) {
+  try {
+    const { usuarioId } = req.params;
+
+    Logger.info('[usuarios]: Getting usuarios list realted to a usuario');
+    const usuarioUsuarios = await this.usuarioServices.findAllUserUsers(usuarioId);
+
+    return reply
+      .code(200)
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ data: usuarioUsuarios });
+  } catch (error) {
+    return errorHandler(error, reply);
+  }
+}
+
 async function findOneUsuario(req, reply) {
   try {
     const { usuarioId } = req.params;
@@ -137,6 +153,7 @@ async function deleteUsuario(req, reply) {
 
 module.exports = {
   findAllUsuarios,
+  findAllUsuarioUsuarios,
   findOneUsuario,
   findOneDetailedUsuario,
   createUsuario,

@@ -14,6 +14,7 @@ const {
 module.exports = {
   findOneQuery: findOneQuery(Usuario),
   findAllQuery: findAllQuery(Usuario),
+  findAllUserUsersQuery: findAllQuery(UsuarioUsuario),
   createQuery: createQuery(Usuario),
   deleteQuery: deleteQuery(Usuario),
   updateQuery: updateQuery(Usuario),

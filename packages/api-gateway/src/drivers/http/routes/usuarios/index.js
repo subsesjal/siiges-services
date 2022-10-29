@@ -8,6 +8,7 @@ const {
   createUsuarioUsuarioSchema,
   updateUsuarioSchema,
   deleteUsuarioSchema,
+  getAllUsuarioUsuariosSchema,
 } = require('./schema');
 
 async function usuarioRouter(fastify, opts, next) {
@@ -31,6 +32,14 @@ async function usuarioRouter(fastify, opts, next) {
       schema: getUsuarioDetalleSchema,
     },
     usuariosAdapter.findOneDetailedUsuario,
+  );
+
+  await fastify.get(
+    '/:usuarioId/usuarios',
+    {
+      schema: getAllUsuarioUsuariosSchema,
+    },
+    usuariosAdapter.findAllUsuarioUsuarios,
   );
 
   await fastify.post(

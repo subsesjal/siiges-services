@@ -1,4 +1,5 @@
 const getAllUsuariosSchema = require('./getAllUsuariosSchema');
+const getAllUsuarioUsuariosSchema = require('./getAllUsuarioUsuariosSchema');
 const getUsuarioSchema = require('./getUsuarioSchema');
 const getUsuarioDetalleSchema = require('./getUsuarioDetalleSchema');
 const createUsuarioSchema = require('./createUsuarioSchema');
@@ -8,6 +9,7 @@ const deleteUsuarioSchema = require('./deleteUsuarioSchema');
 
 module.exports = {
   getAllUsuariosSchema,
+  getAllUsuarioUsuariosSchema,
   getUsuarioSchema,
   getUsuarioDetalleSchema,
   createUsuarioSchema,
