@@ -18,7 +18,8 @@ const { ROL_TABLE, RolSchema } = require('../models/rol');
 const { SOLICITUD_TABLE, SolicitudSchema } = require('../models/solicitud');
 const { TIPO_INMUEBLE_TABLE, TipoInmuebleSchema } = require('../models/tipoInmueble');
 const { TIPO_SOLICITUD_TABLE, TipoSolicitudSchema } = require('../models/tipoSolicitud');
-const { UsuarioSchema, USUARIO_TABLE } = require('../models/usuario');
+const { USUARIO_TABLE, UsuarioSchema } = require('../models/usuario');
+const { USUARIO_USUARIO_TABLE, UsuarioUsuarioSchema } = require('../models/usuarioUsuario');
 
 module.exports = {
   async up(queryInterface) {
@@ -43,6 +44,7 @@ module.exports = {
     await queryInterface.createTable(MODALIDAD_TABLE, ModalidadSchema);
     await queryInterface.createTable(NIVEL_TABLE, NivelSchema);
     await queryInterface.createTable(PROGRAMA_TABLE, ProgramaSchema);
+    await queryInterface.createTable(USUARIO_USUARIO_TABLE, UsuarioUsuarioSchema);
   },
 
   async down(queryInterface) {
@@ -53,7 +55,7 @@ module.exports = {
     await queryInterface.dropTable(DOMICILIO_TABLE);
     await queryInterface.dropTable(PERSONA_TABLE);
     await queryInterface.dropTable(USUARIO_TABLE);
-    await queryInterface.drop(REPRESENTANTE_TABLE);
+    await queryInterface.dropTable(REPRESENTANTE_TABLE);
     await queryInterface.dropTable(FILE_TABLE);
     await queryInterface.dropTable(INSTITUCION_TABLE);
     await queryInterface.dropTable(TIPO_INMUEBLE_TABLE);
@@ -67,5 +69,6 @@ module.exports = {
     await queryInterface.dropTable(MODALIDAD_TABLE);
     await queryInterface.dropTable(NIVEL_TABLE);
     await queryInterface.dropTable(PROGRAMA_TABLE);
+    await queryInterface.dropTable(USUARIO_USUARIO_TABLE);
   },
 };

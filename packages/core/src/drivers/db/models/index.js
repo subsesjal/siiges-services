@@ -19,6 +19,7 @@ const { Solicitud, SolicitudSchema } = require('./solicitud');
 const { TipoInmueble, TipoInmuebleSchema } = require('./tipoInmueble');
 const { TipoSolicitud, TipoSolicitudSchema } = require('./tipoSolicitud');
 const { Usuario, UsuarioSchema } = require('./usuario');
+const { UsuarioUsuario, UsuarioUsuarioSchema } = require('./usuarioUsuario');
 
 function setupModels(sequelize) {
   Ciclo.init(CicloSchema, Ciclo.config(sequelize));
@@ -42,6 +43,7 @@ function setupModels(sequelize) {
   TipoInmueble.init(TipoInmuebleSchema, TipoInmueble.config(sequelize));
   TipoSolicitud.init(TipoSolicitudSchema, TipoSolicitud.config(sequelize));
   Usuario.init(UsuarioSchema, Usuario.config(sequelize));
+  UsuarioUsuario.init(UsuarioUsuarioSchema, UsuarioUsuario.config(sequelize));
 
   Ciclo.associate(sequelize.models);
   Domicilio.associate(sequelize.models);
@@ -64,6 +66,7 @@ function setupModels(sequelize) {
   TipoSolicitud.associate(sequelize.models);
   Solicitud.associate(sequelize.models);
   Usuario.associate(sequelize.models);
+  UsuarioUsuario.associate(sequelize.models);
 }
 
 module.exports = setupModels;

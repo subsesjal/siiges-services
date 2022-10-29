@@ -1,4 +1,5 @@
 const { Logger } = require('@siiges-services/shared');
+const boom = require('@hapi/boom');
 const errorHandler = require('../../utils/errorHandler');
 
 // usuario services
@@ -73,6 +74,30 @@ async function createUsuario(req, reply) {
   }
 }
 
+async function createUsuarioUsuario(req, reply) {
+  try {
+    const { usuarioId } = req.params;
+    const { ...data } = req.body;
+
+    if (!usuarioId) {
+      throw boom.badRequest(
+        '[usuarioUsuario:create]: the request needs these query parameters: usuarioId',
+      );
+    }
+
+    Logger.info('[usuarios]: Creating usuario of usuario');
+
+    const newUsuario = await this.usuarioServices.createUserUser(usuarioId, data);
+
+    return reply
+      .code(201)
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ data: newUsuario });
+  } catch (error) {
+    return errorHandler(error, reply);
+  }
+}
+
 async function updateUsuario(req, reply) {
   try {
     Logger.info('[usuarios]: Updating usuario');
@@ -115,6 +140,7 @@ module.exports = {
   findOneUsuario,
   findOneDetailedUsuario,
   createUsuario,
+  createUsuarioUsuario,
   updateUsuario,
   deleteUsuario,
 };

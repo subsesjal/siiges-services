@@ -1,21 +1,23 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const MODALIDAD_TABLE = 'modalidades';
+const USUARIO_USUARIO_TABLE = 'usuario_usuarios';
 
-const ModalidadSchema = {
+const UsuarioUsuarioSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  nombre: {
-    type: DataTypes.STRING,
+  principalId: {
     allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'principal_id',
   },
-  descripcion: {
-    type: DataTypes.STRING,
+  secundarioId: {
     allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'secundario_id',
   },
   createdAt: {
     allowNull: false,
@@ -37,18 +39,18 @@ const ModalidadSchema = {
   },
 };
 
-class Modalidad extends Model {
+class UsuarioUsuario extends Model {
   static associate() {
-
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: MODALIDAD_TABLE,
-      modelName: 'Modalidad',
+      tableName: USUARIO_USUARIO_TABLE,
+      modelName: 'UsuarioUsuario',
       timestamps: false,
     };
   }
 }
-module.exports = { MODALIDAD_TABLE, ModalidadSchema, Modalidad };
+
+module.exports = { USUARIO_USUARIO_TABLE, UsuarioUsuarioSchema, UsuarioUsuario };
