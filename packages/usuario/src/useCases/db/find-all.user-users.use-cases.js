@@ -5,7 +5,7 @@ const findAllUserUsers = (findAllUserUsersQuery, findOneUserQuery) => async (pri
 
   const usersDetail = await Promise.all(userUsers.map(async (userUser) => {
     const include = [{ association: 'persona' }, { association: 'rol' }];
-    const user = await findOneUserQuery({ id: userUser.principalId }, { include });
+    const user = await findOneUserQuery({ id: userUser.secundarioId }, { include });
     return user;
   }));
 
