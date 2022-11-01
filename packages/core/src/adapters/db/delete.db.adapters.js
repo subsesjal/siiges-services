@@ -4,12 +4,9 @@ const findOneQuery = require('./find-one.db.adapter');
 
 function createDeleteEntry(deletedEntry, deletedAt, updatedAt) {
   return {
-    ...deletedEntry,
-    dataValues: {
-      ...deletedEntry.dataValues,
-      deletedAt,
-      updatedAt,
-    },
+    ...deletedEntry.dataValues,
+    deletedAt,
+    updatedAt,
   };
 }
 
