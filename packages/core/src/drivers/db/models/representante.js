@@ -1,5 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { USUARIO_TABLE } = require('./usuario');
+const { SOLICITUD_TABLE } = require('./solicitud');
 
 const REPRESENTANTE_TABLE = 'Representante';
 
@@ -9,6 +10,16 @@ const RepresentanteSchema = {
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
+  },
+
+  solicitudId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'solicitud_id',
+    references: {
+      model: SOLICITUD_TABLE,
+      key: 'id',
+    },
   },
 
   usuarioId: {
@@ -43,6 +54,7 @@ const RepresentanteSchema = {
 class Representante extends Model {
   static associate(models) {
     this.belongsTo(models.Usuario, { as: 'usuario' });
+    this.belongsTo(models.Solicitud, { as: 'solicitud' });
   }
 
   static config(sequelize) {
