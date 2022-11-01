@@ -4,7 +4,8 @@ const {
   createQuery,
   deleteAndFindQuery,
   findOneQuery,
-  updateAndFindQuery,
+  findAllQuery,
+  updateQuery,
 } = queries;
 
 const { Diligencia } = models;
@@ -13,5 +14,6 @@ module.exports = {
   create: createQuery(Diligencia),
   delete: deleteAndFindQuery(Diligencia),
   findOne: findOneQuery(Diligencia),
-  update: updateAndFindQuery(Diligencia),
+  findAll: findAllQuery(Diligencia),
+  update: updateQuery(Diligencia),
 };
