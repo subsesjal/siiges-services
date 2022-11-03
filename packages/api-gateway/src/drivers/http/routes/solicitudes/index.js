@@ -1,5 +1,5 @@
-const { solicitudesAdapter } = require('../../adapters');
-
+const { solicitudesAdapter, diligenceAdapter } = require('../../adapters');
+const { findGroupSchema } = require('./diligencias/schema');
 const {
   createSolicitudProgramaSchema,
 } = require('./schema');
@@ -11,6 +11,12 @@ async function solicitudRouter(fastify, opts, next) {
       schema: createSolicitudProgramaSchema,
     },
     solicitudesAdapter.createSolicitudPrograma,
+  );
+
+  await fastify.get(
+    '/:solicitudId/diligencia/',
+    { schema: findGroupSchema },
+    diligenceAdapter.findGroup,
   );
 
   next();
