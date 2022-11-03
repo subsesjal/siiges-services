@@ -61,6 +61,10 @@ const PersonaSchema = {
   ine: {
     type: DataTypes.STRING,
   },
+  tituloCargo: {
+    type: DataTypes.STRING,
+    field: 'titulo_cargo',
+  },
   fotografia: {
     allowNull: false,
     type: DataTypes.STRING,
