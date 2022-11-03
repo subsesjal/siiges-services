@@ -12,6 +12,7 @@ const persona = {
   curp: { type: 'string', minLength: 18, maxLength: 18 },
   rfc: { type: 'string', minLength: 13, maxLength: 13 },
   ine: { type: 'string' },
+  tituloCargo: { type: 'string' },
   fotografia: { type: 'string' },
 };
 
