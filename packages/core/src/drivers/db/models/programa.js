@@ -92,7 +92,6 @@ const ProgramaSchema = {
     field: 'acuerdo_rvoe',
   },
   nombre: {
-    allowNull: false,
     type: DataTypes.STRING,
   },
   tipo: {
@@ -104,10 +103,6 @@ const ProgramaSchema = {
   seguimientoEgresados: {
     type: DataTypes.STRING,
     field: 'seguimiento_egresados',
-  },
-  totalAlumnosOtrosRvoes: {
-    type: DataTypes.INTEGER,
-    field: 'total_alumnos_otros_rvoes',
   },
   conveniosVinculacion: {
     type: DataTypes.STRING,
@@ -189,13 +184,9 @@ const ProgramaSchema = {
     type: DataTypes.STRING,
     field: 'objetivo_general',
   },
-  ovjetivosParticulares: {
+  objetivosParticulares: {
     type: DataTypes.STRING,
     field: 'objetivos_particulares',
-  },
-  otrosRvoes: {
-    type: DataTypes.STRING,
-    field: 'otros_rvoes',
   },
   calificacionMinima: {
     type: DataTypes.INTEGER,
@@ -240,7 +231,6 @@ class Programa extends Model {
     this.belongsTo(models.Solicitud, { as: 'solicitud' });
     this.belongsTo(models.Modalidad, { as: 'modalidad' });
     this.belongsTo(models.Plantel, { as: 'plantel' });
-    this.belongsTo(models.Persona, { as: 'persona' });
   }
 
   static config(sequelize) {
