@@ -73,7 +73,7 @@ class Diligencia extends Model {
     return {
       sequelize,
       tableName: DILIGENCIA_TABLE,
-      modelName: 'diligencia',
+      modelName: 'Diligencia',
       timestamps: false,
     };
   }

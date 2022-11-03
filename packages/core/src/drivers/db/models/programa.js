@@ -116,9 +116,9 @@ const ProgramaSchema = {
     type: DataTypes.STRING,
     field: 'estudio_oferta_demanda',
   },
-  lgac: {
+  lineasGeneracionAplicacionConocimiento: {
     type: DataTypes.STRING,
-    field: 'lgac',
+    field: 'lineas_generacion_aplicacion_conocimiento',
   },
   necesidadProfesional: {
     type: DataTypes.STRING,
@@ -231,7 +231,6 @@ class Programa extends Model {
     this.belongsTo(models.Solicitud, { as: 'solicitud' });
     this.belongsTo(models.Modalidad, { as: 'modalidad' });
     this.belongsTo(models.Plantel, { as: 'plantel' });
-    this.belongsTo(models.Persona, { as: 'persona' });
   }
 
   static config(sequelize) {

@@ -21,7 +21,7 @@ const programa = {
   conveniosVinculacion: { type: 'string' },
   fuentesInformacion: { type: 'string' },
   estudioOfertaDemanda: { type: 'string' },
-  lgac: { type: 'string' },
+  lineasGeneracionAplicacionConocimiento: { type: 'string' },
   necesidadProfesional: { type: 'string' },
   necesidadInstitucional: { type: 'string' },
   necesidadSocial: { type: 'string' },
