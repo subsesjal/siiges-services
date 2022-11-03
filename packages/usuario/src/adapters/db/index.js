@@ -1,7 +1,7 @@
 // External dependencies
 const { drivers, queries } = require('@siiges-services/core');
 
-const { Usuario } = drivers.sequelize.models;
+const { Usuario, UsuarioUsuario } = drivers.sequelize.models;
 
 const {
   findOneQuery,
@@ -14,7 +14,9 @@ const {
 module.exports = {
   findOneQuery: findOneQuery(Usuario),
   findAllQuery: findAllQuery(Usuario),
+  findAllUserUsersQuery: findAllQuery(UsuarioUsuario),
   createQuery: createQuery(Usuario),
   deleteQuery: deleteQuery(Usuario),
   updateQuery: updateQuery(Usuario),
+  createUserUsersQuery: createQuery(UsuarioUsuario),
 };
