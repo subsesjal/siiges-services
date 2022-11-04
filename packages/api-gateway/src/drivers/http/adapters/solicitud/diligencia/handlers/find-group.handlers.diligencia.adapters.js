@@ -6,7 +6,7 @@ const errorHandler = require('../../../../utils/errorHandler');
 async function findDiligencesRelatedToSolicitud(fastify, data) {
   Logger.info(`[api/diligencia/findOne]: finding diligences related to solicitud with id ${data.solicitudId}`);
   const diligencesList = await fastify.solicitudServices.diligence.findGroup(
-    { solicitudId: data.solicitudId },
+    { query: { solicitudId: data.solicitudId } },
   );
   checkers.throwErrorIfDataIsFalsy(diligencesList, 'finding diligences', { id: data.solicitudId });
   Logger.info('[api/diligencia/findOne]: the diligence was found');
