@@ -1,21 +1,8 @@
-const { badRequest } = require('@hapi/boom');
 const { Logger, checkers } = require('@siiges-services/shared');
 const errorHandler = require('../../../../utils/errorHandler');
 
 async function createDiligence(fastify, request) {
   const { ...data } = request.body;
-
-  if (checkers.isFalsy(data?.solicitudId)
-  || checkers.isFalsy(data?.personaId)
-  || checkers.isFalsy(data?.horaInicio)
-  || checkers.isFalsy(data?.horaFin)
-  ) {
-    throw badRequest(`[diligencia/create]: to create a diligencia we need these propeties:
-  solicitudId
-  personaId
-  horaInicio
-  horaFin`);
-  }
 
   Logger.info('[api/diligencia/create]: finding the diligence');
   const diligence = await fastify.solicitudServices.diligence.create(data);

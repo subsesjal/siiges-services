@@ -1,14 +1,9 @@
 // External dependencies
-const { badRequest } = require('@hapi/boom');
 const { Logger, checkers } = require('@siiges-services/shared');
 // Internal dependencies
 const errorHandler = require('../../../../utils/errorHandler');
 
 async function deleteDiligence(fastify, identifier) {
-  if (checkers.isFalsy(identifier)) {
-    throw badRequest('[api/diligencia/delete]: to delete a diligencia we need its id');
-  }
-
   Logger.info('[api/diligencia/delete]: deleiting the diligence');
   const diligence = await fastify.solicitudServices.diligence.deleteOne(
     { id: identifier },

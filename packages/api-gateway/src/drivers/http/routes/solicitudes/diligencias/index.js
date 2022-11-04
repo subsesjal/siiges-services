@@ -1,5 +1,10 @@
 const { diligenceAdapter } = require('../../../adapters');
-const { findOneSchema, createSchema } = require('./schema');
+const {
+  createSchema,
+  deleteSchema,
+  findOneSchema,
+  updateSchema,
+} = require('./schema');
 
 async function diligenceRouter(fastify, _, next) {
   await fastify.post(
@@ -16,11 +21,13 @@ async function diligenceRouter(fastify, _, next) {
 
   await fastify.patch(
     '/:diligenceId',
+    { schema: updateSchema },
     diligenceAdapter.update,
   );
 
   await fastify.delete(
     '/:diligenceId',
+    { schema: deleteSchema },
     diligenceAdapter.deleteOne,
   );
 
