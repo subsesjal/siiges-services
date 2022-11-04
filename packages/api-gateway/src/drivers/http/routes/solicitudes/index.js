@@ -14,7 +14,7 @@ async function solicitudRouter(fastify, opts, next) {
   );
 
   await fastify.get(
-    '/:solicitudId/diligencia/',
+    '/:solicitudId/diligencias/',
     { schema: findGroupSchema },
     diligenceAdapter.findGroup,
   );
