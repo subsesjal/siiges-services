@@ -1,5 +1,8 @@
 // External dependencies
 const { drivers, queries } = require('@siiges-services/core');
+// Internal dependencies
+const persona = require('./persona.db.adapters');
+const rol = require('./rol.db.adapters');
 
 const { Usuario, UsuarioUsuario } = drivers.sequelize.models;
 
@@ -8,7 +11,7 @@ const {
   findAllQuery,
   createQuery,
   deleteQuery,
-  updateQuery,
+  updateAndFindQuery,
 } = queries;
 
 module.exports = {
@@ -17,6 +20,8 @@ module.exports = {
   findAllUserUsersQuery: findAllQuery(UsuarioUsuario),
   createQuery: createQuery(Usuario),
   deleteQuery: deleteQuery(Usuario),
-  updateQuery: updateQuery(Usuario),
+  updateQuery: updateAndFindQuery(Usuario),
   createUserUsersQuery: createQuery(UsuarioUsuario),
+  persona,
+  rol,
 };
