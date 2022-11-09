@@ -1,4 +1,4 @@
-const { diligenceResponse } = require('./properties');
+const { diligenceResponse, personaResponse } = require('./properties');
 
 const findOneDiligence = {
   tags: ['Diligence'],
@@ -20,6 +20,7 @@ const findOneDiligence = {
           properties: {
             id: { type: 'integer' },
             ...diligenceResponse,
+            persona: { ...personaResponse },
           },
         },
       },
