@@ -10,12 +10,12 @@ function createDeleteEntry(deletedEntry, deletedAt, updatedAt) {
   };
 }
 
-const deleteAndFindQuery = (model) => async (identifierObj) => {
+const deleteAndFindQuery = (model) => async (identifierObj, dbParams) => {
   const findOne = findOneQuery(model);
   const update = updateQuery(model);
 
   const deletedAt = new Date().toISOString();
-  const deleteEntry = await findOne(identifierObj);
+  const deleteEntry = await findOne(identifierObj, dbParams);
   const updatedAt = await update(identifierObj, { deletedAt }, { isDeleting: true });
 
   return createDeleteEntry(deleteEntry, deletedAt, updatedAt);
