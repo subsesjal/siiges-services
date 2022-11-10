@@ -121,13 +121,13 @@ async function updateUsuario(req, reply) {
     const { usuarioId } = req.params;
     const { ...data } = req.body;
 
-    const usuarioUpdated = await this.usuarioServices.updateUser(
-      usuarioId,
+    const usuarioUpdated = await this.usuarioServices.updateUserDetail(
       data,
+      usuarioId,
     );
 
     return reply
-      .code(204)
+      .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: usuarioUpdated });
   } catch (error) {
