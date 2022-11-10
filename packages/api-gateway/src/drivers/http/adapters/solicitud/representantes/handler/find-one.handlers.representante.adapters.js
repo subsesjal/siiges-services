@@ -16,7 +16,7 @@ async function findRepresentative(fastify, { usuarioId, solicitudId }) {
   checkers.throwErrorIfDataIsFalsy(representative, 'finding representante', 'usuarioId');
   Logger.info('[api/representative/findOne]: the representative was found');
 
-  return representative.dataValues;
+  return representative;
 }
 
 async function findOne(request, reply) {

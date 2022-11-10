@@ -1,9 +1,11 @@
 const { Logger, checkers } = require('@siiges-services/shared');
 const errorHandler = require('../../../../utils/errorHandler');
 
-async function deleteRepresentative(fastify, usuarioId) {
+async function deleteRepresentative(fastify, { usuarioId, solicitudId }) {
   Logger.info('[api/representative/delete]: Deleting representative');
-  const representative = await fastify.solicitudServices.representative.deleteOne({ usuarioId });
+  const representative = await fastify.solicitudServices.representative.deleteOne(
+    { usuarioId, solicitudId },
+  );
   checkers.throwErrorIfDataIsFalsy(representative, 'deleting representative', { usuarioId });
   Logger.info('[api/representative/delete]: Representative deleted');
 
@@ -11,10 +13,8 @@ async function deleteRepresentative(fastify, usuarioId) {
 }
 
 async function deleteOne(request, reply) {
-  const { usuarioId = undefined } = request.params;
-  const changes = { ...request.body };
   try {
-    const representative = await deleteRepresentative(this, usuarioId, changes);
+    const representative = await deleteRepresentative(this, request.params);
 
     return reply
       .code(200)
