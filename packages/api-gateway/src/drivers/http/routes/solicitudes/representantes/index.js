@@ -1,13 +1,10 @@
 const { representativeAdapter } = require('../../../adapters');
-
-// const {
-//   updateUsuarioSchema,
-//   deleteUsuarioSchema,
-// } = require('./schema');
+const { createSchema } = require('./schemas');
 
 async function usuarioRouter(fastify, _, next) {
   await fastify.post(
     '/',
+    { schema: createSchema },
     representativeAdapter.create,
   );
 
