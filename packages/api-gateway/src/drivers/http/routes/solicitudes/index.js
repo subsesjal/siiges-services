@@ -28,9 +28,10 @@ async function solicitudRouter(fastify, opts, next) {
     '/:solicitudId/representantes/:usuarioId',
     { schema: deleteSchema },
     representativeAdapter.deleteOne,
+  );
 
   await fastify.get(
-  '/:solicitudId/diligencias/',
+    '/:solicitudId/diligencias/',
     { schema: findGroupSchema },
     diligenceAdapter.findGroup,
   );
