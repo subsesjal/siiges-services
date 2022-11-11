@@ -4,7 +4,7 @@ const {
   createQuery,
   deleteAndFindQuery,
   findOneQuery,
-  updateAndFindQuery,
+  updateQuery,
 } = queries;
 
 const { Representante } = models;
@@ -13,5 +13,5 @@ module.exports = {
   create: createQuery(Representante),
   delete: deleteAndFindQuery(Representante),
   findOne: findOneQuery(Representante),
-  update: updateAndFindQuery(Representante),
+  update: updateQuery(Representante),
 };

@@ -1,3 +1,7 @@
-const diligence = require('./diligencia/handlers');
+const representativeAdapter = require('./representantes/handler');
+const diligenceAdapter = require('./diligencia/handlers');
 
-module.exports = diligence;
+module.exports = {
+  representativeAdapter,
+  diligenceAdapter
+};
