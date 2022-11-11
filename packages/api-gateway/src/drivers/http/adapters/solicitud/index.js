@@ -3,5 +3,5 @@ const diligenceAdapter = require('./diligencia/handlers');
 
 module.exports = {
   representativeAdapter,
-  diligenceAdapter
+  diligenceAdapter,
 };
