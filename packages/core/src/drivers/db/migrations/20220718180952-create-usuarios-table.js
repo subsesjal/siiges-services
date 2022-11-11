@@ -30,7 +30,6 @@ module.exports = {
     await queryInterface.createTable(DOMICILIO_TABLE, DomicilioSchema);
     await queryInterface.createTable(PERSONA_TABLE, PersonaSchema);
     await queryInterface.createTable(USUARIO_TABLE, UsuarioSchema);
-    await queryInterface.createTable(REPRESENTANTE_TABLE, RepresentanteSchema);
     await queryInterface.createTable(FILE_TABLE, FileSchema);
     await queryInterface.createTable(INSTITUCION_TABLE, InstitucionSchema);
     await queryInterface.createTable(TIPO_INMUEBLE_TABLE, TipoInmuebleSchema);
@@ -39,6 +38,7 @@ module.exports = {
     await queryInterface.createTable(ESTATUS_SOLICITUD_TABLE, EstatusSolicitudSchema);
     await queryInterface.createTable(TIPO_SOLICITUD_TABLE, TipoSolicitudSchema);
     await queryInterface.createTable(SOLICITUD_TABLE, SolicitudSchema);
+    await queryInterface.createTable(REPRESENTANTE_TABLE, RepresentanteSchema);
     await queryInterface.createTable(DILIGENCIA_TABLE, DiligenciaSchema);
     await queryInterface.createTable(CICLO_TABLE, CicloSchema);
     await queryInterface.createTable(MODALIDAD_TABLE, ModalidadSchema);
@@ -64,6 +64,7 @@ module.exports = {
     await queryInterface.dropTable(ESTATUS_SOLICITUD_TABLE);
     await queryInterface.dropTable(TIPO_SOLICITUD_TABLE);
     await queryInterface.dropTable(SOLICITUD_TABLE);
+    await queryInterface.drop(REPRESENTANTE_TABLE);
     await queryInterface.dropTable(DILIGENCIA_TABLE);
     await queryInterface.dropTable(CICLO_TABLE);
     await queryInterface.dropTable(MODALIDAD_TABLE);
