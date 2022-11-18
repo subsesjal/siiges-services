@@ -1,6 +1,7 @@
 // Persona
 const persona = {
   id: { type: 'integer' },
+  domicilioId: { type: 'integer' },
   nombre: { type: 'string' },
   apellidoPaterno: { type: 'string' },
   apellidoMaterno: { type: 'string' },

@@ -1,6 +1,7 @@
 const { persona } = require('./properties/persona');
 const { responseProperties } = require('./properties/responseProperties');
 const { usuario } = require('./properties/usuario');
+const { domicilio } = require('./properties/domicilio');
 
 const updateUsuarioSchema = {
   tags: ['Usuario'],
@@ -17,13 +18,17 @@ const updateUsuarioSchema = {
     type: 'object',
     properties: {
       ...usuario,
-      fotoPerfil: {
-        type: 'object',
-      },
+      contrasena: { type: 'string', minLength: 3, maxLength: 25 },
       persona: {
         type: 'object',
         properties: {
           ...persona,
+          domicilio: {
+            type: 'object',
+            properties: {
+              ...domicilio,
+            },
+          },
         },
       },
     },
@@ -44,6 +49,14 @@ const updateUsuarioSchema = {
                 id: { type: 'integer' },
                 ...persona,
                 ...responseProperties,
+                domicilio: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'integer' },
+                    ...domicilio,
+                    ...responseProperties,
+                  },
+                },
               },
             },
           },

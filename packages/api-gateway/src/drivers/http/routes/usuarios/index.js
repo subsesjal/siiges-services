@@ -1,4 +1,4 @@
-const { usuariosAdapter } = require('../../adapters');
+const { usuariosAdapter, usuariosUsuariosAdapter } = require('../../adapters');
 
 const {
   getAllUsuariosSchema,
@@ -15,7 +15,7 @@ async function usuarioRouter(fastify, opts, next) {
   await fastify.get(
     '/',
     { schema: getAllUsuariosSchema },
-    usuariosAdapter.findAllUsuarios,
+    usuariosAdapter.findAll,
   );
 
   await fastify.get(
@@ -23,7 +23,7 @@ async function usuarioRouter(fastify, opts, next) {
     {
       schema: getUsuarioSchema,
     },
-    usuariosAdapter.findOneUsuario,
+    usuariosAdapter.findOne,
   );
 
   await fastify.get(
@@ -31,7 +31,7 @@ async function usuarioRouter(fastify, opts, next) {
     {
       schema: getUsuarioDetalleSchema,
     },
-    usuariosAdapter.findOneDetailedUsuario,
+    usuariosAdapter.findOneDetail,
   );
 
   await fastify.get(
@@ -39,7 +39,7 @@ async function usuarioRouter(fastify, opts, next) {
     {
       schema: getAllUsuarioUsuariosSchema,
     },
-    usuariosAdapter.findAllUsuarioUsuarios,
+    usuariosUsuariosAdapter.findGroup,
   );
 
   await fastify.post(
@@ -47,7 +47,7 @@ async function usuarioRouter(fastify, opts, next) {
     {
       schema: createUsuarioSchema,
     },
-    usuariosAdapter.createUsuario,
+    usuariosAdapter.create,
   );
 
   await fastify.post(
@@ -55,7 +55,7 @@ async function usuarioRouter(fastify, opts, next) {
     {
       schema: createUsuarioUsuarioSchema,
     },
-    usuariosAdapter.createUsuarioUsuario,
+    usuariosUsuariosAdapter.create,
   );
 
   await fastify.patch(
@@ -63,7 +63,7 @@ async function usuarioRouter(fastify, opts, next) {
     {
       schema: updateUsuarioSchema,
     },
-    usuariosAdapter.updateUsuario,
+    usuariosAdapter.update,
   );
 
   await fastify.delete(
@@ -71,7 +71,7 @@ async function usuarioRouter(fastify, opts, next) {
     {
       schema: deleteUsuarioSchema,
     },
-    usuariosAdapter.deleteUsuario,
+    usuariosAdapter.deleteOne,
   );
 
   next();

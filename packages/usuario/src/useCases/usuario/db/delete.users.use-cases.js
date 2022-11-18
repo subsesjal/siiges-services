@@ -1,5 +1,5 @@
 const deleteUser = (deleteQuery) => async (identifierObject) => {
-  const userDeleted = await deleteQuery({ id: identifierObject });
+  const userDeleted = await deleteQuery(identifierObject);
   return userDeleted;
 };
 
