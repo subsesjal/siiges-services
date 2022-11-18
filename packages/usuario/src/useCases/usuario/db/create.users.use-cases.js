@@ -2,8 +2,7 @@ const createUser = (createQuery) => async (data) => {
   const include = [{
     association: 'persona',
     include: [{ association: 'domicilio' }],
-  },
-  ];
+  }];
 
   let newUser;
 

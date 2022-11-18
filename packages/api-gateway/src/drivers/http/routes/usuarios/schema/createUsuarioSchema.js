@@ -18,7 +18,7 @@ const createUsuarioSchema = {
         required: ['nombre', 'apellidoPaterno'],
       },
     },
-    required: ['rolId', 'usuario', 'correo', 'contrasena', 'actualizado'],
+    required: ['rolId', 'usuario', 'correo', 'contrasena'],
   },
   response: {
     201: {
