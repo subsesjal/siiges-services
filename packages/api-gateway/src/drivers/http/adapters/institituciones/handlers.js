@@ -62,7 +62,7 @@ async function updateInstitucion(req, reply) {
     );
 
     return reply
-      .code(204)
+      .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: institucionUpdated });
   } catch (error) {
@@ -80,7 +80,7 @@ async function deleteInstitucion(req, reply) {
     });
 
     return reply
-      .code(204)
+      .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: institucionDeleted });
   } catch (error) {
@@ -165,7 +165,7 @@ async function updatePlantel(req, reply) {
     );
 
     return reply
-      .code(204)
+      .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: newPlantel });
   } catch (error) {
@@ -185,7 +185,7 @@ async function deletePlantel(req, reply) {
     });
 
     return reply
-      .code(204)
+      .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: plantel });
   } catch (error) {
@@ -227,7 +227,7 @@ async function updateRatificacionNombre(req, reply) {
     );
 
     return reply
-      .code(204)
+      .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: ratificacionNombre });
   } catch (error) {
@@ -267,7 +267,7 @@ async function deleteRatificacionNombre(req, reply) {
     });
 
     return reply
-      .code(204)
+      .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: ratificacionNombre });
   } catch (error) {
