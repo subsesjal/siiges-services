@@ -12,7 +12,7 @@ const deleteInstitucionSchema = {
     required: ['institucionId'],
   },
   response: {
-    204: {
+    201: {
       type: 'object',
       properties: {
         data: {

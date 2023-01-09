@@ -13,7 +13,7 @@ const deleteInstitucionSchema = {
     required: ['institucionId', 'ratificacionId'],
   },
   response: {
-    204: {
+    201: {
       type: 'object',
       properties: {
         data: {

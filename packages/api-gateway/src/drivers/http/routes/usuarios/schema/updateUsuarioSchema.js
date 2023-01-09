@@ -34,7 +34,7 @@ const updateUsuarioSchema = {
     },
   },
   response: {
-    204: {
+    201: {
       type: 'object',
       properties: {
         data: {
