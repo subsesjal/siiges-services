@@ -11,10 +11,12 @@ const findAllUsers = require('./db/find-all.users.use-cases');
 const createUser = require('./db/create.users.use-cases');
 const deleteUser = require('./db/delete.users.use-cases');
 const updateUser = require('./db/update.users.use-cases');
+const findOneUserDetail = require('./db/find-one.users-detail.use-cases');
 
 module.exports = {
   findAllUsers: findAllUsers(findAllQuery),
   findOneUser: findOneUser(findOneQuery),
+  findOneUserDetail: findOneUserDetail(findOneQuery),
   createUser: createUser(createQuery),
   updateUser: updateUser(updateQuery),
   deleteUser: deleteUser(deleteQuery),

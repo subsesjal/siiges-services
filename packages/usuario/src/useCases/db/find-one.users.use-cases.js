@@ -1,8 +1,12 @@
 const { checkers } = require('@siiges-services/shared');
 
-const findOneUser = (findOneQuery) => async (identifierObj, attributes, include) => {
-  const user = await findOneQuery(identifierObj, { attributes, include });
-  checkers.throwErrorIfDataIsFalsy(user);
+const findOneUser = (findOneQuery) => async (
+  identifierObj,
+) => {
+  const include = [{ association: 'persona' }];
+
+  const user = await findOneQuery(identifierObj, { undefined, include });
+  checkers.throwErrorIfDataIsFalsy(user, 'usuario', identifierObj);
   return user;
 };
 

@@ -38,8 +38,8 @@ const TipoInmuebleSchema = {
 
 class TipoInmueble extends Model {
   static associate(models) {
-    this.hasOne(models.Institucion, {
-      as: 'institucion',
+    this.hasOne(models.Plantel, {
+      as: 'plantel',
       foreignKey: 'tipoInmuebleId',
     });
   }

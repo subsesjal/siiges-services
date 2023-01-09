@@ -1,18 +1,20 @@
+// External dependencies
 const { Op } = require('sequelize');
+// Internal dependencies
+const { createInclude } = require('../utils');
 
-const findOneQuery = (model) => async (identifierObj, { attributes, include }) => {
-  const resultQuery = await model.findOne({
+const findOneQuery = (model) => async (identifierObj, dbParams) => {
+  const { attributes = undefined, include = undefined, strict = true } = dbParams || {};
+
+  const result = model.findOne({
     attributes,
     where: {
       ...identifierObj,
-      deletedAt: {
-        [Op.is]: null,
-      },
+      deletedAt: { [Op.is]: null },
     },
-    include,
+    include: createInclude(include, strict),
   });
 
-  return resultQuery;
+  return result;
 };
-
 module.exports = findOneQuery;

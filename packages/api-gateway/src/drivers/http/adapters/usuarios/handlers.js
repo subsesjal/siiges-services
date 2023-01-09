@@ -5,7 +5,7 @@ const errorHandler = require('../../utils/errorHandler');
 async function findAllUsuarios(req, reply) {
   try {
     Logger.info('[usuarios]: Getting usuarios list');
-    const usuarios = await this.usuarioServices.findAllUsuarios();
+    const usuarios = await this.usuarioServices.findAllUsers();
 
     return reply
       .code(200)
@@ -21,7 +21,14 @@ async function findOneUsuario(req, reply) {
     const { usuarioId } = req.params;
 
     Logger.info(`[usuarios]: Getting usuario ${usuarioId}`);
-    const usuario = await this.usuarioServices.findOneUsuario(usuarioId);
+
+    const opts = [
+      {
+        association: 'persona',
+      },
+    ];
+
+    const usuario = await this.usuarioServices.findOneUser({ id: usuarioId }, '', opts);
 
     return reply
       .code(200)
@@ -37,9 +44,8 @@ async function findOneDetailedUsuario(req, reply) {
     const { usuarioId } = req.params;
 
     Logger.info(`[usuarios]: Getting usuario: ${usuarioId}`);
-    const usuario = await this.usuarioServices.findOneUsuarioDetailed(
-      usuarioId,
-    );
+
+    const usuario = await this.usuarioServices.findOneUserDetail({ id: usuarioId });
 
     return reply
       .code(200)
@@ -55,7 +61,8 @@ async function createUsuario(req, reply) {
     const { body } = req;
 
     Logger.info('[usuarios]: Creating usuario');
-    const newUsuario = await this.usuarioServices.createUsuario(body);
+
+    const newUsuario = await this.usuarioServices.createUser(body);
 
     return reply
       .code(201)
@@ -71,31 +78,11 @@ async function updateUsuario(req, reply) {
     Logger.info('[usuarios]: Updating usuario');
 
     const { usuarioId } = req.params;
-    const { fotoPerfil, ...data } = req.body;
+    const { ...data } = req.body;
 
-    let usuarioUpdated = await this.usuarioServices.updateUsuario(
+    const usuarioUpdated = await this.usuarioServices.updateUser(
       usuarioId,
       data,
-    );
-
-    const files = [];
-
-    if (fotoPerfil && usuarioUpdated.personaId) {
-      files.push({
-        file: fotoPerfil,
-        dataFile: {
-          tipoEntidad: 'PERSONA',
-          entidadId: usuarioUpdated.personaId,
-          tipoDocumento: 'FOTOGRAFIA_PERSONA',
-        },
-      });
-    }
-
-    const filesUploaded = await this.fileServices.upload(files);
-
-    usuarioUpdated = await this.usuarioServices.updateUsuario(
-      usuarioId,
-      { persona: { fotografia: filesUploaded.fotografia.path } },
     );
 
     return reply
@@ -112,7 +99,7 @@ async function deleteUsuario(req, reply) {
     const { usuarioId } = req.params;
 
     Logger.info(`[usuarios]: Deleting usuario: ${usuarioId}`);
-    const usuarioDeleted = await this.usuarioServices.deleteUsuario(usuarioId);
+    const usuarioDeleted = await this.usuarioServices.deleteUser(usuarioId);
 
     return reply
       .code(201)
