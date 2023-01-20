@@ -1,5 +1,7 @@
 const { institucion } = require('./properties/institucion');
 const { ratificacionNombre } = require('./properties/ratificacionNombre');
+const { rector } = require('./properties/rector');
+const { persona } = require('../../usuarios/schema/properties/persona');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findOneInstitucionUsuarioSchema = {
@@ -30,6 +32,22 @@ const findOneInstitucionUsuarioSchema = {
                 id: { type: 'integer' },
                 ...ratificacionNombre,
                 ...responseProperties,
+              },
+            },
+            rector: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...rector,
+                ...responseProperties,
+                persona: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'integer' },
+                    ...persona,
+                    ...responseProperties,
+                  },
+                },
               },
             },
           },
