@@ -17,6 +17,7 @@ const {
 
 const findAllInstituciones = require('./db/instituciones/find-all.instituciones.use-cases');
 const findOneInstitucion = require('./db/instituciones/find-one.instituciones.use-cases');
+const findOneInstitucionUsuario = require('./db/instituciones/find-one.institucion-usuario.use-cases');
 const findPlantelesInstitucion = require('./db/instituciones/find.planteles-institucion.use-cases');
 const createInstitucion = require('./db/instituciones/create.instituciones.use-cases');
 const updateInstitucion = require('./db/instituciones/update.instituciones.use-cases');
@@ -33,6 +34,7 @@ const deleteRatificacion = require('./db/ratificaciones/delete.ratificaciones.us
 module.exports = {
   findAllInstituciones: findAllInstituciones(findAllInstitucionesQuery),
   findOneInstitucion: findOneInstitucion(findOneInstitucionQuery),
+  findOneInstitucionUsuario: findOneInstitucionUsuario(findOneInstitucionQuery),
   findPlantelesInstitucion: findPlantelesInstitucion(findOneInstitucionQuery),
   createInstitucion: createInstitucion(createInstitucionQuery),
   updateInstitucion: updateInstitucion(updateInstitucionQuery),
