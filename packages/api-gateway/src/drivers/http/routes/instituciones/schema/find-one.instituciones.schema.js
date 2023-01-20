@@ -35,7 +35,7 @@ const findOneInstitucionSchema = {
               },
             },
             rector: {
-              type: 'object',
+              type: ['object', 'null'],
               properties: {
                 id: { type: 'integer' },
                 ...rector,
