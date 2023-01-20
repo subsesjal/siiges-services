@@ -5,7 +5,13 @@ const findOneInstitucionUsuario = (findOneInstitucionQuery) => async (
   attributes,
 ) => {
   const { usuarioId } = identifierObj;
-  const include = [{ association: 'ratificacionesNombre' }];
+  const include = [
+    { association: 'ratificacionesNombre' },
+    {
+      association: 'rector',
+      include: [{ association: 'persona' }],
+    },
+  ];
 
   const institucion = await findOneInstitucionQuery({ usuarioId }, {
     attributes,
