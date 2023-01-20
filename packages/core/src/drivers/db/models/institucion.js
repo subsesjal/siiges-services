@@ -68,6 +68,7 @@ class Institucion extends Model {
     this.belongsTo(models.Usuario, { as: 'usuario' });
     this.hasMany(models.Plantel, { as: 'planteles', foreignKey: 'institucionId' });
     this.hasMany(models.RatificacionNombre, { as: 'ratificacionesNombre', foreignKey: 'institucionId' });
+    this.hasOne(models.Rector, { as: 'rector', foreignKey: 'institucionId' });
   }
 
   static config(sequelize) {
