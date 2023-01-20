@@ -4,7 +4,13 @@ const findOneInstitucion = (findOneInstitucionQuery) => async (
   identifierObj,
   attributes,
 ) => {
-  const include = [{ association: 'ratificacionesNombre' }];
+  const include = [
+    { association: 'ratificacionesNombre' },
+    {
+      association: 'rector',
+      include: [{ association: 'persona' }],
+    },
+  ];
 
   const institucion = await findOneInstitucionQuery(identifierObj, {
     attributes,
