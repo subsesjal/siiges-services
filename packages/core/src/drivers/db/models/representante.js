@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { USUARIO_TABLE } = require('./usuario');
 const { SOLICITUD_TABLE } = require('./solicitud');
 
-const REPRESENTANTE_TABLE = 'Representante';
+const REPRESENTANTE_TABLE = 'representante';
 
 const RepresentanteSchema = {
   id: {
