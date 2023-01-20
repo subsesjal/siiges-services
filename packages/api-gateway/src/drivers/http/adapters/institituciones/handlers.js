@@ -32,6 +32,22 @@ async function findOneInstitucion(req, reply) {
   }
 }
 
+async function findOneInstitucionUsuario(req, reply) {
+  try {
+    const { usuarioId } = req.params;
+
+    Logger.info(`[instituciones]: Getting institución by usuario ${usuarioId}`);
+    const institucion = await this.institucionServices.findOneInstitucionUsuario({ usuarioId });
+
+    return reply
+      .code(200)
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ data: institucion });
+  } catch (error) {
+    return errorHandler(error, reply);
+  }
+}
+
 async function createInstitucion(req, reply) {
   try {
     const { ...data } = req.body;
@@ -278,6 +294,7 @@ async function deleteRatificacionNombre(req, reply) {
 module.exports = {
   findAllInstituciones,
   findOneInstitucion,
+  findOneInstitucionUsuario,
   findPlantelesInstitucion,
   createInstitucion,
   updateInstitucion,
