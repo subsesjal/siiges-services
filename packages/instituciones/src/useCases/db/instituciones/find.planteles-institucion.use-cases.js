@@ -1,20 +1,23 @@
 const { checkers } = require('@siiges-services/shared');
 
-const findPlantelesInstitucion = (findOneInstitucionQuery) => async (
-  identifierObj,
-) => {
-  const include = [{
-    association: 'planteles',
-    include: [{
-      association: 'domicilio',
+const findPlantelesInstitucion = (findOneInstitucionQuery) => async (identifierObj) => {
+  const include = [
+    { association: 'ratificacionesNombre' },
+    {
+      association: 'planteles',
       include: [
-        { association: 'estado' },
-        { association: 'municipio' },
+        {
+          association: 'domicilio',
+          include: [{ association: 'estado' }, { association: 'municipio' }],
+        },
       ],
-    }],
-  }];
+    },
+  ];
 
-  const plantelesInstitucion = await findOneInstitucionQuery(identifierObj, { undefined, include });
+  const plantelesInstitucion = await findOneInstitucionQuery(identifierObj, {
+    undefined,
+    include,
+  });
   checkers.throwErrorIfDataIsFalsy(plantelesInstitucion);
 
   return plantelesInstitucion;
