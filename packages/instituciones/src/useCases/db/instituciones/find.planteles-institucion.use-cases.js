@@ -2,6 +2,10 @@ const { checkers } = require('@siiges-services/shared');
 
 const findPlantelesInstitucion = (findOneInstitucionQuery) => async (identifierObj) => {
   const include = [
+    {
+      association: 'rector',
+      include: [{ association: 'persona' }],
+    },
     { association: 'ratificacionesNombre' },
     {
       association: 'planteles',
@@ -9,10 +13,8 @@ const findPlantelesInstitucion = (findOneInstitucionQuery) => async (identifierO
         {
           association: 'domicilio',
           include: [{ association: 'estado' }, { association: 'municipio' }],
-        },
-      ],
-    },
-  ];
+        }],
+    }];
 
   const plantelesInstitucion = await findOneInstitucionQuery(identifierObj, {
     undefined,
