@@ -1,5 +1,5 @@
 const { solicitud } = require('./properties/solicitud');
-const { programa } = require('./properties/programa');
+const { programa } = require('../programas/schema/properties/programa');
 const { responseProperties } = require('./properties/responseProperties');
 
 const createSolicitudProgramaSchema = {
