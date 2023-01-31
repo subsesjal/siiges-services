@@ -66,6 +66,10 @@ const PlantelSchema = {
   paginaWeb: {
     type: DataTypes.STRING,
   },
+  redesSociales: {
+    type: DataTypes.STRING,
+    field: 'redes_sociales',
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
@@ -91,6 +95,7 @@ class Plantel extends Model {
     this.belongsTo(models.Institucion, { as: 'institucion' });
     this.belongsTo(models.Domicilio, { as: 'domicilio' });
     this.belongsTo(models.TipoInmueble, { as: 'tipoInmueble' });
+    this.hasMany(models.Director, { as: 'directores', foreignKey: 'plantelId' });
   }
 
   static config(sequelize) {

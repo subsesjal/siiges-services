@@ -7,8 +7,10 @@ const {
   findOnePlantelSchema,
   createInstitucionSchema,
   createPlantelSchema,
+  createDirectorSchema,
   updateInstitucionSchema,
   updatePlantelSchema,
+  updateDirectorSchema,
   deleteInstitucionSchema,
   deletePlantelSchema,
   findOneRatificacionNombreSchema,
@@ -135,6 +137,22 @@ async function institucionRouter(fastify, opts, next) {
       schema: deleteRatificacionNombreSchema,
     },
     institucionesAdapter.deleteRatificacionNombre,
+  );
+
+  await fastify.post(
+    '/planteles/:plantelId/director',
+    {
+      schema: createDirectorSchema,
+    },
+    institucionesAdapter.createDirectorPlantel,
+  );
+
+  await fastify.patch(
+    '/planteles/:plantelId/director/:directorId',
+    {
+      schema: updateDirectorSchema,
+    },
+    institucionesAdapter.updateDirectorPlantel,
   );
 
   next();

@@ -1,5 +1,5 @@
-id,domicilio_id,nombre,apellido_paterno,apellido_materno,fecha_nacimiento,sexo,nacionalidad,correo,telefono,celular,curp,rfc,ine,titulo_cargo,fotografia,created_at
-1,1,Hector Esau,Macias,Javier,2022-09-05 18:16:04,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-05 18:16:04
-2,1,Ivan,Narvaez,,2022-09-05 18:16:04,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-07 21:28:31
-3,1,SIN DATO,SIN DATO,,2022-09-05 18:16:04,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:00:49
-4,1,SIN DATO,SIN DATO,,2022-09-05 18:16:04,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41
+id,domicilio_id,nombre,apellido_paterno,apellido_materno,fecha_nacimiento,sexo,nacionalidad,telefono,celular,curp,rfc,ine,correo_primario,correo_secundario,titulo_cargo,fotografia,created_at
+1,1,Hector Esau,Macias,Javier,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-05 18:16:04
+2,1,Ivan,Narvaez,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-07 21:28:31
+3,1,SIN DATO,SIN DATO,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:00:49
+4,1,SIN DATO,SIN DATO,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41
