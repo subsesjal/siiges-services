@@ -1,4 +1,5 @@
 const { plantel } = require('./properties/plantel');
+const { director } = require('./properties/director');
 const { domicilio } = require('./properties/domicilio');
 const { municipio } = require('./properties/municipio');
 const { estado } = require('./properties/estado');
@@ -25,6 +26,14 @@ const findOnePlantelSchema = {
             id: { type: 'integer' },
             ...plantel,
             ...responseProperties,
+            director: {
+              type: 'array',
+              properties: {
+                id: { type: 'integer' },
+                ...director,
+                ...responseProperties,
+              },
+            },
             domicilio: {
               type: 'object',
               properties: {

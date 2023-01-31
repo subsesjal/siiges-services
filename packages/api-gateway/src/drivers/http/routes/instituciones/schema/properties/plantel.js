@@ -10,7 +10,8 @@ const plantel = {
   telefono1: { type: 'string' },
   telefono2: { type: 'string' },
   telefono3: { type: 'string' },
-  paginWeb: { type: 'string' },
+  paginaWeb: { type: 'string' },
+  redesSociales: { type: 'string' },
 };
 
 module.exports = { plantel };

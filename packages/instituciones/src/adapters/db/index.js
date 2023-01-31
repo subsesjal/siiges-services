@@ -5,6 +5,7 @@ const { Institucion } = drivers.sequelize.models;
 const { Plantel } = drivers.sequelize.models;
 const { Domicilio } = drivers.sequelize.models;
 const { RatificacionNombre } = drivers.sequelize.models;
+const { Director } = drivers.sequelize.models;
 
 const {
   findOneQuery,
@@ -29,4 +30,6 @@ module.exports = {
   createRatificacionQuery: createQuery(RatificacionNombre),
   updateRatificacionQuery: updateQuery(RatificacionNombre),
   deleteRatificacionQuery: deleteQuery(RatificacionNombre),
+  createDirectorQuery: createQuery(Director),
+  updateDirectorQuery: updateQuery(Director),
 };
