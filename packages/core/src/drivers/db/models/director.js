@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PLANTEL_TABLE } = require('./plantel');
 const { PERSONA_TABLE } = require('./persona');
 
-const DIRECTOR_TABLE = 'director';
+const DIRECTOR_TABLE = 'directores';
 
 const DirectorSchema = {
   id: {
