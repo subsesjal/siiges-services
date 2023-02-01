@@ -26,7 +26,7 @@ const findOnePlantelSchema = {
             id: { type: 'integer' },
             ...plantel,
             ...responseProperties,
-            director: {
+            directores: {
               type: 'array',
               properties: {
                 id: { type: 'integer' },
