@@ -46,6 +46,7 @@ module.exports = {
   createPlantel: createPlantel(
     findOneInstitucionQuery,
     createPlantelQuery,
+    createDirectorQuery,
   ),
   findOnePlantel: findOnePlantel(
     findOneInstitucionQuery,
