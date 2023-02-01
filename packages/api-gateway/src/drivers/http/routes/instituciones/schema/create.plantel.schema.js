@@ -3,6 +3,8 @@ const { domicilio } = require('./properties/domicilio');
 const { municipio } = require('./properties/municipio');
 const { estado } = require('./properties/estado');
 const { responseProperties } = require('./properties/responseProperties');
+const { director } = require('./properties/director');
+const { persona } = require('../../usuarios/schema/properties/persona');
 
 const createPlantelSchema = {
   tags: ['Plantel'],
@@ -18,6 +20,20 @@ const createPlantelSchema = {
     type: 'object',
     properties: {
       ...plantel,
+      director: {
+        type: 'object',
+        properties: {
+          ...director,
+          persona: {
+            type: 'object',
+            properties: {
+              ...persona,
+            },
+            required: ['nombre', 'apellidoPaterno'],
+          },
+        },
+        required: ['persona'],
+      },
       domicilio: {
         type: 'object',
         properties: {
@@ -57,6 +73,20 @@ const createPlantelSchema = {
                   properties: {
                     id: { type: 'integer' },
                     ...estado,
+                    ...responseProperties,
+                  },
+                },
+              },
+            },
+            director: {
+              type: 'object',
+              properties: {
+                ...director,
+                ...responseProperties,
+                persona: {
+                  type: 'object',
+                  properties: {
+                    ...persona,
                     ...responseProperties,
                   },
                 },

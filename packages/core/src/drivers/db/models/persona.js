@@ -58,13 +58,13 @@ const PersonaSchema = {
   ine: {
     type: DataTypes.STRING,
   },
-  correo_primario: {
-    allowNull: false,
+  correoPrimario: {
     type: DataTypes.STRING,
+    field: 'correo',
   },
-  correo_secundario: {
-    allowNull: false,
+  correoSecundario: {
     type: DataTypes.STRING,
+    field: 'correo_secundario',
   },
   tituloCargo: {
     type: DataTypes.STRING,
