@@ -42,7 +42,7 @@ const createPlantelSchema = {
         required: ['municipioId', 'estadoId', 'calle', 'numeroExterior', 'colonia', 'codigoPostal'],
       },
     },
-    required: ['domicilio', 'tipoInmuebleId', 'correo1', 'correo2'],
+    required: ['domicilio', 'director', 'tipoInmuebleId', 'correo1', 'correo2'],
   },
   response: {
     201: {
