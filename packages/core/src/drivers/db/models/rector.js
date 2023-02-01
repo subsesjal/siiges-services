@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { INSTITUCION_TABLE } = require('./institucion');
 const { PERSONA_TABLE } = require('./persona');
 
-const RECTOR_TABLE = 'rector';
+const RECTOR_TABLE = 'rectores';
 
 const RectorSchema = {
   id: {

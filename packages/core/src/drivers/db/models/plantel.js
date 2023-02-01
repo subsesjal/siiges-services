@@ -65,6 +65,7 @@ const PlantelSchema = {
   },
   paginaWeb: {
     type: DataTypes.STRING,
+    field: 'pagina_web',
   },
   redesSociales: {
     type: DataTypes.STRING,
