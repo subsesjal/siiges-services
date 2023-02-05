@@ -22,8 +22,6 @@ const updatePlantel = (
     strict: false,
   });
 
-  console.log(plantel.directores[0].personaId);
-
   checkers.throwErrorIfDataIsFalsy(plantel, 'planteles', plantelId);
 
   const plantelUpdated = await updatePlantelQuery({ id: plantelId, institucionId }, data);
