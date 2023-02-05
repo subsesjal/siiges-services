@@ -8,6 +8,7 @@ const {
   RatificacionNombre,
   Director,
   Persona,
+  Municipio,
 } = drivers.sequelize.models;
 
 const {
@@ -37,4 +38,5 @@ module.exports = {
   createDirectorQuery: createQuery(Director),
   updatePersonaQuery: updateQuery(Persona),
   updateDirectorQuery: updateQuery(Director),
+  findAllMunicipiosQuery: findAllQuery(Municipio),
 };
