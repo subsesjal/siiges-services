@@ -1,7 +1,7 @@
 const { plantel } = require('./properties/plantel');
-const { domicilio } = require('./properties/domicilio');
-const { municipio } = require('./properties/municipio');
-const { estado } = require('./properties/estado');
+const { domicilio } = require('../../usuarios/schema/properties/domicilio');
+const { municipio } = require('../../usuarios/schema/properties/municipio');
+const { estado } = require('../../usuarios/schema/properties/estado');
 const { responseProperties } = require('./properties/responseProperties');
 
 const updatePlantelSchema = {
