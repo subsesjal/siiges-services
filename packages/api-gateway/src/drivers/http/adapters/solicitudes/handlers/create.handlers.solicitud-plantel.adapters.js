@@ -1,5 +1,5 @@
 const { Logger } = require('@siiges-services/shared');
-const errorHandler = require('../../utils/errorHandler');
+const errorHandler = require('../../../utils/errorHandler');
 
 // solicitudes services
 async function createSolicitudPrograma(req, reply) {
@@ -8,7 +8,7 @@ async function createSolicitudPrograma(req, reply) {
 
     Logger.info('[solicitudes]: Creating solicitud');
 
-    const newSolicitud = await this.solicitudServices.createSolicitud(data);
+    const newSolicitud = await this.solicitudServices.createSolicitudPrograma(data);
 
     return reply
       .code(201)
@@ -19,6 +19,4 @@ async function createSolicitudPrograma(req, reply) {
   }
 }
 
-module.exports = {
-  createSolicitudPrograma,
-};
+module.exports = createSolicitudPrograma;

@@ -1,9 +1,5 @@
-const representative = require('./representante');
-const diligence = require('./diligencia');
-const institution = require('./institucion');
+const { createSolicitudPrograma } = require('./db/solicitudes');
 
 module.exports = {
-  representative,
-  diligence,
-  institution,
+  createSolicitudPrograma,
 };
