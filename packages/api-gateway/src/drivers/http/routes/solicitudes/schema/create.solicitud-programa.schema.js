@@ -18,6 +18,7 @@ const createSolicitudProgramaSchema = {
       },
     },
     required: ['tipoSolicitudId', 'usuarioId', 'estatusSolicitudId', 'programa'],
+    additionalProperties: false,
   },
   response: {
     201: {
@@ -27,6 +28,7 @@ const createSolicitudProgramaSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
+            folio: { type: 'string' },
             ...solicitud,
             ...responseProperties,
             programa: {

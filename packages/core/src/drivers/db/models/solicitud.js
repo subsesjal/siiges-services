@@ -50,6 +50,7 @@ const SolicitudSchema = {
     field: 'fecha_recepcion',
   },
   folio: {
+    allowNull: false,
     type: DataTypes.STRING,
   },
   convocatoria: {

@@ -1,4 +1,4 @@
-const { diligencia } = require('../../adapters');
+const { diligencia } = require('../../../adapters/db');
 const create = require('./create.diligencia.use-cases');
 const deleteOne = require('./delete.diligencia.use-cases');
 const findOne = require('./find-one.diligencia.use-cases');
