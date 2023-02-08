@@ -8,6 +8,7 @@ const {
 } = models;
 
 const {
+  findAllQuery,
   findOneQuery,
   createQuery,
   updateAndFindQuery,
@@ -21,4 +22,5 @@ module.exports = {
   findOneNivelQuery: findOneQuery(Nivel),
   findOneUsuarioQuery: findOneQuery(Usuario),
   countSolicitudesQuery: countQuery(Solicitud),
+  findAllSolicitudesProgramasQuery: findAllQuery(Solicitud),
 };
