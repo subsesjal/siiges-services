@@ -18,7 +18,7 @@ const findOneInstitucion = (findOneInstitucionQuery) => async (
     strict: false,
   });
 
-  checkers.throwErrorIfDataIsFalsy(institucion);
+  checkers.throwErrorIfDataIsFalsy(institucion, 'instituciones', identifierObj.id);
 
   return institucion;
 };
