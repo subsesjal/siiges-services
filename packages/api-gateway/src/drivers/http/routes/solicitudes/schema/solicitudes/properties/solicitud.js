@@ -1,4 +1,4 @@
-// Solicitud
+// Solicitudes
 const solicitud = {
   tipoSolicitudId: { type: 'integer' },
   usuarioId: { type: 'integer' },
@@ -7,6 +7,7 @@ const solicitud = {
   cita: { type: 'string', format: 'date-time' },
   fechaRecepcion: { type: 'string', format: 'date-time' },
   folio: { type: 'string' },
+  convocatoria: { type: 'string' },
 };
 
 module.exports = { solicitud };
