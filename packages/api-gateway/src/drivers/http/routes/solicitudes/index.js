@@ -1,9 +1,20 @@
 const { solicitudesAdapter, representativeAdapter, diligenceAdapter } = require('../../adapters');
 const { updateSchema, findSchema, deleteSchema } = require('./representantes/schemas');
 const { findGroupSchema } = require('./diligencias/schema');
-const { createSolicitudProgramaSchema } = require('./schema');
+const {
+  createSolicitudProgramaSchema,
+  findAllSolicitudesProgramasSchema,
+} = require('./schema');
 
 async function solicitudRouter(fastify, opts, next) {
+  await fastify.get(
+    '/',
+    {
+      schema: findAllSolicitudesProgramasSchema,
+    },
+    solicitudesAdapter.findAllSolicitudesProgramas,
+  );
+
   await fastify.post(
     '/',
     {

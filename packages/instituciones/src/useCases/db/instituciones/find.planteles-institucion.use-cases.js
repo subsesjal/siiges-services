@@ -13,6 +13,10 @@ const findPlantelesInstitucion = (findOneInstitucionQuery) => async (identifierO
         {
           association: 'domicilio',
           include: [{ association: 'estado' }, { association: 'municipio' }],
+        },
+        {
+          association: 'directores',
+          include: [{ association: 'persona' }],
         }],
     }];
 

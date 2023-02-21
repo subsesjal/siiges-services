@@ -36,8 +36,7 @@ const RolModelResponse = {
 const randomNumber = faker.datatype.number();
 
 const fakeExpirationTimeToken = (
-  Math.floor(Date.now / randomNumber)
-  + (randomNumber * randomNumber * randomNumber)
+  Math.floor(randomNumber)
 );
 
 const fakePayloadToken = {

@@ -16,7 +16,6 @@ async function findAllUsuarios(fastify) {
 async function findAll(req, reply) {
   try {
     const usuarios = await findAllUsuarios(this);
-    console.log('Se han traido todos los usuarios de la base de datos');
 
     return reply
       .code(200)

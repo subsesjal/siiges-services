@@ -1,5 +1,6 @@
 const {
   findAllInstitucionesQuery,
+  findAllMunicipiosQuery,
   findOneInstitucionQuery,
   createInstitucionQuery,
   updateInstitucionQuery,
@@ -13,6 +14,9 @@ const {
   createRatificacionQuery,
   updateRatificacionQuery,
   deleteRatificacionQuery,
+  createDirectorQuery,
+  updateDirectorQuery,
+  updatePersonaQuery,
 } = require('../adapters/db');
 
 const findAllInstituciones = require('./db/instituciones/find-all.instituciones.use-cases');
@@ -30,6 +34,9 @@ const findOneRatificacion = require('./db/ratificaciones/find-one.ratificaciones
 const createRatificacion = require('./db/ratificaciones/create.ratificaciones.use-cases');
 const updateRatificacion = require('./db/ratificaciones/update.ratificacion.use-case');
 const deleteRatificacion = require('./db/ratificaciones/delete.ratificaciones.use-cases');
+const createDirectorPlantel = require('./db/planteles/create.director-plantel.use-cases');
+const updateDirectorPlantel = require('./db/planteles/update.director-plantel.use-cases');
+const findAllMunicipios = require('./db/municipios/find-all.municipios.use-cases');
 
 module.exports = {
   findAllInstituciones: findAllInstituciones(findAllInstitucionesQuery),
@@ -42,15 +49,17 @@ module.exports = {
   createPlantel: createPlantel(
     findOneInstitucionQuery,
     createPlantelQuery,
+    createDirectorQuery,
   ),
   findOnePlantel: findOnePlantel(
     findOneInstitucionQuery,
     findOnePlantelQuery,
   ),
   updatePlantel: updatePlantel(
-    updatePlantelQuery,
     findOnePlantelQuery,
+    updatePlantelQuery,
     updateDomicilioQuery,
+    updatePersonaQuery,
   ),
   deletePlantel: deletePlantel(deletePlantelQuery),
   findOneRatificacionNombre: findOneRatificacion(
@@ -66,4 +75,13 @@ module.exports = {
     updateRatificacionQuery,
   ),
   deleteRatificacionNombre: deleteRatificacion(deleteRatificacionQuery),
+  createDirectorPlantel: createDirectorPlantel(
+    findOnePlantelQuery,
+    createDirectorQuery,
+  ),
+  updateDirectorPlantel: updateDirectorPlantel(
+    findOnePlantelQuery,
+    updateDirectorQuery,
+  ),
+  findAllMunicipios: findAllMunicipios(findAllMunicipiosQuery),
 };

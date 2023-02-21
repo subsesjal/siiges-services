@@ -1,24 +1,20 @@
-// External dependencies
-const { Op } = require('sequelize');
 // Internal dependencies
-const { createInclude } = require('../utils');
+const { createInclude, getWhere } = require('../utils');
 
-const findAllQuery = (model) => async (dbParams = {}, identifierObj = undefined) => {
+const findAllQuery = (model) => async (identifierObj, dbParams = {}) => {
   const {
-    attributes, include, strict = true, query,
+    attributes = undefined,
+    include = undefined,
+    strict = true,
+    isDeleting = false,
+    query = undefined,
   } = dbParams;
 
-  const result = await model.findAll({
+  return model.findAll({
     attributes,
-    where: {
-      ...query,
-      ...identifierObj,
-      deletedAt: { [Op.is]: null },
-    },
+    where: getWhere(identifierObj, isDeleting, query),
     include: createInclude(include, strict),
   });
-
-  return result;
 };
 
 module.exports = findAllQuery;

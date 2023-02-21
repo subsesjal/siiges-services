@@ -3,7 +3,8 @@ const usuariosAdapter = require('./usuarios/handlers');
 const usuariosUsuariosAdapter = require('./usuarios/usuarios/handlers');
 const filesAdapter = require('./files/handlers');
 const institucionesAdapter = require('./institituciones/handlers');
-const solicitudesAdapter = require('./solicitudes/solicitudes.handlers');
+const municipiosAdapter = require('./municipios/handlers');
+const solicitudesAdapter = require('./solicitudes/handlers');
 const { representativeAdapter, diligenceAdapter } = require('./solicitud');
 
 module.exports = {
@@ -14,4 +15,5 @@ module.exports = {
   representativeAdapter,
   usuariosAdapter,
   usuariosUsuariosAdapter,
+  municipiosAdapter,
 };

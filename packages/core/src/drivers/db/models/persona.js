@@ -43,9 +43,6 @@ const PersonaSchema = {
   nacionalidad: {
     type: DataTypes.STRING,
   },
-  correo: {
-    type: DataTypes.STRING,
-  },
   telefono: {
     type: DataTypes.STRING,
   },
@@ -60,6 +57,14 @@ const PersonaSchema = {
   },
   ine: {
     type: DataTypes.STRING,
+  },
+  correoPrimario: {
+    type: DataTypes.STRING,
+    field: 'correo',
+  },
+  correoSecundario: {
+    type: DataTypes.STRING,
+    field: 'correo_secundario',
   },
   tituloCargo: {
     type: DataTypes.STRING,

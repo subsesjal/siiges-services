@@ -22,7 +22,6 @@ async function update(req, reply) {
 
   try {
     const usuarioUpdated = await updateUsuario(this, usuarioId, changes);
-    console.log(usuarioUpdated);
 
     return reply
       .code(200)

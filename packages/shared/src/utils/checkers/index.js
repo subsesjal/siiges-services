@@ -6,6 +6,7 @@ const isThisDatatype = require('./is-this-datatype');
 const { isFalsy, isTruthy } = require('./truthy-falsy');
 const { isNumber, isNotNumber } = require('./number');
 const { isString, isNotString } = require('./string');
+const { IsDate, isNotDate } = require('./date');
 const { isNull, isNotNull } = require('./null');
 const { isUndefined, isDefined } = require('./undefined');
 const { throwErrorIfDataIsFalsy } = require('./db.checkers.utils');
@@ -26,4 +27,6 @@ module.exports = {
   isDefined,
   isUndefined,
   throwErrorIfDataIsFalsy,
+  IsDate,
+  isNotDate,
 };

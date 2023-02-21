@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PERSONA_TABLE } = require('./persona');
 const { SOLICITUD_TABLE } = require('./solicitud');
 
-const DILIGENCIA_TABLE = 'diligencia';
+const DILIGENCIA_TABLE = 'diligencias';
 
 const DiligenciaSchema = {
   id: {

@@ -1,10 +1,15 @@
 // External dependencies
 const { drivers, queries } = require('@siiges-services/core');
 
-const { Institucion } = drivers.sequelize.models;
-const { Plantel } = drivers.sequelize.models;
-const { Domicilio } = drivers.sequelize.models;
-const { RatificacionNombre } = drivers.sequelize.models;
+const {
+  Institucion,
+  Plantel,
+  Domicilio,
+  RatificacionNombre,
+  Director,
+  Persona,
+  Municipio,
+} = drivers.sequelize.models;
 
 const {
   findOneQuery,
@@ -29,4 +34,9 @@ module.exports = {
   createRatificacionQuery: createQuery(RatificacionNombre),
   updateRatificacionQuery: updateQuery(RatificacionNombre),
   deleteRatificacionQuery: deleteQuery(RatificacionNombre),
+  findOneDirectorQuery: findOneQuery(Director),
+  createDirectorQuery: createQuery(Director),
+  updatePersonaQuery: updateQuery(Persona),
+  updateDirectorQuery: updateQuery(Director),
+  findAllMunicipiosQuery: findAllQuery(Municipio),
 };

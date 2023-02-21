@@ -21,6 +21,7 @@ const { TIPO_SOLICITUD_TABLE, TipoSolicitudSchema } = require('../models/tipoSol
 const { USUARIO_TABLE, UsuarioSchema } = require('../models/usuario');
 const { USUARIO_USUARIO_TABLE, UsuarioUsuarioSchema } = require('../models/usuarioUsuario');
 const { RECTOR_TABLE, RectorSchema } = require('../models/rector');
+const { DIRECTOR_TABLE, DirectorSchema } = require('../models/director');
 
 module.exports = {
   async up(queryInterface) {
@@ -47,6 +48,7 @@ module.exports = {
     await queryInterface.createTable(PROGRAMA_TABLE, ProgramaSchema);
     await queryInterface.createTable(USUARIO_USUARIO_TABLE, UsuarioUsuarioSchema);
     await queryInterface.createTable(RECTOR_TABLE, RectorSchema);
+    await queryInterface.createTable(DIRECTOR_TABLE, DirectorSchema);
   },
 
   async down(queryInterface) {
@@ -74,5 +76,6 @@ module.exports = {
     await queryInterface.dropTable(PROGRAMA_TABLE);
     await queryInterface.dropTable(USUARIO_USUARIO_TABLE);
     await queryInterface.dropTable(RECTOR_TABLE);
+    await queryInterface.dropTable(DIRECTOR_TABLE);
   },
 };

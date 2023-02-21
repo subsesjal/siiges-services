@@ -6,22 +6,32 @@ const findOnePlantel = (findOneInstitucionQuery, findOnePlantelQuery) => async (
   const { plantelId, institucionId } = identifierObj;
 
   const institucion = await findOneInstitucionQuery({ id: institucionId });
-  checkers.throwErrorIfDataIsFalsy(institucion);
+  checkers.throwErrorIfDataIsFalsy(institucion, 'instituciones', institucionId);
 
-  const include = [{
-    association: 'domicilio',
-    include: [
-      { association: 'estado' },
-      { association: 'municipio' },
-    ],
-  },
-  { association: 'institucion' }];
+  const include = [
+    {
+      association: 'domicilio',
+      include: [
+        { association: 'estado' },
+        { association: 'municipio' },
+      ],
+    },
+    {
+      association: 'directores',
+      include: [{ association: 'persona' }],
+    },
+    { association: 'institucion' }];
 
   const plantel = await findOnePlantelQuery({
     id: plantelId,
     institucionId,
-  }, { undefined, include });
-  checkers.throwErrorIfDataIsFalsy(plantel);
+  }, {
+    undefined,
+    include,
+    strict: false,
+  });
+
+  checkers.throwErrorIfDataIsFalsy(plantel, 'planteles', plantelId);
 
   return plantel;
 };

@@ -1,8 +1,10 @@
 const { plantel } = require('./properties/plantel');
-const { domicilio } = require('./properties/domicilio');
-const { municipio } = require('./properties/municipio');
-const { estado } = require('./properties/estado');
+const { domicilio } = require('../../usuarios/schema/properties/domicilio');
+const { municipio } = require('../../usuarios/schema/properties/municipio');
+const { estado } = require('../../usuarios/schema/properties/estado');
 const { responseProperties } = require('./properties/responseProperties');
+const { director } = require('./properties/director');
+const { persona } = require('../../usuarios/schema/properties/persona');
 
 const createPlantelSchema = {
   tags: ['Plantel'],
@@ -18,6 +20,20 @@ const createPlantelSchema = {
     type: 'object',
     properties: {
       ...plantel,
+      director: {
+        type: 'object',
+        properties: {
+          ...director,
+          persona: {
+            type: 'object',
+            properties: {
+              ...persona,
+            },
+            required: ['nombre', 'apellidoPaterno'],
+          },
+        },
+        required: ['persona'],
+      },
       domicilio: {
         type: 'object',
         properties: {
@@ -26,7 +42,7 @@ const createPlantelSchema = {
         required: ['municipioId', 'estadoId', 'calle', 'numeroExterior', 'colonia', 'codigoPostal'],
       },
     },
-    required: ['domicilio', 'tipoInmuebleId', 'correo1', 'correo2'],
+    required: ['domicilio', 'director', 'tipoInmuebleId', 'correo1', 'correo2'],
   },
   response: {
     201: {
@@ -57,6 +73,20 @@ const createPlantelSchema = {
                   properties: {
                     id: { type: 'integer' },
                     ...estado,
+                    ...responseProperties,
+                  },
+                },
+              },
+            },
+            director: {
+              type: 'object',
+              properties: {
+                ...director,
+                ...responseProperties,
+                persona: {
+                  type: 'object',
+                  properties: {
+                    ...persona,
                     ...responseProperties,
                   },
                 },

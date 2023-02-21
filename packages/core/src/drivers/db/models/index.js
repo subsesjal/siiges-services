@@ -21,6 +21,7 @@ const { TipoSolicitud, TipoSolicitudSchema } = require('./tipoSolicitud');
 const { Usuario, UsuarioSchema } = require('./usuario');
 const { UsuarioUsuario, UsuarioUsuarioSchema } = require('./usuarioUsuario');
 const { Rector, RectorSchema } = require('./rector');
+const { Director, DirectorSchema } = require('./director');
 
 function setupModels(sequelize) {
   Ciclo.init(CicloSchema, Ciclo.config(sequelize));
@@ -46,6 +47,7 @@ function setupModels(sequelize) {
   Usuario.init(UsuarioSchema, Usuario.config(sequelize));
   UsuarioUsuario.init(UsuarioUsuarioSchema, UsuarioUsuario.config(sequelize));
   Rector.init(RectorSchema, Rector.config(sequelize));
+  Director.init(DirectorSchema, Director.config(sequelize));
 
   Ciclo.associate(sequelize.models);
   Domicilio.associate(sequelize.models);
@@ -70,6 +72,7 @@ function setupModels(sequelize) {
   Usuario.associate(sequelize.models);
   UsuarioUsuario.associate(sequelize.models);
   Rector.associate(sequelize.models);
+  Director.associate(sequelize.models);
 }
 
 module.exports = setupModels;
