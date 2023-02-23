@@ -13,6 +13,7 @@ const {
   createQuery,
   updateAndFindQuery,
   countQuery,
+  updateQuery,
 } = queries;
 
 module.exports = {
@@ -23,4 +24,5 @@ module.exports = {
   findOneUsuarioQuery: findOneQuery(Usuario),
   countSolicitudesQuery: countQuery(Solicitud),
   findAllSolicitudesProgramasQuery: findAllQuery(Solicitud),
+  updateSolicitudQuery: updateQuery(Solicitud),
 };

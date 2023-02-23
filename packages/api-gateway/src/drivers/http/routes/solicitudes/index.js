@@ -1,10 +1,11 @@
-const { solicitudesAdapter, representativeAdapter, diligenceAdapter } = require('../../adapters');
-const { updateSchema, findSchema, deleteSchema } = require('./representantes/schemas');
-const { findGroupSchema } = require('./diligencias/schema');
+const { solicitudesAdapter } = require('../../adapters');
 const {
   createSolicitudProgramaSchema,
   findAllSolicitudesProgramasSchema,
+  updateSolicitudSchema,
 } = require('./schema');
+
+// const { solicitud } = require('./schema/properties/solicitud');
 
 async function solicitudRouter(fastify, opts, next) {
   await fastify.get(
@@ -23,28 +24,10 @@ async function solicitudRouter(fastify, opts, next) {
     solicitudesAdapter.createSolicitudPrograma,
   );
 
-  await fastify.get(
-    '/:solicitudId/representantes/:usuarioId',
-    { schema: findSchema },
-    representativeAdapter.findOne,
-  );
-
   await fastify.patch(
-    '/:solicitudId/representantes/:usuarioId',
-    { schema: updateSchema },
-    representativeAdapter.update,
-  );
-
-  await fastify.delete(
-    '/:solicitudId/representantes/:usuarioId',
-    { schema: deleteSchema },
-    representativeAdapter.deleteOne,
-  );
-
-  await fastify.get(
-    '/:solicitudId/diligencias/',
-    { schema: findGroupSchema },
-    diligenceAdapter.findGroup,
+    '/:solicitudId',
+    { schema: updateSolicitudSchema },
+    solicitudesAdapter.updateSolicitud,
   );
 
   next();
