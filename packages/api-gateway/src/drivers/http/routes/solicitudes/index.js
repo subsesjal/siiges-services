@@ -50,7 +50,7 @@ async function solicitudRouter(fastify, opts, next) {
   );
 
   await fastify.get(
-    '/solicitudes/:solicitudId/programa',
+    '/:solicitudId/programa',
     {
       schema: findOneSolicitudesProgramasSchema,
     },

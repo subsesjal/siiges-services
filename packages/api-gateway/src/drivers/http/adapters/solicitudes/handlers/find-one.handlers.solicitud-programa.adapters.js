@@ -1,10 +1,14 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-async function findOneSolicitudesProgramas(req, reply) {
+async function findOneSolicitudPrograma(req, reply) {
   try {
+    const { solicitudId } = req.params;
+
     Logger.info('[solicitudes]: Getting solicitudes list');
-    const solicitudes = await this.solicitudServices.findOneSolicitudesProgramas();
+    const solicitudes = await this.solicitudServices.findOneSolicitudPrograma(
+      { id: solicitudId },
+    );
 
     return reply
       .code(200)
@@ -15,4 +19,4 @@ async function findOneSolicitudesProgramas(req, reply) {
   }
 }
 
-module.exports = findOneSolicitudesProgramas;
+module.exports = findOneSolicitudPrograma;

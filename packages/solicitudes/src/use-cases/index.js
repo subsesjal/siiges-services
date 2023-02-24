@@ -1,12 +1,11 @@
 const {
   createSolicitudPrograma,
   findAllSolicitudesProgramas,
-  findOneSolicitudesProgramas,
-
+  findOneSolicitudPrograma,
 } = require('./db/solicitudes');
 
 module.exports = {
   createSolicitudPrograma,
   findAllSolicitudesProgramas,
-  findOneSolicitudesProgramas,
+  findOneSolicitudPrograma,
 };
