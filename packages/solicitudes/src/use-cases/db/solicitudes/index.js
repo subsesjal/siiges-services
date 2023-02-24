@@ -4,6 +4,7 @@ const {
 
 const createSolicitudPrograma = require('./create.solicitud-programa.use-cases');
 const findAllSolicitudesProgramas = require('./find-all.solicitudes-programas.use-cases');
+const findOneSolicitudesProgramas = require('./find-one.solicitudes-programas.use-cases');
 
 module.exports = {
   createSolicitudPrograma: createSolicitudPrograma(
@@ -13,6 +14,9 @@ module.exports = {
   ),
   findAllSolicitudesProgramas: findAllSolicitudesProgramas(
     solicitudes.findAllSolicitudesProgramasQuery,
+  ),
+  findOneSolicitudesProgramas: findOneSolicitudesProgramas(
+    solicitudes.findOneSolicitudesProgramasQuery,
   ),
 
 };
