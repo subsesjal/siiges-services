@@ -5,6 +5,7 @@ const {
   Solicitud,
   Nivel,
   Usuario,
+
 } = models;
 
 const {
@@ -13,6 +14,7 @@ const {
   createQuery,
   updateAndFindQuery,
   countQuery,
+  findOneSolicitudesProgramasQuery,
 } = queries;
 
 module.exports = {
@@ -23,4 +25,5 @@ module.exports = {
   findOneUsuarioQuery: findOneQuery(Usuario),
   countSolicitudesQuery: countQuery(Solicitud),
   findAllSolicitudesProgramasQuery: findAllQuery(Solicitud),
+  findOneSolicitudesProgramasQuery: findOneSolicitudesProgramasQuery(Solicitud),
 };
