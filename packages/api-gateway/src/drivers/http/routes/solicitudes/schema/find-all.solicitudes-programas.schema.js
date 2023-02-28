@@ -21,6 +21,7 @@ const findAllSolicitudesProgramasSchema = {
             properties: {
               id: { type: 'integer' },
               ...solicitud,
+              folio: { type: 'string' },
               ...responseProperties,
               estatusSolicitud: {
                 type: 'object',

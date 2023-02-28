@@ -23,4 +23,5 @@ module.exports = {
   findOneUsuarioQuery: findOneQuery(Usuario),
   countSolicitudesQuery: countQuery(Solicitud),
   findAllSolicitudesProgramasQuery: findAllQuery(Solicitud),
+  findOneSolicitudProgramaQuery: findOneQuery(Solicitud),
 };
