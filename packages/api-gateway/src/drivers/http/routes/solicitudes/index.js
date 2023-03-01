@@ -6,6 +6,7 @@ const {
   findAllSolicitudesProgramasSchema,
   findOneSolicitudProgramaSchema,
 } = require('./schema');
+const { findAllSolicitudesUsuarioSchema } = require('./schema');
 
 async function solicitudRouter(fastify, opts, next) {
   await fastify.get(
@@ -52,6 +53,12 @@ async function solicitudRouter(fastify, opts, next) {
     '/:solicitudId/diligencias/',
     { schema: findGroupSchema },
     diligenceAdapter.findGroup,
+  );
+
+  await fastify.get(
+    '/:solicitudId/usuario/',
+    { schema: findAllSolicitudesUsuarioSchema },
+    solicitudesAdapter.findAllSolicitudesUsuario,
   );
 
   next();
