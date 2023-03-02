@@ -1,5 +1,6 @@
 const { solicitud } = require('./properties/solicitud');
 const { programa } = require('./properties/programa');
+const { programaTurnos } = require('./properties/programaTurnos');
 const { responseProperties } = require('./properties/responseProperties');
 
 const createSolicitudProgramaSchema = {
@@ -13,8 +14,16 @@ const createSolicitudProgramaSchema = {
         type: 'object',
         properties: {
           ...programa,
+          programaTurnos: {
+            type: 'array',
+            minItems: 1,
+            items: {
+              type: 'integer',
+              enum: [1, 2, 3, 4],
+            },
+          },
         },
-        required: ['cicloId', 'nivelId', 'modalidadId', 'plantelId'],
+        required: ['cicloId', 'nivelId', 'modalidadId', 'plantelId', 'programaTurnos'],
       },
     },
     required: ['tipoSolicitudId', 'usuarioId', 'estatusSolicitudId', 'programa'],
@@ -36,6 +45,17 @@ const createSolicitudProgramaSchema = {
               properties: {
                 id: { type: 'integer' },
                 ...programa,
+                programaTurnos: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...programaTurnos,
+                      ...responseProperties,
+                    },
+                  },
+                },
                 ...responseProperties,
               },
             },

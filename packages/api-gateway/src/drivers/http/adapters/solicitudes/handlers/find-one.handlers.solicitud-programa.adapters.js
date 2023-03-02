@@ -5,8 +5,6 @@ async function findOneSolicitudPrograma(req, reply) {
   try {
     const { solicitudId } = req.params;
 
-    console.log(solicitudId);
-
     Logger.info('[solicitudes]: Getting solicitud - programa');
     const solicitud = await this.solicitudServices.findOneSolicitudPrograma(
       { id: solicitudId },
