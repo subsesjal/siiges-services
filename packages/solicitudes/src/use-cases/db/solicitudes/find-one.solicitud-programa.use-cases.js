@@ -1,19 +1,20 @@
 const { checkers } = require('@siiges-services/shared');
 
 const findOneSolicitudPrograma = (findOneSolicitudProgramaQuery) => async (identifierObj) => {
-  console.log(identifierObj);
   const include = [{
     association: 'programa',
-    include: [{
-      association: 'plantel',
-      include: [{
-        association: 'domicilio',
-        include: [
-          { association: 'estado' },
-          { association: 'municipio' },
-        ],
+    include: [
+      { association: 'programaTurnos' },
+      {
+        association: 'plantel',
+        include: [{
+          association: 'domicilio',
+          include: [
+            { association: 'estado' },
+            { association: 'municipio' },
+          ],
+        }],
       }],
-    }],
   },
   {
     association: 'estatusSolicitud',

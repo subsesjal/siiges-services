@@ -12,6 +12,7 @@ module.exports = {
     solicitudes.findOneUsuarioQuery,
     solicitudes.countSolicitudesQuery,
     solicitudes.createSolicitudProgramaQuery,
+    solicitudes.createProgramaTurnoQuery,
   ),
   findAllSolicitudesProgramas: findAllSolicitudesProgramas(
     solicitudes.findAllSolicitudesProgramasQuery,

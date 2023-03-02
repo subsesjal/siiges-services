@@ -1,5 +1,6 @@
 const { solicitud } = require('./properties/solicitud');
 const { programa } = require('./properties/programa');
+const { programaTurnos } = require('./properties/programaTurnos');
 const { estatusSolicitud } = require('./properties/estatusSolicitud');
 const { plantel } = require('../../instituciones/schema/properties/plantel');
 const { domicilio } = require('../../usuarios/schema/properties/domicilio');
@@ -36,6 +37,17 @@ const findAllSolicitudesProgramasSchema = {
                 properties: {
                   id: { type: 'integer' },
                   ...programa,
+                  programaTurnos: {
+                    type: 'array',
+                    items: {
+                      type: 'object',
+                      properties: {
+                        id: { type: 'integer' },
+                        ...programaTurnos,
+                        ...responseProperties,
+                      },
+                    },
+                  },
                   ...responseProperties,
                   plantel: {
                     type: 'object',

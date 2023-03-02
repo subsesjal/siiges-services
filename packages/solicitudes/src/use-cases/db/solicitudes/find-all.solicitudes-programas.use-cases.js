@@ -1,16 +1,18 @@
 const findAllSolicitudesProgramas = (findAllSolicitudesQuery) => async (identifierObj) => {
   const include = [{
     association: 'programa',
-    include: [{
-      association: 'plantel',
-      include: [{
-        association: 'domicilio',
-        include: [
-          { association: 'estado' },
-          { association: 'municipio' },
-        ],
+    include: [
+      { association: 'programaTurnos' },
+      {
+        association: 'plantel',
+        include: [{
+          association: 'domicilio',
+          include: [
+            { association: 'estado' },
+            { association: 'municipio' },
+          ],
+        }],
       }],
-    }],
   },
   {
     association: 'estatusSolicitud',
