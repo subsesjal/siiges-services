@@ -8,6 +8,7 @@ const createSolicitudPrograma = (
   findOneUsuarioQuery,
   countSolicitudesQuery,
   createSolicitudProgramaQuery,
+  createProgramaTurnoQuery,
 ) => async (data) => {
   const { usuarioId } = data;
 
@@ -27,6 +28,19 @@ const createSolicitudPrograma = (
 
     const include = [{ association: 'programa' }];
     const newSolicitud = await createSolicitudProgramaQuery(newData, include);
+    checkers.throwErrorIfDataIsFalsy(newSolicitud, 'solicitudes', newSolicitud.id);
+
+    const newProgramaTurnosArray = await Promise.all(
+      data.programa.programaTurnos.map(async (programaTurno) => {
+        const newProgramaTurno = await createProgramaTurnoQuery({
+          turnoId: programaTurno,
+          programaId: newSolicitud.programa.id,
+        });
+        return newProgramaTurno.dataValues;
+      }),
+    );
+
+    newSolicitud.dataValues.programa.dataValues.programaTurnos = newProgramaTurnosArray;
 
     return newSolicitud;
   }

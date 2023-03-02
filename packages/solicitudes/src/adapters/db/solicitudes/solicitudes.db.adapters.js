@@ -5,6 +5,7 @@ const {
   Solicitud,
   Nivel,
   Usuario,
+  ProgramaTurno,
 } = models;
 
 const {
@@ -24,4 +25,5 @@ module.exports = {
   countSolicitudesQuery: countQuery(Solicitud),
   findAllSolicitudesProgramasQuery: findAllQuery(Solicitud),
   findOneSolicitudProgramaQuery: findOneQuery(Solicitud),
+  createProgramaTurnoQuery: createQuery(ProgramaTurno),
 };

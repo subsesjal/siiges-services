@@ -42,6 +42,17 @@ const findOneSolicitudProgramaSchema = {
               properties: {
                 id: { type: 'integer' },
                 ...programa,
+                programaTurnos: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      turnoId: { type: 'integer' },
+                      programaId: { type: 'integer' },
+                    },
+                  },
+                },
                 ...responseProperties,
                 plantel: {
                   type: 'object',

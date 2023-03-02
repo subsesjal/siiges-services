@@ -12,6 +12,8 @@ const { Pais, PaisSchema } = require('./pais');
 const { Persona, PersonaSchema } = require('./persona');
 const { Plantel, PlantelSchema } = require('./plantel');
 const { Programa, ProgramaSchema } = require('./programa');
+const { Turno, TurnoSchema } = require('./turno');
+const { ProgramaTurno, ProgramaTurnoSchema } = require('./programaTurno');
 const { RatificacionNombre, RatificacionNombreSchema } = require('./ratificacionNombre');
 const { Representante, RepresentanteSchema } = require('./representante');
 const { Rol, RolSchema } = require('./rol');
@@ -37,7 +39,9 @@ function setupModels(sequelize) {
   Pais.init(PaisSchema, Pais.config(sequelize));
   Persona.init(PersonaSchema, Persona.config(sequelize));
   Plantel.init(PlantelSchema, Plantel.config(sequelize));
+  Turno.init(TurnoSchema, Turno.config(sequelize));
   Programa.init(ProgramaSchema, Programa.config(sequelize));
+  ProgramaTurno.init(ProgramaTurnoSchema, ProgramaTurno.config(sequelize));
   RatificacionNombre.init(RatificacionNombreSchema, RatificacionNombre.config(sequelize));
   Representante.init(RepresentanteSchema, Representante.config(sequelize));
   Rol.init(RolSchema, Rol.config(sequelize));
@@ -62,7 +66,9 @@ function setupModels(sequelize) {
   Pais.associate(sequelize.models);
   Persona.associate(sequelize.models);
   Plantel.associate(sequelize.models);
+  Turno.associate(sequelize.models);
   Programa.associate(sequelize.models);
+  ProgramaTurno.associate(sequelize.models);
   RatificacionNombre.associate(sequelize.models);
   Representante.associate(sequelize.models);
   Rol.associate(sequelize.models);

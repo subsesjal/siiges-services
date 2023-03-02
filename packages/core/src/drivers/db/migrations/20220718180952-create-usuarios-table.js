@@ -12,6 +12,8 @@ const { PAIS_TABLE, PaisSchema } = require('../models/pais');
 const { PERSONA_TABLE, PersonaSchema } = require('../models/persona');
 const { PLANTEL_TABLE, PlantelSchema } = require('../models/plantel');
 const { PROGRAMA_TABLE, ProgramaSchema } = require('../models/programa');
+const { TURNO_TABLE, TurnoSchema } = require('../models/turno');
+const { PROGRAMA_TURNO_TABLE, ProgramaTurnoSchema } = require('../models/programaTurno');
 const { RATIFICACION_NOMBRE_TABLE, RatificacionNombreSchema } = require('../models/ratificacionNombre');
 const { REPRESENTANTE_TABLE, RepresentanteSchema } = require('../models/representante');
 const { ROL_TABLE, RolSchema } = require('../models/rol');
@@ -46,6 +48,8 @@ module.exports = {
     await queryInterface.createTable(MODALIDAD_TABLE, ModalidadSchema);
     await queryInterface.createTable(NIVEL_TABLE, NivelSchema);
     await queryInterface.createTable(PROGRAMA_TABLE, ProgramaSchema);
+    await queryInterface.createTable(TURNO_TABLE, TurnoSchema);
+    await queryInterface.createTable(PROGRAMA_TURNO_TABLE, ProgramaTurnoSchema);
     await queryInterface.createTable(USUARIO_USUARIO_TABLE, UsuarioUsuarioSchema);
     await queryInterface.createTable(RECTOR_TABLE, RectorSchema);
     await queryInterface.createTable(DIRECTOR_TABLE, DirectorSchema);
@@ -74,6 +78,8 @@ module.exports = {
     await queryInterface.dropTable(MODALIDAD_TABLE);
     await queryInterface.dropTable(NIVEL_TABLE);
     await queryInterface.dropTable(PROGRAMA_TABLE);
+    await queryInterface.dropTable(TURNO_TABLE);
+    await queryInterface.dropTable(PROGRAMA_TURNO_TABLE);
     await queryInterface.dropTable(USUARIO_USUARIO_TABLE);
     await queryInterface.dropTable(RECTOR_TABLE);
     await queryInterface.dropTable(DIRECTOR_TABLE);
