@@ -1,5 +1,6 @@
 const { solicitud } = require('./properties/solicitud');
 const { programa } = require('./properties/programa');
+const { programaTurnos } = require('./properties/programaTurnos');
 const { responseProperties } = require('./properties/responseProperties');
 
 const createSolicitudProgramaSchema = {
@@ -50,8 +51,8 @@ const createSolicitudProgramaSchema = {
                     type: 'object',
                     properties: {
                       id: { type: 'integer' },
-                      turnoId: { type: 'integer' },
-                      programaId: { type: 'integer' },
+                      ...programaTurnos,
+                      ...responseProperties,
                     },
                   },
                 },
