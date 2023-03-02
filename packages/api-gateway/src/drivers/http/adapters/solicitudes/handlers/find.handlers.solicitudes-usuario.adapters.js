@@ -1,10 +1,13 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-async function findAllSolicitudesUsuario(req, reply) {
+async function findSolicitudesUsuario(req, reply) {
   try {
-    Logger.info('[solicitudes]: Getting solicitudes list');
-    const solicitudes = await this.solicitudServices.findAllSolicitudUsuario();
+    const { usuarioId } = req.params;
+    Logger.info('[solicitudes]: Getting solicitudes list by user');
+    const solicitudes = await this.solicitudServices.findSolicitudesUsuario(
+      { usuarioId },
+    );
 
     return reply
       .code(200)
@@ -15,4 +18,4 @@ async function findAllSolicitudesUsuario(req, reply) {
   }
 }
 
-module.exports = findAllSolicitudesUsuario;
+module.exports = findSolicitudesUsuario;

@@ -5,7 +5,7 @@ const { responseProperties } = require('./properties/responseProperties');
 
 const findAllSolicitudesUsuarioSchema = {
   tags: ['Solicitudes'],
-  description: 'Return a list of solicitudes.',
+  description: 'Return a list of solicitudes by user.',
   response: {
     200: {
       type: 'object',
