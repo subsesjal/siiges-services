@@ -1,14 +1,14 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-// asignaturas services
+// asignatura services
 async function createAsignaturaPrograma(req, reply) {
   try {
     const { ...data } = req.body;
 
-    Logger.info('[asignaturas]: Creating asignatura');
+    Logger.info('[asignatura]: Creating asignatura');
 
-    const newSolicitud = await this.asignaturasServices.createAsignaturaPrograma(data);
+    const newSolicitud = await this.asignaturaServices.createAsignaturaPrograma(data);
 
     return reply
       .code(201)

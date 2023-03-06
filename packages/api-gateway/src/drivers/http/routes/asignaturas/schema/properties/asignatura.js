@@ -1,5 +1,5 @@
-// Asignaturas
-const asignaturas = {
+// Asignatura
+const asignatura = {
   infraestructuraId: { type: 'integer' },
   docenteId: { type: 'integer' },
   programaId: { type: 'integer' },
@@ -12,15 +12,15 @@ const asignaturas = {
   objetivo: { type: 'string' },
   temas: { type: 'string' },
   actividades: { type: 'string' },
-  modeloinstitucional: { type: 'string' },
-  horadocente: { type: 'integer' },
-  horasindependiente: { type: 'integer' },
-  minimohoras: { type: 'integer' },
-  minimocreditos: { type: 'integer' },
+  modeloInstitucional: { type: 'string' },
+  horasDocente: { type: 'integer' },
+  horasIndependiente: { type: 'integer' },
+  minimoHoras: { type: 'integer' },
+  minimoCreditos: { type: 'integer' },
   creditos: { type: 'integer' },
   tipo: { type: 'integer' },
   grado: { type: 'string' },
-  fechaautorizacion: { type: 'string', format: 'date-time' },
+  fechaAutorizacion: { type: 'string', format: 'date-time' },
 };
 
-module.exports = { asignaturas };
+module.exports = { asignatura };

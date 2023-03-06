@@ -1,4 +1,4 @@
-const createAsignaturaPrograma = require('./hadlers/create.handlers.asignaturas-programa.adapters');
+const createAsignaturaPrograma = require('./hadlers/create.handlers.asignatura-programa.adapters');
 
 module.exports = {
   createAsignaturaPrograma,
