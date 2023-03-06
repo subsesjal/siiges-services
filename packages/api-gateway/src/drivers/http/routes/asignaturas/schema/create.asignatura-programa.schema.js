@@ -1,16 +1,16 @@
 const { asignatura } = require('./properties/asignatura');
 const { responseProperties } = require('./properties/responseProperties');
 
-const createSolicitudProgramaSchema = {
-  tags: ['Solicitudes'],
+const createAsignaturaSchema = {
+  tags: ['Asignaturas'],
   description:
-    'Given an object with solicitud and programa required data, then save the first time a new solicitud in database.',
+    'Given an object with asignatura required data, then save the first time a new asignatura in database.',
   body: {
     type: 'object',
     properties: {
       ...asignatura,
-      required: ['cicloId', 'nivelId', 'modalidadId', 'plantelId'],
     },
+    required: ['programaId'],
   },
   response: {
     201: {
@@ -19,9 +19,7 @@ const createSolicitudProgramaSchema = {
         data: {
           type: 'object',
           properties: {
-            id: {
-              type: 'integer',
-            },
+            id: { type: 'integer' },
             ...asignatura,
             ...responseProperties,
           },
@@ -31,4 +29,4 @@ const createSolicitudProgramaSchema = {
   },
 };
 
-module.exports = createSolicitudProgramaSchema;
+module.exports = createAsignaturaSchema;

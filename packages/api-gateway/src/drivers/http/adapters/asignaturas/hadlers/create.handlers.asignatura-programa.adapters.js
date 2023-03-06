@@ -8,12 +8,12 @@ async function createAsignaturaPrograma(req, reply) {
 
     Logger.info('[asignatura]: Creating asignatura');
 
-    const newSolicitud = await this.asignaturaServices.createAsignaturaPrograma(data);
+    const newAsignatura = await this.solicitudServices.createAsignaturaPrograma(data);
 
     return reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: newSolicitud });
+      .send({ data: newAsignatura });
   } catch (error) {
     return errorHandler(error, reply);
   }

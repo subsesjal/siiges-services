@@ -1,5 +1,14 @@
-const createAsignaturaProgramaSchema = require('./schema/create.asignatura-programa.schema');
+const { asignaturasAdapter } = require('../../adapters');
+const { createAsignaturaSchema } = require('./schema');
 
-module.exports = {
-  createAsignaturaProgramaSchema,
-};
+async function asignaturaRouter(fastify, opts, next) {
+  await fastify.post(
+    '/',
+    { schema: createAsignaturaSchema },
+    asignaturasAdapter.createAsignaturaPrograma,
+  );
+
+  next();
+}
+
+module.exports = asignaturaRouter;
