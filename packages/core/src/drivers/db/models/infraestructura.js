@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PLANTEL_TABLE } = require('./plantel');
 const { SOLICITUD_TABLE } = require('./solicitud');
 
-const INFRAESTRUCUTRA_TABLE = 'Infraestructura';
+const INFRAESTRUCTURA_TABLE = 'Infraestructura';
 
 const InfraestructuraSchema = {
   id: {
@@ -32,7 +32,7 @@ const InfraestructuraSchema = {
     type: DataTypes.INTEGER,
     field: 'infraestructura_id',
     references: {
-      model: INFRAESTRUCUTRA_TABLE,
+      model: INFRAESTRUCTURA_TABLE,
       key: 'id',
     },
   },
@@ -80,7 +80,7 @@ class Infraestructura extends Model {
   static config(sequelize) {
     return {
       sequelize,
-      tableName: INFRAESTRUCUTRA_TABLE,
+      tableName: INFRAESTRUCTURA_TABLE,
       modelName: 'Infraestructura',
       timestamps: false,
     };
@@ -88,7 +88,7 @@ class Infraestructura extends Model {
 }
 
 module.exports = {
-  INFRAESTRUCUTRA_TABLE,
+  INFRAESTRUCTURA_TABLE,
   InfraestructuraSchema,
   Infraestructura,
   PLANTEL_TABLE,
