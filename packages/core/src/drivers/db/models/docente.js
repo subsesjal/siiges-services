@@ -88,10 +88,4 @@ class Docente extends Model {
   }
 }
 
-module.exports = {
-  DOCENTE_TABLE,
-  DocenteSchema,
-  Docente,
-  PERSONA_TABLE,
-
-};
+module.exports = { DOCENTE_TABLE, DocenteSchema, Docente };

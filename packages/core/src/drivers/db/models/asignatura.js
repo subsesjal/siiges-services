@@ -25,7 +25,7 @@ const AsignaturaSchema = {
     type: DataTypes.INTEGER,
     field: 'docente_id',
     references: {
-      model: PROGRAMA_TABLE,
+      model: DOCENTE_TABLE,
       key: 'id',
     },
   },
@@ -33,7 +33,7 @@ const AsignaturaSchema = {
     type: DataTypes.INTEGER,
     field: 'infraestructura_id',
     references: {
-      model: PROGRAMA_TABLE,
+      model: INFRAESTRUCTURA_TABLE,
       key: 'id',
     },
   },
@@ -125,10 +125,4 @@ class Asignatura extends Model {
   }
 }
 
-module.exports = {
-  ASIGNATURA_TABLE,
-  AsignaturaSchema,
-  Asignatura,
-  INFRAESTRUCTURA_TABLE,
-  DOCENTE_TABLE,
-};
+module.exports = { ASIGNATURA_TABLE, AsignaturaSchema, Asignatura };

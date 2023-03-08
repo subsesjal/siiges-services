@@ -1,8 +1,9 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PLANTEL_TABLE } = require('./plantel');
 const { SOLICITUD_TABLE } = require('./solicitud');
+const { TIPO_INSTALACION_TABLE } = require('./tipoInstalacion');
 
-const INFRAESTRUCTURA_TABLE = 'Infraestructura';
+const INFRAESTRUCTURA_TABLE = 'infraestructuras';
 
 const InfraestructuraSchema = {
   id: {
@@ -14,7 +15,7 @@ const InfraestructuraSchema = {
   plantelId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'Plantel_id',
+    field: 'plantel_id',
     references: {
       model: PLANTEL_TABLE,
       key: 'id',
@@ -28,11 +29,11 @@ const InfraestructuraSchema = {
       key: 'id',
     },
   },
-  TIPO_INSTALACION_Id: {
+  tipoInstalacionId: {
     type: DataTypes.INTEGER,
-    field: 'infraestructura_id',
+    field: 'tipo_instalacion_id',
     references: {
-      model: INFRAESTRUCTURA_TABLE,
+      model: TIPO_INSTALACION_TABLE,
       key: 'id',
     },
   },
@@ -74,7 +75,9 @@ const InfraestructuraSchema = {
 
 class Infraestructura extends Model {
   static associate(models) {
-    this.belongsTo(models.Programa, { as: 'programa' });
+    this.belongsTo(models.Plantel, { as: 'plantel' });
+    this.belongsTo(models.Solicitud, { as: 'solicitud' });
+    this.belongsTo(models.tipoInstalacion, { as: 'tipoInstalacion' });
   }
 
   static config(sequelize) {
@@ -87,9 +90,4 @@ class Infraestructura extends Model {
   }
 }
 
-module.exports = {
-  INFRAESTRUCTURA_TABLE,
-  InfraestructuraSchema,
-  Infraestructura,
-  PLANTEL_TABLE,
-};
+module.exports = { INFRAESTRUCTURA_TABLE, InfraestructuraSchema, Infraestructura };

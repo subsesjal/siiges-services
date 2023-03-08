@@ -24,6 +24,7 @@ const { Usuario, UsuarioSchema } = require('./usuario');
 const { UsuarioUsuario, UsuarioUsuarioSchema } = require('./usuarioUsuario');
 const { Rector, RectorSchema } = require('./rector');
 const { Director, DirectorSchema } = require('./director');
+const { TipoInstalacion, TipoInstalacionSchema } = require('./tipoInstalacion');
 const { Docente, DocenteSchema } = require('./docente');
 const { Infraestructura, InfraestructuraSchema } = require('./infraestructura');
 const { Asignatura, AsignaturaSchema } = require('./asignatura');
@@ -55,6 +56,7 @@ function setupModels(sequelize) {
   UsuarioUsuario.init(UsuarioUsuarioSchema, UsuarioUsuario.config(sequelize));
   Rector.init(RectorSchema, Rector.config(sequelize));
   Director.init(DirectorSchema, Director.config(sequelize));
+  TipoInstalacion.init(TipoInstalacionSchema, TipoInstalacion.config(sequelize));
   Docente.init(DocenteSchema, Docente.config(sequelize));
   Infraestructura.init(InfraestructuraSchema, Infraestructura.config(sequelize));
   Asignatura.init(AsignaturaSchema, Asignatura.config(sequelize));
@@ -85,6 +87,7 @@ function setupModels(sequelize) {
   UsuarioUsuario.associate(sequelize.models);
   Rector.associate(sequelize.models);
   Director.associate(sequelize.models);
+  TipoInstalacion.associate(sequelize.models);
   Docente.associate(sequelize.models);
   Infraestructura.associate(sequelize.models);
   Asignatura.associate(sequelize.models);
