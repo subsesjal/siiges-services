@@ -1,0 +1,14 @@
+id,nombre,descripcion,created_at,updated_at,deleted_at
+1,Aula,Aulas,2018-08-08 00:00:00,NULL,NULL
+2,Cubículo,Área administrativa,2018-08-08 00:00:00,NULL,NULL
+3,Auditorio,Área administrativa,2018-08-08 00:00:00,NULL,NULL
+4,Laboratorio físico",Otros laboratorios y/o talleres,2018-08-08 00:00:00,NULL,NULL
+5,Laboratorio virtual,Laboratorio virtual,2018-08-08 00:00:00,NULL,NULL
+6,Taller físico,Otros talleres,2018-08-08 00:00:00,NULL,NULL
+7,Taller virtua",Taller virtual,2018-08-08 00:00:00,NULL,NULL
+8,Laboratorio de cómputo,Centro de cómputo,2018-08-08 00:00:00,NULL,NULL
+9,Biblioteca física,Centro de documentación o biblioteca,2018-08-08 00:00:00",NULL,NULL
+10,Biblioteca virtual,Biblioteca virtual,2018-08-08 00:00:00,NULL,NULL
+11,Otros,Otras áreas,2018-09-11 00:00:00,NULL,NULL
+12,Área administrativa,Área administrativa,2018-09-11 00:00:00,NULL,NULL
+13,Archivo muerto,Área para el archivo muerto,2018-09-11 00:00:00,NULL,NULL
