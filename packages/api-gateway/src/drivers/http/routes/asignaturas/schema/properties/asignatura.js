@@ -1,7 +1,5 @@
 // Asignatura
 const asignatura = {
-  infraestructuraId: { type: 'integer' },
-  docenteId: { type: 'integer' },
   programaId: { type: 'integer' },
   academia: { type: 'string' },
   consecutivo: { type: 'integer' },
@@ -12,7 +10,7 @@ const asignatura = {
   objetivo: { type: 'string' },
   temas: { type: 'string' },
   actividades: { type: 'string' },
-  modeloInstitucional: { type: 'string' },
+  modeloInstruccional: { type: 'string' },
   horasDocente: { type: 'integer' },
   horasIndependiente: { type: 'integer' },
   minimoHoras: { type: 'integer' },
