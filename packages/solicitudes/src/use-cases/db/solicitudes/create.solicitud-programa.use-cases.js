@@ -23,9 +23,7 @@ const createSolicitudPrograma = (
   } else {
     const totalSolicitudes = await countSolicitudesQuery();
     const folioSolcitud = createFolioSolicitud(totalSolicitudes, data.programa.nivelId);
-
     const newData = { folio: folioSolcitud, ...data };
-
     const include = [{ association: 'programa' }];
     const newSolicitud = await createSolicitudProgramaQuery(newData, include);
     checkers.throwErrorIfDataIsFalsy(newSolicitud, 'solicitudes', newSolicitud.id);

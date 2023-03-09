@@ -14,7 +14,6 @@ const {
   createQuery,
   updateAndFindQuery,
   countQuery,
-
 } = queries;
 
 module.exports = {
