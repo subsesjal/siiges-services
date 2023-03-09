@@ -79,7 +79,7 @@ class Infraestructura extends Model {
   static associate(models) {
     this.belongsTo(models.Plantel, { as: 'plantel' });
     this.belongsTo(models.Solicitud, { as: 'solicitud' });
-    this.belongsTo(models.tipoInstalacion, { as: 'tipoInstalacion' });
+    this.belongsTo(models.TipoInstalacion, { as: 'tipoInstalacion' });
   }
 
   static config(sequelize) {
