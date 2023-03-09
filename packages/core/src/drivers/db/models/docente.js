@@ -65,7 +65,7 @@ const DocenteSchema = {
 
 class Docente extends Model {
   static associate(models) {
-    this.belongsTo(models.Programa, { as: 'programa' });
+    this.belongsTo(models.Persona, { as: 'persona' });
   }
 
   static config(sequelize) {
