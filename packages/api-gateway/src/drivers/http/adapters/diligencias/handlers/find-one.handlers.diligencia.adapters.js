@@ -1,31 +1,31 @@
 // External dependencies
 const { Logger, checkers } = require('@siiges-services/shared');
 // Internal dependencies
-const errorHandler = require('../../../../utils/errorHandler');
+const errorHandler = require('../../../utils/errorHandler');
 
-async function findDiligence(fastify, data) {
+async function findDiligencias(fastify, data) {
   Logger.info('[api/diligencia/findOne]: finding the diligence');
-  const diligence = await fastify.solicitudServices.diligence.findOne(
+  const diligencias = await fastify.solicitudServices.diligencias.findOne(
     { id: data.diligenceId },
   );
-  checkers.throwErrorIfDataIsFalsy(diligence);
+  checkers.throwErrorIfDataIsFalsy(diligencias);
   Logger.info('[api/diligencia/findOne]: the diligence was found');
 
-  return diligence;
+  return diligencias;
 }
 
-async function findOne(request, reply) {
+async function findOneDiligencia(request, reply) {
   const { ...data } = request.params;
   try {
-    const diligence = await findDiligence(this, data);
+    const diligencias = await findDiligencias(this, data);
 
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: diligence });
+      .send({ data: diligencias });
   } catch (error) {
     return errorHandler(error, reply);
   }
 }
 
-module.exports = findOne;
+module.exports = findOneDiligencia;

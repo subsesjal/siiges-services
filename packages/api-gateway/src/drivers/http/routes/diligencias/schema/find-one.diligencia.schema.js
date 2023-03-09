@@ -1,10 +1,10 @@
-const { diligenceResponse } = require('./properties');
+const { diligenciasResponse, personaResponse } = require('./properties');
 
-const deleteOneDiligence = {
+const findOneDiligencias = {
   tags: ['Diligence'],
-  description: 'Given a diligenceId delete a diligence',
+  description: 'Given a diligenceId get a diligence',
   params: {
-    title: 'delete diligence',
+    title: 'getOneDiligence',
     type: 'object',
     properties: {
       diligenceId: { type: 'integer' },
@@ -19,7 +19,8 @@ const deleteOneDiligence = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...diligenceResponse,
+            ...diligenciasResponse,
+            persona: { ...personaResponse },
           },
         },
       },
@@ -27,4 +28,4 @@ const deleteOneDiligence = {
   },
 };
 
-module.exports = deleteOneDiligence;
+module.exports = findOneDiligencias;

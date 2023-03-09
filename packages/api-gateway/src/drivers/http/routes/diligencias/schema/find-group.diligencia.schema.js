@@ -1,6 +1,6 @@
-const { diligenceResponse } = require('./properties');
+const { diligenciasResponse } = require('./properties');
 
-const findGroupDiligence = {
+const findGroupDiligencias = {
   tags: ['Diligence'],
   description: 'Given a solicitudId get their related diligences',
   params: {
@@ -20,7 +20,7 @@ const findGroupDiligence = {
           items: {
             properties: {
               id: { type: 'integer' },
-              ...diligenceResponse,
+              ...diligenciasResponse,
             },
           },
         },
@@ -29,4 +29,4 @@ const findGroupDiligence = {
   },
 };
 
-module.exports = findGroupDiligence;
+module.exports = findGroupDiligencias;

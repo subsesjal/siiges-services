@@ -1,22 +1,15 @@
-const { diligence, diligenceResponse } = require('./properties');
+const { diligenciasResponse } = require('./properties');
 
-const updateDiligence = {
+const deleteOneDiligencias = {
   tags: ['Diligence'],
-  description: 'Given a diligenceId update a diligence',
+  description: 'Given a diligenceId delete a diligence',
   params: {
-    title: 'update diligence',
+    title: 'delete diligence',
     type: 'object',
     properties: {
       diligenceId: { type: 'integer' },
     },
     required: ['diligenceId'],
-  },
-  body: {
-    title: 'getOneDiligence',
-    type: 'object',
-    properties: {
-      ...diligence,
-    },
   },
   response: {
     200: {
@@ -26,7 +19,7 @@ const updateDiligence = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...diligenceResponse,
+            ...diligenciasResponse,
           },
         },
       },
@@ -34,4 +27,4 @@ const updateDiligence = {
   },
 };
 
-module.exports = updateDiligence;
+module.exports = deleteOneDiligencias;

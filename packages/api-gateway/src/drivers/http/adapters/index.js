@@ -5,11 +5,11 @@ const filesAdapter = require('./files/handlers');
 const institucionesAdapter = require('./institituciones/handlers');
 const municipiosAdapter = require('./municipios/handlers');
 const solicitudesAdapter = require('./solicitudes/handlers');
-const { representativeAdapter, diligenceAdapter } = require('./solicitud');
-const findSolicitudesUsuarioAdapter = require('./solicitudes/handlers');
+const diligenciasAdapter = require('./diligencias/handlers');
+const { representativeAdapter } = require('./solicitud');
 
 module.exports = {
-  diligenceAdapter,
+  diligenciasAdapter,
   filesAdapter,
   institucionesAdapter,
   solicitudesAdapter,
@@ -17,5 +17,4 @@ module.exports = {
   usuariosAdapter,
   usuariosUsuariosAdapter,
   municipiosAdapter,
-  findSolicitudesUsuarioAdapter,
 };
