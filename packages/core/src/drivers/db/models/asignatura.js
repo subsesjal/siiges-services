@@ -1,7 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PROGRAMA_TABLE } = require('./programa');
-const { DOCENTE_TABLE } = require('./docente');
-const { INFRAESTRUCTURA_TABLE } = require('./infraestructura');
 
 const ASIGNATURA_TABLE = 'asignaturas';
 
@@ -21,22 +19,6 @@ const AsignaturaSchema = {
       key: 'id',
     },
   },
-  docenteId: {
-    type: DataTypes.INTEGER,
-    field: 'docente_id',
-    references: {
-      model: DOCENTE_TABLE,
-      key: 'id',
-    },
-  },
-  infraestructuraId: {
-    type: DataTypes.INTEGER,
-    field: 'infraestructura_id',
-    references: {
-      model: INFRAESTRUCTURA_TABLE,
-      key: 'id',
-    },
-  },
   nombre: {
     allowNull: false,
     type: DataTypes.STRING,
@@ -51,6 +33,7 @@ const AsignaturaSchema = {
     type: DataTypes.INTEGER,
   },
   clave: {
+    allowNull: false,
     type: DataTypes.STRING,
   },
   seriacion: {
@@ -65,7 +48,7 @@ const AsignaturaSchema = {
   actividades: {
     type: DataTypes.STRING,
   },
-  modelo_instrccional: {
+  modelo_instruccional: {
     type: DataTypes.STRING,
   },
   horas_docente: {
@@ -80,6 +63,9 @@ const AsignaturaSchema = {
   minimo_creditos: {
     type: DataTypes.INTEGER,
   },
+  creditos: {
+    type: DataTypes.STRING,
+  },
   tipo: {
     type: DataTypes.INTEGER,
   },
@@ -89,7 +75,6 @@ const AsignaturaSchema = {
   fecha_autorizacion: {
     type: DataTypes.DATE,
   },
-
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,

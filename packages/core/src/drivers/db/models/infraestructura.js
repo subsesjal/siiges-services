@@ -22,6 +22,7 @@ const InfraestructuraSchema = {
     },
   },
   solicitudId: {
+    allowNull: false,
     type: DataTypes.INTEGER,
     field: 'solicitud_id',
     references: {
@@ -30,6 +31,7 @@ const InfraestructuraSchema = {
     },
   },
   tipoInstalacionId: {
+    allowNull: false,
     type: DataTypes.INTEGER,
     field: 'tipo_instalacion_id',
     references: {
