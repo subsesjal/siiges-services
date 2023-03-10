@@ -17,6 +17,7 @@ const {
   createDirectorQuery,
   updateDirectorQuery,
   updatePersonaQuery,
+  findOneAsignaturaQuery,
 } = require('../adapters/db');
 
 const findAllInstituciones = require('./db/instituciones/find-all.instituciones.use-cases');
@@ -37,6 +38,7 @@ const deleteRatificacion = require('./db/ratificaciones/delete.ratificaciones.us
 const createDirectorPlantel = require('./db/planteles/create.director-plantel.use-cases');
 const updateDirectorPlantel = require('./db/planteles/update.director-plantel.use-cases');
 const findAllMunicipios = require('./db/municipios/find-all.municipios.use-cases');
+const findOneAsignatura = require('./db/asignatura/find-one.asignatura.use-case');
 
 module.exports = {
   findAllInstituciones: findAllInstituciones(findAllInstitucionesQuery),
@@ -84,4 +86,5 @@ module.exports = {
     updateDirectorQuery,
   ),
   findAllMunicipios: findAllMunicipios(findAllMunicipiosQuery),
+  findOneAsignatura: findOneAsignatura(findOneAsignaturaQuery),
 };
