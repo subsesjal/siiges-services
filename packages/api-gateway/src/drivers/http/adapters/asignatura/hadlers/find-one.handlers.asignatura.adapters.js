@@ -6,7 +6,9 @@ async function findOneAsignatura(req, reply) {
     const { asignaturaId } = req.params;
 
     Logger.info(`[asignaturas]: Getting institución ${asignaturaId}`);
-    const asignatura = await this.institucionServices.findOneAsignatura({ id: asignaturaId });
+    const asignatura = await this.institucionServices.findOneAsignatura({
+      id: asignaturaId,
+    });
 
     return reply
       .code(200)

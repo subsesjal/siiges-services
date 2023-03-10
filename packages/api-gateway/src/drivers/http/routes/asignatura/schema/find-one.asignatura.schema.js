@@ -8,9 +8,8 @@ const findOneAsignaturaSchema = {
     type: 'object',
     properties: {
       asignaturaId: { type: 'integer' },
-      programalId: { type: 'integer' },
     },
-    required: ['asignaturaId', 'programaId'],
+    required: ['asignaturaId'],
   },
   response: {
     200: {
