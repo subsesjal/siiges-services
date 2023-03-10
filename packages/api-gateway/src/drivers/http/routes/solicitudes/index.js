@@ -5,8 +5,8 @@ const {
   createSolicitudProgramaSchema,
   findAllSolicitudesProgramasSchema,
   findOneSolicitudProgramaSchema,
+  findAllSolicitudesUsuarioSchema,
 } = require('./schema');
-const { findSolicitudesUsuarioSchema } = require('./schema');
 
 async function solicitudRouter(fastify, opts, next) {
   await fastify.get(
@@ -53,7 +53,7 @@ async function solicitudRouter(fastify, opts, next) {
 
   await fastify.get(
     '/usuarios/:usuarioId',
-    { schema: findSolicitudesUsuarioSchema },
+    { schema: findAllSolicitudesUsuarioSchema },
     solicitudesAdapter.findSolicitudesUsuario,
   );
 
