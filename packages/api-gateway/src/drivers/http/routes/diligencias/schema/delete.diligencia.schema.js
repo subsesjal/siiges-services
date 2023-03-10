@@ -1,15 +1,15 @@
 const { diligenciasResponse } = require('./properties');
 
 const deleteOneDiligencias = {
-  tags: ['Diligence'],
-  description: 'Given a diligenceId delete a diligence',
+  tags: ['Diligencia'],
+  description: 'Given a diligenciaId delete a diligencia',
   params: {
-    title: 'delete diligence',
+    title: 'delete diligencia',
     type: 'object',
     properties: {
-      diligenceId: { type: 'integer' },
+      diligenciaId: { type: 'integer' },
     },
-    required: ['diligenceId'],
+    required: ['diligenciaId'],
   },
   response: {
     200: {

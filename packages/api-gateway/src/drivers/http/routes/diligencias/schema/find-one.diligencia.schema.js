@@ -9,7 +9,7 @@ const findOneDiligencias = {
     properties: {
       diligenceId: { type: 'integer' },
     },
-    required: ['diligenceId'],
+    required: ['diligenciaId'],
   },
   response: {
     200: {

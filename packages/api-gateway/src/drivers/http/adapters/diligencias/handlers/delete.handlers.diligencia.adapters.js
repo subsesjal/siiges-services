@@ -7,7 +7,7 @@ async function deleteDiligencia(request, reply) {
   try {
     const { diligenciaId } = request.params;
 
-    Logger.info('[api/diligencia/delete]: deleting the diligencia');
+    Logger.info('[api/diligencia/delete]: deleting the diligencias');
     const diligencia = await this.solicitudServices.deleteDiligencia(
       { id: diligenciaId },
     );

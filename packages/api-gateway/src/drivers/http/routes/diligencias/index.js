@@ -8,7 +8,7 @@ const {
 
 async function diligenciasRouter(fastify, _, next) {
   await fastify.get(
-    '/:diligenceId',
+    '/:diligenciaId',
     { schema: findOneDiligenciaSchema },
     diligenciasAdapter.findOneDiligencia,
   );
@@ -20,13 +20,13 @@ async function diligenciasRouter(fastify, _, next) {
   );
 
   await fastify.patch(
-    '/:diligenceId',
+    '/:diligenciaId',
     { schema: updateDiligenciaSchema },
     diligenciasAdapter.updateDiligencia,
   );
 
   await fastify.delete(
-    '/:diligenceId',
+    '/:diligenciaId',
     { schema: deleteDiligenciaSchema },
     diligenciasAdapter.deleteDiligencia,
   );

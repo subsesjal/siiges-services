@@ -10,6 +10,7 @@ const {
   findDiligenciasSolicitud,
   findOneDiligencia,
   updateDiligencia,
+  deleteDiligencia,
 } = require('./db/diligencias');
 
 module.exports = {
@@ -21,4 +22,5 @@ module.exports = {
   findDiligenciasSolicitud,
   findOneDiligencia,
   updateDiligencia,
+  deleteDiligencia,
 };

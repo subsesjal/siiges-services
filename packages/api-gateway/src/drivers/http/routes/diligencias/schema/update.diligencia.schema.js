@@ -9,7 +9,7 @@ const updateDiligencias = {
     properties: {
       diligenceId: { type: 'integer' },
     },
-    required: ['diligenceId'],
+    required: ['diligenciaId'],
   },
   body: {
     title: 'getOneDiligence',
