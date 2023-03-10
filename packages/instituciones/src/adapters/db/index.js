@@ -40,5 +40,5 @@ module.exports = {
   updatePersonaQuery: updateQuery(Persona),
   updateDirectorQuery: updateQuery(Director),
   findAllMunicipiosQuery: findAllQuery(Municipio),
-  findOneAsignaturaQuery: findOneQuery(Asinatura),
+  findOneAsignaturaQuery: findOneQuery(Asignatura),
 };
