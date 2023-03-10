@@ -5,6 +5,14 @@ const {
   findSolicitudesUsuario,
 } = require('./db/solicitudes');
 
+const {
+  createDiligencia,
+  findDiligenciasSolicitud,
+  findOneDiligencia,
+  updateDiligencia,
+  deleteDiligencia,
+} = require('./db/diligencias');
+
 const { createAsignaturaPrograma } = require('./db/asignaturas');
 
 module.exports = {
@@ -12,5 +20,10 @@ module.exports = {
   findAllSolicitudesProgramas,
   findOneSolicitudPrograma,
   findSolicitudesUsuario,
+  createDiligencia,
+  findDiligenciasSolicitud,
+  findOneDiligencia,
+  updateDiligencia,
+  deleteDiligencia,
   createAsignaturaPrograma,
 };
