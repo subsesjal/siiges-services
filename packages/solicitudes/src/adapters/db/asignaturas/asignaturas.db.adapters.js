@@ -14,4 +14,5 @@ const {
 module.exports = {
   findProgramaQuery: findOneQuery(Programa),
   createAsignaturaProgramaQuery: createQuery(Asignatura),
+  findOneAsignaturaQuery: findOneQuery(Asignatura),
 };
