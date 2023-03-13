@@ -17,7 +17,7 @@ const findOneAsignaturaSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            asignatura: { ...asignatura },
+            ...asignatura,
             ...responseProperties,
           },
         },
