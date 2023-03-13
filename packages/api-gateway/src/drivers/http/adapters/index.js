@@ -7,7 +7,7 @@ const municipiosAdapter = require('./municipios/handlers');
 const solicitudesAdapter = require('./solicitudes/handlers');
 const diligenciasAdapter = require('./diligencias/handlers');
 const { representativeAdapter } = require('./solicitud');
-const asignaturasAdapter = require('./asignaturas/hadlers');
+const asignaturasAdapter = require('./asignaturas/handlers');
 
 module.exports = {
   diligenciasAdapter,

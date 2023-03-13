@@ -1,11 +1,12 @@
 const { asignatura } = require('./properties/asignatura');
+const { responseProperties } = require('./properties/responseProperties');
 
 const findOneAsignaturaSchema = {
   tags: ['Asignatura'],
-  description: 'Asignatura information finder',
+  description: 'Given an asignatura id, then return a asignatura from database.',
   params: {
     type: 'object',
-    properties: { ...asignatura },
+    properties: { asignaturaId: { type: 'integer' } },
     required: ['asignaturaId'],
   },
   response: {
@@ -15,7 +16,9 @@ const findOneAsignaturaSchema = {
         data: {
           type: 'object',
           properties: {
+            id: { type: 'integer' },
             asignatura: { ...asignatura },
+            ...responseProperties,
           },
         },
       },

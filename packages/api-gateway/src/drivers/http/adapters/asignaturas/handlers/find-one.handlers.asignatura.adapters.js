@@ -1,12 +1,12 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-async function findOneAsignatura(req, reply) {
+async function findOneAsignaturaPrograma(req, reply) {
   try {
     const { asignaturaId } = req.params;
 
     Logger.info(`[asignaturas]: Getting institución ${asignaturaId}`);
-    const asignatura = await this.asignaturaServices.findOneAsignatura({
+    const asignatura = await this.solicitudServices.findOneAsignatura({
       id: asignaturaId,
     });
 
@@ -19,4 +19,4 @@ async function findOneAsignatura(req, reply) {
   }
 }
 
-module.exports = findOneAsignatura;
+module.exports = findOneAsignaturaPrograma;
