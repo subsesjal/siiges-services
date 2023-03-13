@@ -7,7 +7,8 @@ module.exports = {
   createAsignaturaPrograma: createAsignaturaPrograma(
     asignaturas.findProgramaQuery,
     asignaturas.createAsignaturaProgramaQuery,
+  ),
+  findOneAsignatura: findOneAsignatura(
     asignaturas.findOneAsignaturaQuery,
-    findOneAsignatura,
   ),
 };

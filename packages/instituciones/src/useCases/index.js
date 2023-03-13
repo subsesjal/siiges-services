@@ -17,7 +17,7 @@ const {
   createDirectorQuery,
   updateDirectorQuery,
   updatePersonaQuery,
- } = require('../adapters/db');
+} = require('../adapters/db');
 
 const findAllInstituciones = require('./db/instituciones/find-all.instituciones.use-cases');
 const findOneInstitucion = require('./db/instituciones/find-one.instituciones.use-cases');
