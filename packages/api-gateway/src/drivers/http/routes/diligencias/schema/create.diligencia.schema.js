@@ -1,13 +1,13 @@
-const { diligence, diligenceResponse } = require('./properties');
+const { diligencias, diligenciasResponse } = require('./properties');
 
-const createDiligence = {
+const createDiligencias = {
   tags: ['Diligence'],
   description: 'Given a solicitudId create a diligence',
   body: {
     title: 'getOneDiligence',
     type: 'object',
     properties: {
-      ...diligence,
+      ...diligencias,
     },
     required: ['solicitudId', 'personaId', 'horaInicio', 'horaFin'],
   },
@@ -19,7 +19,7 @@ const createDiligence = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...diligenceResponse,
+            ...diligenciasResponse,
           },
         },
       },
@@ -27,4 +27,4 @@ const createDiligence = {
   },
 };
 
-module.exports = createDiligence;
+module.exports = createDiligencias;
