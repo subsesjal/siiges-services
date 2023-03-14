@@ -2,23 +2,20 @@ const { checkers } = require('@siiges-services/shared');
 
 const findProgramaAsignatura = (findProgramaAsignaturaQuery) => async (identifierObj) => {
   const include = [{
-    association: 'asignaturas',
+    association: 'programas',
     include: [
-      { association: 'programas' },
+      { association: 'asignaturas' },
       {
-        association: 'programas_Turnos',
         include: [{
           association: 'nombre',
           include: [
             { association: 'area' },
             { association: 'clave' },
             { association: 'programaId' },
+            { association: 'asignaturaId' },
           ],
         }],
       }],
-  },
-  {
-    association: 'asignaturaId',
   }];
 
   const asignaturas = await findProgramaAsignaturaQuery(identifierObj, {
