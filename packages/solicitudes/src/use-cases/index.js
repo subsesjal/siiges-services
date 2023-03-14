@@ -13,7 +13,7 @@ const {
   deleteDiligencia,
 } = require('./db/diligencias');
 
-const { createAsignaturaPrograma } = require('./db/asignaturas');
+const { createAsignaturaPrograma, findOneAsignatura } = require('./db/asignaturas');
 
 module.exports = {
   createSolicitudPrograma,
@@ -26,4 +26,5 @@ module.exports = {
   updateDiligencia,
   deleteDiligencia,
   createAsignaturaPrograma,
+  findOneAsignatura,
 };
