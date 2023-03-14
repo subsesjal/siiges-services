@@ -16,7 +16,7 @@ async function asignaturaRouter(fastify, opts, next) {
   next();
 
   await fastify.get(
-    '/:asignaturaId/programas/:programaId',
+    '/:programaId/asignatura/',
     { schema: findProgramaAsignaturaSchema },
     asignaturasAdapter.findProgramaAsignatura,
   );
