@@ -9,17 +9,17 @@ async function asignaturaRouter(fastify, opts, next) {
   );
 
   await fastify.get(
+    '/programas/:programaId',
+    { schema: findProgramaAsignaturaSchema },
+    asignaturasAdapter.findProgramaAsignatura,
+  );
+
+  await fastify.get(
     '/:asignaturaId',
     { schema: findOneAsignaturaSchema },
     asignaturasAdapter.findOneAsignaturaPrograma,
   );
   next();
-
-  await fastify.get(
-    '/programas/:programaId',
-    { schema: findProgramaAsignaturaSchema },
-    asignaturasAdapter.findProgramaAsignatura,
-  );
 }
 
 module.exports = asignaturaRouter;
