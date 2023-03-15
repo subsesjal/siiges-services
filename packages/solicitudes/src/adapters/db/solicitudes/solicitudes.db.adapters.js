@@ -6,6 +6,7 @@ const {
   Nivel,
   Usuario,
   ProgramaTurno,
+  Programa,
 } = models;
 
 const {
@@ -14,7 +15,7 @@ const {
   createQuery,
   updateAndFindQuery,
   countQuery,
-
+  deleteQuery,
 } = queries;
 
 module.exports = {
@@ -27,5 +28,10 @@ module.exports = {
   findAllSolicitudesProgramasQuery: findAllQuery(Solicitud),
   findOneSolicitudProgramaQuery: findOneQuery(Solicitud),
   findAllSolicitudesUsuarioQuery: findAllQuery(Solicitud),
+  updateSolicitudQuery: updateAndFindQuery(Solicitud),
+  findOneProgramaQuery: findOneQuery(Programa),
+  updateProgramaQuery: updateAndFindQuery(Programa),
   createProgramaTurnoQuery: createQuery(ProgramaTurno),
+  findOneProgramaTurnoQuery: findOneQuery(ProgramaTurno),
+  deleteProgramaTurnoQuery: deleteQuery(ProgramaTurno),
 };
