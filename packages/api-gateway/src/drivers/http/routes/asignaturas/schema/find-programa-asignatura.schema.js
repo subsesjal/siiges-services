@@ -1,4 +1,4 @@
-const { programa, asignatura } = require('./properties/asignatura');
+const { asignatura } = require('./properties/asignatura');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findProgramaAsignaturaSchema = {
@@ -19,18 +19,12 @@ const findProgramaAsignaturaSchema = {
       properties: {
         data: {
           type: 'object',
-          properties: {
-            id: { type: 'integer' },
-            ...programa,
-            folio: { type: 'string' },
-            ...responseProperties,
-            asignatura: {
-              type: 'object',
-              properties: {
-                id: { type: 'integer' },
-                ...asignatura,
-                ...responseProperties,
-              },
+          asignatura: {
+            type: 'object',
+            properties: {
+              id: { type: 'integer' },
+              ...asignatura,
+              ...responseProperties,
             },
           },
         },
