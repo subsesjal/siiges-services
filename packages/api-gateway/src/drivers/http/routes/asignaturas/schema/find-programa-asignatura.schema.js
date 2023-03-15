@@ -9,7 +9,6 @@ const findProgramaAsignaturaSchema = {
     type: 'object',
     properties: {
       programaId: { type: 'integer' },
-      asignaturaId: { type: 'integer' },
     },
     required: ['programaId'],
   },
