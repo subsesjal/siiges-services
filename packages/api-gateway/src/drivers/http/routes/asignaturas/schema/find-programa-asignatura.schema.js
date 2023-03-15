@@ -11,7 +11,7 @@ const findProgramaAsignaturaSchema = {
       programaId: { type: 'integer' },
       asignaturaId: { type: 'integer' },
     },
-    required: ['programaId', 'asignaturaId'],
+    required: ['programaId'],
   },
   response: {
     200: {
