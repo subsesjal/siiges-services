@@ -1,13 +1,7 @@
 const { checkers } = require('@siiges-services/shared');
 
 const findProgramaAsignatura = (findProgramaAsignaturaQuery) => async (identifierObj) => {
-  const include = { association: 'asignaturas' };
-
-  const asignaturas = await findProgramaAsignaturaQuery(identifierObj, {
-    undefined,
-    include,
-    strict: false,
-  });
+  const asignaturas = await findProgramaAsignaturaQuery({ identifierObj });
 
   checkers.throwErrorIfDataIsFalsy(asignaturas, 'asignaturas', identifierObj.id);
 
