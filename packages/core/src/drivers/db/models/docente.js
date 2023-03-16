@@ -19,21 +19,24 @@ const DocenteSchema = {
       key: 'id',
     },
   },
-  es_aceptado: {
+  esAceptado: {
     allowNull: false,
-    type: DataTypes.INTEGER,
+    type: DataTypes.BOOLEAN,
+    field: 'es_aceptado',
   },
-  tipo_docente: {
+  tipoDocente: {
     allowNull: false,
     type: DataTypes.INTEGER,
+    field: 'tipo_docente',
   },
-  tipo_contratacion: {
+  tipoContratacion: {
     allowNull: false,
     type: DataTypes.INTEGER,
+    field: 'tipo_contratacion',
   },
   antiguedad: {
     allowNull: false,
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
   },
   experiencias: {
     allowNull: false,
