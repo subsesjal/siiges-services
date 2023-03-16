@@ -3,6 +3,7 @@ const { usuario } = require('./properties/usuario');
 const { estatusSolicitud } = require('./properties/estatusSolicitud');
 const { responseProperties } = require('./properties/responseProperties');
 const { plantel } = require('../../instituciones/schema/properties/plantel');
+const { tipoSolicitud } = require('./properties/solicitud');
 
 const findAllSolicitudesUsuarioSchema = {
   tags: ['Solicitudes'],
@@ -26,6 +27,11 @@ const findAllSolicitudesUsuarioSchema = {
                   id: { type: 'integer' },
                   ...estatusSolicitud,
                   ...responseProperties,
+                  tipoSolicitud: {
+                    tipoSolicitud: { type: 'string' },
+                    ...tipoSolicitud,
+                    ...responseProperties,
+                  },
                 },
               },
               usuario: {
