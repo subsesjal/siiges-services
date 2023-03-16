@@ -16,7 +16,7 @@ const {
 const {
   createAsignaturaPrograma,
   findOneAsignatura,
-  findProgramaAsignatura,
+  findProgramaAsignaturas,
 } = require('./db/asignaturas');
 
 module.exports = {
@@ -31,5 +31,5 @@ module.exports = {
   deleteDiligencia,
   createAsignaturaPrograma,
   findOneAsignatura,
-  findProgramaAsignatura,
+  findProgramaAsignaturas,
 };

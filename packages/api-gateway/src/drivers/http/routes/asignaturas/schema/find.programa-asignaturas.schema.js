@@ -3,9 +3,9 @@ const { responseProperties } = require('./properties/responseProperties');
 
 const findProgramaAsignaturaSchema = {
   tags: ['Programas'],
-  description: 'Return an object programa - asignatura.',
+  description: 'Return an array of asignaturas grouped by programa.',
   params: {
-    title: 'findProgramaAsignaturaSchema',
+    title: 'findProgramaAsignaturasSchema',
     type: 'object',
     properties: {
       programaId: { type: 'integer' },
@@ -17,14 +17,11 @@ const findProgramaAsignaturaSchema = {
       type: 'object',
       properties: {
         data: {
-          type: 'object',
-          asignatura: {
-            type: 'object',
-            properties: {
-              id: { type: 'integer' },
-              ...asignatura,
-              ...responseProperties,
-            },
+          type: 'array',
+          properties: {
+            id: { type: 'integer' },
+            ...asignatura,
+            ...responseProperties,
           },
         },
       },

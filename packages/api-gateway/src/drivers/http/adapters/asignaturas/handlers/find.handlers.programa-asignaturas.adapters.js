@@ -1,14 +1,12 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-async function findProgramaAsignatura(req, reply) {
+async function findProgramaAsignaturas(req, reply) {
   try {
     const { programaId } = req.params;
 
     Logger.info('[programa]: Getting asignatura - programa');
-    const asignatura = await this.solicitudServices.findProgramaAsignatura(
-      { programaId },
-    );
+    const asignatura = await this.solicitudServices.findProgramaAsignaturas({ programaId });
 
     return reply
       .code(200)
@@ -19,4 +17,4 @@ async function findProgramaAsignatura(req, reply) {
   }
 }
 
-module.exports = findProgramaAsignatura;
+module.exports = findProgramaAsignaturas;

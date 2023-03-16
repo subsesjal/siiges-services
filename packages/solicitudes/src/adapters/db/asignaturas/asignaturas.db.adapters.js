@@ -16,5 +16,5 @@ module.exports = {
   findProgramaQuery: findOneQuery(Programa),
   createAsignaturaProgramaQuery: createQuery(Asignatura),
   findOneAsignaturaQuery: findOneQuery(Asignatura),
-  findProgramaAsignaturaQuery: findAllQuery(Asignatura),
+  findProgramaAsignaturasQuery: findAllQuery(Asignatura),
 };
