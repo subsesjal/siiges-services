@@ -28,7 +28,7 @@ const findAllSolicitudesUsuarioSchema = {
                   ...estatusSolicitud,
                   ...responseProperties,
                   tipoSolicitud: {
-                    nombre: { type: 'string' },
+                    id: { type: 'integer' },
                     ...tipoSolicitud,
                     ...responseProperties,
                   },
