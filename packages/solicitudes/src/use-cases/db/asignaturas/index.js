@@ -2,6 +2,7 @@ const { asignaturas } = require('../../../adapters/db');
 
 const createAsignaturaPrograma = require('./create.asignatura.use-cases');
 const findOneAsignatura = require('./find-one.asignatura.use-cases');
+const updateAsignatura = require('./update.asignatura.use-cases');
 
 module.exports = {
   createAsignaturaPrograma: createAsignaturaPrograma(
@@ -10,5 +11,8 @@ module.exports = {
   ),
   findOneAsignatura: findOneAsignatura(
     asignaturas.findOneAsignaturaQuery,
+  ),
+  updateAsignatura: updateAsignatura(
+    asignaturas.updateAsignaturaQuery,
   ),
 };
