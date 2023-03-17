@@ -8,7 +8,7 @@ async function updateAsignatura(request, reply) {
     const { asignaturasId } = request.params;
     const { ...changes } = request.body;
 
-    Logger.info('[api/asignatura/update]: updating the diligence');
+    Logger.info('[api/asignatura/update]: updating the asignatura');
     const asignaturas = await this.solicitudServices.updateAsignatura(
       { id: asignaturasId },
       changes,
