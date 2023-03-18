@@ -14,7 +14,7 @@ const updateDiligencias = {
     required: ['diligenciaId'],
   },
   body: {
-    title: 'getOneDiligence',
+    title: 'updateDiligence',
     type: 'object',
     properties: {
       ...diligencia,

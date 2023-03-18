@@ -1,5 +1,6 @@
 const { diligencia } = require('./properties/diligencia');
 const { responseProperties } = require('./properties/responseProperties');
+const { persona } = require('../../usuarios/schema/properties/persona');
 
 const findGroupDiligencias = {
   tags: ['Diligence'],
@@ -23,6 +24,14 @@ const findGroupDiligencias = {
               id: { type: 'integer' },
               ...diligencia,
               ...responseProperties,
+              persona: {
+                type: 'object',
+                properties: {
+                  id: { type: 'integer' },
+                  ...persona,
+                  ...responseProperties,
+                },
+              },
             },
           },
         },

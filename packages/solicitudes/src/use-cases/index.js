@@ -8,7 +8,7 @@ const {
 
 const {
   createDiligencia,
-  findDiligenciasSolicitud,
+  findDiligenciasBySolicitud,
   findOneDiligencia,
   updateDiligencia,
   deleteDiligencia,
@@ -22,7 +22,7 @@ module.exports = {
   findOneSolicitudPrograma,
   findSolicitudesUsuario,
   createDiligencia,
-  findDiligenciasSolicitud,
+  findDiligenciasBySolicitud,
   findOneDiligencia,
   updateDiligencia,
   deleteDiligencia,

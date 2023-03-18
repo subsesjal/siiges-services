@@ -1,11 +1,17 @@
 const { Logger } = require('@siiges-services/shared');
 
 const find = (findGroupQuery) => async (identifierObj) => {
-  Logger.info('[diligence/find] Searching all diligences in a solicitud');
-  const diligence = await findGroupQuery(identifierObj);
-  Logger.info('[diligence/find] Diligences search finish');
+  const { query } = identifierObj;
 
-  return diligence;
+  const include = [{
+    association: 'persona',
+    include: [{ association: 'domicilio' }],
+  }];
+
+  Logger.info('[diligence/find] Searching all diligences in a solicitud');
+  const diligencia = await findGroupQuery(null, { query, include });
+
+  return diligencia;
 };
 
 module.exports = find;

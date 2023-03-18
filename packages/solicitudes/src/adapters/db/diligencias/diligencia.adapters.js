@@ -5,15 +5,16 @@ const {
   deleteAndFindQuery,
   findOneQuery,
   findAllQuery,
-  updateQuery,
+  updateAndFindQuery,
 } = queries;
 
-const { Diligencia } = models;
+const { Diligencia, Persona } = models;
 
 module.exports = {
   createQuery: createQuery(Diligencia),
   deleteQuery: deleteAndFindQuery(Diligencia),
   findOneQuery: findOneQuery(Diligencia),
   findAllQuery: findAllQuery(Diligencia),
-  updateQuery: updateQuery(Diligencia),
+  updateQuery: updateAndFindQuery(Diligencia),
+  updatePersonaQuery: updateAndFindQuery(Persona),
 };
