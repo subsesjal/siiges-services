@@ -1,11 +1,25 @@
-const { Logger } = require('@siiges-services/shared');
+const { checkers } = require('@siiges-services/shared');
 
-const update = (updateQuery) => async (identifierObj, changes) => {
-  Logger.info('[diligencia/update]: Updating diligencia');
-  const diligence = await updateQuery(identifierObj, changes);
-  Logger.info('[diligencia/update]: Diligencia updated');
+const update = (
+  findDiligenciaQuery,
+  updateDiligenciaQuery,
+  updatePersonaQuery,
+) => async (identifierObj, data) => {
+  const { diligenciaId } = identifierObj;
 
-  return diligence;
+  const diligencia = await findDiligenciaQuery(diligenciaId);
+  checkers.throwErrorIfDataIsFalsy(diligencia, 'diligencias', diligenciaId);
+
+  let personaUpdated;
+  const diligenciaUpdated = await updateDiligenciaQuery({ id: diligencia.id }, data);
+
+  if (data.persona) {
+    const { persona } = data;
+    personaUpdated = await updatePersonaQuery({ id: diligencia.personaId }, persona);
+    diligenciaUpdated.dataValues.persona = personaUpdated.dataValues;
+  }
+
+  return diligenciaUpdated;
 };
 
 module.exports = update;

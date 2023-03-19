@@ -1,4 +1,5 @@
-const { diligenciasResponse } = require('./properties');
+const { responseProperties } = require('./properties/responseProperties');
+const { diligencia } = require('./properties/diligencia');
 
 const deleteOneDiligencias = {
   tags: ['Diligencia'],
@@ -19,7 +20,8 @@ const deleteOneDiligencias = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...diligenciasResponse,
+            ...diligencia,
+            ...responseProperties,
           },
         },
       },

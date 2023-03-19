@@ -1,5 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PERSONA_TABLE } = require('./persona');
+const { PROGRAMA_TABLE } = require('./programa');
 
 const DOCENTE_TABLE = 'docentes';
 
@@ -19,28 +20,40 @@ const DocenteSchema = {
       key: 'id',
     },
   },
-  es_aceptado: {
+  programaId: {
     allowNull: false,
     type: DataTypes.INTEGER,
+    field: 'programa_id',
+    references: {
+      model: PROGRAMA_TABLE,
+      key: 'id',
+    },
   },
-  tipo_docente: {
+  esAceptado: {
     allowNull: false,
-    type: DataTypes.INTEGER,
+    type: DataTypes.BOOLEAN,
+    field: 'es_aceptado',
   },
-  tipo_contratacion: {
+  tipoDocente: {
     allowNull: false,
     type: DataTypes.INTEGER,
+    field: 'tipo_docente',
+  },
+  tipoContratacion: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'tipo_contratacion',
   },
   antiguedad: {
-    allowNull: false,
-    type: DataTypes.INTEGER,
+    allowNull: true,
+    type: DataTypes.STRING,
   },
   experiencias: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.STRING,
   },
   observaciones: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.STRING,
   },
   createdAt: {
@@ -66,6 +79,7 @@ const DocenteSchema = {
 class Docente extends Model {
   static associate(models) {
     this.belongsTo(models.Persona, { as: 'persona' });
+    this.hasMany(models.AsignaturaDocente, { as: 'asignaturasDocentes', foreignKey: 'docenteId' });
   }
 
   static config(sequelize) {

@@ -3,3 +3,7 @@ id,domicilio_id,nombre,apellido_paterno,apellido_materno,fecha_nacimiento,sexo,n
 2,1,Ivan,Narvaez,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-07 21:28:31
 3,1,SIN DATO,SIN DATO,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:00:49
 4,1,SIN DATO,SIN DATO,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41
+5,1,Director 1,dir 1,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41
+6,1,Director 2,dir 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41
+7,1,Director 3,dir 3,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41
+8,1,Director 4,dir 4,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41

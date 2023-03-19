@@ -7,8 +7,15 @@ const update = require('./update.diligencia.use-cases');
 
 module.exports = {
   createDiligencia: create(diligencias.createQuery),
-  deleteDiligencia: deleteOne(diligencias.deleteQuery),
+  deleteDiligencia: deleteOne(
+    diligencias.findOneQuery,
+    diligencias.deleteQuery,
+  ),
   findOneDiligencia: findOne(diligencias.findOneQuery),
-  findDiligenciasSolicitud: findGroup(diligencias.findAllQuery),
-  updateDiligencia: update(diligencias.updateQuery),
+  findDiligenciasBySolicitud: findGroup(diligencias.findAllQuery),
+  updateDiligencia: update(
+    diligencias.findOneQuery,
+    diligencias.updateQuery,
+    diligencias.updatePersonaQuery,
+  ),
 };
