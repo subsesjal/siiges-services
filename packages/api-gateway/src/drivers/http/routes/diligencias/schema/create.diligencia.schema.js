@@ -1,15 +1,24 @@
-const { diligencias, diligenciasResponse } = require('./properties');
+const { diligencia } = require('./properties/diligencia');
+const { responseProperties } = require('./properties/responseProperties');
+const { persona } = require('../../usuarios/schema/properties/persona');
 
 const createDiligencias = {
-  tags: ['Diligence'],
-  description: 'Given a solicitudId create a diligence',
+  tags: ['Diligencia'],
+  description: 'Given an object with request data create a diligencia',
   body: {
-    title: 'getOneDiligence',
+    title: 'createDiligencia',
     type: 'object',
     properties: {
-      ...diligencias,
+      ...diligencia,
+      persona: {
+        type: 'object',
+        properties: {
+          ...persona,
+        },
+        required: ['nombre', 'apellidoPaterno'],
+      },
     },
-    required: ['solicitudId', 'personaId', 'horaInicio', 'horaFin'],
+    required: ['solicitudId', 'horaInicio', 'horaFin', 'persona'],
   },
   response: {
     200: {
@@ -19,7 +28,16 @@ const createDiligencias = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...diligenciasResponse,
+            ...diligencia,
+            ...responseProperties,
+            persona: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...persona,
+                ...responseProperties,
+              },
+            },
           },
         },
       },
