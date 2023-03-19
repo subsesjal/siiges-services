@@ -1,5 +1,10 @@
 const { solicitud } = require('./properties/solicitud');
-const { usuario } = require('./properties/usuario');
+const { programa } = require('./properties/programa');
+const { plantel } = require('../../instituciones/schema/properties/plantel');
+const { domicilio } = require('../../usuarios/schema/properties/domicilio');
+const { estado } = require('../../usuarios/schema/properties/estado');
+const { municipio } = require('../../usuarios/schema/properties/municipio');
+
 const { estatusSolicitud } = require('./properties/estatusSolicitud');
 const { responseProperties } = require('./properties/responseProperties');
 
@@ -27,12 +32,44 @@ const findAllSolicitudesUsuarioSchema = {
                   ...responseProperties,
                 },
               },
-              usuario: {
+              programa: {
                 type: 'object',
                 properties: {
                   id: { type: 'integer' },
-                  ...usuario,
+                  ...programa,
                   ...responseProperties,
+                  plantel: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...plantel,
+                      ...responseProperties,
+                      domicilio: {
+                        type: 'object',
+                        properties: {
+                          id: { type: 'integer' },
+                          ...domicilio,
+                          ...responseProperties,
+                          municipio: {
+                            type: 'object',
+                            properties: {
+                              id: { type: 'integer' },
+                              ...municipio,
+                              ...responseProperties,
+                            },
+                          },
+                          estado: {
+                            type: 'object',
+                            properties: {
+                              id: { type: 'integer' },
+                              ...estado,
+                              ...responseProperties,
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
                 },
               },
             },
