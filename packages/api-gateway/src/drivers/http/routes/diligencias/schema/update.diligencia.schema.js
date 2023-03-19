@@ -1,21 +1,29 @@
-const { diligencias, diligenciasResponse } = require('./properties');
+const { diligencia } = require('./properties/diligencia');
+const { persona } = require('../../usuarios/schema/properties/persona');
+const { responseProperties } = require('./properties/responseProperties');
 
 const updateDiligencias = {
-  tags: ['Diligence'],
+  tags: ['Diligencias'],
   description: 'Given a diligenceId update a diligence',
   params: {
     title: 'update diligence',
     type: 'object',
     properties: {
-      diligenceId: { type: 'integer' },
+      diligenciaId: { type: 'integer' },
     },
     required: ['diligenciaId'],
   },
   body: {
-    title: 'getOneDiligence',
+    title: 'updateDiligence',
     type: 'object',
     properties: {
-      ...diligencias,
+      ...diligencia,
+      persona: {
+        type: 'object',
+        properties: {
+          ...persona,
+        },
+      },
     },
   },
   response: {
@@ -26,7 +34,16 @@ const updateDiligencias = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...diligenciasResponse,
+            ...diligencia,
+            ...responseProperties,
+            persona: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...persona,
+                ...responseProperties,
+              },
+            },
           },
         },
       },

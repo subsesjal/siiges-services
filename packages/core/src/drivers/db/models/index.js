@@ -28,6 +28,7 @@ const { TipoInstalacion, TipoInstalacionSchema } = require('./tipoInstalacion');
 const { Docente, DocenteSchema } = require('./docente');
 const { Infraestructura, InfraestructuraSchema } = require('./infraestructura');
 const { Asignatura, AsignaturaSchema } = require('./asignatura');
+const { AsignaturaDocente, AsignaturaDocenteSchema } = require('./asignaturaDocente');
 
 function setupModels(sequelize) {
   Ciclo.init(CicloSchema, Ciclo.config(sequelize));
@@ -60,6 +61,7 @@ function setupModels(sequelize) {
   Docente.init(DocenteSchema, Docente.config(sequelize));
   Infraestructura.init(InfraestructuraSchema, Infraestructura.config(sequelize));
   Asignatura.init(AsignaturaSchema, Asignatura.config(sequelize));
+  AsignaturaDocente.init(AsignaturaDocenteSchema, AsignaturaDocente.config(sequelize));
 
   Ciclo.associate(sequelize.models);
   Domicilio.associate(sequelize.models);
@@ -91,6 +93,7 @@ function setupModels(sequelize) {
   Docente.associate(sequelize.models);
   Infraestructura.associate(sequelize.models);
   Asignatura.associate(sequelize.models);
+  AsignaturaDocente.associate(sequelize.models);
 }
 
 module.exports = setupModels;
