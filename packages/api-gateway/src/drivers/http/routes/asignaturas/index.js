@@ -30,6 +30,7 @@ async function asignaturaRouter(fastify, opts, next) {
     { schema: deleteAsignaturaSchema },
     asignaturasAdapter.deleteAsignaturaPrograma,
   );
+
   next();
 }
 
