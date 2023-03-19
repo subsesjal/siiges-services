@@ -38,8 +38,17 @@ const createDocenteSchema = {
             id: { type: 'integer' },
             ...docente,
             ...responseProperties,
+            persona: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...persona,
+                ...responseProperties,
+              },
+            },
             asignaturasDocentes: {
               type: 'array',
+              minItems: 1,
               properties: {
                 id: { type: 'integer' },
                 ...asignatura,

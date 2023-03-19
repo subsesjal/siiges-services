@@ -1,5 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PERSONA_TABLE } = require('./persona');
+const { PROGRAMA_TABLE } = require('./programa');
 
 const DOCENTE_TABLE = 'docentes';
 
@@ -19,6 +20,15 @@ const DocenteSchema = {
       key: 'id',
     },
   },
+  programaId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'programa_id',
+    references: {
+      model: PROGRAMA_TABLE,
+      key: 'id',
+    },
+  },
   esAceptado: {
     allowNull: false,
     type: DataTypes.BOOLEAN,
@@ -35,15 +45,15 @@ const DocenteSchema = {
     field: 'tipo_contratacion',
   },
   antiguedad: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.STRING,
   },
   experiencias: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.STRING,
   },
   observaciones: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.STRING,
   },
   createdAt: {
