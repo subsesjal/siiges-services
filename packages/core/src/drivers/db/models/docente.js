@@ -79,6 +79,7 @@ const DocenteSchema = {
 class Docente extends Model {
   static associate(models) {
     this.belongsTo(models.Persona, { as: 'persona' });
+    this.hasMany(models.AsignaturaDocente, { as: 'asignaturasDocentes', foreignKey: 'docenteId' });
   }
 
   static config(sequelize) {

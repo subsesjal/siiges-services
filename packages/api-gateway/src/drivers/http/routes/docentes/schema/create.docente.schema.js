@@ -48,11 +48,12 @@ const createDocenteSchema = {
             },
             asignaturasDocentes: {
               type: 'array',
-              minItems: 1,
-              properties: {
-                id: { type: 'integer' },
-                ...asignatura,
-                ...responseProperties,
+              items: {
+                properties: {
+                  id: { type: 'integer' },
+                  ...asignatura,
+                  ...responseProperties,
+                },
               },
             },
           },
