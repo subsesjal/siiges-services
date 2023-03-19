@@ -15,11 +15,15 @@ const {
 } = require('./db/diligencias');
 
 const {
+  createAsignaturaPrograma,
+  findOneAsignatura,
+  findProgramaAsignaturas,
+} = require('./db/asignaturas');
+
+const {
   createDocente,
   findOneDocente,
 } = require('./db/docentes');
-
-const { createAsignaturaPrograma, findOneAsignatura } = require('./db/asignaturas');
 
 module.exports = {
   createSolicitudPrograma,
@@ -34,6 +38,7 @@ module.exports = {
   createAsignaturaPrograma,
   updateSolicitudPrograma,
   findOneAsignatura,
+  findProgramaAsignaturas,
   createDocente,
   findOneDocente,
 };
