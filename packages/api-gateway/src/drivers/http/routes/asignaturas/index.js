@@ -1,5 +1,9 @@
 const { asignaturasAdapter } = require('../../adapters');
-const { createAsignaturaSchema, findOneAsignaturaSchema, updateAsignaturasSchema } = require('./schema');
+const {
+  createAsignaturaSchema,
+  findOneAsignaturaSchema,
+  updateAsignaturasSchema,
+} = require('./schema');
 
 async function asignaturaRouter(fastify, opts, next) {
   await fastify.post(
