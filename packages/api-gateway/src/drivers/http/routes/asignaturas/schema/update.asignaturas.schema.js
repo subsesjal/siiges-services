@@ -1,5 +1,5 @@
-const { asignaturas } = require('./properties/asignatura');
-const { asignaturasResponse } = require('./properties/responseProperties');
+const { asignatura } = require('./properties/asignatura');
+const { responseProperties } = require('./properties/responseProperties');
 
 const updateAsignaturas = {
   tags: ['Asignaturas'],
@@ -16,18 +16,18 @@ const updateAsignaturas = {
     title: 'getOneAsignatura',
     type: 'object',
     properties: {
-      ...asignaturas,
+      ...asignatura,
     },
   },
   response: {
-    200: {
+    201: {
       type: 'object',
       properties: {
         data: {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...asignaturasResponse,
+            ...responseProperties,
           },
         },
       },
