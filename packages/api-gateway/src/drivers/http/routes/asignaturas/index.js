@@ -16,7 +16,7 @@ async function asignaturaRouter(fastify, opts, next) {
   await fastify.patch(
     '/:asignaturaId',
     { schema: updateAsignaturasSchema },
-    asignaturasAdapter.updateAsignatura,
+    asignaturasAdapter.updateAsignaturas,
   );
 
   next();
