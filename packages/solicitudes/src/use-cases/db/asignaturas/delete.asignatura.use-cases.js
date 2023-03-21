@@ -1,13 +1,17 @@
 const { Logger } = require('@siiges-services/shared');
+const { checkers } = require('@siiges-services/shared');
 
-const deleteAsignatura = (deleteAsignaturaQuery) => async (
+const deleteAsignatura = (findOneAsignaturaQuery, deleteAsignaturaQuery) => async (
   identifierObj,
 ) => {
+  const asignatura = await findOneAsignaturaQuery(identifierObj);
+  checkers.throwErrorIfDataIsFalsy(asignatura, 'asignaturas', identifierObj.id);
+
   Logger.info('[asignatura/delete]: Deleting asignatura');
-  const asignatura = await deleteAsignaturaQuery(identifierObj);
+  const asignaturaDeleted = await deleteAsignaturaQuery(identifierObj);
   Logger.info('[asignatura/delete]: Asignatura deleted');
 
-  return asignatura;
+  return asignaturaDeleted;
 };
 
 module.exports = deleteAsignatura;
