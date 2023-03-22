@@ -1,6 +1,6 @@
 const { Logger } = require('@siiges-services/shared');
 
-const update = (updateQuery) => async (identifierObj, changes) => {
+const updatedocente = (updateQuery) => async (identifierObj, changes) => {
   Logger.info('[docente/update]: Updating docente');
   const updatedDocente = await updateQuery(identifierObj, changes);
   Logger.info('[docente/updated] A docente was updated');
@@ -8,4 +8,4 @@ const update = (updateQuery) => async (identifierObj, changes) => {
   return updatedDocente;
 };
 
-module.exports = update;
+module.exports = updatedocente;
