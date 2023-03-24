@@ -3,7 +3,7 @@ const { PLANTEL_TABLE } = require('./plantel');
 
 const PLANTEL_HIGIENE_TABLE = 'PlantelHigiene';
 
-const HigieneSchema = {
+const plantelHigieneSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -55,8 +55,8 @@ const HigieneSchema = {
 
 class PlantelHigiene extends Model {
   static associate(models) {
-    this.belongsTo(models.Persona, { as: 'higiene' });
-    this.hasMany(models.AsignaturaDocente, { as: 'plantelhigiene', foreignKey: 'palntelhigieneId' });
+    this.belongsTo(models.Plantel, { as: 'plantel' });
+    this.hasMany(models.PlantelHigiene, { as: 'plantelhigiene', foreignKey: 'palntelhigieneId' });
   }
 
   static config(sequelize) {
@@ -69,4 +69,4 @@ class PlantelHigiene extends Model {
   }
 }
 
-module.exports = { PLANTEL_HIGIENE_TABLE, HigieneSchema, PlantelHigiene };
+module.exports = { PLANTEL_HIGIENE_TABLE, plantelHigieneSchema, PlantelHigiene };
