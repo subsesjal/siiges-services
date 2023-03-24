@@ -16,7 +16,12 @@ const updateDocenteSchema = {
     type: 'object',
     properties: {
       ...docente,
-      ...persona,
+      persona: {
+        type: 'object',
+        properties: {
+          ...persona,
+        },
+      },
     },
   },
   response: {
@@ -27,9 +32,16 @@ const updateDocenteSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...responseProperties,
             ...docente,
-            ...persona,
+            ...responseProperties,
+            persona: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...persona,
+                ...responseProperties,
+              },
+            },
           },
         },
       },
