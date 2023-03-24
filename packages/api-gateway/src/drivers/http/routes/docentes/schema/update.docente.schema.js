@@ -28,6 +28,8 @@ const updateDocenteSchema = {
           properties: {
             id: { type: 'integer' },
             ...responseProperties,
+            ...docente,
+            ...persona,
           },
         },
       },
