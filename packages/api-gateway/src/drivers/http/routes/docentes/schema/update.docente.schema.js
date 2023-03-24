@@ -1,5 +1,6 @@
 const { docente } = require('./properties/docente');
 const { responseProperties } = require('./properties/responseProperties');
+const { persona } = require('../../usuarios/schema/properties/persona');
 
 const updateDocenteSchema = {
   tags: ['docente'],
@@ -15,6 +16,7 @@ const updateDocenteSchema = {
     type: 'object',
     properties: {
       ...docente,
+      ...persona,
     },
   },
   response: {
