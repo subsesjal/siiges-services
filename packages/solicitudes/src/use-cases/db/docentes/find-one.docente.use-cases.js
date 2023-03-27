@@ -13,7 +13,10 @@ const findOneDocente = (findOneDocenteQuery) => async (
     },
   ];
 
-  const docente = await findOneDocenteQuery(identifierObj, { include });
+  const docente = await findOneDocenteQuery(identifierObj, {
+    include,
+    strict: false,
+  });
   checkers.throwErrorIfDataIsFalsy(docente, 'docentes', identifierObj.id);
 
   return docente;
