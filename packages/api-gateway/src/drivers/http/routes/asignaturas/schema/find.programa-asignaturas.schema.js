@@ -18,10 +18,12 @@ const findProgramaAsignaturaSchema = {
       properties: {
         data: {
           type: 'array',
-          properties: {
-            id: { type: 'integer' },
-            ...asignatura,
-            ...responseProperties,
+          items: {
+            properties: {
+              id: { type: 'integer' },
+              ...asignatura,
+              ...responseProperties,
+            },
           },
         },
       },

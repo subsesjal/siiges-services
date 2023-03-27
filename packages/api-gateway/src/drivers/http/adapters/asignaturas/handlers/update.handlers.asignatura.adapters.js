@@ -3,14 +3,14 @@ const { Logger } = require('@siiges-services/shared');
 // Internal dependencies
 const errorHandler = require('../../../utils/errorHandler');
 
-async function updateAsignaturas(request, reply) {
+async function updateAsignatura(request, reply) {
   try {
-    const { asignaturasId } = request.params;
+    const { asignaturaId } = request.params;
     const { ...changes } = request.body;
 
     Logger.info('[api/asignatura/update]: updating the asignatura');
     const asignaturas = await this.solicitudServices.updateAsignatura(
-      { id: asignaturasId },
+      { asignaturaId },
       changes,
     );
 
@@ -23,4 +23,4 @@ async function updateAsignaturas(request, reply) {
   }
 }
 
-module.exports = updateAsignaturas;
+module.exports = updateAsignatura;

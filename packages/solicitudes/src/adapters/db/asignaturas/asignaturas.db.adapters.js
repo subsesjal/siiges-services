@@ -9,7 +9,7 @@ const {
 const {
   createQuery,
   findOneQuery,
-  updateQuery,
+  updateAndFindQuery,
   deleteAndFindQuery,
   findAllQuery,
 } = queries;
@@ -18,7 +18,7 @@ module.exports = {
   findProgramaQuery: findOneQuery(Programa),
   createAsignaturaProgramaQuery: createQuery(Asignatura),
   findOneAsignaturaQuery: findOneQuery(Asignatura),
-  updateAsignaturaQuery: updateQuery(Asignatura),
+  updateAsignaturaQuery: updateAndFindQuery(Asignatura),
   deleteAsignaturaQuery: deleteAndFindQuery(Asignatura),
   findProgramaAsignaturasQuery: findAllQuery(Asignatura),
 };

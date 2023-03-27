@@ -1,11 +1,16 @@
-const { Logger } = require('@siiges-services/shared');
+const { checkers } = require('@siiges-services/shared');
 
-const updateAsignatura = (updateAsignaturaQuery) => async (identifierObj, changes) => {
-  Logger.info('[asignatura/update]: Updating asignatura');
-  const asignatura = await updateAsignaturaQuery(identifierObj, changes);
-  Logger.info('[asignatura/update]: asignaturaupdated');
+const updateAsignatura = (
+  findOneAsignaturaQuery,
+  updateAsignaturaQuery,
+) => async (identifierObj, changes) => {
+  const { asignaturaId } = identifierObj;
+  const asignatura = await findOneAsignaturaQuery({ id: asignaturaId });
+  checkers.throwErrorIfDataIsFalsy(asignatura, 'asignaturas', asignaturaId);
 
-  return asignatura;
+  const asignaturaUpdated = await updateAsignaturaQuery({ id: asignaturaId }, changes);
+
+  return asignaturaUpdated;
 };
 
 module.exports = updateAsignatura;
