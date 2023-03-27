@@ -1,6 +1,7 @@
 const { docente } = require('./properties/docente');
 const { responseProperties } = require('./properties/responseProperties');
 const { persona } = require('../../usuarios/schema/properties/persona');
+const { asignaturaDocente } = require('./properties/asignaturaDocente');
 
 const updateDocenteSchema = {
   tags: ['docente'],
@@ -23,6 +24,7 @@ const updateDocenteSchema = {
         },
       },
     },
+    required: ['programaId'],
   },
   response: {
     201: {
@@ -40,6 +42,16 @@ const updateDocenteSchema = {
                 id: { type: 'integer' },
                 ...persona,
                 ...responseProperties,
+              },
+            },
+            asignaturasDocentes: {
+              type: 'array',
+              items: {
+                properties: {
+                  id: { type: 'integer' },
+                  ...asignaturaDocente,
+                  ...responseProperties,
+                },
               },
             },
           },

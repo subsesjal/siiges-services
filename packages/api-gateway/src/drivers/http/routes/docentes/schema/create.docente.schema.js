@@ -1,5 +1,5 @@
 const { docente } = require('./properties/docente');
-const { asignatura } = require('../../asignaturas/schema/properties/asignatura');
+const { asignaturaDocente } = require('./properties/asignaturaDocente');
 const { persona } = require('../../usuarios/schema/properties/persona');
 const { responseProperties } = require('./properties/responseProperties');
 
@@ -51,7 +51,7 @@ const createDocenteSchema = {
               items: {
                 properties: {
                   id: { type: 'integer' },
-                  ...asignatura,
+                  ...asignaturaDocente,
                   ...responseProperties,
                 },
               },

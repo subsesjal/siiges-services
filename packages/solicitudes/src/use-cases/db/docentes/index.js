@@ -13,6 +13,13 @@ module.exports = {
     docentes.findOneDocenteQuery,
   ),
   updateDocente: updateDocente(
+    docentes.findOneDocenteQuery,
+    docentes.findAsignaturasDocentesQuery,
+    docentes.findOneAsignaturaDocenteQuery,
+    asignaturas.findOneAsignaturaQuery,
     docentes.updateDocenteQuery,
+    docentes.updatePersonaQuery,
+    docentes.createAsignaturaDocenteQuery,
+    docentes.deleteAsignaturaDocenteQuery,
   ),
 };

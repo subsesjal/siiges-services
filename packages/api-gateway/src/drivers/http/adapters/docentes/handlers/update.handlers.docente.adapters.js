@@ -8,7 +8,7 @@ async function updatedocente(req, reply) {
 
     Logger.info('[docentes]: Updating solicitud');
 
-    const solicitud = await this.docenteServices.updatedocente(
+    const solicitud = await this.solicitudServices.updateDocente(
       { id: docenteId },
       data,
     );
