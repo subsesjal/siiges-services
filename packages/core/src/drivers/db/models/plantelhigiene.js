@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PLANTEL_TABLE } = require('./plantel');
 const { HIGIENE_TABLE } = require('./higiene');
 
-const PLANTEL_HIGIENE_TABLE = 'PlantelHigiene';
+const PLANTELHIGIENE_TABLE = 'PlantelHigiene';
 
 const PlantelHigieneSchema = {
   id: {
@@ -62,11 +62,11 @@ class PlantelHigiene extends Model {
   static config(sequelize) {
     return {
       sequelize,
-      tableName: PLANTEL_HIGIENE_TABLE,
+      tableName: PLANTELHIGIENE_TABLE,
       modelName: 'PlantelHigiene',
       timestamps: false,
     };
   }
 }
 
-module.exports = { PLANTEL_HIGIENE_TABLE, PlantelHigieneSchema, PlantelHigiene };
+module.exports = { PLANTELHIGIENE_TABLE, PlantelHigieneSchema, PlantelHigiene };

@@ -1,7 +1,7 @@
 const csvToJson = require('convert-csv-to-json');
 const path = require('path');
 
-const { PLANTEL_HIGIENE_TABLE } = require('../models/plantelhigiene');
+const { PLANTELHIGIENE_TABLE } = require('../models/plantelhigiene');
 
 const plantelhigieneCSV = path.join(__dirname, '../CSVFiles/higiene.csv');
 
@@ -11,10 +11,10 @@ module.exports = {
       .fieldDelimiter(',')
       .getJsonFromCsv(plantelhigieneCSV);
 
-    await queryInterface.bulkInsert(PLANTEL_HIGIENE_TABLE, plantelhigieneJson, {});
+    await queryInterface.bulkInsert(PLANTELHIGIENE_TABLE, plantelhigieneJson, {});
   },
 
   async down(queryInterface) {
-    await queryInterface.bulkDelete(PLANTEL_HIGIENE_TABLE, null, {});
+    await queryInterface.bulkDelete(PLANTELHIGIENE_TABLE, null, {});
   },
 };
