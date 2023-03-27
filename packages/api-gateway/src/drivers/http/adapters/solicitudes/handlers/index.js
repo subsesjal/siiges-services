@@ -3,6 +3,7 @@ const findAllSolicitudesProgramas = require('./find-all.handlers.solicitudes-pro
 const findOneSolicitudPrograma = require('./find-one.handlers.solicitud-programa.adapters');
 const findSolicitudesUsuario = require('./find.handlers.solicitudes-usuario.adapters');
 const updateSolicitudPrograma = require('./update.handlers.solicitud-programa.adapters');
+const setSolicitudSeccion = require('./set.handlers.solicitud-seccion.adapters');
 
 module.exports = {
   createSolicitudPrograma,
@@ -10,4 +11,5 @@ module.exports = {
   findOneSolicitudPrograma,
   findSolicitudesUsuario,
   updateSolicitudPrograma,
+  setSolicitudSeccion,
 };

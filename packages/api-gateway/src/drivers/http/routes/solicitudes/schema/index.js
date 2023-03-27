@@ -3,6 +3,7 @@ const findAllSolicitudesProgramasSchema = require('./find-all.solicitudes-progra
 const findOneSolicitudProgramaSchema = require('./find-one.solicitud-programa.schema');
 const findAllSolicitudesUsuarioSchema = require('./find.solicitud-usuario.schema');
 const updateSolicitudProgramaSchema = require('./update.solicitud-programa.schema');
+const setSolicitudSeccionSchema = require('./set.solicitud-seccion.schema');
 
 module.exports = {
   createSolicitudProgramaSchema,
@@ -10,4 +11,5 @@ module.exports = {
   findOneSolicitudProgramaSchema,
   findAllSolicitudesUsuarioSchema,
   updateSolicitudProgramaSchema,
+  setSolicitudSeccionSchema,
 };
