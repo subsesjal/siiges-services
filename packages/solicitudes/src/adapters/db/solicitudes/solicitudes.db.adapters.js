@@ -7,6 +7,7 @@ const {
   Usuario,
   ProgramaTurno,
   Programa,
+  SolicitudSeccion,
 } = models;
 
 const {
@@ -34,4 +35,7 @@ module.exports = {
   createProgramaTurnoQuery: createQuery(ProgramaTurno),
   findOneProgramaTurnoQuery: findOneQuery(ProgramaTurno),
   deleteProgramaTurnoQuery: deleteQuery(ProgramaTurno),
+  findOneSolicitudSeccionQuery: findOneQuery(SolicitudSeccion),
+  createSolicitudSeccionQuery: createQuery(SolicitudSeccion),
+  updateSolicitudSeccionQuery: updateAndFindQuery(SolicitudSeccion),
 };
