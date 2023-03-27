@@ -3,6 +3,8 @@ const {
   findAllSolicitudesProgramas,
   findOneSolicitudPrograma,
   findSolicitudesUsuario,
+  updateSolicitudPrograma,
+  setSolicitudSeccion,
 } = require('./db/solicitudes');
 
 const {
@@ -37,10 +39,12 @@ module.exports = {
   updateDiligencia,
   deleteDiligencia,
   createAsignaturaPrograma,
+  updateSolicitudPrograma,
   findOneAsignatura,
   deleteAsignatura,
   findProgramaAsignaturas,
   createDocente,
   findOneDocente,
   updateDocente,
+  setSolicitudSeccion,
 };
