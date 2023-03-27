@@ -2,6 +2,7 @@ const { asignaturasAdapter } = require('../../adapters');
 const {
   createAsignaturaSchema,
   findOneAsignaturaSchema,
+  updateAsignaturasSchema,
   findProgramaAsignaturasSchema,
   deleteAsignaturaSchema,
 } = require('./schema');
@@ -23,6 +24,12 @@ async function asignaturaRouter(fastify, opts, next) {
     '/:asignaturaId',
     { schema: findOneAsignaturaSchema },
     asignaturasAdapter.findOneAsignaturaPrograma,
+  );
+
+  await fastify.patch(
+    '/:asignaturaId',
+    { schema: updateAsignaturasSchema },
+    asignaturasAdapter.updateAsignaturas,
   );
 
   await fastify.delete(
