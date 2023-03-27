@@ -3,7 +3,7 @@ const path = require('path');
 
 const { PLANTELHIGIENE_TABLE } = require('../models/plantelhigiene');
 
-const plantelhigieneCSV = path.join(__dirname, '../CSVFiles/higiene.csv');
+const plantelhigieneCSV = path.join(__dirname, '../CSVFiles/plantelhigiene.csv');
 
 module.exports = {
   async up(queryInterface) {
