@@ -25,6 +25,7 @@ const {
 const {
   createDocente,
   findOneDocente,
+  updateDocente,
 } = require('./db/docentes');
 
 module.exports = {
@@ -44,5 +45,6 @@ module.exports = {
   findProgramaAsignaturas,
   createDocente,
   findOneDocente,
+  updateDocente,
   setSolicitudSeccion,
 };
