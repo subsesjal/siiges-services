@@ -23,7 +23,7 @@ const PlantelHigieneSchema = {
   higieneId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'docente_id',
+    field: 'higiene_id',
     references: {
       model: HIGIENE_TABLE,
       key: 'id',
