@@ -3,7 +3,6 @@ const { checkers } = require('@siiges-services/shared');
 const findOneDocente = (findOneDocenteQuery) => async (
   identifierObj,
 ) => {
-  console.log(identifierObj);
   const include = [
     { association: 'persona' },
     {
@@ -15,9 +14,6 @@ const findOneDocente = (findOneDocenteQuery) => async (
   ];
 
   const docente = await findOneDocenteQuery(identifierObj, { include });
-
-  console.log(docente);
-
   checkers.throwErrorIfDataIsFalsy(docente, 'docentes', identifierObj.id);
 
   return docente;

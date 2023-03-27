@@ -13,8 +13,6 @@ const setSolicitudSeccion = (
 
   const solicitudSeccionFound = await findOneSolicitudSeccionQuery({ solicitudId, seccionId });
 
-  console.log(solicitudSeccionFound);
-
   let solicitudSeccion;
   if (solicitudSeccionFound) {
     const isClosed = !solicitudSeccionFound.isClosed;
