@@ -15,6 +15,7 @@ module.exports = {
     asignaturas.findOneAsignaturaQuery,
   ),
   updateAsignatura: updateAsignatura(
+    asignaturas.findOneAsignaturaQuery,
     asignaturas.updateAsignaturaQuery,
   ),
   deleteAsignatura: deleteAsignatura(
