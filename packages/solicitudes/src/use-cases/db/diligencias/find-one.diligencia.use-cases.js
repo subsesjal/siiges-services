@@ -3,11 +3,11 @@ const { Logger } = require('@siiges-services/shared');
 const find = (findOneQuery) => async (identifierObj) => {
   Logger.info('[diligence/find] Searching  diligence');
   const include = ['persona'];
-  const diligence = await findOneQuery(identifierObj, { include });
-  Logger.info('[diligence/find] Diligence search finish');
+  const diligencia = await findOneQuery(identifierObj, { include });
+
   return {
-    ...diligence.dataValues,
-    persona: { ...diligence.dataValues.persona.dataValues },
+    ...diligencia.dataValues,
+    persona: { ...diligencia.dataValues.persona.dataValues },
   };
 };
 

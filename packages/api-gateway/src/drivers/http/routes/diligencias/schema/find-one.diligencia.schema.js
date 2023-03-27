@@ -1,4 +1,6 @@
-const { diligenciasResponse, personaResponse } = require('./properties');
+const { diligencia } = require('./properties/diligencia');
+const { persona } = require('../../usuarios/schema/properties/persona');
+const { responseProperties } = require('./properties/responseProperties');
 
 const findOneDiligencias = {
   tags: ['Diligence'],
@@ -19,8 +21,16 @@ const findOneDiligencias = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...diligenciasResponse,
-            persona: { ...personaResponse },
+            ...diligencia,
+            ...responseProperties,
+            persona: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...persona,
+                ...responseProperties,
+              },
+            },
           },
         },
       },
