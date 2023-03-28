@@ -31,6 +31,7 @@ const { ASIGNATURA_TABLE, AsignaturaSchema } = require('../models/asignatura');
 const { ASIGNATURA_DOCENTE_TABLE, AsignaturaDocenteSchema } = require('../models/asignaturaDocente');
 const { SECCION_TABLE, SeccionSchema } = require('../models/seccion');
 const { SOLICITUD_SECCION_TABLE, SolicitudSeccionSchema } = require('../models/solicitudSeccion');
+const { PLANTEL_HIGIENE_TABLE, PlantelHigieneSchema } = require('../models/plantelhigiene');
 
 module.exports = {
   async up(queryInterface) {
@@ -67,6 +68,7 @@ module.exports = {
     await queryInterface.createTable(ASIGNATURA_DOCENTE_TABLE, AsignaturaDocenteSchema);
     await queryInterface.createTable(SECCION_TABLE, SeccionSchema);
     await queryInterface.createTable(SOLICITUD_SECCION_TABLE, SolicitudSeccionSchema);
+    await queryInterface.createTable(PLANTEL_HIGIENE_TABLE, PlantelHigieneSchema);
   },
 
   async down(queryInterface) {
@@ -104,5 +106,6 @@ module.exports = {
     await queryInterface.dropTable(ASIGNATURA_DOCENTE_TABLE);
     await queryInterface.dropTable(SECCION_TABLE);
     await queryInterface.dropTable(SOLICITUD_SECCION_TABLE);
+    await queryInterface.dropTable(PLANTEL_HIGIENE_TABLE);
   },
 };
