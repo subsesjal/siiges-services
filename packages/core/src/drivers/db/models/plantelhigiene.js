@@ -1,6 +1,4 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { PLANTEL_TABLE } = require('./plantel');
-const { HIGIENE_TABLE } = require('./higiene');
 
 const PLANTEL_HIGIENE_TABLE = 'plantelhigiene';
 
@@ -16,7 +14,7 @@ const PlantelHigieneSchema = {
     type: DataTypes.INTEGER,
     field: 'plantel_id',
     references: {
-      model: PLANTEL_TABLE,
+      model: PLANTEL_HIGIENE_TABLE,
       key: 'id',
     },
   },
@@ -25,7 +23,7 @@ const PlantelHigieneSchema = {
     type: DataTypes.INTEGER,
     field: 'plantel_id',
     references: {
-      model: HIGIENE_TABLE,
+      model: PLANTEL_HIGIENE_TABLE,
       key: 'id',
     },
   },
