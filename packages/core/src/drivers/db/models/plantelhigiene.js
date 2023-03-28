@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PLANTEL_TABLE } = require('./plantel');
 const { HIGIENE_TABLE } = require('./higiene');
 
-const PLANTELHIGIENE_TABLE = 'PlantelHigiene';
+const PLANTEL_HIGIENE_TABLE = 'plantelhigiene';
 
 const PlantelHigieneSchema = {
   id: {
@@ -23,15 +23,15 @@ const PlantelHigieneSchema = {
   higieneId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'higiene_id',
+    field: 'plantel_id',
     references: {
       model: HIGIENE_TABLE,
       key: 'id',
     },
   },
   cantidad: {
-    type: DataTypes.STRING,
-    field: 'cantidad',
+    allowNull: false,
+    type: DataTypes.INTEGER,
   },
   createdAt: {
     allowNull: false,
@@ -55,18 +55,17 @@ const PlantelHigieneSchema = {
 
 class PlantelHigiene extends Model {
   static associate(models) {
-    this.belongsTo(models.plantel, { as: 'plantel' });
-    this.belongsTo(models.higiene, { as: 'higiene' });
+    this.belongsTo(models.Plantel, { as: 'plantel' });
+    this.belongsTo(models.Higiene, { as: 'higiene' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: PLANTELHIGIENE_TABLE,
+      tableName: PLANTEL_HIGIENE_TABLE,
       modelName: 'PlantelHigiene',
       timestamps: false,
     };
   }
 }
-
-module.exports = { PLANTELHIGIENE_TABLE, PlantelHigieneSchema, PlantelHigiene };
+module.exports = { PLANTEL_HIGIENE_TABLE, PlantelHigieneSchema, PlantelHigiene };
