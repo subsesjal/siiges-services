@@ -56,7 +56,7 @@ const PlantelHigieneSchema = {
 class PlantelHigiene extends Model {
   static associate(models) {
     this.belongsTo(models.Plantel, { as: 'plantel' });
-    this.belongsTo(models.Higiene, { as: 'higiene' });
+    this.belongsTo(models.Plantel, { as: 'higiene' });
   }
 
   static config(sequelize) {

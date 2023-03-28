@@ -32,7 +32,7 @@ const { AsignaturaDocente, AsignaturaDocenteSchema } = require('./asignaturaDoce
 const { Seccion, SeccionSchema } = require('./seccion');
 const { SolicitudSeccion, SolicitudSeccionSchema } = require('./solicitudSeccion');
 const { Higiene, HigieneSchema } = require('./higiene');
-const { PlantelHigiene, PlantelHigieneSchema } = require('./plantelhigiene');
+const { PlantelHigiene, plantelHigieneSchema } = require('./plantelhigiene');
 
 function setupModels(sequelize) {
   Ciclo.init(CicloSchema, Ciclo.config(sequelize));
@@ -69,7 +69,7 @@ function setupModels(sequelize) {
   Seccion.init(SeccionSchema, Seccion.config(sequelize));
   SolicitudSeccion.init(SolicitudSeccionSchema, SolicitudSeccion.config(sequelize));
   Higiene.init(HigieneSchema, Higiene.config(sequelize));
-  PlantelHigiene.init(PlantelHigieneSchema, PlantelHigiene.config(sequelize));
+  PlantelHigiene.init(plantelHigieneSchema, PlantelHigiene.config(sequelize));
 
   Ciclo.associate(sequelize.models);
   Domicilio.associate(sequelize.models);
