@@ -1,5 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PLANTEL_TABLE } = require('./plantel');
+const { HIGIENE_TABLE } = require('./higiene');
 
 const PLANTEL_HIGIENE_TABLE = 'plantelhigiene';
 
@@ -16,6 +17,15 @@ const PlantelHigieneSchema = {
     field: 'plantel_id',
     references: {
       model: PLANTEL_TABLE,
+      key: 'id',
+    },
+  },
+  higieneId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'plantel_id',
+    references: {
+      model: HIGIENE_TABLE,
       key: 'id',
     },
   },
@@ -46,6 +56,7 @@ const PlantelHigieneSchema = {
 class PlantelHigiene extends Model {
   static associate(models) {
     this.belongsTo(models.Plantel, { as: 'plantel' });
+    this.belongsTo(models.Plantel, { as: 'higiene' });
   }
 
   static config(sequelize) {
