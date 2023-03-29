@@ -6,6 +6,7 @@ const {
 
 async function higieneRouter(fastify, opts, next) {
   await fastify.post(
+
     '/planteles/:plantelId/higiene/higieneId',
     {
       schema: createHigieneSchema,
