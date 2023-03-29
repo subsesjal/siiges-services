@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PLANTEL_TABLE } = require('./plantel');
 const { HIGIENE_TABLE } = require('./higiene');
 
-const PLANTEL_HIGIENE_TABLE = 'plantelhigiene';
+const PLANTEL_HIGIENE_TABLE = 'planteles_higiene';
 
 const plantelHigieneSchema = {
   id: {
