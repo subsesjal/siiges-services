@@ -1,4 +1,4 @@
-const createHigieneSchema = require('./create.higiene.schema');
+const createHigieneSchema = require('./create.plantel-higiene.schema');
 
 module.exports = {
   createHigieneSchema,

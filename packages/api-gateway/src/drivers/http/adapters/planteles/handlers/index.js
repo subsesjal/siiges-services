@@ -1,5 +1,5 @@
-const createhigiene = require('./create.handlers.higiene.adapters');
+const createPlantelHigiene = require('./create.handlers.plantel-higiene.adapters');
 
 module.exports = {
-  createhigiene,
+  createPlantelHigiene,
 };

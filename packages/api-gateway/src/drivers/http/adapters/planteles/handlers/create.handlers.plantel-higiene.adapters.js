@@ -1,7 +1,7 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-async function createHigiene(request, reply) {
+async function createPlantelHigiene(request, reply) {
   try {
     const { ...data } = request.body;
 
@@ -17,4 +17,4 @@ async function createHigiene(request, reply) {
   }
 }
 
-module.exports = createHigiene;
+module.exports = createPlantelHigiene;

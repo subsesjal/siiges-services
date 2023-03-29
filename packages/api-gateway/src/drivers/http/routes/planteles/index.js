@@ -1,20 +1,20 @@
-const { higieneAdapter } = require('../../adapters');
+const { plantelesAdapter } = require('../../adapters');
 
 const {
-  createHigieneSchema,
+  createPlantelHigieneSchema,
 } = require('./schema');
 
-async function higieneRouter(fastify, opts, next) {
+async function plantelRouter(fastify, opts, next) {
   await fastify.post(
 
-    '/planteles/:plantelId/higiene/higieneId',
+    '/:plantelId/higienes/higieneId',
     {
-      schema: createHigieneSchema,
+      schema: createPlantelHigieneSchema,
     },
-    higieneAdapter.createhigiene,
+    plantelesAdapter.createPlantelHigiene,
   );
 
   next();
 }
 
-module.exports = higieneRouter;
+module.exports = plantelRouter;
