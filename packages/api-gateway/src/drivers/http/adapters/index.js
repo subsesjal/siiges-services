@@ -9,7 +9,7 @@ const diligenciasAdapter = require('./diligencias/handlers');
 const { representativeAdapter } = require('./solicitud');
 const asignaturasAdapter = require('./asignaturas/handlers');
 const docentesAdapter = require('./docentes/handlers');
-const higieneAdapter = require('./institituciones/handlers');
+const higieneAdapter = require('./planteles/handlers');
 
 module.exports = {
   diligenciasAdapter,

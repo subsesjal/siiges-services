@@ -1,6 +1,6 @@
-const { plantel } = require('./properties/plantel');
-const { higiene } = require('./properties/higiene');
-const { responseProperties } = require('./properties/responseProperties');
+const { plantel } = require('../../instituciones/schema/properties/plantel');
+const { higiene } = require('../properties/higiene');
+const { responseProperties } = require('../../instituciones/schema/properties/responseProperties');
 
 const createHigieneSchema = {
   tags: ['Higiene'],
