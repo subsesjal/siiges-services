@@ -18,6 +18,8 @@ const {
   updateRatificacionNombreSchema,
   deleteRatificacionNombreSchema,
   findOneInstitucionUsuarioSchema,
+  updateHigieneSchema,
+
 } = require('./schema');
 
 async function institucionRouter(fastify, opts, next) {
@@ -153,6 +155,13 @@ async function institucionRouter(fastify, opts, next) {
       schema: updateDirectorSchema,
     },
     institucionesAdapter.updateDirectorPlantel,
+  );
+  await fastify.patch(
+    '/planteles/:plantelId/higiene/:higieneid',
+    {
+      schema: updateHigieneSchema,
+    },
+    institucionesAdapter.updateHigiene,
   );
 
   next();
