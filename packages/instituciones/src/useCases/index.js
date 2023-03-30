@@ -38,7 +38,7 @@ const deleteRatificacion = require('./db/ratificaciones/delete.ratificaciones.us
 const createDirectorPlantel = require('./db/planteles/create.director-plantel.use-cases');
 const updateDirectorPlantel = require('./db/planteles/update.director-plantel.use-cases');
 const findAllMunicipios = require('./db/municipios/find-all.municipios.use-cases');
-const createHigiene = require('./db/instituciones/create.higiene.use-cases');
+const createHigiene = require('./db/planteles/create.higiene.use-cases');
 
 module.exports = {
   findAllInstituciones: findAllInstituciones(findAllInstitucionesQuery),
