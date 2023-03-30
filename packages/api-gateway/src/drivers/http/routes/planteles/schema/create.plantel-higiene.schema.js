@@ -1,5 +1,5 @@
 const { plantelHigiene } = require('./properties/plantelHigiene');
-const { responseProperties } = require('../../instituciones/schema/properties/responseProperties');
+const { responseProperties } = require('./properties/responseProperties');
 
 const createPlantelHigieneSchema = {
   tags: ['Plantel'],
