@@ -1,7 +1,7 @@
 const { plantelesAdapter } = require('../../adapters');
 
 const {
-  createPlantelHigieneSchema,
+  createHigieneSchema,
 } = require('./schema');
 
 async function plantelRouter(fastify, opts, next) {
@@ -9,7 +9,7 @@ async function plantelRouter(fastify, opts, next) {
 
     '/:plantelId/higienes/higieneId',
     {
-      schema: createPlantelHigieneSchema,
+      schema: createHigieneSchema,
     },
     plantelesAdapter.createPlantelHigiene,
   );
