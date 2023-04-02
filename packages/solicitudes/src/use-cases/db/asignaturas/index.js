@@ -1,4 +1,8 @@
-const { asignaturas, solicitudes } = require('../../../adapters/db');
+const {
+  asignaturas,
+  solicitudes,
+  docentes,
+} = require('../../../adapters/db');
 
 const createAsignaturaPrograma = require('./create.asignatura.use-cases');
 const findOneAsignatura = require('./find-one.asignatura.use-cases');
@@ -20,6 +24,8 @@ module.exports = {
   ),
   deleteAsignatura: deleteAsignatura(
     asignaturas.findOneAsignaturaQuery,
+    docentes.findAsignaturasDocentesQuery,
+    docentes.deleteAsignaturaDocenteQuery,
     asignaturas.deleteAsignaturaQuery,
   ),
   findProgramaAsignaturas: findProgramaAsignaturas(
