@@ -4,6 +4,7 @@ const {
   findOneDocenteSchema,
   updateDocenteSchema,
   findGroupDocentesProgramaSchema,
+  deleteDocenteSchema,
 } = require('./schema');
 
 async function docenteRouter(fastify, opts, next) {
@@ -29,6 +30,12 @@ async function docenteRouter(fastify, opts, next) {
     '/:docenteId',
     { schema: updateDocenteSchema },
     docentesAdapter.updateDocente,
+  );
+
+  await fastify.delete(
+    '/:docenteId',
+    { schema: deleteDocenteSchema },
+    docentesAdapter.deleteDocente,
   );
 
   next();

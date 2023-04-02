@@ -3,7 +3,7 @@ const { Logger } = require('@siiges-services/shared');
 const create = (
   findOneAsignaturaQuery,
   createDocenteQuery,
-  createAsignaturasDocenteQuery,
+  createAsignaturaDocenteQuery,
 ) => async (data) => {
   const { programaId } = data;
   const include = [{
@@ -21,7 +21,7 @@ const create = (
         programaId,
       });
       if (asignatura) {
-        const newAsignaturaDocente = await createAsignaturasDocenteQuery({
+        const newAsignaturaDocente = await createAsignaturaDocenteQuery({
           asignaturaId: asignaturaDocente,
           docenteId: newDocente.id,
         });
