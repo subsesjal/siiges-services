@@ -23,4 +23,5 @@ module.exports = {
   updateDocenteQuery: updateAndFindQuery(Docente),
   updatePersonaQuery: updateAndFindQuery(Persona),
   deleteAsignaturaDocenteQuery: deleteAndFindQuery(AsignaturaDocente),
+  findAllDocentesQuery: findAllQuery(Docente),
 };

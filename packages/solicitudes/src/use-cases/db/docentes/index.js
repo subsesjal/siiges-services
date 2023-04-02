@@ -1,7 +1,8 @@
-const { docentes, asignaturas } = require('../../../adapters/db');
+const { docentes, asignaturas, solicitudes } = require('../../../adapters/db');
 const create = require('./create.docente.use-cases');
 const findOneDocente = require('./find-one.docente.use-cases');
 const updateDocente = require('./update.docente.use-cases');
+const findGroupDocentesPrograma = require('./find-group.docentes-programa.use-cases');
 
 module.exports = {
   createDocente: create(
@@ -21,5 +22,9 @@ module.exports = {
     docentes.updatePersonaQuery,
     docentes.createAsignaturaDocenteQuery,
     docentes.deleteAsignaturaDocenteQuery,
+  ),
+  findGroupDocentesPrograma: findGroupDocentesPrograma(
+    solicitudes.findOneProgramaQuery,
+    docentes.findAllDocentesQuery,
   ),
 };

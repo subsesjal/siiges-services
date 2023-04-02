@@ -1,5 +1,10 @@
 const { docentesAdapter } = require('../../adapters');
-const { createDocenteSchema, findOneDocenteSchema, updateDocenteSchema } = require('./schema');
+const {
+  createDocenteSchema,
+  findOneDocenteSchema,
+  updateDocenteSchema,
+  findGroupDocentesProgramaSchema,
+} = require('./schema');
 
 async function docenteRouter(fastify, opts, next) {
   await fastify.post(
@@ -9,10 +14,17 @@ async function docenteRouter(fastify, opts, next) {
   );
 
   await fastify.get(
+    '/programas/:programaId',
+    { schema: findGroupDocentesProgramaSchema },
+    docentesAdapter.findGroupDocentesPrograma,
+  );
+
+  await fastify.get(
     '/:docenteId',
     { schema: findOneDocenteSchema },
     docentesAdapter.findOneDocente,
   );
+
   await fastify.patch(
     '/:docenteId',
     { schema: updateDocenteSchema },
