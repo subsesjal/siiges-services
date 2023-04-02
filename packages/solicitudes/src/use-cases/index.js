@@ -28,6 +28,7 @@ const {
   findOneDocente,
   updateDocente,
   findGroupDocentesPrograma,
+  deleteDocente,
 } = require('./db/docentes');
 
 module.exports = {
@@ -51,4 +52,5 @@ module.exports = {
   updateDocente,
   findGroupDocentesPrograma,
   setSolicitudSeccion,
+  deleteDocente,
 };
