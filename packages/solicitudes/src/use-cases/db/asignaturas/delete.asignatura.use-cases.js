@@ -1,15 +1,26 @@
-const { Logger } = require('@siiges-services/shared');
 const { checkers } = require('@siiges-services/shared');
 
-const deleteAsignatura = (findOneAsignaturaQuery, deleteAsignaturaQuery) => async (
-  identifierObj,
-) => {
+const deleteAsignatura = (
+  findOneAsignaturaQuery,
+  findAsignaturasDocentesQuery,
+  deleteAsignaturaDocenteQuery,
+  deleteAsignaturaQuery,
+) => async (identifierObj) => {
+  const { id } = identifierObj;
+
   const asignatura = await findOneAsignaturaQuery(identifierObj);
   checkers.throwErrorIfDataIsFalsy(asignatura, 'asignaturas', identifierObj.id);
 
-  Logger.info('[asignatura/delete]: Deleting asignatura');
+  const asignaturasDocente = await findAsignaturasDocentesQuery({ asignaturaId: id });
+
+  await Promise.all(
+    asignaturasDocente.map(async (asignaturaDocente) => {
+      const asignaturaDocenteId = asignaturaDocente.dataValues.id;
+      await deleteAsignaturaDocenteQuery({ id: asignaturaDocenteId });
+    }),
+  );
+
   const asignaturaDeleted = await deleteAsignaturaQuery(identifierObj);
-  Logger.info('[asignatura/delete]: Asignatura deleted');
 
   return asignaturaDeleted;
 };
