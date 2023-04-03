@@ -1,5 +1,5 @@
-const { higiene } = require('./properties/higiene');
-const { responseProperties } = require('./properties/responseProperties');
+const { higiene } = require('./schema/properties/higiene');
+const { responseProperties } = require('./schema/properties/responseProperties');
 
 const updateHigieneSchema = {
   tags: ['Higiene'],
