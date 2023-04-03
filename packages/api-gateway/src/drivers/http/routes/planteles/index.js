@@ -7,7 +7,7 @@ const {
 
 async function plantelesRouter(fastify, opts, next) {
   await fastify.patch(
-    '/:plantelId/higiene/higieneid',
+    '/:plantelId/higiene/higieneId',
     {
       schema: updateHigieneSchema,
     },
