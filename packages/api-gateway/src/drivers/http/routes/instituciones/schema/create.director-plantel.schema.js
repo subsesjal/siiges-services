@@ -1,22 +1,30 @@
-const { institucion } = require('./properties/institucion');
-const { ratificacionNombre } = require('./properties/ratificacionNombre');
+const { persona } = require('../../usuarios/schema/properties/persona');
+const { director } = require('./properties/director');
 const { responseProperties } = require('./properties/responseProperties');
 
-const createInstitucionSchema = {
-  tags: ['Institucion'],
-  description: 'Given an object with institucion required data, then save a institucion in database.',
+const createDirectorSchema = {
+  tags: ['Plantel'],
+  description: 'Given an object with director required data, then save a director in database.',
+  params: {
+    type: 'object',
+    properties: {
+      plantelId: { type: 'integer' },
+    },
+    required: ['plantelId'],
+  },
   body: {
     type: 'object',
     properties: {
-      usuarioId: { type: 'integer' },
-      ...institucion,
-      ratificacionesNombre: {
+      ...director,
+      persona: {
         type: 'object',
         properties: {
-          ...ratificacionNombre,
+          ...persona,
         },
+        required: ['nombre', 'apellidoPaterno'],
       },
     },
+    required: ['persona'],
   },
   response: {
     201: {
@@ -26,14 +34,13 @@ const createInstitucionSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            usuarioId: { type: 'integer' },
-            ...institucion,
+            ...director,
             ...responseProperties,
-            ratificacionesNombre: {
-              type: 'array',
+            persona: {
+              type: 'object',
               properties: {
                 id: { type: 'integer' },
-                ...ratificacionNombre,
+                ...persona,
                 ...responseProperties,
               },
             },
@@ -44,4 +51,4 @@ const createInstitucionSchema = {
   },
 };
 
-module.exports = createInstitucionSchema;
+module.exports = createDirectorSchema;
