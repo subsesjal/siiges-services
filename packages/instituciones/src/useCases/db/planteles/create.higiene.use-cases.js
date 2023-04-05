@@ -1,7 +1,12 @@
 const createHigiene = (createQuery) => async (data) => {
-  const include = [{ association: 'higiene' }];
+  // traer los id, traer el body, enviar en el query
+  const { plantelId, higieneId, cantidad } = data;
 
-  const newHigiene = await createQuery(data, include);
+  const newHigiene = await createQuery({
+    plantelId,
+    higieneId,
+    cantidad,
+  });
 
   return newHigiene;
 };

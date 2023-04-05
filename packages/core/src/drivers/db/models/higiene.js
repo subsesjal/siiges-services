@@ -1,6 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const HIGIENE_TABLE = 'higiene';
+const HIGIENE_TABLE = 'higienes';
 
 const HigieneSchema = {
   id: {
