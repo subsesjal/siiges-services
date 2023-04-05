@@ -7,7 +7,7 @@ const {
 async function plantelRouter(fastify, opts, next) {
   await fastify.post(
 
-    '/:plantelId/higienes/higieneId',
+    '/:plantelId/higiene/:higieneId',
     {
       schema: createHigieneSchema,
     },
