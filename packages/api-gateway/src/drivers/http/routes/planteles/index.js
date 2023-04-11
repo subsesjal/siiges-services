@@ -3,6 +3,8 @@ const { plantelesAdapter } = require('../../adapters');
 const {
   createUpdatePlantelHigieneSchema,
   deletePlantelHigieneSchema,
+  findGroupPlantelHigieneSchema,
+
 } = require('./schema');
 
 async function plantelRouter(fastify, opts, next) {
@@ -31,6 +33,14 @@ async function plantelRouter(fastify, opts, next) {
       schema: deletePlantelHigieneSchema,
     },
     plantelesAdapter.deletePlantelHigiene,
+  );
+
+  await fastify.get(
+    'planteles/:plantelId/higienes',
+    {
+      schema: findGroupPlantelHigieneSchema,
+    },
+    plantelesAdapter.findGroupPlantelHigiene,
   );
 
   next();
