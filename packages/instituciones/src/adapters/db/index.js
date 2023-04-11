@@ -9,6 +9,7 @@ const {
   Director,
   Persona,
   Municipio,
+  PlantelHigiene,
 
 } = drivers.sequelize.models;
 
@@ -40,4 +41,5 @@ module.exports = {
   updatePersonaQuery: updateQuery(Persona),
   updateDirectorQuery: updateQuery(Director),
   findAllMunicipiosQuery: findAllQuery(Municipio),
+  createHigieneQuery: createQuery(PlantelHigiene),
 };
