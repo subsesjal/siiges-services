@@ -8,6 +8,7 @@ const {
   updatePlantel,
   deletePlantel,
   createPlantelHigiene,
+  updatePlantelHigiene,
 } = require('./db/planteles');
 
 const {
@@ -45,4 +46,5 @@ module.exports = {
   createRatificacionNombre,
   updateRatificacionNombre,
   deleteRatificacionNombre,
+  updatePlantelHigiene,
 };

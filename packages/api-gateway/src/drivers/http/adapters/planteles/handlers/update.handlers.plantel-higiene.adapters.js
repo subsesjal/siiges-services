@@ -1,13 +1,13 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-async function createPlantelHigiene(req, reply) {
+async function updatePlantelHigiene(req, reply) {
   try {
     const { plantelId, higieneId } = req.params;
     const { cantidad } = req.body;
 
-    Logger.info('[api/higiene/create]: creating link between plantel and higiene');
-    const plantelHigiene = await this.institucionServices.createPlantelHigiene({
+    Logger.info('[api/higiene/update]: updating link between plantel and higiene');
+    const plantelHigiene = await this.institucionServices.updatePlantelHigiene({
       plantelId,
       higieneId,
       cantidad,
@@ -22,4 +22,4 @@ async function createPlantelHigiene(req, reply) {
   }
 }
 
-module.exports = createPlantelHigiene;
+module.exports = updatePlantelHigiene;

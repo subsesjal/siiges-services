@@ -1,11 +1,11 @@
 const { plantelHigiene } = require('./properties/plantelHigiene');
 const { responseProperties } = require('./properties/responseProperties');
 
-const createPlantelHigieneSchema = {
+const createUpdatePlantelHigieneSchema = {
   tags: ['Plantel'],
   description: 'Given an object with plantel higiene required data, then save a record of plantel-higiene in database.',
   params: {
-    title: 'createPlantelHigieneSchema',
+    title: 'createUpdatePlantelHigieneSchema',
     type: 'object',
     properties: {
       plantelId: { type: 'integer' },
@@ -37,4 +37,4 @@ const createPlantelHigieneSchema = {
   },
 };
 
-module.exports = createPlantelHigieneSchema;
+module.exports = createUpdatePlantelHigieneSchema;
