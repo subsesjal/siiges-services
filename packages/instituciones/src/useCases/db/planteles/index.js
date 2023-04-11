@@ -9,6 +9,7 @@ const {
   updatePersonaQuery,
   updateDirectorQuery,
   createHigieneQuery,
+  updateHigieneQuery,
 } = require('../../../adapters/db');
 
 const createPlantel = require('./create.planteles.use-cases');
@@ -18,6 +19,7 @@ const deletePlantel = require('./delete.planteles.use-cases');
 const createDirectorPlantel = require('./create.director-plantel.use-cases');
 const updateDirectorPlantel = require('./update.director-plantel.use-cases');
 const createPlantelHigiene = require('./create.higiene.use-cases');
+const updatePlantelHigiene = require('./update.higiene.use-cases');
 
 module.exports = {
   createPlantel: createPlantel(
@@ -45,4 +47,5 @@ module.exports = {
     updateDirectorQuery,
   ),
   createPlantelHigiene: createPlantelHigiene(createHigieneQuery),
+  updatePlantelHigiene: updatePlantelHigiene(updateHigieneQuery),
 };
