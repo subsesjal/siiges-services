@@ -7,7 +7,7 @@ async function createPlantelHigiene(req, reply) {
     const { cantidad } = req.body;
 
     Logger.info('[api/higiene/create]: creating the higiene');
-    const higienePlantel = await this.institucionServices.createHigiene({
+    const plantelHigiene = await this.institucionServices.createPlantelHigiene({
       plantelId,
       higieneId,
       cantidad,
@@ -16,7 +16,7 @@ async function createPlantelHigiene(req, reply) {
     return reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: higienePlantel });
+      .send({ data: plantelHigiene });
   } catch (error) {
     return errorHandler(error, reply);
   }

@@ -1,15 +1,15 @@
 const { plantelesAdapter } = require('../../adapters');
 
 const {
-  createHigieneSchema,
+  createPlantelHigieneSchema,
 } = require('./schema');
 
 async function plantelRouter(fastify, opts, next) {
   await fastify.post(
 
-    '/:plantelId/higiene/:higieneId',
+    '/:plantelId/higienes/:higieneId',
     {
-      schema: createHigieneSchema,
+      schema: createPlantelHigieneSchema,
     },
     plantelesAdapter.createPlantelHigiene,
   );
