@@ -19,6 +19,7 @@ const {
   deleteQuery,
   updateQuery,
   updateAndFindQuery,
+  deleteAndFindQuery,
 } = queries;
 
 module.exports = {
@@ -43,4 +44,6 @@ module.exports = {
   findAllMunicipiosQuery: findAllQuery(Municipio),
   createHigieneQuery: createQuery(PlantelHigiene),
   updateHigieneQuery: updateAndFindQuery(PlantelHigiene),
+  deleteHigieneQuery: deleteAndFindQuery(PlantelHigiene),
+  findOnePlantelHigieneQuery: findOneQuery(PlantelHigiene),
 };

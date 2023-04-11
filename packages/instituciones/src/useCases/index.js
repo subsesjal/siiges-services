@@ -9,6 +9,7 @@ const {
   deletePlantel,
   createPlantelHigiene,
   updatePlantelHigiene,
+  deletePlantelHigiene,
 } = require('./db/planteles');
 
 const {
@@ -47,4 +48,5 @@ module.exports = {
   updateRatificacionNombre,
   deleteRatificacionNombre,
   updatePlantelHigiene,
+  deletePlantelHigiene,
 };
