@@ -4,7 +4,7 @@ const { HIGIENE_TABLE } = require('./higiene');
 
 const PLANTEL_HIGIENE_TABLE = 'planteles_higienes';
 
-const plantelHigieneSchema = {
+const PlantelHigieneSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -53,7 +53,7 @@ const plantelHigieneSchema = {
   },
 };
 
-class plantelHigiene extends Model {
+class PlantelHigiene extends Model {
   static associate(models) {
     this.belongsTo(models.Plantel, { as: 'plantel' });
     this.belongsTo(models.Higiene, { as: 'higiene' });
@@ -68,4 +68,4 @@ class plantelHigiene extends Model {
     };
   }
 }
-module.exports = { PLANTEL_HIGIENE_TABLE, plantelHigieneSchema, plantelHigiene };
+module.exports = { PLANTEL_HIGIENE_TABLE, PlantelHigieneSchema, PlantelHigiene };

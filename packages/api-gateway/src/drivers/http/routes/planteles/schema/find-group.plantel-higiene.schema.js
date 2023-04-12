@@ -9,10 +9,10 @@ const findGroupPlantelHigieneSchema = {
     type: 'object',
     properties: {
       plantelId: { type: 'integer' },
-      higieneId: { type: 'integer' },
+
     },
 
-    required: ['plantelId', 'higieneId'],
+    required: ['plantelId'],
   },
   response: {
     200: {

@@ -37,7 +37,8 @@ const HigieneSchema = {
 };
 
 class Higiene extends Model {
-  static associate() {
+  static associate(models) {
+    this.hasMany(models.PlantelHigiene, { as: 'plantelHigienes', foreignKey: 'higieneId' });
   }
 
   static config(sequelize) {
