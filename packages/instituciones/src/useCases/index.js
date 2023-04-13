@@ -10,6 +10,7 @@ const {
   createPlantelHigiene,
   updatePlantelHigiene,
   deletePlantelHigiene,
+  findAllPlantelHigiene,
 } = require('./db/planteles');
 
 const {
@@ -49,4 +50,5 @@ module.exports = {
   deleteRatificacionNombre,
   updatePlantelHigiene,
   deletePlantelHigiene,
+  findAllPlantelHigiene,
 };
