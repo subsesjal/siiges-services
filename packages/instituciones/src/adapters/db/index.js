@@ -47,4 +47,5 @@ module.exports = {
   deleteHigieneQuery: deleteAndFindQuery(PlantelHigiene),
   findOnePlantelHigieneQuery: findOneQuery(PlantelHigiene),
   findAllPlantelHigieneQuery: findAllQuery(PlantelHigiene),
+  findGroupPlantelHigieneQuery: findAllQuery(PlantelHigiene),
 };

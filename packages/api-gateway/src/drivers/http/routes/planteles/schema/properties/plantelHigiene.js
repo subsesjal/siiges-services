@@ -1,4 +1,4 @@
-// Higiene
+// Plantel Higiene
 const plantelHigiene = {
   Id: { type: 'integer' },
   plantelId: { type: 'integer' },

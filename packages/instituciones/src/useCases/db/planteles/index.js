@@ -13,6 +13,8 @@ const {
   deleteHigieneQuery,
   findOnePlantelHigieneQuery,
   findAllPlantelHigieneQuery,
+  findGroupPlantelHigieneQuery,
+
 } = require('../../../adapters/db');
 
 const createPlantel = require('./create.planteles.use-cases');
@@ -25,6 +27,7 @@ const createPlantelHigiene = require('./create.higiene.use-cases');
 const updatePlantelHigiene = require('./update.higiene.use-cases');
 const deletePlantelHigiene = require('./delete.higiene.use-cases');
 const findAllPlantelHigiene = require('./find-all.planteles-higiene.use-cases');
+const findGroupPlantelHigiene = require('./find-group.plantel-higiene.use-cases');
 
 module.exports = {
   createPlantel: createPlantel(
@@ -55,4 +58,5 @@ module.exports = {
   updatePlantelHigiene: updatePlantelHigiene(updateHigieneQuery),
   deletePlantelHigiene: deletePlantelHigiene(findOnePlantelHigieneQuery, deleteHigieneQuery),
   findAllPlantelHigiene: findAllPlantelHigiene(findAllPlantelHigieneQuery),
+  findGroupPlantelHigiene: findGroupPlantelHigiene(findGroupPlantelHigieneQuery),
 };
