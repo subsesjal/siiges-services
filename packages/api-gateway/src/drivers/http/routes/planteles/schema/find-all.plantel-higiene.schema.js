@@ -1,7 +1,7 @@
 const { higiene } = require('./properties/higiene');
 const { responseProperties } = require('./properties/responseProperties');
 
-const findAllHigieneSchema = {
+const findAllPlantelHigieneSchema = {
   tags: ['Higiene'],
   description: 'Return a list of higiene.',
   response: {
@@ -25,4 +25,4 @@ const findAllHigieneSchema = {
   },
 };
 
-module.exports = findAllHigieneSchema;
+module.exports = findAllPlantelHigieneSchema;

@@ -37,7 +37,7 @@ async function plantelRouter(fastify, opts, next) {
 
   await fastify.get(
 
-    '/higienes',
+    '/higienes/',
     {
       schema: findAllPlantelHigieneSchema,
     },

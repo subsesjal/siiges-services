@@ -1,10 +1,10 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-async function findAllHigiene(req, reply) {
+async function findAllPlantelHigiene(req, reply) {
   try {
     Logger.info('[higiene]: Getting higiene list');
-    const higiene = await this.institucionServices.findAllHigiene();
+    const higiene = await this.institucionServices.findAllPlantelHigiene();
 
     return reply
       .code(200)
@@ -15,4 +15,4 @@ async function findAllHigiene(req, reply) {
   }
 }
 
-module.exports = findAllHigiene;
+module.exports = findAllPlantelHigiene;
