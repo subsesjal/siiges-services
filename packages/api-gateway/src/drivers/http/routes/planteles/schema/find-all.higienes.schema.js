@@ -2,8 +2,8 @@ const { higiene } = require('./properties/higiene');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findAllPlantelHigieneSchema = {
-  tags: ['Higiene'],
-  description: 'Return a list of higiene.',
+  tags: ['Plantel'],
+  description: 'Return the list of higienes.',
   response: {
     200: {
       type: 'object',
@@ -14,7 +14,6 @@ const findAllPlantelHigieneSchema = {
             type: 'object',
             properties: {
               id: { type: 'integer' },
-              usuarioId: { type: 'integer' },
               ...higiene,
               ...responseProperties,
             },
