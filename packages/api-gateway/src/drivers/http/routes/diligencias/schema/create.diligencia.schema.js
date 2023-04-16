@@ -21,7 +21,7 @@ const createDiligencias = {
     required: ['solicitudId', 'horaInicio', 'horaFin', 'persona'],
   },
   response: {
-    200: {
+    201: {
       type: 'object',
       properties: {
         data: {

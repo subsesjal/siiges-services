@@ -14,7 +14,7 @@ async function updatePlantelHigiene(req, reply) {
     });
 
     return reply
-      .code(201)
+      .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: plantelHigiene });
   } catch (error) {

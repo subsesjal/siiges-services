@@ -26,7 +26,7 @@ const updateDirectorSchema = {
     },
   },
   response: {
-    201: {
+    200: {
       type: 'object',
       properties: {
         data: {

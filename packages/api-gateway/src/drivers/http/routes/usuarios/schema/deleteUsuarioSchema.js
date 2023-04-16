@@ -13,7 +13,7 @@ const deleteUsuarioSchema = {
     required: ['usuarioId'],
   },
   response: {
-    201: {
+    200: {
       type: 'object',
       properties: {
         data: {
