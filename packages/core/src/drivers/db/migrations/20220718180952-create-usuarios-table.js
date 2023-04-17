@@ -33,6 +33,13 @@ const { SECCION_TABLE, SeccionSchema } = require('../models/seccion');
 const { SOLICITUD_SECCION_TABLE, SolicitudSeccionSchema } = require('../models/solicitudSeccion');
 const { HIGIENE_TABLE, HigieneSchema } = require('../models/higiene');
 const { PLANTEL_HIGIENE_TABLE, plantelHigieneSchema } = require('../models/plantelHigiene');
+const { ESTATUS_INSPECCION_TABLE, estatusSchema } = require('../models/estatus_inspeccion');
+const { INSPECCION_APARTADOS_TABLE, apartadoSchema } = require('../models/inspeccion_apartados');
+const { INSPECCIONES_TABLE, inspeccionesSchema } = require('../models/inspecciones');
+const { INSPECCIONES_CATEGORIAS_TABLE, categoriasSchema } = require('../models/inspeccion_categorias');
+const { INSPECCIONES_OBSERVACIONES_TABLE, observacionesSchema } = require('../models/inspecciones_observaciones');
+const { INSPECCIONES_TIPO_PREGUNTAS_TABLE, tipopreguntasSchema } = require('../models/inspeccion_tipo_preguntas');
+const { INSPECCIONES_INSPECCION_PREGUNTA_TABLE, inspeccionespreSchema } = require('../models/inspecciones_inspeccion_preguntas');
 
 module.exports = {
   async up(queryInterface) {
@@ -71,6 +78,13 @@ module.exports = {
     await queryInterface.createTable(SOLICITUD_SECCION_TABLE, SolicitudSeccionSchema);
     await queryInterface.createTable(HIGIENE_TABLE, HigieneSchema);
     await queryInterface.createTable(PLANTEL_HIGIENE_TABLE, plantelHigieneSchema);
+    await queryInterface.createTable(ESTATUS_INSPECCION_TABLE, estatusSchema);
+    await queryInterface.createTable(INSPECCION_APARTADOS_TABLE, apartadoSchema);
+    await queryInterface.createTable(INSPECCIONES_TABLE, inspeccionesSchema);
+    await queryInterface.createTable(INSPECCIONES_CATEGORIAS_TABLE, categoriasSchema);
+    await queryInterface.createTable(INSPECCIONES_OBSERVACIONES_TABLE, observacionesSchema);
+    await queryInterface.createTable(INSPECCIONES_TIPO_PREGUNTAS_TABLE, tipopreguntasSchema);
+    await queryInterface.createTable(INSPECCIONES_INSPECCION_PREGUNTA_TABLE, inspeccionespreSchema);
   },
 
   async down(queryInterface) {
@@ -110,5 +124,12 @@ module.exports = {
     await queryInterface.dropTable(SOLICITUD_SECCION_TABLE);
     await queryInterface.dropTable(HIGIENE_TABLE);
     await queryInterface.dropTable(PLANTEL_HIGIENE_TABLE);
+    await queryInterface.dropTable(ESTATUS_INSPECCION_TABLE);
+    await queryInterface.dropTable(INSPECCION_APARTADOS_TABLE);
+    await queryInterface.dropTable(INSPECCIONES_TABLE);
+    await queryInterface.dropTable(INSPECCIONES_CATEGORIAS_TABLE);
+    await queryInterface.dropTable(INSPECCIONES_OBSERVACIONES_TABLE);
+    await queryInterface.dropTable(INSPECCIONES_TIPO_PREGUNTAS_TABLE);
+    await queryInterface.dropTable(INSPECCIONES_INSPECCION_PREGUNTA_TABLE);
   },
 };
