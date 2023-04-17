@@ -11,7 +11,7 @@ async function deleteInstitucion(req, reply) {
     });
 
     return reply
-      .code(201)
+      .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: institucionDeleted });
   } catch (error) {

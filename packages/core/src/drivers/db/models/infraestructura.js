@@ -1,6 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PLANTEL_TABLE } = require('./plantel');
-const { SOLICITUD_TABLE } = require('./solicitud');
 const { TIPO_INSTALACION_TABLE } = require('./tipoInstalacion');
 
 const INFRAESTRUCTURA_TABLE = 'infraestructuras';
@@ -18,15 +17,6 @@ const InfraestructuraSchema = {
     field: 'plantel_id',
     references: {
       model: PLANTEL_TABLE,
-      key: 'id',
-    },
-  },
-  solicitudId: {
-    allowNull: false,
-    type: DataTypes.INTEGER,
-    field: 'solicitud_id',
-    references: {
-      model: SOLICITUD_TABLE,
       key: 'id',
     },
   },
@@ -78,8 +68,8 @@ const InfraestructuraSchema = {
 class Infraestructura extends Model {
   static associate(models) {
     this.belongsTo(models.Plantel, { as: 'plantel' });
-    this.belongsTo(models.Solicitud, { as: 'solicitud' });
     this.belongsTo(models.TipoInstalacion, { as: 'tipoInstalacion' });
+    this.hasMany(models.AsignaturaInfraestructura, { as: 'asignaturasInfraestructuras', foreignKey: 'infraestructuraId' });
   }
 
   static config(sequelize) {

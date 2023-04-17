@@ -16,7 +16,7 @@ const deletePlantelSchema = {
     required: ['institucionId', 'plantelId'],
   },
   response: {
-    201: {
+    200: {
       type: 'object',
       properties: {
         data: {

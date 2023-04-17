@@ -37,7 +37,7 @@ const createSolicitudProgramaSchema = {
     additionalProperties: false,
   },
   response: {
-    201: {
+    200: {
       type: 'object',
       properties: {
         data: {
