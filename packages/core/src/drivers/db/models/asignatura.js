@@ -98,6 +98,8 @@ const AsignaturaSchema = {
 class Asignatura extends Model {
   static associate(models) {
     this.belongsTo(models.Programa, { as: 'programa' });
+    this.hasMany(models.AsignaturaDocente, { as: 'asignaturasDocentes', foreignKey: 'asignaturaId' });
+    this.hasMany(models.AsignaturaInfraestructura, { as: 'asignaturasInfraestructuras', foreignKey: 'asignaturaId' });
   }
 
   static config(sequelize) {

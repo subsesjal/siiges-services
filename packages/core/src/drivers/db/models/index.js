@@ -26,15 +26,18 @@ const { Rector, RectorSchema } = require('./rector');
 const { Director, DirectorSchema } = require('./director');
 const { TipoInstalacion, TipoInstalacionSchema } = require('./tipoInstalacion');
 const { Docente, DocenteSchema } = require('./docente');
-const { Infraestructura, InfraestructuraSchema } = require('./infraestructura');
 const { Asignatura, AsignaturaSchema } = require('./asignatura');
 const { AsignaturaDocente, AsignaturaDocenteSchema } = require('./asignaturaDocente');
 const { Seccion, SeccionSchema } = require('./seccion');
 const { SolicitudSeccion, SolicitudSeccionSchema } = require('./solicitudSeccion');
 const { Higiene, HigieneSchema } = require('./higiene');
 const { PlantelHigiene, PlantelHigieneSchema } = require('./plantelHigiene');
+const { Infraestructura, InfraestructuraSchema } = require('./infraestructura');
+const { InfraestructuraPrograma, InfraestructuraProgramaSchema } = require('./infraestructuraPrograma');
+const { AsignaturaInfraestructura, AsignaturaInfraestructuraSchema } = require('./asignaturaInfraestructura');
 
 function setupModels(sequelize) {
+  // Initialize models
   Ciclo.init(CicloSchema, Ciclo.config(sequelize));
   Domicilio.init(DomicilioSchema, Domicilio.config(sequelize));
   Diligencia.init(DiligenciaSchema, Diligencia.config(sequelize));
@@ -63,14 +66,23 @@ function setupModels(sequelize) {
   Director.init(DirectorSchema, Director.config(sequelize));
   TipoInstalacion.init(TipoInstalacionSchema, TipoInstalacion.config(sequelize));
   Docente.init(DocenteSchema, Docente.config(sequelize));
-  Infraestructura.init(InfraestructuraSchema, Infraestructura.config(sequelize));
   Asignatura.init(AsignaturaSchema, Asignatura.config(sequelize));
   AsignaturaDocente.init(AsignaturaDocenteSchema, AsignaturaDocente.config(sequelize));
   Seccion.init(SeccionSchema, Seccion.config(sequelize));
   SolicitudSeccion.init(SolicitudSeccionSchema, SolicitudSeccion.config(sequelize));
   Higiene.init(HigieneSchema, Higiene.config(sequelize));
   PlantelHigiene.init(PlantelHigieneSchema, PlantelHigiene.config(sequelize));
+  Infraestructura.init(InfraestructuraSchema, Infraestructura.config(sequelize));
+  InfraestructuraPrograma.init(
+    InfraestructuraProgramaSchema,
+    InfraestructuraPrograma.config(sequelize),
+  );
+  AsignaturaInfraestructura.init(
+    AsignaturaInfraestructuraSchema,
+    AsignaturaInfraestructura.config(sequelize),
+  );
 
+  // Associations
   Ciclo.associate(sequelize.models);
   Domicilio.associate(sequelize.models);
   Diligencia.associate(sequelize.models);
@@ -99,13 +111,15 @@ function setupModels(sequelize) {
   Director.associate(sequelize.models);
   TipoInstalacion.associate(sequelize.models);
   Docente.associate(sequelize.models);
-  Infraestructura.associate(sequelize.models);
   Asignatura.associate(sequelize.models);
   AsignaturaDocente.associate(sequelize.models);
   Seccion.associate(sequelize.models);
   SolicitudSeccion.associate(sequelize.models);
   Higiene.associate(sequelize.models);
   PlantelHigiene.associate(sequelize.models);
+  Infraestructura.associate(sequelize.models);
+  InfraestructuraPrograma.associate(sequelize.models);
+  AsignaturaInfraestructura.associate(sequelize.models);
 }
 
 module.exports = setupModels;
