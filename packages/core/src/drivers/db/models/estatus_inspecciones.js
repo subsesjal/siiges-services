@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 
 const ESTATUS_INSPECCIONES_TABLE = 'estatus_inspecciones';
 
-const EstatusSchema = {
+const estatusInspeccionesSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -51,4 +51,4 @@ class Estatus extends Model {
   }
 }
 
-module.exports = { ESTATUS_INSPECCIONES_TABLE, EstatusSchema, Estatus };
+module.exports = { ESTATUS_INSPECCIONES_TABLE, estatusInspeccionesSchema, Estatus };
