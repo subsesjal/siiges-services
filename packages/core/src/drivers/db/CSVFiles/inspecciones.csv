@@ -1,0 +1,2 @@
+id,programa_id,estatus_inspeccion_id,fecha,fecha_asignada,resultado,folio,created_at
+1,1,5,2019-08-20,2019-08-19,null,20180522268,2019-08-19 10:42:08
