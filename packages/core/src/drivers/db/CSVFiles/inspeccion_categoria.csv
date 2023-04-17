@@ -1,0 +1,13 @@
+id,nombre,descripcion,instruccion,created_at
+1,Aulas,aulas,Verificar que la ventilación, iluminación y condiciones,2018-09-11 00:00:00
+2,aulas en el plantel,aulas,Verificar la adecuación del tamaño y cantidad,2018-09-11 00:00:00
+3,Constancia IFEJAL y Proteccion Civil,Dictamen,Verificar que la constancia de INFEJAL y Dictamen,2018-09-11 00:00:00
+4,Elementos de Seguridad Laboratorio o Taller,Taller,Verificar la existencia y funcionalidad,2018-09-11 00:00:00
+5,Funcionamiento de Taller o Laboratorio,Taller,Verificar que las instalaciones hidráulicas,2018-09-11 00:00:00
+6,Condiciones de Biblioteca,Biblioteca,Verificar que la ventilación iluminación y condiciones,2018-09-11 00:00:00
+7,Elementos de la Biblioteca,Biblioteca,Verificar la existencia de los elementos de seguridad,2018-09-11 00:00:00
+8,Dimensiones Biblioteca,Biblioteca,Verificar la existencia de los elementos de seguridad,2018-09-11 00:00:00
+9,Sanitarios,Sanitarios,Verificar la existencia suficiencie,2018-09-11 00:00:00
+10,Especificaciones de Equipo de Computo,Equipo de computo,Verificar las condiciones necesarias para el centro,2018-09-11 00:00:00
+11,Identificacion del Plantel (Exterior),Exterior,Verificar la presencia de la razón social,2018-09-11 00:00:00
+12,Indentificacion de las Areas Administrativas,Areas Administrativas,Verificar que se cuente con las áreas que se indinca,2018-09-11 00:00:00

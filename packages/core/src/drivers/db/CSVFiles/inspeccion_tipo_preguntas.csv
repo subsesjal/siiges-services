@@ -1,0 +1,4 @@
+id,nombre,descripcion,created_at
+1,si/no,Tipo de pregunta SI o NO,2018-09-10 00:00:00
+2,numerico,Tipo de pregunta entero,2018-09-10 00:00:00
+3,Abierta, Tipo de pregunta que recibe una cadena,2018-09-10 00:00:00
