@@ -1,4 +1,4 @@
-id,nombre,descripcion,tipo_aparatado,created_at
+id,nombre,descripcion,tipo_apartado,created_at
 1,Aulas Indicadores,Apartado que engloba a las aulas,1,2018-09-11 06:00:00
 2,Constancia INFEJAL y Dictamen de Proteccion Civil,N/A,1,2018-09-11 06:00:00
 3,Laboratorios y Talleres,N/A,1,2018-09-11 06:00:00
