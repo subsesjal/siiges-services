@@ -1,6 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const ESTATUS_INSPECCIONES_TABLE = 'estatusInspecciones';
+const ESTATUS_INSPECCIONES_TABLE = 'estatus_Inspecciones';
 
 const estatusInspeccionesSchema = {
   id: {
