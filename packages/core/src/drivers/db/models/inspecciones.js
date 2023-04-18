@@ -3,7 +3,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PROGRAMA_TABLE } = require('./programa');
 const { ESTATUS_INSPECCION_TABLE } = require('./estatusInspecciones');
 
-const INSPECCIONES_TABLE = 'inspecciones';
+const INSPECCIONES_TABLE = 'Inspecciones';
 
 const InspeccionesSchema = {
   id: {
@@ -24,7 +24,7 @@ const InspeccionesSchema = {
   estatus_inspeccionlId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'estatusInspeccionId',
+    field: 'estatus_Inspeccionesid',
     references: {
       model: ESTATUS_INSPECCION_TABLE,
       key: 'id',
@@ -32,11 +32,11 @@ const InspeccionesSchema = {
   },
   fecha: {
     allowNull: false,
-    type: DataTypes.DATE,
+    type: DataTypes.DATETIME,
   },
   fecha_asignada: {
     allowNull: false,
-    type: DataTypes.DATE,
+    type: DataTypes.DATETIME,
   },
   resultado: {
     allowNull: false,
@@ -68,7 +68,7 @@ const InspeccionesSchema = {
 
 class Inspecciones extends Model {
   static associate(models) {
-    this.belongsTo(models.programa, { as: 'programa' });
+    this.belongsTo(models.Programa, { as: 'programa' });
     this.belongsTo(models.estatusInspecciones, { as: 'estatusInspecciones' });
   }
 
@@ -81,4 +81,8 @@ class Inspecciones extends Model {
     };
   }
 }
-module.exports = { INSPECCIONES_TABLE, InspeccionesSchema, Inspecciones };
+module.exports = {
+  INSPECCIONES_TABLE,
+  InspeccionesSchema,
+  Inspecciones,
+};
