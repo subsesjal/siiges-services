@@ -4,7 +4,7 @@ const { INSPECCIONES_APARTADOS_TABLE } = require('./inspeccionApartado');
 
 const INSPECCIONES_OBSERVACIONES_TABLE = 'inspeccion_observaciones';
 
-const inspeccionesObservacionesSchema = {
+const inspeccionObservacionesSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -52,7 +52,7 @@ const inspeccionesObservacionesSchema = {
   },
 };
 
-class inspeccionesObservaciones extends Model {
+class Observaciones extends Model {
   static associate(models) {
     this.belongsTo(models.Inspecciones, { as: 'inspecciones' });
     this.belongsTo(models.inspecciones_apartados, { as: 'inspeccion_apartado', foreignKey: 'inspeccion_apartado_Id' });
@@ -62,7 +62,7 @@ class inspeccionesObservaciones extends Model {
     return {
       sequelize,
       tableName: INSPECCIONES_OBSERVACIONES_TABLE,
-      modelName: 'Inspecciones_Observaciones',
+      modelName: 'Inspeccion_Observaciones',
       timestamps: false,
     };
   }
@@ -70,6 +70,6 @@ class inspeccionesObservaciones extends Model {
 
 module.exports = {
   INSPECCIONES_OBSERVACIONES_TABLE,
-  inspeccionesObservacionesSchema,
-  inspeccionesObservaciones,
+  inspeccionObservacionesSchema,
+  Observaciones,
 };
