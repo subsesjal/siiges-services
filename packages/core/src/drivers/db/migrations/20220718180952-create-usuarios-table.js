@@ -36,6 +36,7 @@ const { INFRAESTRUCTURA_TABLE, InfraestructuraSchema } = require('../models/infr
 const { INFRAESTRUCTURA_PROGRAMA_TABLE, InfraestructuraProgramaSchema } = require('../models/infraestructuraPrograma');
 const { ASIGNATURA_INFRAESTRUCTURA_TABLE, AsignaturaInfraestructuraSchema } = require('../models/asignaturaInfraestructura');
 const { ESTATUS_INSPECCIONES_TABLE, estatusInspeccionesSchema } = require('../models/estatusInspecciones');
+const { INSPECCIONES_APARTADOS_TABLE, inspeccionesApartadosSchema } = require('../models/inspeccionApartado');
 
 module.exports = {
   async up(queryInterface) {
@@ -80,6 +81,7 @@ module.exports = {
       AsignaturaInfraestructuraSchema,
     );
     await queryInterface.createTable(ESTATUS_INSPECCIONES_TABLE, estatusInspeccionesSchema);
+    await queryInterface.createTable(INSPECCIONES_APARTADOS_TABLE, inspeccionesApartadosSchema);
   },
 
   async down(queryInterface) {
@@ -122,5 +124,6 @@ module.exports = {
     await queryInterface.dropTable(INFRAESTRUCTURA_PROGRAMA_TABLE);
     await queryInterface.dropTable(ASIGNATURA_INFRAESTRUCTURA_TABLE);
     await queryInterface.dropTable(ESTATUS_INSPECCIONES_TABLE);
+    await queryInterface.dropTable(INSPECCIONES_APARTADOS_TABLE);
   },
 };
