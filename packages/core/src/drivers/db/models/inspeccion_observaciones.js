@@ -55,14 +55,14 @@ const ObservacionesSchema = {
 class Observaciones extends Model {
   static associate(models) {
     this.belongsTo(models.Inspecciones, { as: 'inspecciones' });
-    this.belongsTo(models.inspeccionApartado, { as: 'inspecciones_apartado', foreignKey: 'inspeccion_apartado_Id' });
+    this.belongsTo(models.inspeccionApartado, { as: 'inspeccionapartado', foreignKey: 'inspeccion_apartado_Id' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
       tableName: INSPECCION_OBSERVACIONES_TABLE,
-      modelName: 'Inspecciones',
+      modelName: 'inspeccion_observaciones',
       timestamps: false,
     };
   }
