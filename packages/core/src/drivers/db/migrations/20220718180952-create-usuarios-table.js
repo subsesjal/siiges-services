@@ -97,10 +97,7 @@ module.exports = {
       INSPECCION_INSPECCIONES_PREGUNTAS_TABLE,
       inspeccionInspeccionesSchema,
     );
-    await queryInterface.createTable(
-      INSPECCIONES_OBSERVACIONES_TABLE,
-      ObservacionesSchema,
-    );
+    await queryInterface.createTable(INSPECCIONES_OBSERVACIONES_TABLE, ObservacionesSchema);
   },
 
   async down(queryInterface) {
@@ -154,9 +151,6 @@ module.exports = {
       INSPECCION_INSPECCIONES_PREGUNTAS_TABLE,
       inspeccionInspeccionesSchema,
     );
-    await queryInterface.dropTable(
-      INSPECCIONES_OBSERVACIONES_TABLE,
-      ObservacionesSchema,
-    );
+    await queryInterface.dropTable(INSPECCIONES_OBSERVACIONES_TABLE, ObservacionesSchema);
   },
 };
