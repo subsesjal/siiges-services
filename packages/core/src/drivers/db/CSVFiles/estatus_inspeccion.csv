@@ -1,6 +1,0 @@
-id,nombre,descripcion,created_at
-1,Nueva,Inspeccion asignada,2018-10-06
-2,En proceso,Inspeccion en proceso,2018-10-06
-3,Completa,Inspeccion completa,2018-10-06
-4,En observacion,Inspección terminada pero por atender observaciones,2018-10-06
-5,Sincronizada,Acta de cierre expedida,2018-10-06
