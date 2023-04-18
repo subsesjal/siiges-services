@@ -1,7 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
 const { PROGRAMA_TABLE } = require('./programa');
-const { ESTATUS_INSPECCION_TABLE } = require('./estatus_inspecciones');
+const { ESTATUS_INSPECCION_TABLE } = require('./estatusInspecciones');
 
 const INSPECCIONES_TABLE = 'inspecciones';
 
@@ -24,7 +24,7 @@ const InspeccionesSchema = {
   estatus_inspeccionlId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'estatus_inspeccion_id',
+    field: 'estatusInspeccionId',
     references: {
       model: ESTATUS_INSPECCION_TABLE,
       key: 'id',
@@ -69,7 +69,7 @@ const InspeccionesSchema = {
 class Inspecciones extends Model {
   static associate(models) {
     this.belongsTo(models.Programa, { as: 'programa' });
-    this.belongsTo(models.Estatus_inspeccion, { as: 'estatus_inspeccion' });
+    this.belongsTo(models.Estatus_inspeccion, { as: 'estatusInspeccion' });
   }
 
   static config(sequelize) {
