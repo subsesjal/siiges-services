@@ -68,7 +68,7 @@ const InspeccionesSchema = {
 
 class Inspecciones extends Model {
   static associate(models) {
-    this.belongsTo(models.Programa, { as: 'programa' });
+    this.belongsTo(models.Programa, { as: 'Programa' });
     this.belongsTo(models.estatusInspecciones, { as: 'estatusInspecciones' });
   }
 
