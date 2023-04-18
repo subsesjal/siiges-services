@@ -68,8 +68,8 @@ const InspeccionesSchema = {
 
 class Inspecciones extends Model {
   static associate(models) {
-    this.belongsTo(models.Programa, { as: 'programa' });
-    this.belongsTo(models.Estatus_inspeccion, { as: 'estatusInspeccion' });
+    this.belongsTo(models.programa, { as: 'programa' });
+    this.belongsTo(models.estatusInspecciones, { as: 'estatusInspecciones' });
   }
 
   static config(sequelize) {

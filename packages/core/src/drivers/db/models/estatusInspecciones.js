@@ -38,7 +38,7 @@ const estatusInspeccionesSchema = {
 
 class estatusInspecciones extends Model {
   static associate(models) {
-    this.hasMany(models.Estatus_inspecciones, { as: 'estatusInspecciones', foreignKey: 'estatusInspeccionesId' });
+    this.hasMany(models.estatusInspecciones, { as: 'estatusInspecciones', foreignKey: 'estatusInspeccionesId' });
   }
 
   static config(sequelize) {
