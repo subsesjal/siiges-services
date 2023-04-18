@@ -39,6 +39,7 @@ const { ESTATUS_INSPECCIONES_TABLE, estatusInspeccionesSchema } = require('../mo
 const { INSPECCIONES_APARTADOS_TABLE, inspeccionesApartadosSchema } = require('../models/inspeccionApartado');
 const { INSPECCIONES_CATEGORIAS_TABLE, inspeccionesCategoriasSchema } = require('../models/inspeccionCategorias');
 const { INSPECCIONES_TIPO_PREGUNTAS_TABLE, inspeccionesTipoPreguntasSchema } = require('../models/inspeccionesTipoPreguntas');
+const { INSPECCIONES_TABLE, InspeccionesSchema } = require('../models/inspecciones');
 
 module.exports = {
   async up(queryInterface) {
@@ -89,6 +90,7 @@ module.exports = {
       INSPECCIONES_TIPO_PREGUNTAS_TABLE,
       inspeccionesTipoPreguntasSchema,
     );
+    await queryInterface.createTable(INSPECCIONES_TABLE, InspeccionesSchema);
   },
 
   async down(queryInterface) {
@@ -137,5 +139,6 @@ module.exports = {
       INSPECCIONES_TIPO_PREGUNTAS_TABLE,
       inspeccionesTipoPreguntasSchema,
     );
+    await queryInterface.dropTable(INSPECCIONES_TABLE, InspeccionesSchema);
   },
 };
