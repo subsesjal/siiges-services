@@ -1,16 +1,16 @@
 id,pregunta,id_inspeccion_tipo_pregunta,id_inspeccion_apartado,id_inspeccion_categoria,created_at
 1,¿Las aulas tienen adecuada y suficiente ventilación?,1,1,1,2018-09-11 06:00:00
 2,¿Las aulas tienen adecuada y suficiente iluminación?,1,1,1,2018-09-11 06:00:00
-3,¿Son adecuadas las condiciones de mantenimiento y limpieza (Pisos, pintura, techos, muros, puertas, instalaciones eléctricas…)?,1,1,1,2018-09-11 06:00:00
+3,¿Son adecuadas las condiciones de mantenimiento y limpieza (Pisos pintura techos muros puertas instalaciones eléctricas)?,1,1,1,2018-09-11 06:00:00
 4,¿Las aulas cuentan con nomenclatura?,1,1,1,2018-09-11 06:00:00
 5,¿Las aulas cuentas con pintarrón en buen estado?,1,1,1,2018-09-11 06:00:00
 6,¿Las aulas cuentan con botes de basura?,1,1,1,2018-09-11 06:00:00
-7,Capacidad mínima de las aulas (personas):,2,1,1,2018-09-11 06:00:00
-8,Capacidad máxima de las aulas (personas):,2,1,1,2018-09-11 06:00:00
+7,Capacidad mínima de las aulas (personas),2,1,1,2018-09-11 06:00:00
+8,Capacidad máxima de las aulas (personas),2,1,1,2018-09-11 06:00:00
 9,¿El plantel cuenta con las aulas suficientes para los grupos vigentes del programa educativo?,1,1,2,2018-09-11 06:00:00
 10,¿Cuenta con constancia de INFEJAL actulizada?,1,2,3,2018-09-11 06:00:00
 11,¿Cuenta con el dictamen de protección civil actualizado?,1,2,3,2018-09-11 06:00:00
-12,Número de extintores:,2,2,3,2018-09-11 06:00:00
+12,Número de extintores,2,2,3,2018-09-11 06:00:00
 13,¿Los extintores cuentan con recarga vigente?,1,2,3,2018-09-11 06:00:00
 14,¿Se cuenta con señalamientos de evacuación?,1,2,3,2018-09-11 06:00:00
 15,¿El laboratorio cuenta con nomenclatura?,1,3,4,2018-09-11 06:00:00
@@ -20,12 +20,12 @@ id,pregunta,id_inspeccion_tipo_pregunta,id_inspeccion_apartado,id_inspeccion_cat
 19,¿El laboratorio cuenta con horarios de atención?,1,3,4,2018-09-11 06:00:00
 20,¿El laboratorio se observa limpio e higiénico?,1,3,4,2018-09-11 06:00:00
 21,¿Se cuenta con laboratorios y talleres especiales?,1,3,4,2018-09-11 06:00:00
-22,De ser positiva la respuesta en la pregunta anterior indicar los nombres de los talleres o laboratorios:,3,3,4,2018-09-11 06:00:00
+22,De ser positiva la respuesta en la pregunta anterior indicar los nombres de los talleres o laboratorios,3,3,4,2018-09-11 06:00:00
 23,¿ Se cuenta con una iluminación  adecuada y suficiente en el laboratorio?,1,3,5,2018-09-11 06:00:00
 24,¿ Se cuenta con una ventilación adecuada y suficiente en el laboratorio?,1,3,5,2018-09-11 06:00:00
 25,¿La biblioteca tiene adecuada y suficiente ventilación?,1,4,6,2018-09-11 06:00:00
 26,¿La biblioteca tiene adecuada y suficiente ventilación?,1,4,6,2018-09-11 06:00:00
-27,¿Son adecuadas las condiciones de mantenimiento y limpieza? (Pisos pintura techos muros puertas…),1,4,6,2018-09-11 06:00:00
+27,¿Son adecuadas las condiciones de mantenimiento y limpieza? (Pisos pintura techos muros puertas),1,4,6,2018-09-11 06:00:00
 28,¿Cuenta con el acervo manifestado en el formato FDP04?,1,4,6,2018-09-11 06:00:00
 29,¿La biblioteca cuenta con nomenclatura?,1,4,7,2018-09-11 06:00:00
 30,¿La biblioteca cuenta con horarios de atención?,1,4,7,2018-09-11 06:00:00
@@ -34,33 +34,33 @@ id,pregunta,id_inspeccion_tipo_pregunta,id_inspeccion_apartado,id_inspeccion_cat
 33,¿La biblioteca cuenta con bitácora de registro de préstamo en la sala o domicilio?,1,4,7,2018-09-11 06:00:00
 34,¿La biblioteca cuenta con señalamientos de seguridad?,1,4,7,2018-09-11 06:00:00
 35,¿La biblioteca cuenta con extintor?,1,4,7,2018-09-11 06:00:00
-36,Número de títulos:,2,4,7,2018-09-11 06:00:00
+36,Número de títulos,2,4,7,2018-09-11 06:00:00
 37,Número de volúmenes,2,4,7,2018-09-11 06:00:00
 38,¿Las dimensiones de la biblioteca son adecuadas?,1,4,8,2018-09-11 06:00:00
 39,¿Los sanitarios en general cuentan con señalización del espacio?,1,5,9,2018-09-11 06:00:00
 40,¿Los sanitarios en general se obervan limpios e higiénicos y funcionales?,1,5,9,2018-09-11 06:00:00
 41,¿Los sanitarios en general cuentan con suministro permanente de agua?,1,5,9,2018-09-11 06:00:00
 42,¿Los sanitarios en general cuentan con suministro permanente de agua?,1,5,9,2018-09-11 06:00:00
-43,Número de inodoros para estudiantes mujeres:,2,5,9,2018-09-11 06:00:00
-44,Número de lavamanos en los baños de mujeres estudiantes:,2,5,9,2018-09-11 06:00:00
-45,Número de inodoros para estudiantes hombres:,2,5,9,2018-09-11 06:00:00
+43,Número de inodoros para estudiantes mujeres,2,5,9,2018-09-11 06:00:00
+44,Número de lavamanos en los baños de mujeres estudiantes,2,5,9,2018-09-11 06:00:00
+45,Número de inodoros para estudiantes hombres,2,5,9,2018-09-11 06:00:00
 46,Número de lavamanos en los baños de hombres estudiantes:,2,5,9,2018-09-11 06:00:00
-47,Número de mingitorios en los baños de hombres estudiantes:,2,5,9,2018-09-11 06:00:00
-48,Número de sanitarios para el personal administrativo,2,5,9,2018-09-11 06:00:00
-49,Número de sanitarios para el personal administrativo,2,5,9,2018-09-11 06:00:00
+47,Número de mingitorios en los baños de hombres estudiantes,2,5,9,2018-09-11 06:00:00
+48,Número de sanitarios para el personal administrativo hombres,2,5,9,2018-09-11 06:00:00
+49,Número de sanitarios para el personal administrativo mujeres,2,5,9,2018-09-11 06:00:00
 50,Número de computadoras,2,6,10,2018-09-11 06:00:00
-51,Número de computadora,3,65,10,2018-09-11 06:00:00
-52,Versión del sistema operativo del equipo de cómputo:,3,6,10,2018-09-11 06:00:00
-53,Memoria RAM del equipo de cómputo:,3,6,10,2018-09-11 06:00:00
-54,Capacidad del disco duro del equipo de cómputo:,3,6,10,2018-09-11 06:00:00
-55,Se identifica claramente el plantel, nombre de la escuela, 1,6,11,2018-09-11 06:00:00
+51,Sistema operativo del equipo de cómputo,3,65,10,2018-09-11 06:00:00
+52,Versión del sistema operativo del equipo de cómputo,3,6,10,2018-09-11 06:00:00
+53,Memoria RAM del equipo de cómputo,3,6,10,2018-09-11 06:00:00
+54,Capacidad del disco duro del equipo de cómputo,3,6,10,2018-09-11 06:00:00
+55,Se identifica claramente el plantel nombre de la escuela,1,6,11,2018-09-11 06:00:00
 56,Se identifica claramente el número de domicilio,1,6,11,2018-09-11 06:00:00
 57,Se observa limpio e higiénico el exterior del plantel,1,6,11,2018-09-11 06:00:00
 58,¿La institución cuenta con área de recepción?,1,7,12,2018-09-11 06:00:00
 59,¿La institución cuenta con dirección?,1,7,12,2018-09-11 06:00:00
 60,¿La institución cuenta con área de control escolar?,1,7,12,2018-09-11 06:00:00
 61,¿La institución cuenta con sala(s) de maestros?,1,7,12,2018-09-11 06:00:00
-62,¿La institución cuenta con sala(s) de maestros?,1,7,12,2018-09-11 06:00:00
+62,¿La institución cuenta con cubículo(s) de orientación educativa?,1,7,12,2018-09-11 06:00:00
 
 
 
