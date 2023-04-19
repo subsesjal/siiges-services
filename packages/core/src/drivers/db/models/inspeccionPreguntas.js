@@ -5,7 +5,7 @@ const { INSPECCIONES_CATEGORIAS_TABLE } = require('./inspeccionCategorias');
 
 const INSPECCION_PREGUNTAS_TABLE = 'inspeccion_preguntas';
 
-const inspeccionPreguntasSchema = {
+const InspeccionPreguntasSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -80,4 +80,4 @@ class InspeccionPreguntas extends Model {
   }
 }
 
-module.exports = { INSPECCION_PREGUNTAS_TABLE, inspeccionPreguntasSchema, InspeccionPreguntas };
+module.exports = { INSPECCION_PREGUNTAS_TABLE, InspeccionPreguntasSchema, InspeccionPreguntas };

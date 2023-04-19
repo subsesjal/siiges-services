@@ -1,10 +1,10 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { INSPECCIONES_TABLE } = require('./inspecciones');
-const { INSPECCIONES_APARTADOS_TABLE } = require('./inspeccionApartado');
+const { INSPECCIONES_TIPO_PREGUNTAS_TABLE } = require('./inspeccionesTipoPreguntas');
 
-const INSPECCIONES_OBSERVACIONES_TABLE = 'inspeccion_observaciones';
+const INSPECCION_INSPECCIONES_PREGUNTAS_TABLE = 'inspecciones_inspeccion_preguntas';
 
-const ObservacionesSchema = {
+const InspeccionInspeccionesSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -23,13 +23,13 @@ const ObservacionesSchema = {
   estatus_inspeccionId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'inspeccion_apartado_id',
+    field: 'inspeccion_pregunta_id',
     references: {
-      model: INSPECCIONES_APARTADOS_TABLE,
+      model: INSPECCIONES_TIPO_PREGUNTAS_TABLE,
       key: 'id',
     },
   },
-  comentario: {
+  respuesta: {
     type: DataTypes.STRING,
   },
   createdAt: {
@@ -52,20 +52,24 @@ const ObservacionesSchema = {
   },
 };
 
-class Observaciones extends Model {
+class inspeccionPregunta extends Model {
   static associate(models) {
-    this.belongsTo(models.Inspecciones, { as: 'inspecciones' });
-    this.belongsTo(models.inspeccionesapartados, { as: 'inspeccionesapartados', foreignKey: 'inspeccionesapartadosId' });
+    this.belongsTo(models.Inspecciones, { as: 'inspecciones', foreignKey: 'inspeccionesId' });
+    this.belongsTo(models.Inspecciones_tipo_preguntas, { as: 'inspeccionesInspeccionPregunta', foreignKey: 'inspeccionesInspeccionPreguntaId' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: INSPECCIONES_OBSERVACIONES_TABLE,
-      modelName: 'inspeccion_observaciones',
+      tableName: INSPECCION_INSPECCIONES_PREGUNTAS_TABLE,
+      modelName: 'inspeccion_inspecciones_preguntas',
       timestamps: false,
     };
   }
 }
 
-module.exports = { INSPECCIONES_OBSERVACIONES_TABLE, ObservacionesSchema, Observaciones };
+module.exports = {
+  INSPECCION_INSPECCIONES_PREGUNTAS_TABLE,
+  InspeccionInspeccionesSchema,
+  inspeccionPregunta,
+};

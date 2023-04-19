@@ -1,10 +1,10 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { INSPECCIONES_TABLE } = require('./inspecciones');
-const { INSPECCIONES_TIPO_PREGUNTAS_TABLE } = require('./inspeccionesTipoPreguntas');
+const { INSPECCIONES_APARTADOS_TABLE } = require('./inspeccionApartado');
 
-const INSPECCION_INSPECCIONES_PREGUNTAS_TABLE = 'inspecciones_inspeccion_preguntas';
+const INSPECCIONES_OBSERVACIONES_TABLE = 'inspeccion_observaciones';
 
-const inspeccionInspeccionesSchema = {
+const InspeccionObservacionesSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -23,13 +23,13 @@ const inspeccionInspeccionesSchema = {
   estatus_inspeccionId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'inspeccion_pregunta_id',
+    field: 'inspeccion_apartado_id',
     references: {
-      model: INSPECCIONES_TIPO_PREGUNTAS_TABLE,
+      model: INSPECCIONES_APARTADOS_TABLE,
       key: 'id',
     },
   },
-  respuesta: {
+  comentario: {
     type: DataTypes.STRING,
   },
   createdAt: {
@@ -52,24 +52,24 @@ const inspeccionInspeccionesSchema = {
   },
 };
 
-class inspeccionPregunta extends Model {
+class Observaciones extends Model {
   static associate(models) {
     this.belongsTo(models.Inspecciones, { as: 'inspecciones' });
-    this.belongsTo(models.Inspecciones_tipo_preguntas, { as: 'inspeccion_pregunta', foreignKey: 'inspeccion_preguntaId' });
+    this.belongsTo(models.inspeccionesapartados, { as: 'inspeccionesapartados', foreignKey: 'inspeccionesapartadosId' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: INSPECCION_INSPECCIONES_PREGUNTAS_TABLE,
-      modelName: 'inspecciones_tipo_preguntas',
+      tableName: INSPECCIONES_OBSERVACIONES_TABLE,
+      modelName: 'inspeccion_observaciones',
       timestamps: false,
     };
   }
 }
 
 module.exports = {
-  INSPECCION_INSPECCIONES_PREGUNTAS_TABLE,
-  inspeccionInspeccionesSchema,
-  inspeccionPregunta,
+  INSPECCIONES_OBSERVACIONES_TABLE,
+  InspeccionObservacionesSchema,
+  Observaciones,
 };

@@ -1,6 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PROGRAMA_TABLE } = require('./programa');
-const { ESTATUS_INSPECCIONES_TABLE } = require('./estatusInspecciones');
+const { ESTATUS_INSPECCIONES_TABLE } = require('./estatusInspeccion');
 
 const INSPECCIONES_TABLE = 'inspecciones';
 

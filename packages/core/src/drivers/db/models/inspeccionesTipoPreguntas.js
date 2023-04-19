@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 
 const INSPECCIONES_TIPO_PREGUNTAS_TABLE = 'inspecciones_tipo_preguntas';
 
-const inspeccionesTipoPreguntasSchema = {
+const InspeccionesTipoPreguntasSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -53,6 +53,6 @@ class inspeccionTipoPreguntas extends Model {
 
 module.exports = {
   INSPECCIONES_TIPO_PREGUNTAS_TABLE,
-  inspeccionesTipoPreguntasSchema,
+  InspeccionesTipoPreguntasSchema,
   inspeccionTipoPreguntas,
 };
