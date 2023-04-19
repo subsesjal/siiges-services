@@ -42,6 +42,7 @@ const { INSPECCIONES_TIPO_PREGUNTAS_TABLE, inspeccionesTipoPreguntasSchema } = r
 const { INSPECCIONES_TABLE, InspeccionesSchema } = require('../models/inspecciones');
 const { INSPECCION_INSPECCIONES_PREGUNTAS_TABLE, inspeccionInspeccionesSchema } = require('../models/inspeccion_inspeccionespreguntas');
 const { INSPECCIONES_OBSERVACIONES_TABLE, ObservacionesSchema } = require('../models/inspeccion_observaciones');
+const { INSPECCION_PREGUNTAS_TABLE, inspeccionPreguntasSchema } = require('../models/inspeccion_preguntas');
 
 module.exports = {
   async up(queryInterface) {
@@ -98,6 +99,7 @@ module.exports = {
       inspeccionInspeccionesSchema,
     );
     await queryInterface.createTable(INSPECCIONES_OBSERVACIONES_TABLE, ObservacionesSchema);
+    await queryInterface.createTable(INSPECCION_PREGUNTAS_TABLE, inspeccionPreguntasSchema);
   },
 
   async down(queryInterface) {
@@ -141,16 +143,11 @@ module.exports = {
     await queryInterface.dropTable(ASIGNATURA_INFRAESTRUCTURA_TABLE);
     await queryInterface.dropTable(ESTATUS_INSPECCIONES_TABLE);
     await queryInterface.dropTable(INSPECCIONES_APARTADOS_TABLE);
-    await queryInterface.dropTable(INSPECCIONES_CATEGORIAS_TABLE, inspeccionesCategoriasSchema);
-    await queryInterface.dropTable(
-      INSPECCIONES_TIPO_PREGUNTAS_TABLE,
-      inspeccionesTipoPreguntasSchema,
-    );
-    await queryInterface.dropTable(INSPECCIONES_TABLE, InspeccionesSchema);
-    await queryInterface.dropTable(
-      INSPECCION_INSPECCIONES_PREGUNTAS_TABLE,
-      inspeccionInspeccionesSchema,
-    );
-    await queryInterface.dropTable(INSPECCIONES_OBSERVACIONES_TABLE, ObservacionesSchema);
+    await queryInterface.dropTable(INSPECCIONES_CATEGORIAS_TABLE);
+    await queryInterface.dropTable(INSPECCIONES_TIPO_PREGUNTAS_TABLE);
+    await queryInterface.dropTable(INSPECCIONES_TABLE);
+    await queryInterface.dropTable(INSPECCION_INSPECCIONES_PREGUNTAS_TABLE);
+    await queryInterface.dropTable(INSPECCIONES_OBSERVACIONES_TABLE);
+    await queryInterface.dropTable(INSPECCION_PREGUNTAS_TABLE);
   },
 };
