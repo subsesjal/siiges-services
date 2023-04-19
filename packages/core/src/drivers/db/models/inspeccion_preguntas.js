@@ -12,6 +12,10 @@ const inspeccionPreguntasSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
+  pregunta: {
+    allowNull: false,
+    type: DataTypes.STRING,
+  },
   inspeccionTipoPreguntaId: {
     allowNull: false,
     type: DataTypes.INTEGER,
