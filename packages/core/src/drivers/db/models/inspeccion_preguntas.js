@@ -19,7 +19,7 @@ const inspeccionPreguntasSchema = {
   inspeccionTipoPreguntaId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'id_inspeccion_tipo_pregunta_',
+    field: 'id_inspeccion_tipo_pregunta',
     references: {
       model: INSPECCIONES_TIPO_PREGUNTAS_TABLE,
       key: 'id',
@@ -28,7 +28,7 @@ const inspeccionPreguntasSchema = {
   inspeccionApartadoId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'id_inspeccion_apartado_',
+    field: 'id_inspeccion_apartado',
     references: {
       model: INSPECCIONES_APARTADOS_TABLE,
       key: 'id',
@@ -37,7 +37,7 @@ const inspeccionPreguntasSchema = {
   inspeccionCategoriaId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'id_inspeccion_categoria_',
+    field: 'id_inspeccion_categoria',
     references: {
       model: INSPECCIONES_CATEGORIAS_TABLE,
       key: 'id',
