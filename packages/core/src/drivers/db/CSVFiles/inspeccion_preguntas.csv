@@ -49,7 +49,7 @@ id,pregunta,id_inspeccion_tipo_pregunta,id_inspeccion_apartado,id_inspeccion_cat
 48,Número de sanitarios para el personal administrativo hombres,2,5,9,2018-09-11 06:00:00
 49,Número de sanitarios para el personal administrativo mujeres,2,5,9,2018-09-11 06:00:00
 50,Número de computadoras,2,6,10,2018-09-11 06:00:00
-51,Sistema operativo del equipo de cómputo,3,65,10,2018-09-11 06:00:00
+51,Sistema operativo del equipo de cómputo,3,6,10,2018-09-11 06:00:00
 52,Versión del sistema operativo del equipo de cómputo,3,6,10,2018-09-11 06:00:00
 53,Memoria RAM del equipo de cómputo,3,6,10,2018-09-11 06:00:00
 54,Capacidad del disco duro del equipo de cómputo,3,6,10,2018-09-11 06:00:00
