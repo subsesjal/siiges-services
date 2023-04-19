@@ -65,7 +65,7 @@ const inspeccionPreguntasSchema = {
 
 class InspeccionPreguntas extends Model {
   static associate(models) {
-    this.belongsTo(models.TipoPreguntas, { as: 'tipoPreguntas' });
+    this.belongsTo(models.TipoPreguntas, { as: 'tipoPreguntas', foreignKey: 'tipoPreguntasId' });
     this.belongsTo(models.InspeccionesApartados, { as: 'InspeccionApartado', foreignKey: 'estatusInspeccionesId' });
     this.belongsTo(models.InspeccionesCategorias, { as: 'InspeccionCategorias', foreignKey: 'estatusCategoriasId' });
   }
