@@ -1,7 +1,7 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-async function findPlantelbyInfraestructura(req, reply) {
+async function findInfraestructurabyPlantel(req, reply) {
   try {
     const { infraestructuraId } = req.params;
 
@@ -19,4 +19,4 @@ async function findPlantelbyInfraestructura(req, reply) {
   }
 }
 
-module.exports = findPlantelbyInfraestructura;
+module.exports = findInfraestructurabyPlantel;
