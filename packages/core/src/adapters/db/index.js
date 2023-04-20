@@ -4,6 +4,7 @@ const findOneQuery = require('./find-one.db.adapter');
 const findAllQuery = require('./find-all.db.adapter');
 const updateQueryModule = require('./update.db.adapters');
 const countQuery = require('./count.db.adapter');
+const findGroupQuery = require('./find-all.db.adapter');
 
 module.exports = {
   ...updateQueryModule,
@@ -12,4 +13,5 @@ module.exports = {
   findOneQuery,
   findAllQuery,
   countQuery,
+  findGroupQuery,
 };

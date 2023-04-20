@@ -1,7 +1,7 @@
 const { infraestructura } = require('./properties/infraestructura');
 const { responseProperties } = require('./properties/responseProperties');
 
-const findPlantelInfraestructuraSchema = {
+const findGroupPlantelInfraestructuraSchema = {
   tags: ['Infraestructura'],
   description: 'Given the ID of plantel, then return the list of Infraestructura.',
   params: {
@@ -32,4 +32,4 @@ const findPlantelInfraestructuraSchema = {
   },
 };
 
-module.exports = findPlantelInfraestructuraSchema;
+module.exports = findGroupPlantelInfraestructuraSchema;
