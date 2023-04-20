@@ -18,7 +18,7 @@ async function plantelRouter(fastify, opts, next) {
     plantelesAdapter.findGroupPlantelHigiene,
   );
   await fastify.get(
-    '/:plantelId/infraestructura',
+    '/:plantelId/infraestructuras',
     {
       schema: findPlantelInfraestructuraSchema,
     },
