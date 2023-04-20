@@ -1,22 +1,22 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-async function findInfraestructurabyPlantel(req, reply) {
+async function findPlantelInfraestructura(req, reply) {
   try {
-    const { infraestructuraId } = req.params;
+    const { plantelId } = req.params;
 
-    Logger.info('[planteles]: Getting planteles - infraestructura');
-    const infraestructura = await this.institucionServices.findPlantelbyInfraestructura(
-      { id: infraestructuraId },
-    );
+    Logger.info(`[infraestructura]: Getting infraestructura by plantel with id: ${plantelId}`);
+    const plantel = await this.institucionServices.findPlantelInfraestructura({
+      plantelId,
+    });
 
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: infraestructura });
+      .send({ data: plantel });
   } catch (error) {
     return errorHandler(error, reply);
   }
 }
 
-module.exports = findInfraestructurabyPlantel;
+module.exports = findPlantelInfraestructura;

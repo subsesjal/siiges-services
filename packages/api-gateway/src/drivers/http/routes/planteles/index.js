@@ -5,7 +5,7 @@ const {
   deletePlantelHigieneSchema,
   findGroupPlantelHigieneSchema,
   createPlantelInfraestructuraSchema,
-  findInfraestructurabyPlantelSchema,
+  findPlantelInfraestructuraSchema,
 
 } = require('./schema');
 
@@ -20,9 +20,9 @@ async function plantelRouter(fastify, opts, next) {
   await fastify.get(
     '/:plantelId/infraestructura',
     {
-      schema: findInfraestructurabyPlantelSchema,
+      schema: findPlantelInfraestructuraSchema,
     },
-    plantelesAdapter.findPlantelbyInfraestructura,
+    plantelesAdapter.findPlantelInfraestructura,
   );
 
   await fastify.post(

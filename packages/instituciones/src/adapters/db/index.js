@@ -10,6 +10,7 @@ const {
   Persona,
   Municipio,
   PlantelHigiene,
+  PlantelInfraestructura,
 } = drivers.sequelize.models;
 
 const {
@@ -47,4 +48,5 @@ module.exports = {
   deleteHigieneQuery: deleteAndFindQuery(PlantelHigiene),
   findOnePlantelHigieneQuery: findOneQuery(PlantelHigiene),
   findGroupPlantelHigieneQuery: findAllQuery(PlantelHigiene),
+  findPlantelInfraestructuraQuery: findAllQuery(PlantelInfraestructura),
 };
