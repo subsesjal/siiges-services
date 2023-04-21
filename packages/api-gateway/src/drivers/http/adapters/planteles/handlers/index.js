@@ -3,6 +3,7 @@ const updatePlantelHigiene = require('./update.handlers.plantel-higiene.adapters
 const deletePlantelHigiene = require('./delete.handlers.plantel-higiene.adapters');
 const findGroupPlantelHigiene = require('./find-group.handlers.plantel-higiene.adapters');
 const createPlantelInfraestructura = require('./create.handlers.plantel-infraestructura.adapters');
+const findGroupPlantelesUsuario = require('./find-group.handlers.planteles-usuario.adapters');
 
 module.exports = {
   createPlantelHigiene,
@@ -10,4 +11,5 @@ module.exports = {
   deletePlantelHigiene,
   findGroupPlantelHigiene,
   createPlantelInfraestructura,
+  findGroupPlantelesUsuario,
 };
