@@ -5,6 +5,7 @@ const {
 } = require('../../../adapters/db');
 
 const createPlantelInfraestructura = require('./create.plantel-infraestructura.use-cases');
+const findGroupPlantelesUsuario = require('./find-group.planteles-usuario.use-cases');
 
 module.exports = {
   createPlantelInfraestructura: createPlantelInfraestructura(
@@ -14,5 +15,8 @@ module.exports = {
     planteles.createInfraestructuraQuery,
     planteles.createInfraestructuraProgramaQuery,
     planteles.createAsignaturaInfraestructuraQuery,
+  ),
+  findGroupPlantelesUsuario: findGroupPlantelesUsuario(
+    planteles.findOneInstitucionQuery,
   ),
 };

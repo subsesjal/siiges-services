@@ -6,6 +6,7 @@ const {
   Infraestructura,
   InfraestructuraPrograma,
   AsignaturaInfraestructura,
+  Institucion,
 } = models;
 
 const {
@@ -15,6 +16,7 @@ const {
 
 module.exports = {
   findOnePlantelQuery: findOneQuery(Plantel),
+  findOneInstitucionQuery: findOneQuery(Institucion),
   createInfraestructuraQuery: createQuery(Infraestructura),
   createInfraestructuraProgramaQuery: createQuery(InfraestructuraPrograma),
   createAsignaturaInfraestructuraQuery: createQuery(AsignaturaInfraestructura),
