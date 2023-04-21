@@ -11,7 +11,7 @@ const {
 const {
   createQuery,
   findOneQuery,
-  findGroupQuery,
+  findAllQuery,
 
 } = queries;
 
@@ -20,5 +20,5 @@ module.exports = {
   createInfraestructuraQuery: createQuery(Infraestructura),
   createInfraestructuraProgramaQuery: createQuery(InfraestructuraPrograma),
   createAsignaturaInfraestructuraQuery: createQuery(AsignaturaInfraestructura),
-  findGroupPlantelInfraestructuraQuery: findGroupQuery(Infraestructura),
+  findAllInfraestructuraQuery: findAllQuery(Infraestructura),
 };

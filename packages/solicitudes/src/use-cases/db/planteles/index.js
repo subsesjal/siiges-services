@@ -17,6 +17,6 @@ module.exports = {
     planteles.createAsignaturaInfraestructuraQuery,
   ),
   findGroupPlantelInfraestructura: findGroupPlantelInfraestructura(
-    planteles.findGroupPlantelInfraestructuraQuery,
+    planteles.findAllInfraestructuraQuery,
   ),
 };

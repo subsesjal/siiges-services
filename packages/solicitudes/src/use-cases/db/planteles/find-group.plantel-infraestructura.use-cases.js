@@ -1,13 +1,7 @@
-const findGroupPlantelInfraestructura = (findGroupQuery) => async (identifierObj) => {
-  const include = [
-    { association: 'infraestructura' },
-  ];
+const findGroupPlantelInfraestructura = (findAllQuery) => async (identifierObj) => {
+  const plantelInfraestructuras = await findAllQuery(identifierObj);
 
-  const plantel = await findGroupQuery(identifierObj, { include });
-
-  return plantel;
+  return plantelInfraestructuras;
 };
-
-console.log('estoy aqui');
 
 module.exports = findGroupPlantelInfraestructura;
