@@ -8,4 +8,6 @@ const findGroupPlantelInfraestructura = (findGroupQuery) => async (identifierObj
   return plantel;
 };
 
+console.log('estoy aqui');
+
 module.exports = findGroupPlantelInfraestructura;

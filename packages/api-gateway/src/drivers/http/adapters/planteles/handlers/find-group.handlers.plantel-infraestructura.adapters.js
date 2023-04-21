@@ -8,6 +8,7 @@ async function findGroupPlantelInfraestructura(req, reply) {
     Logger.info(`[infraestructura]: Getting infraestructura by plantel with id: ${plantelId}`);
     const plantel = await this.solicitudServices.findGroupPlantelInfraestructura({
       plantelId,
+
     });
 
     return reply
