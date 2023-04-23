@@ -1,20 +1,20 @@
 const csvToJson = require('convert-csv-to-json');
 const path = require('path');
 
-const { INSPECCIONES_CATEGORIAS_TABLE } = require('../models/inspeccionCategorias');
+const { INSPECCION_CATEGORIA_TABLE } = require('../models/inspeccionCategoria');
 
-const inspeccioncategoriaCSV = path.join(__dirname, '../CSVFiles/inspeccion_categoria.csv');
+const inspeccionCategoriasCSV = path.join(__dirname, '../CSVFiles/inspeccion_categorias.csv');
 
 module.exports = {
   async up(queryInterface) {
-    const inspeccioncategoriaJson = await csvToJson
+    const inspeccionCategoriasJson = await csvToJson
       .fieldDelimiter(',')
-      .getJsonFromCsv(inspeccioncategoriaCSV);
+      .getJsonFromCsv(inspeccionCategoriasCSV);
 
-    await queryInterface.bulkInsert(INSPECCIONES_CATEGORIAS_TABLE, inspeccioncategoriaJson, {});
+    await queryInterface.bulkInsert(INSPECCION_CATEGORIA_TABLE, inspeccionCategoriasJson, {});
   },
 
   async down(queryInterface) {
-    await queryInterface.bulkDelete(INSPECCIONES_CATEGORIAS_TABLE, null, {});
+    await queryInterface.bulkDelete(INSPECCION_CATEGORIA_TABLE, null, {});
   },
 };

@@ -1,6 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const ESTATUS_INSPECCIONES_TABLE = 'estatus_inspecciones';
+const ESTATUS_INSPECCION_TABLE = 'estatus_inspecciones';
 
 const EstatusInspeccionSchema = {
   id: {
@@ -36,19 +36,18 @@ const EstatusInspeccionSchema = {
   },
 };
 
-class estatusInspeccion extends Model {
-  static associate(models) {
-    this.hasMany(models.estatusInspeccion, { as: 'estatusInspeccion', foreignKey: 'estatusInspeccionId' });
+class EstatusInspeccion extends Model {
+  static associate() {
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: ESTATUS_INSPECCIONES_TABLE,
-      modelName: 'estatusInspeccionSchema',
+      tableName: ESTATUS_INSPECCION_TABLE,
+      modelName: 'EstatusInspeccion',
       timestamps: false,
     };
   }
 }
 
-module.exports = { ESTATUS_INSPECCIONES_TABLE, EstatusInspeccionSchema, estatusInspeccion };
+module.exports = { ESTATUS_INSPECCION_TABLE, EstatusInspeccionSchema, EstatusInspeccion };

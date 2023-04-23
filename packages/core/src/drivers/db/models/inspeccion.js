@@ -1,10 +1,10 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { INSPECCIONES_TABLE } = require('./inspecciones');
-const { INSPECCIONES_APARTADOS_TABLE } = require('./inspeccionApartado');
+const { PROGRAMA_TABLE } = require('./programa');
+const { ESTATUS_INSPECCION_TABLE } = require('./estatusInspeccion');
 
-const INSPECCIONES_OBSERVACIONES_TABLE = 'inspeccion_observaciones';
+const INSPECCION_TABLE = 'inspecciones';
 
-const InspeccionObservacionesSchema = {
+const InspeccionSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -14,22 +14,32 @@ const InspeccionObservacionesSchema = {
   programaId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'inspeccion_id',
+    field: 'programa_id',
     references: {
-      model: INSPECCIONES_TABLE,
+      model: PROGRAMA_TABLE,
       key: 'id',
     },
   },
-  estatus_inspeccionId: {
+  estatusInspeccionId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'inspeccion_apartado_id',
+    field: 'estatus_inspeccion_id',
     references: {
-      model: INSPECCIONES_APARTADOS_TABLE,
+      model: ESTATUS_INSPECCION_TABLE,
       key: 'id',
     },
   },
-  comentario: {
+  fecha: {
+    type: DataTypes.DATE,
+  },
+  fechaAsignada: {
+    type: DataTypes.DATE,
+    field: 'fecha_asignada',
+  },
+  resultado: {
+    type: DataTypes.STRING,
+  },
+  folio: {
     type: DataTypes.STRING,
   },
   createdAt: {
@@ -52,24 +62,20 @@ const InspeccionObservacionesSchema = {
   },
 };
 
-class Observaciones extends Model {
+class Inspeccion extends Model {
   static associate(models) {
-    this.belongsTo(models.Inspecciones, { as: 'inspecciones' });
-    this.belongsTo(models.inspeccionesapartados, { as: 'inspeccionesapartados', foreignKey: 'inspeccionesapartadosId' });
+    this.belongsTo(models.Programa, { as: 'programa' });
+    this.belongsTo(models.EstatusInspeccion, { as: 'estatusInspeccion' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: INSPECCIONES_OBSERVACIONES_TABLE,
-      modelName: 'inspeccion_observaciones',
+      tableName: INSPECCION_TABLE,
+      modelName: 'Inspeccion',
       timestamps: false,
     };
   }
 }
 
-module.exports = {
-  INSPECCIONES_OBSERVACIONES_TABLE,
-  InspeccionObservacionesSchema,
-  Observaciones,
-};
+module.exports = { INSPECCION_TABLE, InspeccionSchema, Inspeccion };

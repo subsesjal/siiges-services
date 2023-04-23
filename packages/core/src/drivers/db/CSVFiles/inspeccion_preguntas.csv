@@ -1,4 +1,4 @@
-id,pregunta,id_inspeccion_tipo_pregunta,id_inspeccion_apartado,id_inspeccion_categoria,created_at
+id,pregunta,inspeccion_tipo_pregunta_id,inspeccion_apartado_id,inspeccion_categoria_id,created_at
 1,¿Las aulas tienen adecuada y suficiente ventilación?,1,1,1,2018-09-11 06:00:00
 2,¿Las aulas tienen adecuada y suficiente iluminación?,1,1,1,2018-09-11 06:00:00
 3,¿Son adecuadas las condiciones de mantenimiento y limpieza(Pisos pintura techos muros puertas instalaciones eléctricas)?,1,1,1,2018-09-11 06:00:00
@@ -61,6 +61,3 @@ id,pregunta,id_inspeccion_tipo_pregunta,id_inspeccion_apartado,id_inspeccion_cat
 60,¿La institución cuenta con área de control escolar?,1,7,12,2018-09-11 06:00:00
 61,¿La institución cuenta con sala(s) de maestros?,1,7,12,2018-09-11 06:00:00
 62,¿La institución cuenta con cubículo(s) de orientación educativa?,1,7,12,2018-09-11 06:00:00
-
-
-

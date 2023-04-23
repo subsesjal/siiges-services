@@ -1,8 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const INSPECCIONES_APARTADOS_TABLE = 'inspecciones_apartados';
+const INSPECCION_APARTADO_TABLE = 'inspeccion_apartados';
 
-const InspeccionesApartadosSchema = {
+const InspeccionApartadoSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -16,8 +16,9 @@ const InspeccionesApartadosSchema = {
   descripcion: {
     type: DataTypes.STRING,
   },
-  tipo_apartado: {
+  tipoApartado: {
     type: DataTypes.STRING,
+    field: 'tipo_apartado',
   },
   createdAt: {
     allowNull: false,
@@ -39,19 +40,18 @@ const InspeccionesApartadosSchema = {
   },
 };
 
-class inspeccionApartados extends Model {
-  static associate(models) {
-    this.hasMany(models.inspeccionesApartado, { as: 'inspeccionesApartado', foreignKey: 'inspeccionesApartadoId' });
+class InspeccionApartado extends Model {
+  static associate() {
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: INSPECCIONES_APARTADOS_TABLE,
-      modelName: 'inspeccionesApartadosSchema',
+      tableName: INSPECCION_APARTADO_TABLE,
+      modelName: 'InspeccionApartadoSchema',
       timestamps: false,
     };
   }
 }
 
-module.exports = { INSPECCIONES_APARTADOS_TABLE, InspeccionesApartadosSchema, inspeccionApartados };
+module.exports = { INSPECCION_APARTADO_TABLE, InspeccionApartadoSchema, InspeccionApartado };
