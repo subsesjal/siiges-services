@@ -35,6 +35,14 @@ const { PLANTEL_HIGIENE_TABLE, PlantelHigieneSchema } = require('../models/plant
 const { INFRAESTRUCTURA_TABLE, InfraestructuraSchema } = require('../models/infraestructura');
 const { INFRAESTRUCTURA_PROGRAMA_TABLE, InfraestructuraProgramaSchema } = require('../models/infraestructuraPrograma');
 const { ASIGNATURA_INFRAESTRUCTURA_TABLE, AsignaturaInfraestructuraSchema } = require('../models/asignaturaInfraestructura');
+const { ESTATUS_INSPECCION_TABLE, EstatusInspeccionSchema } = require('../models/estatusInspeccion');
+const { INSPECCION_APARTADO_TABLE, InspeccionApartadoSchema } = require('../models/inspeccionApartado');
+const { INSPECCION_CATEGORIA_TABLE, InspeccionCategoriaSchema } = require('../models/inspeccionCategoria');
+const { INSPECCION_TIPO_PREGUNTA_TABLE, InspeccionTipoPreguntaSchema } = require('../models/inspeccionTipoPregunta');
+const { INSPECCION_PREGUNTA_TABLE, InspeccionPreguntaSchema } = require('../models/inspeccionPregunta');
+const { INSPECCION_TABLE, InspeccionSchema } = require('../models/inspeccion');
+const { INSPECCION_OBSERVACION_TABLE, InspeccionObservacionSchema } = require('../models/inspeccionObservacion');
+const { INSPECCION_INSPECCION_PREGUNTA_TABLE, InspeccionInspeccionPreguntaSchema } = require('../models/inspeccionInspeccionPregunta');
 
 module.exports = {
   async up(queryInterface) {
@@ -78,6 +86,17 @@ module.exports = {
       ASIGNATURA_INFRAESTRUCTURA_TABLE,
       AsignaturaInfraestructuraSchema,
     );
+    await queryInterface.createTable(ESTATUS_INSPECCION_TABLE, EstatusInspeccionSchema);
+    await queryInterface.createTable(INSPECCION_APARTADO_TABLE, InspeccionApartadoSchema);
+    await queryInterface.createTable(INSPECCION_CATEGORIA_TABLE, InspeccionCategoriaSchema);
+    await queryInterface.createTable(INSPECCION_TIPO_PREGUNTA_TABLE, InspeccionTipoPreguntaSchema);
+    await queryInterface.createTable(INSPECCION_PREGUNTA_TABLE, InspeccionPreguntaSchema);
+    await queryInterface.createTable(INSPECCION_TABLE, InspeccionSchema);
+    await queryInterface.createTable(INSPECCION_OBSERVACION_TABLE, InspeccionObservacionSchema);
+    await queryInterface.createTable(
+      INSPECCION_INSPECCION_PREGUNTA_TABLE,
+      InspeccionInspeccionPreguntaSchema,
+    );
   },
 
   async down(queryInterface) {
@@ -119,5 +138,13 @@ module.exports = {
     await queryInterface.dropTable(INFRAESTRUCTURA_TABLE);
     await queryInterface.dropTable(INFRAESTRUCTURA_PROGRAMA_TABLE);
     await queryInterface.dropTable(ASIGNATURA_INFRAESTRUCTURA_TABLE);
+    await queryInterface.dropTable(ESTATUS_INSPECCION_TABLE);
+    await queryInterface.dropTable(INSPECCION_APARTADO_TABLE);
+    await queryInterface.dropTable(INSPECCION_CATEGORIA_TABLE);
+    await queryInterface.dropTable(INSPECCION_TIPO_PREGUNTA_TABLE);
+    await queryInterface.dropTable(INSPECCION_PREGUNTA_TABLE);
+    await queryInterface.dropTable(INSPECCION_TABLE);
+    await queryInterface.dropTable(INSPECCION_OBSERVACION_TABLE);
+    await queryInterface.dropTable(INSPECCION_INSPECCION_PREGUNTA_TABLE);
   },
 };

@@ -3,18 +3,25 @@ const { plantelesAdapter } = require('../../adapters');
 const {
   createUpdatePlantelHigieneSchema,
   deletePlantelHigieneSchema,
+  findAllHigienesSchema,
   findGroupPlantelHigieneSchema,
   createPlantelInfraestructuraSchema,
   findGroupPlantelInfraestructuraSchema,
-
+  findGroupPlantelesUsuarioSchema,
 } = require('./schema');
 
 async function plantelRouter(fastify, opts, next) {
   await fastify.get(
-    '/:plantelId/higienes',
+    '/higienes',
     {
-      schema: findGroupPlantelHigieneSchema,
+      schema: findAllHigienesSchema,
     },
+    plantelesAdapter.findAllHigienes,
+  );
+
+  await fastify.get(
+    '/:plantelId/higienes',
+    { schema: findGroupPlantelHigieneSchema },
     plantelesAdapter.findGroupPlantelHigiene,
   );
   await fastify.get(
@@ -25,35 +32,33 @@ async function plantelRouter(fastify, opts, next) {
     plantelesAdapter.findGroupPlantelInfraestructura,
   );
 
+  await fastify.get(
+    '/usuarios/:usuarioId',
+    { schema: findGroupPlantelesUsuarioSchema },
+    plantelesAdapter.findGroupPlantelesUsuario,
+  );
+
   await fastify.post(
     '/:plantelId/higienes/:higieneId',
-    {
-      schema: createUpdatePlantelHigieneSchema,
-    },
+    { schema: createUpdatePlantelHigieneSchema },
     plantelesAdapter.createPlantelHigiene,
   );
 
   await fastify.post(
     '/:plantelId/infraestructuras',
-    {
-      schema: createPlantelInfraestructuraSchema,
-    },
+    { schema: createPlantelInfraestructuraSchema },
     plantelesAdapter.createPlantelInfraestructura,
   );
 
   await fastify.patch(
     '/:plantelId/higienes/:higieneId',
-    {
-      schema: createUpdatePlantelHigieneSchema,
-    },
+    { schema: createUpdatePlantelHigieneSchema },
     plantelesAdapter.updatePlantelHigiene,
   );
 
   await fastify.delete(
     '/:plantelId/higienes/:higieneId',
-    {
-      schema: deletePlantelHigieneSchema,
-    },
+    { schema: deletePlantelHigieneSchema },
     plantelesAdapter.deletePlantelHigiene,
   );
 

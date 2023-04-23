@@ -6,6 +6,7 @@ const {
 
 const createPlantelInfraestructura = require('./create.plantel-infraestructura.use-cases');
 const findGroupPlantelInfraestructura = require('./find-group.plantel-infraestructura.use-cases');
+const findGroupPlantelesUsuario = require('./find-group.planteles-usuario.use-cases');
 
 module.exports = {
   createPlantelInfraestructura: createPlantelInfraestructura(
@@ -18,5 +19,8 @@ module.exports = {
   ),
   findGroupPlantelInfraestructura: findGroupPlantelInfraestructura(
     planteles.findAllInfraestructuraQuery,
+  ),
+  findGroupPlantelesUsuario: findGroupPlantelesUsuario(
+    planteles.findOneInstitucionQuery,
   ),
 };
