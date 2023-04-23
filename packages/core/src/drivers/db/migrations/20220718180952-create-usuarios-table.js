@@ -35,7 +35,7 @@ const { PLANTEL_HIGIENE_TABLE, PlantelHigieneSchema } = require('../models/plant
 const { INFRAESTRUCTURA_TABLE, InfraestructuraSchema } = require('../models/infraestructura');
 const { INFRAESTRUCTURA_PROGRAMA_TABLE, InfraestructuraProgramaSchema } = require('../models/infraestructuraPrograma');
 const { ASIGNATURA_INFRAESTRUCTURA_TABLE, AsignaturaInfraestructuraSchema } = require('../models/asignaturaInfraestructura');
-const { ESTATUS_INSPECCIONES_TABLE, EstatusInspeccionSchema } = require('../models/estatusInspeccion');
+const { ESTATUS_INSPECCION_TABLE, EstatusInspeccionSchema } = require('../models/estatusInspeccion');
 const { INSPECCION_APARTADO_TABLE, InspeccionApartadoSchema } = require('../models/inspeccionApartado');
 const { INSPECCION_CATEGORIA_TABLE, InspeccionCategoriaSchema } = require('../models/inspeccionCategoria');
 const { INSPECCION_TIPO_PREGUNTA_TABLE, InspeccionTipoPreguntaSchema } = require('../models/inspeccionTipoPregunta');
@@ -86,7 +86,7 @@ module.exports = {
       ASIGNATURA_INFRAESTRUCTURA_TABLE,
       AsignaturaInfraestructuraSchema,
     );
-    await queryInterface.createTable(ESTATUS_INSPECCIONES_TABLE, EstatusInspeccionSchema);
+    await queryInterface.createTable(ESTATUS_INSPECCION_TABLE, EstatusInspeccionSchema);
     await queryInterface.createTable(INSPECCION_APARTADO_TABLE, InspeccionApartadoSchema);
     await queryInterface.createTable(INSPECCION_CATEGORIA_TABLE, InspeccionCategoriaSchema);
     await queryInterface.createTable(INSPECCION_TIPO_PREGUNTA_TABLE, InspeccionTipoPreguntaSchema);
@@ -138,7 +138,7 @@ module.exports = {
     await queryInterface.dropTable(INFRAESTRUCTURA_TABLE);
     await queryInterface.dropTable(INFRAESTRUCTURA_PROGRAMA_TABLE);
     await queryInterface.dropTable(ASIGNATURA_INFRAESTRUCTURA_TABLE);
-    await queryInterface.dropTable(ESTATUS_INSPECCIONES_TABLE);
+    await queryInterface.dropTable(ESTATUS_INSPECCION_TABLE);
     await queryInterface.dropTable(INSPECCION_APARTADO_TABLE);
     await queryInterface.dropTable(INSPECCION_CATEGORIA_TABLE);
     await queryInterface.dropTable(INSPECCION_TIPO_PREGUNTA_TABLE);
