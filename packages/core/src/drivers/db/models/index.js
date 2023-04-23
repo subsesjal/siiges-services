@@ -35,6 +35,14 @@ const { PlantelHigiene, PlantelHigieneSchema } = require('./plantelHigiene');
 const { Infraestructura, InfraestructuraSchema } = require('./infraestructura');
 const { InfraestructuraPrograma, InfraestructuraProgramaSchema } = require('./infraestructuraPrograma');
 const { AsignaturaInfraestructura, AsignaturaInfraestructuraSchema } = require('./asignaturaInfraestructura');
+const { EstatusInspeccion, EstatusInspeccionSchema } = require('./estatusInspeccion');
+const { InspeccionApartado, InspeccionApartadoSchema } = require('./inspeccionApartado');
+const { InspeccionCategoria, InspeccionCategoriaSchema } = require('./inspeccionCategoria');
+const { InspeccionTipoPregunta, InspeccionTipoPreguntaSchema } = require('./inspeccionTipoPregunta');
+const { InspeccionObservacion, InspeccionObservacionSchema } = require('./inspeccionObservacion');
+const { InspeccionPregunta, InspeccionPreguntaSchema } = require('./inspeccionPregunta');
+const { Inspeccion, InspeccionSchema } = require('./inspeccion');
+const { InspeccionInspeccionPregunta, InspeccionInspeccionPreguntaSchema } = require('./inspeccionInspeccionPregunta');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -81,6 +89,20 @@ function setupModels(sequelize) {
     AsignaturaInfraestructuraSchema,
     AsignaturaInfraestructura.config(sequelize),
   );
+  EstatusInspeccion.init(EstatusInspeccionSchema, EstatusInspeccion.config(sequelize));
+  InspeccionApartado.init(InspeccionApartadoSchema, InspeccionApartado.config(sequelize));
+  InspeccionCategoria.init(InspeccionCategoriaSchema, InspeccionCategoria.config(sequelize));
+  InspeccionTipoPregunta.init(
+    InspeccionTipoPreguntaSchema,
+    InspeccionTipoPregunta.config(sequelize),
+  );
+  InspeccionPregunta.init(InspeccionPreguntaSchema, InspeccionPregunta.config(sequelize));
+  Inspeccion.init(InspeccionSchema, Inspeccion.config(sequelize));
+  InspeccionObservacion.init(InspeccionObservacionSchema, InspeccionObservacion.config(sequelize));
+  InspeccionInspeccionPregunta.init(
+    InspeccionInspeccionPreguntaSchema,
+    InspeccionInspeccionPregunta.config(sequelize),
+  );
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -120,6 +142,14 @@ function setupModels(sequelize) {
   Infraestructura.associate(sequelize.models);
   InfraestructuraPrograma.associate(sequelize.models);
   AsignaturaInfraestructura.associate(sequelize.models);
+  EstatusInspeccion.associate(sequelize.models);
+  InspeccionApartado.associate(sequelize.models);
+  InspeccionCategoria.associate(sequelize.models);
+  InspeccionTipoPregunta.associate(sequelize.models);
+  InspeccionPregunta.associate(sequelize.models);
+  Inspeccion.associate(sequelize.models);
+  InspeccionObservacion.associate(sequelize.models);
+  InspeccionInspeccionPregunta.associate(sequelize.models);
 }
 
 module.exports = setupModels;

@@ -1,46 +1,36 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { PROGRAMA_TABLE } = require('./programa');
-const { ESTATUS_INSPECCIONES_TABLE } = require('./estatusInspeccion');
+const { INSPECCION_TABLE } = require('./inspeccion');
+const { INSPECCION_PREGUNTA_TABLE } = require('./inspeccionPregunta');
 
-const INSPECCIONES_TABLE = 'inspecciones';
+const INSPECCION_INSPECCION_PREGUNTA_TABLE = 'inspecciones_inspeccion_preguntas';
 
-const InspeccionesSchema = {
+const InspeccionInspeccionPreguntaSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  programaId: {
+  inspeccionId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'programa_id',
+    field: 'inspeccion_id',
     references: {
-      model: PROGRAMA_TABLE,
+      model: INSPECCION_TABLE,
       key: 'id',
     },
   },
-  estatus_inspeccionId: {
+  inspeccionPreguntaId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'estatus_inspeccion_id',
+    field: 'inspeccion_pregunta_id',
     references: {
-      model: ESTATUS_INSPECCIONES_TABLE,
+      model: INSPECCION_PREGUNTA_TABLE,
       key: 'id',
     },
   },
-  fecha: {
-    allowNull: false,
-    type: DataTypes.DATE,
-  },
-  fecha_asignada: {
-    type: DataTypes.DATE,
-  },
-  resultado: {
+  respuesta: {
     type: DataTypes.STRING,
-  },
-  folio: {
-    type: DataTypes.INTEGER,
   },
   createdAt: {
     allowNull: false,
@@ -62,20 +52,24 @@ const InspeccionesSchema = {
   },
 };
 
-class Inspecciones extends Model {
+class InspeccionInspeccionPregunta extends Model {
   static associate(models) {
-    this.belongsTo(models.Programa, { as: 'programa' });
-    this.belongsTo(models.estatusinspecciones, { as: 'estatusInspecciones', foreignKey: 'estatusInspeccionesId' });
+    this.belongsTo(models.Inspeccion, { as: 'inspeccion' });
+    this.belongsTo(models.InspeccionPregunta, { as: 'inspeccionPregunta' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: INSPECCIONES_TABLE,
-      modelName: 'Inspecciones',
+      tableName: INSPECCION_INSPECCION_PREGUNTA_TABLE,
+      modelName: 'InspeccionInspeccionPregunta',
       timestamps: false,
     };
   }
 }
 
-module.exports = { INSPECCIONES_TABLE, InspeccionesSchema, Inspecciones };
+module.exports = {
+  INSPECCION_INSPECCION_PREGUNTA_TABLE,
+  InspeccionInspeccionPreguntaSchema,
+  InspeccionInspeccionPregunta,
+};

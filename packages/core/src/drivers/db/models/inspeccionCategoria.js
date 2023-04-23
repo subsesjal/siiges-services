@@ -1,8 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const INSPECCIONES_TIPO_PREGUNTAS_TABLE = 'inspecciones_tipo_preguntas';
+const INSPECCION_CATEGORIA_TABLE = 'inspeccion_categorias';
 
-const InspeccionesTipoPreguntasSchema = {
+const InspeccionCategoriaSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -14,6 +14,9 @@ const InspeccionesTipoPreguntasSchema = {
     type: DataTypes.STRING,
   },
   descripcion: {
+    type: DataTypes.STRING,
+  },
+  instruccion: {
     type: DataTypes.STRING,
   },
   createdAt: {
@@ -36,23 +39,18 @@ const InspeccionesTipoPreguntasSchema = {
   },
 };
 
-class inspeccionTipoPreguntas extends Model {
-  static associate(models) {
-    this.hasMany(models.inspeccionesTipoPreguntas, { as: 'inspeccionesTipopreguntas', foreignKey: 'inspeccionesTipoPreguntasId' });
+class InspeccionCategoria extends Model {
+  static associate() {
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: INSPECCIONES_TIPO_PREGUNTAS_TABLE,
-      modelName: 'inspeccionesTipoPreguntasSchema',
+      tableName: INSPECCION_CATEGORIA_TABLE,
+      modelName: 'InspeccionCategoria',
       timestamps: false,
     };
   }
 }
 
-module.exports = {
-  INSPECCIONES_TIPO_PREGUNTAS_TABLE,
-  InspeccionesTipoPreguntasSchema,
-  inspeccionTipoPreguntas,
-};
+module.exports = { INSPECCION_CATEGORIA_TABLE, InspeccionCategoriaSchema, InspeccionCategoria };

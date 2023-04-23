@@ -3,15 +3,15 @@ const path = require('path');
 
 const { HIGIENE_TABLE } = require('../models/higiene');
 
-const higieneCSV = path.join(__dirname, '../CSVFiles/higienes.csv');
+const higienesCSV = path.join(__dirname, '../CSVFiles/higienes.csv');
 
 module.exports = {
   async up(queryInterface) {
-    const higieneJson = await csvToJson
+    const higienesJson = await csvToJson
       .fieldDelimiter(',')
-      .getJsonFromCsv(higieneCSV);
+      .getJsonFromCsv(higienesCSV);
 
-    await queryInterface.bulkInsert(HIGIENE_TABLE, higieneJson, {});
+    await queryInterface.bulkInsert(HIGIENE_TABLE, higienesJson, {});
   },
 
   async down(queryInterface) {
