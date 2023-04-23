@@ -10,6 +10,7 @@ const createPlantelInfraestructura = (
   createPlantelInfraestructuraQuery,
   createInfraestructuraProgramaQuery,
   createAsignaturaInfraestructuraQuery,
+
 ) => async (identifierObj, data) => {
   const { plantelId } = identifierObj;
 

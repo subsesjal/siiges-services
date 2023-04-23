@@ -6,6 +6,7 @@ const {
   findAllHigienesSchema,
   findGroupPlantelHigieneSchema,
   createPlantelInfraestructuraSchema,
+  findGroupPlantelInfraestructuraSchema,
   findGroupPlantelesUsuarioSchema,
 } = require('./schema');
 
@@ -22,6 +23,13 @@ async function plantelRouter(fastify, opts, next) {
     '/:plantelId/higienes',
     { schema: findGroupPlantelHigieneSchema },
     plantelesAdapter.findGroupPlantelHigiene,
+  );
+  await fastify.get(
+    '/:plantelId/infraestructuras',
+    {
+      schema: findGroupPlantelInfraestructuraSchema,
+    },
+    plantelesAdapter.findGroupPlantelInfraestructura,
   );
 
   await fastify.get(
