@@ -34,7 +34,7 @@ const InspeccionSchema = {
   },
   fechaAsignada: {
     type: DataTypes.DATE,
-    field: 'fechaAsignada',
+    field: 'fecha_asignada',
   },
   resultado: {
     type: DataTypes.STRING,
