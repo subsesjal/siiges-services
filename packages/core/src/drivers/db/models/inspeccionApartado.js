@@ -48,7 +48,7 @@ class InspeccionApartado extends Model {
     return {
       sequelize,
       tableName: INSPECCION_APARTADO_TABLE,
-      modelName: 'InspeccionApartadoSchema',
+      modelName: 'InspeccionApartado',
       timestamps: false,
     };
   }
