@@ -43,8 +43,8 @@ const { INSPECCION_PREGUNTA_TABLE, InspeccionPreguntaSchema } = require('../mode
 const { INSPECCION_TABLE, InspeccionSchema } = require('../models/inspeccion');
 const { INSPECCION_OBSERVACION_TABLE, InspeccionObservacionSchema } = require('../models/inspeccionObservacion');
 const { INSPECCION_INSPECCION_PREGUNTA_TABLE, InspeccionInspeccionPreguntaSchema } = require('../models/inspeccionInspeccionPregunta');
-const { INSPECTORES_TABLE, InspectoresSchema } = require('../models/inspectores');
-const { INSPECTORES_PROGRAMAS_TABLE, InspectoresProgramasSchema } = require('../models/inspectoresProgramas');
+const { INSPECTOR_TABLE, InspectorSchema } = require('../models/inspector');
+const { INSPECTOR_PROGRAMA_TABLE, InspectorProgramaSchema } = require('../models/inspectorPrograma');
 
 module.exports = {
   async up(queryInterface) {
@@ -99,8 +99,8 @@ module.exports = {
       INSPECCION_INSPECCION_PREGUNTA_TABLE,
       InspeccionInspeccionPreguntaSchema,
     );
-    await queryInterface.createTable(INSPECTORES_TABLE, InspectoresSchema);
-    await queryInterface.createTable(INSPECTORES_PROGRAMAS_TABLE, InspectoresProgramasSchema);
+    await queryInterface.createTable(INSPECTOR_TABLE, InspectorSchema);
+    await queryInterface.createTable(INSPECTOR_PROGRAMA_TABLE, InspectorProgramaSchema);
   },
 
   async down(queryInterface) {
@@ -150,7 +150,7 @@ module.exports = {
     await queryInterface.dropTable(INSPECCION_TABLE);
     await queryInterface.dropTable(INSPECCION_OBSERVACION_TABLE);
     await queryInterface.dropTable(INSPECCION_INSPECCION_PREGUNTA_TABLE);
-    await queryInterface.dropTable(INSPECTORES_TABLE);
-    await queryInterface.dropTable(INSPECTORES_PROGRAMAS_TABLE);
+    await queryInterface.dropTable(INSPECTOR_TABLE);
+    await queryInterface.dropTable(INSPECTOR_PROGRAMA_TABLE);
   },
 };

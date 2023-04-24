@@ -1,9 +1,10 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { PERSONA_TABLE } = require('./persona');
+const { PROGRAMA_TABLE } = require('./programa');
+const { INSPECTOR_TABLE } = require('./inspector');
 
-const INSPECTORES_TABLE = 'inspectores';
+const INSPECTOR_PROGRAMA_TABLE = 'inspecctorPrograma';
 
-const InspectoresSchema = {
+const InspectorProgramaSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -11,12 +12,21 @@ const InspectoresSchema = {
     type: DataTypes.INTEGER,
   },
 
-  personaId: {
+  inspectorId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'persona_id',
+    field: 'inspector_id',
     references: {
-      model: PERSONA_TABLE,
+      model: INSPECTOR_TABLE,
+      key: 'id',
+    },
+  },
+  programaId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'programa_id',
+    references: {
+      model: PROGRAMA_TABLE,
       key: 'id',
     },
   },
@@ -39,23 +49,20 @@ const InspectoresSchema = {
     defaultValue: null,
   },
 };
-class Inspectores extends Model {
+class InspectorPrograma extends Model {
   static associate(models) {
-    this.belongsTo(models.Persona, { as: 'persona' });
+    this.belongsTo(models.Inspector, { as: 'inspector' });
+    this.belongsTo(models.Programa, { as: 'programa' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: INSPECTORES_TABLE,
-      modelName: 'Inspectores',
+      tableName: INSPECTOR_PROGRAMA_TABLE,
+      modelName: 'InspecctorPrograma',
       timestamps: false,
     };
   }
 }
 
-module.exports = {
-  INSPECTORES_TABLE,
-  InspectoresSchema,
-  Inspectores,
-};
+module.exports = { INSPECTOR_PROGRAMA_TABLE, InspectorProgramaSchema, InspectorPrograma };
