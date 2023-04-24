@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PROGRAMA_TABLE } = require('./programa');
 const { INSPECTOR_TABLE } = require('./inspector');
 
-const INSPECTOR_PROGRAMA_TABLE = 'inspecctorPrograma';
+const INSPECTOR_PROGRAMA_TABLE = 'inspector_programa';
 
 const InspectorProgramaSchema = {
   id: {
