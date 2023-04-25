@@ -1,7 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PERSONA_TABLE } = require('./persona');
 
-const INSPECTOR_TABLE = 'inspector';
+const INSPECTOR_TABLE = 'inspectores';
 
 const InspectorSchema = {
   id: {
@@ -54,8 +54,4 @@ class Inspector extends Model {
   }
 }
 
-module.exports = {
-  INSPECTOR_TABLE,
-  InspectorSchema,
-  Inspector,
-};
+module.exports = { INSPECTOR_TABLE, InspectorSchema, Inspector };
