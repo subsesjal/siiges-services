@@ -43,6 +43,8 @@ const { InspeccionObservacion, InspeccionObservacionSchema } = require('./inspec
 const { InspeccionPregunta, InspeccionPreguntaSchema } = require('./inspeccionPregunta');
 const { Inspeccion, InspeccionSchema } = require('./inspeccion');
 const { InspeccionInspeccionPregunta, InspeccionInspeccionPreguntaSchema } = require('./inspeccionInspeccionPregunta');
+const { Inspector, InspectorSchema } = require('./inspector');
+const { InspectorPrograma, InspectorProgramaSchema } = require('./inspectorPrograma');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -104,6 +106,9 @@ function setupModels(sequelize) {
     InspeccionInspeccionPregunta.config(sequelize),
   );
 
+  Inspector.init(InspectorSchema, Inspector.config(sequelize));
+  InspectorPrograma.init(InspectorProgramaSchema, InspectorPrograma.config(sequelize));
+
   // Associations
   Ciclo.associate(sequelize.models);
   Domicilio.associate(sequelize.models);
@@ -150,6 +155,8 @@ function setupModels(sequelize) {
   Inspeccion.associate(sequelize.models);
   InspeccionObservacion.associate(sequelize.models);
   InspeccionInspeccionPregunta.associate(sequelize.models);
+  Inspector.associate(sequelize.models);
+  InspectorPrograma.associate(sequelize.models);
 }
 
 module.exports = setupModels;
