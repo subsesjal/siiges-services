@@ -35,6 +35,7 @@
     "@siiges-services/authentication": "^1.0.0",
     "@siiges-services/core": "^1.0.0",
     "@siiges-services/files": "^1.0.0",
+    "@siiges-services/inspecciones": "^1.0.0",
     "@siiges-services/instituciones": "^1.0.0",
     "@siiges-services/shared": "^0.0.1",
     "@siiges-services/solicitudes": "^1.0.0",
