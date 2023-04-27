@@ -37,6 +37,10 @@ const {
   findGroupPlantelesUsuario,
 } = require('./db/planteles');
 
+const {
+  createInspeccionPreguntas,
+} = require('./db/inspecciones');
+
 module.exports = {
   createSolicitudPrograma,
   findAllSolicitudesProgramas,
@@ -62,4 +66,5 @@ module.exports = {
   createPlantelInfraestructura,
   findGroupPlantelInfraestructura,
   findGroupPlantelesUsuario,
+  createInspeccionPreguntas,
 };
