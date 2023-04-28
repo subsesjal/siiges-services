@@ -9,7 +9,7 @@ const createInspeccionesSchema = {
     properties: {
       ...inspecciones,
     },
-    required: ['programaId', 'estatusInspeccionId', 'fecha', 'fechaAsignada', 'resultado', 'folio'],
+    required: ['programaId', 'estatusInspeccionId', 'fechaAsignada'],
   },
   response: {
     201: {
