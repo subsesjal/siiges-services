@@ -7,7 +7,7 @@ async function createInspecciones(req, reply) {
 
     Logger.info('[inspecciones]: Creating inspecciones');
 
-    const newInspecciones = await this.inspeccionesServices.createInspecciones(data);
+    const newInspecciones = await this.SolicitudServices.createInspecciones(data);
 
     return reply
       .code(201)

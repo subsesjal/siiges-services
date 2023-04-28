@@ -1,9 +1,6 @@
-const createInspecciones = (createQuery) => async (data) => {
-  const include = [{ association: 'estatusInspecciones' }];
-
-  const newInspecciones = await createQuery(data, include);
-
-  return newInspecciones;
+const createInspecciones = (createInspeccionesQuery) => async (data) => {
+  const inspecciones = await createInspeccionesQuery(data);
+  return inspecciones;
 };
 
 module.exports = createInspecciones;
