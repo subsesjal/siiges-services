@@ -1,15 +1,5 @@
-// External dependencies
-const { drivers, queries } = require('@siiges-services/core');
-
-const {
-  Inspecciones,
-} = drivers.sequelize.models;
-
-const {
-  createQuery,
-} = queries;
+const inspecciones = require('./inspecciones/inspecciones.db.adapters');
 
 module.exports = {
-  createInspeccionesQuery: createQuery(Inspecciones),
-
+  inspecciones,
 };
