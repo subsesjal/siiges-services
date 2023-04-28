@@ -1,5 +1,5 @@
 const { inspecciones } = require('./properties/inspecciones');
-const { responseProperties } = require('../../planteles/schema/properties/responseProperties');
+const { responseProperties } = require('./properties/responseProperties');
 const { programas } = require('../../solicitudes/schema/properties/programa');
 const { estatatusInspecciones } = require('./properties/estatusInspecciones');
 
