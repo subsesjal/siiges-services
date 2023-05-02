@@ -1,5 +1,5 @@
-const createInspeccionesSchema = require('./create.inspecciones.schema');
+const createInspeccionSchema = require('./create.inspeccion.schema');
 
 module.exports = {
-  createInspeccionesSchema,
+  createInspeccionSchema,
 };

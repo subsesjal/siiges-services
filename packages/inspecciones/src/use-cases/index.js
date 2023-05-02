@@ -1,8 +1,7 @@
 const {
-  createInspecciones,
+  createInspeccion,
 } = require('./db/inspecciones');
 
 module.exports = {
-  createInspecciones,
-
+  createInspeccion,
 };

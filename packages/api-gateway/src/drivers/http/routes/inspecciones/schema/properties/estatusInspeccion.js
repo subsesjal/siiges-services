@@ -1,7 +1,7 @@
 // EstatusInspecciones
-const EstatusInspecciones = {
+const estatusInspeccion = {
   nombre: { type: 'string' },
   descripcion: { type: 'string' },
 };
 
-module.exports = { EstatusInspecciones };
+module.exports = { estatusInspeccion };

@@ -1,13 +1,13 @@
-const { inspecciones } = require('./properties/inspecciones');
+const { inspeccion } = require('./properties/inspeccion');
 const { responseProperties } = require('./properties/responseProperties');
 
-const createInspeccionesSchema = {
+const createInspeccionSchema = {
   tags: ['Inspecciones'],
-  description: 'Given an object with inspecciones required data, then save a record of inspecciones in database.',
+  description: 'Given an object with inspeccion required data, then save a record of one inspeccion in database.',
   body: {
     type: 'object',
     properties: {
-      ...inspecciones,
+      ...inspeccion,
     },
     required: ['programaId', 'estatusInspeccionId', 'fechaAsignada'],
   },
@@ -19,7 +19,7 @@ const createInspeccionesSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...inspecciones,
+            ...inspeccion,
             ...responseProperties,
           },
         },
@@ -28,4 +28,4 @@ const createInspeccionesSchema = {
   },
 };
 
-module.exports = createInspeccionesSchema;
+module.exports = createInspeccionSchema;

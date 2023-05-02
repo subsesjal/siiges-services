@@ -1,13 +1,12 @@
 const {
   inspecciones,
-
 } = require('../../../adapters/db');
 
-const createInspecciones = require('./create.inspecciones.use-cases');
+const createInspeccion = require('./create.inspeccion.use-cases');
 
 module.exports = {
-  createInspecciones: createInspecciones(
-    inspecciones.createInspeccionesQuery,
+  createInspeccion: createInspeccion(
+    inspecciones.createInspeccionQuery,
   ),
 
 };

@@ -1,5 +1,5 @@
-const createInspecciones = require('./create.handlers.inspeccion.adapters');
+const createInspeccion = require('./create.handlers.inspeccion.adapters');
 
 module.exports = {
-  createInspecciones,
+  createInspeccion,
 };
