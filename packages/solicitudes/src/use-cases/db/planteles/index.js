@@ -19,6 +19,7 @@ module.exports = {
     planteles.createAsignaturaInfraestructuraQuery,
   ),
   deletePlantelInfraestructura: deletePlantelInfraestructura(
+    planteles.findOneInfraestructuraQuery,
     planteles.deleteInfraestructuraQuery,
   ),
   findGroupPlantelInfraestructura: findGroupPlantelInfraestructura(

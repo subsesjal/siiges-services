@@ -1,4 +1,4 @@
-const { plantelInfraestructura } = require('./properties/infraestructura');
+const { infraestructura } = require('./properties/infraestructura');
 const { responseProperties } = require('./properties/responseProperties');
 
 const deletePlantelInfraestructuraSchema = {
@@ -9,9 +9,9 @@ const deletePlantelInfraestructuraSchema = {
     type: 'object',
     properties: {
       plantelId: { type: 'integer' },
-      id: { type: 'integer' },
+      infraestructuraId: { type: 'integer' },
     },
-    required: ['plantelId', 'id'],
+    required: ['plantelId', 'infraestructuraId'],
   },
   response: {
     200: {
@@ -21,7 +21,7 @@ const deletePlantelInfraestructuraSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...plantelInfraestructura,
+            ...infraestructura,
             ...responseProperties,
           },
         },

@@ -52,7 +52,7 @@ async function plantelRouter(fastify, opts, next) {
   );
 
   await fastify.delete(
-    '/:plantelId/infraestructuras/:id',
+    '/:plantelId/infraestructuras/:infraestructuraId',
     { schema: deletePlantelInfraestructuraSchema },
     plantelesAdapter.deletePlantelInfraestructura,
   );

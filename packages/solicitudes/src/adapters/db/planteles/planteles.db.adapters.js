@@ -13,15 +13,15 @@ const {
   createQuery,
   findOneQuery,
   findAllQuery,
-  deleteQuery,
-
+  deleteAndFindQuery,
 } = queries;
 
 module.exports = {
   findOnePlantelQuery: findOneQuery(Plantel),
   findOneInstitucionQuery: findOneQuery(Institucion),
+  findOneInfraestructuraQuery: findOneQuery(Infraestructura),
   createInfraestructuraQuery: createQuery(Infraestructura),
-  deleteInfraestructuraQuery: deleteQuery(Infraestructura),
+  deleteInfraestructuraQuery: deleteAndFindQuery(Infraestructura),
   createInfraestructuraProgramaQuery: createQuery(InfraestructuraPrograma),
   createAsignaturaInfraestructuraQuery: createQuery(AsignaturaInfraestructura),
   findAllInfraestructuraQuery: findAllQuery(Infraestructura),
