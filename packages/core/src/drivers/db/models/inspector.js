@@ -1,5 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PERSONA_TABLE } = require('./persona');
+const { PROGRAMA_TABLE } = require('./programa');
 
 const INSPECTOR_TABLE = 'inspectores';
 
@@ -25,7 +26,7 @@ const InspectorSchema = {
     type: DataTypes.INTEGER,
     field: 'programa_id',
     references: {
-      model: PERSONA_TABLE,
+      model: PROGRAMA_TABLE,
       key: 'id',
     },
   },
