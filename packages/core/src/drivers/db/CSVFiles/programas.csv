@@ -1,0 +1,9 @@
+id,ciclo_id,nivel_id,solicitud_id,modalidad_id,plantel_id,duracion_periodos,objetivos,antecedentes,creditos,minimo_horas_optativas,minimo_creditos_optativas,vigencia,fecha_surte_efecto,acuerdo_rvoe,nombre,tipo,actualizacion,seguimiento_egresados,convenios_vinculacion,fuentes_informacion,estudio_oferta_demanda,lineas_generacion_aplicacion_conocimiento,necesidad_profesional,necesidad_institucional,necesidad_social,recursos_operacion,antecedente_academico,perfil_ingreso_conocimientos,perfil_ingreso_habilidades,perfil_ingreso_actitudes,perfil_egreso_conocimientos,perfil_egreso_habilidades,perfil_egreso_actitudes,metodos_induccion,proceso_seleccion,mapa_curricular,flexibilidad_curricular,objetivo_general,objetivos_particulares,calificacion_minima,calificacion_maxima,calificacion_aprobatoria,calificacion_decimal,created_at
+1,2,3,1,1,1,,,,,,,,,,Derecho,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2023-04-23 22:43:56
+2,2,2,2,1,1,,,,,,,,,,Informática Administrativa,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2023-04-23 22:44:32
+3,2,2,3,1,2,,,,,,,,,,Lenguas,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2023-04-23 22:45:12
+4,2,2,4,1,2,,,,,,,,,,Administración,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2023-04-23 22:45:29
+5,2,2,5,1,3,,,,,,,,,,Turismo,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2023-04-23 22:46:33
+6,2,2,6,1,3,,,,,,,,,,Salud Publica,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2023-04-23 22:48:09
+7,2,2,7,1,4,,,,,,,,,,Ingeniería en Sistemas,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2023-04-23 22:48:32
+8,2,2,8,1,4,,,,,,,,,,Medicina,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2023-04-23 22:48:38
