@@ -1,10 +1,18 @@
 const { checkers } = require('@siiges-services/shared');
 
 const deletePlantelInfraestructura = (
+  findOneInfraestructuraQuery,
   deleteInfraestructuraQuery,
 ) => async (identifierObj) => {
-  const infraestructuraDeleted = await deleteInfraestructuraQuery(identifierObj);
-  checkers.throwErrorIfDataIsFalsy(infraestructuraDeleted, 'infraestructura', identifierObj.id);
+  const { plantelId, infraestructuraId } = identifierObj;
+
+  const infraestructura = await findOneInfraestructuraQuery({ id: infraestructuraId, plantelId });
+  checkers.throwErrorIfDataIsFalsy(infraestructura, 'infraestructuras', infraestructuraId);
+
+  const infraestructuraDeleted = await deleteInfraestructuraQuery({
+    id: infraestructuraId,
+    plantelId,
+  });
 
   return infraestructuraDeleted;
 };
