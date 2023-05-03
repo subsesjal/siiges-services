@@ -33,6 +33,7 @@ const {
 
 const {
   createPlantelInfraestructura,
+  deletePlantelInfraestructura,
   findGroupPlantelInfraestructura,
   findGroupPlantelesUsuario,
 } = require('./db/planteles');
@@ -60,6 +61,7 @@ module.exports = {
   setSolicitudSeccion,
   deleteDocente,
   createPlantelInfraestructura,
+  deletePlantelInfraestructura,
   findGroupPlantelInfraestructura,
   findGroupPlantelesUsuario,
 };
