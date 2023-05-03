@@ -20,6 +20,15 @@ const InspectorSchema = {
       key: 'id',
     },
   },
+  programaId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'programa_id',
+    references: {
+      model: PERSONA_TABLE,
+      key: 'id',
+    },
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
