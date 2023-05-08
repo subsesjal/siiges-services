@@ -6,8 +6,10 @@ const {
 
 const {
   createQuery,
+  findAllQuery,
 } = queries;
 
 module.exports = {
   createInspeccionPreguntaQuery: createQuery(InspeccionPregunta),
+  findAllInspeccionPreguntasQuery: findAllQuery(InspeccionPregunta),
 };
