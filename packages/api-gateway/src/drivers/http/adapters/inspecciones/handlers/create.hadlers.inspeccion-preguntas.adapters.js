@@ -18,4 +18,5 @@ async function createInspeccionPreguntas(req, reply) {
     return errorHandler(error, reply);
   }
 }
+
 module.exports = createInspeccionPreguntas;
