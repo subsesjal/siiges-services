@@ -2,7 +2,7 @@ const { inspeccionesAdapter } = require('../../adapters');
 
 const {
   createInspeccionSchema,
-  createInspeccionPreguntasSchema,
+  createInspeccionInspeccionPreguntasSchema,
   findAllInspeccionPreguntasSchema,
 } = require('./schema');
 
@@ -22,11 +22,11 @@ async function inspeccionRouter(fastify, opts, next) {
   );
 
   await fastify.post(
-    '/preguntas',
+    '/inspeccion/preguntas',
     {
-      schema: createInspeccionPreguntasSchema,
+      schema: createInspeccionInspeccionPreguntasSchema,
     },
-    inspeccionesAdapter.createInspeccionPreguntas,
+    inspeccionesAdapter.createInspeccionInspeccionPreguntas,
   );
 
   next();

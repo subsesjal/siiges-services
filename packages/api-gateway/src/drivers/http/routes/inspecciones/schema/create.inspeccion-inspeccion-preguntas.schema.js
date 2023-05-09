@@ -1,15 +1,15 @@
-const { inspeccionPreguntas } = require('./properties/inspeccionPreguntas');
+const { inspeccionInspeccionPregunta } = require('./properties/inspeccionInspeccionPreguntas');
 const { responseProperties } = require('./properties/responseProperties');
 
-const createInspeccionPreguntasSchema = {
+const createInspeccionInspeccionPreguntasSchema = {
   tags: ['Inspeccion'],
   description: 'Given an object with inspeccion-pregunta required data, then save a record of inspeccion-preguntas in database.',
   body: {
     type: 'object',
     properties: {
-      ...inspeccionPreguntas,
+      ...inspeccionInspeccionPregunta,
     },
-    required: ['inspeccionTipoPreguntaId', 'inspeccionApartadoId', 'inspeccionCategoriaId', 'pregunta'],
+    required: ['inspeccionId', 'inspeccionPreguntaId'],
   },
   response: {
     201: {
@@ -19,7 +19,7 @@ const createInspeccionPreguntasSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...inspeccionPreguntas,
+            ...inspeccionInspeccionPregunta,
             ...responseProperties,
           },
         },
@@ -28,4 +28,4 @@ const createInspeccionPreguntasSchema = {
   },
 };
 
-module.exports = createInspeccionPreguntasSchema;
+module.exports = createInspeccionInspeccionPreguntasSchema;

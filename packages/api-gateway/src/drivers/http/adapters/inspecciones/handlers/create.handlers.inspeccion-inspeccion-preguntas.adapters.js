@@ -2,13 +2,15 @@ const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
 // solicitudes services
-async function createInspeccionPreguntas(req, reply) {
+async function createInspeccionInspeccionPreguntas(req, reply) {
   try {
     const { ...data } = req.body;
 
-    Logger.info('[inspeccion/preguntas]: Creating preguntas en inspeccion');
+    Logger.info('[inspeccion/inspeccion/preguntas]: Creating respuestas en inspeccion/pregunta');
 
-    const inspeccionPreguntas = await this.solicitudServices.createInspeccionPreguntas(data);
+    const inspeccionPreguntas = await this.inspeccionServices.createInspeccionInspeccionPreguntas(
+      data,
+    );
 
     return reply
       .code(201)
@@ -19,4 +21,4 @@ async function createInspeccionPreguntas(req, reply) {
   }
 }
 
-module.exports = createInspeccionPreguntas;
+module.exports = createInspeccionInspeccionPreguntas;

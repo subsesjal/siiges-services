@@ -3,7 +3,7 @@ const { models, queries } = require('@siiges-services/core');
 
 const {
   Inspeccion,
-  InspeccionPregunta,
+  InspeccionInspeccionPregunta,
 } = models;
 
 const {
@@ -12,5 +12,5 @@ const {
 
 module.exports = {
   createInspeccionQuery: createQuery(Inspeccion),
-  createInspeccionPreguntaQuery: createQuery(InspeccionPregunta),
+  createInspeccionInspeccionPreguntaQuery: createQuery(InspeccionInspeccionPregunta),
 };
