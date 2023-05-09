@@ -2,6 +2,7 @@ const { inspeccionesAdapter } = require('../../adapters');
 
 const {
   createInspeccionSchema,
+  findAllInspeccionPreguntasSchema,
 } = require('./schema');
 
 async function inspeccionRouter(fastify, opts, next) {
@@ -9,6 +10,13 @@ async function inspeccionRouter(fastify, opts, next) {
     '/',
     { schema: createInspeccionSchema },
     inspeccionesAdapter.createInspeccion,
+  
+  await fastify.get(
+    '/preguntas',
+    {
+      schema: findAllInspeccionPreguntasSchema,
+    },
+    inspeccionesAdapter.findAllInspeccionPreguntas,
   );
 
   next();
