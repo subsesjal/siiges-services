@@ -10,12 +10,11 @@ async function inspeccionRouter(fastify, opts, next) {
     '/',
     { schema: createInspeccionSchema },
     inspeccionesAdapter.createInspeccion,
-  
+  );
+
   await fastify.get(
     '/preguntas',
-    {
-      schema: findAllInspeccionPreguntasSchema,
-    },
+    { schema: findAllInspeccionPreguntasSchema },
     inspeccionesAdapter.findAllInspeccionPreguntas,
   );
 
