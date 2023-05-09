@@ -12,15 +12,15 @@ async function inspeccionRouter(fastify, opts, next) {
     { schema: createInspeccionSchema },
     inspeccionesAdapter.createInspeccion,
   );
-  
+
   await fastify.post(
-      '/preguntas',
+    '/preguntas',
     {
       schema: createInspeccionPreguntasSchema,
     },
     inspeccionesAdapter.createInspeccionPreguntas,
   );
-    
+
   await fastify.get(
     '/preguntas',
     {
