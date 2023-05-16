@@ -1,13 +1,11 @@
 const {
   createInspeccion,
   findAllInspeccionPreguntas,
-  createinspeccionRespuesta,
-
+  createInspeccionRespuestas,
 } = require('./db/inspecciones');
 
 module.exports = {
   createInspeccion,
   findAllInspeccionPreguntas,
-  createinspeccionRespuesta,
-
+  createInspeccionRespuestas,
 };

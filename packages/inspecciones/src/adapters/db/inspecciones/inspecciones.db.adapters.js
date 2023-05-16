@@ -4,18 +4,21 @@ const { models, queries } = require('@siiges-services/core');
 const {
   Inspeccion,
   InspeccionPregunta,
-  InspeccionRespuesta,
+  InspeccionInspeccionPregunta,
 
 } = models;
 
 const {
   createQuery,
   findAllQuery,
+  findOneQuery,
 } = queries;
 
 module.exports = {
   createInspeccionQuery: createQuery(Inspeccion),
+  findOneInspeccionQuery: findOneQuery(Inspeccion),
   findAllInspeccionPreguntasQuery: findAllQuery(InspeccionPregunta),
-  createInspeccionRespuestaQuery: createQuery(InspeccionRespuesta),
+  createInspeccionInspeccionPreguntaQuery: createQuery(InspeccionInspeccionPregunta),
+  findOneInspeccionInspeccionPreguntaQuery: findOneQuery(InspeccionInspeccionPregunta),
 
 };
