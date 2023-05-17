@@ -2,12 +2,13 @@ const { Logger } = require('@siiges-services/shared');
 
 const createInspeccionInspeccionPreguntas = (
   createInspeccionInspeccionPreguntasQuery,
-  //findOneInspeccionQuery,
-  //findOneInspeccionPreguntaQuery,
+  createInspeccionQuery,
+  findOneInspeccionQuery,
+  findOneInspeccionPreguntaQuery,
 ) => async (data) => {
   Logger.info('[inspeccion/inspeccion/preguntas]: Creating inspeccion-preguntas');
 
-  /* -----------Quiza funcione cuando existan los Querys necesarios
+  const newInspeccion = await createInspeccionQuery(data);
 
   const newInspeccionInspeccionPreguntaArray = [];
   await Promise.all(
@@ -15,27 +16,26 @@ const createInspeccionInspeccionPreguntas = (
       const inspeccion = await findOneInspeccionQuery({
         id: inspeccionId,
       });
-      if(inspeccion) {
+      if (inspeccion) {
         data.inspeccionPreguntaId.map(async (inspeccionPregunta) => {
           const pregunta = await findOneInspeccionPreguntaQuery({
             id: inspeccionPregunta,
           });
-          if(pregunta) {
+          if (pregunta) {
             const newInspeccionInspeccionPregunta = await createInspeccionInspeccionPreguntasQuery({
-              inspeccionId: inspeccionId,
+              inspeccionId,
               inspeccionPreguntaId: inspeccionPregunta,
               ...data,
             });
             newInspeccionInspeccionPreguntaArray.push(newInspeccionInspeccionPregunta);
           }
-        }),
+        });
       }
     }),
-  );*/
+  );
 
-  //Esto dara error por las llaves foraneas
-  const inspeccion = await createInspeccionInspeccionPreguntasQuery(data);
-  return inspeccion;
+  newInspeccion.dataValues.inspeccionInspeccionPregunta = newInspeccionInspeccionPreguntaArray;
+  return newInspeccion;
 };
 
 module.exports = createInspeccionInspeccionPreguntas;
