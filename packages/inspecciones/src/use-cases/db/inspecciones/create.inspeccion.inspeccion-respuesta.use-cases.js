@@ -4,6 +4,7 @@ const createInspeccionRespuestas = (
   findOneInspeccionQuery,
   findOneInspeccionInspeccionPreguntaQuery,
   createInspeccionInspeccionPreguntaQuery,
+  updateInspeccionInspeccionPreguntaQuery,
 ) => async (identifierObj, data) => {
   const { inspeccionId } = identifierObj;
 
@@ -30,7 +31,12 @@ const createInspeccionRespuestas = (
         inspeccionRespuestaArray.push(inspeccionRespuesta);
       } else {
         // update response
-
+        const newinspeccionRespuesta = await updateInspeccionInspeccionPreguntaQuery({
+          inspeccionId,
+          inspeccionPreguntaId,
+          respuesta,
+        });
+        inspeccionRespuestaArray.push(newinspeccionRespuesta);
       }
     }),
   );

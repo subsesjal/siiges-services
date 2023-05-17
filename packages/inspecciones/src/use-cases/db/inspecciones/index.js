@@ -17,5 +17,6 @@ module.exports = {
     inspecciones.findOneInspeccionQuery,
     inspecciones.findOneInspeccionInspeccionPreguntaQuery,
     inspecciones.createInspeccionInspeccionPreguntaQuery,
+    inspecciones.updateInspeccionInspeccionPreguntaQuery,
   ),
 };
