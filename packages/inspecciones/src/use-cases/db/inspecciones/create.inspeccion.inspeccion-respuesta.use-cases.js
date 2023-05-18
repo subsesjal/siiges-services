@@ -23,20 +23,21 @@ const createInspeccionRespuestas = (
       // if the response wasn't find, save the response
       if (!pregunta) {
         // create response
-        const inspeccionRespuesta = await createInspeccionInspeccionPreguntaQuery({
+        const inspeccionInspeccionPreguntaCreated = await createInspeccionInspeccionPreguntaQuery({
           inspeccionId,
           inspeccionPreguntaId,
           respuesta,
         });
-        inspeccionRespuestaArray.push(inspeccionRespuesta);
+
+        inspeccionRespuestaArray.push(inspeccionInspeccionPreguntaCreated);
       } else {
         // update response
-        const newinspeccionRespuesta = await updateInspeccionInspeccionPreguntaQuery({
+        const inspeccionInspeccionPreguntaUpdated = await updateInspeccionInspeccionPreguntaQuery({
           inspeccionId,
           inspeccionPreguntaId,
-          respuesta,
-        });
-        inspeccionRespuestaArray.push(newinspeccionRespuesta);
+        }, { respuesta });
+
+        inspeccionRespuestaArray.push(inspeccionInspeccionPreguntaUpdated);
       }
     }),
   );
