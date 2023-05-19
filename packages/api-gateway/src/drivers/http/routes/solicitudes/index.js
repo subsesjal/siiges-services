@@ -8,6 +8,8 @@ const {
   findAllSolicitudesUsuarioSchema,
   updateSolicitudProgramaSchema,
   setSolicitudSeccionSchema,
+  findOneSolicitudSeccionSchema,
+
 } = require('./schema');
 
 async function solicitudRouter(fastify, opts, next) {
@@ -63,6 +65,12 @@ async function solicitudRouter(fastify, opts, next) {
     '/:solicitudId/secciones/:seccionId',
     { schema: setSolicitudSeccionSchema },
     solicitudesAdapter.setSolicitudSeccion,
+  );
+
+  await fastify.get(
+    '/:solicitudId/secciones/:seccionId',
+    { schema: findOneSolicitudSeccionSchema },
+    solicitudesAdapter.findOneSolicitudSeccion,
   );
 
   await fastify.get(
