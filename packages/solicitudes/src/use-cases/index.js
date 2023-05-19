@@ -5,6 +5,7 @@ const {
   findSolicitudesUsuario,
   updateSolicitudPrograma,
   setSolicitudSeccion,
+  findOneSolicitudSeccion,
 } = require('./db/solicitudes');
 
 const {
@@ -64,4 +65,5 @@ module.exports = {
   deletePlantelInfraestructura,
   findGroupPlantelInfraestructura,
   findGroupPlantelesUsuario,
+  findOneSolicitudSeccion,
 };
