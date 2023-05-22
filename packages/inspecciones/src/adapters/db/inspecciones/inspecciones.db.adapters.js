@@ -5,6 +5,7 @@ const {
   Inspeccion,
   InspeccionPregunta,
   InspeccionInspeccionPregunta,
+  InspeccionObservacion,
 } = models;
 
 const {
@@ -21,4 +22,5 @@ module.exports = {
   createInspeccionInspeccionPreguntaQuery: createQuery(InspeccionInspeccionPregunta),
   findOneInspeccionInspeccionPreguntaQuery: findOneQuery(InspeccionInspeccionPregunta),
   updateInspeccionInspeccionPreguntaQuery: updateAndFindQuery(InspeccionInspeccionPregunta),
+  createInspeccionObservacionQuery: createQuery(InspeccionObservacion),
 };
