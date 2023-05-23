@@ -3,6 +3,7 @@ const {
   findAllInspeccionPreguntas,
   createInspeccionRespuestas,
   createInspeccionObservacion,
+  deleteInspeccion,
 } = require('./db/inspecciones');
 
 module.exports = {
@@ -10,4 +11,5 @@ module.exports = {
   findAllInspeccionPreguntas,
   createInspeccionRespuestas,
   createInspeccionObservacion,
+  deleteInspeccion,
 };
