@@ -3,6 +3,7 @@ const {
 } = require('../../../adapters/db');
 
 const createInspeccion = require('./create.inspeccion.use-cases');
+const deleteInspeccion = require('./delete.inspeccion.use-cases');
 const findAllInspeccionPreguntas = require('./find-all.inspeccion-preguntas.use-cases');
 const createInspeccionRespuestas = require('./create.inspeccion.inspeccion-respuesta.use-cases');
 
@@ -18,5 +19,9 @@ module.exports = {
     inspecciones.findOneInspeccionInspeccionPreguntaQuery,
     inspecciones.createInspeccionInspeccionPreguntaQuery,
     inspecciones.updateInspeccionInspeccionPreguntaQuery,
+  ),
+  deleteInspeccion: deleteInspeccion(
+    inspecciones.findOneQuery,
+    inspecciones.deleteQuery,
   ),
 };
