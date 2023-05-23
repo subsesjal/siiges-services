@@ -1,8 +1,8 @@
-const { inspeccionInspeccionObservacion } = require('./properties/inspeccionInspeccionPreguntas');
+const { inspeccionObservaciones } = require('./properties/inspeccionInspeccionPreguntas');
 const { responseProperties } = require('./properties/responseProperties');
 
 const createInspeccionObservacionSchema = {
-  tags: ['Inspeccion Observacion'],
+  tags: ['Inspeccion'],
   description: 'Save a record of inspeccion-observacion in database.',
   params: {
     type: 'object',
@@ -13,7 +13,7 @@ const createInspeccionObservacionSchema = {
     type: 'object',
     items: {
       properties: {
-        ...inspeccionInspeccionObservacion,
+        ...inspeccionObservaciones,
       },
       required: ['inspeccionApartadoId', 'comentario'],
     },
@@ -26,7 +26,7 @@ const createInspeccionObservacionSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...inspeccionInspeccionObservacion,
+            ...inspeccionObservaciones,
             ...responseProperties,
           },
         },
