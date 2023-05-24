@@ -1,5 +1,8 @@
-function authentication() {
-  // TODO
-}
+/**
+ * @description Export all features and business rules from the package
+ */
+const useCases = require('./use-cases/crypto');
 
-module.exports = authentication;
+module.exports = {
+  ...useCases,
+};

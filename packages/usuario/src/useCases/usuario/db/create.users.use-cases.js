@@ -1,9 +1,13 @@
+const { encrypStringHmacAlgorithm } = require('@siiges-services/authentication');
+
 const createUser = (createQuery) => async (data) => {
   const include = [{
     association: 'persona',
     include: [{ association: 'domicilio' }],
   }];
 
+  // eslint-disable-next-line no-param-reassign
+  data.contrasena = encrypStringHmacAlgorithm(data.contrasena);
   let newUser;
 
   if (!data.persona) {

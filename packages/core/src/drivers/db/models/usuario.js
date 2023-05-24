@@ -41,7 +41,7 @@ const UsuarioSchema = {
   },
   contrasena: {
     allowNull: false,
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
   },
   estatus: {
     allowNull: false,

@@ -44,9 +44,7 @@ async function usuarioRouter(fastify, opts, next) {
 
   await fastify.post(
     '/',
-    {
-      schema: createUsuarioSchema,
-    },
+    { schema: createUsuarioSchema },
     usuariosAdapter.create,
   );
 
