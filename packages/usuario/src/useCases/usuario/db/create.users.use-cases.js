@@ -23,6 +23,7 @@ const createUser = (createQuery) => async (data) => {
     newUser = await createQuery(data, include);
   }
 
+  delete newUser.dataValues.contrasena;
   return newUser;
 };
 

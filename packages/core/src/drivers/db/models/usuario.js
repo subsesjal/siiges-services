@@ -45,8 +45,8 @@ const UsuarioSchema = {
   },
   estatus: {
     allowNull: false,
-    type: DataTypes.INTEGER,
-    defaultValue: 1,
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
   actualizado: {
     allowNull: false,

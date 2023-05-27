@@ -6,6 +6,7 @@ const AutoLoad = require('@fastify/autoload');
 const helmet = require('@fastify/helmet');
 const cors = require('@fastify/cors');
 const path = require('path');
+// Internal dependencies
 const { Logger } = require('@siiges-services/shared');
 const { validateApiKey } = require('./utils/auth.handler');
 const { config } = require('../../../config/environment');

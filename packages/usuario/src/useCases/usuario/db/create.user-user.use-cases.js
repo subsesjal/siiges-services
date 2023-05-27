@@ -1,5 +1,6 @@
 const boom = require('@hapi/boom');
 const { checkers } = require('@siiges-services/shared');
+const { encrypStringHmacAlgorithm } = require('@siiges-services/authentication');
 
 const createUserUser = (
   createUserUserQuery,
@@ -21,7 +22,10 @@ const createUserUser = (
   },
   ];
 
+  // eslint-disable-next-line no-param-reassign
+  data.contrasena = encrypStringHmacAlgorithm(data.contrasena);
   let newUser;
+
   if (!data.persona) {
     const persona = {
       nombre: 'SIN DATO',
@@ -37,6 +41,7 @@ const createUserUser = (
 
   await createUserUserQuery({ principalId: primaryId, secundarioId: newUser.id });
 
+  delete newUser.dataValues.contrasena;
   return newUser;
 };
 

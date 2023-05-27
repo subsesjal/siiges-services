@@ -513,6 +513,14 @@
   dependencies:
     text-decoding "^1.0.0"
 
+"@fastify/cookie@^8.0.0":
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/@fastify/cookie/-/cookie-8.3.0.tgz#7d3304fcf0d11ea64ae8e02d65ae217b01fe1cf4"
+  integrity sha512-P9hY9GO11L20TnZ33XN3i0bt+3x0zaT7S0ohAzWO950E9PB2xnNhLYzPFJIGFi5AVN0yr5+/iZhWxeYvR6KCzg==
+  dependencies:
+    cookie "^0.5.0"
+    fastify-plugin "^4.0.0"
+
 "@fastify/cors@^8.0.0":
   version "8.0.0"
   resolved "https://registry.npmjs.org/@fastify/cors/-/cors-8.0.0.tgz"
@@ -533,6 +541,13 @@
   dependencies:
     fast-json-stringify "^5.0.0"
 
+"@fastify/flash@^5.0.0", "@fastify/flash@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@fastify/flash/-/flash-5.1.0.tgz#9842c8d700d2000a56f8734eb89e2369de744c0c"
+  integrity sha512-8/MwOWkky0RsSgSVRcpoY8Q+lGj+vx/QF60E0Opp+92KtLFWldr6eWUL+gpGJNmQiodsKCr0osjKIjySuUuM/g==
+  dependencies:
+    fastify-plugin "^4.0.0"
+
 "@fastify/helmet@^9.1.0":
   version "9.1.0"
   resolved "https://registry.npmjs.org/@fastify/helmet/-/helmet-9.1.0.tgz"
@@ -540,6 +555,23 @@
   dependencies:
     fastify-plugin "^3.0.0"
     helmet "^5.0.1"
+
+"@fastify/passport@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@fastify/passport/-/passport-2.3.0.tgz#e942a914961d8bbe3d989ef39ccb6c33550b1dbc"
+  integrity sha512-OVTUXyAm7Tx194RJiJrzSvM8m5O8TR0CIc9ewKDZWjQcFs+MNiVURdjpIm28l7oY2o19TV9XANutfSH/ngEd+A==
+  dependencies:
+    "@fastify/flash" "^5.0.0"
+    fastify-plugin "^4.0.0"
+
+"@fastify/secure-session@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@fastify/secure-session/-/secure-session-6.1.0.tgz#cc02885cea2a6b1372c2676521e7a2c627731ed4"
+  integrity sha512-TBg8tNw1SejDOmjnS/wpaDzvXfrEPQ3ZlYekQqqu+lXimWBZYbXyF1yT4EftOBW87PtmVEIAabR5ogBbz12diQ==
+  dependencies:
+    "@fastify/cookie" "^8.0.0"
+    fastify-plugin "^4.0.0"
+    sodium-native "^4.0.0"
 
 "@fastify/static@^6.0.0", "@fastify/static@^6.5.0":
   version "6.5.0"
@@ -5883,6 +5915,11 @@ node-gyp-build@^4.3.0:
   resolved "https://registry.npmjs.org/node-gyp-build/-/node-gyp-build-4.5.0.tgz"
   integrity sha512-2iGbaQBV+ITgCz76ZEjmhUKAKVf7xfY1sRl4UiKQspfZMH2h06SyhNsnSVy50cwkFQDGLyif6m/6uFXHkOZ6rg==
 
+node-gyp-build@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.6.0.tgz#0c52e4cbf54bbd28b709820ef7b6a3c2d6209055"
+  integrity sha512-NTZVKn9IylLwUzaKjkas1e4u2DLNcV4rdYagA4PWdPwW87Bi7z+BznyKSRwS/761tV/lzCGXplWsiaMjLqP2zQ==
+
 node-gyp@^8.4.1:
   version "8.4.1"
   resolved "https://registry.npmjs.org/node-gyp/-/node-gyp-8.4.1.tgz"
@@ -6453,6 +6490,13 @@ passport-jwt@^4.0.0:
   dependencies:
     jsonwebtoken "^8.2.0"
     passport-strategy "^1.0.0"
+
+passport-local@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/passport-local/-/passport-local-1.0.0.tgz#1fe63268c92e75606626437e3b906662c15ba6ee"
+  integrity sha512-9wCE6qKznvf9mQYYbgJ3sVOHmCWoUNMVFoZzNoznmISbhnNNPhN9xfY3sLmScHMetEJeoY7CXwfhCe7argfQow==
+  dependencies:
+    passport-strategy "1.x.x"
 
 passport-strategy@1.x.x, passport-strategy@^1.0.0:
   version "1.0.0"
@@ -7278,6 +7322,13 @@ socks@^2.3.3, socks@^2.6.2:
   dependencies:
     ip "^1.1.5"
     smart-buffer "^4.2.0"
+
+sodium-native@^4.0.0:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/sodium-native/-/sodium-native-4.0.3.tgz#b47e3f1024c71db76ef0141343e1e7611df3d4e0"
+  integrity sha512-0zOjNag+0gIRe56O1TkTfltT+b+JhOpGV6u69MVoKy+BTH95viPPJ0exHHnmgRliWKDGyYsyNeyBamfcU7ZlgQ==
+  dependencies:
+    node-gyp-build "^4.6.0"
 
 sonic-boom@^3.0.0:
   version "3.0.0"
