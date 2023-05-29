@@ -4,13 +4,19 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function loginUser(req, reply) {
   try {
-    const { user } = req;
-    Logger.info(`[auth]: User Logged in: ${user.usuario}`);
+    const { usuario, contrasena } = req.body;
+    Logger.info(`[auth]: User Logged in: ${usuario}`);
+
+    const usuarioFound = await this.authServices.localStrategy({ usuario, contrasena });
+    Logger.info('[api/usuarios/findOne]: the usuario was found');
+
+    const userPayload = await this.authServices.jwtAdapter.createUserTokenPayload(usuarioFound);
+    const token = this.jwt.sign({ userPayload });
 
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: user });
+      .send({ data: usuarioFound, token });
   } catch (error) {
     return errorHandler(error, reply);
   }

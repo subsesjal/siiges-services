@@ -6,7 +6,8 @@ const {
 } = require('./crypto');
 
 const {
-  LocalStrategy,
+  localStrategy,
+  JwtStrategy,
 } = require('./strategies');
 
 module.exports = {
@@ -14,5 +15,6 @@ module.exports = {
   getUserEncryptAlgorithm,
   encrypStringHmacAlgorithm,
   encryptStringHashAlgorithm,
-  LocalStrategy,
+  localStrategy,
+  JwtStrategy,
 };

@@ -1,3 +1,4 @@
+// Internal dependencies
 const { usuariosAdapter, usuariosUsuariosAdapter } = require('../../adapters');
 
 const {
@@ -14,7 +15,10 @@ const {
 async function usuarioRouter(fastify, opts, next) {
   await fastify.get(
     '/',
-    { schema: getAllUsuariosSchema },
+    {
+      schema: getAllUsuariosSchema,
+      onRequest: [fastify.authenticate],
+    },
     usuariosAdapter.findAll,
   );
 
@@ -22,6 +26,7 @@ async function usuarioRouter(fastify, opts, next) {
     '/:usuarioId',
     {
       schema: getUsuarioSchema,
+      onRequest: [fastify.authenticate],
     },
     usuariosAdapter.findOne,
   );
@@ -30,6 +35,7 @@ async function usuarioRouter(fastify, opts, next) {
     '/:usuarioId/detalle',
     {
       schema: getUsuarioDetalleSchema,
+      onRequest: [fastify.authenticate],
     },
     usuariosAdapter.findOneDetail,
   );
@@ -38,13 +44,17 @@ async function usuarioRouter(fastify, opts, next) {
     '/:usuarioId/usuarios',
     {
       schema: getAllUsuarioUsuariosSchema,
+      onRequest: [fastify.authenticate],
     },
     usuariosUsuariosAdapter.findGroup,
   );
 
   await fastify.post(
     '/',
-    { schema: createUsuarioSchema },
+    {
+      schema: createUsuarioSchema,
+      onRequest: [fastify.authenticate],
+    },
     usuariosAdapter.create,
   );
 
@@ -52,6 +62,7 @@ async function usuarioRouter(fastify, opts, next) {
     '/:usuarioId/usuario',
     {
       schema: createUsuarioUsuarioSchema,
+      onRequest: [fastify.authenticate],
     },
     usuariosUsuariosAdapter.create,
   );
@@ -60,6 +71,7 @@ async function usuarioRouter(fastify, opts, next) {
     '/:usuarioId',
     {
       schema: updateUsuarioSchema,
+      onRequest: [fastify.authenticate],
     },
     usuariosAdapter.update,
   );
@@ -68,6 +80,7 @@ async function usuarioRouter(fastify, opts, next) {
     '/:usuarioId',
     {
       schema: deleteUsuarioSchema,
+      onRequest: [fastify.authenticate],
     },
     usuariosAdapter.deleteOne,
   );

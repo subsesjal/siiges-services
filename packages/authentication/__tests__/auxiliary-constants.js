@@ -26,6 +26,16 @@ const UserModelResponse = {
   passwordUpdated: true,
   created_at: faker.date.past(5),
   update_at: faker.date.past(1),
+  dataValues: {
+    rol: {
+      id: faker.datatype.number(),
+      nombre: faker.name.jobDescriptor(),
+      descripcion: faker.name.jobDescriptor(),
+      createdAt: faker.date.past(5),
+      updatedAt: faker.date.past(1),
+      deletedAt: null,
+    },
+  },
 };
 
 const RolModelResponse = {
@@ -41,6 +51,7 @@ const fakeExpirationTimeToken = (
 );
 
 const fakePayloadToken = {
+  id: UserModelResponse.id,
   usuario: UserModelResponse.usuario,
   rol: faker.name.jobDescriptor(),
 };

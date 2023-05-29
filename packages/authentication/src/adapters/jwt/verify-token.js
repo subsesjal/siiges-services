@@ -14,6 +14,4 @@ function signToken(payloadObject) {
   return token;
 }
 
-module.exports = {
-  signToken,
-};
+module.exports = signToken;

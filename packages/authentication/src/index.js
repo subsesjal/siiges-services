@@ -2,9 +2,9 @@
  * @description Export all features and business rules from the package
  */
 const useCases = require('./use-cases');
-const strategies = require('./drivers');
+const jwtAdapter = require('./adapters/jwt');
 
 module.exports = {
   ...useCases,
-  ...strategies,
+  jwtAdapter,
 };
