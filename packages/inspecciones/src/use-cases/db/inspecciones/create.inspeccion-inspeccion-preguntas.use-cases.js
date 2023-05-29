@@ -2,40 +2,47 @@ const { Logger } = require('@siiges-services/shared');
 
 const createInspeccionInspeccionPreguntas = (
   createInspeccionInspeccionPreguntasQuery,
-  createInspeccionQuery,
   findOneInspeccionQuery,
-  findOneInspeccionPreguntaQuery,
+  findOneInspeccionInspeccionPreguntaQuery,
+  updateAndFindInspeccionInspeccionPreguntaQuery,
 ) => async (data) => {
   Logger.info('[inspeccion/inspeccion/preguntas]: Creating inspeccion-preguntas');
 
-  const newInspeccion = await createInspeccionQuery(data);
-
   const newInspeccionInspeccionPreguntaArray = [];
-  await Promise.all(
-    data.inspeccionId.map(async (inspeccionId) => {
-      const inspeccion = await findOneInspeccionQuery({
-        id: inspeccionId,
-      });
-      if (inspeccion) {
-        data.inspeccionPreguntaId.map(async (inspeccionPregunta) => {
-          const pregunta = await findOneInspeccionPreguntaQuery({
-            id: inspeccionPregunta,
-          });
-          if (pregunta) {
-            const newInspeccionInspeccionPregunta = await createInspeccionInspeccionPreguntasQuery({
-              inspeccionId,
-              inspeccionPreguntaId: inspeccionPregunta,
-              ...data,
-            });
-            newInspeccionInspeccionPreguntaArray.push(newInspeccionInspeccionPregunta);
-          }
-        });
-      }
-    }),
-  );
 
-  newInspeccion.dataValues.inspeccionInspeccionPregunta = newInspeccionInspeccionPreguntaArray;
-  return newInspeccion;
+  const inspeccionId = await findOneInspeccionQuery(data.inspeccionId);
+
+  if (inspeccionId) {
+    await Promise.all(
+      data.map(async ({ inspeccionPreguntaId, respuesta }) => {
+        const newRespuesta = await findOneInspeccionInspeccionPreguntaQuery({
+          inspeccionPreguntaId,
+          inspeccionId,
+        });
+
+        let newInspeccionInspeccionPregunta;
+
+        if (newRespuesta) {
+          newInspeccionInspeccionPregunta = await updateAndFindInspeccionInspeccionPreguntaQuery({
+            inspeccionId,
+            inspeccionPreguntaId,
+            respuesta,
+            ...data,
+          });
+        } else {
+          newInspeccionInspeccionPregunta = await createInspeccionInspeccionPreguntasQuery({
+            inspeccionId,
+            inspeccionPreguntaId,
+            respuesta,
+            ...data,
+          });
+        }
+        newInspeccionInspeccionPreguntaArray.push(newInspeccionInspeccionPregunta);
+      }),
+    );
+  }
+
+  return newInspeccionInspeccionPreguntaArray;
 };
 
 module.exports = createInspeccionInspeccionPreguntas;
