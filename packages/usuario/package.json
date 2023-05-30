@@ -32,6 +32,7 @@
     "url": "https://github.com/robertotorres-dev/siiges-services/issues"
   },
   "dependencies": {
+    "@siiges-services/authentication": "^1.0.0",
     "@siiges-services/core": "^1.0.0",
     "@siiges-services/shared": "^0.0.1"
   }

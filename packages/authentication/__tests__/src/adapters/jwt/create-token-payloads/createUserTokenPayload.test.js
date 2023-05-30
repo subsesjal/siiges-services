@@ -2,8 +2,7 @@
 const { Logger, validate } = require('@siiges-services/shared');
 // Internal dependencies
 const {
-  fakePayloadToken,
-  fakeExpirationTimeToken,
+  fakePayloadToken, UserModelResponse,
 } = require('../../../../auxiliary-constants');
 const {
   createUserTokenPayload,
@@ -22,25 +21,16 @@ const { usuario, rol } = fakePayloadToken;
 
 describe('Given a call to createUserTokenPayload function', () => {
   test('Then it should call validate function', () => {
-    createUserTokenPayload(
-      fakeExpirationTimeToken,
-      {
-        usuario,
-        rol,
-      },
-    );
+    createUserTokenPayload(UserModelResponse);
     expect(validate).toHaveBeenCalled();
   });
 
   describe('When usuario or rol keys are in payloadObject', () => {
     test('THEN it should return and object', () => {
-      const objectReturned = createUserTokenPayload(
-        fakeExpirationTimeToken,
-        {
-          usuario,
-          rol,
-        },
-      );
+      const userPayload = JSON.parse(JSON.stringify(UserModelResponse));
+      userPayload.dataValues.rol.nombre = fakePayloadToken.rol;
+
+      const objectReturned = createUserTokenPayload(userPayload);
       expect(objectReturned).toMatchObject(fakePayloadToken);
     });
   });
@@ -48,7 +38,6 @@ describe('Given a call to createUserTokenPayload function', () => {
   describe("When usuario key wasn't in payloadObject", () => {
     test('THEN ut should throw a Error', () => {
       expect(() => createUserTokenPayload(
-        fakeExpirationTimeToken,
         { rol },
       )).toThrow(Error);
     });
@@ -57,7 +46,6 @@ describe('Given a call to createUserTokenPayload function', () => {
   describe("when rol key wasn't in payloadObject", () => {
     test('THEN ut should throw a Error', () => {
       expect(() => createUserTokenPayload(
-        fakeExpirationTimeToken,
         { usuario },
       )).toThrow(Error);
     });

@@ -41,12 +41,12 @@ const UsuarioSchema = {
   },
   contrasena: {
     allowNull: false,
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
   },
   estatus: {
     allowNull: false,
-    type: DataTypes.INTEGER,
-    defaultValue: 1,
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
   actualizado: {
     allowNull: false,

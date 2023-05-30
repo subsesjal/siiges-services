@@ -9,7 +9,12 @@ const createUsuarioSchema = {
     type: 'object',
     properties: {
       ...usuario,
-      contrasena: { type: 'string', minLength: 3, maxLength: 25 },
+      contrasena: {
+        type: 'string',
+        minLength: 8,
+        maxLength: 25,
+        pattern: '^(?!.* )(?=.*[a-z])(?=.*[A-Z])(?=.*?[0-9])(?=.*[@$!%*?&./])[A-Za-z0-9@$!%*?&./]{8,25}$',
+      },
       persona: {
         type: 'object',
         properties: {

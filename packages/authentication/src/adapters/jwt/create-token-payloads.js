@@ -1,36 +1,20 @@
-// External dependencies
-const { validate } = require('@siiges-services/shared');
 // Internal dependencies
+const { validate } = require('@siiges-services/shared');
 const { validateUserPayload } = require('../../utils');
 
-function createBaseTokenPayload(exp) {
+function createUserTokenPayload(payloadObject) {
   validate({
-    nameVar: 'exp',
-    valueVar: exp,
-    expectedDatatype: 'number',
+    nameVar: 'payloadObject',
+    valueVar: payloadObject,
+    expectedDatatype: 'object',
   });
+  const newPayload = validateUserPayload(payloadObject);
 
-  const tokenObject = {
-    exp,
-  };
-  return tokenObject;
-}
-
-function createMachineTokenPayload(exp) {
-  return createBaseTokenPayload(exp);
-}
-
-function createUserTokenPayload(exp, payloadObject) {
-  validateUserPayload(payloadObject);
-
-  const tokenObject = createBaseTokenPayload(exp);
   return {
-    ...tokenObject,
-    ...payloadObject,
+    ...newPayload,
   };
 }
 
 module.exports = {
-  createMachineTokenPayload,
   createUserTokenPayload,
 };

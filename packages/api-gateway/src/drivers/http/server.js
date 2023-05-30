@@ -6,12 +6,11 @@ const AutoLoad = require('@fastify/autoload');
 const helmet = require('@fastify/helmet');
 const cors = require('@fastify/cors');
 const path = require('path');
+
+// Internal dependencies
 const { Logger } = require('@siiges-services/shared');
-const {
-  serverHost,
-  whiteList,
-  serverPort,
-} = require('../../../config/environment');
+const { validateApiKey } = require('./utils/auth.handler');
+const { config } = require('../../../config/environment');
 
 const fastify = Fastify({
   ajv: {
@@ -36,7 +35,7 @@ fastify.register(multer.contentParser);
 
 const options = {
   origin: (origin, cb) => {
-    if (whiteList.includes(origin)) {
+    if (config.whiteList.includes(origin)) {
       cb(null, true);
     } else {
       cb(new Error('Not allowed'), false);
@@ -48,6 +47,8 @@ fastify.register(cors, {
   options,
 });
 
+fastify.addHook('preHandler', validateApiKey);
+
 fastify.register(AutoLoad, {
   dir: path.join(__dirname, 'routes'),
   ignorePattern: /.*(schema).*/,
@@ -57,8 +58,8 @@ fastify.register(AutoLoad, {
 const start = async () => {
   await fastify.listen(
     {
-      port: serverPort,
-      host: serverHost,
+      port: config.serverPort,
+      host: config.serverHost,
     },
     (err, address) => {
       if (err) {
