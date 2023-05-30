@@ -16,7 +16,7 @@ const jwtVerifyPlugin = async (fastify) => {
     secret: config.authJwtSecret,
     messages: myCustomMessages,
     sign: {
-      expiresIn: '5m',
+      expiresIn: config.expToken,
     },
   });
 
