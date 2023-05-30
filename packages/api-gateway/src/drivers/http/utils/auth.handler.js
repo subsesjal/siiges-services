@@ -10,7 +10,7 @@ const validateApiKey = (req, reply, next) => {
     if (apiKey === config.apiKey) {
       next();
     } else {
-      throw boom.unauthorized();
+      throw boom.unauthorized('Unauthorized access to this API. You need an API KEY');
     }
   } catch (error) {
     return errorHandler(error, reply);
