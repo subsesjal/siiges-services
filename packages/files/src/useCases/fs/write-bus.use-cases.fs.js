@@ -4,7 +4,7 @@ const writeBus = async (currentFile, { tipoDocumento, tipoEntidad }, previousFil
   const dirFilePath = directory.createPath(tipoEntidad, tipoDocumento);
   const fileName = file.createName(tipoDocumento, currentFile);
   const filePath = `${dirFilePath}/${fileName}`;
-  const fileToUnlinkPath = file.createPath(dirFilePath, previousFile);
+  const fileToUnlinkPath = file.createPath(previousFile);
 
   await directory.createIfNotExist(dirFilePath);
   await file.unlinkIfNameIsDefined(previousFile, fileToUnlinkPath);
