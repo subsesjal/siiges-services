@@ -13,6 +13,7 @@ const {
   createQuery,
   findAllQuery,
   findOneQuery,
+  updateQuery,
   updateAndFindQuery,
   deleteAndFindQuery,
 
@@ -27,5 +28,7 @@ module.exports = {
   createInspeccionInspeccionPreguntaQuery: createQuery(InspeccionInspeccionPregunta),
   findOneInspeccionInspeccionPreguntaQuery: findOneQuery(InspeccionInspeccionPregunta),
   createInspeccionObservacionQuery: createQuery(InspeccionObservacion),
+  findOneInspeccionObservacionQuery: findOneQuery(InspeccionObservacion),
+  updateInspeccionObservacionQuery: updateQuery(InspeccionObservacion),
   updateInspeccionInspeccionPreguntaQuery: updateAndFindQuery(InspeccionInspeccionPregunta),
 };

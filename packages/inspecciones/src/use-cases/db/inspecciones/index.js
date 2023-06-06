@@ -24,6 +24,8 @@ module.exports = {
   createInspeccionObservacion: createInspeccionObservacion(
     inspecciones.createInspeccionObservacionQuery,
     inspecciones.findOneInspeccionQuery,
+    inspecciones.updateInspeccionObservacionQuery,
+    inspecciones.findOneInspeccionObservacionQuery,
   ),
   deleteInspeccion: deleteInspeccion(
     inspecciones.findOneQuery,
