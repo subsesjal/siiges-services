@@ -12,6 +12,7 @@ const createInspeccionRespuestasSchema = {
   body: {
     type: 'array',
     items: {
+      type: 'object',
       properties: {
         ...inspeccionInspeccionPregunta,
       },
