@@ -4,6 +4,7 @@ const {
   createInspeccionSchema,
   findAllInspeccionPreguntasSchema,
   createInspeccionRespuestasSchema,
+  createInspeccionObservacionSchema,
   deleteInspeccionSchema,
 } = require('./schema');
 
@@ -22,6 +23,11 @@ async function inspeccionRouter(fastify, opts, next) {
     '/preguntas',
     { schema: findAllInspeccionPreguntasSchema },
     inspeccionesAdapter.findAllInspeccionPreguntas,
+  );
+  await fastify.post(
+    '/:inspeccionId/observaciones',
+    { schema: createInspeccionObservacionSchema },
+    inspeccionesAdapter.createInspeccionObservacion,
   );
   await fastify.delete(
     '/:inspeccionId',
