@@ -22,10 +22,10 @@ module.exports = {
     inspecciones.updateInspeccionInspeccionPreguntaQuery,
   ),
   createInspeccionObservacion: createInspeccionObservacion(
-    inspecciones.createInspeccionObservacionQuery,
     inspecciones.findOneInspeccionQuery,
-    inspecciones.updateInspeccionObservacionQuery,
     inspecciones.findOneInspeccionObservacionQuery,
+    inspecciones.createInspeccionObservacionQuery,
+    inspecciones.updateInspeccionObservacionQuery,
   ),
   deleteInspeccion: deleteInspeccion(
     inspecciones.findOneQuery,

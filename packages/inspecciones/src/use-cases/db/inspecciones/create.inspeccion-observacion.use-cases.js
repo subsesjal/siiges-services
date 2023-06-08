@@ -1,10 +1,10 @@
 const { checkers } = require('@siiges-services/shared');
 
 const createInspeccionObservacion = (
+  findOneInspeccionQuery,
+  findOneInspeccionObservacionQuery,
   createInspeccionObservacionQuery,
   updateInspeccionObservacionQuery,
-  findOneInspeccionObservacionQuery,
-  findOneInspeccionQuery,
 ) => async (data) => {
   const {
     inspeccionId,
@@ -12,28 +12,24 @@ const createInspeccionObservacion = (
     comentario,
   } = data;
 
-  const Inspeccion = await findOneInspeccionQuery({ id: data.inspeccionId });
-  checkers.throwErrorIfDataIsFalsy(Inspeccion, 'Inspeccion', data.inspeccionId);
+  const inspeccion = await findOneInspeccionQuery({ id: inspeccionId });
+  checkers.throwErrorIfDataIsFalsy(inspeccion, 'inspecciones', inspeccionId);
 
-  const InspeccionObservacion = await findOneInspeccionObservacionQuery({
+  const inspeccionObservacion = await findOneInspeccionObservacionQuery({
     inspeccionId,
     inspeccionApartadoId,
   });
 
-  checkers.throwErrorIfDataIsFalsy(InspeccionObservacion, 'Inspeccion', data.inspeccionId);
-
   let newInspeccionObservacion;
 
-  if (InspeccionObservacion) {
+  if (inspeccionObservacion) {
     newInspeccionObservacion = await updateInspeccionObservacionQuery(
-      { id: InspeccionObservacion.id },
+      { id: inspeccionObservacion.id },
       { comentario },
     );
   } else {
     newInspeccionObservacion = await createInspeccionObservacionQuery(data);
   }
-
-  checkers.throwErrorIfDataIsFalsy(newInspeccionObservacion, 'inspeccioneObservacion', newInspeccionObservacion.id);
 
   return newInspeccionObservacion;
 };

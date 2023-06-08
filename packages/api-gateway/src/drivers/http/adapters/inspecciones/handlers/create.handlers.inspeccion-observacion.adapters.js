@@ -3,12 +3,13 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function createInspeccionObservacion(req, reply) {
   try {
+    const { inspeccionId } = req.params;
     const { ...data } = req.body;
 
     Logger.info('[inspecciones observaciones]: Creating inspecciones observaciones');
 
     const newInspeccionObservacion = await this.inspeccionServices.createInspeccionObservacion(
-      data,
+      { ...data, inspeccionId },
     );
 
     return reply
