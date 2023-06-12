@@ -5,6 +5,7 @@ const {
   findSolicitudesUsuario,
   updateSolicitudPrograma,
   setSolicitudSeccion,
+  updateSolcitudSeccionObservacion,
   findOneSolicitudSeccion,
 } = require('./db/solicitudes');
 
@@ -60,6 +61,7 @@ module.exports = {
   updateDocente,
   findGroupDocentesPrograma,
   setSolicitudSeccion,
+  updateSolcitudSeccionObservacion,
   deleteDocente,
   createPlantelInfraestructura,
   deletePlantelInfraestructura,
