@@ -30,6 +30,7 @@ const updateInstitucion = (
         rector.persona,
       );
       institucionUpdated.dataValues.rector = {
+        ...institucion.rector.dataValues,
         persona: personaUpdated,
       };
     } else {
