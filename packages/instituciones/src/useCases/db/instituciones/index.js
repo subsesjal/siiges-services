@@ -4,6 +4,7 @@ const {
   createInstitucionQuery,
   updateInstitucionQuery,
   deleteInstitucionQuery,
+  createRectorQuery,
 } = require('../../../adapters/db');
 
 const findAllInstituciones = require('./find-all.instituciones.use-cases');
@@ -19,7 +20,10 @@ module.exports = {
   findOneInstitucion: findOneInstitucion(findOneInstitucionQuery),
   findOneInstitucionUsuario: findOneInstitucionUsuario(findOneInstitucionQuery),
   findPlantelesInstitucion: findPlantelesInstitucion(findOneInstitucionQuery),
-  createInstitucion: createInstitucion(createInstitucionQuery),
+  createInstitucion: createInstitucion(
+    createInstitucionQuery,
+    createRectorQuery,
+  ),
   updateInstitucion: updateInstitucion(updateInstitucionQuery),
   deleteInstitucion: deleteInstitucion(deleteInstitucionQuery),
 };
