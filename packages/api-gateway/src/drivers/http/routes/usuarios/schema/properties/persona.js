@@ -5,7 +5,7 @@ const persona = {
   nombre: { type: 'string' },
   apellidoPaterno: { type: 'string' },
   apellidoMaterno: { type: 'string' },
-  fechaNacimiento: { type: 'string', format: 'date' },
+  fechaNacimiento: { type: 'string', format: 'date-time' },
   sexo: { type: 'string' },
   nacionalidad: { type: 'string' },
   telefono: { type: 'string' },
