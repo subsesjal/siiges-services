@@ -24,7 +24,7 @@ const updateInstitucion = (
   const institucionUpdated = await updateInstitucionQuery(identifierObj, data);
 
   if (rector) {
-    if (institucion.rector.personaId) {
+    if (institucion.rector) {
       const personaUpdated = await updatePersonaQuery(
         { id: institucion.rector.personaId },
         rector.persona,
