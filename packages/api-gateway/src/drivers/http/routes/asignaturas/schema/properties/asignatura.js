@@ -16,7 +16,10 @@ const asignatura = {
   minimoHoras: { type: 'integer' },
   minimoCreditos: { type: 'integer' },
   creditos: { type: 'integer' },
-  tipo: { type: 'integer' },
+  tipo: {
+    type: 'integer',
+    enum: [1, 2],
+  },
   grado: { type: 'string' },
   fechaAutorizacion: { type: 'string', format: 'date-time' },
 };

@@ -4,6 +4,15 @@ const { responseProperties } = require('./properties/responseProperties');
 const findProgramaAsignaturaSchema = {
   tags: ['Programas'],
   description: 'Return an array of asignaturas grouped by programa.',
+  querystring: {
+    type: 'object',
+    properties: {
+      tipo: {
+        type: 'integer',
+        enum: [1, 2],
+      },
+    },
+  },
   params: {
     title: 'findProgramaAsignaturasSchema',
     type: 'object',
