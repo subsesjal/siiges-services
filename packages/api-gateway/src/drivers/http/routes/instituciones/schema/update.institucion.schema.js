@@ -1,4 +1,6 @@
 const { institucion } = require('./properties/institucion');
+const { rector } = require('./properties/rector');
+const { persona } = require('../../usuarios/schema/properties/persona');
 const { responseProperties } = require('./properties/responseProperties');
 
 const updateInstitucionSchema = {
@@ -15,6 +17,19 @@ const updateInstitucionSchema = {
     type: 'object',
     properties: {
       ...institucion,
+      rector: {
+        type: 'object',
+        properties: {
+          ...rector,
+          persona: {
+            type: 'object',
+            properties: {
+              ...persona,
+            },
+          },
+        },
+        required: ['persona'],
+      },
     },
   },
   response: {
@@ -28,6 +43,20 @@ const updateInstitucionSchema = {
             usuarioId: { type: 'integer' },
             ...institucion,
             ...responseProperties,
+            rector: {
+              type: 'object',
+              properties: {
+                ...rector,
+                ...responseProperties,
+                persona: {
+                  type: 'object',
+                  properties: {
+                    ...persona,
+                    ...responseProperties,
+                  },
+                },
+              },
+            },
           },
         },
       },
