@@ -5,6 +5,8 @@ const {
   updateAsignaturaSchema,
   findProgramaAsignaturasSchema,
   deleteAsignaturaSchema,
+  createAsignaturaElectivaSchema,
+
 } = require('./schema');
 
 async function asignaturaRouter(fastify, opts, next) {
@@ -12,6 +14,12 @@ async function asignaturaRouter(fastify, opts, next) {
     '/',
     { schema: createAsignaturaSchema },
     asignaturasAdapter.createAsignaturaPrograma,
+  );
+
+  await fastify.post(
+    '/:asignatura',
+    { schema: createAsignaturaElectivaSchema },
+    asignaturasAdapter.createAsignaturaElectivaPrograma,
   );
 
   await fastify.get(

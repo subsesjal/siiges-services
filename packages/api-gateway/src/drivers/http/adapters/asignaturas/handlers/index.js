@@ -3,6 +3,7 @@ const findOneAsignaturaPrograma = require('./find-one.handlers.asignatura.adapte
 const updateAsignatura = require('./update.handlers.asignatura.adapters');
 const deleteAsignaturaPrograma = require('./delete.handlers.asignatura-programa.adapters');
 const findProgramaAsignaturas = require('./find.handlers.programa-asignaturas.adapters');
+const createAsignaturaElectivaPrograma = require('./create.handlers.asignaturaElectiva-programa.adapters');
 
 module.exports = {
   createAsignaturaPrograma,
@@ -10,4 +11,5 @@ module.exports = {
   updateAsignatura,
   deleteAsignaturaPrograma,
   findProgramaAsignaturas,
+  createAsignaturaElectivaPrograma,
 };
