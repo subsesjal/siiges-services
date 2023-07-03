@@ -38,5 +38,4 @@ module.exports = {
   findOneSolicitudSeccionQuery: findOneQuery(SolicitudSeccion),
   createSolicitudSeccionQuery: createQuery(SolicitudSeccion),
   updateSolicitudSeccionQuery: updateAndFindQuery(SolicitudSeccion),
-  createSolcitudSeccionObservacionQuery: createQuery(SolicitudSeccion),
 };

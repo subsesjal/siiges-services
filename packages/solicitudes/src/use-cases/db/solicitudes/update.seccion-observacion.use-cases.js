@@ -1,6 +1,6 @@
 const updateSolcitudSeccionObservacion = (
   findOneSolicitudSeccionQuery,
-  createSolcitudSeccionObservacionQuery,
+  createSolcitudSeccionQuery,
   updateSolicitudSeccionQuery,
 ) => async (data) => {
   const {
@@ -22,7 +22,7 @@ const updateSolcitudSeccionObservacion = (
       { observaciones },
     );
   } else {
-    newSeccionObservaciones = await createSolcitudSeccionObservacionQuery(data);
+    newSeccionObservaciones = await createSolcitudSeccionQuery(data);
   }
 
   return newSeccionObservaciones;

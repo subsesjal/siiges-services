@@ -31,7 +31,7 @@ const updateSolcitudSeccionObservacionSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...solicitud,
+            ...solicitudSeccion,
             ...responseProperties,
           },
         },

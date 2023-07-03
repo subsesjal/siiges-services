@@ -48,7 +48,7 @@ module.exports = {
   ),
   updateSolcitudSeccionObservacion: updateSolcitudSeccionObservacion(
     solicitudes.findOneSolicitudSeccionQuery,
-    solicitudes.createSolcitudSeccionObservacionQuery,
+    solicitudes.createSolicitudSeccionQuery,
     solicitudes.updateSolicitudSeccionQuery,
   ),
 };
