@@ -10,6 +10,7 @@ const { IsDate, isNotDate } = require('./date');
 const { isNull, isNotNull } = require('./null');
 const { isUndefined, isDefined } = require('./undefined');
 const { throwErrorIfDataIsFalsy } = require('./db.checkers.utils');
+const { cleanObject } = require('./cleanObject');
 
 module.exports = {
   isDevEnvironment,
@@ -29,4 +30,5 @@ module.exports = {
   throwErrorIfDataIsFalsy,
   IsDate,
   isNotDate,
+  cleanObject,
 };
