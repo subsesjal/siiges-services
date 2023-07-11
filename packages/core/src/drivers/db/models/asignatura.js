@@ -70,7 +70,7 @@ const AsignaturaSchema = {
     type: DataTypes.INTEGER,
   },
   grado: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
   },
   fecha_autorizacion: {
     type: DataTypes.DATE,
