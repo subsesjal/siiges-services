@@ -1,11 +1,14 @@
 const { encrypStringHmacAlgorithm } = require('@siiges-services/authentication');
 
-const createUser = (createQuery) => async (data) => {
+const createUser = (createQuery, findOneUserQuery) => async (data) => {
   const include = [{
     association: 'persona',
     include: [{ association: 'domicilio' }],
   }];
-
+  const userExists = await findOneUserQuery({ usuario: data.usuario });
+  if (userExists) {
+    throw boom.conflict(`User ${data.usuario} already exists`);
+  }
   // eslint-disable-next-line no-param-reassign
   data.contrasena = encrypStringHmacAlgorithm(data.contrasena);
   let newUser;

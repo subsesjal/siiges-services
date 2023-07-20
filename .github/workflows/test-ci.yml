@@ -1,0 +1,56 @@
+name: API TEST
+
+# on: [push]
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    container:
+      image: node:16
+
+    services:
+      mysql:
+        image: mysql:latest
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_DATABASE: siiges_e2e
+          MYSQL_USER: db_user
+          MYSQL_PASSWORD: db_password
+          MYSQL_ROOT_PASSWORD: root123
+          MYSQL_PORT: 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: yarn install
+      - name: Run e2e tests
+        run: yarn run e2e:ci
+        env:
+          SERVER_PORT: 9000
+          SERVER_HOST: 127.0.0.1
+          API_KEY: zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx
+          AUTH_JWT_SECRET: 9fRk3VN4ugE6Ipjd0xBo25lyKGbnMAWe
+          AUTH_JWT_ALGORITHM: RS256
+          AUTH_HMAC_ALGORITHM: sha256
+          AUTH_HMAC_SALT: xfdU1aP6tIzekh02LpZqAnMyT7ulrQ83
+          AUTH_HASH_ALGORITHM: md5
+          EXPIRATION_TOKEN: 1d
+          DB_HOST_MYSQL: mysql
+          DB_NAME_MYSQL: siiges_e2e
+          DB_USER_MYSQL: root
+          DB_PASSWORD_MYSQL: root123
+          DB_PORT_MYSQL: 3306
+          WHITE_LIST: mysql
+          NODE_ENV: development
