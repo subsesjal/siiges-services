@@ -25,7 +25,7 @@ module.exports = {
   findAllUserUsers: findAllUserUsers(findAllUserUsersQuery, findOneUserQuery),
   findOneUser: findOneUser(findOneUserQuery),
   findOneUserDetail: findOneUserDetail(findOneUserQuery),
-  createUser: createUser(createQuery),
+  createUser: createUser(createQuery, findOneUserQuery),
   createUserUser: createUserUser(createUserUsersQuery, createQuery, findOneUserQuery),
   updateUser: updateUser(
     findOneUserQuery,
