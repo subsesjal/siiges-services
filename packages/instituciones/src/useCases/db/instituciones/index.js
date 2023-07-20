@@ -5,6 +5,7 @@ const {
   updateInstitucionQuery,
   deleteInstitucionQuery,
   createRectorQuery,
+  deleteRectorQuery,
   updatePersonaQuery,
 } = require('../../../adapters/db');
 
@@ -31,5 +32,9 @@ module.exports = {
     updatePersonaQuery,
     createRectorQuery,
   ),
-  deleteInstitucion: deleteInstitucion(deleteInstitucionQuery),
+  deleteInstitucion: deleteInstitucion(
+    findOneInstitucionQuery,
+    deleteInstitucionQuery,
+    deleteRectorQuery,
+  ),
 };
