@@ -1,4 +1,5 @@
 const { encrypStringHmacAlgorithm } = require('@siiges-services/authentication');
+const boom = require('@hapi/boom');
 
 const createUser = (createQuery, findOneUserQuery) => async (data) => {
   const include = [{

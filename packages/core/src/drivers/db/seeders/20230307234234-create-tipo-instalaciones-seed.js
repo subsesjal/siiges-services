@@ -7,11 +7,15 @@ const tipoInstalacionesCSV = path.join(__dirname, '../CSVFiles/tipo_instalacione
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const tipoInstalacionesJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(tipoInstalacionesCSV);
 
-    await queryInterface.bulkInsert(TIPO_INSTALACION_TABLE, tipoInstalacionesJson, {});
+    return queryInterface.bulkInsert(TIPO_INSTALACION_TABLE, tipoInstalacionesJson, {});
   },
 
   async down(queryInterface) {

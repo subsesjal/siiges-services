@@ -7,11 +7,15 @@ const municipiosCSV = path.join(__dirname, '../CSVFiles/municipios.csv');
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const municipiosJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(municipiosCSV);
 
-    await queryInterface.bulkInsert(MUNICIPIO_TABLE, municipiosJson, {});
+    return queryInterface.bulkInsert(MUNICIPIO_TABLE, municipiosJson, {});
   },
 
   async down(queryInterface) {
