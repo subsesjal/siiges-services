@@ -5,6 +5,7 @@ const {
   isProdEnvironment,
   isDevEnvironment,
   isTestEnvironment,
+  isCiEnvironment,
 } = require('../../utils/checkers');
 
 function getEnvironment() {
@@ -12,7 +13,8 @@ function getEnvironment() {
     throw ReferenceError('reference to undefined property "NODE_ENV"');
   } else if (!isProdEnvironment(nodeEnv)
   && !isDevEnvironment(nodeEnv)
-  && !isTestEnvironment(nodeEnv)) {
+  && !isTestEnvironment(nodeEnv)
+  && !isCiEnvironment(nodeEnv)) {
     throw new TypeError('Invalid assignment to const "NODE_ENV"');
   }
 
