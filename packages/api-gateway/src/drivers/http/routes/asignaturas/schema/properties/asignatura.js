@@ -1,4 +1,5 @@
 // Asignatura
+
 const asignatura = {
   programaId: { type: 'integer' },
   academia: { type: 'string' },
