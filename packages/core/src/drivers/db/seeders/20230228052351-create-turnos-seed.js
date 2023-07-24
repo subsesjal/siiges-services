@@ -7,11 +7,15 @@ const nivelesCSV = path.join(__dirname, '../CSVFiles/turnos.csv');
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const nivelesJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(nivelesCSV);
 
-    await queryInterface.bulkInsert(TURNO_TABLE, nivelesJson, {});
+    return queryInterface.bulkInsert(TURNO_TABLE, nivelesJson, {});
   },
 
   async down(queryInterface) {

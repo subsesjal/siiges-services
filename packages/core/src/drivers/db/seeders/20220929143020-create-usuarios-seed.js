@@ -7,11 +7,15 @@ const usuariosCSV = path.join(__dirname, '../CSVFiles/usuarios.csv');
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const usuariosJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(usuariosCSV);
 
-    await queryInterface.bulkInsert(USUARIO_TABLE, usuariosJson, {});
+    return queryInterface.bulkInsert(USUARIO_TABLE, usuariosJson, {});
   },
 
   async down(queryInterface) {

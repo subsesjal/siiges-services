@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const csvToJson = require('convert-csv-to-json');
 const path = require('path');
 
@@ -6,15 +7,18 @@ const { PAIS_TABLE } = require('../models/pais');
 const paisesCSV = path.join(__dirname, '../CSVFiles/paises.csv');
 
 module.exports = {
-  async up(queryInterface) {
+  up: async (queryInterface) => {
+    if (queryInterface.context) {
+      queryInterface = queryInterface.context;
+    }
     const paisesJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(paisesCSV);
 
-    await queryInterface.bulkInsert(PAIS_TABLE, paisesJson, {});
+    return queryInterface.bulkInsert(PAIS_TABLE, paisesJson, {});
   },
 
-  async down(queryInterface) {
+  down: async (queryInterface) => {
     await queryInterface.bulkDelete(PAIS_TABLE, null, {});
   },
 };

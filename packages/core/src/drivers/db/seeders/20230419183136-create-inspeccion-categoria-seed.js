@@ -7,11 +7,15 @@ const inspeccionCategoriasCSV = path.join(__dirname, '../CSVFiles/inspeccion_cat
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const inspeccionCategoriasJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(inspeccionCategoriasCSV);
 
-    await queryInterface.bulkInsert(INSPECCION_CATEGORIA_TABLE, inspeccionCategoriasJson, {});
+    return queryInterface.bulkInsert(INSPECCION_CATEGORIA_TABLE, inspeccionCategoriasJson, {});
   },
 
   async down(queryInterface) {

@@ -7,11 +7,15 @@ const modalidadesCSV = path.join(__dirname, '../CSVFiles/modalidades.csv');
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const modalidadesJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(modalidadesCSV);
 
-    await queryInterface.bulkInsert(MODALIDAD_TABLE, modalidadesJson, {});
+    return queryInterface.bulkInsert(MODALIDAD_TABLE, modalidadesJson, {});
   },
 
   async down(queryInterface) {

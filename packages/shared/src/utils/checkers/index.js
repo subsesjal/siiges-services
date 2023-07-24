@@ -2,6 +2,7 @@
 const isDevEnvironment = require('./is-development');
 const isProdEnvironment = require('./is-production');
 const isTestEnvironment = require('./is-test');
+const isCiEnvironment = require('./is-ci');
 const isThisDatatype = require('./is-this-datatype');
 const { isFalsy, isTruthy } = require('./truthy-falsy');
 const { isNumber, isNotNumber } = require('./number');
@@ -15,6 +16,7 @@ module.exports = {
   isDevEnvironment,
   isProdEnvironment,
   isTestEnvironment,
+  isCiEnvironment,
   isTruthy,
   isFalsy,
   isNumber,

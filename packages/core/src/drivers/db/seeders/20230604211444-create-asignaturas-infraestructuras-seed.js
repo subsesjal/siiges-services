@@ -7,11 +7,15 @@ const asignaturasInfraestructurasCSV = path.join(__dirname, '../CSVFiles/asignat
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const asignaturasInfraestructurasJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(asignaturasInfraestructurasCSV);
 
-    await queryInterface.bulkInsert(
+    return queryInterface.bulkInsert(
       ASIGNATURA_INFRAESTRUCTURA_TABLE,
       asignaturasInfraestructurasJson,
       {},

@@ -7,11 +7,15 @@ const seccionesCSV = path.join(__dirname, '../CSVFiles/secciones.csv');
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const seccionesJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(seccionesCSV);
 
-    await queryInterface.bulkInsert(SECCION_TABLE, seccionesJson, {});
+    return queryInterface.bulkInsert(SECCION_TABLE, seccionesJson, {});
   },
 
   async down(queryInterface) {

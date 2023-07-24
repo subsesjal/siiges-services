@@ -7,11 +7,15 @@ const estadosCSV = path.join(__dirname, '../CSVFiles/estados.csv');
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const estadosJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(estadosCSV);
 
-    await queryInterface.bulkInsert(ESTADO_TABLE, estadosJson, {});
+    return queryInterface.bulkInsert(ESTADO_TABLE, estadosJson, {});
   },
 
   async down(queryInterface) {

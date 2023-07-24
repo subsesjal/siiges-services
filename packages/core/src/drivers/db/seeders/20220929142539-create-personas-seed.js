@@ -7,11 +7,15 @@ const personasCSV = path.join(__dirname, '../CSVFiles/personas.csv');
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const personasJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(personasCSV);
 
-    await queryInterface.bulkInsert(PERSONA_TABLE, personasJson, {});
+    return queryInterface.bulkInsert(PERSONA_TABLE, personasJson, {});
   },
 
   async down(queryInterface) {
