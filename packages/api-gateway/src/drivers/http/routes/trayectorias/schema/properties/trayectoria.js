@@ -1,6 +1,6 @@
 // Trayectoria
 const trayectoria = {
-  programaId: { type: 'string' },
+  programaId: { type: 'integer' },
   programaSeguimiento: { type: 'string' },
   tipoTutoria: { type: 'string' },
   estadisticasTitulacion: { type: 'string' },

@@ -40,7 +40,10 @@ const {
   findGroupPlantelesUsuario,
 } = require('./db/planteles');
 
-const { createTrayectoriaPrograma } = require('./db/trayectorias');
+const {
+  createTrayectoriaPrograma,
+  findOneTrayectoriaPrograma,
+} = require('./db/trayectorias');
 
 module.exports = {
   createSolicitudPrograma,
@@ -71,4 +74,5 @@ module.exports = {
   findGroupPlantelesUsuario,
   findOneSolicitudSeccion,
   createTrayectoriaPrograma,
+  findOneTrayectoriaPrograma,
 };
