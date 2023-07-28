@@ -11,6 +11,7 @@ const asignaturasAdapter = require('./asignaturas/handlers');
 const docentesAdapter = require('./docentes/handlers');
 const plantelesAdapter = require('./planteles/handlers');
 const inspeccionesAdapter = require('./inspecciones/handlers');
+const trayectoriasAdapter = require('./trayectorias/handlers');
 const authAdapter = require('./auth/handlers');
 
 module.exports = {
@@ -27,4 +28,5 @@ module.exports = {
   plantelesAdapter,
   inspeccionesAdapter,
   authAdapter,
+  trayectoriasAdapter,
 };

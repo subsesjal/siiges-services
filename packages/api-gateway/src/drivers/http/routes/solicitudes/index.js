@@ -10,7 +10,6 @@ const {
   setSolicitudSeccionSchema,
   findOneSolicitudSeccionSchema,
   updateSolcitudSeccionObservacionSchema,
-
 } = require('./schema');
 
 async function solicitudRouter(fastify, opts, next) {
