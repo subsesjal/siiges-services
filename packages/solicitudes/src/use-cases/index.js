@@ -43,6 +43,7 @@ const {
 const {
   createTrayectoriaPrograma,
   findOneTrayectoriaPrograma,
+  updateTrayectoriaPrograma,
 } = require('./db/trayectorias');
 
 module.exports = {
@@ -75,4 +76,5 @@ module.exports = {
   findOneSolicitudSeccion,
   createTrayectoriaPrograma,
   findOneTrayectoriaPrograma,
+  updateTrayectoriaPrograma,
 };
