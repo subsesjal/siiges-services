@@ -4,7 +4,7 @@ const { join } = require('path');
 const { uploadDir } = require('../../../utils/constants');
 
 function createPath(fileEntry = {}) {
-  const { ubicacion = 'undefined' } = fileEntry;
+  const ubicacion = fileEntry ? fileEntry.ubicacion : '';
   return join(uploadDir, ubicacion);
 }
 
