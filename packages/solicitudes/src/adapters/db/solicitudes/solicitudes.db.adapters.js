@@ -41,4 +41,5 @@ module.exports = {
   updateSolicitudSeccionQuery: updateAndFindQuery(SolicitudSeccion),
   createTrayectoriaQuery: createQuery(Trayectoria),
   findOneTrayectoriaQuery: findOneQuery(Trayectoria),
+  updateTrayectoriaQuery: updateAndFindQuery(Trayectoria),
 };

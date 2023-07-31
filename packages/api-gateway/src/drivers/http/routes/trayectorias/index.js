@@ -2,6 +2,7 @@ const { trayectoriasAdapter } = require('../../adapters');
 const {
   createTrayectoriaProgramaSchema,
   findOneTrayectoriaProgramaSchema,
+  updateTrayectoriaProgramaSchema,
 } = require('./schema');
 
 async function trayectoriaRouter(fastify, opts, next) {
@@ -15,6 +16,12 @@ async function trayectoriaRouter(fastify, opts, next) {
     '/',
     { schema: createTrayectoriaProgramaSchema },
     trayectoriasAdapter.createTrayectoriaPrograma,
+  );
+
+  await fastify.patch(
+    '/:trayectoriaId',
+    { schema: updateTrayectoriaProgramaSchema },
+    trayectoriasAdapter.updateTrayectoriaPrograma,
   );
 
   next();

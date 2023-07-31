@@ -4,6 +4,7 @@ const {
 
 const createTrayectoriaPrograma = require('./create.trayectoria-programa.use-cases');
 const findOneTrayectoriaPrograma = require('./find-one.trayectoria-programa.use-cases');
+const updateTrayectoriaPrograma = require('./update.trayectoria-programa.use-cases');
 
 module.exports = {
   createTrayectoriaPrograma: createTrayectoriaPrograma(
@@ -13,5 +14,9 @@ module.exports = {
   ),
   findOneTrayectoriaPrograma: findOneTrayectoriaPrograma(
     solicitudes.findOneTrayectoriaQuery,
+  ),
+  updateTrayectoriaPrograma: updateTrayectoriaPrograma(
+    solicitudes.findOneTrayectoriaQuery,
+    solicitudes.updateTrayectoriaQuery,
   ),
 };
