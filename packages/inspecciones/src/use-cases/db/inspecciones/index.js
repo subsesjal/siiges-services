@@ -7,6 +7,7 @@ const deleteInspeccion = require('./delete.inspeccion.use-cases');
 const findAllInspeccionPreguntas = require('./find-all.inspeccion-preguntas.use-cases');
 const createInspeccionRespuestas = require('./create.inspeccion.inspeccion-respuesta.use-cases');
 const createInspeccionObservacion = require('./create.inspeccion-observacion.use-cases');
+const createInspectorProgramas = require('./create.inspector-programas.use-cases');
 
 module.exports = {
   createInspeccion: createInspeccion(
@@ -30,5 +31,10 @@ module.exports = {
   deleteInspeccion: deleteInspeccion(
     inspecciones.findOneQuery,
     inspecciones.deleteQuery,
+  ),
+  createInspectorProgramas: createInspectorProgramas(
+    inspecciones.createInspectorProgramasQuery,
+    inspecciones.findOneInspectorQuery,
+    inspecciones.findOneProgramasQuery,
   ),
 };

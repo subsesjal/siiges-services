@@ -3,6 +3,7 @@ const createInspeccion = require('./create.handlers.inspeccion.adapters');
 const createInspeccionRespuestas = require('./create.handlers.inspeccion-respuestas.adapters');
 const createInspeccionObservacion = require('./create.handlers.inspeccion-observacion.adapters');
 const deleteInspeccion = require('./delete.handlers.inspeccion.adapters');
+const createInspectoresProgramas = require('./create.handlers.inspectores-programas.adapters');
 
 module.exports = {
   createInspeccion,
@@ -10,4 +11,5 @@ module.exports = {
   createInspeccionRespuestas,
   createInspeccionObservacion,
   deleteInspeccion,
+  createInspectoresProgramas,
 };

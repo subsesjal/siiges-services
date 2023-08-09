@@ -6,7 +6,9 @@ const {
   InspeccionPregunta,
   InspeccionInspeccionPregunta,
   InspeccionObservacion,
-
+  InspectorPrograma,
+  Programa,
+  Inspector,
 } = models;
 
 const {
@@ -30,4 +32,7 @@ module.exports = {
   findOneInspeccionObservacionQuery: findOneQuery(InspeccionObservacion),
   updateInspeccionObservacionQuery: updateAndFindQuery(InspeccionObservacion),
   updateInspeccionInspeccionPreguntaQuery: updateAndFindQuery(InspeccionInspeccionPregunta),
+  createInspectorProgramasQuery: createQuery(InspectorPrograma),
+  findOneProgramasQuery: findOneQuery(Programa),
+  findOneInspectorQuery: findOneQuery(Inspector),
 };
