@@ -18,17 +18,6 @@ async function create(req, reply) {
   try {
     const newUsuario = await createUsuario(this, req);
 
-    await this.notificacionServices.sendNotificationEmail({
-      usuarioId: newUsuario.id,
-      email: newUsuario.correo,
-      asunto: 'Usuario creado exitosamente',
-      template: 'usuarioCreado',
-      params: {
-        email: newUsuario.correo,
-        usuario: newUsuario.usuario,
-      },
-    });
-
     return reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
