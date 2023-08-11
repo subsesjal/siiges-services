@@ -5,10 +5,8 @@ const update = (
   updateDiligenciaQuery,
   updatePersonaQuery,
 ) => async (identifierObj, data) => {
-  const { diligenciaId } = identifierObj;
-
-  const diligencia = await findDiligenciaQuery(diligenciaId);
-  checkers.throwErrorIfDataIsFalsy(diligencia, 'diligencias', diligenciaId);
+  const diligencia = await findDiligenciaQuery(identifierObj);
+  checkers.throwErrorIfDataIsFalsy(diligencia, 'diligencias', identifierObj.id);
 
   let personaUpdated;
   const diligenciaUpdated = await updateDiligenciaQuery({ id: diligencia.id }, data);
