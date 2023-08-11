@@ -1,0 +1,42 @@
+version: '3.3'
+services:
+  mysql:
+    image: mysql:8.0.29
+    environment:
+      - MYSQL_DATABASE=siiges_dev
+      - MYSQL_USER=db_user
+      - MYSQL_PASSWORD=db_password
+      - MYSQL_ROOT_PASSWORD=root123
+      - MYSQL_PORT=3306
+    ports:
+      - '5506:3306'
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    restart: unless-stopped
+
+  back:
+      image: lau1980/siigesback:latest
+      depends_on:
+            - mysql
+      ports:
+            - '3000:3000'
+  
+  front:
+      image: lau1980/siiges-ui:latest
+      ports:
+            - '3001:3001'
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      #- PMA_ARBITRARY=1
+      - MYSQL_ROOT_PASSWORD=root123
+      - PMA_HOST=mysql
+    ports:
+      - '8077:80'
+    depends_on:
+      - mysql
+    restart: always
+
+
+      
