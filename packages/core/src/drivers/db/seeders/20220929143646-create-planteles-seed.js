@@ -7,11 +7,15 @@ const plantelesCSV = path.join(__dirname, '../CSVFiles/planteles.csv');
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const plantelesJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(plantelesCSV);
 
-    await queryInterface.bulkInsert(PLANTEL_TABLE, plantelesJson, {});
+    return queryInterface.bulkInsert(PLANTEL_TABLE, plantelesJson, {});
   },
 
   async down(queryInterface) {

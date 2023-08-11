@@ -7,11 +7,15 @@ const programasTurnosCSV = path.join(__dirname, '../CSVFiles/programas_turnos.cs
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const programasTurnosJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(programasTurnosCSV);
 
-    await queryInterface.bulkInsert(PROGRAMA_TURNO_TABLE, programasTurnosJson, {});
+    return queryInterface.bulkInsert(PROGRAMA_TURNO_TABLE, programasTurnosJson, {});
   },
 
   async down(queryInterface) {

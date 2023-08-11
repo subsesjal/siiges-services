@@ -3,8 +3,10 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function findAllInstituciones(req, reply) {
   try {
+    const queryParams = req.query;
+
     Logger.info('[instituciones]: Getting instituciones list');
-    const instituciones = await this.institucionServices.findAllInstituciones();
+    const instituciones = await this.institucionServices.findAllInstituciones({ queryParams });
 
     return reply
       .code(200)

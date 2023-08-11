@@ -46,6 +46,7 @@ const { InspeccionInspeccionPregunta, InspeccionInspeccionPreguntaSchema } = req
 const { Inspector, InspectorSchema } = require('./inspector');
 const { InspectorPrograma, InspectorProgramaSchema } = require('./inspectorPrograma');
 const { Notificacion, NotificacionSchema } = require('./notificacion');
+const { Trayectoria, TrayectoriaSchema } = require('./trayectoria');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -109,6 +110,7 @@ function setupModels(sequelize) {
   Inspector.init(InspectorSchema, Inspector.config(sequelize));
   InspectorPrograma.init(InspectorProgramaSchema, InspectorPrograma.config(sequelize));
   Notificacion.init(NotificacionSchema, Notificacion.config(sequelize));
+  Trayectoria.init(TrayectoriaSchema, Trayectoria.config(sequelize));
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -159,6 +161,7 @@ function setupModels(sequelize) {
   Inspector.associate(sequelize.models);
   InspectorPrograma.associate(sequelize.models);
   Notificacion.associate(sequelize.models);
+  Trayectoria.associate(sequelize.models);
 }
 
 module.exports = setupModels;

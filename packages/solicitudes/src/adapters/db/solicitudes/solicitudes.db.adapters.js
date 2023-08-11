@@ -8,6 +8,7 @@ const {
   ProgramaTurno,
   Programa,
   SolicitudSeccion,
+  Trayectoria,
 } = models;
 
 const {
@@ -38,4 +39,7 @@ module.exports = {
   findOneSolicitudSeccionQuery: findOneQuery(SolicitudSeccion),
   createSolicitudSeccionQuery: createQuery(SolicitudSeccion),
   updateSolicitudSeccionQuery: updateAndFindQuery(SolicitudSeccion),
+  createTrayectoriaQuery: createQuery(Trayectoria),
+  findOneTrayectoriaQuery: findOneQuery(Trayectoria),
+  updateTrayectoriaQuery: updateAndFindQuery(Trayectoria),
 };

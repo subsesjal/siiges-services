@@ -7,11 +7,15 @@ const plantelesHigienesCSV = path.join(__dirname, '../CSVFiles/planteles_higiene
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const plantelesHigienesJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(plantelesHigienesCSV);
 
-    await queryInterface.bulkInsert(PLANTEL_HIGIENE_TABLE, plantelesHigienesJson, {});
+    return queryInterface.bulkInsert(PLANTEL_HIGIENE_TABLE, plantelesHigienesJson, {});
   },
 
   async down(queryInterface) {

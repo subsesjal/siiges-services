@@ -7,11 +7,15 @@ const inspeccionTipoPreguntasCSV = path.join(__dirname, '../CSVFiles/inspeccion_
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const inspeccionTipoPreguntasJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(inspeccionTipoPreguntasCSV);
 
-    await queryInterface.bulkInsert(
+    return queryInterface.bulkInsert(
       INSPECCION_TIPO_PREGUNTA_TABLE,
       inspeccionTipoPreguntasJson,
       {},

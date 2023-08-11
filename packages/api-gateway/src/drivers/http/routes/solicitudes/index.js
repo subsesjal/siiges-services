@@ -9,7 +9,7 @@ const {
   updateSolicitudProgramaSchema,
   setSolicitudSeccionSchema,
   findOneSolicitudSeccionSchema,
-
+  updateSolcitudSeccionObservacionSchema,
 } = require('./schema');
 
 async function solicitudRouter(fastify, opts, next) {
@@ -65,6 +65,12 @@ async function solicitudRouter(fastify, opts, next) {
     '/:solicitudId/secciones/:seccionId',
     { schema: setSolicitudSeccionSchema },
     solicitudesAdapter.setSolicitudSeccion,
+  );
+
+  await fastify.post(
+    '/:solicitudId/secciones/:seccionId/observaciones',
+    { schema: updateSolcitudSeccionObservacionSchema },
+    solicitudesAdapter.updateSolcitudSeccionObservacion,
   );
 
   await fastify.get(

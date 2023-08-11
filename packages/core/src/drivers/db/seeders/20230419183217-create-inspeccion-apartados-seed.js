@@ -7,11 +7,15 @@ const inspeccionApartadosCSV = path.join(__dirname, '../CSVFiles/inspeccion_apar
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const inspeccionApartadosJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(inspeccionApartadosCSV);
 
-    await queryInterface.bulkInsert(INSPECCION_APARTADO_TABLE, inspeccionApartadosJson, {});
+    return queryInterface.bulkInsert(INSPECCION_APARTADO_TABLE, inspeccionApartadosJson, {});
   },
 
   async down(queryInterface) {

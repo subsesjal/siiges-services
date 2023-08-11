@@ -5,8 +5,8 @@ const fs = require('./fs');
 async function deleteByParams(dataFile) {
   const identifierObj = await db.getFileIdentifierObj(dataFile);
   const fileDeleted = await db.deleteFile(identifierObj);
-  const filePath = file.createPath(fileDeleted.dataValues);
-  await fs.deleteBus(filePath, fileDeleted.dataValues);
+  const filePath = file.createPath(fileDeleted);
+  await fs.deleteBus(filePath, fileDeleted);
 
   return fileDeleted;
 }

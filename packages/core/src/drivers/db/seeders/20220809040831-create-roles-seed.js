@@ -7,11 +7,15 @@ const rolesCSV = path.join(__dirname, '../CSVFiles/roles.csv');
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const rolesJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(rolesCSV);
 
-    await queryInterface.bulkInsert(ROL_TABLE, rolesJson, {});
+    return queryInterface.bulkInsert(ROL_TABLE, rolesJson, {});
   },
 
   async down(queryInterface) {

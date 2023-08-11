@@ -7,11 +7,15 @@ const estatusSolicitudesCSV = path.join(__dirname, '../CSVFiles/estatus_solicitu
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const estatusSolicitudesJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(estatusSolicitudesCSV);
 
-    await queryInterface.bulkInsert(ESTATUS_SOLICITUD_TABLE, estatusSolicitudesJson, {});
+    return queryInterface.bulkInsert(ESTATUS_SOLICITUD_TABLE, estatusSolicitudesJson, {});
   },
 
   async down(queryInterface) {

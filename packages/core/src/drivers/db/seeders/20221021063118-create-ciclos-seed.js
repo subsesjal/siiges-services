@@ -7,11 +7,15 @@ const ciclosCSV = path.join(__dirname, '../CSVFiles/ciclos.csv');
 
 module.exports = {
   async up(queryInterface) {
+    if (queryInterface.context) {
+      // eslint-disable-next-line no-param-reassign
+      queryInterface = queryInterface.context;
+    }
     const ciclosJson = await csvToJson
       .fieldDelimiter(',')
       .getJsonFromCsv(ciclosCSV);
 
-    await queryInterface.bulkInsert(CICLO_TABLE, ciclosJson, {});
+    return queryInterface.bulkInsert(CICLO_TABLE, ciclosJson, {});
   },
 
   async down(queryInterface) {

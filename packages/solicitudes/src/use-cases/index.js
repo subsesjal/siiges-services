@@ -5,6 +5,7 @@ const {
   findSolicitudesUsuario,
   updateSolicitudPrograma,
   setSolicitudSeccion,
+  updateSolcitudSeccionObservacion,
   findOneSolicitudSeccion,
 } = require('./db/solicitudes');
 
@@ -39,6 +40,12 @@ const {
   findGroupPlantelesUsuario,
 } = require('./db/planteles');
 
+const {
+  createTrayectoriaPrograma,
+  findOneTrayectoriaPrograma,
+  updateTrayectoriaPrograma,
+} = require('./db/trayectorias');
+
 module.exports = {
   createSolicitudPrograma,
   findAllSolicitudesProgramas,
@@ -60,10 +67,14 @@ module.exports = {
   updateDocente,
   findGroupDocentesPrograma,
   setSolicitudSeccion,
+  updateSolcitudSeccionObservacion,
   deleteDocente,
   createPlantelInfraestructura,
   deletePlantelInfraestructura,
   findGroupPlantelInfraestructura,
   findGroupPlantelesUsuario,
   findOneSolicitudSeccion,
+  createTrayectoriaPrograma,
+  findOneTrayectoriaPrograma,
+  updateTrayectoriaPrograma,
 };
