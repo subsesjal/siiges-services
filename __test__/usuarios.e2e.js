@@ -160,7 +160,6 @@ describe('test for users', () => {
   describe('[DELETE] /api/v1/usuarios/:{id}', () => {
     it('should ', async () => {
       const { token: dataa } = await createUserAndToken(createUserInitial);
-      // eslint-disable-next-line no-console
       console.log(dataa);
     });
     it('should a user delete', async () => {
