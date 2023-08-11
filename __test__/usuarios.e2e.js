@@ -30,7 +30,7 @@ describe('test for users', () => {
   beforeAll(async () => {
     api = supertest(await upServer());
     await upSeed();
-  }, 100000);
+  });
   describe('[POST] /api/v1/usuarios', () => {
     it('should new user', async () => {
       const { body, statusCode } = await api.post('/api/v1/usuarios')

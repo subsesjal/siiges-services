@@ -15,7 +15,7 @@ describe('Test for inspectores', () => {
     api = supertest(await upServer());
     await upSeed();
     inspector = await createInpector();
-  }, 100000);
+  });
   describe('[POST] /api/v1/inspecciones/inspectores-programas', () => {
     it('should new inspector program', async () => {
       const { statusCode, body } = await api.post('/api/v1/inspecciones/inspectores-programas')

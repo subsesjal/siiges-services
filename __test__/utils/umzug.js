@@ -17,7 +17,6 @@ const upSeed = async () => {
     await umzug.up();
     Logger.silent = true;
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error(error);
   }
 };
