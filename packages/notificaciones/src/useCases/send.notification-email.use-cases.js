@@ -1,4 +1,4 @@
-const { checkers } = require('@siiges-services/shared');
+const { Logger, checkers } = require('@siiges-services/shared');
 
 const services = require('./services');
 const db = require('./db');
@@ -18,15 +18,23 @@ const sendNotificationEmail = async ({
     status: 'pending',
   };
 
-  const notificacion = await db.createNotificacion(notificationData);
+  try {
+    const notificacion = await db.createNotificacion(notificationData);
+    // Send email notification
+    const nodemailerService = await services.sendEmail(notificationData);
 
-  // Send email notification
-  await services.sendEmail(notificationData);
+    if (nodemailerService.error) {
+      throw new Error(nodemailerService.error);
+    }
 
-  notificacion.status = 'enviado';
-  await notificacion.save();
+    notificacion.status = 'enviado';
 
-  return notificacion;
+    await notificacion.save();
+    return notificacion;
+  } catch (error) {
+    Logger.error('Failed to send email', error);
+    return error;
+  }
 };
 
 module.exports = sendNotificationEmail;

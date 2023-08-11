@@ -2,6 +2,7 @@
 const path = require('path');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
+const { config } = require('../../../config/environment');
 
 const sendEmail = async ({
   email, asunto, template, data,
@@ -25,20 +26,23 @@ const sendEmail = async ({
   };
 
   const transporter = nodemailer.createTransport({
-    // Settings of email service (Gmail, Outlook, etc.)
-    service: 'gmail',
+    service: config.serviceEmail,
     auth: {
-      user: 'email@gmail.com',
-      pass: 'password',
+      user: config.userEmail,
+      pass: config.passwordEmail,
+    },
+    tls: {
+      rejectUnauthorized: false,
     },
   });
 
   try {
-    // console.log('Correo electrónico enviado:', info.response);
     return await transporter.sendMail(mailOptions);
   } catch (error) {
-    console.error('Error al enviar el correo electrónico:', error);
-    return error;
+    return {
+      statusCode: 500,
+      error,
+    };
   }
 };
 
