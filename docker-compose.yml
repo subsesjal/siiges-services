@@ -23,6 +23,8 @@ services:
   
   front:
       image: lau1980/siiges-ui:latest
+      depends_on:
+            - back
       ports:
             - '3001:3001'
 
