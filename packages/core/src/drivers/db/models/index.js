@@ -47,6 +47,10 @@ const { Inspector, InspectorSchema } = require('./inspector');
 const { InspectorPrograma, InspectorProgramaSchema } = require('./inspectorPrograma');
 const { Notificacion, NotificacionSchema } = require('./notificacion');
 const { Trayectoria, TrayectoriaSchema } = require('./trayectoria');
+const { Situacion, SituacionSchema } = require('./situacion');
+const { TipoTramite, TipoTramiteSchema } = require('./tipoTramite');
+const { Alumno, AlumnoSchema } = require('./alumno');
+const { AlumnoTipoTramite, AlumnoTipoTramiteSchema } = require('./alumnoTipoTramite');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -111,6 +115,10 @@ function setupModels(sequelize) {
   InspectorPrograma.init(InspectorProgramaSchema, InspectorPrograma.config(sequelize));
   Notificacion.init(NotificacionSchema, Notificacion.config(sequelize));
   Trayectoria.init(TrayectoriaSchema, Trayectoria.config(sequelize));
+  Situacion.init(SituacionSchema, Situacion.config(sequelize));
+  TipoTramite.init(TipoTramiteSchema, TipoTramite.config(sequelize));
+  Alumno.init(AlumnoSchema, Alumno.config(sequelize));
+  AlumnoTipoTramite.init(AlumnoTipoTramiteSchema, AlumnoTipoTramite.config(sequelize));
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -162,6 +170,10 @@ function setupModels(sequelize) {
   InspectorPrograma.associate(sequelize.models);
   Notificacion.associate(sequelize.models);
   Trayectoria.associate(sequelize.models);
+  Situacion.associate(sequelize.models);
+  TipoTramite.associate(sequelize.models);
+  Alumno.associate(sequelize.models);
+  AlumnoTipoTramite.associate(sequelize.models);
 }
 
 module.exports = setupModels;
