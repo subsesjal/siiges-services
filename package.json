@@ -12,13 +12,13 @@
     "url": "https://github.com/subsesjal/siiges-services.git"
   },
   "scripts": {
+    "start": "node packages/api-gateway/src/index.js",
     "bootstrap": "yarn install -W && lerna bootstrap",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "jest",
     "test:debug": "jest --runInBand",
     "test:watch": "jest --watch",
-    "postinstall": "husky install",
     "e2e": "jest --config ./jest-e2e.json --verbose  --detectOpenHandles --forceExit --runInBand",
     "e2e:ci": "NODE_ENV='ci' jest --config ./jest-e2e.json --silent --verbose --forceExit --runInBand"
   },
@@ -29,7 +29,6 @@
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "husky": "^8.0.1",
     "jest": "^28.1.2",
     "lerna": "5.1.6",
     "nodemon": "^2.0.19",
@@ -44,6 +43,7 @@
     "joi": "^17.6.0",
     "mysql2": "^2.3.3",
     "nx": "14.4.0",
+    "pg": "^8.9.0",
     "sequelize": "^6.21.3"
   }
 }
