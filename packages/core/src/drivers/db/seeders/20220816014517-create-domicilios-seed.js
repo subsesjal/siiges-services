@@ -1,5 +1,5 @@
-const csvToJson = require('convert-csv-to-json');
 const path = require('path');
+const csvToJson = require('convert-csv-to-json');
 
 const { DOMICILIO_TABLE } = require('../models/domicilio');
 
