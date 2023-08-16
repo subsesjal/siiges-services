@@ -47,6 +47,10 @@ const { INSPECTOR_TABLE, InspectorSchema } = require('../models/inspector');
 const { INSPECTOR_PROGRAMA_TABLE, InspectorProgramaSchema } = require('../models/inspectorPrograma');
 const { NOTIFICACION_TABLE, NotificacionSchema } = require('../models/notificacion');
 const { TRAYECTORIA_TABLE, TrayectoriaSchema } = require('../models/trayectoria');
+const { SITUACION_TABLE, SituacionSchema } = require('../models/situacion');
+const { TIPO_TRAMITE_TABLE, TipoTramiteSchema } = require('../models/tipoTramite');
+const { ALUMNO_TABLE, AlumnoSchema } = require('../models/alumno');
+const { ALUMNO_TIPO_TRAMITE_TABLE, AlumnoTipoTramiteSchema } = require('../models/alumnoTipoTramite');
 
 module.exports = {
   async up(queryInterface) {
@@ -105,6 +109,10 @@ module.exports = {
     await queryInterface.createTable(INSPECTOR_PROGRAMA_TABLE, InspectorProgramaSchema);
     await queryInterface.createTable(NOTIFICACION_TABLE, NotificacionSchema);
     await queryInterface.createTable(TRAYECTORIA_TABLE, TrayectoriaSchema);
+    await queryInterface.createTable(SITUACION_TABLE, SituacionSchema);
+    await queryInterface.createTable(TIPO_TRAMITE_TABLE, TipoTramiteSchema);
+    await queryInterface.createTable(ALUMNO_TABLE, AlumnoSchema);
+    await queryInterface.createTable(ALUMNO_TIPO_TRAMITE_TABLE, AlumnoTipoTramiteSchema);
   },
 
   async down(queryInterface) {
@@ -158,5 +166,9 @@ module.exports = {
     await queryInterface.dropTable(INSPECTOR_PROGRAMA_TABLE);
     await queryInterface.dropTable(NOTIFICACION_TABLE);
     await queryInterface.dropTable(TRAYECTORIA_TABLE);
+    await queryInterface.dropTable(SITUACION_TABLE);
+    await queryInterface.dropTable(TIPO_TRAMITE_TABLE);
+    await queryInterface.dropTable(ALUMNO_TABLE);
+    await queryInterface.dropTable(ALUMNO_TIPO_TRAMITE_TABLE);
   },
 };

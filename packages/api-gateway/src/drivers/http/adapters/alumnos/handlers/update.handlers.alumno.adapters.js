@@ -1,25 +1,25 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-async function updateDocente(req, reply) {
+async function updateAlumno(req, reply) {
   try {
     const { ...data } = req.body;
-    const { docenteId } = req.params;
+    const { alumnoId } = req.params;
 
-    Logger.info('[docentes]: Updating docente');
+    Logger.info('[Alumnos]: Updating alumno');
 
-    const docente = await this.solicitudServices.updateDocente(
-      { id: docenteId },
+    const alumnoUpdated = await this.administracionAcademicaServices.updateAlumno(
+      { id: alumnoId },
       data,
     );
 
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: docente });
+      .send({ data: alumnoUpdated });
   } catch (error) {
     return errorHandler(error, reply);
   }
 }
 
-module.exports = updateDocente;
+module.exports = updateAlumno;
