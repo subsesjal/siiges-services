@@ -12,7 +12,7 @@
     "url": "https://github.com/subsesjal/siiges-services.git"
   },
   "scripts": {
-    "start": "node packages/api-gateway/src/index.js",
+    "start":  "node packages/api-gateway/src/index.js",
     "bootstrap": "yarn install -W && lerna bootstrap",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
@@ -42,8 +42,8 @@
     "dotenv": "^16.0.1",
     "joi": "^17.6.0",
     "mysql2": "^2.3.3",
-    "nx": "14.4.0",
     "pg": "^8.9.0",
+    "nx": "14.4.0",
     "sequelize": "^6.21.3"
   }
 }
