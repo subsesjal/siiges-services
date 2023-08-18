@@ -11,7 +11,7 @@ const swaggerObject = {
       description: 'Find more info here',
     },
     host: process.env.SWAGGER_HOST,
-    schemes: ['http'],
+    schemes: ['https', 'http'],
     consumes: ['application/json'],
     produces: ['application/json'],
     definitions: {},

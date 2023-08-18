@@ -8,14 +8,6 @@ const loginSchema = {
       contrasena: { type: 'string' },
     },
   },
-  response: {
-    200: {
-      type: 'object',
-      properties: {
-        token: { type: 'string' },
-      },
-    },
-  },
 };
 
 module.exports = loginSchema;
