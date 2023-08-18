@@ -12,6 +12,7 @@ const plantel = {
   telefono3: { type: 'string' },
   paginaWeb: { type: 'string' },
   redesSociales: { type: 'string' },
+  especificaciones: { type: 'string' },
 };
 
 module.exports = { plantel };
