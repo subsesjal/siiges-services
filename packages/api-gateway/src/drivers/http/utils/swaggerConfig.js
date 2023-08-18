@@ -10,7 +10,7 @@ const swaggerObject = {
       url: 'https://swagger.io',
       description: 'Find more info here',
     },
-    host: 'localhost',
+    host: 'localhost:3000',
     schemes: ['http'],
     consumes: ['application/json'],
     produces: ['application/json'],
@@ -18,10 +18,21 @@ const swaggerObject = {
     securityDefinitions: {
       apiKey: {
         type: 'apiKey',
-        name: 'apiKey',
+        name: 'api_key',
         in: 'header',
+        description: 'Enter your Apikey in the format: <api_key>',
+      },
+      token: {
+        type: 'apiKey',
+        name: 'Authorization',
+        in: 'header',
+        description: 'Enter your bearer token in the format: Bearer <jwt>',
       },
     },
+    security: [{
+      apiKey: [],
+      token: [],
+    }],
   },
   uiConfig: {
     docExpansion: 'list',
