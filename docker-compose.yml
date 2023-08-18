@@ -22,12 +22,12 @@ services:
             - '3000:3000'
   
   front:
-      image: lau1980/siiges-ui:latest
+      image: lau1980/frontend5:latest
       depends_on:
             - back
       ports:
             - '3001:3001'
-
+  
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
@@ -39,6 +39,3 @@ services:
     depends_on:
       - mysql
     restart: always
-
-
-      
