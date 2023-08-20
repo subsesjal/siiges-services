@@ -26,17 +26,15 @@ const AlumnoSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'situacion_id',
-    unique: true,
     references: {
       model: SITUACION_TABLE,
       key: 'id',
     },
   },
-  programalId: {
+  programaId: {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'programa_id',
-    unique: true,
     references: {
       model: PROGRAMA_TABLE,
       key: 'id',
@@ -125,6 +123,7 @@ class Alumno extends Model {
   static associate(models) {
     this.belongsTo(models.Programa, { as: 'programa' });
     this.belongsTo(models.Persona, { as: 'persona' });
+    this.hasMany(models.AlumnoTipoTramite, { as: 'alumnoTipoTramites', foreignKey: 'alumnoId' });
   }
 
   static config(sequelize) {

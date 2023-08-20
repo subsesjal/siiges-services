@@ -16,6 +16,7 @@ const alumno = {
   observaciones1: { type: 'string' },
   observaciones2: { type: 'string' },
   fechaBaja: { type: 'string', format: 'date-time' },
+  alumnoTipoTramite: { type: 'integer' },
 };
 
 module.exports = { alumno };

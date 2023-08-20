@@ -1,4 +1,5 @@
 const { alumno } = require('./properties/alumno');
+const { alumnoTipoTramite } = require('./properties/alumnoTipoTramite');
 const { persona } = require('../../usuarios/schema/properties/persona');
 const { responseProperties } = require('./properties/responseProperties');
 
@@ -18,7 +19,7 @@ const createAlumnoSchema = {
         required: ['nombre', 'apellidoPaterno'],
       },
     },
-    required: ['personaId', 'situacionId', 'programaId', 'matricula', 'estatus'],
+    required: ['persona', 'situacionId', 'programaId', 'matricula', 'estatus'],
   },
   response: {
     201: {
@@ -34,6 +35,16 @@ const createAlumnoSchema = {
               id: { type: 'integer' },
               ...persona,
               ...responseProperties,
+            },
+            alumnoTipoTramite: {
+              type: 'array',
+              items: {
+                properties: {
+                  id: { type: 'integer' },
+                  ...alumnoTipoTramite,
+                  ...responseProperties,
+                },
+              },
             },
           },
         },

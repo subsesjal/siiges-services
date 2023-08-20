@@ -1,10 +1,11 @@
 const { alumno } = require('./properties/alumno');
+const { alumnoTipoTramite } = require('./properties/alumnoTipoTramite');
 const { persona } = require('../../usuarios/schema/properties/persona');
 const { responseProperties } = require('./properties/responseProperties');
 
 const updateAlumno = {
   tags: ['Alumnos'],
-  description: 'Given a AlumnoId update an alumno',
+  description: 'Given an alumnoId update that alumno record',
   params: {
     title: 'update alumno',
     type: 'object',
@@ -42,6 +43,16 @@ const updateAlumno = {
                 id: { type: 'integer' },
                 ...persona,
                 ...responseProperties,
+              },
+            },
+            alumnoTipoTramite: {
+              type: 'array',
+              items: {
+                properties: {
+                  id: { type: 'integer' },
+                  ...alumnoTipoTramite,
+                  ...responseProperties,
+                },
               },
             },
           },

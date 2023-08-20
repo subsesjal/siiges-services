@@ -1,4 +1,5 @@
 const { alumno } = require('./properties/alumno');
+const { alumnoTipoTramite } = require('./properties/alumnoTipoTramite');
 const { persona } = require('../../usuarios/schema/properties/persona');
 const { responseProperties } = require('./properties/responseProperties');
 
@@ -26,6 +27,16 @@ const findOneAlumnoSchema = {
                 id: { type: 'integer' },
                 ...persona,
                 ...responseProperties,
+              },
+            },
+            alumnoTipoTramites: {
+              type: 'array',
+              items: {
+                properties: {
+                  id: { type: 'integer' },
+                  ...alumnoTipoTramite,
+                  ...responseProperties,
+                },
               },
             },
           },

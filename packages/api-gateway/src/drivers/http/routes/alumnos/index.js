@@ -10,31 +10,46 @@ const {
 async function asignaturaRouter(fastify, opts, next) {
   await fastify.post(
     '/',
-    { schema: createAlumnoSchema },
+    {
+      schema: createAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
     alumnosAdapter.createAlumno,
   );
 
   await fastify.get(
     '/programas/:programaId',
-    { schema: findProgramaAlumnosSchema },
+    {
+      schema: findProgramaAlumnosSchema,
+      onRequest: [fastify.authenticate],
+    },
     alumnosAdapter.findGroupAlumnosPrograma,
   );
 
   await fastify.get(
     '/:alumnoId',
-    { schema: findOneAlumnoSchema },
+    {
+      schema: findOneAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
     alumnosAdapter.findOneAlumno,
   );
 
   await fastify.patch(
     '/:alumnoId',
-    { schema: updateAlumnoSchema },
+    {
+      schema: updateAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
     alumnosAdapter.updateAlumno,
   );
 
   await fastify.delete(
     '/:alumnoId',
-    { schema: deleteAlumnoSchema },
+    {
+      schema: deleteAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
     alumnosAdapter.deleteAlumno,
   );
 
