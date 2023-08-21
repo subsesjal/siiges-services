@@ -57,3 +57,4 @@ jobs:
           SERVICE_EMAIL: gmail
           USER_EMAIL: mail@gmail.com
           PASSWORD_EMAIL: zqjcfggkbhobwert
+          DATABASE: mysql

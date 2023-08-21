@@ -15,6 +15,11 @@ const URI = `${dbAdmin}://${USER}:${PASSWORD}@${dbHost}:${dbPort}/${dbName}`;
 const sequelize = new Sequelize(URI, {
   dialect: `${dbAdmin}`,
   logging: process.env.NODE_ENV !== 'test',
+  dialectOptions: {
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  },
 });
 
 setupModels(sequelize);
