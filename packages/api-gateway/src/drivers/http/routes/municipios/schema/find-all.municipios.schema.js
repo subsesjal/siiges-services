@@ -4,6 +4,12 @@ const { responseProperties } = require('./properties/responseProperties');
 const findAllMunicipiosSchema = {
   tags: ['Municipio'],
   description: 'Return a list of municipios.',
+  querystring: {
+    type: 'object',
+    properties: {
+      estadoId: { type: 'number' },
+    },
+  },
   response: {
     200: {
       type: 'object',
