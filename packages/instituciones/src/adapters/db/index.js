@@ -13,6 +13,7 @@ const {
   PlantelHigiene,
   PlantelInfraestructura,
   Higiene,
+  EdificioNivel,
 } = drivers.sequelize.models;
 
 const {
@@ -56,4 +57,5 @@ module.exports = {
   findAllHigienesQuery: findAllQuery(Higiene),
   findGroupPlantelHigieneQuery: findAllQuery(PlantelHigiene),
   findPlantelInfraestructuraQuery: findAllQuery(PlantelInfraestructura),
+  findAllEdificiosNivelesQuery: findAllQuery(EdificioNivel),
 };
