@@ -43,15 +43,6 @@ async function plantelRouter(fastify, opts, next) {
     plantelesAdapter.findGroupPlantelHigiene,
   );
 
-  await fastify.patch(
-    '/:plantelId/higienes/:higieneId',
-    {
-      schema: createUpdatePlantelHigieneSchema,
-      onRequest: [fastify.authenticate],
-    },
-    plantelesAdapter.updatePlantelHigiene,
-  );
-
   await fastify.delete(
     '/:plantelId/higienes/:higieneId',
     {
