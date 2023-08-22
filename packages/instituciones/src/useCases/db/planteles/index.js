@@ -34,6 +34,7 @@ const findAllHigienes = require('./find-all.higienes.use-cases');
 const findGroupPlantelHigiene = require('./find-group.plantel-higiene.use-cases');
 const findAllEdificiosNiveles = require('./find-all.edificios-niveles.use-cases');
 const createUpdatePlantelNiveles = require('./create-update.plantel-niveles.use-cases');
+const findGroupPlantelNiveles = require('./find-group.plantel-niveles.use-cases');
 
 module.exports = {
   createPlantel: createPlantel(
@@ -71,5 +72,9 @@ module.exports = {
     findOnePlantelEdificioNivelQuery,
     createPlantelEdificioNivelQuery,
     deletePlantelEdificioNivelQuery,
+  ),
+  findGroupPlantelNiveles: findGroupPlantelNiveles(
+    findOnePlantelQuery,
+    findAllPlantelEdificioNivelesQuery,
   ),
 };

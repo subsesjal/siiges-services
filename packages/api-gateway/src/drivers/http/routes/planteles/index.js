@@ -11,6 +11,7 @@ const {
   findGroupPlantelesUsuarioSchema,
   findAllEdificiosNivelesSchema,
   createUpdatePlantelNivelesSchema,
+  findGroupPlantelNivelesSchema,
 } = require('./schema');
 
 async function plantelRouter(fastify, opts, next) {
@@ -119,10 +120,10 @@ async function plantelRouter(fastify, opts, next) {
   await fastify.get(
     '/:plantelId/niveles',
     {
-      schema: findGroupPlantelHigieneSchema,
+      schema: findGroupPlantelNivelesSchema,
       onRequest: [fastify.authenticate],
     },
-    plantelesAdapter.findGroupPlantelHigiene,
+    plantelesAdapter.findGroupPlantelNiveles,
   );
 
   next();
