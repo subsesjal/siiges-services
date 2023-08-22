@@ -1,8 +1,6 @@
 const createPlantelHigiene = (findOneQuery, createQuery, updateQuery) => async (data) => {
   const { plantelId, higieneId, cantidad } = data;
 
-  console.log(data);
-
   const existingPlantelHigiene = await findOneQuery({ plantelId, higieneId });
 
   if (existingPlantelHigiene) {
