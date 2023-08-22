@@ -15,6 +15,10 @@ const {
   findAllHigienesQuery,
   findGroupPlantelHigieneQuery,
   findAllEdificiosNivelesQuery,
+  createPlantelEdificioNivelQuery,
+  findOnePlantelEdificioNivelQuery,
+  findAllPlantelEdificioNivelesQuery,
+  deletePlantelEdificioNivelQuery,
 } = require('../../../adapters/db');
 
 const createPlantel = require('./create.planteles.use-cases');
@@ -29,6 +33,7 @@ const deletePlantelHigiene = require('./delete.higiene.use-cases');
 const findAllHigienes = require('./find-all.higienes.use-cases');
 const findGroupPlantelHigiene = require('./find-group.plantel-higiene.use-cases');
 const findAllEdificiosNiveles = require('./find-all.edificios-niveles.use-cases');
+const createUpdatePlantelNiveles = require('./create-update.plantel-niveles.use-cases');
 
 module.exports = {
   createPlantel: createPlantel(
@@ -61,4 +66,10 @@ module.exports = {
   findAllHigienes: findAllHigienes(findAllHigienesQuery),
   findGroupPlantelHigiene: findGroupPlantelHigiene(findGroupPlantelHigieneQuery),
   findAllEdificiosNiveles: findAllEdificiosNiveles(findAllEdificiosNivelesQuery),
+  createUpdatePlantelNiveles: createUpdatePlantelNiveles(
+    findAllPlantelEdificioNivelesQuery,
+    findOnePlantelEdificioNivelQuery,
+    createPlantelEdificioNivelQuery,
+    deletePlantelEdificioNivelQuery,
+  ),
 };
