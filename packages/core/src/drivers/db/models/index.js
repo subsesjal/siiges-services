@@ -47,6 +47,8 @@ const { Inspector, InspectorSchema } = require('./inspector');
 const { InspectorPrograma, InspectorProgramaSchema } = require('./inspectorPrograma');
 const { Notificacion, NotificacionSchema } = require('./notificacion');
 const { Trayectoria, TrayectoriaSchema } = require('./trayectoria');
+const { EdificioNivel, EdificioNivelSchema } = require('./edificioNivel');
+const { PlantelEdificioNivel, PlantelEdificioNivelSchema } = require('./plantelEdificioNivel');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -111,6 +113,8 @@ function setupModels(sequelize) {
   InspectorPrograma.init(InspectorProgramaSchema, InspectorPrograma.config(sequelize));
   Notificacion.init(NotificacionSchema, Notificacion.config(sequelize));
   Trayectoria.init(TrayectoriaSchema, Trayectoria.config(sequelize));
+  EdificioNivel.init(EdificioNivelSchema, EdificioNivel.config(sequelize));
+  PlantelEdificioNivel.init(PlantelEdificioNivelSchema, PlantelEdificioNivel.config(sequelize));
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -162,6 +166,8 @@ function setupModels(sequelize) {
   InspectorPrograma.associate(sequelize.models);
   Notificacion.associate(sequelize.models);
   Trayectoria.associate(sequelize.models);
+  EdificioNivel.associate(sequelize.models);
+  PlantelEdificioNivel.associate(sequelize.models);
 }
 
 module.exports = setupModels;

@@ -47,6 +47,8 @@ const { INSPECTOR_TABLE, InspectorSchema } = require('../models/inspector');
 const { INSPECTOR_PROGRAMA_TABLE, InspectorProgramaSchema } = require('../models/inspectorPrograma');
 const { NOTIFICACION_TABLE, NotificacionSchema } = require('../models/notificacion');
 const { TRAYECTORIA_TABLE, TrayectoriaSchema } = require('../models/trayectoria');
+const { EDIFICIO_NIVEL_TABLE, EdificioNivelSchema } = require('../models/edificioNivel');
+const { PLANTEL_EDIFICIO_NIVEL_TABLE, PlantelEdificioNivelSchema } = require('../models/plantelEdificioNivel');
 
 module.exports = {
   async up(queryInterface) {
@@ -105,6 +107,8 @@ module.exports = {
     await queryInterface.createTable(INSPECTOR_PROGRAMA_TABLE, InspectorProgramaSchema);
     await queryInterface.createTable(NOTIFICACION_TABLE, NotificacionSchema);
     await queryInterface.createTable(TRAYECTORIA_TABLE, TrayectoriaSchema);
+    await queryInterface.createTable(EDIFICIO_NIVEL_TABLE, EdificioNivelSchema);
+    await queryInterface.createTable(PLANTEL_EDIFICIO_NIVEL_TABLE, PlantelEdificioNivelSchema);
   },
 
   async down(queryInterface) {
@@ -158,5 +162,7 @@ module.exports = {
     await queryInterface.dropTable(INSPECTOR_PROGRAMA_TABLE);
     await queryInterface.dropTable(NOTIFICACION_TABLE);
     await queryInterface.dropTable(TRAYECTORIA_TABLE);
+    await queryInterface.dropTable(EDIFICIO_NIVEL_TABLE);
+    await queryInterface.dropTable(PLANTEL_EDIFICIO_NIVEL_TABLE);
   },
 };

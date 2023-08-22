@@ -1,9 +1,9 @@
-const { infraestructura } = require('./properties/infraestructura');
+const { plantelEdificioNivel } = require('./properties/plantelEdificioNivel');
 const { responseProperties } = require('./properties/responseProperties');
 
-const findGroupPlantelInfraestructuraSchema = {
+const findGroupPlantelNivelesSchema = {
   tags: ['Plantel'],
-  description: 'Given the ID of plantel, then return the list of Infraestructura.',
+  description: 'Given the ID of plantel, then return the list of Planteles.',
   params: {
     type: 'object',
     properties: {
@@ -20,7 +20,7 @@ const findGroupPlantelInfraestructuraSchema = {
           items: {
             properties: {
               id: { type: 'integer' },
-              ...infraestructura,
+              ...plantelEdificioNivel,
               ...responseProperties,
             },
           },
@@ -30,4 +30,4 @@ const findGroupPlantelInfraestructuraSchema = {
   },
 };
 
-module.exports = findGroupPlantelInfraestructuraSchema;
+module.exports = findGroupPlantelNivelesSchema;
