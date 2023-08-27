@@ -26,7 +26,7 @@ async function plantelRouter(fastify, opts, next) {
   );
 
   await fastify.post(
-    '/:plantelId/higienes/:higieneId',
+    '/:plantelId/higienes',
     {
       schema: createUpdatePlantelHigieneSchema,
       onRequest: [fastify.authenticate],
