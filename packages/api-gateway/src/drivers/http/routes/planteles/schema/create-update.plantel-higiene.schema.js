@@ -9,27 +9,34 @@ const createUpdatePlantelHigieneSchema = {
     type: 'object',
     properties: {
       plantelId: { type: 'integer' },
-      higieneId: { type: 'integer' },
     },
-    required: ['plantelId', 'higieneId'],
+    required: ['plantelId'],
   },
   body: {
-    type: 'object',
-    properties: {
-      cantidad: { type: 'integer' },
+    type: 'array',
+    items: {
+      type: 'object',
+      properties: {
+        ...plantelHigiene,
+      },
+      required: ['higieneId', 'cantidad'],
     },
-    required: ['cantidad'],
+    minItems: 11,
+    maxItems: 11,
   },
   response: {
     201: {
       type: 'object',
       properties: {
         data: {
-          type: 'object',
-          properties: {
-            id: { type: 'integer' },
-            ...plantelHigiene,
-            ...responseProperties,
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              id: { type: 'integer' },
+              ...plantelHigiene,
+              ...responseProperties,
+            },
           },
         },
       },

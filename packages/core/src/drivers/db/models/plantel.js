@@ -71,6 +71,9 @@ const PlantelSchema = {
     type: DataTypes.STRING,
     field: 'redes_sociales',
   },
+  especificaciones: {
+    type: DataTypes.STRING,
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,

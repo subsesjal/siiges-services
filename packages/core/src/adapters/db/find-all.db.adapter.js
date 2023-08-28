@@ -8,10 +8,11 @@ const findAllQuery = (model) => async (identifierObj, dbParams = {}) => {
     strict = true,
     isDeleting = false,
     query = undefined,
+    order = undefined,
   } = dbParams;
-
   return model.findAll({
     attributes,
+    order,
     where: getWhere(identifierObj, isDeleting, query),
     include: createInclude(include, strict),
   });

@@ -59,7 +59,7 @@ class InspectorPrograma extends Model {
     return {
       sequelize,
       tableName: INSPECTOR_PROGRAMA_TABLE,
-      modelName: 'InspecctorPrograma',
+      modelName: 'InspectorPrograma',
       timestamps: false,
     };
   }

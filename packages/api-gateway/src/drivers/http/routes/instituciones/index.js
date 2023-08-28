@@ -23,7 +23,10 @@ const {
 async function institucionRouter(fastify, opts, next) {
   await fastify.get(
     '/',
-    { schema: findAllInstitucionesSchema },
+    {
+      schema: findAllInstitucionesSchema,
+      onRequest: [fastify.authenticate],
+    },
     institucionesAdapter.findAllInstituciones,
   );
 
@@ -31,6 +34,7 @@ async function institucionRouter(fastify, opts, next) {
     '/usuarios/:usuarioId',
     {
       schema: findOneInstitucionUsuarioSchema,
+      onRequest: [fastify.authenticate],
     },
     institucionesAdapter.findOneInstitucionUsuario,
   );
@@ -39,6 +43,7 @@ async function institucionRouter(fastify, opts, next) {
     '/:institucionId',
     {
       schema: findOneInstitucionSchema,
+      onRequest: [fastify.authenticate],
     },
     institucionesAdapter.findOneInstitucion,
   );
@@ -47,6 +52,7 @@ async function institucionRouter(fastify, opts, next) {
     '/',
     {
       schema: createInstitucionSchema,
+      onRequest: [fastify.authenticate],
     },
     institucionesAdapter.createInstitucion,
   );
@@ -55,6 +61,7 @@ async function institucionRouter(fastify, opts, next) {
     '/:institucionId',
     {
       schema: updateInstitucionSchema,
+      onRequest: [fastify.authenticate],
     },
     institucionesAdapter.updateInstitucion,
   );
@@ -63,6 +70,7 @@ async function institucionRouter(fastify, opts, next) {
     '/:institucionId',
     {
       schema: deleteInstitucionSchema,
+      onRequest: [fastify.authenticate],
     },
     institucionesAdapter.deleteInstitucion,
   );
@@ -71,6 +79,7 @@ async function institucionRouter(fastify, opts, next) {
     '/:institucionId/planteles',
     {
       schema: findPlantelesInstitucionSchema,
+      onRequest: [fastify.authenticate],
     },
     institucionesAdapter.findPlantelesInstitucion,
   );
@@ -79,6 +88,7 @@ async function institucionRouter(fastify, opts, next) {
     '/:institucionId/planteles/:plantelId',
     {
       schema: findOnePlantelSchema,
+      onRequest: [fastify.authenticate],
     },
     institucionesAdapter.findOnePlantel,
   );
@@ -87,6 +97,7 @@ async function institucionRouter(fastify, opts, next) {
     '/:institucionId/planteles',
     {
       schema: createPlantelSchema,
+      onRequest: [fastify.authenticate],
     },
     institucionesAdapter.createPlantel,
   );
@@ -95,6 +106,7 @@ async function institucionRouter(fastify, opts, next) {
     '/:institucionId/planteles/:plantelId',
     {
       schema: updatePlantelSchema,
+      onRequest: [fastify.authenticate],
     },
     institucionesAdapter.updatePlantel,
   );
@@ -103,6 +115,7 @@ async function institucionRouter(fastify, opts, next) {
     '/:institucionId/planteles/:plantelId',
     {
       schema: deletePlantelSchema,
+      onRequest: [fastify.authenticate],
     },
     institucionesAdapter.deletePlantel,
   );
@@ -111,6 +124,7 @@ async function institucionRouter(fastify, opts, next) {
     '/:institucionId/ratificaciones',
     {
       schema: createRatificacionNombreSchema,
+      onRequest: [fastify.authenticate],
     },
     institucionesAdapter.createRatificacionNombre,
   );
@@ -119,6 +133,7 @@ async function institucionRouter(fastify, opts, next) {
     '/:institucionId/ratificaciones/:ratificacionId',
     {
       schema: updateRatificacionNombreSchema,
+      onRequest: [fastify.authenticate],
     },
     institucionesAdapter.updateRatificacionNombre,
   );
@@ -127,6 +142,7 @@ async function institucionRouter(fastify, opts, next) {
     '/:institucionId/ratificaciones/:ratificacionId',
     {
       schema: findOneRatificacionNombreSchema,
+      onRequest: [fastify.authenticate],
     },
     institucionesAdapter.findOneRatificacionNombre,
   );
@@ -135,6 +151,7 @@ async function institucionRouter(fastify, opts, next) {
     '/:institucionId/ratificaciones/:ratificacionId',
     {
       schema: deleteRatificacionNombreSchema,
+      onRequest: [fastify.authenticate],
     },
     institucionesAdapter.deleteRatificacionNombre,
   );
@@ -143,6 +160,7 @@ async function institucionRouter(fastify, opts, next) {
     '/planteles/:plantelId/director',
     {
       schema: createDirectorSchema,
+      onRequest: [fastify.authenticate],
     },
     institucionesAdapter.createDirectorPlantel,
   );
@@ -151,6 +169,7 @@ async function institucionRouter(fastify, opts, next) {
     '/planteles/:plantelId/director/:directorId',
     {
       schema: updateDirectorSchema,
+      onRequest: [fastify.authenticate],
     },
     institucionesAdapter.updateDirectorPlantel,
   );

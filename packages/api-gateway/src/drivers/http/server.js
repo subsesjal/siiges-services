@@ -1,11 +1,11 @@
 // External dependencies
+const path = require('path');
 const Fastify = require('fastify');
 const multer = require('fastify-multer');
 const fastifyStatic = require('@fastify/static');
 const AutoLoad = require('@fastify/autoload');
 const helmet = require('@fastify/helmet');
 const cors = require('@fastify/cors');
-const path = require('path');
 
 // Internal dependencies
 const { Logger } = require('@siiges-services/shared');

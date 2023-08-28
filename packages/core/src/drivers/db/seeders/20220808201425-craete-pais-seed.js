@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-const csvToJson = require('convert-csv-to-json');
 const path = require('path');
+const csvToJson = require('convert-csv-to-json');
 
 const { PAIS_TABLE } = require('../models/pais');
 

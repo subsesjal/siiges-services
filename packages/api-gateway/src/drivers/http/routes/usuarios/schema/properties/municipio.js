@@ -1,7 +1,7 @@
 // Municipio
 const municipio = {
   estadoId: { type: 'integer' },
-  municipio: { type: 'string' },
+  nombre: { type: 'string' },
 };
 
 module.exports = { municipio };
