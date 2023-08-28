@@ -3,15 +3,14 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function createPlantelHigiene(req, reply) {
   try {
-    const { plantelId, higieneId } = req.params;
-    const { cantidad } = req.body;
+    const { plantelId } = req.params;
+    const data = req.body;
 
     Logger.info('[api/higiene/create]: creating link between plantel and higiene');
-    const plantelHigiene = await this.institucionServices.createPlantelHigiene({
-      plantelId,
-      higieneId,
-      cantidad,
-    });
+    const plantelHigiene = await this.institucionServices.createPlantelHigiene(
+      { plantelId },
+      data,
+    );
 
     return reply
       .code(201)
