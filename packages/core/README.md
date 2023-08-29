@@ -5,6 +5,7 @@ This package is related to db connections, Sequelize models and configurations q
 Here you will find all your db models made it with Sequelize.
 By this moment.
 This are the models made by the moment
+- Ciclo Escolar
 - Ciclo
 - Diligencia
 - Domicilio

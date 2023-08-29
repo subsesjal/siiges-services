@@ -1,3 +1,4 @@
+const { CICLOESCOLAR_TABLE, CicloEscolarSchema } = require('../models/cicloEscolar');
 const { CICLO_TABLE, CicloSchema } = require('../models/ciclo');
 const { DOMICILIO_TABLE, DomicilioSchema } = require('../models/domicilio');
 const { DILIGENCIA_TABLE, DiligenciaSchema } = require('../models/diligencia');
@@ -49,6 +50,7 @@ const { TRAYECTORIA_TABLE, TrayectoriaSchema } = require('../models/trayectoria'
 
 module.exports = {
   async up(queryInterface) {
+    await queryInterface.createTable(CICLOESCOLAR_TABLE, CicloEscolarSchema);
     await queryInterface.createTable(ROL_TABLE, RolSchema);
     await queryInterface.createTable(PAIS_TABLE, PaisSchema);
     await queryInterface.createTable(ESTADO_TABLE, EstadoSchema);
@@ -106,6 +108,7 @@ module.exports = {
   },
 
   async down(queryInterface) {
+    await queryInterface.dropTable(CICLOESCOLAR_TABLE)
     await queryInterface.dropTable(ROL_TABLE);
     await queryInterface.dropTable(PAIS_TABLE);
     await queryInterface.dropTable(ESTADO_TABLE);

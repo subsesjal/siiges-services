@@ -1,3 +1,4 @@
+const { CicloEscolar, CicloEscolarSchema } = require('./cicloEscolar')
 const { Ciclo, CicloSchema } = require('./ciclo');
 const { Domicilio, DomicilioSchema } = require('./domicilio');
 const { Diligencia, DiligenciaSchema } = require('./diligencia');
@@ -49,6 +50,7 @@ const { Trayectoria, TrayectoriaSchema } = require('./trayectoria');
 
 function setupModels(sequelize) {
   // Initialize models
+  CicloEscolar.init(CicloEscolarSchema, CicloEscolar.config(sequelize));
   Ciclo.init(CicloSchema, Ciclo.config(sequelize));
   Domicilio.init(DomicilioSchema, Domicilio.config(sequelize));
   Diligencia.init(DiligenciaSchema, Diligencia.config(sequelize));
@@ -112,6 +114,7 @@ function setupModels(sequelize) {
   Trayectoria.init(TrayectoriaSchema, Trayectoria.config(sequelize));
 
   // Associations
+  CicloEscolar.associate(sequelize.models);
   Ciclo.associate(sequelize.models);
   Domicilio.associate(sequelize.models);
   Diligencia.associate(sequelize.models);
