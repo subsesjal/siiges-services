@@ -1,4 +1,5 @@
 const { institucion } = require('./properties/institucion');
+const { ratificacionNombre } = require('./properties/ratificacionNombre');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findAllInstitucionesSchema = {
@@ -17,6 +18,17 @@ const findAllInstitucionesSchema = {
               usuarioId: { type: 'integer' },
               ...institucion,
               ...responseProperties,
+              ratificacionesNombre: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'integer' },
+                    ...ratificacionNombre,
+                    ...responseProperties,
+                  },
+                },
+              },
             },
           },
         },

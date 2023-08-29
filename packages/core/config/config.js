@@ -1,7 +1,7 @@
 const { dotenv } = require('@siiges-services/shared');
 
 const mysql = {
-  dbAdmin: 'mysql',
+  dbAdmin: process.env.DATABASE,
   dbHost: dotenv.getEnvironmentVar('DB_HOST_MYSQL'),
   dbName: dotenv.getEnvironmentVar('DB_NAME_MYSQL'),
   dbPassword: dotenv.getEnvironmentVar('DB_PASSWORD_MYSQL'),

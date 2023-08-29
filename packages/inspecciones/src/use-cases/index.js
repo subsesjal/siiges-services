@@ -4,6 +4,7 @@ const {
   createInspeccionRespuestas,
   deleteInspeccion,
   createInspeccionObservacion,
+  createInspectorProgramas,
 } = require('./db/inspecciones');
 
 module.exports = {
@@ -12,4 +13,5 @@ module.exports = {
   createInspeccionRespuestas,
   createInspeccionObservacion,
   deleteInspeccion,
+  createInspectorProgramas,
 };

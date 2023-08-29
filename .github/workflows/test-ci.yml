@@ -54,3 +54,7 @@ jobs:
           DB_PORT_MYSQL: 3306
           WHITE_LIST: mysql
           NODE_ENV: development
+          SERVICE_EMAIL: gmail
+          USER_EMAIL: mail@gmail.com
+          PASSWORD_EMAIL: zqjcfggkbhobwert
+          DATABASE: mysql
