@@ -1,4 +1,3 @@
-const { CICLOESCOLAR_TABLE, CicloEscolarSchema } = require('../models/cicloEscolar');
 const { CICLO_TABLE, CicloSchema } = require('../models/ciclo');
 const { DOMICILIO_TABLE, DomicilioSchema } = require('../models/domicilio');
 const { DILIGENCIA_TABLE, DiligenciaSchema } = require('../models/diligencia');
@@ -50,10 +49,11 @@ const { NOTIFICACION_TABLE, NotificacionSchema } = require('../models/notificaci
 const { TRAYECTORIA_TABLE, TrayectoriaSchema } = require('../models/trayectoria');
 const { EDIFICIO_NIVEL_TABLE, EdificioNivelSchema } = require('../models/edificioNivel');
 const { PLANTEL_EDIFICIO_NIVEL_TABLE, PlantelEdificioNivelSchema } = require('../models/plantelEdificioNivel');
+const { CICLOESCOLAR_TABLE, CicloEscolarSchema } = require('../models/cicloEscolar');
+const { CALIFICACIONES_TABLE, CalificacionesSchema } = require('../models/calificaciones');
 
 module.exports = {
   async up(queryInterface) {
-    await queryInterface.createTable(CICLOESCOLAR_TABLE, CicloEscolarSchema);
     await queryInterface.createTable(ROL_TABLE, RolSchema);
     await queryInterface.createTable(PAIS_TABLE, PaisSchema);
     await queryInterface.createTable(ESTADO_TABLE, EstadoSchema);
@@ -111,10 +111,11 @@ module.exports = {
     await queryInterface.createTable(TRAYECTORIA_TABLE, TrayectoriaSchema);
     await queryInterface.createTable(EDIFICIO_NIVEL_TABLE, EdificioNivelSchema);
     await queryInterface.createTable(PLANTEL_EDIFICIO_NIVEL_TABLE, PlantelEdificioNivelSchema);
+    await queryInterface.createTable(CICLOESCOLAR_TABLE, CicloEscolarSchema);
+    await queryInterface.createTable(CALIFICACIONES_TABLE, CalificacionesSchema);
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable(CICLOESCOLAR_TABLE)
     await queryInterface.dropTable(ROL_TABLE);
     await queryInterface.dropTable(PAIS_TABLE);
     await queryInterface.dropTable(ESTADO_TABLE);
@@ -167,5 +168,7 @@ module.exports = {
     await queryInterface.dropTable(TRAYECTORIA_TABLE);
     await queryInterface.dropTable(EDIFICIO_NIVEL_TABLE);
     await queryInterface.dropTable(PLANTEL_EDIFICIO_NIVEL_TABLE);
+    await queryInterface.dropTable(CICLOESCOLAR_TABLE);
+    await queryInterface.dropTable(CALIFICACIONES_TABLE);
   },
 };
