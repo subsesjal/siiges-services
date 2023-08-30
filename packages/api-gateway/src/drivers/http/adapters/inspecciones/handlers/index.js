@@ -5,6 +5,7 @@ const createInspeccionObservacion = require('./create.handlers.inspeccion-observ
 const deleteInspeccion = require('./delete.handlers.inspeccion.adapters');
 const createInspectoresProgramas = require('./create.handlers.inspectores-programas.adapters');
 const findAllInspectoresProgramas = require('./find-all.handlers.inspectores-programas.adapters');
+const { deleteInspectoresProgramas } = require('./delete.handlers.inspectores-programas.adpaters');
 
 module.exports = {
   createInspeccion,
@@ -14,4 +15,5 @@ module.exports = {
   deleteInspeccion,
   createInspectoresProgramas,
   findAllInspectoresProgramas,
+  deleteInspectoresProgramas,
 };
