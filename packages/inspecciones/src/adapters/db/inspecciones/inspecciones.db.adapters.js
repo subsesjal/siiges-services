@@ -38,4 +38,5 @@ module.exports = {
   findAllInspectorProgramasQuery: findAllQuery(InspectorPrograma),
   findOneInspectoresProgramasQuery: findOneQuery(InspectorPrograma),
   deleteInspectoresProgramasQuery: deleteAndFindQuery(InspectorPrograma),
+  updateInspectoresProgramasQuery: updateAndFindQuery(InspectorPrograma),
 };

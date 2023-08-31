@@ -10,6 +10,7 @@ const {
   findAllInspectoresProgramasSchema,
   deleteInspectoresProgramasSchema,
 } = require('./schema');
+const updateInspectoresProgramasSchema = require('./schema/update.inspectores-programas.schema');
 
 async function inspeccionRouter(fastify, opts, next) {
   await fastify.post(
@@ -58,6 +59,12 @@ async function inspeccionRouter(fastify, opts, next) {
     '/inspectores-programas/:id',
     { schema: deleteInspectoresProgramasSchema },
     inspeccionesAdapter.deleteInspectoresProgramas,
+  );
+
+  await fastify.patch(
+    '/inspectores-programas/:id',
+    { schema: updateInspectoresProgramasSchema },
+    inspeccionesAdapter.updateInspectoresProgramas,
   );
 
   next();
