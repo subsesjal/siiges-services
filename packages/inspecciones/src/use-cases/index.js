@@ -5,6 +5,9 @@ const {
   deleteInspeccion,
   createInspeccionObservacion,
   createInspectorProgramas,
+  findAllInspectoresProgramas,
+  deleteInspectoresProgramas,
+  updateInspectoresProgramas,
 } = require('./db/inspecciones');
 
 module.exports = {
@@ -14,4 +17,7 @@ module.exports = {
   createInspeccionObservacion,
   deleteInspeccion,
   createInspectorProgramas,
+  findAllInspectoresProgramas,
+  deleteInspectoresProgramas,
+  updateInspectoresProgramas,
 };
