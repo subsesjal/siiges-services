@@ -51,6 +51,8 @@ const { SITUACION_TABLE, SituacionSchema } = require('../models/situacion');
 const { TIPO_TRAMITE_TABLE, TipoTramiteSchema } = require('../models/tipoTramite');
 const { ALUMNO_TABLE, AlumnoSchema } = require('../models/alumno');
 const { ALUMNO_TIPO_TRAMITE_TABLE, AlumnoTipoTramiteSchema } = require('../models/alumnoTipoTramite');
+const { EDIFICIO_NIVEL_TABLE, EdificioNivelSchema } = require('../models/edificioNivel');
+const { PLANTEL_EDIFICIO_NIVEL_TABLE, PlantelEdificioNivelSchema } = require('../models/plantelEdificioNivel');
 
 module.exports = {
   async up(queryInterface) {
@@ -113,6 +115,8 @@ module.exports = {
     await queryInterface.createTable(TIPO_TRAMITE_TABLE, TipoTramiteSchema);
     await queryInterface.createTable(ALUMNO_TABLE, AlumnoSchema);
     await queryInterface.createTable(ALUMNO_TIPO_TRAMITE_TABLE, AlumnoTipoTramiteSchema);
+    await queryInterface.createTable(EDIFICIO_NIVEL_TABLE, EdificioNivelSchema);
+    await queryInterface.createTable(PLANTEL_EDIFICIO_NIVEL_TABLE, PlantelEdificioNivelSchema);
   },
 
   async down(queryInterface) {
@@ -170,5 +174,7 @@ module.exports = {
     await queryInterface.dropTable(TIPO_TRAMITE_TABLE);
     await queryInterface.dropTable(ALUMNO_TABLE);
     await queryInterface.dropTable(ALUMNO_TIPO_TRAMITE_TABLE);
+    await queryInterface.dropTable(EDIFICIO_NIVEL_TABLE);
+    await queryInterface.dropTable(PLANTEL_EDIFICIO_NIVEL_TABLE);
   },
 };

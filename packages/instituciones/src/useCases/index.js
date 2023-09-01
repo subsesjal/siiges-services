@@ -12,7 +12,9 @@ const {
   deletePlantelHigiene,
   findAllHigienes,
   findGroupPlantelHigiene,
-
+  findAllEdificiosNiveles,
+  createUpdatePlantelNiveles,
+  findGroupPlantelNiveles,
 } = require('./db/planteles');
 
 const {
@@ -54,4 +56,7 @@ module.exports = {
   deletePlantelHigiene,
   findAllHigienes,
   findGroupPlantelHigiene,
+  findAllEdificiosNiveles,
+  createUpdatePlantelNiveles,
+  findGroupPlantelNiveles,
 };

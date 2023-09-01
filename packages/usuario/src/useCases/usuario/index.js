@@ -9,6 +9,7 @@ const {
   updateUserQuery,
   updatePersonaQuery,
   updateDomicilioQuery,
+  createInspector,
 } = require('../../adapters/db');
 
 const findOneUser = require('./db/find-one.users.use-cases');
@@ -25,7 +26,7 @@ module.exports = {
   findAllUserUsers: findAllUserUsers(findAllUserUsersQuery, findOneUserQuery),
   findOneUser: findOneUser(findOneUserQuery),
   findOneUserDetail: findOneUserDetail(findOneUserQuery),
-  createUser: createUser(createQuery, findOneUserQuery),
+  createUser: createUser(createQuery, findOneUserQuery, createInspector),
   createUserUser: createUserUser(createUserUsersQuery, createQuery, findOneUserQuery),
   updateUser: updateUser(
     findOneUserQuery,

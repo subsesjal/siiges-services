@@ -1,5 +1,18 @@
+const boom = require('@hapi/boom');
+
 const findAllInspeccionPreguntas = (findAllInspeccionPreguntasQuery) => async (identifierObj) => {
-  const inspeccionPreguntas = await findAllInspeccionPreguntasQuery(identifierObj);
+  const { query } = identifierObj;
+  const where = {};
+  const nullQuery = Object.keys(identifierObj.query).length === 0;
+  if (!query.apartado !== nullQuery) {
+    throw boom.badRequest(`Query parameter [${Object.keys(query)[0]}] not defined`);
+  }
+  if (query.apartado) {
+    where.inspeccionApartadoId = query.apartado;
+  }
+  const include = [{ association: 'inspeccionApartado' }];
+
+  const inspeccionPreguntas = await findAllInspeccionPreguntasQuery(where, { undefined, include });
 
   return inspeccionPreguntas;
 };

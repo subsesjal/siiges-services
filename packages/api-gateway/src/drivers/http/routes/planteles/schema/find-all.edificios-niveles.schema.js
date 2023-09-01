@@ -1,15 +1,9 @@
-const { municipio } = require('./properties/municipio');
+const { edificioNivel } = require('./properties/edificioNivel');
 const { responseProperties } = require('./properties/responseProperties');
 
-const findAllMunicipiosSchema = {
-  tags: ['Municipio'],
-  description: 'Return a list of municipios.',
-  querystring: {
-    type: 'object',
-    properties: {
-      estadoId: { type: 'number' },
-    },
-  },
+const findAllEdificiosNivelesSchema = {
+  tags: ['Plantel'],
+  description: 'Return the list of edificios niveles.',
   response: {
     200: {
       type: 'object',
@@ -20,8 +14,7 @@ const findAllMunicipiosSchema = {
             type: 'object',
             properties: {
               id: { type: 'integer' },
-              usuarioId: { type: 'integer' },
-              ...municipio,
+              ...edificioNivel,
               ...responseProperties,
             },
           },
@@ -31,4 +24,4 @@ const findAllMunicipiosSchema = {
   },
 };
 
-module.exports = findAllMunicipiosSchema;
+module.exports = findAllEdificiosNivelesSchema;

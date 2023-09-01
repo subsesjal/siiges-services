@@ -1,11 +1,11 @@
-const { plantelHigiene } = require('./properties/plantelHigiene');
+const { plantelEdificioNivel } = require('./properties/plantelEdificioNivel');
 const { responseProperties } = require('./properties/responseProperties');
 
-const createUpdatePlantelHigieneSchema = {
+const createUpdatePlantelNivelesSchema = {
   tags: ['Plantel'],
-  description: 'Given an object with plantel higiene required data, then save a record of plantel-higiene in database.',
+  description: 'Given an array with plantel edificio nivel required data, then save a record of plantel-edificio-niveles in database.',
   params: {
-    title: 'createUpdatePlantelHigieneSchema',
+    title: 'createUpdatePlantelNivelesSchema',
     type: 'object',
     properties: {
       plantelId: { type: 'integer' },
@@ -17,12 +17,10 @@ const createUpdatePlantelHigieneSchema = {
     items: {
       type: 'object',
       properties: {
-        ...plantelHigiene,
+        ...plantelEdificioNivel,
       },
-      required: ['higieneId', 'cantidad'],
+      required: ['edificioNivelId'],
     },
-    minItems: 11,
-    maxItems: 11,
   },
   response: {
     201: {
@@ -34,7 +32,7 @@ const createUpdatePlantelHigieneSchema = {
             type: 'object',
             properties: {
               id: { type: 'integer' },
-              ...plantelHigiene,
+              ...plantelEdificioNivel,
               ...responseProperties,
             },
           },
@@ -44,4 +42,4 @@ const createUpdatePlantelHigieneSchema = {
   },
 };
 
-module.exports = createUpdatePlantelHigieneSchema;
+module.exports = createUpdatePlantelNivelesSchema;

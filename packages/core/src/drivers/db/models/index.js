@@ -51,6 +51,8 @@ const { Situacion, SituacionSchema } = require('./situacion');
 const { TipoTramite, TipoTramiteSchema } = require('./tipoTramite');
 const { Alumno, AlumnoSchema } = require('./alumno');
 const { AlumnoTipoTramite, AlumnoTipoTramiteSchema } = require('./alumnoTipoTramite');
+const { EdificioNivel, EdificioNivelSchema } = require('./edificioNivel');
+const { PlantelEdificioNivel, PlantelEdificioNivelSchema } = require('./plantelEdificioNivel');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -119,6 +121,8 @@ function setupModels(sequelize) {
   TipoTramite.init(TipoTramiteSchema, TipoTramite.config(sequelize));
   Alumno.init(AlumnoSchema, Alumno.config(sequelize));
   AlumnoTipoTramite.init(AlumnoTipoTramiteSchema, AlumnoTipoTramite.config(sequelize));
+  EdificioNivel.init(EdificioNivelSchema, EdificioNivel.config(sequelize));
+  PlantelEdificioNivel.init(PlantelEdificioNivelSchema, PlantelEdificioNivel.config(sequelize));
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -174,6 +178,8 @@ function setupModels(sequelize) {
   TipoTramite.associate(sequelize.models);
   Alumno.associate(sequelize.models);
   AlumnoTipoTramite.associate(sequelize.models);
+  EdificioNivel.associate(sequelize.models);
+  PlantelEdificioNivel.associate(sequelize.models);
 }
 
 module.exports = setupModels;

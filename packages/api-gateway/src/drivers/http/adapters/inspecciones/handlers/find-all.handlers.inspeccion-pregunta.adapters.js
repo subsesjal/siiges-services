@@ -4,7 +4,8 @@ const errorHandler = require('../../../utils/errorHandler');
 async function findAllInspeccionPreguntas(req, reply) {
   try {
     Logger.info('[Inspeccion/Preguntas]: Getting inspeccion-preguntas list');
-    const inspeccionPreguntas = await this.inspeccionServices.findAllInspeccionPreguntas();
+    const { query } = req;
+    const inspeccionPreguntas = await this.inspeccionServices.findAllInspeccionPreguntas({ query });
 
     return reply
       .code(200)

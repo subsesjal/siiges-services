@@ -3,15 +3,13 @@ const { plantelHigiene } = require('./properties/plantelHigiene');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findGroupPlantelHigieneSchema = {
-  tags: ['Higiene'],
+  tags: ['Plantel'],
   description: 'Given the ID of plantel, then return the list of Higiene.',
   params: {
     type: 'object',
     properties: {
       plantelId: { type: 'integer' },
-
     },
-
     required: ['plantelId'],
   },
   response: {

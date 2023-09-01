@@ -7,7 +7,10 @@ const {
   createInspeccionObservacionSchema,
   deleteInspeccionSchema,
   createInspectoresProgramasSchema,
+  findAllInspectoresProgramasSchema,
+  deleteInspectoresProgramasSchema,
 } = require('./schema');
+const updateInspectoresProgramasSchema = require('./schema/update.inspectores-programas.schema');
 
 async function inspeccionRouter(fastify, opts, next) {
   await fastify.post(
@@ -44,6 +47,24 @@ async function inspeccionRouter(fastify, opts, next) {
     '/inspectores-programas',
     { schema: createInspectoresProgramasSchema },
     inspeccionesAdapter.createInspectoresProgramas,
+  );
+
+  await fastify.get(
+    '/inspectores-programas',
+    { schema: findAllInspectoresProgramasSchema },
+    inspeccionesAdapter.findAllInspectoresProgramas,
+  );
+
+  await fastify.delete(
+    '/inspectores-programas/:id',
+    { schema: deleteInspectoresProgramasSchema },
+    inspeccionesAdapter.deleteInspectoresProgramas,
+  );
+
+  await fastify.patch(
+    '/inspectores-programas/:id',
+    { schema: updateInspectoresProgramasSchema },
+    inspeccionesAdapter.updateInspectoresProgramas,
   );
 
   next();
