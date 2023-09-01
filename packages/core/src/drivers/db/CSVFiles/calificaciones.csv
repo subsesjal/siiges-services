@@ -1,0 +1,2 @@
+id,alumno_id,grupo_id,asignatura_id,estatus_calificacion_id,calificacion,fecha_examen,tipo,created_at
+1,1,1,1,,,,1,2023-04-23 23:30:26
