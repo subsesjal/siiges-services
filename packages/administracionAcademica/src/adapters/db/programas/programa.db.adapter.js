@@ -1,7 +1,7 @@
 const { models, queries } = require('@siiges-services/core');
 
 const {
-  findOneQuery,
+  findAllQuery,
 } = queries;
 
 const {
@@ -9,5 +9,5 @@ const {
 } = models;
 
 module.exports = {
-  findOneProgramaQuery: findOneQuery(Programa),
+  findAllProgramaQuery: findAllQuery(Programa),
 };
