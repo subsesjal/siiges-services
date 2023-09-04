@@ -1,0 +1,9 @@
+id,nombre,descripcion,created_at
+1,recubrimiento_plastico,Recubrimientos plásticos en pisos y escalone,2019-08-01 00:00:00
+2,alarma,Alarma contra incendios y/o terremotos,2019-08-01 00:00:00
+3,senal_evacuacion,Señalamientos de evacuación,2019-08-01 00:00:00
+4,botiquin,Botiquín,2019-08-01 00:00:00
+5,escalera_emergencia,Escaleras de emergencia,2019-08-01 00:00:00
+6,area_seguridad,Área de seguridad,2019-08-01 00:00:00
+7,extintor,Extintores,2019-08-01 00:00:00
+8,punto_reunion,Puntos de reunión para evacuación,2019-08-01 00:00:00
