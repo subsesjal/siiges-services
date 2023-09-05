@@ -12,6 +12,9 @@ const {
   findAllEdificiosNivelesSchema,
   createUpdatePlantelNivelesSchema,
   findGroupPlantelNivelesSchema,
+  findAllSeguridadSistemasSchema,
+  findGroupPlantelSeguridadSchema,
+  createUpdatePlantelSeguridadSchema,
 } = require('./schema');
 
 async function plantelRouter(fastify, opts, next) {
@@ -115,6 +118,34 @@ async function plantelRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     plantelesAdapter.findGroupPlantelNiveles,
+  );
+
+  // Seguridad Sistemas
+  await fastify.get(
+    '/seguridad',
+    {
+      schema: findAllSeguridadSistemasSchema,
+      onRequest: [fastify.authenticate],
+    },
+    plantelesAdapter.findAllSeguridad,
+  );
+
+  await fastify.post(
+    '/:plantelId/seguridad',
+    {
+      schema: createUpdatePlantelSeguridadSchema,
+      onRequest: [fastify.authenticate],
+    },
+    plantelesAdapter.createUpdatePlantelSeguridad,
+  );
+
+  await fastify.get(
+    '/:plantelId/seguridad',
+    {
+      schema: findGroupPlantelSeguridadSchema,
+      onRequest: [fastify.authenticate],
+    },
+    plantelesAdapter.findGroupPlantelSeguridad,
   );
 
   next();

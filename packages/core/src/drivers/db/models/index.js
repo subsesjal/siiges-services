@@ -53,6 +53,8 @@ const { Alumno, AlumnoSchema } = require('./alumno');
 const { AlumnoTipoTramite, AlumnoTipoTramiteSchema } = require('./alumnoTipoTramite');
 const { EdificioNivel, EdificioNivelSchema } = require('./edificioNivel');
 const { PlantelEdificioNivel, PlantelEdificioNivelSchema } = require('./plantelEdificioNivel');
+const { SeguridadSistema, SeguridadSistemaSchema } = require('./seguridadSistema');
+const { PlantelSeguridadSistema, PlantelSeguridadSistemaSchema } = require('./plantelSeguridadSistema');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -123,6 +125,11 @@ function setupModels(sequelize) {
   AlumnoTipoTramite.init(AlumnoTipoTramiteSchema, AlumnoTipoTramite.config(sequelize));
   EdificioNivel.init(EdificioNivelSchema, EdificioNivel.config(sequelize));
   PlantelEdificioNivel.init(PlantelEdificioNivelSchema, PlantelEdificioNivel.config(sequelize));
+  SeguridadSistema.init(SeguridadSistemaSchema, SeguridadSistema.config(sequelize));
+  PlantelSeguridadSistema.init(
+    PlantelSeguridadSistemaSchema,
+    PlantelSeguridadSistema.config(sequelize),
+  );
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -180,6 +187,8 @@ function setupModels(sequelize) {
   AlumnoTipoTramite.associate(sequelize.models);
   EdificioNivel.associate(sequelize.models);
   PlantelEdificioNivel.associate(sequelize.models);
+  SeguridadSistema.associate(sequelize.models);
+  PlantelSeguridadSistema.associate(sequelize.models);
 }
 
 module.exports = setupModels;
