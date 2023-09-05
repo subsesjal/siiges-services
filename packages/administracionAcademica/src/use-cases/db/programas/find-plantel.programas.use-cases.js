@@ -6,7 +6,11 @@ const findPlantelProgramas = (
   whereProgramasQuery,
 ) => async (identifierObj) => {
   const where = whereProgramasQuery;
-  where.plantelId = identifierObj.plantelId;
+  if (Array.isArray(identifierObj)) {
+    where.plantelId = identifierObj;
+  } else {
+    where.plantelId = identifierObj.plantelId;
+  }
 
   const program = await findPlantelProgramasQuery(where, { include });
   if (program.length === 0) {
@@ -16,4 +20,4 @@ const findPlantelProgramas = (
   return program;
 };
 
-module.exports = findPlantelProgramas;
+module.exports = { findPlantelProgramas };

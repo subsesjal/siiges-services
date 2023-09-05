@@ -7,6 +7,7 @@ const {
 
 const {
   Programa,
+  Plantel,
 } = models;
 
 const include = [{
@@ -25,6 +26,7 @@ const where = {
 module.exports = {
   findAllProgramaQuery: findAllQuery(Programa),
   findPlantelProgramasQuery: findAllQuery(Programa),
+  findInstitucionQuery: findAllQuery(Plantel),
   includeProgramasQuery: include,
   whereProgramasQuery: where,
 };
