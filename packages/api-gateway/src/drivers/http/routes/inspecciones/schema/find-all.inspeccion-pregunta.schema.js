@@ -22,6 +22,8 @@ const findAllInspeccionPreguntasSchema = {
               id: { type: 'integer' },
               ...inspeccionPreguntas,
               inspeccionApartado: { type: 'object', properties: { nombre: { type: 'string' } } },
+              inspeccionCategoria: { type: 'object', properties: { nombre: { type: 'string' }, instruccion: { type: 'string' } } },
+              inspeccionTipoPregunta: { type: 'object', properties: { nombre: { type: 'string' } } },
               ...responseProperties,
             },
           },

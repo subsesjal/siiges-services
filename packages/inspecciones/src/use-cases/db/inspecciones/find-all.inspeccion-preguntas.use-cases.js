@@ -10,7 +10,11 @@ const findAllInspeccionPreguntas = (findAllInspeccionPreguntasQuery) => async (i
   if (query.apartado) {
     where.inspeccionApartadoId = query.apartado;
   }
-  const include = [{ association: 'inspeccionApartado' }];
+  const include = [
+    { association: 'inspeccionApartado' },
+    { association: 'inspeccionCategoria' },
+    { association: 'inspeccionTipoPregunta' },
+  ];
 
   const inspeccionPreguntas = await findAllInspeccionPreguntasQuery(where, { undefined, include });
 
