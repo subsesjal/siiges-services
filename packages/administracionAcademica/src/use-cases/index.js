@@ -8,6 +8,7 @@ const {
 
 const {
   findAllProgramas,
+  findPlantelProgramas,
 } = require('./db/programas');
 
 module.exports = {
@@ -17,4 +18,5 @@ module.exports = {
   findGroupAlumnosPrograma,
   deleteAlumno,
   findAllProgramas,
+  findPlantelProgramas,
 };

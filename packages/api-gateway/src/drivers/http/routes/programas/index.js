@@ -1,6 +1,6 @@
 const { programasAdapter } = require('../../adapters');
 const {
-  findAllProgramasSchema,
+  findAllProgramasSchema, findPlantelProgramasSchema,
 } = require('./schema');
 
 async function programasRouter(fastify, opts, next) {
@@ -8,6 +8,12 @@ async function programasRouter(fastify, opts, next) {
     '/',
     { schema: findAllProgramasSchema },
     programasAdapter.findAllProgramas,
+  );
+
+  await fastify.get(
+    '/planteles/:plantelId',
+    { schema: findPlantelProgramasSchema },
+    programasAdapter.findPlantelProgramas,
   );
 
   next();
