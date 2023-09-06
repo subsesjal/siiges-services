@@ -2,7 +2,7 @@ const { inspectoresProgramas } = require('./properties/inspectoresProgramas');
 const { responseProperties } = require('./properties/responseProperties');
 
 const deleteInspectoresProgramasSchema = {
-  tags: ['inspectores'],
+  tags: ['Inspecciones'],
   description: 'Delete a inspector programs',
   params: {
     title: 'delete Inspector Program',

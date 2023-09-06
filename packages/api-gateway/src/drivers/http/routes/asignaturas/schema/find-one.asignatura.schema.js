@@ -2,7 +2,7 @@ const { asignatura } = require('./properties/asignatura');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findOneAsignaturaSchema = {
-  tags: ['Asignatura'],
+  tags: ['Asignaturas'],
   description: 'Given an asignatura id, then return a asignatura from database.',
   params: {
     type: 'object',

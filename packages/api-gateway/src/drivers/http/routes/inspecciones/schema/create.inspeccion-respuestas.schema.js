@@ -2,7 +2,7 @@ const { inspeccionInspeccionPregunta } = require('./properties/inspeccionInspecc
 const { responseProperties } = require('./properties/responseProperties');
 
 const createInspeccionRespuestasSchema = {
-  tags: ['Inspeccion'],
+  tags: ['Inspecciones'],
   description: 'Given an object with inspeccion-inspeccion-pregunta required data, then save a record of inspeccion-inspeccion-preguntas in database.',
   params: {
     type: 'object',

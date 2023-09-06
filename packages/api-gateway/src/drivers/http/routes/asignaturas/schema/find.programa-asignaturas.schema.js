@@ -2,7 +2,7 @@ const { asignatura } = require('./properties/asignatura');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findProgramaAsignaturaSchema = {
-  tags: ['Programas'],
+  tags: ['Asignaturas'],
   description: 'Return an array of asignaturas grouped by programa.',
   querystring: {
     type: 'object',

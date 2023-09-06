@@ -2,7 +2,7 @@ const { inspectoresProgramas } = require('./properties/inspectoresProgramas');
 const { responseProperties } = require('./properties/responseProperties');
 
 const createInspectoresProgramasSchema = {
-  tags: ['inspectores'],
+  tags: ['Inspecciones'],
   description: 'Create a new inspector program',
   body: {
     type: 'object',
