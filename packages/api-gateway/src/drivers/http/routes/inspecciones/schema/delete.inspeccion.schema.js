@@ -2,7 +2,7 @@ const { responseProperties } = require('./properties/responseProperties');
 const { inspeccion } = require('./properties/inspeccion');
 
 const deleteOneInspecciones = {
-  tags: ['Inspeccion'],
+  tags: ['Inspecciones'],
   description: 'Given a inspeccionId delete a inspeccion',
   params: {
     title: 'delete inspeccion',

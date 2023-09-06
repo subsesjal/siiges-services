@@ -2,7 +2,7 @@ const { inspectoresProgramas } = require('./properties/inspectoresProgramas');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findAllInspectoresProgramasSchema = {
-  tags: ['inspectores'],
+  tags: ['Inspecciones'],
   description: 'Find all inspector programs',
   reponse: {
     200: {

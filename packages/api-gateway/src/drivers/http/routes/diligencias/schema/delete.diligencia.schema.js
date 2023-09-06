@@ -2,7 +2,7 @@ const { responseProperties } = require('./properties/responseProperties');
 const { diligencia } = require('./properties/diligencia');
 
 const deleteOneDiligencias = {
-  tags: ['Diligencia'],
+  tags: ['Diligencias'],
   description: 'Given a diligenciaId delete a diligencia',
   params: {
     title: 'delete diligencia',

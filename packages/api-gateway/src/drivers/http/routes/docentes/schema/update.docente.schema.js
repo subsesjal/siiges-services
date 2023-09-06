@@ -4,7 +4,7 @@ const { persona } = require('../../usuarios/schema/properties/persona');
 const { asignaturaDocente } = require('./properties/asignaturaDocente');
 
 const updateDocenteSchema = {
-  tags: ['docente'],
+  tags: ['Docentes'],
   description: 'docente',
   params: {
     type: 'object',
