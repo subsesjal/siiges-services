@@ -6,7 +6,7 @@ const findInstitucionProgramas = require('./find-institucion.programas.use-cases
 
 module.exports = {
   findAllProgramas: findAllProgramas(
-    programas.findAllProgramaQuery,
+    programas.findAllProgramasQuery,
     programas.includeProgramasQuery,
     programas.whereProgramasQuery,
   ),

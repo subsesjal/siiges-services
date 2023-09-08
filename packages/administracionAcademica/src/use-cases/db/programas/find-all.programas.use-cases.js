@@ -1,7 +1,17 @@
-const findAllProgramas = (findAllProgramaQuery, include, whereProgramasQuery) => async () => {
-  const getAllPrograms = await findAllProgramaQuery(whereProgramasQuery, { include });
+const findAllProgramas = (
+  findAllProgramaQuery,
+  include,
+  whereProgramasQuery,
+) => async (identifierObj) => {
+  const programas = await findAllProgramaQuery(
+    identifierObj,
+    {
+      query: whereProgramasQuery,
+      include,
+    },
+  );
 
-  return getAllPrograms;
+  return programas;
 };
 
 module.exports = findAllProgramas;
