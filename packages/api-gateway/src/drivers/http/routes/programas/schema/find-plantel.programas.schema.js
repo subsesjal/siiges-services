@@ -1,4 +1,4 @@
-const { programa } = require('./properties/programa');
+const { programa } = require('../../solicitudes/schema/properties/programa');
 const { plantel } = require('../../instituciones/schema/properties/plantel');
 const { institucion } = require('../../instituciones/schema/properties/institucion');
 const { domicilio } = require('../../usuarios/schema/properties/domicilio');
