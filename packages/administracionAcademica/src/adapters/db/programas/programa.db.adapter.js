@@ -1,13 +1,32 @@
 const { models, queries } = require('@siiges-services/core');
+const { Op } = require('sequelize');
 
 const {
-  findOneQuery,
+  findAllQuery,
 } = queries;
 
 const {
   Programa,
+  Plantel,
 } = models;
 
+const include = [{
+  association: 'plantel',
+  include: [
+    { association: 'institucion' },
+    { association: 'domicilio' },
+  ],
+}];
+
+const where = {
+  acuerdoRvoe: { [Op.not]: null },
+  fechaSurteEfecto: { [Op.gt]: new Date() },
+};
+
 module.exports = {
-  findOneProgramaQuery: findOneQuery(Programa),
+  findAllProgramaQuery: findAllQuery(Programa),
+  findPlantelProgramasQuery: findAllQuery(Programa),
+  findInstitucionQuery: findAllQuery(Plantel),
+  includeProgramasQuery: include,
+  whereProgramasQuery: where,
 };
