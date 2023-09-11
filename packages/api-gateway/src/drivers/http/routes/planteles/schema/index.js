@@ -10,6 +10,7 @@ const findAllEdificiosNivelesSchema = require('./find-all.edificios-niveles.sche
 const createUpdatePlantelNivelesSchema = require('./create-update.plantel-niveles.schema');
 const findGroupPlantelNivelesSchema = require('./find-group.plantel-niveles.schema');
 const createSaludInstiucionSchema = require('./create.salud-institucion.schema');
+const findPlantelSaludInstiucionSchema = require('./find-plantel.salud-institucion.schema');
 
 module.exports = {
   createUpdatePlantelHigieneSchema,
@@ -24,4 +25,5 @@ module.exports = {
   createUpdatePlantelNivelesSchema,
   findGroupPlantelNivelesSchema,
   createSaludInstiucionSchema,
+  findPlantelSaludInstiucionSchema,
 };

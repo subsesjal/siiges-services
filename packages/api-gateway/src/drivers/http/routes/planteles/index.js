@@ -13,6 +13,7 @@ const {
   createUpdatePlantelNivelesSchema,
   findGroupPlantelNivelesSchema,
   createSaludInstiucionSchema,
+  findPlantelSaludInstiucionSchema,
 } = require('./schema');
 
 async function plantelRouter(fastify, opts, next) {
@@ -122,6 +123,12 @@ async function plantelRouter(fastify, opts, next) {
     '/institucionesSalud',
     { schema: createSaludInstiucionSchema },
     institucionesAdapter.createSaludInstitucion,
+  );
+
+  await fastify.get(
+    '/:plantelId/institucionesSalud',
+    { schema: findPlantelSaludInstiucionSchema },
+    institucionesAdapter.findPlantelSaludInstituciones,
   );
 
   next();

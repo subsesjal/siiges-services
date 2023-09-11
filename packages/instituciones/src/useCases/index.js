@@ -34,7 +34,10 @@ const {
   deleteRatificacionNombre,
 } = require('./db/ratificaciones');
 
-const { createSaludInstitucion } = require('./db/saludInstitucion');
+const {
+  createSaludInstitucion,
+  findPlantelSaludInstituciones,
+} = require('./db/saludInstitucion');
 
 module.exports = {
   findAllInstituciones,
@@ -62,4 +65,5 @@ module.exports = {
   createUpdatePlantelNiveles,
   findGroupPlantelNiveles,
   createSaludInstitucion,
+  findPlantelSaludInstituciones,
 };
