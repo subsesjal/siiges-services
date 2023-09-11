@@ -1,4 +1,4 @@
-const { plantelesAdapter } = require('../../adapters');
+const { plantelesAdapter, institucionesAdapter } = require('../../adapters');
 
 const {
   createUpdatePlantelHigieneSchema,
@@ -12,6 +12,7 @@ const {
   findAllEdificiosNivelesSchema,
   createUpdatePlantelNivelesSchema,
   findGroupPlantelNivelesSchema,
+  createSaludInstiucionSchema,
 } = require('./schema');
 
 async function plantelRouter(fastify, opts, next) {
@@ -115,6 +116,12 @@ async function plantelRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     plantelesAdapter.findGroupPlantelNiveles,
+  );
+
+  await fastify.post(
+    '/institucionesSalud',
+    { schema: createSaludInstiucionSchema },
+    institucionesAdapter.createSaludInstitucion,
   );
 
   next();

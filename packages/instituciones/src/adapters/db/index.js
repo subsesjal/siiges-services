@@ -15,6 +15,7 @@ const {
   Higiene,
   EdificioNivel,
   PlantelEdificioNivel,
+  SaludInstitucion,
 } = drivers.sequelize.models;
 
 const {
@@ -63,4 +64,5 @@ module.exports = {
   findOnePlantelEdificioNivelQuery: findOneQuery(PlantelEdificioNivel),
   createPlantelEdificioNivelQuery: createQuery(PlantelEdificioNivel),
   deletePlantelEdificioNivelQuery: deleteAndFindQuery(PlantelEdificioNivel),
+  createSaludInstitucionQuery: createQuery(SaludInstitucion),
 };
