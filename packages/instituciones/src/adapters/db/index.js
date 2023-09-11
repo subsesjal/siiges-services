@@ -66,4 +66,5 @@ module.exports = {
   deletePlantelEdificioNivelQuery: deleteAndFindQuery(PlantelEdificioNivel),
   createSaludInstitucionQuery: createQuery(SaludInstitucion),
   findAllSaludInstitucionesQuery: findAllQuery(SaludInstitucion),
+  findOneSaludInstitucionesQuery: findOneQuery(SaludInstitucion),
 };

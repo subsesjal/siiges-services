@@ -17,6 +17,7 @@ const updatePlantel = require('./update.handlers.plantel.adapters');
 const updateRatificacionNombre = require('./update.handlers.ratificacion-nombre.adapters');
 const createSaludInstitucion = require('./create.handlers.salud-institucion.adapters');
 const { findPlantelSaludInstituciones } = require('./find-plantel.handlers.salud-institucion.adapters');
+const { findOneSaludInstituciones } = require('./find-one.handlers.salud-institucion.adapters');
 
 module.exports = {
   createDirectorPlantel,
@@ -38,4 +39,5 @@ module.exports = {
   updateRatificacionNombre,
   createSaludInstitucion,
   findPlantelSaludInstituciones,
+  findOneSaludInstituciones,
 };

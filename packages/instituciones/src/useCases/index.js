@@ -37,6 +37,7 @@ const {
 const {
   createSaludInstitucion,
   findPlantelSaludInstituciones,
+  findOneSaludInstituciones,
 } = require('./db/saludInstitucion');
 
 module.exports = {
@@ -66,4 +67,5 @@ module.exports = {
   findGroupPlantelNiveles,
   createSaludInstitucion,
   findPlantelSaludInstituciones,
+  findOneSaludInstituciones,
 };
