@@ -38,6 +38,7 @@ const {
   createSaludInstitucion,
   findPlantelSaludInstituciones,
   findOneSaludInstituciones,
+  deleteSaludInstitucion,
 } = require('./db/saludInstitucion');
 
 module.exports = {
@@ -68,4 +69,5 @@ module.exports = {
   createSaludInstitucion,
   findPlantelSaludInstituciones,
   findOneSaludInstituciones,
+  deleteSaludInstitucion,
 };

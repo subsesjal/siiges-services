@@ -15,6 +15,7 @@ const {
   createSaludInstiucionSchema,
   findPlantelSaludInstiucionSchema,
   findOneSaludInstiucionSchema,
+  deleteSaludInstiucionSchema,
 } = require('./schema');
 
 async function plantelRouter(fastify, opts, next) {
@@ -136,6 +137,12 @@ async function plantelRouter(fastify, opts, next) {
     '/institucionesSalud/:institucionesSaludId',
     { schema: findOneSaludInstiucionSchema },
     institucionesAdapter.findOneSaludInstituciones,
+  );
+
+  await fastify.delete(
+    '/institucionesSalud/:institucionesSaludId',
+    { schema: deleteSaludInstiucionSchema },
+    institucionesAdapter.deleteSaludInstitucion,
   );
 
   next();
