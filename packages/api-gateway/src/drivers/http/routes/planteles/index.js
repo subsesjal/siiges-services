@@ -124,31 +124,46 @@ async function plantelRouter(fastify, opts, next) {
 
   await fastify.post(
     '/institucionesSalud',
-    { schema: createSaludInstiucionSchema },
+    {
+      schema: createSaludInstiucionSchema,
+      onRequest: [fastify.authenticate],
+    },
     institucionesAdapter.createSaludInstitucion,
   );
 
   await fastify.get(
     '/:plantelId/institucionesSalud',
-    { schema: findPlantelSaludInstiucionSchema },
+    {
+      schema: findPlantelSaludInstiucionSchema,
+      onRequest: [fastify.authenticate],
+    },
     institucionesAdapter.findPlantelSaludInstituciones,
   );
 
   await fastify.get(
     '/institucionesSalud/:institucionesSaludId',
-    { schema: findOneSaludInstiucionSchema },
+    {
+      schema: findOneSaludInstiucionSchema,
+      onRequest: [fastify.authenticate],
+    },
     institucionesAdapter.findOneSaludInstituciones,
   );
 
   await fastify.delete(
     '/institucionesSalud/:institucionesSaludId',
-    { schema: deleteSaludInstiucionSchema },
+    {
+      schema: deleteSaludInstiucionSchema,
+      onRequest: [fastify.authenticate],
+    },
     institucionesAdapter.deleteSaludInstitucion,
   );
 
   await fastify.patch(
     '/institucionesSalud/:institucionesSaludId',
-    { schema: updateSaludInstiucionSchema },
+    {
+      schema: updateSaludInstiucionSchema,
+      onRequest: [fastify.authenticate],
+    },
     institucionesAdapter.updateSaludInstitucion,
   );
 
