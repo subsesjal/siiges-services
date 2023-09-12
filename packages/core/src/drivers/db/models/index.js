@@ -53,7 +53,7 @@ const { Alumno, AlumnoSchema } = require('./alumno');
 const { AlumnoTipoTramite, AlumnoTipoTramiteSchema } = require('./alumnoTipoTramite');
 const { EdificioNivel, EdificioNivelSchema } = require('./edificioNivel');
 const { PlantelEdificioNivel, PlantelEdificioNivelSchema } = require('./plantelEdificioNivel');
-const { SaludInstitucion, SaludInstitucionSchema } = require('./salud_institucion');
+const { SaludInstitucion, SaludInstitucionSchema } = require('./saludInstitucion');
 
 function setupModels(sequelize) {
   // Initialize models

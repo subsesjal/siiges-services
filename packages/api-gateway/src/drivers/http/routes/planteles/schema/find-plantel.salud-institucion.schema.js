@@ -16,15 +16,13 @@ const findPlantelSaludInstiucionSchema = {
       type: 'object',
       properties: {
         data: {
-          data: {
-            type: 'array',
-            items: {
-              type: 'object',
-              properties: {
-                id: { type: 'integer' },
-                ...saludInstiucion,
-                ...responseProperties,
-              },
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              id: { type: 'integer' },
+              ...saludInstiucion,
+              ...responseProperties,
             },
           },
         },

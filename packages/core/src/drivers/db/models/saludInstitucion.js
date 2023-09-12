@@ -27,7 +27,7 @@ const SaludInstitucionSchema = {
   },
 
   tiempo: {
-    type: DataTypes.DATE,
+    type: DataTypes.TIME,
   },
 
   createdAt: {

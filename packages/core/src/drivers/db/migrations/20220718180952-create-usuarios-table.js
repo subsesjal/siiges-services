@@ -53,7 +53,7 @@ const { ALUMNO_TABLE, AlumnoSchema } = require('../models/alumno');
 const { ALUMNO_TIPO_TRAMITE_TABLE, AlumnoTipoTramiteSchema } = require('../models/alumnoTipoTramite');
 const { EDIFICIO_NIVEL_TABLE, EdificioNivelSchema } = require('../models/edificioNivel');
 const { PLANTEL_EDIFICIO_NIVEL_TABLE, PlantelEdificioNivelSchema } = require('../models/plantelEdificioNivel');
-const { SALUD_INSTITUCION_TABLE, SaludInstitucionSchema } = require('../models/salud_institucion');
+const { SALUD_INSTITUCION_TABLE, SaludInstitucionSchema } = require('../models/saludInstitucion');
 
 module.exports = {
   async up(queryInterface) {
