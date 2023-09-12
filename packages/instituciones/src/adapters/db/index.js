@@ -68,4 +68,5 @@ module.exports = {
   findAllSaludInstitucionesQuery: findAllQuery(SaludInstitucion),
   findOneSaludInstitucionesQuery: findOneQuery(SaludInstitucion),
   deleteSaludInstiucionQuery: deleteQuery(SaludInstitucion),
+  updateSaludInstitucionQuery: updateAndFindQuery(SaludInstitucion),
 };

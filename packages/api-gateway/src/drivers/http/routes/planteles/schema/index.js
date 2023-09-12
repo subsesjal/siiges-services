@@ -13,6 +13,7 @@ const createSaludInstiucionSchema = require('./create.salud-institucion.schema')
 const findPlantelSaludInstiucionSchema = require('./find-plantel.salud-institucion.schema');
 const findOneSaludInstiucionSchema = require('./find-one.salud-institucion.schema');
 const deleteSaludInstiucionSchema = require('./delete.salud-institucion.schema');
+const updateSaludInstiucionSchema = require('./update.salud-institucion.schema');
 
 module.exports = {
   createUpdatePlantelHigieneSchema,
@@ -30,4 +31,5 @@ module.exports = {
   findPlantelSaludInstiucionSchema,
   findOneSaludInstiucionSchema,
   deleteSaludInstiucionSchema,
+  updateSaludInstiucionSchema,
 };
