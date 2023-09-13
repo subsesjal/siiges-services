@@ -14,6 +14,9 @@ const findPlantelSaludInstiucionSchema = require('./find-plantel.salud-instituci
 const findOneSaludInstiucionSchema = require('./find-one.salud-institucion.schema');
 const deleteSaludInstiucionSchema = require('./delete.salud-institucion.schema');
 const updateSaludInstiucionSchema = require('./update.salud-institucion.schema');
+const findAllSeguridadSistemasSchema = require('./find-all.seguridad-sistemas.schema');
+const findGroupPlantelSeguridadSchema = require('./find-group.plantel-seguridad.schema');
+const createUpdatePlantelSeguridadSchema = require('./create-update.plantel-seguridad.schema');
 
 module.exports = {
   createUpdatePlantelHigieneSchema,
@@ -32,4 +35,7 @@ module.exports = {
   findOneSaludInstiucionSchema,
   deleteSaludInstiucionSchema,
   updateSaludInstiucionSchema,
+  findAllSeguridadSistemasSchema,
+  findGroupPlantelSeguridadSchema,
+  createUpdatePlantelSeguridadSchema,
 };

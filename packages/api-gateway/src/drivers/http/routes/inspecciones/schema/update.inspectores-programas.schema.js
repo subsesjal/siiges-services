@@ -2,7 +2,7 @@ const { inspectoresProgramas } = require('./properties/inspectoresProgramas');
 const { responseProperties } = require('./properties/responseProperties');
 
 const updateInspectoresProgramasSchema = {
-  tags: ['inspectores'],
+  tags: ['Inspecciones'],
   description: 'Update a inspector program',
   params: {
     title: 'Update Inspector Program',
