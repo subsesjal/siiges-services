@@ -168,8 +168,9 @@ async function plantelRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     institucionesAdapter.updateSaludInstitucion,
+  );
 
-// Seguridad Sistemas
+  // Seguridad Sistemas
   await fastify.get(
     '/seguridad',
     {
