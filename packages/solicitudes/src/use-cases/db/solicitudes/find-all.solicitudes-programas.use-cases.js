@@ -1,4 +1,4 @@
-const findAllSolicitudesProgramas = (findAllSolicitudesQuery) => async (identifierObj) => {
+const findAllSolicitudesProgramas = (findAllSolicitudesQuery) => async (queryParams) => {
   const include = [{
     association: 'programa',
     include: [
@@ -11,18 +11,28 @@ const findAllSolicitudesProgramas = (findAllSolicitudesQuery) => async (identifi
             { association: 'estado' },
             { association: 'municipio' },
           ],
-        }],
+        },
+        { association: 'institucion' }],
       }],
   },
   {
     association: 'estatusSolicitud',
   }];
 
-  const solicitudes = await findAllSolicitudesQuery(identifierObj, {
-    undefined,
-    include,
-    strict: false,
-  });
+  let query = {};
+  if (queryParams && queryParams.length > 0) {
+    query = {
+      estatusSolicitudId: queryParams,
+    };
+  }
+
+  const solicitudes = await findAllSolicitudesQuery(
+    query,
+    {
+      include,
+      strict: false,
+    },
+  );
 
   return solicitudes;
 };
