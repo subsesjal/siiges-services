@@ -3,6 +3,7 @@ const { programa } = require('./properties/programa');
 const { programaTurnos } = require('./properties/programaTurnos');
 const { estatusSolicitud } = require('./properties/estatusSolicitud');
 const { plantel } = require('../../instituciones/schema/properties/plantel');
+const { institucion } = require('../../instituciones/schema/properties/institucion');
 const { domicilio } = require('../../usuarios/schema/properties/domicilio');
 const { estado } = require('../../usuarios/schema/properties/estado');
 const { municipio } = require('../../usuarios/schema/properties/municipio');
@@ -11,6 +12,16 @@ const { responseProperties } = require('./properties/responseProperties');
 const findAllSolicitudesProgramasSchema = {
   tags: ['Solicitudes'],
   description: 'Return a list of solicitudes.',
+  querystring: {
+    estatus: {
+      type: 'array',
+      items: {
+        type: 'integer',
+        enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 100, 200],
+      },
+      description: 'Array of estatus values',
+    },
+  },
   response: {
     200: {
       type: 'object',
@@ -77,6 +88,14 @@ const findAllSolicitudesProgramasSchema = {
                               ...responseProperties,
                             },
                           },
+                        },
+                      },
+                      institucion: {
+                        type: 'object',
+                        properties: {
+                          id: { type: 'integer' },
+                          ...institucion,
+                          ...responseProperties,
                         },
                       },
                     },
