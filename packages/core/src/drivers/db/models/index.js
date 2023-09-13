@@ -53,6 +53,7 @@ const { Alumno, AlumnoSchema } = require('./alumno');
 const { AlumnoTipoTramite, AlumnoTipoTramiteSchema } = require('./alumnoTipoTramite');
 const { EdificioNivel, EdificioNivelSchema } = require('./edificioNivel');
 const { PlantelEdificioNivel, PlantelEdificioNivelSchema } = require('./plantelEdificioNivel');
+const { SaludInstitucion, SaludInstitucionSchema } = require('./saludInstitucion');
 const { SeguridadSistema, SeguridadSistemaSchema } = require('./seguridadSistema');
 const { PlantelSeguridadSistema, PlantelSeguridadSistemaSchema } = require('./plantelSeguridadSistema');
 
@@ -125,6 +126,7 @@ function setupModels(sequelize) {
   AlumnoTipoTramite.init(AlumnoTipoTramiteSchema, AlumnoTipoTramite.config(sequelize));
   EdificioNivel.init(EdificioNivelSchema, EdificioNivel.config(sequelize));
   PlantelEdificioNivel.init(PlantelEdificioNivelSchema, PlantelEdificioNivel.config(sequelize));
+  SaludInstitucion.init(SaludInstitucionSchema, SaludInstitucion.config(sequelize));
   SeguridadSistema.init(SeguridadSistemaSchema, SeguridadSistema.config(sequelize));
   PlantelSeguridadSistema.init(
     PlantelSeguridadSistemaSchema,
@@ -187,6 +189,7 @@ function setupModels(sequelize) {
   AlumnoTipoTramite.associate(sequelize.models);
   EdificioNivel.associate(sequelize.models);
   PlantelEdificioNivel.associate(sequelize.models);
+  SaludInstitucion.associate(sequelize.models);
   SeguridadSistema.associate(sequelize.models);
   PlantelSeguridadSistema.associate(sequelize.models);
 }

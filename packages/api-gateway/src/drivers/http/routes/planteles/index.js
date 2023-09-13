@@ -1,4 +1,4 @@
-const { plantelesAdapter } = require('../../adapters');
+const { plantelesAdapter, institucionesAdapter } = require('../../adapters');
 
 const {
   createUpdatePlantelHigieneSchema,
@@ -12,6 +12,11 @@ const {
   findAllEdificiosNivelesSchema,
   createUpdatePlantelNivelesSchema,
   findGroupPlantelNivelesSchema,
+  createSaludInstiucionSchema,
+  findPlantelSaludInstiucionSchema,
+  findOneSaludInstiucionSchema,
+  deleteSaludInstiucionSchema,
+  updateSaludInstiucionSchema,
   findAllSeguridadSistemasSchema,
   findGroupPlantelSeguridadSchema,
   createUpdatePlantelSeguridadSchema,
@@ -120,7 +125,51 @@ async function plantelRouter(fastify, opts, next) {
     plantelesAdapter.findGroupPlantelNiveles,
   );
 
-  // Seguridad Sistemas
+  await fastify.post(
+    '/institucionesSalud',
+    {
+      schema: createSaludInstiucionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    institucionesAdapter.createSaludInstitucion,
+  );
+
+  await fastify.get(
+    '/:plantelId/institucionesSalud',
+    {
+      schema: findPlantelSaludInstiucionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    institucionesAdapter.findPlantelSaludInstituciones,
+  );
+
+  await fastify.get(
+    '/institucionesSalud/:institucionesSaludId',
+    {
+      schema: findOneSaludInstiucionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    institucionesAdapter.findOneSaludInstituciones,
+  );
+
+  await fastify.delete(
+    '/institucionesSalud/:institucionesSaludId',
+    {
+      schema: deleteSaludInstiucionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    institucionesAdapter.deleteSaludInstitucion,
+  );
+
+  await fastify.patch(
+    '/institucionesSalud/:institucionesSaludId',
+    {
+      schema: updateSaludInstiucionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    institucionesAdapter.updateSaludInstitucion,
+
+// Seguridad Sistemas
   await fastify.get(
     '/seguridad',
     {
