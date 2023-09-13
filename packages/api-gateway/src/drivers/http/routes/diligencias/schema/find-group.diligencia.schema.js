@@ -3,7 +3,7 @@ const { responseProperties } = require('./properties/responseProperties');
 const { persona } = require('../../usuarios/schema/properties/persona');
 
 const findGroupDiligencias = {
-  tags: ['Diligence'],
+  tags: ['Diligencias'],
   description: 'Given a solicitudId get their related diligences',
   params: {
     title: 'getOneDiligence',

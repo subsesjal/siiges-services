@@ -47,8 +47,15 @@ const { INSPECTOR_TABLE, InspectorSchema } = require('../models/inspector');
 const { INSPECTOR_PROGRAMA_TABLE, InspectorProgramaSchema } = require('../models/inspectorPrograma');
 const { NOTIFICACION_TABLE, NotificacionSchema } = require('../models/notificacion');
 const { TRAYECTORIA_TABLE, TrayectoriaSchema } = require('../models/trayectoria');
+const { SITUACION_TABLE, SituacionSchema } = require('../models/situacion');
+const { TIPO_TRAMITE_TABLE, TipoTramiteSchema } = require('../models/tipoTramite');
+const { ALUMNO_TABLE, AlumnoSchema } = require('../models/alumno');
+const { ALUMNO_TIPO_TRAMITE_TABLE, AlumnoTipoTramiteSchema } = require('../models/alumnoTipoTramite');
 const { EDIFICIO_NIVEL_TABLE, EdificioNivelSchema } = require('../models/edificioNivel');
 const { PLANTEL_EDIFICIO_NIVEL_TABLE, PlantelEdificioNivelSchema } = require('../models/plantelEdificioNivel');
+const { SALUD_INSTITUCION_TABLE, SaludInstitucionSchema } = require('../models/saludInstitucion');
+const { SEGURIDAD_SISTEMA_TABLE, SeguridadSistemaSchema } = require('../models/seguridadSistema');
+const { PLANTEL_SEGURIDAD_SISTEMA_TABLE, PlantelSeguridadSistemaSchema } = require('../models/plantelSeguridadSistema');
 
 module.exports = {
   async up(queryInterface) {
@@ -107,8 +114,18 @@ module.exports = {
     await queryInterface.createTable(INSPECTOR_PROGRAMA_TABLE, InspectorProgramaSchema);
     await queryInterface.createTable(NOTIFICACION_TABLE, NotificacionSchema);
     await queryInterface.createTable(TRAYECTORIA_TABLE, TrayectoriaSchema);
+    await queryInterface.createTable(SITUACION_TABLE, SituacionSchema);
+    await queryInterface.createTable(TIPO_TRAMITE_TABLE, TipoTramiteSchema);
+    await queryInterface.createTable(ALUMNO_TABLE, AlumnoSchema);
+    await queryInterface.createTable(ALUMNO_TIPO_TRAMITE_TABLE, AlumnoTipoTramiteSchema);
     await queryInterface.createTable(EDIFICIO_NIVEL_TABLE, EdificioNivelSchema);
     await queryInterface.createTable(PLANTEL_EDIFICIO_NIVEL_TABLE, PlantelEdificioNivelSchema);
+    await queryInterface.createTable(SALUD_INSTITUCION_TABLE, SaludInstitucionSchema);
+    await queryInterface.createTable(SEGURIDAD_SISTEMA_TABLE, SeguridadSistemaSchema);
+    await queryInterface.createTable(
+      PLANTEL_SEGURIDAD_SISTEMA_TABLE,
+      PlantelSeguridadSistemaSchema,
+    );
   },
 
   async down(queryInterface) {
@@ -162,7 +179,14 @@ module.exports = {
     await queryInterface.dropTable(INSPECTOR_PROGRAMA_TABLE);
     await queryInterface.dropTable(NOTIFICACION_TABLE);
     await queryInterface.dropTable(TRAYECTORIA_TABLE);
+    await queryInterface.dropTable(SITUACION_TABLE);
+    await queryInterface.dropTable(TIPO_TRAMITE_TABLE);
+    await queryInterface.dropTable(ALUMNO_TABLE);
+    await queryInterface.dropTable(ALUMNO_TIPO_TRAMITE_TABLE);
     await queryInterface.dropTable(EDIFICIO_NIVEL_TABLE);
     await queryInterface.dropTable(PLANTEL_EDIFICIO_NIVEL_TABLE);
+    await queryInterface.dropTable(SALUD_INSTITUCION_TABLE);
+    await queryInterface.dropTable(SEGURIDAD_SISTEMA_TABLE);
+    await queryInterface.dropTable(PLANTEL_SEGURIDAD_SISTEMA_TABLE);
   },
 };

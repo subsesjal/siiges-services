@@ -1,4 +1,4 @@
-const { plantelesAdapter } = require('../../adapters');
+const { plantelesAdapter, institucionesAdapter } = require('../../adapters');
 
 const {
   createUpdatePlantelHigieneSchema,
@@ -12,6 +12,14 @@ const {
   findAllEdificiosNivelesSchema,
   createUpdatePlantelNivelesSchema,
   findGroupPlantelNivelesSchema,
+  createSaludInstiucionSchema,
+  findPlantelSaludInstiucionSchema,
+  findOneSaludInstiucionSchema,
+  deleteSaludInstiucionSchema,
+  updateSaludInstiucionSchema,
+  findAllSeguridadSistemasSchema,
+  findGroupPlantelSeguridadSchema,
+  createUpdatePlantelSeguridadSchema,
 } = require('./schema');
 
 async function plantelRouter(fastify, opts, next) {
@@ -115,6 +123,79 @@ async function plantelRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     plantelesAdapter.findGroupPlantelNiveles,
+  );
+
+  await fastify.post(
+    '/institucionesSalud',
+    {
+      schema: createSaludInstiucionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    institucionesAdapter.createSaludInstitucion,
+  );
+
+  await fastify.get(
+    '/:plantelId/institucionesSalud',
+    {
+      schema: findPlantelSaludInstiucionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    institucionesAdapter.findPlantelSaludInstituciones,
+  );
+
+  await fastify.get(
+    '/institucionesSalud/:institucionesSaludId',
+    {
+      schema: findOneSaludInstiucionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    institucionesAdapter.findOneSaludInstituciones,
+  );
+
+  await fastify.delete(
+    '/institucionesSalud/:institucionesSaludId',
+    {
+      schema: deleteSaludInstiucionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    institucionesAdapter.deleteSaludInstitucion,
+  );
+
+  await fastify.patch(
+    '/institucionesSalud/:institucionesSaludId',
+    {
+      schema: updateSaludInstiucionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    institucionesAdapter.updateSaludInstitucion,
+  );
+
+  // Seguridad Sistemas
+  await fastify.get(
+    '/seguridad',
+    {
+      schema: findAllSeguridadSistemasSchema,
+      onRequest: [fastify.authenticate],
+    },
+    plantelesAdapter.findAllSeguridad,
+  );
+
+  await fastify.post(
+    '/:plantelId/seguridad',
+    {
+      schema: createUpdatePlantelSeguridadSchema,
+      onRequest: [fastify.authenticate],
+    },
+    plantelesAdapter.createUpdatePlantelSeguridad,
+  );
+
+  await fastify.get(
+    '/:plantelId/seguridad',
+    {
+      schema: findGroupPlantelSeguridadSchema,
+      onRequest: [fastify.authenticate],
+    },
+    plantelesAdapter.findGroupPlantelSeguridad,
   );
 
   next();

@@ -2,7 +2,7 @@ const { inspeccionPreguntas } = require('./properties/inspeccionPreguntas');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findAllInspeccionPreguntasSchema = {
-  tags: ['Inspeccion'],
+  tags: ['Inspecciones'],
   description: 'Return the list of inspeccion-preguntas.',
   querystring: {
     type: 'object',
@@ -22,6 +22,8 @@ const findAllInspeccionPreguntasSchema = {
               id: { type: 'integer' },
               ...inspeccionPreguntas,
               inspeccionApartado: { type: 'object', properties: { nombre: { type: 'string' } } },
+              inspeccionCategoria: { type: 'object', properties: { nombre: { type: 'string' }, instruccion: { type: 'string' } } },
+              inspeccionTipoPregunta: { type: 'object', properties: { nombre: { type: 'string' } } },
               ...responseProperties,
             },
           },

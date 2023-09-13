@@ -2,7 +2,7 @@ const { asignatura } = require('./properties/asignatura');
 const { responseProperties } = require('./properties/responseProperties');
 
 const deleteAsignaturaSchema = {
-  tags: ['Asignatura'],
+  tags: ['Asignaturas'],
   description: 'Given an asignaturaId delete an asignatura',
   params: {
     title: 'delete asignatura',

@@ -2,7 +2,7 @@ const { inspeccionObservacion } = require('./properties/inspeccionObservacion');
 const { responseProperties } = require('./properties/responseProperties');
 
 const createInspeccionObservacionSchema = {
-  tags: ['Inspeccion'],
+  tags: ['Inspecciones'],
   description: 'Save a record of inspeccion-observacion in database.',
   params: {
     type: 'object',

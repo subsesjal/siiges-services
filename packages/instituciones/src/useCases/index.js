@@ -15,6 +15,9 @@ const {
   findAllEdificiosNiveles,
   createUpdatePlantelNiveles,
   findGroupPlantelNiveles,
+  findAllSeguridad,
+  findGroupPlantelSeguridad,
+  createUpdatePlantelSeguridad,
 } = require('./db/planteles');
 
 const {
@@ -33,6 +36,14 @@ const {
   findOneRatificacionNombre,
   deleteRatificacionNombre,
 } = require('./db/ratificaciones');
+
+const {
+  createSaludInstitucion,
+  findPlantelSaludInstituciones,
+  findOneSaludInstituciones,
+  deleteSaludInstitucion,
+  updateSaludInstitucion,
+} = require('./db/saludInstitucion');
 
 module.exports = {
   findAllInstituciones,
@@ -59,4 +70,12 @@ module.exports = {
   findAllEdificiosNiveles,
   createUpdatePlantelNiveles,
   findGroupPlantelNiveles,
+  createSaludInstitucion,
+  findPlantelSaludInstituciones,
+  findOneSaludInstituciones,
+  deleteSaludInstitucion,
+  updateSaludInstitucion,
+  findAllSeguridad,
+  findGroupPlantelSeguridad,
+  createUpdatePlantelSeguridad,
 };

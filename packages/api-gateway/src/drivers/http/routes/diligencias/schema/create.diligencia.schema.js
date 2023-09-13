@@ -3,7 +3,7 @@ const { responseProperties } = require('./properties/responseProperties');
 const { persona } = require('../../usuarios/schema/properties/persona');
 
 const createDiligencias = {
-  tags: ['Diligencia'],
+  tags: ['Diligencias'],
   description: 'Given an object with request data create a diligencia',
   body: {
     title: 'createDiligencia',
