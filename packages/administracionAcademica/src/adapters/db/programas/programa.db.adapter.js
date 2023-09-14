@@ -20,7 +20,7 @@ const include = [{
 
 const where = {
   acuerdoRvoe: { [Op.not]: null },
-  fechaSurteEfecto: { [Op.lt]: new Date() },
+  fechaSurteEfecto: { [Op.lte]: new Date() },
 };
 
 module.exports = {
