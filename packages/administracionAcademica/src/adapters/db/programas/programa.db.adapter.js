@@ -20,11 +20,11 @@ const include = [{
 
 const where = {
   acuerdoRvoe: { [Op.not]: null },
-  fechaSurteEfecto: { [Op.gt]: new Date() },
+  fechaSurteEfecto: { [Op.lte]: new Date() },
 };
 
 module.exports = {
-  findAllProgramaQuery: findAllQuery(Programa),
+  findAllProgramasQuery: findAllQuery(Programa),
   findPlantelProgramasQuery: findAllQuery(Programa),
   findInstitucionQuery: findAllQuery(Plantel),
   includeProgramasQuery: include,
