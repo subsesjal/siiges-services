@@ -5,12 +5,12 @@ async function findAllInspectoresProgramas(req, reply) {
   try {
     Logger.info('[Inspector programas]: Creating inspector program');
 
-    const InspectorProgram = await this.inspeccionServices.findAllInspectoresProgramas();
+    const inspectoresPrograma = await this.inspeccionServices.findAllInspectores();
 
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: InspectorProgram });
+      .send({ data: inspectoresPrograma });
   } catch (error) {
     return errorHandler(error, reply);
   }
