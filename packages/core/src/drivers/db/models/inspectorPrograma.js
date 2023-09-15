@@ -1,6 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PROGRAMA_TABLE } = require('./programa');
 const { INSPECTOR_TABLE } = require('./inspector');
+const { INSPECCION_TABLE } = require('./inspeccion');
 
 const INSPECTOR_PROGRAMA_TABLE = 'inspectores_programas';
 
@@ -11,7 +12,6 @@ const InspectorProgramaSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-
   inspectorId: {
     allowNull: false,
     type: DataTypes.INTEGER,
@@ -30,6 +30,17 @@ const InspectorProgramaSchema = {
       key: 'id',
     },
   },
+  inspeccionId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'inspeccion_id',
+    unique: true,
+    references: {
+      model: INSPECCION_TABLE,
+      key: 'id',
+    },
+  },
+
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
@@ -53,6 +64,7 @@ class InspectorPrograma extends Model {
   static associate(models) {
     this.belongsTo(models.Inspector, { as: 'inspector' });
     this.belongsTo(models.Programa, { as: 'programa' });
+    this.belongsTo(models.Inspeccion, { as: 'inspeccion' });
   }
 
   static config(sequelize) {

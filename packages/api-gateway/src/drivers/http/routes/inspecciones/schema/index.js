@@ -4,7 +4,7 @@ const createInspeccionRespuestasSchema = require('./create.inspeccion-respuestas
 const createInspeccionObservacionSchema = require('./create.inspeccion-observacion.schema');
 const deleteInspeccionSchema = require('./delete.inspeccion.schema');
 const createInspectoresProgramasSchema = require('./craate.inspectores-programas.schema');
-const findAllInspectoresProgramasSchema = require('./find-all.inspectores-programas');
+const findAllInspectoresProgramasSchema = require('./find-all.inspectores-programas.schema');
 const { deleteInspectoresProgramasSchema } = require('./delete.inspectores-programas.schema');
 
 module.exports = {
