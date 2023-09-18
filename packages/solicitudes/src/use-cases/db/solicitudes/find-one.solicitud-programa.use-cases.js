@@ -13,7 +13,10 @@ const findOneSolicitudPrograma = (findOneSolicitudProgramaQuery) => async (ident
             { association: 'estado' },
             { association: 'municipio' },
           ],
-        }],
+        }, {
+          association: 'institucion',
+        },
+        ],
       }],
   },
   {
