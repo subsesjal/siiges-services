@@ -35,7 +35,7 @@ module.exports = {
   createInspectorProgramasQuery: createQuery(InspectorPrograma),
   findOneProgramasQuery: findOneQuery(Programa),
   findOneInspectorQuery: findOneQuery(Inspector),
-  findAllInspectorProgramasQuery: findAllQuery(InspectorPrograma),
+  findAllInspectoresQuery: findAllQuery(Inspector),
   findOneInspectoresProgramasQuery: findOneQuery(InspectorPrograma),
   deleteInspectoresProgramasQuery: deleteAndFindQuery(InspectorPrograma),
   updateInspectoresProgramasQuery: updateAndFindQuery(InspectorPrograma),

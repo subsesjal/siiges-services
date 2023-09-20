@@ -10,7 +10,6 @@ const InspectorSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-
   personaId: {
     allowNull: false,
     type: DataTypes.INTEGER,
@@ -39,9 +38,11 @@ const InspectorSchema = {
     defaultValue: null,
   },
 };
+
 class Inspector extends Model {
   static associate(models) {
     this.belongsTo(models.Persona, { as: 'persona' });
+    this.hasMany(models.InspectorPrograma, { as: 'inspectorPrograma', foreignKey: 'inspectorId' });
   }
 
   static config(sequelize) {

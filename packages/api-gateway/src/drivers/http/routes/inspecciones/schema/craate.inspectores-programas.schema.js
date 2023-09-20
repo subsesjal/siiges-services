@@ -1,4 +1,4 @@
-const { inspectoresProgramas } = require('./properties/inspectoresProgramas');
+const { inspectoresProgramas } = require('./properties/inspectorPrograma');
 const { responseProperties } = require('./properties/responseProperties');
 
 const createInspectoresProgramasSchema = {
@@ -9,14 +9,14 @@ const createInspectoresProgramasSchema = {
     properties: {
       ...inspectoresProgramas,
     },
-    required: ['inspectorId', 'programaId'],
+    required: ['inspectorId', 'programaId', 'inspeccionId'],
   },
   reponse: {
     201: {
       type: 'object',
       properties: {
         data: {
-          type: 'array',
+          type: 'object',
           properties: {
             id: { type: 'integer' },
             ...inspectoresProgramas,

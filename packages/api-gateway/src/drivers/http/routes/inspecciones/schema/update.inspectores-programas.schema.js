@@ -1,4 +1,4 @@
-const { inspectoresProgramas } = require('./properties/inspectoresProgramas');
+const { inspectoresProgramas } = require('./properties/inspectorPrograma');
 const { responseProperties } = require('./properties/responseProperties');
 
 const updateInspectoresProgramasSchema = {

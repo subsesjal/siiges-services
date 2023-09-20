@@ -7,6 +7,7 @@ const { domicilio } = require('../../usuarios/schema/properties/domicilio');
 const { estado } = require('../../usuarios/schema/properties/estado');
 const { municipio } = require('../../usuarios/schema/properties/municipio');
 const { responseProperties } = require('./properties/responseProperties');
+const { institucion } = require('../../instituciones/schema/properties/institucion');
 
 const findOneSolicitudProgramaSchema = {
   tags: ['Solicitudes'],
@@ -61,6 +62,14 @@ const findOneSolicitudProgramaSchema = {
                     id: { type: 'integer' },
                     ...plantel,
                     ...responseProperties,
+                    institucion: {
+                      type: 'object',
+                      properties: {
+                        id: { type: 'integer' },
+                        ...institucion,
+                        ...responseProperties,
+                      },
+                    },
                     domicilio: {
                       type: 'object',
                       properties: {
