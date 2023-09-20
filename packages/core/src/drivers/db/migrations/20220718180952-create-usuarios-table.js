@@ -56,6 +56,7 @@ const { PLANTEL_EDIFICIO_NIVEL_TABLE, PlantelEdificioNivelSchema } = require('..
 const { SALUD_INSTITUCION_TABLE, SaludInstitucionSchema } = require('../models/saludInstitucion');
 const { SEGURIDAD_SISTEMA_TABLE, SeguridadSistemaSchema } = require('../models/seguridadSistema');
 const { PLANTEL_SEGURIDAD_SISTEMA_TABLE, PlantelSeguridadSistemaSchema } = require('../models/plantelSeguridadSistema');
+const { ASOCIACIONES_TABLE, AsociacionesSchema } = require('../models/asociaciones');
 
 module.exports = {
   async up(queryInterface) {
@@ -126,6 +127,7 @@ module.exports = {
       PLANTEL_SEGURIDAD_SISTEMA_TABLE,
       PlantelSeguridadSistemaSchema,
     );
+    await queryInterface.createTable(ASOCIACIONES_TABLE, AsociacionesSchema);
   },
 
   async down(queryInterface) {
@@ -188,5 +190,6 @@ module.exports = {
     await queryInterface.dropTable(SALUD_INSTITUCION_TABLE);
     await queryInterface.dropTable(SEGURIDAD_SISTEMA_TABLE);
     await queryInterface.dropTable(PLANTEL_SEGURIDAD_SISTEMA_TABLE);
+    await queryInterface.dropTable(ASOCIACIONES_TABLE);
   },
 };
