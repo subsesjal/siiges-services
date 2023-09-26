@@ -68,7 +68,8 @@ const getToken = async (data) => {
 const createUserAndToken = async (data) => {
   const user = await createUserDb(data);
   const token = await getToken(user);
-  return { user, token };
+  const headers = updateToken(token);
+  return { user, token, headers };
 };
 
 module.exports = {

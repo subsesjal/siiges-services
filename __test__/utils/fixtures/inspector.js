@@ -1,5 +1,5 @@
-const { createUserDb } = require('./server');
-const { models } = require('../../../packages/core/src/drivers/db/connection');
+const { createUserAndToken } = require('./server');
+// const { models } = require('../../../packages/core/src/drivers/db/connection');
 
 const createUserInspector = {
   usuario: 'inspector',
@@ -7,10 +7,35 @@ const createUserInspector = {
   correo: 'inspector@gmail.com',
   contrasena: 'Qwerty1234@',
 };
+
+const solicitud = {
+  programaId: 3,
+  estatusInspeccionId: 1,
+  fechaAsignada: '2022-10-28T15:24:07.000Z',
+  folio: 'LI3032345',
+};
+
+const inspectorProgramas = {
+  programaId: 3,
+  inspectorId: 1,
+  inspeccionId: 1,
+};
+
+const inspectorProgramasError = {
+  programaId: 3,
+  inspectorId: 1,
+  inspeccionId: 100,
+};
+
 const createInpector = async () => {
-  const { personaId } = await createUserDb(createUserInspector);
-  const inspector = await models.Inspector.create({ personaId });
+  const inspector = await createUserAndToken(createUserInspector);
+  // const inspector = await models.Inspector.create({ personaId });
   return inspector;
 };
 
-module.exports = { createInpector };
+module.exports = {
+  createInpector,
+  solicitud,
+  inspectorProgramas,
+  inspectorProgramasError,
+};
