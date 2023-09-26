@@ -9,19 +9,28 @@ const {
 async function docenteRouter(fastify, opts, next) {
   await fastify.post(
     '/',
-    { schema: createEvaluacionesSchema },
+    {
+      schema: createEvaluacionesSchema,
+      onRequest: [fastify.authenticate],
+    },
     solicitudesAdapter.createEvaluaciones,
   );
 
   await fastify.get(
     '/:evaluacionId',
-    { schema: findOneEvaluacionesSchema },
+    {
+      schema: findOneEvaluacionesSchema,
+      onRequest: [fastify.authenticate],
+    },
     solicitudesAdapter.findOneEvaluaciones,
   );
 
   await fastify.patch(
     '/:evaluacionId',
-    { schema: updateEvaluacionesSchema },
+    {
+      schema: updateEvaluacionesSchema,
+      onRequest: [fastify.authenticate],
+    },
     solicitudesAdapter.updateEvaluaciones,
   );
 

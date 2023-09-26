@@ -10,7 +10,7 @@ const {
   createEvaluaciones,
   findOneEvaluaciones,
   updateEvaluaciones,
-} = require('../../solicitud/evaluaciones');
+} = require('./evaluaciones');
 
 module.exports = {
   createSolicitudPrograma,

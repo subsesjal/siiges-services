@@ -6,7 +6,7 @@ async function createEvaluaciones(req, reply) {
     const { body: data } = req;
 
     Logger.info('[Evaluaciones]: creating evaluations');
-    const evaluacion = await this.institucionServices.createEvaluaciones(data);
+    const evaluacion = await this.solicitudServices.createEvaluaciones(data);
 
     return reply
       .code(201)

@@ -45,8 +45,9 @@ const EvaluacionSchema = {
   fecha: {
     type: DataTypes.DATE,
   },
-  cumplimineto: {
+  porcentajeCumplimiento: {
     type: DataTypes.STRING,
+    field: 'porcentaje_cumplimiento',
   },
   valoracion: {
     type: DataTypes.TEXT,

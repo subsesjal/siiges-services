@@ -3,11 +3,11 @@ const errorHandler = require('../../../../utils/errorHandler');
 
 async function findOneEvaluaciones(req, reply) {
   try {
-    const { evaluacionId } = req.params;
+    const { evaluacionId: id } = req.params;
 
     Logger.info('[Evaluaciones]: creating evaluations');
-    const evaluacion = await this.institucionServices.findOneEvaluaciones({
-      evaluacionId,
+    const evaluacion = await this.solicitudServices.findOneEvaluaciones({
+      id,
     });
 
     return reply

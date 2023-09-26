@@ -3,13 +3,13 @@ const errorHandler = require('../../../../utils/errorHandler');
 
 async function updateEvaluaciones(req, reply) {
   try {
-    const { evaluacionId } = req.params;
+    const evaluacionId = req.params;
     const { body: data } = req;
 
     Logger.info('[Evaluaciones]: creating evaluations');
-    const evaluacionUpdate = await this.institucionServices.updateEvaluaciones({
-      evaluacionId,
-      data,
+    const evaluacionUpdate = await this.solicitudServices.updateEvaluaciones({
+      ...data,
+      ...evaluacionId,
     });
 
     return reply
