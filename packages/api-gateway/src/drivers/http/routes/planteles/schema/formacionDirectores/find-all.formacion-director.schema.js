@@ -8,7 +8,7 @@ const findAllFormacionDirectorSchema = {
   params: {
     type: 'object',
     properties: {
-      ...formacionDirector.directorId,
+      directorId: formacionDirector.directorId,
     },
     required: ['directorId'],
   },

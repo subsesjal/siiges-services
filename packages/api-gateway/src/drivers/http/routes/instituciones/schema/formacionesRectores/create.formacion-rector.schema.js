@@ -8,7 +8,7 @@ const createFormacionRectorSchema = {
   params: {
     type: 'object',
     properties: {
-      ...formacionRector.rectorId,
+      rectorId: formacionRector.rectorId,
     },
     required: ['rectorId'],
   },
