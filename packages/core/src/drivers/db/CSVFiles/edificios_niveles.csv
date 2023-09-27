@@ -5,3 +5,4 @@ id,nombre,descripcion,created_at
 4,cuarto_piso,Cuarto piso,2018-08-29 0:00:00
 10,sotano,Sotano,2018-08-29 0:00:00
 20,planta_baja,Planta baja,2018-08-29 0:00:00
+

@@ -1,5 +1,5 @@
-id,nombre,descripcion,created_at
-1,Escolarizada,Modalidad escolarizada de un programa de estudios,2018-11-11 0:00:00
-2,No escolarizada,Modalidad no escolarizada de un programa de estudios,2018-11-21 0:00:00
-3,Mixta,Modalidad mixta de un programa de estudios,2018-11-21 0:00:00
+id,nombre,descripcion,created_at,updated_at,deleted_at
+1,Escolarizada,Modalidad escolarizada de un programa de estudios,2018-11-11 00:00:00
+2,No escolarizada,Modalidad no escolarizada de un programa de estudios,2018-11-21 00:00:00
+3,Mixta,Modalidad mixta de un programa de estudios,2018-11-21 00:00:00
 4,Dual,Modalidad dual de un programa de estudios,2022-04-06 10:52:58
