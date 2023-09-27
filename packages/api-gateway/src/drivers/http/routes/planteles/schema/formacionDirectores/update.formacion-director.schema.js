@@ -4,7 +4,7 @@ const { responseProperties } = require('../properties/responseProperties');
 
 const updateFormacionDirectorSchema = {
   tags: ['Formacion'],
-  description: 'Update the information for the formation of a rector. It is created with the information from an object.',
+  description: 'Update the information for the formation of a director. It is created with the information from an object.',
   params: {
     type: 'object',
     properties: {

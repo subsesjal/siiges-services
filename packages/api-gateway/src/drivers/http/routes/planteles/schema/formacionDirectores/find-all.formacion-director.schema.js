@@ -2,9 +2,9 @@ const { formacion } = require('../../../instituciones/schema/formacionesRectores
 const { formacionDirector } = require('./properties/formacionDirector');
 const { responseProperties } = require('../properties/responseProperties');
 
-const createFormacionDirectorSchema = {
+const findAllFormacionDirectorSchema = {
   tags: ['Formacion'],
-  description: 'Create the information for the formation of a rector. It is created with the information from an object.',
+  description: 'Get all the formations of a director in institutions.',
   params: {
     type: 'object',
     properties: {
@@ -12,23 +12,19 @@ const createFormacionDirectorSchema = {
     },
     required: ['directorId'],
   },
-  body: {
-    type: 'object',
-    properties: {
-      ...formacion,
-    },
-    required: ['nivelId', 'nombre', 'institucion', 'fechaGraduado'],
-  },
   response: {
-    201: {
+    200: {
       type: 'object',
       properties: {
         data: {
-          type: 'object',
-          properties: {
-            id: { type: 'integer' },
-            ...formacion,
-            ...responseProperties,
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              id: { type: 'integer' },
+              ...formacion,
+              ...responseProperties,
+            },
           },
         },
       },
@@ -36,4 +32,4 @@ const createFormacionDirectorSchema = {
   },
 };
 
-module.exports = { createFormacionDirectorSchema };
+module.exports = { findAllFormacionDirectorSchema };
