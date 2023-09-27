@@ -1,17 +1,16 @@
 const { persona } = require('../../usuarios/schema/properties/persona');
-const { director } = require('./properties/director');
-const { responseProperties } = require('./properties/responseProperties');
+const { director } = require('../../instituciones/schema/properties/director');
+const { responseProperties } = require('../../instituciones/schema/properties/responseProperties');
 
-const updateDirectorSchema = {
+const createDirectorSchema = {
   tags: ['Plantel'],
-  description: 'Given an object with director ID, then update a director in database.',
+  description: 'Given an object with director required data, then save a director in database.',
   params: {
     type: 'object',
     properties: {
-      directorId: { type: 'integer' },
       plantelId: { type: 'integer' },
     },
-    required: ['directorId', 'plantelId'],
+    required: ['plantelId'],
   },
   body: {
     type: 'object',
@@ -22,11 +21,13 @@ const updateDirectorSchema = {
         properties: {
           ...persona,
         },
+        required: ['nombre', 'apellidoPaterno'],
       },
     },
+    required: ['persona'],
   },
   response: {
-    200: {
+    201: {
       type: 'object',
       properties: {
         data: {
@@ -50,4 +51,4 @@ const updateDirectorSchema = {
   },
 };
 
-module.exports = updateDirectorSchema;
+module.exports = createDirectorSchema;
