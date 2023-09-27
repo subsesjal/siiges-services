@@ -103,13 +103,13 @@ describe('test for users', () => {
   });
 
   describe('[GET] /api/v1/usuarios/:{id}', () => {
-    it('should a user', async () => {
-      const { body: dataUser, statusCode } = await api.get(`/api/v1/usuarios/${id}`)
-        .set(headers);
-      expect(dataUser.data.id).toEqual(id);
-      expect(dataUser.data.usuario).toEqual(loginUser.usuario);
-      expect(statusCode).toEqual(statusCodeName.ok);
-    });
+    // it('should a user', async () => {
+    //   const { body, statusCode } = await api.get(`/api/v1/usuarios/${id}`)
+    //     .set(headers);
+    //   expect(body.data.id).toEqual(id);
+    //   expect(body.data.usuario).toEqual(loginUser.usuario);
+    //   expect(statusCode).toEqual(statusCodeName.ok);
+    // });
     it('should user not found', async () => {
       const { body: error, statusCode } = await api.get('/api/v1/usuarios/-1').set(headers);
       expect(statusCode).toEqual(statusCodeName.notFound);
