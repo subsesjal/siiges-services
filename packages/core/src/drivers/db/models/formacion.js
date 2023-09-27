@@ -54,7 +54,7 @@ const FormacionSchema = {
 };
 
 class Formacion extends Model {
-  static associations(models) {
+  static associate(models) {
     this.belongsTo(models.Nivel, { as: 'nivel' });
   }
 

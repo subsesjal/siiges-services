@@ -49,7 +49,7 @@ const FormacionRectorSchema = {
 };
 
 class FormacionRector extends Model {
-  static associations(models) {
+  static associate(models) {
     this.belongsTo(models.Formacion, { as: 'formacion' });
     this.belongsTo(models.Rector, { as: 'rector' });
   }
