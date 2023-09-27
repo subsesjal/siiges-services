@@ -2,10 +2,10 @@ id,nombre,descripcion,created_at
 1,Aula,Aulas,2018-08-08 00:00:00
 2,Cubículo,Área administrativa,2018-08-08 00:00:00
 3,Auditorio,Área administrativa,2018-08-08 00:00:00
-4,Laboratorio físico",Otros laboratorios y/o talleres,2018-08-08 00:00:00
+4,Laboratorio físico,Otros laboratorios y/o talleres,2018-08-08 00:00:00
 5,Laboratorio virtual,Laboratorio virtual,2018-08-08 00:00:00
 6,Taller físico,Otros talleres,2018-08-08 00:00:00
-7,Taller virtua",Taller virtual,2018-08-08 00:00:00
+7,Taller virtual,Taller virtual,2018-08-08 00:00:00
 8,Laboratorio de cómputo,Centro de cómputo,2018-08-08 00:00:00
 9,Biblioteca física,Centro de documentación o biblioteca,2018-08-08 00:00:00
 10,Biblioteca virtual,Biblioteca virtual,2018-08-08 00:00:00
