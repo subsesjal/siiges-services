@@ -56,6 +56,9 @@ const { PLANTEL_EDIFICIO_NIVEL_TABLE, PlantelEdificioNivelSchema } = require('..
 const { SALUD_INSTITUCION_TABLE, SaludInstitucionSchema } = require('../models/saludInstitucion');
 const { SEGURIDAD_SISTEMA_TABLE, SeguridadSistemaSchema } = require('../models/seguridadSistema');
 const { PLANTEL_SEGURIDAD_SISTEMA_TABLE, PlantelSeguridadSistemaSchema } = require('../models/plantelSeguridadSistema');
+const { CUMPLIMIENTO_TABLE, CumplimientoSchema } = require('../models/cumplimiento');
+const { EVALUACION_TABLE, EvaluacionSchema } = require('../models/evaluacion');
+const { EVALUADOR_TABLE, EvaluadorSchema } = require('../models/evaluador');
 
 module.exports = {
   async up(queryInterface) {
@@ -126,6 +129,9 @@ module.exports = {
       PLANTEL_SEGURIDAD_SISTEMA_TABLE,
       PlantelSeguridadSistemaSchema,
     );
+    await queryInterface.createTable(EVALUADOR_TABLE, EvaluadorSchema);
+    await queryInterface.createTable(CUMPLIMIENTO_TABLE, CumplimientoSchema);
+    await queryInterface.createTable(EVALUACION_TABLE, EvaluacionSchema);
   },
 
   async down(queryInterface) {
@@ -188,5 +194,8 @@ module.exports = {
     await queryInterface.dropTable(SALUD_INSTITUCION_TABLE);
     await queryInterface.dropTable(SEGURIDAD_SISTEMA_TABLE);
     await queryInterface.dropTable(PLANTEL_SEGURIDAD_SISTEMA_TABLE);
+    await queryInterface.dropTable(EVALUADOR_TABLE);
+    await queryInterface.dropTable(CUMPLIMIENTO_TABLE);
+    await queryInterface.dropTable(EVALUACION_TABLE);
   },
 };

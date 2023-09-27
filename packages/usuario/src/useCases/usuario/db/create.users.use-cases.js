@@ -1,7 +1,12 @@
 const { encrypStringHmacAlgorithm } = require('@siiges-services/authentication');
 const boom = require('@hapi/boom');
 
-const createUser = (createQuery, findOneUserQuery, createInspector) => async (data) => {
+const createUser = (
+  createQuery,
+  findOneUserQuery,
+  createInspector,
+  createEvaluador,
+) => async (data) => {
   const include = [{
     association: 'persona',
     include: [{ association: 'domicilio' }],
@@ -29,9 +34,15 @@ const createUser = (createQuery, findOneUserQuery, createInspector) => async (da
 
   delete newUser.dataValues.contrasena;
 
-  if (data.rolId === 6) {
-    await createInspector({ personaId: newUser.personaId });
+  // Create sub roles
+  const roles = {
+    5: createEvaluador,
+    6: createInspector,
+  };
+  if (Object.keys(roles).includes(data.rolId.toString())) {
+    await roles[data.rolId]({ personaId: newUser.personaId });
   }
+
   return newUser;
 };
 
