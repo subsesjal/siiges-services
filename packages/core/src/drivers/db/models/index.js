@@ -56,6 +56,9 @@ const { PlantelEdificioNivel, PlantelEdificioNivelSchema } = require('./plantelE
 const { SaludInstitucion, SaludInstitucionSchema } = require('./saludInstitucion');
 const { SeguridadSistema, SeguridadSistemaSchema } = require('./seguridadSistema');
 const { PlantelSeguridadSistema, PlantelSeguridadSistemaSchema } = require('./plantelSeguridadSistema');
+const { Cumplimiento, CumplimientoSchema } = require('./cumplimiento');
+const { Evaluacion, EvaluacionSchema } = require('./evaluacion');
+const { Evaluador, EvaluadorSchema } = require('./evaluador');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -132,6 +135,9 @@ function setupModels(sequelize) {
     PlantelSeguridadSistemaSchema,
     PlantelSeguridadSistema.config(sequelize),
   );
+  Cumplimiento.init(CumplimientoSchema, Cumplimiento.config(sequelize));
+  Evaluacion.init(EvaluacionSchema, Evaluacion.config(sequelize));
+  Evaluador.init(EvaluadorSchema, Evaluador.config(sequelize));
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -192,6 +198,9 @@ function setupModels(sequelize) {
   SaludInstitucion.associate(sequelize.models);
   SeguridadSistema.associate(sequelize.models);
   PlantelSeguridadSistema.associate(sequelize.models);
+  Cumplimiento.associate(sequelize.models);
+  Evaluacion.associate(sequelize.models);
+  Evaluador.associate(sequelize.models);
 }
 
 module.exports = setupModels;

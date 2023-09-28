@@ -5,6 +5,7 @@ const {
 const createSolicitudPrograma = require('./create.solicitud-programa.use-cases');
 const findAllSolicitudesProgramas = require('./find-all.solicitudes-programas.use-cases');
 const findOneSolicitudPrograma = require('./find-one.solicitud-programa.use-cases');
+const findOneSolicitudDetalle = require('./find-one.solicitud-detalle.use-cases');
 const findSolicitudesUsuario = require('./find.solicitudes-usuario.use-cases');
 const updateSolicitudPrograma = require('./update.solicitud-programa.use-cases');
 const setSolicitudSeccion = require('./set.solicitud-seccion.use-cases');
@@ -50,5 +51,8 @@ module.exports = {
     solicitudes.findOneSolicitudSeccionQuery,
     solicitudes.createSolicitudSeccionQuery,
     solicitudes.updateSolicitudSeccionQuery,
+  ),
+  findOneSolicitudDetalle: findOneSolicitudDetalle(
+    solicitudes.findOneSolicitudProgramaQuery,
   ),
 };

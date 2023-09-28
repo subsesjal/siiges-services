@@ -1,11 +1,17 @@
 const createSolicitudPrograma = require('./create.handlers.solicitud-programa.adapters');
 const findAllSolicitudesProgramas = require('./find-all.handlers.solicitudes-programas.adapters');
 const findOneSolicitudPrograma = require('./find-one.handlers.solicitud-programa.adapters');
+const findOneSolicitudDetalle = require('./find-one.handlers.solicitud-detalle.adapters');
 const findSolicitudesUsuario = require('./find.handlers.solicitudes-usuario.adapters');
 const updateSolicitudPrograma = require('./update.handlers.solicitud-programa.adapters');
 const setSolicitudSeccion = require('./set.handlers.solicitud-seccion.adapters');
 const updateSolcitudSeccionObservacion = require('./update.handlers.seccion-observacion.adapters');
 const findOneSolicitudSeccion = require('./find-one.handlers.solicitud-seccion.adapters');
+const {
+  createEvaluaciones,
+  findOneEvaluaciones,
+  updateEvaluaciones,
+} = require('./evaluaciones');
 
 module.exports = {
   createSolicitudPrograma,
@@ -16,4 +22,8 @@ module.exports = {
   setSolicitudSeccion,
   updateSolcitudSeccionObservacion,
   findOneSolicitudSeccion,
+  createEvaluaciones,
+  findOneEvaluaciones,
+  updateEvaluaciones,
+  findOneSolicitudDetalle,
 };
