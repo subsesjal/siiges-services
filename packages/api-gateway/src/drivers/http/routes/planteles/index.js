@@ -26,6 +26,8 @@ const {
   findAllSeguridadSistemasSchema,
   findGroupPlantelSeguridadSchema,
   createUpdatePlantelSeguridadSchema,
+  createDirectorSchema,
+  updateDirectorSchema,
 } = require('./schema');
 
 async function plantelRouter(fastify, opts, next) {
@@ -238,6 +240,25 @@ async function plantelRouter(fastify, opts, next) {
       schema: findOneFormacionDirectorSchema,
     },
     plantelesAdapter.findOneFormacionDirector,
+
+  // Directores
+  await fastify.post(
+    '/:plantelId/director',
+    {
+      schema: createDirectorSchema,
+      onRequest: [fastify.authenticate],
+    },
+    institucionesAdapter.createDirectorPlantel,
+  );
+
+  await fastify.patch(
+    '/:plantelId/director/:directorId',
+    {
+      schema: updateDirectorSchema,
+      onRequest: [fastify.authenticate],
+    },
+    institucionesAdapter.updateDirectorPlantel,
+
   );
 
   next();

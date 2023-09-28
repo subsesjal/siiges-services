@@ -6,7 +6,7 @@ const {
   updateEvaluacionesSchema,
 } = require('./schema');
 
-async function docenteRouter(fastify, opts, next) {
+async function evaluacionRouter(fastify, opts, next) {
   await fastify.post(
     '/',
     {
@@ -37,4 +37,4 @@ async function docenteRouter(fastify, opts, next) {
   next();
 }
 
-module.exports = docenteRouter;
+module.exports = evaluacionRouter;
