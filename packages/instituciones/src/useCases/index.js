@@ -18,6 +18,10 @@ const {
   findAllSeguridad,
   findGroupPlantelSeguridad,
   createUpdatePlantelSeguridad,
+  createFormacionDirector,
+  findAllFormacionDirector,
+  findOneFormacionDirector,
+  updateFormacionDirector,
 } = require('./db/planteles');
 
 const {
@@ -28,6 +32,10 @@ const {
   createInstitucion,
   updateInstitucion,
   deleteInstitucion,
+  createFormacionRector,
+  findAllFormacionRector,
+  findOneFormacionRector,
+  updateFormacionRector,
 } = require('./db/instituciones');
 
 const {
@@ -78,4 +86,12 @@ module.exports = {
   findAllSeguridad,
   findGroupPlantelSeguridad,
   createUpdatePlantelSeguridad,
+  createFormacionRector,
+  findAllFormacionRector,
+  findOneFormacionRector,
+  updateFormacionRector,
+  createFormacionDirector,
+  findAllFormacionDirector,
+  findOneFormacionDirector,
+  updateFormacionDirector,
 };
