@@ -9,6 +9,7 @@ const findAllInstituciones = require('./find-all.handlers.instituciones.adapters
 const findOneInstitucionUsuario = require('./find-one.handlers.institucion-ususario.adapters');
 const findOneInstitucion = require('./find-one.handlers.institucion.adapters');
 const findOnePlantel = require('./find-one.handlers.plantel.adapters');
+const findOnePlantelDetalles = require('./find-one.handlers.plantel-detalles.adapters');
 const findOneRatificacionNombre = require('./find-one.handlers.ratificacion-nombre.adapters');
 const findPlantelesInstitucion = require('./find.handlers.planteles-institucion.adapters');
 const updateDirectorPlantel = require('./update.handlers.director-plantel.adapters');
@@ -33,6 +34,7 @@ module.exports = {
   findOneInstitucionUsuario,
   findOneInstitucion,
   findOnePlantel,
+  findOnePlantelDetalles,
   findOneRatificacionNombre,
   findPlantelesInstitucion,
   updateDirectorPlantel,

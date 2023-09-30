@@ -28,6 +28,7 @@ const {
 
 const createPlantel = require('./create.planteles.use-cases');
 const findOnePlantel = require('./find-one.planteles.use-case');
+const findOnePlantelDetalles = require('./find-one.planteles-detalles.use-case');
 const updatePlantel = require('./update.planteles.use-cases');
 const deletePlantel = require('./delete.planteles.use-cases');
 const createDirectorPlantel = require('./create.director-plantel.use-cases');
@@ -50,6 +51,10 @@ module.exports = {
     createDirectorQuery,
   ),
   findOnePlantel: findOnePlantel(
+    findOneInstitucionQuery,
+    findOnePlantelQuery,
+  ),
+  findOnePlantelDetalles: findOnePlantelDetalles(
     findOneInstitucionQuery,
     findOnePlantelQuery,
   ),
