@@ -74,6 +74,9 @@ const PlantelSchema = {
   especificaciones: {
     type: DataTypes.STRING,
   },
+  dimensiones: {
+    type: DataTypes.STRING,
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
