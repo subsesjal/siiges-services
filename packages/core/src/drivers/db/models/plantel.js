@@ -74,9 +74,9 @@ const PlantelSchema = {
   especificaciones: {
     type: DataTypes.STRING,
   },
-  dimensiones: {
+  /* dimensiones: {
     type: DataTypes.STRING,
-  },
+  }, */
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
@@ -106,6 +106,8 @@ class Plantel extends Model {
     this.hasMany(models.PlantelEdificioNivel, { as: 'plantelEdificioNiveles', foreignKey: 'plantelId' });
     this.hasMany(models.PlantelSeguridadSistema, { as: 'plantelSeguridadSistemas', foreignKey: 'plantelId' });
     this.hasMany(models.PlantelHigiene, { as: 'plantelHigienes', foreignKey: 'plantelId' });
+    this.hasMany(models.SaludInstitucion, { as: 'saludInstituciones', foreignKey: 'plantelId' });
+    this.hasMany(models.Infraestructura, { as: 'infraestructuras', foreignKey: 'plantelId' });
   }
 
   static config(sequelize) {

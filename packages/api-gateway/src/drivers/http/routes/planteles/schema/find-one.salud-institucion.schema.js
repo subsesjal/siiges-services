@@ -1,7 +1,7 @@
-const { saludInstiucion } = require('./properties/saludInstiucion');
+const { saludInstitucion } = require('./properties/saludInstitucion');
 const { responseProperties } = require('./properties/responseProperties');
 
-const findOneSaludInstiucionSchema = {
+const findOneSaludInstitucionSchema = {
   tags: ['Planteles'],
   description: 'Get one Salud Instiucion with institucionesSaludId params',
   params: {
@@ -19,7 +19,7 @@ const findOneSaludInstiucionSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...saludInstiucion,
+            ...saludInstitucion,
             ...responseProperties,
           },
         },
@@ -28,4 +28,4 @@ const findOneSaludInstiucionSchema = {
   },
 };
 
-module.exports = findOneSaludInstiucionSchema;
+module.exports = findOneSaludInstitucionSchema;

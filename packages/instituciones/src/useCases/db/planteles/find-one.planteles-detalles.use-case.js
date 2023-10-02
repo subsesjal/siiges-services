@@ -40,6 +40,18 @@ const findOnePlantel = (findOneInstitucionQuery, findOnePlantelQuery) => async (
         { association: 'higiene' },
       ],
     },
+    { association: 'saludInstituciones' },
+    {
+      association: 'infraestructuras',
+      include: [
+        {
+          association: 'asignaturasInfraestructura',
+          include: [
+            { association: 'asignatura' },
+          ],
+        },
+      ],
+    },
   ];
 
   const plantel = await findOnePlantelQuery({

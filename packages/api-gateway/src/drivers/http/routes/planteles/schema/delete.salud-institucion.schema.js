@@ -1,7 +1,7 @@
-const { saludInstiucion } = require('./properties/saludInstiucion');
+const { saludInstitucion } = require('./properties/saludInstitucion');
 const { responseProperties } = require('./properties/responseProperties');
 
-const deleteSaludInstiucionSchema = {
+const deleteSaludInstitucionSchema = {
   tags: ['Instituciones'],
   description: 'Delete a Salud Instiucion with institucionesSaludId params',
   params: {
@@ -19,7 +19,7 @@ const deleteSaludInstiucionSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...saludInstiucion,
+            ...saludInstitucion,
             ...responseProperties,
           },
         },
@@ -28,4 +28,4 @@ const deleteSaludInstiucionSchema = {
   },
 };
 
-module.exports = deleteSaludInstiucionSchema;
+module.exports = deleteSaludInstitucionSchema;

@@ -3,7 +3,7 @@ const {
   findOnePlantelQuery,
   findAllSaludInstitucionesQuery,
   findOneSaludInstitucionesQuery,
-  deleteSaludInstiucionQuery,
+  deleteSaludInstitucionQuery,
   updateSaludInstitucionQuery,
 } = require('../../../adapters/db');
 
@@ -26,7 +26,7 @@ module.exports = {
   ),
   deleteSaludInstitucion: deleteSaludInstitucion(
     findOneSaludInstitucionesQuery,
-    deleteSaludInstiucionQuery,
+    deleteSaludInstitucionQuery,
   ),
   updateSaludInstitucion: updateSaludInstitucion(
     findOneSaludInstitucionesQuery,
