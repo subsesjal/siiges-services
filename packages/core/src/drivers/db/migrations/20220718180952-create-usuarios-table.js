@@ -59,6 +59,9 @@ const { PLANTEL_SEGURIDAD_SISTEMA_TABLE, PlantelSeguridadSistemaSchema } = requi
 const { CUMPLIMIENTO_TABLE, CumplimientoSchema } = require('../models/cumplimiento');
 const { EVALUACION_TABLE, EvaluacionSchema } = require('../models/evaluacion');
 const { EVALUADOR_TABLE, EvaluadorSchema } = require('../models/evaluador');
+const { GRADO_TABLE, GradoSchema } = require('../models/grado');
+const { CICLO_ESCOLAR_TABLE, CicloEscolarSchema } = require('../models/cicloEscolar');
+const { GRUPOS_TABLE, GrupoSchema } = require('../models/grupo');
 
 module.exports = {
   async up(queryInterface) {
@@ -132,6 +135,9 @@ module.exports = {
     await queryInterface.createTable(EVALUADOR_TABLE, EvaluadorSchema);
     await queryInterface.createTable(CUMPLIMIENTO_TABLE, CumplimientoSchema);
     await queryInterface.createTable(EVALUACION_TABLE, EvaluacionSchema);
+    await queryInterface.createTable(GRADO_TABLE, GradoSchema);
+    await queryInterface.createTable(CICLO_ESCOLAR_TABLE, CicloEscolarSchema);
+    await queryInterface.createTable(GRUPOS_TABLE, GrupoSchema);
   },
 
   async down(queryInterface) {
@@ -197,5 +203,8 @@ module.exports = {
     await queryInterface.dropTable(EVALUADOR_TABLE);
     await queryInterface.dropTable(CUMPLIMIENTO_TABLE);
     await queryInterface.dropTable(EVALUACION_TABLE);
+    await queryInterface.dropTable(GRADO_TABLE);
+    await queryInterface.dropTable(CICLO_ESCOLAR_TABLE);
+    await queryInterface.dropTable(GRUPOS_TABLE);
   },
 };
