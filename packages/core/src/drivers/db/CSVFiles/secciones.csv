@@ -1,4 +1,4 @@
-id,nombre,descripcion,modulo,created_at
+wid,nombre,descripcion,modulo,created_at
 1,Datos del plan de estudios,Datos del plan de estudios,PLAN DE ESTUDIOS,2018-11-19 0:00:00
 2,Coordinador del programa,Coordinador del programa,PLAN DE ESTUDIOS,2018-11-19 0:00:00
 3,Fundamentación del plan de estudios,Fundamentación del plan de estudios,PLAN DE ESTUDIOS,2018-11-19 0:00:00
