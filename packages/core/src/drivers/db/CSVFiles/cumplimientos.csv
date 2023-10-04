@@ -1,0 +1,17 @@
+id,nombre,modalidad_id,porcentaje_cumplimiento,cumplimiento_minimo,cumplimiento_maximo,created_at
+1,Cumple al 100%,2,100,237,263,2018-10-07 13:00:00
+2,Aceptable con mínimas recomendaciones ( no requiere segunda revisión),2,90,211,236,2018-10-07 13:00:00
+3,Aceptable con recomendaciones (Requiere segunda revisión),2,80,185,210,2018-10-07 13:00:00
+4,No aceptable,2,70,0,184,2018-10-07 13:00:00
+5,Cumple al 100%,3,100,237,263,2018-10-07 13:00:00
+6,Aceptable con mínimas recomendaciones ( no requiere segunda revisión),3,90,211,236,2018-10-07 13:00:00
+7,Aceptable con recomendaciones (Requiere segunda revisión),3,80,185,210,2018-10-07 13:00:00
+8,No aceptable,3,70,0,184,2018-10-07 13:00:00
+9,Cumple al 100%,1,100,210,233,2018-10-07 13:00:00
+10,Aceptable con mínimas recomendaciones ( no requiere segunda revisión),1,90,187,209,2018-10-07 13:00:00
+11,Aceptable con recomendaciones (Requiere segunda revisión),1,80,164,186,2018-10-07 13:00:00
+12,No aceptable,1,70,0,163,2018-10-07 13:00:00
+13,Cumple al 100%,4,100,210,233,2018-10-07 13:00:00
+14,Aceptable con mínimas recomendaciones ( no requiere segunda revisión),4,90,187,209,2018-10-07 13:00:00
+15,Aceptable con recomendaciones (Requiere segunda revisión),4,80,164,186,2018-10-07 13:00:00
+16,No aceptable,4,70,0,163,2018-10-07 13:00:00

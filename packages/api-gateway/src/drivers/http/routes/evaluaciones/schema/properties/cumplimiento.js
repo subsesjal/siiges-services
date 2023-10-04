@@ -1,6 +1,6 @@
 const cumplimiento = {
-  nombre: { type: 'string' },
   modalidadId: { type: 'integer' },
+  nombre: { type: 'string' },
   porcentajeCumplimiento: { type: 'integer' },
   cumplimientoMinimo: { type: 'integer' },
   cumplimientoMaximo: { type: 'integer' },
