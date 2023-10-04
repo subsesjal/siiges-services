@@ -1,4 +1,5 @@
 const createSolicitudProgramaSchema = require('./create.solicitud-programa.schema');
+const createSolicitudRefrendoSchema = require('./create.solicitud-refrendo.schema');
 const findAllSolicitudesProgramasSchema = require('./find-all.solicitudes-programas.schema');
 const findOneSolicitudProgramaSchema = require('./find-one.solicitud-programa.schema');
 const findAllSolicitudesUsuarioSchema = require('./find.solicitud-usuario.schema');
@@ -9,6 +10,7 @@ const updateSolcitudSeccionObservacionSchema = require('./update.seccion-observa
 
 module.exports = {
   createSolicitudProgramaSchema,
+  createSolicitudRefrendoSchema,
   findAllSolicitudesProgramasSchema,
   findOneSolicitudProgramaSchema,
   findAllSolicitudesUsuarioSchema,
