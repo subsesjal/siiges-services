@@ -48,7 +48,7 @@ async function evaluacionRouter(fastify, opts, next) {
   await fastify.get(
     '/cumplimiento',
     {
-      // schema: findCumplimientoSchema,
+      schema: findCumplimientoSchema,
       onRequest: [fastify.authenticate],
     },
     solicitudesAdapter.findCumplimiento,
