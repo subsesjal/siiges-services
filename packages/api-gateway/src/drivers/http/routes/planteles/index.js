@@ -1,6 +1,12 @@
 const { plantelesAdapter, institucionesAdapter } = require('../../adapters');
 
 const {
+  createFormacionDirectorSchema,
+  updateFormacionDirectorSchema,
+  findAllFormacionDirectorSchema,
+  findOneFormacionDirectorSchema,
+} = require('./schema/formacionDirectores');
+const {
   createUpdatePlantelHigieneSchema,
   deletePlantelHigieneSchema,
   findAllHigienesSchema,
@@ -200,6 +206,42 @@ async function plantelRouter(fastify, opts, next) {
     plantelesAdapter.findGroupPlantelSeguridad,
   );
 
+  await fastify.post(
+    '/directores/:directorId/formaciones',
+    {
+      onRequest: [fastify.authenticate],
+      schema: createFormacionDirectorSchema,
+    },
+    plantelesAdapter.createFormacionDirector,
+  );
+
+  await fastify.patch(
+    '/directores/:directorId/formaciones/:formacionId',
+    {
+      schema: updateFormacionDirectorSchema,
+      onRequest: [fastify.authenticate],
+    },
+    plantelesAdapter.updateFormacionDirector,
+  );
+
+  await fastify.get(
+    '/directores/:directorId/formaciones',
+    {
+      onRequest: [fastify.authenticate],
+      schema: findAllFormacionDirectorSchema,
+    },
+    plantelesAdapter.findAllFormacionDirector,
+  );
+
+  await fastify.get(
+    '/directores/:directorId/formaciones/:formacionId',
+    {
+      onRequest: [fastify.authenticate],
+      schema: findOneFormacionDirectorSchema,
+    },
+    plantelesAdapter.findOneFormacionDirector,
+  );
+
   // Directores
   await fastify.post(
     '/:plantelId/director',
@@ -217,6 +259,7 @@ async function plantelRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     institucionesAdapter.updateDirectorPlantel,
+
   );
 
   next();

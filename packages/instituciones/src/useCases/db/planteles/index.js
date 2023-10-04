@@ -24,6 +24,13 @@ const {
   updatePlantelSeguridadQuery,
   findOnePlantelSeguridadQuery,
   findGroupPlantelSeguridadQuery,
+  createFormacionDirectorQuery,
+  findOneDirectorQuery,
+  findOneNivelQuery,
+  findAllFormacionDirectorQuery,
+  findAllFormacionQuery,
+  findOneFormacionDirectorQuery,
+  updateFormacionQuery,
 } = require('../../../adapters/db');
 
 const createPlantel = require('./create.planteles.use-cases');
@@ -42,6 +49,18 @@ const findGroupPlantelNiveles = require('./find-group.plantel-niveles.use-cases'
 const findAllSeguridad = require('./find-all.seguridad-sistemas.use-cases');
 const findGroupPlantelSeguridad = require('./find-group.plantel-seguridad.use-cases');
 const createUpdatePlantelSeguridad = require('./create.plantel-seguridad.use-cases');
+
+const {
+  createFormacionDirector,
+  findAllFormacionDirector,
+  findOneFormacionDirector,
+  updateFormacionDirector,
+} = require('./formacionesDirectores');
+
+const findFormacionDirector = findOneFormacionDirector(
+  findOneDirectorQuery,
+  findOneFormacionDirectorQuery,
+);
 
 module.exports = {
   createPlantel: createPlantel(
@@ -97,5 +116,20 @@ module.exports = {
     findOnePlantelSeguridadQuery,
     createPlantelSeguridadQuery,
     updatePlantelSeguridadQuery,
+  ),
+  createFormacionDirector: createFormacionDirector(
+    createFormacionDirectorQuery,
+    findOneDirectorQuery,
+    findOneNivelQuery,
+  ),
+  findAllFormacionDirector: findAllFormacionDirector(
+    findAllFormacionDirectorQuery,
+    findAllFormacionQuery,
+  ),
+  findOneFormacionDirector: findFormacionDirector,
+  updateFormacionDirector: updateFormacionDirector(
+    findFormacionDirector,
+    findOneNivelQuery,
+    updateFormacionQuery,
   ),
 };

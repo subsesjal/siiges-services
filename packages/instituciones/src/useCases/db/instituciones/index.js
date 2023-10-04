@@ -7,6 +7,13 @@ const {
   createRectorQuery,
   deleteRectorQuery,
   updatePersonaQuery,
+  createFormacionRectorQuery,
+  findOneRectorQuery,
+  findOneNivelQuery,
+  findAllFormacionRectorQuery,
+  findAllFormacionQuery,
+  findOneFormacionRectorQuery,
+  updateFormacionQuery,
 } = require('../../../adapters/db');
 
 const findAllInstituciones = require('./find-all.instituciones.use-cases');
@@ -16,6 +23,17 @@ const findPlantelesInstitucion = require('./find.planteles-institucion.use-cases
 const createInstitucion = require('./create.instituciones.use-cases');
 const updateInstitucion = require('./update.instituciones.use-cases');
 const deleteInstitucion = require('./delete.instituciones.use-cases');
+const {
+  createFormacionRector,
+  findAllFormacionRector,
+  findOneFormacionRector,
+  updateFormacionRector,
+} = require('./formacionesRectores');
+
+const findFormacionRector = findOneFormacionRector(
+  findOneRectorQuery,
+  findOneFormacionRectorQuery,
+);
 
 module.exports = {
   findAllInstituciones: findAllInstituciones(findAllInstitucionesQuery),
@@ -36,5 +54,20 @@ module.exports = {
     findOneInstitucionQuery,
     deleteInstitucionQuery,
     deleteRectorQuery,
+  ),
+  createFormacionRector: createFormacionRector(
+    createFormacionRectorQuery,
+    findOneRectorQuery,
+    findOneNivelQuery,
+  ),
+  findAllFormacionRector: findAllFormacionRector(
+    findAllFormacionRectorQuery,
+    findAllFormacionQuery,
+  ),
+  findOneFormacionRector: findFormacionRector,
+  updateFormacionRector: updateFormacionRector(
+    findFormacionRector,
+    findOneNivelQuery,
+    updateFormacionQuery,
   ),
 };
