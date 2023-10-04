@@ -5,6 +5,7 @@ const {
   findOneEvaluacionesSchema,
   findAllEvaluadoresSchema,
   updateEvaluacionesSchema,
+  findCumplimientoSchema,
 } = require('./schema');
 
 async function evaluacionRouter(fastify, opts, next) {
@@ -42,6 +43,15 @@ async function evaluacionRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     solicitudesAdapter.findAllEvaluadores,
+  );
+
+  await fastify.get(
+    '/cumplimiento',
+    {
+      // schema: findCumplimientoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesAdapter.findCumplimiento,
   );
 
   next();
