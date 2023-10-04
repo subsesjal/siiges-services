@@ -240,6 +240,7 @@ async function plantelRouter(fastify, opts, next) {
       schema: findOneFormacionDirectorSchema,
     },
     plantelesAdapter.findOneFormacionDirector,
+  );
 
   // Directores
   await fastify.post(
