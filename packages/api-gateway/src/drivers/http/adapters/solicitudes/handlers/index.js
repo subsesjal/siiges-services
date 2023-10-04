@@ -10,6 +10,7 @@ const findOneSolicitudSeccion = require('./find-one.handlers.solicitud-seccion.a
 const {
   createEvaluaciones,
   findOneEvaluaciones,
+  findAllEvaluadores,
   updateEvaluaciones,
 } = require('./evaluaciones');
 
@@ -24,6 +25,7 @@ module.exports = {
   findOneSolicitudSeccion,
   createEvaluaciones,
   findOneEvaluaciones,
+  findAllEvaluadores,
   updateEvaluaciones,
   findOneSolicitudDetalle,
 };
