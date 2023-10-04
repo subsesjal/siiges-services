@@ -12,6 +12,7 @@ const {
   findOneEvaluaciones,
   findAllEvaluadores,
   updateEvaluaciones,
+  findCumplimiento,
 } = require('./evaluaciones');
 
 module.exports = {
@@ -28,4 +29,5 @@ module.exports = {
   findAllEvaluadores,
   updateEvaluaciones,
   findOneSolicitudDetalle,
+  findCumplimiento,
 };
