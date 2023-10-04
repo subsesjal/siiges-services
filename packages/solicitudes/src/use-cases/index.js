@@ -50,6 +50,7 @@ const {
 const {
   createEvaluaciones,
   findOneEvaluaciones,
+  findAllEvaluadores,
   updateEvaluaciones,
 } = require('./db/evaluaciones');
 
@@ -86,6 +87,7 @@ module.exports = {
   updateTrayectoriaPrograma,
   createEvaluaciones,
   findOneEvaluaciones,
+  findAllEvaluadores,
   updateEvaluaciones,
   findOneSolicitudDetalle,
 };

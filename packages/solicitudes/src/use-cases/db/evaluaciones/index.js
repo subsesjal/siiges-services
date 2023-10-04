@@ -4,6 +4,7 @@ const {
 
 const { createEvaluaciones } = require('./create.evaluaciones.use-cases');
 const { findOneEvaluaciones } = require('./find-one.evaluaciones.use-cases');
+const { findAllEvaluadores } = require('./find-all.evaluadores.use-cases');
 const { updateEvaluaciones } = require('./update.evaluaciones.use-cases');
 
 module.exports = {
@@ -15,6 +16,9 @@ module.exports = {
   ),
   findOneEvaluaciones: findOneEvaluaciones(
     evaluaciones.findOneEvaluacionQuery,
+  ),
+  findAllEvaluadores: findAllEvaluadores(
+    evaluaciones.findAllEvaluadoresQuery,
   ),
   updateEvaluaciones: updateEvaluaciones(
     evaluaciones.updateEvaluacionQuery,

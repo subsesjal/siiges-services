@@ -3,6 +3,7 @@ const { solicitudesAdapter } = require('../../adapters');
 const {
   createEvaluacionesSchema,
   findOneEvaluacionesSchema,
+  findAllEvaluadoresSchema,
   updateEvaluacionesSchema,
 } = require('./schema');
 
@@ -32,6 +33,15 @@ async function evaluacionRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     solicitudesAdapter.updateEvaluaciones,
+  );
+
+  await fastify.get(
+    '/evaluadores',
+    {
+      schema: findAllEvaluadoresSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesAdapter.findAllEvaluadores,
   );
 
   next();
