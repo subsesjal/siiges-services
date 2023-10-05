@@ -6,11 +6,12 @@ const errorHandler = require('../../../utils/errorHandler');
 async function updateGrupo(request, reply) {
   try {
     const { grupoId } = request.params;
+    const { ...data } = request.body;
 
     Logger.info('[Grupo]: update Grupo');
 
     const Grupo = await this.administracionAcademicaServices.updateGrupo(
-      { id: grupoId },
+      { id: grupoId, data },
     );
 
     return reply

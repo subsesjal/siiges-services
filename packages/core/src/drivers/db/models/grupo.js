@@ -85,7 +85,7 @@ class Grupo extends Model {
     return {
       sequelize,
       tableName: GRUPOS_TABLE,
-      modelName: 'Grado',
+      modelName: 'Grupo',
       timestamps: false,
     };
   }

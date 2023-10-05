@@ -9,7 +9,7 @@ async function findGroupGrupo(request, reply) {
 
     Logger.info('[Grupo]: find group Grupo');
     const Grupo = await this.administracionAcademicaServices.findGroupGrupo(
-      { id: cicloEscolarId },
+      { cicloEscolarId },
     );
 
     return reply

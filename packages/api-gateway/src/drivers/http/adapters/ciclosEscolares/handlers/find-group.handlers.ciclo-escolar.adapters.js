@@ -8,9 +8,8 @@ async function findGroupCicloEscolar(request, reply) {
     const { programaId } = request.params;
 
     Logger.info('[Ciclo escolar]: find group Ciclo Escolar');
-    const cicloEscolar = await this.administracionAcademicaServices.findGroupCicloEscolar(
-      { id: programaId },
-    );
+    const cicloEscolar = await this.administracionAcademicaServices
+      .findGroupCicloEscolar({ programaId });
 
     return reply
       .code(200)

@@ -1,4 +1,3 @@
-const { grado } = require('./properties/grados');
 const { grupos } = require('./properties/grupos');
 const { responseProperties } = require('./properties/responseProperties');
 
@@ -21,12 +20,6 @@ const findGroupGrupoSchema = {
             properties: {
               id: { type: 'integer' },
               ...grupos,
-              grado: {
-                type: 'object',
-                properties: {
-                  ...grado,
-                },
-              },
               ...responseProperties,
             },
           },

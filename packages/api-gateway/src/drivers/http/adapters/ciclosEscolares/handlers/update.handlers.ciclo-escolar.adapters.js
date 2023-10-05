@@ -6,11 +6,12 @@ const errorHandler = require('../../../utils/errorHandler');
 async function updateCicloEscolar(request, reply) {
   try {
     const { cicloEscolarId } = request.params;
+    const { ...data } = request.body;
 
     Logger.info('[Ciclo escolar]: update Ciclo Escolar');
 
     const cicloEscolar = await this.administracionAcademicaServices.updateCicloEscolar(
-      { id: cicloEscolarId },
+      { id: cicloEscolarId, data },
     );
 
     return reply

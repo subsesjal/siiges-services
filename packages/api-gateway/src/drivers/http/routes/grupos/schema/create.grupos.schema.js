@@ -1,6 +1,5 @@
 const { responseProperties } = require('./properties/responseProperties');
 const { grupos } = require('./properties/grupos');
-const { grado } = require('./properties/grados');
 
 const createGrupoSchema = {
   tags: ['Ciclo Escolar'],
@@ -10,7 +9,6 @@ const createGrupoSchema = {
     type: 'object',
     properties: {
       ...grupos,
-      ...grado,
     },
     required: ['cicloEscolarId', 'turnoId', 'generacion', 'generacionFechaInicio', 'generacionFechaFin'],
   },
@@ -23,12 +21,6 @@ const createGrupoSchema = {
           properties: {
             id: { type: 'integer' },
             ...grupos,
-            grado: {
-              type: 'object',
-              properties: {
-                ...grado,
-              },
-            },
             ...responseProperties,
           },
         },
