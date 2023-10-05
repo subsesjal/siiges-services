@@ -1,6 +1,12 @@
 const { institucionesAdapter } = require('../../adapters');
 
 const {
+  createFormacionRectorSchema,
+  updateFormacionRectorSchema,
+  findAllFormacionRectorSchema,
+  findOneFormacionRectorSchema,
+} = require('./schema/formacionesRectores');
+const {
   findAllInstitucionesSchema,
   findOneInstitucionSchema,
   findPlantelesInstitucionSchema,
@@ -172,6 +178,42 @@ async function institucionRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     institucionesAdapter.updateDirectorPlantel,
+  );
+
+  await fastify.post(
+    '/rectores/:rectorId/formaciones',
+    {
+      onRequest: [fastify.authenticate],
+      schema: createFormacionRectorSchema,
+    },
+    institucionesAdapter.createFormacionRector,
+  );
+
+  await fastify.patch(
+    '/rectores/:rectorId/formaciones/:formacionId',
+    {
+      onRequest: [fastify.authenticate],
+      schema: updateFormacionRectorSchema,
+    },
+    institucionesAdapter.updateFormacionRector,
+  );
+
+  await fastify.get(
+    '/rectores/:rectorId/formaciones',
+    {
+      onRequest: [fastify.authenticate],
+      schema: findAllFormacionRectorSchema,
+    },
+    institucionesAdapter.findAllFormacionRector,
+  );
+
+  await fastify.get(
+    '/rectores/:rectorId/formaciones/:formacionId',
+    {
+      onRequest: [fastify.authenticate],
+      schema: findOneFormacionRectorSchema,
+    },
+    institucionesAdapter.findOneFormacionRector,
   );
 
   next();

@@ -12,6 +12,12 @@ const findGroupPlantelNiveles = require('./find-group.handlers.plantel-niveles.a
 const findAllSeguridad = require('./find-all.handlers.seguridad.adapters');
 const findGroupPlantelSeguridad = require('./find-group.handlers.plantel-seguridad.adapters');
 const createUpdatePlantelSeguridad = require('./create-update.handlers.plantel-seguridad.adapters');
+const {
+  createFormacionDirector,
+  findAllFormacionDirector,
+  findOneFormacionDirector,
+  updateFormacionDirector,
+} = require('./formacionDirector');
 
 module.exports = {
   createPlantelHigiene,
@@ -28,4 +34,8 @@ module.exports = {
   findAllSeguridad,
   findGroupPlantelSeguridad,
   createUpdatePlantelSeguridad,
+  createFormacionDirector,
+  findAllFormacionDirector,
+  findOneFormacionDirector,
+  updateFormacionDirector,
 };

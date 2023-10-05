@@ -2,7 +2,7 @@ const { saludInstiucion } = require('./properties/saludInstiucion');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findPlantelSaludInstiucionSchema = {
-  tags: ['Instituciones'],
+  tags: ['Planteles'],
   description: 'Get a list Salud Instiucion with plantelId params',
   params: {
     type: 'object',

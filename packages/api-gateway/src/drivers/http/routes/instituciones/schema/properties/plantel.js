@@ -13,6 +13,7 @@ const plantel = {
   paginaWeb: { type: 'string' },
   redesSociales: { type: 'string' },
   especificaciones: { type: 'string' },
+  dimensiones: { type: 'string' },
 };
 
 module.exports = { plantel };

@@ -28,6 +28,7 @@ const EvaluadorSchema = {
   },
   otrosRegistros: {
     type: DataTypes.STRING,
+    field: 'otros_registros',
   },
   logros: {
     type: DataTypes.TEXT,

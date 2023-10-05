@@ -7,6 +7,7 @@ const {
   setSolicitudSeccion,
   updateSolcitudSeccionObservacion,
   findOneSolicitudSeccion,
+  findOneSolicitudDetalle,
 } = require('./db/solicitudes');
 
 const {
@@ -49,7 +50,9 @@ const {
 const {
   createEvaluaciones,
   findOneEvaluaciones,
+  findAllEvaluadores,
   updateEvaluaciones,
+  findCumplimiento,
 } = require('./db/evaluaciones');
 
 module.exports = {
@@ -85,5 +88,8 @@ module.exports = {
   updateTrayectoriaPrograma,
   createEvaluaciones,
   findOneEvaluaciones,
+  findAllEvaluadores,
   updateEvaluaciones,
+  findOneSolicitudDetalle,
+  findCumplimiento,
 };

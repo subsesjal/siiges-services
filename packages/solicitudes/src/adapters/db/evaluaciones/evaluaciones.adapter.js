@@ -3,6 +3,7 @@ const { models, queries } = require('@siiges-services/core');
 const {
   createQuery,
   findOneQuery,
+  findAllQuery,
   updateAndFindQuery,
 } = queries;
 
@@ -11,6 +12,7 @@ const {
   Programa,
   Evaluador,
   Modalidad,
+  Cumplimiento,
 } = models;
 
 module.exports = {
@@ -20,4 +22,6 @@ module.exports = {
   findOneProgramaQuery: findOneQuery(Programa),
   findOneEvaluadorQuery: findOneQuery(Evaluador),
   findOneModalidadQuery: findOneQuery(Modalidad),
+  findAllEvaluadoresQuery: findAllQuery(Evaluador),
+  findAllCumplimientosQuery: findAllQuery(Cumplimiento),
 };
