@@ -18,6 +18,10 @@ const {
   SaludInstitucion,
   SeguridadSistema,
   PlantelSeguridadSistema,
+  Formacion,
+  FormacionRector,
+  FormacionDirector,
+  Nivel,
 } = drivers.sequelize.models;
 
 const {
@@ -76,4 +80,13 @@ module.exports = {
   findOneSaludInstitucionesQuery: findOneQuery(SaludInstitucion),
   deleteSaludInstiucionQuery: deleteQuery(SaludInstitucion),
   updateSaludInstitucionQuery: updateAndFindQuery(SaludInstitucion),
+  createFormacionRectorQuery: createQuery(FormacionRector),
+  createFormacionDirectorQuery: createQuery(FormacionDirector),
+  findOneNivelQuery: findOneQuery(Nivel),
+  findAllFormacionQuery: findAllQuery(Formacion),
+  findOneFormacionRectorQuery: findOneQuery(FormacionRector),
+  findAllFormacionRectorQuery: findAllQuery(FormacionRector),
+  findOneFormacionDirectorQuery: findOneQuery(FormacionDirector),
+  findAllFormacionDirectorQuery: findAllQuery(FormacionDirector),
+  updateFormacionQuery: updateAndFindQuery(Formacion),
 };

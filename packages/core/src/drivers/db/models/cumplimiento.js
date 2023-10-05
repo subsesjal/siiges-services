@@ -10,10 +10,6 @@ const CumplimientoSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  nombre: {
-    allowNull: false,
-    type: DataTypes.STRING,
-  },
   modalidadId: {
     allowNull: false,
     type: DataTypes.INTEGER,
@@ -22,6 +18,10 @@ const CumplimientoSchema = {
       model: MODALIDAD_TABLE,
       key: 'id',
     },
+  },
+  nombre: {
+    allowNull: false,
+    type: DataTypes.STRING,
   },
   porcentajeCumplimiento: {
     type: DataTypes.INTEGER,
