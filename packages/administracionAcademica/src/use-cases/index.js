@@ -12,6 +12,22 @@ const {
   findInstitucionProgramas,
 } = require('./db/programas');
 
+const {
+  createCicloEscolar,
+  deleteCicloEscolar,
+  findGroupCicloEscolar,
+  findOneCicloEscolar,
+  updateCicloEscolar,
+} = require('./db/ciclosEscolares');
+
+const {
+  createGrupo,
+  findOneGrupo,
+  findGroupGrupo,
+  updateGrupo,
+  deleteGrupo,
+} = require('./db/grupos');
+
 module.exports = {
   createAlumno,
   findOneAlumno,
@@ -21,4 +37,14 @@ module.exports = {
   findAllProgramas,
   findPlantelProgramas,
   findInstitucionProgramas,
+  createCicloEscolar,
+  deleteCicloEscolar,
+  findGroupCicloEscolar,
+  findOneCicloEscolar,
+  updateCicloEscolar,
+  createGrupo,
+  findOneGrupo,
+  findGroupGrupo,
+  updateGrupo,
+  deleteGrupo,
 };
