@@ -13,7 +13,7 @@ module.exports = {
     evaluaciones.createEvaluacionQuery,
     evaluaciones.findOneProgramaQuery,
     evaluaciones.findOneEvaluadorQuery,
-    evaluaciones.findOneModalidadQuery,
+    evaluaciones.findOneCumplimientodQuery,
   ),
   findOneEvaluaciones: findOneEvaluaciones(
     evaluaciones.findOneEvaluacionQuery,

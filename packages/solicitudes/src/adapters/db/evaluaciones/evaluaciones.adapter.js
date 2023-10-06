@@ -11,7 +11,6 @@ const {
   Evaluacion,
   Programa,
   Evaluador,
-  Modalidad,
   Cumplimiento,
 } = models;
 
@@ -21,7 +20,7 @@ module.exports = {
   updateEvaluacionQuery: updateAndFindQuery(Evaluacion),
   findOneProgramaQuery: findOneQuery(Programa),
   findOneEvaluadorQuery: findOneQuery(Evaluador),
-  findOneModalidadQuery: findOneQuery(Modalidad),
+  findOneCumplimientodQuery: findOneQuery(Cumplimiento),
   findAllEvaluadoresQuery: findAllQuery(Evaluador),
   findAllCumplimientosQuery: findAllQuery(Cumplimiento),
 };
