@@ -59,6 +59,9 @@ const { PlantelSeguridadSistema, PlantelSeguridadSistemaSchema } = require('./pl
 const { Cumplimiento, CumplimientoSchema } = require('./cumplimiento');
 const { Evaluacion, EvaluacionSchema } = require('./evaluacion');
 const { Evaluador, EvaluadorSchema } = require('./evaluador');
+const { Grado, GradoSchema } = require('./grado');
+const { CicloEscolar, CicloEscolarSchema } = require('./cicloEscolar');
+const { Grupo, GrupoSchema } = require('./grupo');
 const { Formacion, FormacionSchema } = require('./formacion');
 const { FormacionRector, FormacionRectorSchema } = require('./formacionRector');
 const { FormacionDirector, FormacionDirectorSchema } = require('./formacionesDirectores');
@@ -141,6 +144,9 @@ function setupModels(sequelize) {
   Cumplimiento.init(CumplimientoSchema, Cumplimiento.config(sequelize));
   Evaluacion.init(EvaluacionSchema, Evaluacion.config(sequelize));
   Evaluador.init(EvaluadorSchema, Evaluador.config(sequelize));
+  Grado.init(GradoSchema, Grado.config(sequelize));
+  CicloEscolar.init(CicloEscolarSchema, CicloEscolar.config(sequelize));
+  Grupo.init(GrupoSchema, Grupo.config(sequelize));
   Formacion.init(FormacionSchema, Formacion.config(sequelize));
   FormacionRector.init(FormacionRectorSchema, FormacionRector.config(sequelize));
   FormacionDirector.init(FormacionDirectorSchema, FormacionDirector.config(sequelize));
@@ -207,6 +213,9 @@ function setupModels(sequelize) {
   Cumplimiento.associate(sequelize.models);
   Evaluacion.associate(sequelize.models);
   Evaluador.associate(sequelize.models);
+  Grado.associate(sequelize.models);
+  CicloEscolar.associate(sequelize.models);
+  Grupo.associate(sequelize.models);
   Formacion.associate(sequelize.models);
   FormacionRector.associate(sequelize.models);
   FormacionDirector.associate(sequelize.models);

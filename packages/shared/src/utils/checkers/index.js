@@ -10,7 +10,7 @@ const { isString, isNotString } = require('./string');
 const { IsDate, isNotDate } = require('./date');
 const { isNull, isNotNull } = require('./null');
 const { isUndefined, isDefined } = require('./undefined');
-const { throwErrorIfDataIsFalsy } = require('./db.checkers.utils');
+const { throwErrorIfDataIsFalsy, findValidator } = require('./db.checkers.utils');
 const { cleanObject } = require('./cleanObject');
 
 module.exports = {
@@ -33,4 +33,5 @@ module.exports = {
   IsDate,
   isNotDate,
   cleanObject,
+  findValidator,
 };
