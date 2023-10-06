@@ -4,28 +4,18 @@ const createEvaluaciones = (
   createEvaluationQuery,
   findProgramQuery,
   findEvaluadorQuery,
-  findOneModalidadQuery,
+  findOneCumplimientoQuery,
 ) => async (identifierObj) => {
-  const {
-    programaId,
-    evaluadorId,
-    cumplimiento,
-  } = identifierObj;
-
-  const include = [{
-    association: 'cumplimiento',
-  }];
-
+  const queryFunctions = {
+    Programa: [identifierObj.programaId, findProgramQuery],
+    Evaluador: [identifierObj.evaluadorId, findEvaluadorQuery],
+    Cumplimiento: [identifierObj.cumplimientoId, findOneCumplimientoQuery],
+  };
   // find program, evaluador and cumplimiento
-  const findProgram = await findProgramQuery({ id: programaId }, { attributes: ['id'] });
-  checkers.throwErrorIfDataIsFalsy(findProgram, 'Programa', programaId);
-  const findEvaluador = await findEvaluadorQuery({ id: evaluadorId }, { attributes: ['id'] });
-  checkers.throwErrorIfDataIsFalsy(findEvaluador, 'Evaluador', evaluadorId);
-  const findModalidad = await findOneModalidadQuery({ id: cumplimiento.modalidadId }, { attributes: ['id'] });
-  checkers.throwErrorIfDataIsFalsy(findModalidad, 'Modalidad', cumplimiento.modalidadId);
+  await checkers.findValidator(queryFunctions);
 
   // create
-  const createEvaluation = await createEvaluationQuery(identifierObj, include);
+  const createEvaluation = await createEvaluationQuery(identifierObj);
   checkers.throwErrorIfDataIsFalsy(createEvaluation, 'Evaluciones', '');
 
   return createEvaluation;

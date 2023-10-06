@@ -1,6 +1,5 @@
 const { responseProperties } = require('./properties/responseProperties');
 const { evaluacion } = require('./properties/evaluacion');
-const { cumplimiento } = require('./properties/cumplimiento');
 
 const createEvaluacionesSchema = {
   tags: ['Evaluaciones'],
@@ -10,14 +9,8 @@ const createEvaluacionesSchema = {
     type: 'object',
     properties: {
       ...evaluacion,
-      cumplimiento: {
-        type: 'object',
-        properties: {
-          ...cumplimiento,
-        },
-      },
     },
-    required: ['programaId', 'evaluadorId', 'estatus', 'fecha'],
+    required: ['programaId', 'evaluadorId', 'cumplimientoId', 'estatus', 'fecha'],
   },
   response: {
     201: {
@@ -28,13 +21,6 @@ const createEvaluacionesSchema = {
           properties: {
             id: { type: 'integer' },
             ...evaluacion,
-            cumplimiento: {
-              type: 'object',
-              properties: {
-                id: { type: 'integer' },
-                ...cumplimiento,
-              },
-            },
             ...responseProperties,
           },
         },
