@@ -1,4 +1,130 @@
-const { checkers } = require('@siiges-services/shared');
+const { checkers, Logger } = require('@siiges-services/shared');
+
+const validateAlumno = async ({ findOneAlumnoQuery, alumnoId }) => {
+  const alumno = await findOneAlumnoQuery({ id: alumnoId });
+  checkers.throwErrorIfDataIsFalsy(alumno, 'alumnos', alumnoId);
+};
+
+const validatePrograma = async ({ findOneProgramaQuery, programaId }) => {
+  const programa = await findOneProgramaQuery({ id: programaId });
+  checkers.throwErrorIfDataIsFalsy(programa, 'alumnos', programaId);
+};
+
+const validateGrupo = async ({ findOneGrupoQuery, grupoId }) => {
+  const include = [{ association: 'cicloEscolar' }];
+
+  const grupo = await findOneGrupoQuery({ id: grupoId }, {
+    include,
+    strict: false,
+  });
+  checkers.throwErrorIfDataIsFalsy(grupo, 'grupos', grupoId);
+
+  return grupo;
+};
+
+const saveAlumnosGrupo = async ({
+  findOneAlumnoGrupoQuery,
+  createAlumnoGrupoQuery,
+  grupoId,
+  dataArray,
+}) => {
+  dataArray.map(async (obj) => {
+    const { alumnoId } = obj;
+
+    const alumnoGrupo = await findOneAlumnoGrupoQuery({ alumnoId, grupoId });
+
+    if (!alumnoGrupo) {
+      await createAlumnoGrupoQuery({ alumnoId, grupoId });
+    }
+  });
+};
+
+const createAlumnoAsignaturasRelations = async ({
+  findOneCalificacionQuery,
+  findOneAsignaturaQuery,
+  createCalificacionQuery,
+  alumnoAsignaturas,
+  asignaturas,
+  alumnoId,
+  programaId,
+  grupoId,
+}) => {
+  await Promise.all(asignaturas.map(async (asignatura) => {
+    if (alumnoAsignaturas.some(({ asignaturaId }) => asignaturaId === asignatura)) {
+      await findOneCalificacionQuery({
+        asignaturaId: asignatura,
+        grupoId,
+        alumnoId,
+      });
+    } else {
+      const asignaturaFound = await findOneAsignaturaQuery({
+        id: asignatura,
+        programaId,
+      });
+
+      if (asignaturaFound) {
+        await createCalificacionQuery({
+          alumnoId,
+          asignaturaId: asignatura,
+          grupoId,
+          tipo: 1,
+        });
+      }
+    }
+  }));
+};
+
+const deleteAlumnoAsignaturasRelations = async ({
+  deleteCalificacionQuery,
+  alumnoAsignaturas,
+  asignaturas,
+}) => {
+  const toDelete = alumnoAsignaturas.filter((
+    alumnoAsignatura,
+  ) => !asignaturas.includes(alumnoAsignatura.asignaturaId));
+
+  await Promise.all(toDelete.map(({ id }) => deleteCalificacionQuery({ id })));
+};
+
+const createUpdateAlumnosAsignaturas = async ({
+  findOneCalificacionQuery,
+  findOneAsignaturaQuery,
+  findAllCalificacionesQuery,
+  createCalificacionQuery,
+  deleteCalificacionQuery,
+  dataArray,
+  programaId,
+  grupoId,
+}) => {
+  dataArray.map(async (obj) => {
+    const { alumnoId, asignaturas } = obj;
+
+    const alumnoAsignaturas = await findAllCalificacionesQuery({
+      alumnoId,
+      grupoId,
+      tipo: 1,
+    });
+
+    await Promise.all([
+      createAlumnoAsignaturasRelations({
+        findOneCalificacionQuery,
+        findOneAsignaturaQuery,
+        createCalificacionQuery,
+        alumnoAsignaturas,
+        alumnoId,
+        asignaturas,
+        programaId,
+        grupoId,
+      }),
+      deleteAlumnoAsignaturasRelations({
+        deleteCalificacionQuery,
+        alumnoAsignaturas,
+        alumnoId,
+        asignaturas,
+      }),
+    ]);
+  });
+};
 
 const alumnosInscripcion = (
   findOneGrupoQuery,
@@ -12,81 +138,47 @@ const alumnosInscripcion = (
   createCalificacionQuery,
   deleteCalificacionQuery,
 ) => async ({ grupoId }, dataArray) => {
-  const include = [{ association: 'cicloEscolar' }];
+  Logger.info('[alumnos]: add alumnos inscritos');
 
-  let grupo = await findOneGrupoQuery({ id: grupoId }, {
-    include,
-    strict: false,
-  });
-  checkers.throwErrorIfDataIsFalsy(grupo, 'grupos', grupoId);
-
+  let grupo = await validateGrupo({ findOneGrupoQuery, grupoId });
   grupo = grupo.toJSON();
-
   const { programaId } = grupo.cicloEscolar;
 
-  const programa = await findOneProgramaQuery({ id: programaId });
-  checkers.throwErrorIfDataIsFalsy(programa, 'programas', programaId);
+  await validatePrograma({ findOneProgramaQuery, programaId });
 
-  const validateAlumnosPromises = dataArray.map(async (obj) => {
+  await Promise.all(dataArray.map(({ alumnoId }) => validateAlumno({
+    findOneAlumnoQuery,
+    alumnoId,
+  })));
+
+  await saveAlumnosGrupo({
+    findOneAlumnoGrupoQuery, createAlumnoGrupoQuery, grupoId, dataArray,
+  });
+
+  await createUpdateAlumnosAsignaturas({
+    findOneCalificacionQuery,
+    findOneAsignaturaQuery,
+    findAllCalificacionesQuery,
+    createCalificacionQuery,
+    deleteCalificacionQuery,
+    dataArray,
+    programaId,
+    grupoId,
+  });
+
+  const alumnosAsignaturas = await Promise.all(dataArray.map(async (obj) => {
     const { alumnoId } = obj;
-    const alumno = await findOneAlumnoQuery({ id: alumnoId });
-    checkers.throwErrorIfDataIsFalsy(alumno, 'alumnos', alumnoId);
-  });
 
-  await Promise.all(validateAlumnosPromises);
+    const alumnoAsignaturas = await findAllCalificacionesQuery({
+      alumnoId,
+      grupoId,
+      tipo: 1,
+    });
 
-  const alumnosInscripcionArray = [];
+    return { alumnoId, alumnoAsignaturas };
+  }));
 
-  const saveAlumnosGrupoPromises = dataArray.map(async (obj) => {
-    const { alumnoId, asignaturas } = obj;
-
-    const alumnoGrupo = await findOneAlumnoGrupoQuery({ alumnoId, grupoId });
-
-    if (!alumnoGrupo) {
-      await createAlumnoGrupoQuery({ alumnoId, grupoId });
-    }
-
-    const asignaturasAlumno = await findAllCalificacionesQuery({ alumnoId, grupoId });
-
-    // Find and create relation asignatura - alumno
-    await Promise.all(asignaturas.map(async (asignatura) => {
-      if (asignaturasAlumno.some(({ asignaturaId }) => asignaturaId === asignatura)) {
-        const asignaturaAlumno = await findOneCalificacionQuery({
-          asignaturaId: asignatura,
-          grupoId,
-          alumnoId,
-        });
-        alumnosInscripcionArray.push(asignaturaAlumno);
-      } else {
-        const asignaturaFound = await findOneAsignaturaQuery({
-          id: asignatura,
-          programaId,
-        });
-
-        if (asignaturaFound) {
-          let newAsignaturaAlumno = await createCalificacionQuery({
-            alumnoId,
-            asignaturaId: asignatura,
-            grupoId,
-            tipo: 1,
-          });
-          newAsignaturaAlumno = newAsignaturaAlumno.toJSON();
-          alumnosInscripcionArray.push(newAsignaturaAlumno);
-        }
-      }
-    }));
-
-    // Delete relation asignatura - alumno
-    await Promise.all(asignaturasAlumno.map(async (asignaturaAlumno) => {
-      if (!asignaturas.includes(asignaturaAlumno.asignaturaId)) {
-        await deleteCalificacionQuery({ id: asignaturaAlumno.id });
-      }
-    }));
-  });
-
-  await Promise.all(saveAlumnosGrupoPromises);
-
-  return dataArray;
+  return alumnosAsignaturas;
 };
 
 module.exports = alumnosInscripcion;

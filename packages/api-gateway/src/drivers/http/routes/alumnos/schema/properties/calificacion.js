@@ -2,14 +2,10 @@
 const calificacion = {
   alumnoId: { type: 'integer' },
   grupoId: { type: 'integer' },
-  periodoFechaInicio: {
-    type: 'string',
-    format: 'date',
-  },
-  periodoFechaFin: {
-    type: 'string',
-    format: 'date',
-  },
+  asignaturaId: { type: 'integer' },
+  calificacion: { type: 'integer' },
+  tipo: { type: 'integer' },
+  fechaExamen: { type: 'string', format: 'date' },
 };
 
 module.exports = { calificacion };

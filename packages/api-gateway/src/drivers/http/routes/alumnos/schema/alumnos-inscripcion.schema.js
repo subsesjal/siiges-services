@@ -26,24 +26,27 @@ const alumnosInscripcionSchema = {
           },
         },
       },
-      required: ['alumnoId'],
+      required: ['alumnoId', 'asignaturas'],
     },
   },
   response: {
     201: {
-      type: 'array',
-      items: {
-        properties: {
-          id: { type: 'integer' },
-          ...alumnoGrupo,
-          ...responseProperties,
-          calificaciones: {
-            type: 'array',
-            items: {
-              properties: {
-                id: { type: 'integer' },
-                ...calificacion,
-                ...responseProperties,
+      type: 'object',
+      properties: {
+        data: {
+          type: 'array',
+          items: {
+            properties: {
+              alumnoId: { type: 'integer' },
+              alumnoAsignaturas: {
+                type: 'array',
+                items: {
+                  properties: {
+                    id: { type: 'integer' },
+                    ...calificacion,
+                    ...responseProperties,
+                  },
+                },
               },
             },
           },
