@@ -34,11 +34,13 @@ const AlumnoGrupoSchema = {
     allowNull: false,
     type: DataTypes.DATEONLY,
     field: 'periodo_fecha_inicio',
+    defaultValue: '2023-10-08',
   },
   periodoFechaFin: {
     allowNull: false,
     type: DataTypes.DATEONLY,
     field: 'periodo_fecha_fin',
+    defaultValue: '2023-10-08',
   },
   createdAt: {
     allowNull: false,

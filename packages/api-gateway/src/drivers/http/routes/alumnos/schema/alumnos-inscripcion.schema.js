@@ -18,7 +18,7 @@ const alumnosInscripcionSchema = {
       type: 'object',
       properties: {
         ...alumnoGrupo,
-        calificaciones: {
+        asignaturas: {
           type: 'array',
           minItems: 1,
           items: {
