@@ -3,6 +3,7 @@ const findOneAlumnoSchema = require('./find-one.alumno.schema');
 const updateAlumnoSchema = require('./update.alumno.schema');
 const deleteAlumnoSchema = require('./delete.alumno.schema');
 const findProgramaAlumnosSchema = require('./find.programa-alumnos.schema');
+const alumnosInscripcionSchema = require('./alumnos-inscripcion.schema');
 
 module.exports = {
   createAlumnoSchema,
@@ -10,4 +11,5 @@ module.exports = {
   updateAlumnoSchema,
   deleteAlumnoSchema,
   findProgramaAlumnosSchema,
+  alumnosInscripcionSchema,
 };

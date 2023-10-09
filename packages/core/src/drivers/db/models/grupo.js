@@ -3,7 +3,7 @@ const { CICLO_ESCOLAR_TABLE } = require('./cicloEscolar');
 const { TURNO_TABLE } = require('./turno');
 const { GRADO_TABLE } = require('./grado');
 
-const GRUPOS_TABLE = 'grupos';
+const GRUPO_TABLE = 'grupos';
 
 const GrupoSchema = {
   id: {
@@ -84,11 +84,11 @@ class Grupo extends Model {
   static config(sequelize) {
     return {
       sequelize,
-      tableName: GRUPOS_TABLE,
+      tableName: GRUPO_TABLE,
       modelName: 'Grupo',
       timestamps: false,
     };
   }
 }
 
-module.exports = { GRUPOS_TABLE, GrupoSchema, Grupo };
+module.exports = { GRUPO_TABLE, GrupoSchema, Grupo };

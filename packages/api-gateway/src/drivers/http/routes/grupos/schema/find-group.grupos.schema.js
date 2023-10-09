@@ -1,4 +1,4 @@
-const { grupos } = require('./properties/grupos');
+const { grupo } = require('./properties/grupo');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findGroupGrupoSchema = {
@@ -19,7 +19,7 @@ const findGroupGrupoSchema = {
             type: 'object',
             properties: {
               id: { type: 'integer' },
-              ...grupos,
+              ...grupo,
               ...responseProperties,
             },
           },

@@ -1,4 +1,4 @@
-const { grupos } = require('./properties/grupos');
+const { grupo } = require('./properties/grupo');
 const { responseProperties } = require('./properties/responseProperties');
 
 const deleteGrupoSchema = {
@@ -17,7 +17,7 @@ const deleteGrupoSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...grupos,
+            ...grupo,
             ...responseProperties,
           },
         },
