@@ -1,4 +1,4 @@
-const { ciclosEscolares } = require('./properties/ciclosEscolares');
+const { cicloEscolar } = require('./properties/cicloEscolar');
 const { responseProperties } = require('./properties/responseProperties');
 
 const updateCicloEscolarSchema = {
@@ -11,7 +11,7 @@ const updateCicloEscolarSchema = {
   },
   body: {
     type: 'object',
-    properties: ciclosEscolares,
+    properties: cicloEscolar,
   },
   response: {
     200: {
@@ -21,7 +21,7 @@ const updateCicloEscolarSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...ciclosEscolares,
+            ...cicloEscolar,
             ...responseProperties,
           },
         },

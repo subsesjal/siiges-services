@@ -4,6 +4,7 @@ const {
   updateAlumno,
   findGroupAlumnosPrograma,
   deleteAlumno,
+  alumnosInscripcion,
 } = require('./db/alumnos');
 
 const {
@@ -47,4 +48,5 @@ module.exports = {
   findGroupGrupo,
   updateGrupo,
   deleteGrupo,
+  alumnosInscripcion,
 };

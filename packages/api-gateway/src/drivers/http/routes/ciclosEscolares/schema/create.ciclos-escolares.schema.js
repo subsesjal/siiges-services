@@ -1,5 +1,5 @@
 const { responseProperties } = require('./properties/responseProperties');
-const { ciclosEscolares } = require('./properties/ciclosEscolares');
+const { cicloEscolar } = require('./properties/cicloEscolar');
 
 const createCicloEscolarSchema = {
   tags: ['Ciclo Escolar'],
@@ -8,9 +8,9 @@ const createCicloEscolarSchema = {
     title: 'Data body',
     type: 'object',
     properties: {
-      ...ciclosEscolares,
+      ...cicloEscolar,
     },
-    required: Object.keys(ciclosEscolares),
+    required: Object.keys(cicloEscolar),
   },
   response: {
     201: {
@@ -20,7 +20,7 @@ const createCicloEscolarSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...ciclosEscolares,
+            ...cicloEscolar,
             ...responseProperties,
           },
         },

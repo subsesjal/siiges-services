@@ -1,7 +1,7 @@
-const { ciclosEscolares } = require('./properties/ciclosEscolares');
+const { cicloEscolar } = require('./properties/cicloEscolar');
 const { responseProperties } = require('./properties/responseProperties');
 
-const { programaId } = ciclosEscolares;
+const { programaId } = cicloEscolar;
 
 const findGroupCicloEscolarSchema = {
   tags: ['Ciclo Escolar'],
@@ -21,7 +21,7 @@ const findGroupCicloEscolarSchema = {
             type: 'object',
             properties: {
               id: { type: 'integer' },
-              ...ciclosEscolares,
+              ...cicloEscolar,
               ...responseProperties,
             },
           },
