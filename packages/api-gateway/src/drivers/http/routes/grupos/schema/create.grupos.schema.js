@@ -1,5 +1,5 @@
 const { responseProperties } = require('./properties/responseProperties');
-const { grupos } = require('./properties/grupos');
+const { grupo } = require('./properties/grupo');
 
 const createGrupoSchema = {
   tags: ['Ciclo Escolar'],
@@ -8,9 +8,9 @@ const createGrupoSchema = {
     title: 'Data body',
     type: 'object',
     properties: {
-      ...grupos,
+      ...grupo,
     },
-    required: ['cicloEscolarId', 'turnoId', 'generacion', 'generacionFechaInicio', 'generacionFechaFin'],
+    required: Object.keys(grupo),
   },
   response: {
     201: {
@@ -20,7 +20,7 @@ const createGrupoSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...grupos,
+            ...grupo,
             ...responseProperties,
           },
         },

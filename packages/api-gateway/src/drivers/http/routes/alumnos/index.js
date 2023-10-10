@@ -5,6 +5,7 @@ const {
   updateAlumnoSchema,
   findProgramaAlumnosSchema,
   deleteAlumnoSchema,
+  alumnosInscripcionSchema,
 } = require('./schema');
 
 async function asignaturaRouter(fastify, opts, next) {
@@ -51,6 +52,15 @@ async function asignaturaRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.deleteAlumno,
+  );
+
+  await fastify.post(
+    '/grupos/:grupoId/inscripcion',
+    {
+      schema: alumnosInscripcionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    alumnosAdapter.alumnosInscripcion,
   );
 
   next();

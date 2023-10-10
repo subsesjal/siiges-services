@@ -3,6 +3,7 @@ const { Op } = require('sequelize');
 
 const {
   findAllQuery,
+  findOneQuery,
 } = queries;
 
 const {
@@ -25,6 +26,7 @@ const where = {
 
 module.exports = {
   findAllProgramasQuery: findAllQuery(Programa),
+  findOneProgramaQuery: findOneQuery(Programa),
   findPlantelProgramasQuery: findAllQuery(Programa),
   findInstitucionQuery: findAllQuery(Plantel),
   includeProgramasQuery: include,

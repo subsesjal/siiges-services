@@ -1,5 +1,5 @@
-const { grado } = require('./properties/grados');
-const { grupos } = require('./properties/grupos');
+const { grado } = require('./properties/grado');
+const { grupo } = require('./properties/grupo');
 const { responseProperties } = require('./properties/responseProperties');
 
 const updateGrupoSchema = {
@@ -13,7 +13,7 @@ const updateGrupoSchema = {
   body: {
     type: 'object',
     properties: {
-      ...grupos,
+      ...grupo,
       ...grado,
     },
   },
@@ -25,7 +25,7 @@ const updateGrupoSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...grupos,
+            ...grupo,
             grado: {
               type: 'object',
               properties: {
