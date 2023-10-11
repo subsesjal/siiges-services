@@ -15,7 +15,6 @@ const AlumnoGrupoSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'alumno_id',
-    unique: true,
     references: {
       model: ALUMNO_TABLE,
       key: 'id',
