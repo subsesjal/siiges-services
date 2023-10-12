@@ -20,10 +20,13 @@ const findOneSolicitudPrograma = (findOneSolicitudProgramaQuery) => async (ident
         },
         {
           association: 'institucion',
-          include: [{
-            association: 'rector',
-            include: [{ association: 'persona' }],
-          }],
+          include: [
+            { association: 'ratificacionesNombre' },
+            {
+              association: 'rector',
+              include: [{ association: 'persona' }],
+            },
+          ],
         },
         ],
       }],
