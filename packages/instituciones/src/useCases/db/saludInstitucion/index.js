@@ -20,15 +20,19 @@ module.exports = {
   ),
   findPlantelSaludInstituciones: findPlantelSaludInstituciones(
     findAllSaludInstitucionesQuery,
+    findOnePlantelQuery,
   ),
   findOneSaludInstituciones: findOneSaludInstituciones(
     findOneSaludInstitucionesQuery,
+    findOnePlantelQuery,
   ),
   deleteSaludInstitucion: deleteSaludInstitucion(
+    findOnePlantelQuery,
     findOneSaludInstitucionesQuery,
     deleteSaludInstitucionQuery,
   ),
   updateSaludInstitucion: updateSaludInstitucion(
+    findOnePlantelQuery,
     findOneSaludInstitucionesQuery,
     updateSaludInstitucionQuery,
   ),

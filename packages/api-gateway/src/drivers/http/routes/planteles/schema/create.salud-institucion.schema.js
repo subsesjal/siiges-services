@@ -4,12 +4,19 @@ const { responseProperties } = require('./properties/responseProperties');
 const createSaludInstitucionSchema = {
   tags: ['Planteles'],
   description: 'Create a new Salud Instiucion',
+  params: {
+    type: 'object',
+    properties: {
+      plantelId: { type: 'integer' },
+    },
+    required: ['plantelId'],
+  },
   body: {
     type: 'object',
     properties: {
       ...saludInstitucion,
     },
-    required: ['plantelId', 'nombre', 'tiempo'],
+    required: ['nombre', 'tiempo'],
   },
   response: {
     201: {

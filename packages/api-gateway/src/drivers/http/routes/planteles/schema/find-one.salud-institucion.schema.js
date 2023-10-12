@@ -7,9 +7,10 @@ const findOneSaludInstitucionSchema = {
   params: {
     type: 'object',
     properties: {
-      institucionesSaludId: { type: 'integer' },
+      saludInstitucionId: { type: 'integer' },
+      plantelId: { type: 'integer' },
     },
-    required: ['institucionesSaludId'],
+    required: ['plantelId', 'saludInstitucionId'],
   },
   response: {
     200: {

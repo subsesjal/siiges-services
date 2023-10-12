@@ -1,6 +1,7 @@
 const { institucion } = require('./properties/institucion');
 const { plantel } = require('./properties/plantel');
 const { plantelEdificioNivel } = require('../../planteles/schema/properties/plantelEdificioNivel');
+const { tipoInmueble } = require('./properties/tipoInmueble');
 const { edificioNivel } = require('../../planteles/schema/properties/edificioNivel');
 const { plantelSeguridadSistema } = require('../../planteles/schema/properties/plantelSeguridadSistema');
 const { seguridadSistema } = require('../../planteles/schema/properties/seguridadSistema');
@@ -38,6 +39,14 @@ const findOnePlantelDetallesSchema = {
             id: { type: 'integer' },
             ...plantel,
             ...responseProperties,
+            tipoInmueble: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...tipoInmueble,
+                ...responseProperties,
+              },
+            },
             institucion: {
               type: 'object',
               properties: {

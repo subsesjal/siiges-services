@@ -3,12 +3,15 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function deleteSaludInstitucion(req, reply) {
   try {
-    const { institucionesSaludId } = req.params;
+    const { plantelId, saludInstitucionId } = req.params;
 
-    Logger.info(`[Salud institución]: delete salud-institucion ${institucionesSaludId}`);
+    Logger.info(`[Salud institución]: delete salud-institucion ${saludInstitucionId}`);
 
     const saludInstitucionDeleted = await this.institucionServices
-      .deleteSaludInstitucion({ id: institucionesSaludId });
+      .deleteSaludInstitucion({
+        plantelId,
+        saludInstitucionId,
+      });
 
     return reply
       .code(200)

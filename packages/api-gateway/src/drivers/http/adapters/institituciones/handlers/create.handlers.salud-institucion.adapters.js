@@ -3,11 +3,15 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function createSaludInstitucion(req, reply) {
   try {
+    const { plantelId } = req.params;
     const { ...data } = req.body;
 
     Logger.info('[institución salud]: Creating institucion-salud');
 
-    const newInstitucionSalud = await this.institucionServices.createSaludInstitucion(data);
+    const newInstitucionSalud = await this.institucionServices.createSaludInstitucion(
+      { plantelId },
+      data,
+    );
 
     return reply
       .code(201)

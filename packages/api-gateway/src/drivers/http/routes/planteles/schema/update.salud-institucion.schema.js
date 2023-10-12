@@ -2,14 +2,15 @@ const { saludInstitucion } = require('./properties/saludInstitucion');
 const { responseProperties } = require('./properties/responseProperties');
 
 const updateSaludInstitucionSchema = {
-  tags: ['Instituciones'],
+  tags: ['Planteles'],
   description: 'update a Salud Instiucion with institucionesSaludId params',
   params: {
     type: 'object',
     properties: {
-      institucionesSaludId: { type: 'integer' },
+      saludInstitucionId: { type: 'integer' },
+      plantelId: { type: 'integer' },
     },
-    required: ['institucionesSaludId'],
+    required: ['plantelId', 'saludInstitucionId'],
   },
   body: {
     type: 'object',

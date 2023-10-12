@@ -1,14 +1,21 @@
 const { checkers } = require('@siiges-services/shared');
 
 const deleteSaludInstitucion = (
-  findOneSaludInstitucionesQuery,
+  findOnePlantelQuery,
+  findOneSaludInstitucionQuery,
   deleteSaludInstitucionesQuery,
 ) => async (identifierObj) => {
-  const saludInstitucion = await findOneSaludInstitucionesQuery(identifierObj);
-  checkers.throwErrorIfDataIsFalsy(saludInstitucion, 'SaludInstitucion', identifierObj.id);
+  const { plantelId, saludInstitucionId } = identifierObj;
 
-  await deleteSaludInstitucionesQuery(identifierObj);
-  return saludInstitucion;
+  const plantel = await findOnePlantelQuery({ id: plantelId });
+  checkers.throwErrorIfDataIsFalsy(plantel, 'planteles', plantelId);
+
+  const saludInstitucion = await findOneSaludInstitucionQuery({ id: saludInstitucionId });
+  checkers.throwErrorIfDataIsFalsy(saludInstitucion, 'salud_instituciones', saludInstitucionId);
+
+  const saludInstitucionDeleted = await deleteSaludInstitucionesQuery({ id: saludInstitucionId });
+
+  return saludInstitucionDeleted;
 };
 
 module.exports = { deleteSaludInstitucion };

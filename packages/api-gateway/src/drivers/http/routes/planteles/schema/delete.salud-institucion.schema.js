@@ -2,14 +2,15 @@ const { saludInstitucion } = require('./properties/saludInstitucion');
 const { responseProperties } = require('./properties/responseProperties');
 
 const deleteSaludInstitucionSchema = {
-  tags: ['Instituciones'],
+  tags: ['Planteles'],
   description: 'Delete a Salud Instiucion with institucionesSaludId params',
   params: {
     type: 'object',
     properties: {
-      institucionesSaludId: { type: 'integer' },
+      saludInstitucionId: { type: 'integer' },
+      plantelId: { type: 'integer' },
     },
-    required: ['institucionesSaludId'],
+    required: ['plantelId', 'saludInstitucionId'],
   },
   response: {
     200: {
