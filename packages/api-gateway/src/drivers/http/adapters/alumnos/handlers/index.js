@@ -4,6 +4,7 @@ const updateAlumno = require('./update.handlers.alumno.adapters');
 const findGroupAlumnosPrograma = require('./find-group.handlers.alumnos-programa.adapters');
 const deleteAlumno = require('./delete.handlers.alumno.adapters');
 const alumnosInscripcion = require('./create-update.handlers.alumnos-inscripcion.adapters');
+const findAlumnosInscritos = require('./find-group.handlers.alumnos-inscritos');
 
 module.exports = {
   createAlumno,
@@ -12,4 +13,5 @@ module.exports = {
   findGroupAlumnosPrograma,
   deleteAlumno,
   alumnosInscripcion,
+  findAlumnosInscritos,
 };

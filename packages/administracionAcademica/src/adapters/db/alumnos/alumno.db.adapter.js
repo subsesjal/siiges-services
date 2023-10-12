@@ -23,6 +23,7 @@ module.exports = {
   createAlumnoQuery: createQuery(Alumno),
   createAlumnoGrupoQuery: createQuery(AlumnoGrupo),
   findOneAlumnoGrupoQuery: findOneQuery(AlumnoGrupo),
+  findAllAlumnoGrupoQuery: findAllQuery(AlumnoGrupo),
   createAlumnoTipoTramiteQuery: createQuery(AlumnoTipoTramite),
   updateAlumnoQuery: updateAndFindQuery(Alumno),
   updateAlumnoTipoTramiteQuery: updateAndFindQuery(AlumnoTipoTramite),

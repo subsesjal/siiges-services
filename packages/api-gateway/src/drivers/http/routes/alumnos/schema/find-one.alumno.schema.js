@@ -8,7 +8,7 @@ const findOneAlumnoSchema = {
   description: 'Given an Alumno id, then return a Alumno from database.',
   params: {
     type: 'object',
-    properties: { AlumnoId: { type: 'integer' } },
+    properties: { alumnoId: { type: 'integer' } },
     required: ['alumnoId'],
   },
   response: {

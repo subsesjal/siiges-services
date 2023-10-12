@@ -28,7 +28,7 @@ const saveAlumnosGrupo = async ({
   grupoId,
   dataArray,
 }) => {
-  dataArray.map(async (obj) => {
+  await Promise.all(dataArray.map(async (obj) => {
     const { alumnoId } = obj;
 
     const alumnoGrupo = await findOneAlumnoGrupoQuery({ alumnoId, grupoId });
@@ -36,7 +36,7 @@ const saveAlumnosGrupo = async ({
     if (!alumnoGrupo) {
       await createAlumnoGrupoQuery({ alumnoId, grupoId });
     }
-  });
+  }));
 };
 
 const createAlumnoAsignaturasRelations = async ({
