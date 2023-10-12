@@ -10,3 +10,5 @@ id,domicilio_id,nombre,apellido_paterno,apellido_materno,fecha_nacimiento,sexo,n
 9,1,Roberto,Cervantes Torres,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:14:54
 10,1,alumno1,apellido paterno alumno,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:26:43
 11,1,alumno2,apellido paterno alumno2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17
+12,1,Diligente 1,apellido diligente 1,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17
+13,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17
