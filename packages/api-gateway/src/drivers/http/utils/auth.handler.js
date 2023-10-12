@@ -7,7 +7,9 @@ const validateApiKey = (req, reply, next) => {
   try {
     const apiKey = req.headers.api_key === config.apiKey;
     const swaggerDoc = req.url.startsWith('/doc');
-    if (!apiKey !== swaggerDoc) {
+    const documents = req.url.startsWith('/uploads');
+    const skipApiKey = swaggerDoc || documents;
+    if (!apiKey !== skipApiKey) {
       throw boom.unauthorized('Unauthorized access to this API. You need an API KEY');
     }
     next();
