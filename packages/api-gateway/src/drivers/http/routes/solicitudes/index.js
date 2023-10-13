@@ -3,6 +3,7 @@ const { updateSchema, findSchema, deleteSchema } = require('./representantes/sch
 const { findDiligenciasSolicitudSchema } = require('../diligencias/schema');
 const {
   createSolicitudProgramaSchema,
+  createSolicitudRefrendoSchema,
   findAllSolicitudesProgramasSchema,
   findOneSolicitudProgramaSchema,
   findAllSolicitudesUsuarioSchema,
@@ -39,6 +40,15 @@ async function solicitudRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     solicitudesAdapter.findOneSolicitudDetalle,
+  );
+
+  await fastify.post(
+    '/:solicitudId/refrendo',
+    {
+      // schema: createSolicitudRefrendoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesAdapter.createSolicitudPrograma,
   );
 
   await fastify.post(

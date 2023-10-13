@@ -5,9 +5,13 @@ async function findOneSaludInstituciones(req, reply) {
   try {
     Logger.info('[institución salud]: Get one saludInstituciones');
 
-    const { institucionesSaludId } = req.params;
+    const { saludInstitucionId, plantelId } = req.params;
+
     const saludInstituciones = await this.institucionServices
-      .findOneSaludInstituciones(institucionesSaludId);
+      .findOneSaludInstituciones({
+        saludInstitucionId,
+        plantelId,
+      });
 
     return reply
       .code(200)

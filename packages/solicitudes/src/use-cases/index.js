@@ -1,5 +1,6 @@
 const {
-  createSolicitudPrograma,
+  createNuevaSolicitudPrograma,
+  createRefrendoSolicitudPrograma,
   findAllSolicitudesProgramas,
   findOneSolicitudPrograma,
   findSolicitudesUsuario,
@@ -56,7 +57,8 @@ const {
 } = require('./db/evaluaciones');
 
 module.exports = {
-  createSolicitudPrograma,
+  createNuevaSolicitudPrograma,
+  createRefrendoSolicitudPrograma,
   findAllSolicitudesProgramas,
   findOneSolicitudPrograma,
   findSolicitudesUsuario,

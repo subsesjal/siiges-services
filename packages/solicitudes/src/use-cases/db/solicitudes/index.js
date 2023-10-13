@@ -2,7 +2,8 @@ const {
   solicitudes,
 } = require('../../../adapters/db');
 
-const createSolicitudPrograma = require('./create.solicitud-programa.use-cases');
+const createNuevaSolicitudPrograma = require('./create.solicitud-programa.use-cases');
+const createRefrendoSolicitudPrograma = require('./create.solicitud-refrendo-programa.use-cases');
 const findAllSolicitudesProgramas = require('./find-all.solicitudes-programas.use-cases');
 const findOneSolicitudPrograma = require('./find-one.solicitud-programa.use-cases');
 const findOneSolicitudDetalle = require('./find-one.solicitud-detalle.use-cases');
@@ -13,8 +14,15 @@ const updateSolcitudSeccionObservacion = require('./update.seccion-observacion.u
 const findOneSolicitudSeccion = require('./find-one.solicitud-seccion.use-cases');
 
 module.exports = {
-  createSolicitudPrograma: createSolicitudPrograma(
+  createNuevaSolicitudPrograma: createNuevaSolicitudPrograma(
     solicitudes.findOneUsuarioQuery,
+    solicitudes.countSolicitudesQuery,
+    solicitudes.createSolicitudProgramaQuery,
+    solicitudes.createProgramaTurnoQuery,
+  ),
+  createRefrendoSolicitudPrograma: createRefrendoSolicitudPrograma(
+    solicitudes.findOneUsuarioQuery,
+    solicitudes.findOneSolicitudProgramaQuery,
     solicitudes.countSolicitudesQuery,
     solicitudes.createSolicitudProgramaQuery,
     solicitudes.createProgramaTurnoQuery,

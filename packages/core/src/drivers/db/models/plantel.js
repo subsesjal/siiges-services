@@ -103,6 +103,11 @@ class Plantel extends Model {
     this.belongsTo(models.Domicilio, { as: 'domicilio' });
     this.belongsTo(models.TipoInmueble, { as: 'tipoInmueble' });
     this.hasMany(models.Director, { as: 'directores', foreignKey: 'plantelId' });
+    this.hasMany(models.PlantelEdificioNivel, { as: 'plantelEdificioNiveles', foreignKey: 'plantelId' });
+    this.hasMany(models.PlantelSeguridadSistema, { as: 'plantelSeguridadSistemas', foreignKey: 'plantelId' });
+    this.hasMany(models.PlantelHigiene, { as: 'plantelHigienes', foreignKey: 'plantelId' });
+    this.hasMany(models.SaludInstitucion, { as: 'saludInstituciones', foreignKey: 'plantelId' });
+    this.hasMany(models.Infraestructura, { as: 'infraestructuras', foreignKey: 'plantelId' });
   }
 
   static config(sequelize) {

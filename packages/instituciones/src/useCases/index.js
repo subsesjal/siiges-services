@@ -5,6 +5,7 @@ const {
 const {
   createPlantel,
   findOnePlantel,
+  findOnePlantelDetalles,
   updatePlantel,
   deletePlantel,
   createPlantelHigiene,
@@ -64,6 +65,7 @@ module.exports = {
   findAllMunicipios,
   createPlantel,
   findOnePlantel,
+  findOnePlantelDetalles,
   updatePlantel,
   deletePlantel,
   createPlantelHigiene,

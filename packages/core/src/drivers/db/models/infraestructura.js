@@ -69,7 +69,7 @@ class Infraestructura extends Model {
   static associate(models) {
     this.belongsTo(models.Plantel, { as: 'plantel' });
     this.belongsTo(models.TipoInstalacion, { as: 'tipoInstalacion' });
-    this.hasMany(models.AsignaturaInfraestructura, { as: 'asignaturasInfraestructuras', foreignKey: 'infraestructuraId' });
+    this.hasMany(models.AsignaturaInfraestructura, { as: 'asignaturasInfraestructura', foreignKey: 'infraestructuraId' });
   }
 
   static config(sequelize) {

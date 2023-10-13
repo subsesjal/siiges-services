@@ -9,11 +9,11 @@ const findGroupPlantelesUsuarioSchema = require('./find-group.planteles-usuario.
 const findAllEdificiosNivelesSchema = require('./find-all.edificios-niveles.schema');
 const createUpdatePlantelNivelesSchema = require('./create-update.plantel-niveles.schema');
 const findGroupPlantelNivelesSchema = require('./find-group.plantel-niveles.schema');
-const createSaludInstiucionSchema = require('./create.salud-institucion.schema');
-const findPlantelSaludInstiucionSchema = require('./find-plantel.salud-institucion.schema');
-const findOneSaludInstiucionSchema = require('./find-one.salud-institucion.schema');
-const deleteSaludInstiucionSchema = require('./delete.salud-institucion.schema');
-const updateSaludInstiucionSchema = require('./update.salud-institucion.schema');
+const createSaludInstitucionSchema = require('./create.salud-institucion.schema');
+const findPlantelSaludInstitucionSchema = require('./find-plantel.salud-institucion.schema');
+const findOneSaludInstitucionSchema = require('./find-one.salud-institucion.schema');
+const deleteSaludInstitucionSchema = require('./delete.salud-institucion.schema');
+const updateSaludInstitucionSchema = require('./update.salud-institucion.schema');
 const findAllSeguridadSistemasSchema = require('./find-all.seguridad-sistemas.schema');
 const findGroupPlantelSeguridadSchema = require('./find-group.plantel-seguridad.schema');
 const createUpdatePlantelSeguridadSchema = require('./create-update.plantel-seguridad.schema');
@@ -32,11 +32,11 @@ module.exports = {
   findAllEdificiosNivelesSchema,
   createUpdatePlantelNivelesSchema,
   findGroupPlantelNivelesSchema,
-  createSaludInstiucionSchema,
-  findPlantelSaludInstiucionSchema,
-  findOneSaludInstiucionSchema,
-  deleteSaludInstiucionSchema,
-  updateSaludInstiucionSchema,
+  createSaludInstitucionSchema,
+  findPlantelSaludInstitucionSchema,
+  findOneSaludInstitucionSchema,
+  deleteSaludInstitucionSchema,
+  updateSaludInstitucionSchema,
   findAllSeguridadSistemasSchema,
   findGroupPlantelSeguridadSchema,
   createUpdatePlantelSeguridadSchema,

@@ -11,6 +11,7 @@ const {
   findOneInstitucionSchema,
   findPlantelesInstitucionSchema,
   findOnePlantelSchema,
+  findOnePlantelDetallesSchema,
   createInstitucionSchema,
   createPlantelSchema,
   createDirectorSchema,
@@ -97,6 +98,15 @@ async function institucionRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     institucionesAdapter.findOnePlantel,
+  );
+
+  await fastify.get(
+    '/:institucionId/planteles/:plantelId/detalles',
+    {
+      schema: findOnePlantelDetallesSchema,
+      onRequest: [fastify.authenticate],
+    },
+    institucionesAdapter.findOnePlantelDetalles,
   );
 
   await fastify.post(

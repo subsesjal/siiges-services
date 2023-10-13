@@ -2,6 +2,7 @@ const findAllInstitucionesSchema = require('./find-all.instituciones.schema');
 const findOneInstitucionSchema = require('./find-one.instituciones.schema');
 const findPlantelesInstitucionSchema = require('./find.planteles-institucion.schema');
 const findOnePlantelSchema = require('./find-one.plantel.schema');
+const findOnePlantelDetallesSchema = require('./find-one.plantel-detalles.schema');
 const createInstitucionSchema = require('./create.intitucion.schema');
 const createPlantelSchema = require('./create.plantel.schema');
 const updateInstitucionSchema = require('./update.institucion.schema');
@@ -18,6 +19,7 @@ module.exports = {
   findOneInstitucionSchema,
   findPlantelesInstitucionSchema,
   findOnePlantelSchema,
+  findOnePlantelDetallesSchema,
   createInstitucionSchema,
   createPlantelSchema,
   updateInstitucionSchema,

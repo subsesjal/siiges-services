@@ -1,4 +1,4 @@
-const saludInstiucion = {
+const saludInstitucion = {
   plantelId: { type: 'integer' },
   nombre: { type: 'string' },
   tiempo: {
@@ -7,4 +7,4 @@ const saludInstiucion = {
   },
 };
 
-module.exports = { saludInstiucion };
+module.exports = { saludInstitucion };

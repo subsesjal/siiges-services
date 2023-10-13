@@ -4,13 +4,13 @@ const { createFolioSolicitud } = require('../../../utils/create-folio.utils');
 
 const ROL_REPRESENTANTE = 3;
 
-const createSolicitudPrograma = (
+const createNuevaSolicitudPrograma = (
   findOneUsuarioQuery,
   countSolicitudesQuery,
   createSolicitudProgramaQuery,
   createProgramaTurnoQuery,
 ) => async (data) => {
-  const { usuarioId } = data;
+  const { usuarioId, tipoSolicitudId } = data;
 
   const usuario = await findOneUsuarioQuery({ id: usuarioId });
 
@@ -18,7 +18,11 @@ const createSolicitudPrograma = (
 
   if (usuario.rolId !== ROL_REPRESENTANTE) {
     throw boom.badRequest(
-      '[usuario:finOne]: The user is not a REPRESENTANTE role',
+      '[solicitudes]: The user is not a REPRESENTANTE role',
+    );
+  } else if (tipoSolicitudId !== 1) {
+    throw boom.badRequest(
+      '[solicitudes]: Tipo Solicitud is not correct',
     );
   } else {
     const totalSolicitudes = await countSolicitudesQuery();
@@ -46,4 +50,4 @@ const createSolicitudPrograma = (
   }
 };
 
-module.exports = createSolicitudPrograma;
+module.exports = createNuevaSolicitudPrograma;

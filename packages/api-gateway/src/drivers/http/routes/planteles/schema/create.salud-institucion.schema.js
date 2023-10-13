@@ -1,15 +1,22 @@
-const { saludInstiucion } = require('./properties/saludInstiucion');
+const { saludInstitucion } = require('./properties/saludInstitucion');
 const { responseProperties } = require('./properties/responseProperties');
 
-const createSaludInstiucionSchema = {
+const createSaludInstitucionSchema = {
   tags: ['Planteles'],
   description: 'Create a new Salud Instiucion',
+  params: {
+    type: 'object',
+    properties: {
+      plantelId: { type: 'integer' },
+    },
+    required: ['plantelId'],
+  },
   body: {
     type: 'object',
     properties: {
-      ...saludInstiucion,
+      ...saludInstitucion,
     },
-    required: ['plantelId', 'nombre', 'tiempo'],
+    required: ['nombre', 'tiempo'],
   },
   response: {
     201: {
@@ -19,7 +26,7 @@ const createSaludInstiucionSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...saludInstiucion,
+            ...saludInstitucion,
             ...responseProperties,
           },
         },
@@ -28,4 +35,4 @@ const createSaludInstiucionSchema = {
   },
 };
 
-module.exports = createSaludInstiucionSchema;
+module.exports = createSaludInstitucionSchema;

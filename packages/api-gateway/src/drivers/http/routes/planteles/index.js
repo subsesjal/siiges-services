@@ -18,11 +18,11 @@ const {
   findAllEdificiosNivelesSchema,
   createUpdatePlantelNivelesSchema,
   findGroupPlantelNivelesSchema,
-  createSaludInstiucionSchema,
-  findPlantelSaludInstiucionSchema,
-  findOneSaludInstiucionSchema,
-  deleteSaludInstiucionSchema,
-  updateSaludInstiucionSchema,
+  createSaludInstitucionSchema,
+  findPlantelSaludInstitucionSchema,
+  findOneSaludInstitucionSchema,
+  deleteSaludInstitucionSchema,
+  updateSaludInstitucionSchema,
   findAllSeguridadSistemasSchema,
   findGroupPlantelSeguridadSchema,
   createUpdatePlantelSeguridadSchema,
@@ -133,46 +133,47 @@ async function plantelRouter(fastify, opts, next) {
     plantelesAdapter.findGroupPlantelNiveles,
   );
 
+  // Salud Instuciones
   await fastify.post(
-    '/institucionesSalud',
+    '/:plantelId/saludInstituciones',
     {
-      schema: createSaludInstiucionSchema,
+      schema: createSaludInstitucionSchema,
       onRequest: [fastify.authenticate],
     },
     institucionesAdapter.createSaludInstitucion,
   );
 
   await fastify.get(
-    '/:plantelId/institucionesSalud',
+    '/:plantelId/saludInstituciones',
     {
-      schema: findPlantelSaludInstiucionSchema,
+      schema: findPlantelSaludInstitucionSchema,
       onRequest: [fastify.authenticate],
     },
     institucionesAdapter.findPlantelSaludInstituciones,
   );
 
   await fastify.get(
-    '/institucionesSalud/:institucionesSaludId',
+    '/:plantelId/saludInstituciones/:saludInstitucionId',
     {
-      schema: findOneSaludInstiucionSchema,
+      schema: findOneSaludInstitucionSchema,
       onRequest: [fastify.authenticate],
     },
     institucionesAdapter.findOneSaludInstituciones,
   );
 
   await fastify.delete(
-    '/institucionesSalud/:institucionesSaludId',
+    '/:plantelId/saludInstituciones/:saludInstitucionId',
     {
-      schema: deleteSaludInstiucionSchema,
+      schema: deleteSaludInstitucionSchema,
       onRequest: [fastify.authenticate],
     },
     institucionesAdapter.deleteSaludInstitucion,
   );
 
   await fastify.patch(
-    '/institucionesSalud/:institucionesSaludId',
+    '/:plantelId/saludInstituciones/:saludInstitucionId',
     {
-      schema: updateSaludInstiucionSchema,
+      schema: updateSaludInstitucionSchema,
       onRequest: [fastify.authenticate],
     },
     institucionesAdapter.updateSaludInstitucion,

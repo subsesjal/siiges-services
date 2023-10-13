@@ -3,15 +3,18 @@ const { checkers } = require('@siiges-services/shared');
 const createSaludInstitucion = (
   createSaludInstitucionQuery,
   findOnePlantelQuery,
-) => async (identifierObj) => {
+) => async (identifierObj, data) => {
   const { plantelId } = identifierObj;
 
   const plantel = await findOnePlantelQuery({ id: plantelId });
-  checkers.throwErrorIfDataIsFalsy(plantel, 'Instituciones', plantelId);
+  checkers.throwErrorIfDataIsFalsy(plantel, 'planteles', plantelId);
 
-  const institucionSalud = await createSaludInstitucionQuery(identifierObj);
+  const saludInstitucion = await createSaludInstitucionQuery({
+    ...data,
+    plantelId,
+  });
 
-  return institucionSalud;
+  return saludInstitucion;
 };
 
 module.exports = createSaludInstitucion;

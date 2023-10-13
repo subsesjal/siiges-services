@@ -1,10 +1,16 @@
 const { checkers } = require('@siiges-services/shared');
 
-const findPlantelSaludInstituciones = (findAllSaludInstitucionesQuery) => async (identifierObj) => {
-  const allSaludInstituciones = await findAllSaludInstitucionesQuery(identifierObj);
-  if (allSaludInstituciones.length === 0) {
-    checkers.throwErrorIfDataIsFalsy(null, 'SaludInstituciones', identifierObj.plantelId);
-  }
+const findPlantelSaludInstituciones = (
+  findAllSaludInstitucionesQuery,
+  findOnePlantelQuery,
+) => async (identifierObj) => {
+  const { plantelId } = identifierObj;
+
+  const plantel = findOnePlantelQuery;
+  checkers.throwErrorIfDataIsFalsy(plantel, 'planteles', plantelId);
+
+  const allSaludInstituciones = await findAllSaludInstitucionesQuery({ plantelId });
+
   return allSaludInstituciones;
 };
 
