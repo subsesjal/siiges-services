@@ -1,0 +1,26 @@
+id,nombre,descripcion,numero_grado,created_at
+1,Primer cuatrimestre,Primer cuatrimestre,1,2021-12-07 12:18:13
+2,Segundo cuatrimestre,Segundo cuatrimestre,2,2021-12-07 12:18:13
+3,Tercero cuatrimestre,Tercero cuatrimestre,3,2021-12-07 12:19:59
+4,Cuarto cuatrimestre,Cuarto cuatrimestre,4,2021-12-07 12:19:59
+5,Quinto cuatrimestre,Quinto cuatrimestre,5,2021-12-07 12:19:59
+6,Sexto cuatrimestre,Sexto cuatrimestre,6,2021-12-07 12:19:59
+7,Septimo cuatrimestre,Septimo cuatrimestre,7,2021-12-07 12:19:59
+8,Octavo cuatrimestre,Octavo cuatrimestre,8,2021-12-07 12:19:59
+9,Noveno cuatrimestre,Noveno cuatrimestre,9,2021-12-07 12:19:59
+10,Decimo cuatrimestre,Decimo cuatrimestre,10,2021-12-07 12:19:59
+11,Undecimo cuatrimestre,Undecimo cuatrimestre,11,2021-12-07 12:19:59
+12,Duodecimo cuatrimestre,Duodecimo cuatrimestre,12,2021-12-07 12:19:59
+13,Primer semestre,Primer semestre,1,2021-12-07 12:19:59
+14,Segundo semestre,Segundo semestre,2,2021-12-07 12:19:59
+15,Tercero semestre,Tercero semestre,3,2021-12-07 12:19:59
+16,Cuarto semestre,Cuarto semestre,4,2021-12-07 12:19:59
+17,Quinto semestre,Quinto semestre,5,2021-12-07 12:19:59
+18,Sexto semestre,Sexto semestre,6,2021-12-07 12:19:59
+19,Septimo semestre,Septimo semestre,7,2021-12-07 12:19:59
+20,Octavo semestre,Octavo semestre,8,2021-12-07 12:19:59
+21,Noveno semestre,Noveno semestre,9,2021-12-07 12:27:07
+22,Decimo semestre,Decimo semestre,10,2021-12-07 12:27:48
+23,Flexible Cuatrimestral,Flexible Cuatrimestral,1,2021-12-07 12:27:48
+24,Flexible Semestral,Flexible Semestral,1,2021-12-07 12:27:48
+25,Optativa,Optativa,100,2021-12-13 11:48:42
