@@ -43,6 +43,10 @@ const GrupoSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
+  grupo: {
+    allowNull: false,
+    type: DataTypes.STRING,
+  },
   generacion: {
     type: DataTypes.STRING,
   },
