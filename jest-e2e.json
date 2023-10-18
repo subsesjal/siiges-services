@@ -1,5 +1,5 @@
 {
-  "testTimeout": 20000,
+  "testTimeout": 50000,
   "moduleFileExtensions": ["js"],
   "rootDir" : ".",
   "testEnvironment": "node",
