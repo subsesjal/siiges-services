@@ -3,9 +3,23 @@ const {
 } = require('../../../adapters/db');
 
 const createNotificacion = require('./create.notificacion.use-cases');
+const { findOneNotificaciones } = require('./find-one.notificacion.use-cases');
+const { findGroupNotificaciones } = require('./find-group.notificacion.use-cases');
+const { deleteNotificaciones } = require('./delete.notificacion.use-cases');
 
 module.exports = {
   createNotificacion: createNotificacion(
     notificaciones.createQuery,
+  ),
+  findOneNotificaciones: findOneNotificaciones(
+    notificaciones.findOneNotificationQuery,
+    notificaciones.updateUserQuery,
+  ),
+  findGroupNotificaciones: findGroupNotificaciones(
+    notificaciones.findAllQuery,
+  ),
+  deleteNotificaciones: deleteNotificaciones(
+    notificaciones.findOneNotificationQuery,
+    notificaciones.deleteQuery,
   ),
 };

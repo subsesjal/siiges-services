@@ -9,7 +9,7 @@ const {
   findOneQuery,
   findAllQuery,
   createQuery,
-  deleteQuery,
+  deleteAndFindQuery,
   updateAndFindQuery,
 } = queries;
 
@@ -17,6 +17,7 @@ module.exports = {
   findOneUserQuery: findOneQuery(Notificacion),
   findAllQuery: findAllQuery(Notificacion),
   createQuery: createQuery(Notificacion),
-  deleteQuery: deleteQuery(Notificacion),
+  deleteQuery: deleteAndFindQuery(Notificacion),
   updateUserQuery: updateAndFindQuery(Notificacion),
+  findOneNotificationQuery: findOneQuery(Notificacion),
 };
