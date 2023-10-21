@@ -6,8 +6,11 @@ const findGroupGrupoSchema = {
   description: 'Get a group Grupo.',
   params: {
     type: 'object',
-    properties: { cicloEscolarId: { type: 'integer' } },
-    required: ['cicloEscolarId'],
+    properties: {
+      cicloEscolarId: { type: 'integer' },
+      gradoId: { type: 'integer' },
+    },
+    required: ['cicloEscolarId', 'gradoId'],
   },
   response: {
     200: {
