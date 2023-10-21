@@ -123,6 +123,7 @@ class Alumno extends Model {
   static associate(models) {
     this.belongsTo(models.Programa, { as: 'programa' });
     this.belongsTo(models.Persona, { as: 'persona' });
+    this.belongsTo(models.Situacion, { as: 'situacion' });
     this.hasMany(models.AlumnoTipoTramite, { as: 'alumnoTipoTramites', foreignKey: 'alumnoId' });
   }
 

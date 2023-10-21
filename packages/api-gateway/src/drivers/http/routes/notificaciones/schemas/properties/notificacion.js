@@ -1,4 +1,5 @@
-const notificaciones = {
+// Notificacion
+const notificacion = {
   usuarioId: { type: 'integer' },
   asunto: { type: 'string' },
   template: { type: 'string' },
@@ -9,4 +10,4 @@ const notificaciones = {
   openedAt: { type: 'string', format: 'date-time' },
 };
 
-module.exports = { notificaciones };
+module.exports = { notificacion };
