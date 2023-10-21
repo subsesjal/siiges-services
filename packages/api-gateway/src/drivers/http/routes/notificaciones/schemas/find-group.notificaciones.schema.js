@@ -1,5 +1,5 @@
 const { responseProperties } = require('./properties/responseProperties');
-const { notificaciones } = require('./properties/notificaciones');
+const { notificacion } = require('./properties/notificacion');
 
 const findGroupNotificacionesSchema = {
   tags: ['Notificaciones'],
@@ -30,7 +30,7 @@ const findGroupNotificacionesSchema = {
             type: 'object',
             properties: {
               id: { type: 'integer' },
-              ...notificaciones,
+              ...notificacion,
               ...responseProperties,
             },
           },

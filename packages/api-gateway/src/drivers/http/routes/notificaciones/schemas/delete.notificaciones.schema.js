@@ -1,5 +1,5 @@
 const { responseProperties } = require('./properties/responseProperties');
-const { notificaciones } = require('./properties/notificaciones');
+const { notificacion } = require('./properties/notificacion');
 
 const deleteNotificacionesSchema = {
   tags: ['Notificaciones'],
@@ -18,7 +18,7 @@ const deleteNotificacionesSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...notificaciones,
+            ...notificacion,
             ...responseProperties,
           },
         },
