@@ -26,7 +26,7 @@ async function grupoRouter(fastify, opts, next) {
     gruposAdapter.findOneGrupo,
   );
   await fastify.get(
-    '/ciclosEscolares/:cicloEscolarId',
+    '/ciclosEscolares/:cicloEscolarId/grados/:gradoId',
     {
       schema: findGroupGrupoSchema,
       onRequest: [fastify.authenticate],

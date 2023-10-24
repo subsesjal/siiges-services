@@ -5,11 +5,11 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function findGroupGrupo(request, reply) {
   try {
-    const { cicloEscolarId } = request.params;
+    const { cicloEscolarId, gradoId } = request.params;
 
     Logger.info('[Grupo]: find group Grupo');
     const Grupo = await this.administracionAcademicaServices.findGroupGrupo(
-      { cicloEscolarId },
+      { cicloEscolarId, gradoId },
     );
 
     return reply

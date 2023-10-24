@@ -1,5 +1,6 @@
 const { alumno } = require('./properties/alumno');
 const { persona } = require('../../usuarios/schema/properties/persona');
+const { situacion } = require('./properties/situacion');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findProgramaAlumnosSchema = {
@@ -29,6 +30,14 @@ const findProgramaAlumnosSchema = {
                 properties: {
                   id: { type: 'integer' },
                   ...persona,
+                  ...responseProperties,
+                },
+              },
+              situacion: {
+                type: 'object',
+                properties: {
+                  id: { type: 'integer' },
+                  ...situacion,
                   ...responseProperties,
                 },
               },
