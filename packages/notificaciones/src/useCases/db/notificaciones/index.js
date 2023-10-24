@@ -4,7 +4,8 @@ const {
 
 const createNotificacion = require('./create.notificacion.use-cases');
 const { findOneNotificaciones } = require('./find-one.notificacion.use-cases');
-const { findGroupNotificaciones } = require('./find-group.notificacion.use-cases');
+const { findGroupNotificaciones } = require('./find-group.notificaciones.use-cases');
+const { findAllNotificaciones } = require('./find-all.notificaciones.use-cases');
 const { deleteNotificaciones } = require('./delete.notificacion.use-cases');
 
 module.exports = {
@@ -16,6 +17,9 @@ module.exports = {
     notificaciones.updateUserQuery,
   ),
   findGroupNotificaciones: findGroupNotificaciones(
+    notificaciones.findAllQuery,
+  ),
+  findAllNotificaciones: findAllNotificaciones(
     notificaciones.findAllQuery,
   ),
   deleteNotificaciones: deleteNotificaciones(
