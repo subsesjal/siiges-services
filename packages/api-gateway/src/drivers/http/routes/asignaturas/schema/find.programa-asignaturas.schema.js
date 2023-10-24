@@ -11,6 +11,9 @@ const findProgramaAsignaturaSchema = {
         type: 'integer',
         enum: [1, 2],
       },
+      grado: {
+        type: 'integer',
+      },
     },
   },
   params: {
