@@ -2,11 +2,21 @@ const { notificacionesAdapter } = require('../../adapters');
 
 const {
   findGroupNotificacionesSchema,
+  findAllNotificacionesSchema,
   findOneNotificacionesSchema,
   deleteNotificacionesSchema,
 } = require('./schemas');
 
 async function notificacionesRouter(fastify, opts, next) {
+  await fastify.get(
+    '/',
+    {
+      onRequest: [fastify.authenticate],
+      schema: findAllNotificacionesSchema,
+    },
+    notificacionesAdapter.findAllNotificaciones,
+  );
+
   await fastify.get(
     '/usuarios/:usuarioId',
     {
@@ -15,6 +25,7 @@ async function notificacionesRouter(fastify, opts, next) {
     },
     notificacionesAdapter.findGroupNotificaciones,
   );
+
   await fastify.get(
     '/:notificacionId',
     {
@@ -23,6 +34,7 @@ async function notificacionesRouter(fastify, opts, next) {
     },
     notificacionesAdapter.findOneNotificaciones,
   );
+
   await fastify.delete(
     '/:notificacionId',
     {

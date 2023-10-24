@@ -3,11 +3,11 @@ const { notificacion } = require('./properties/notificacion');
 
 const findGroupNotificacionesSchema = {
   tags: ['Notificaciones'],
-  description: 'Return a list of Notifications.',
+  description: 'Return a list of Notifications by user',
   params: {
     type: 'object',
     properties: {
-      usuarioId: { type: 'number' },
+      usuarioId: { type: 'string' },
     },
   },
   querystring: {
