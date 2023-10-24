@@ -29,7 +29,6 @@ const findProgramaAsignaturas = (
     asignaturas = [...asignaturasTipo1, ...asignaturasTipo2];
   } else {
     asignaturas = await findProgramaAsignaturasQuery(identifierObj, { query });
-    checkers.throwErrorIfDataIsFalsy(asignaturas, 'asignaturas', identifierObj.id);
   }
 
   return asignaturas;
