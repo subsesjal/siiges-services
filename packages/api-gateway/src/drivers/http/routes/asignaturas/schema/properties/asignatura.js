@@ -1,6 +1,7 @@
 // Asignatura
 const asignatura = {
   programaId: { type: 'integer' },
+  gradoId: { type: 'integer' },
   academia: { type: 'string' },
   consecutivo: { type: 'integer' },
   area: { type: 'integer' },
@@ -20,7 +21,6 @@ const asignatura = {
     type: 'integer',
     enum: [1, 2],
   },
-  grado: { type: 'string' },
   fechaAutorizacion: { type: 'string', format: 'date-time' },
 };
 

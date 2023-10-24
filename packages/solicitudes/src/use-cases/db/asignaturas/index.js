@@ -13,6 +13,7 @@ const findProgramaAsignaturas = require('./find.programa-asignaturas.use-cases')
 module.exports = {
   createAsignaturaPrograma: createAsignaturaPrograma(
     asignaturas.findProgramaQuery,
+    asignaturas.findOneGradoQuery,
     asignaturas.createAsignaturaProgramaQuery,
   ),
   findOneAsignatura: findOneAsignatura(

@@ -30,6 +30,8 @@ const {
   deleteGrupo,
 } = require('./db/grupos');
 
+const grados = require('./db/grados');
+
 module.exports = {
   createAlumno,
   findOneAlumno,
@@ -51,4 +53,5 @@ module.exports = {
   deleteGrupo,
   alumnosInscripcion,
   findAlumnosInscritos,
+  ...grados,
 };

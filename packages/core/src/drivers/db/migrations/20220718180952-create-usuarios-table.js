@@ -93,6 +93,7 @@ module.exports = {
     await queryInterface.createTable(PROGRAMA_TABLE, ProgramaSchema);
     await queryInterface.createTable(TURNO_TABLE, TurnoSchema);
     await queryInterface.createTable(PROGRAMA_TURNO_TABLE, ProgramaTurnoSchema);
+    await queryInterface.createTable(GRADO_TABLE, GradoSchema);
     await queryInterface.createTable(USUARIO_USUARIO_TABLE, UsuarioUsuarioSchema);
     await queryInterface.createTable(RECTOR_TABLE, RectorSchema);
     await queryInterface.createTable(DIRECTOR_TABLE, DirectorSchema);
@@ -140,7 +141,6 @@ module.exports = {
     await queryInterface.createTable(EVALUADOR_TABLE, EvaluadorSchema);
     await queryInterface.createTable(CUMPLIMIENTO_TABLE, CumplimientoSchema);
     await queryInterface.createTable(EVALUACION_TABLE, EvaluacionSchema);
-    await queryInterface.createTable(GRADO_TABLE, GradoSchema);
     await queryInterface.createTable(CICLO_ESCOLAR_TABLE, CicloEscolarSchema);
     await queryInterface.createTable(GRUPO_TABLE, GrupoSchema);
     await queryInterface.createTable(FORMACION_TABLE, FormacionSchema);

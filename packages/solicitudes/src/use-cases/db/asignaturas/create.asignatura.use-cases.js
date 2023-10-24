@@ -1,9 +1,15 @@
 const { checkers } = require('@siiges-services/shared');
 
-const createAsignaturaPrograma = (findOneProgramaQuery, createAsignaturaQuery) => async (data) => {
-  const programa = await findOneProgramaQuery({ id: data.programaId });
-
-  checkers.throwErrorIfDataIsFalsy(programa);
+const createAsignaturaPrograma = (
+  findOneProgramaQuery,
+  findOneGradoQuery,
+  createAsignaturaQuery,
+) => async (data) => {
+  const validatorQuery = {
+    Programa: [data.programaId, findOneProgramaQuery],
+    Grado: [data.gradoId, findOneGradoQuery],
+  };
+  await checkers.findValidator(validatorQuery);
 
   const newAsignaturaPrograma = await createAsignaturaQuery(data);
   return newAsignaturaPrograma;
