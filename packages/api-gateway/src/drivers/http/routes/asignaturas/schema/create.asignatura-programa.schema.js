@@ -10,7 +10,7 @@ const createAsignaturaSchema = {
     properties: {
       ...asignatura,
     },
-    required: ['programaId', 'nombre', 'clave', 'tipo'],
+    required: ['programaId', 'nombre', 'clave', 'tipo', 'gradoId'],
   },
   response: {
     201: {

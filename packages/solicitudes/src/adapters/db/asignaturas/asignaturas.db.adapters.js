@@ -4,6 +4,7 @@ const { models, queries } = require('@siiges-services/core');
 const {
   Asignatura,
   Programa,
+  Grado,
 } = models;
 
 const {
@@ -21,4 +22,5 @@ module.exports = {
   updateAsignaturaQuery: updateAndFindQuery(Asignatura),
   deleteAsignaturaQuery: deleteAndFindQuery(Asignatura),
   findProgramaAsignaturasQuery: findAllQuery(Asignatura),
+  findOneGradoQuery: findOneQuery(Grado),
 };

@@ -1,5 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PROGRAMA_TABLE } = require('./programa');
+const { GRADO_TABLE } = require('./grado');
 
 const ASIGNATURA_TABLE = 'asignaturas';
 
@@ -16,6 +17,15 @@ const AsignaturaSchema = {
     field: 'programa_id',
     references: {
       model: PROGRAMA_TABLE,
+      key: 'id',
+    },
+  },
+  gradoId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: 'grado_id',
+    references: {
+      model: GRADO_TABLE,
       key: 'id',
     },
   },
@@ -69,9 +79,6 @@ const AsignaturaSchema = {
   tipo: {
     type: DataTypes.INTEGER,
   },
-  grado: {
-    type: DataTypes.STRING,
-  },
   fecha_autorizacion: {
     type: DataTypes.DATE,
   },
@@ -98,6 +105,7 @@ const AsignaturaSchema = {
 class Asignatura extends Model {
   static associate(models) {
     this.belongsTo(models.Programa, { as: 'programa' });
+    this.belongsTo(models.Grado, { as: 'grado' });
     this.hasMany(models.AsignaturaDocente, { as: 'asignaturasDocentes', foreignKey: 'asignaturaId' });
     this.hasMany(models.AsignaturaInfraestructura, { as: 'asignaturasInfraestructuras', foreignKey: 'asignaturaId' });
   }
