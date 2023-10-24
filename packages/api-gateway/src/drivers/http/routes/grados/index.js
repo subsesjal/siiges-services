@@ -15,7 +15,7 @@ async function cicloEscolarRouter(fastify, opts, next) {
     gradosAdapter.findAllGrados,
   );
   await fastify.get(
-    '/programas/:programaId/asignaturas/',
+    '/programas/:programaId',
     {
       schema: findGroupGradosSchema,
       onRequest: [fastify.authenticate],
