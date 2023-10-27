@@ -14,13 +14,48 @@ const findProgramaAlumnosSchema = {
     },
     required: ['programaId'],
   },
+  querystring: {
+    type: 'object',
+    properties: {
+      matricula: { type: 'string' },
+    },
+  },
   response: {
     200: {
       type: 'object',
       properties: {
         data: {
-          type: 'array',
-          items: {
+          if: {
+            type: 'array',
+          },
+          then: {
+            type: 'array',
+            items: {
+              properties: {
+                id: { type: 'integer' },
+                ...alumno,
+                ...responseProperties,
+                persona: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'integer' },
+                    ...persona,
+                    ...responseProperties,
+                  },
+                },
+                situacion: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'integer' },
+                    ...situacion,
+                    ...responseProperties,
+                  },
+                },
+              },
+            },
+          },
+          else: {
+            type: 'object',
             properties: {
               id: { type: 'integer' },
               ...alumno,

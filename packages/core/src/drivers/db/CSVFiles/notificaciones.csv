@@ -1,0 +1,11 @@
+id,usuario_id,asunto,template,email,status,data,sent_at,opened_at,created_at
+1,5,Sample Notification 1,template_1,user1@example.com,pendiente,"{""sampleData"":""Lorem ipsum dolor sit""}",2023-10-23 15:25:00,2023-10-22 08:40:00,2023-10-23 10:30:00
+2,5,Sample Notification 2,template_2,user2@example.com,pendiente,"{""sampleData"":""Amet consectetur adipiscing""}",2023-10-22 12:15:00,2023-10-20 14:50:00,2023-10-22 18:45:00
+3,5,Sample Notification 3,template_3,user3@example.com,pendiente,"{""sampleData"":""Elit sed do eiusmod""}",2023-10-20 19:30:00,2023-10-21 10:20:00,2023-10-21 22:15:00
+4,3,Sample Notification 4,template_4,user4@example.com,pendiente,"{""sampleData"":""Tempor incididunt ut labore et""}",2023-10-21 08:05:00,2023-10-23 13:55:00,2023-10-20 14:10:00
+5,3,Sample Notification 5,template_5,user5@example.com,pendiente,"{""sampleData"":""Dolore magna aliqua""}",2023-10-23 14:20:00,2023-10-22 11:30:00,2023-10-19 16:55:00
+6,3,Sample Notification 6,template_6,user6@example.com,pendiente,"{""sampleData"":""Ut enim ad minim veniam""}",2023-10-19 17:45:00,2023-10-20 09:10:00,2023-10-18 20:25:00
+7,2,Sample Notification 7,template_7,user7@example.com,pendiente,"{""sampleData"":""Quis nostrud exercitation ullamco""}",2023-10-22 10:35:00,2023-10-21 15:45:00,2023-10-24 08:15:00
+8,2,Sample Notification 8,template_8,user8@example.com,pendiente,"{""sampleData"":""Exercitation ullamco laboris""}",2023-10-20 13:55:00,2023-10-19 20:40:00,2023-10-17 12:30:00
+9,4,Sample Notification 9,template_9,user9@example.com,pendiente,"{""sampleData"":""Nisi ut aliquip ex ea""}",2023-10-24 09:45:00,2023-10-23 07:20:00,2023-10-16 16:40:00
+10,1,Sample Notification 10,template_10,user10@example.com,pendiente,"{""sampleData"":""Cupidatat non proident sunt""}",2023-10-23 12:10:00,2023-10-20 17:50:00,2023-10-15 19:05:00
