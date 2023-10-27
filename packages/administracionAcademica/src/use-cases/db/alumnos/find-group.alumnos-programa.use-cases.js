@@ -22,7 +22,7 @@ const findGroupAlumnosPrograma = (
     checkers.throwErrorIfDataIsFalsy(alumno, 'alumnos', matricula);
     return alumno;
   }
-  return findAllAlumnosQuery(programaId, {
+  return findAllAlumnosQuery({ programaId }, {
     include,
     strict: false,
   });
