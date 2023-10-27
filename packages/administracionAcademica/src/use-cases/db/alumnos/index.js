@@ -27,6 +27,7 @@ module.exports = {
   ),
   findGroupAlumnosPrograma: findGroupAlumnosPrograma(
     programas.findOneProgramaQuery,
+    alumnos.findOneAlumnoQuery,
     alumnos.findAllAlumnosQuery,
   ),
   deleteAlumno: deleteAlumno(
