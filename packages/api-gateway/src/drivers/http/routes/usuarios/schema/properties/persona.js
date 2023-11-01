@@ -14,7 +14,7 @@ const persona = {
   rfc: { type: 'string', minLength: 13, maxLength: 13 },
   ine: { type: 'string' },
   correoPrimario: { type: 'string', format: 'email' },
-  correoecundario: { type: 'string', format: 'email' },
+  correoSecundario: { type: 'string', format: 'email' },
   tituloCargo: { type: 'string' },
   fotografia: { type: 'string' },
 };
