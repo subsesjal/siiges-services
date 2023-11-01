@@ -7,11 +7,8 @@ const updateAlumno = {
   tags: ['Alumnos'],
   description: 'Given an alumnoId update that alumno record',
   params: {
-    title: 'update alumno',
     type: 'object',
-    properties: {
-      AlumnoId: { type: 'integer' },
-    },
+    properties: { alumnoId: { type: 'integer' } },
     required: ['alumnoId'],
   },
   body: {

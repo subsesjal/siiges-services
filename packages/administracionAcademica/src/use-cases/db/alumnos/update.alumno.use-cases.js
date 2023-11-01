@@ -8,10 +8,9 @@ const updateAlumno = (
   updateAlumnoTipoTramiteQuery,
   updatePersonaQuery,
 ) => async (identifierObj, changes) => {
-  const { alumnoId } = identifierObj;
-
-  const alumno = await findOneAlumnoQuery(alumnoId);
-  checkers.throwErrorIfDataIsFalsy(alumno, 'alumnos', alumnoId);
+  const { id } = identifierObj;
+  const alumno = await findOneAlumnoQuery(identifierObj);
+  checkers.throwErrorIfDataIsFalsy(alumno, 'alumnos', id);
 
   let personaUpdated;
   const alumnoUpdated = await updateAlumnoQuery(identifierObj, changes);

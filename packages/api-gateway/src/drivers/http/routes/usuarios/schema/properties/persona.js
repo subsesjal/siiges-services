@@ -13,8 +13,8 @@ const persona = {
   curp: { type: 'string', minLength: 18, maxLength: 18 },
   rfc: { type: 'string', minLength: 13, maxLength: 13 },
   ine: { type: 'string' },
-  correo_primario: { type: 'string', format: 'email' },
-  correo_secundario: { type: 'string', format: 'email' },
+  correoPrimario: { type: 'string', format: 'email' },
+  correoecundario: { type: 'string', format: 'email' },
   tituloCargo: { type: 'string' },
   fotografia: { type: 'string' },
 };
