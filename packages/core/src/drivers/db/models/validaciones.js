@@ -3,7 +3,7 @@ const { ALUMNO_TABLE } = require('./alumno');
 const { USUARIO_TABLE } = require('./usuario');
 const { ESTADO_TABLE } = require('./estado');
 const { NIVEL_TABLE } = require('./nivel');
-const { SITUACIONES_VALIDACIONES_TABLE } = require('./situacionesValidacion');
+const { SITUACIONES_VALIDACION_TABLE } = require('./situacionesValidacion');
 const { TIPO_VALIDACIONES_TABLE } = require('./tipoValidaciones');
 
 const VALIDACIONES_TABLE = 'validaciones';
@@ -66,7 +66,7 @@ const ValidacionesSchema = {
     type: DataTypes.INTEGER,
     field: 'situacion_validacion_id',
     references: {
-      model: SITUACIONES_VALIDACIONES_TABLE,
+      model: SITUACIONES_VALIDACION_TABLE,
       key: 'id',
     },
   },
@@ -149,7 +149,7 @@ class Validaciones extends Model {
     this.belongsTo(models.Estado, { as: 'estado' });
     this.belongsTo(models.Nivel, { as: 'nivel' });
     this.belongsTo(models.TipoValidaciones, { as: 'tipoValidaciones' });
-    this.belongsTo(models.SituacionesValidaciones, { as: 'situacionesValidaciones' });
+    this.belongsTo(models.SituacionesValidacion, { as: 'situacionesValidaciones' });
   }
 
   static config(sequelize) {
