@@ -67,6 +67,9 @@ const { FormacionRector, FormacionRectorSchema } = require('./formacionRector');
 const { FormacionDirector, FormacionDirectorSchema } = require('./formacionesDirectores');
 const { AlumnoGrupo, AlumnoGrupoSchema } = require('./alumnoGrupo');
 const { Calificacion, CalificacionSchema } = require('./calificacion');
+const { SituacionesValidaciones, SituacionesValidacionesSchema } = require('./situacionesValidacion');
+const { TipoValidaciones, TipoValidacionesSchema } = require('./tipoValidaciones');
+const { Validaciones, ValidacionesSchema } = require('./validaciones');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -154,6 +157,12 @@ function setupModels(sequelize) {
   FormacionDirector.init(FormacionDirectorSchema, FormacionDirector.config(sequelize));
   AlumnoGrupo.init(AlumnoGrupoSchema, AlumnoGrupo.config(sequelize));
   Calificacion.init(CalificacionSchema, Calificacion.config(sequelize));
+  SituacionesValidaciones.init(
+    SituacionesValidacionesSchema,
+    SituacionesValidaciones.config(sequelize),
+  );
+  TipoValidaciones.init(TipoValidacionesSchema, TipoValidaciones.config(sequelize));
+  Validaciones.init(ValidacionesSchema, Validaciones.config(sequelize));
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -225,6 +234,7 @@ function setupModels(sequelize) {
   FormacionDirector.associate(sequelize.models);
   AlumnoGrupo.associate(sequelize.models);
   Calificacion.associate(sequelize.models);
+  Validaciones.associate(sequelize.models);
 }
 
 module.exports = setupModels;
