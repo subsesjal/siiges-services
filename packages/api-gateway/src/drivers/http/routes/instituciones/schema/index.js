@@ -1,5 +1,6 @@
 const findAllInstitucionesSchema = require('./find-all.instituciones.schema');
 const findOneInstitucionSchema = require('./find-one.instituciones.schema');
+const findOneInstitucionUsuarioSchema = require('./find-one.institucion-usuario.schema');
 const findPlantelesInstitucionSchema = require('./find.planteles-institucion.schema');
 const findOnePlantelSchema = require('./find-one.plantel.schema');
 const findOnePlantelDetallesSchema = require('./find-one.plantel-detalles.schema');
@@ -17,6 +18,7 @@ const deleteRatificacionNombreSchema = require('./delete.ratificacion-nombre.sch
 module.exports = {
   findAllInstitucionesSchema,
   findOneInstitucionSchema,
+  findOneInstitucionUsuarioSchema,
   findPlantelesInstitucionSchema,
   findOnePlantelSchema,
   findOnePlantelDetallesSchema,
