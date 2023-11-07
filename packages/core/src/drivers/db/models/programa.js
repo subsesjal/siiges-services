@@ -67,7 +67,7 @@ const ProgramaSchema = {
     type: DataTypes.STRING,
   },
   antecedentes: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
   },
   creditos: {
     type: DataTypes.STRING,
@@ -98,94 +98,94 @@ const ProgramaSchema = {
     type: DataTypes.INTEGER,
   },
   actualizacion: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
   },
   seguimientoEgresados: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'seguimiento_egresados',
   },
   conveniosVinculacion: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'convenios_vinculacion',
   },
   fuentesInformacion: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'fuentes_informacion',
   },
   estudioOfertaDemanda: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'estudio_oferta_demanda',
   },
   lineasGeneracionAplicacionConocimiento: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'lineas_generacion_aplicacion_conocimiento',
   },
   necesidadProfesional: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'necesidad_profesional',
   },
   necesidadInstitucional: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'necesidad_institucional',
   },
   necesidadSocial: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'necesidad_social',
   },
   recursosOperacion: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'recursos_operacion',
   },
   antecedenteAcademico: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'antecedente_academico',
   },
   perfilIngresoConocimientos: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'perfil_ingreso_conocimientos',
   },
   perfilIngresoHabilidades: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'perfil_ingreso_habilidades',
   },
   perfilIngresoActitudes: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'perfil_ingreso_actitudes',
   },
   perfilEgresoConocimientos: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'perfil_egreso_conocimientos',
   },
   perfilEgresoHabilidades: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'perfil_egreso_habilidades',
   },
   perfilEgresoActitudes: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'perfil_egreso_actitudes',
   },
   metodosInduccion: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'metodos_induccion',
   },
   procesoSeleccion: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'proceso_seleccion',
   },
   mapaCurricular: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'mapa_curricular',
   },
   flexibilidadCurricular: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'flexibilidad_curricular',
   },
   objetivoGeneral: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'objetivo_general',
   },
   objetivosParticulares: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'objetivos_particulares',
   },
   calificacionMinima: {
