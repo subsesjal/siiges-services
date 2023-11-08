@@ -7,6 +7,9 @@ const {
   deleteAlumnoSchema,
   alumnosInscripcionSchema,
   findAlumnosInscritosSchema,
+  createValidacionSchema,
+  findOneValidacionSchema,
+  updateValidacionSchema,
 } = require('./schema');
 
 async function asignaturaRouter(fastify, opts, next) {
@@ -71,6 +74,33 @@ async function asignaturaRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.findAlumnosInscritos,
+  );
+
+  await fastify.post(
+    '/:alumnoId/validaciones',
+    {
+      schema: createValidacionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    alumnosAdapter.createAlumnoValidacion,
+  );
+
+  await fastify.get(
+    '/:alumnoId/validaciones',
+    {
+      schema: findOneValidacionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    alumnosAdapter.findOneAlumnoValidacion,
+  );
+
+  await fastify.patch(
+    '/:alumnoId/validaciones',
+    {
+      schema: updateValidacionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    alumnosAdapter.updateAlumnoValidacion,
   );
 
   next();
