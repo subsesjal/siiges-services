@@ -5,6 +5,7 @@ const findGroupAlumnosPrograma = require('./find-group.handlers.alumnos-programa
 const deleteAlumno = require('./delete.handlers.alumno.adapters');
 const alumnosInscripcion = require('./create-update.handlers.alumnos-inscripcion.adapters');
 const findAlumnosInscritos = require('./find-group.handlers.alumnos-inscritos');
+const validaciones = require('./validaciones');
 
 module.exports = {
   createAlumno,
@@ -14,4 +15,5 @@ module.exports = {
   deleteAlumno,
   alumnosInscripcion,
   findAlumnosInscritos,
+  ...validaciones,
 };
