@@ -32,6 +32,8 @@ const {
 
 const grados = require('./db/grados');
 
+const validaciones = require('./db/validaciones');
+
 module.exports = {
   createAlumno,
   findOneAlumno,
@@ -54,4 +56,5 @@ module.exports = {
   alumnosInscripcion,
   findAlumnosInscritos,
   ...grados,
+  ...validaciones,
 };
