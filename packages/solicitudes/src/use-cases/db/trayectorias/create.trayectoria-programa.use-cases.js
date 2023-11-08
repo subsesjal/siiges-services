@@ -15,7 +15,7 @@ const createTrayectoriaPrograma = (
   // find trayectoria
   const trayectoriaFound = await findOneTrayectoriaQuery({ programaId });
 
-  if (trayectoriaFound.id) {
+  if (trayectoriaFound?.id) {
     // error if tipo instalacion programaId = null
     throw boom.conflict(
       '[trayectoria:create]: trayectoria already exist',

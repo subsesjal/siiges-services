@@ -19,7 +19,6 @@ const ValidacionesSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'alumno_id',
-    unique: true,
     references: {
       model: ALUMNO_TABLE,
       key: 'id',
@@ -148,15 +147,15 @@ class Validaciones extends Model {
     this.belongsTo(models.Usuario, { as: 'usuario' });
     this.belongsTo(models.Estado, { as: 'estado' });
     this.belongsTo(models.Nivel, { as: 'nivel' });
-    this.belongsTo(models.TipoValidaciones, { as: 'tipoValidaciones' });
-    this.belongsTo(models.SituacionesValidacion, { as: 'situacionesValidaciones' });
+    this.belongsTo(models.TipoValidaciones, { as: 'tipo', foreignKey: 'tipo_validacion_id' });
+    this.belongsTo(models.SituacionesValidacion, { as: 'situaciones', foreignKey: 'situacion_validacion_id' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
       tableName: VALIDACIONES_TABLE,
-      modelName: 'SituacionesValidaciones',
+      modelName: 'Validaciones',
       timestamps: false,
     };
   }
