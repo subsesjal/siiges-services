@@ -5,6 +5,7 @@ const deleteAlumnoSchema = require('./delete.alumno.schema');
 const findProgramaAlumnosSchema = require('./find.programa-alumnos.schema');
 const alumnosInscripcionSchema = require('./alumnos-inscripcion.schema');
 const { findAlumnosInscritosSchema } = require('./find-group.alumno-inscrito.schema');
+const findAlumnosGrupoSchema = require('./find-group.alumnos-grupo.schema');
 
 module.exports = {
   createAlumnoSchema,
@@ -14,4 +15,5 @@ module.exports = {
   findProgramaAlumnosSchema,
   alumnosInscripcionSchema,
   findAlumnosInscritosSchema,
+  findAlumnosGrupoSchema,
 };

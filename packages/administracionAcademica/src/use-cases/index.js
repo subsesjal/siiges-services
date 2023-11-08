@@ -1,12 +1,4 @@
-const {
-  createAlumno,
-  findOneAlumno,
-  updateAlumno,
-  findGroupAlumnosPrograma,
-  deleteAlumno,
-  alumnosInscripcion,
-  findAlumnosInscritos,
-} = require('./db/alumnos');
+const alumnos = require('./db/alumnos');
 
 const {
   findAllProgramas,
@@ -33,11 +25,6 @@ const {
 const grados = require('./db/grados');
 
 module.exports = {
-  createAlumno,
-  findOneAlumno,
-  updateAlumno,
-  findGroupAlumnosPrograma,
-  deleteAlumno,
   findAllProgramas,
   findPlantelProgramas,
   findInstitucionProgramas,
@@ -51,7 +38,6 @@ module.exports = {
   findGroupGrupo,
   updateGrupo,
   deleteGrupo,
-  alumnosInscripcion,
-  findAlumnosInscritos,
+  ...alumnos,
   ...grados,
 };
