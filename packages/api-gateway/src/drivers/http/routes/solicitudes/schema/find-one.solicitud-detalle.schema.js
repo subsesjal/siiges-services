@@ -8,6 +8,10 @@ const { domicilio } = require('../../usuarios/schema/properties/domicilio');
 const { estado } = require('../../usuarios/schema/properties/estado');
 const { municipio } = require('../../usuarios/schema/properties/municipio');
 const { institucion } = require('../../instituciones/schema/properties/institucion');
+const { ratificacionNombre } = require('../../instituciones/schema/properties/ratificacionNombre');
+const { trayectoria } = require('../../trayectorias/schema/properties/trayectoria');
+const { rector } = require('../../instituciones/schema/properties/rector');
+const { persona } = require('../../usuarios/schema/properties/persona');
 
 const findOneSolicitudDetalleSchema = {
   tags: ['Solicitudes'],
@@ -56,6 +60,14 @@ const findOneSolicitudDetalleSchema = {
                     },
                   },
                 },
+                trayectoria: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'integer' },
+                    ...trayectoria,
+                    ...responseProperties,
+                  },
+                },
                 ...responseProperties,
                 plantel: {
                   type: 'object',
@@ -63,14 +75,6 @@ const findOneSolicitudDetalleSchema = {
                     id: { type: 'integer' },
                     ...plantel,
                     ...responseProperties,
-                    institucion: {
-                      type: 'object',
-                      properties: {
-                        id: { type: 'integer' },
-                        ...institucion,
-                        ...responseProperties,
-                      },
-                    },
                     domicilio: {
                       type: 'object',
                       properties: {
@@ -91,6 +95,49 @@ const findOneSolicitudDetalleSchema = {
                             id: { type: 'integer' },
                             ...estado,
                             ...responseProperties,
+                          },
+                        },
+                      },
+                    },
+                    institucion: {
+                      type: 'object',
+                      properties: {
+                        id: { type: 'integer' },
+                        ...institucion,
+                        ...responseProperties,
+                        ratificacionesNombre: {
+                          type: 'array',
+                          items: {
+                            type: 'object',
+                            properties: {
+                              id: { type: 'integer' },
+                              ...ratificacionNombre,
+                              ...responseProperties,
+                            },
+                          },
+                        },
+                        rector: {
+                          if: {
+                            type: 'object',
+                          },
+                          then: {
+                            type: 'object',
+                            properties: {
+                              id: { type: 'integer' },
+                              ...rector,
+                              ...responseProperties,
+                              persona: {
+                                type: 'object',
+                                properties: {
+                                  id: { type: 'integer' },
+                                  ...persona,
+                                  ...responseProperties,
+                                },
+                              },
+                            },
+                          },
+                          else: {
+                            type: 'object',
                           },
                         },
                       },

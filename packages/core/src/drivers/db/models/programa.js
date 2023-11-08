@@ -234,7 +234,7 @@ class Programa extends Model {
     this.hasMany(models.ProgramaTurno, { as: 'programaTurnos', foreignKey: 'programaId' });
     this.hasMany(models.Asignatura, { as: 'asignaturas', foreignKey: 'programaId' });
     this.hasMany(models.Docente, { as: 'docentes', foreignKey: 'programaId' });
-    this.hasMany(models.Trayectoria, { as: 'trayectorias', foreignKey: 'programaId' });
+    this.hasOne(models.Trayectoria, { as: 'trayectoria', foreignKey: 'programaId' });
   }
 
   static config(sequelize) {
