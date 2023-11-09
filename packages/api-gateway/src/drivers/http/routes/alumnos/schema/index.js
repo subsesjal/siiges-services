@@ -8,6 +8,7 @@ const { findAlumnosInscritosSchema } = require('./find-group.alumno-inscrito.sch
 const { createValidacionSchema } = require('./create.validacion.schema');
 const { findOneValidacionSchema } = require('./find-one.validacion.schema');
 const { updateValidacionSchema } = require('./update.validacion.schema');
+const findAlumnosGrupoSchema = require('./find-group.alumnos-grupo.schema');
 
 module.exports = {
   createAlumnoSchema,
@@ -20,4 +21,5 @@ module.exports = {
   findOneValidacionSchema,
   findAlumnosInscritosSchema,
   updateValidacionSchema,
+  findAlumnosGrupoSchema,
 };

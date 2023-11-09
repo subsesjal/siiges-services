@@ -3,7 +3,6 @@ const { updateSchema, findSchema, deleteSchema } = require('./representantes/sch
 const { findDiligenciasSolicitudSchema } = require('../diligencias/schema');
 const {
   createSolicitudProgramaSchema,
-  createSolicitudRefrendoSchema,
   findAllSolicitudesProgramasSchema,
   findOneSolicitudProgramaSchema,
   findAllSolicitudesUsuarioSchema,

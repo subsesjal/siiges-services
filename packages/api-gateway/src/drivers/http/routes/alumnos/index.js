@@ -10,6 +10,7 @@ const {
   createValidacionSchema,
   findOneValidacionSchema,
   updateValidacionSchema,
+  findAlumnosGrupoSchema,
 } = require('./schema');
 
 async function asignaturaRouter(fastify, opts, next) {
@@ -101,6 +102,15 @@ async function asignaturaRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.updateAlumnoValidacion,
+  );
+ 
+  await fastify.get(
+    '/grupos/:grupoId/asignatura/:asignaturaId',
+    {
+      schema: findAlumnosGrupoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    alumnosAdapter.findAlumnosGrupo,
   );
 
   next();

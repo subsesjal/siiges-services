@@ -5,6 +5,7 @@ const findOneSolicitudPrograma = (findOneSolicitudProgramaQuery) => async (ident
     association: 'programa',
     include: [
       { association: 'programaTurnos' },
+      { association: 'trayectoria' },
       {
         association: 'plantel',
         include: [{
@@ -27,8 +28,7 @@ const findOneSolicitudPrograma = (findOneSolicitudProgramaQuery) => async (ident
               include: [{ association: 'persona' }],
             },
           ],
-        },
-        ],
+        }],
       }],
   },
   {
