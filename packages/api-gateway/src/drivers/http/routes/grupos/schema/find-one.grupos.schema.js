@@ -2,6 +2,7 @@ const { cicloEscolar } = require('../../ciclosEscolares/schema/properties/cicloE
 const { grado } = require('./properties/grado');
 const { turno } = require('./properties/turno');
 const { grupo } = require('./properties/grupo');
+const { nivel } = require('./properties/nivel');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findOneGrupoSchema = {
@@ -27,6 +28,21 @@ const findOneGrupoSchema = {
               properties: {
                 ...cicloEscolar,
                 ...responseProperties,
+                programa: {
+                  type: 'object',
+                  properties: {
+                    nombre: { type: 'string' },
+                    acuerdoRvoe: { type: 'string' },
+                    ...responseProperties,
+                    nivel: {
+                      type: 'object',
+                      properties: {
+                        ...nivel,
+                        ...responseProperties,
+                      },
+                    },
+                  },
+                },
               },
             },
             grado: {
