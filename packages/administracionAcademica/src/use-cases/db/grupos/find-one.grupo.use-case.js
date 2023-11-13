@@ -2,7 +2,17 @@ const { checkers } = require('@siiges-services/shared');
 
 const findOneGrupo = (findOneGrupoQuery) => async ({ id }) => {
   const include = [
-    { association: 'cicloEscolar' },
+    {
+      association: 'cicloEscolar',
+      include: [
+        {
+          association: 'programa',
+          include: [
+            { association: 'nivel' },
+          ],
+        },
+      ],
+    },
     { association: 'grado' },
     { association: 'turno' },
   ];
