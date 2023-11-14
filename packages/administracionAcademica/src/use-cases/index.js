@@ -24,6 +24,8 @@ const {
 
 const grados = require('./db/grados');
 
+const validaciones = require('./db/validaciones');
+
 module.exports = {
   findAllProgramas,
   findPlantelProgramas,
@@ -40,4 +42,5 @@ module.exports = {
   deleteGrupo,
   ...alumnos,
   ...grados,
+  ...validaciones,
 };
