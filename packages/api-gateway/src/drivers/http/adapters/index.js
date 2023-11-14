@@ -19,6 +19,7 @@ const gruposAdapter = require('./grupos/handlers');
 const ciclosEscolaresAdapter = require('./ciclosEscolares/handlers');
 const gradosAdapter = require('./grados/handlers');
 const notificacionesAdapter = require('./notificaciones/handlers');
+const calificacionesAdapter = require('./calificaciones/handlers');
 
 module.exports = {
   diligenciasAdapter,
@@ -41,4 +42,5 @@ module.exports = {
   ciclosEscolaresAdapter,
   gradosAdapter,
   notificacionesAdapter,
+  calificacionesAdapter,
 };

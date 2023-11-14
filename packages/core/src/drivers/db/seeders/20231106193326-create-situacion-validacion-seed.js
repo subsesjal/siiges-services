@@ -1,7 +1,7 @@
 const path = require('path');
 const csvToJson = require('convert-csv-to-json');
 
-const { SITUACIONES_VALIDACION_TABLE } = require('../models/situacionesValidacion');
+const { SITUACION_VALIDACION_TABLE } = require('../models/situacionValidacion');
 
 const situacionesValidacion = path.join(__dirname, '../CSVFiles/situacion_validacion.csv');
 
@@ -15,10 +15,10 @@ module.exports = {
       .fieldDelimiter(',')
       .getJsonFromCsv(situacionesValidacion);
 
-    return queryInterface.bulkInsert(SITUACIONES_VALIDACION_TABLE, situacionesValidacionJson, {});
+    return queryInterface.bulkInsert(SITUACION_VALIDACION_TABLE, situacionesValidacionJson, {});
   },
 
   async down(queryInterface) {
-    await queryInterface.bulkDelete(SITUACIONES_VALIDACION_TABLE, null, {});
+    await queryInterface.bulkDelete(SITUACION_VALIDACION_TABLE, null, {});
   },
 };
