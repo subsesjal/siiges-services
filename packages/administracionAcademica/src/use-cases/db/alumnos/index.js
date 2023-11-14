@@ -1,4 +1,7 @@
-const { alumnos, programas, grupos } = require('../../../adapters/db');
+const {
+  alumnos, programas, grupos, validaciones,
+} = require('../../../adapters/db');
+
 const createAlumno = require('./create.alumno.use-cases');
 const findOneAlumno = require('./find-one.alumno.use-cases');
 const updateAlumno = require('./update.alumno.use-cases');
@@ -7,6 +10,7 @@ const deleteAlumno = require('./delete.alumno.use-cases');
 const alumnosInscripcion = require('./alumnos-inscripcion.use-cases');
 const { findAlumnosInscritos } = require('./find-group.alumnos-inscritos.use-cases');
 const findAlumnosGrupoAsignatura = require('./find-group.alumnos-grupo.use-cases');
+const updateCalificaciones = require('./update.calificaciones.use-cases');
 
 module.exports = {
   createAlumno: createAlumno(
@@ -56,5 +60,15 @@ module.exports = {
   ),
   findAlumnosGrupoAsignatura: findAlumnosGrupoAsignatura(
     alumnos.findAllCalificacionesQuery,
+  ),
+  updateCalificaciones: updateCalificaciones(
+    grupos.findOneGrupoQuery,
+    programas.findOneProgramaQuery,
+    alumnos.findOneAlumnoQuery,
+    alumnos.findOneAsignaturaQuery,
+    validaciones.findOneValidacionQuery,
+    alumnos.findOneCalificacionQuery,
+    alumnos.createCalificacionQuery,
+    alumnos.updateCalificacionQuery,
   ),
 };

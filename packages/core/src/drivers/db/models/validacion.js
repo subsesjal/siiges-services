@@ -3,12 +3,12 @@ const { ALUMNO_TABLE } = require('./alumno');
 const { USUARIO_TABLE } = require('./usuario');
 const { ESTADO_TABLE } = require('./estado');
 const { NIVEL_TABLE } = require('./nivel');
-const { SITUACIONES_VALIDACION_TABLE } = require('./situacionesValidacion');
-const { TIPO_VALIDACIONES_TABLE } = require('./tipoValidaciones');
+const { SITUACION_VALIDACION_TABLE } = require('./situacionValidacion');
+const { TIPO_VALIDACION_TABLE } = require('./tipoValidacion');
 
-const VALIDACIONES_TABLE = 'validaciones';
+const VALIDACION_TABLE = 'validaciones';
 
-const ValidacionesSchema = {
+const ValidacionSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -19,6 +19,7 @@ const ValidacionesSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'alumno_id',
+    unique: true,
     references: {
       model: ALUMNO_TABLE,
       key: 'id',
@@ -56,7 +57,7 @@ const ValidacionesSchema = {
     type: DataTypes.INTEGER,
     field: 'tipo_validacion_id',
     references: {
-      model: TIPO_VALIDACIONES_TABLE,
+      model: TIPO_VALIDACION_TABLE,
       key: 'id',
     },
   },
@@ -65,7 +66,7 @@ const ValidacionesSchema = {
     type: DataTypes.INTEGER,
     field: 'situacion_validacion_id',
     references: {
-      model: SITUACIONES_VALIDACION_TABLE,
+      model: SITUACION_VALIDACION_TABLE,
       key: 'id',
     },
   },
@@ -141,28 +142,28 @@ const ValidacionesSchema = {
   },
 };
 
-class Validaciones extends Model {
+class Validacion extends Model {
   static associate(models) {
     this.belongsTo(models.Alumno, { as: 'alumno' });
     this.belongsTo(models.Usuario, { as: 'usuario' });
     this.belongsTo(models.Estado, { as: 'estado' });
     this.belongsTo(models.Nivel, { as: 'nivel' });
-    this.belongsTo(models.TipoValidaciones, { as: 'tipo', foreignKey: 'tipo_validacion_id' });
-    this.belongsTo(models.SituacionesValidacion, { as: 'situaciones', foreignKey: 'situacion_validacion_id' });
+    this.belongsTo(models.TipoValidacion, { as: 'tipo', foreignKey: 'tipo_validacion_id' });
+    this.belongsTo(models.SituacionValidacion, { as: 'situacion', foreignKey: 'situacion_validacion_id' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: VALIDACIONES_TABLE,
-      modelName: 'Validaciones',
+      tableName: VALIDACION_TABLE,
+      modelName: 'Validacion',
       timestamps: false,
     };
   }
 }
 
 module.exports = {
-  VALIDACIONES_TABLE,
-  ValidacionesSchema,
-  Validaciones,
+  VALIDACION_TABLE,
+  ValidacionSchema,
+  Validacion,
 };

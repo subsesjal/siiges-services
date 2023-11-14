@@ -35,6 +35,7 @@ module.exports = {
   findOneAsignaturaQuery: findOneQuery(Asignatura),
   findOneCalificacionQuery: findOneQuery(Calificacion),
   createCalificacionQuery: createQuery(Calificacion),
+  updateCalificacionQuery: updateAndFindQuery(Calificacion),
   findAllCalificacionesQuery: findAllQuery(Calificacion),
   deleteCalificacionQuery: deleteAndFindQuery(Calificacion),
 };

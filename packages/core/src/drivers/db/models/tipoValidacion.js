@@ -1,8 +1,8 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
 
-const SITUACIONES_VALIDACION_TABLE = 'situaciones_validacion';
+const TIPO_VALIDACION_TABLE = 'tipo_validaciones';
 
-const SituacionesValidacionSchema = {
+const TipoValidacionSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -37,22 +37,22 @@ const SituacionesValidacionSchema = {
   },
 };
 
-class SituacionesValidacion extends Model {
+class TipoValidacion extends Model {
   static associate() {
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: SITUACIONES_VALIDACION_TABLE,
-      modelName: 'SituacionesValidacion',
+      tableName: TIPO_VALIDACION_TABLE,
+      modelName: 'TipoValidacion',
       timestamps: false,
     };
   }
 }
 
 module.exports = {
-  SITUACIONES_VALIDACION_TABLE,
-  SituacionesValidacionSchema,
-  SituacionesValidacion,
+  TIPO_VALIDACION_TABLE,
+  TipoValidacionSchema,
+  TipoValidacion,
 };
