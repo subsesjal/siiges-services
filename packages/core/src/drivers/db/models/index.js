@@ -70,6 +70,16 @@ const { Calificacion, CalificacionSchema } = require('./calificacion');
 const { SituacionValidacion, SituacionValidacionSchema } = require('./situacionValidacion');
 const { TipoValidacion, TipoValidacionSchema } = require('./tipoValidacion');
 const { Validacion, ValidacionSchema } = require('./validacion');
+const { EstatusVigilancia, EstatusVigilanciaSchema } = require('./estatusVigilancia');
+const { VigilanciaApartado, VigilanciaApartadoSchema } = require('./vigilanciaApartado');
+const { VigilanciaCategoria, VigilanciaCategoriaSchema } = require('./vigilanciaCategoria');
+const { VigilanciaTipoPregunta, VigilanciaTipoPreguntaSchema } = require('./vigilanciaTipoPregunta');
+const { VigilanciaObservacion, VigilanciaObservacionSchema } = require('./vigilanciaObservacion');
+const { VigilanciaPregunta, VigilanciaPreguntaSchema } = require('./vigilanciaPregunta');
+const { Vigilancia, VigilanciaSchema } = require('./vigilancia');
+const { VigilanciaVigilanciaPregunta, VigilanciaVigilanciaPreguntaSchema } = require('./vigilanciaVigilanciaPregunta');
+const { Vigilante, VigilanteSchema } = require('./vigilante');
+const { VigilanteVigilancia, VigilanteVigilanciaSchema } = require('./vigilanteVigilancia');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -163,6 +173,22 @@ function setupModels(sequelize) {
   );
   TipoValidacion.init(TipoValidacionSchema, TipoValidacion.config(sequelize));
   Validacion.init(ValidacionSchema, Validacion.config(sequelize));
+  EstatusVigilancia.init(EstatusVigilanciaSchema, EstatusVigilancia.config(sequelize));
+  VigilanciaApartado.init(VigilanciaApartadoSchema, VigilanciaApartado.config(sequelize));
+  VigilanciaCategoria.init(VigilanciaCategoriaSchema, VigilanciaCategoria.config(sequelize));
+  VigilanciaTipoPregunta.init(
+    VigilanciaTipoPreguntaSchema,
+    VigilanciaTipoPregunta.config(sequelize),
+  );
+  VigilanciaPregunta.init(VigilanciaPreguntaSchema, VigilanciaPregunta.config(sequelize));
+  Vigilancia.init(VigilanciaSchema, Vigilancia.config(sequelize));
+  VigilanciaObservacion.init(VigilanciaObservacionSchema, VigilanciaObservacion.config(sequelize));
+  VigilanciaVigilanciaPregunta.init(
+    VigilanciaVigilanciaPreguntaSchema,
+    VigilanciaVigilanciaPregunta.config(sequelize),
+  );
+  Vigilante.init(VigilanteSchema, Vigilante.config(sequelize));
+  VigilanteVigilancia.init(VigilanteVigilanciaSchema, VigilanteVigilancia.config(sequelize));
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -237,6 +263,16 @@ function setupModels(sequelize) {
   SituacionValidacion.associate(sequelize.models);
   TipoValidacion.associate(sequelize.models);
   Validacion.associate(sequelize.models);
+  EstatusVigilancia.associate(sequelize.models);
+  VigilanciaApartado.associate(sequelize.models);
+  VigilanciaCategoria.associate(sequelize.models);
+  VigilanciaTipoPregunta.associate(sequelize.models);
+  VigilanciaPregunta.associate(sequelize.models);
+  Vigilancia.associate(sequelize.models);
+  VigilanciaObservacion.associate(sequelize.models);
+  VigilanciaVigilanciaPregunta.associate(sequelize.models);
+  Vigilante.associate(sequelize.models);
+  VigilanteVigilancia.associate(sequelize.models);
 }
 
 module.exports = setupModels;
