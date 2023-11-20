@@ -80,6 +80,9 @@ const { Vigilancia, VigilanciaSchema } = require('./vigilancia');
 const { VigilanciaVigilanciaPregunta, VigilanciaVigilanciaPreguntaSchema } = require('./vigilanciaVigilanciaPregunta');
 const { Vigilante, VigilanteSchema } = require('./vigilante');
 const { VigilanteVigilancia, VigilanteVigilanciaSchema } = require('./vigilanteVigilancia');
+const { Sesion, SesionSchema } = require('./sesion');
+const { Periodo, PeriodoSchema } = require('./periodo');
+const { OrganoColegiado, OrganoColegiadoSchema } = require('./organoColegiado');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -189,6 +192,9 @@ function setupModels(sequelize) {
   );
   Vigilante.init(VigilanteSchema, Vigilante.config(sequelize));
   VigilanteVigilancia.init(VigilanteVigilanciaSchema, VigilanteVigilancia.config(sequelize));
+  Sesion.init(SesionSchema, Sesion.config(sequelize));
+  Periodo.init(PeriodoSchema, Periodo.config(sequelize));
+  OrganoColegiado.init(OrganoColegiadoSchema, OrganoColegiado.config(sequelize));
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -273,6 +279,9 @@ function setupModels(sequelize) {
   VigilanciaVigilanciaPregunta.associate(sequelize.models);
   Vigilante.associate(sequelize.models);
   VigilanteVigilancia.associate(sequelize.models);
+  Sesion.associate(sequelize.models);
+  Periodo.associate(sequelize.models);
+  OrganoColegiado.associate(sequelize.models);
 }
 
 module.exports = setupModels;
