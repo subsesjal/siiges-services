@@ -23,7 +23,7 @@ const VigilanciaObservacionSchema = {
   vigilanciaApartadoId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'Vigilancia_apartado_id',
+    field: 'vigilancia_apartado_id',
     references: {
       model: VIGILANCIA_CATEGORIA_TABLE,
       key: 'id',

@@ -1,6 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const VIGILANCIA_TIPO_PREGUNTA_TABLE = 'Vigilancia_tipo_preguntas';
+const VIGILANCIA_TIPO_PREGUNTA_TABLE = 'vigilancia_tipo_preguntas';
 
 const VigilanciaTipoPreguntaSchema = {
   id: {
