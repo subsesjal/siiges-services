@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { VIGILANCIA_TABLE } = require('./vigilancia');
 const { VIGILANCIA_PREGUNTA_TABLE } = require('./vigilanciaPregunta');
 
-const VIGILANCIA_VIGILANCIA_PREGUNTA_TABLE = 'Vigilanciaes_Vigilancia_preguntas';
+const VIGILANCIA_VIGILANCIA_PREGUNTA_TABLE = 'vigilancias_vigilancia_preguntas';
 
 const VigilanciaVigilanciaPreguntaSchema = {
   id: {

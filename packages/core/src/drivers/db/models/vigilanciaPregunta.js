@@ -1,5 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { VIGILANCIA_TIPO_PREGUNTA } = require('./vigilanciaTipoPregunta');
+const { VIGILANCIA_TIPO_PREGUNTA_TABLE } = require('./vigilanciaTipoPregunta');
 const { VIGILANCIA_APARTADO_TABLE } = require('./vigilanciaApartado');
 const { VIGILANCIA_CATEGORIA_TABLE } = require('./vigilanciaCategoria');
 
@@ -17,14 +17,14 @@ const VigilanciaPreguntaSchema = {
     type: DataTypes.INTEGER,
     field: 'vigilancia_tipo_pregunta_id',
     references: {
-      model: VIGILANCIA_TIPO_PREGUNTA,
+      model: VIGILANCIA_TIPO_PREGUNTA_TABLE,
       key: 'id',
     },
   },
   vigilanciaApartadoId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'Vigilancia_apartado_id',
+    field: 'vigilancia_apartado_id',
     references: {
       model: VIGILANCIA_APARTADO_TABLE,
       key: 'id',
@@ -33,7 +33,7 @@ const VigilanciaPreguntaSchema = {
   VigilanciaCategoriaId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'Vigilancia_categoria_id',
+    field: 'vigilancia_categoria_id',
     references: {
       model: VIGILANCIA_CATEGORIA_TABLE,
       key: 'id',
