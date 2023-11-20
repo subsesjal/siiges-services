@@ -42,7 +42,7 @@ const VigilanteSchema = {
 class Vigilante extends Model {
   static associate(models) {
     this.belongsTo(models.Persona, { as: 'persona' });
-    this.hasMany(models.VigilantePrograma, { as: 'vigilantePrograma', foreignKey: 'vigilanteId' });
+    this.hasMany(models.VigilanteVigilancia, { as: 'vigilanteVigilancia', foreignKey: 'vigilanteId' });
   }
 
   static config(sequelize) {
