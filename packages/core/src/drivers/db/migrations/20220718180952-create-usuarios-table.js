@@ -70,6 +70,16 @@ const { CALIFICACION_TABLE, CalificacionSchema } = require('../models/calificaci
 const { VALIDACION_TABLE, ValidacionSchema } = require('../models/validacion');
 const { SITUACION_VALIDACION_TABLE, SituacionValidacionSchema } = require('../models/situacionValidacion');
 const { TIPO_VALIDACION_TABLE, TipoValidacionSchema } = require('../models/tipoValidacion');
+const { ESTATUS_VIGILANCIA_TABLE, EstatusVigilanciaSchema } = require('../models/estatusVigilancia');
+const { VIGILANCIA_APARTADO_TABLE, VigilanciaApartadoSchema } = require('../models/vigilanciaApartado');
+const { VIGILANCIA_CATEGORIA_TABLE, VigilanciaCategoriaSchema } = require('../models/vigilanciaCategoria');
+const { VIGILANCIA_TIPO_PREGUNTA_TABLE, VigilanciaTipoPreguntaSchema } = require('../models/vigilanciaTipoPregunta');
+const { VIGILANCIA_PREGUNTA_TABLE, VigilanciaPreguntaSchema } = require('../models/vigilanciaPregunta');
+const { VIGILANCIA_TABLE, VigilanciaSchema } = require('../models/vigilancia');
+const { VIGILANCIA_OBSERVACION_TABLE, VigilanciaObservacionSchema } = require('../models/vigilanciaObservacion');
+const { VIGILANCIA_VIGILANCIA_PREGUNTA_TABLE, VigilanciaVigilanciaPreguntaSchema } = require('../models/vigilanciaVigilanciaPregunta');
+const { VIGILANTE_TABLE, VigilanteSchema } = require('../models/vigilante');
+const { VIGILANTE_VIGILANCIA_TABLE, VigilanteVigilanciaSchema } = require('../models/vigilanteVigilancia');
 
 module.exports = {
   async up(queryInterface) {
@@ -154,6 +164,19 @@ module.exports = {
     await queryInterface.createTable(SITUACION_VALIDACION_TABLE, SituacionValidacionSchema);
     await queryInterface.createTable(TIPO_VALIDACION_TABLE, TipoValidacionSchema);
     await queryInterface.createTable(VALIDACION_TABLE, ValidacionSchema);
+    await queryInterface.createTable(ESTATUS_VIGILANCIA_TABLE, EstatusVigilanciaSchema);
+    await queryInterface.createTable(VIGILANCIA_APARTADO_TABLE, VigilanciaApartadoSchema);
+    await queryInterface.createTable(VIGILANCIA_CATEGORIA_TABLE, VigilanciaCategoriaSchema);
+    await queryInterface.createTable(VIGILANCIA_TIPO_PREGUNTA_TABLE, VigilanciaTipoPreguntaSchema);
+    await queryInterface.createTable(VIGILANCIA_PREGUNTA_TABLE, VigilanciaPreguntaSchema);
+    await queryInterface.createTable(VIGILANCIA_TABLE, VigilanciaSchema);
+    await queryInterface.createTable(VIGILANCIA_OBSERVACION_TABLE, VigilanciaObservacionSchema);
+    await queryInterface.createTable(
+      VIGILANCIA_VIGILANCIA_PREGUNTA_TABLE,
+      VigilanciaVigilanciaPreguntaSchema,
+    );
+    await queryInterface.createTable(VIGILANTE_TABLE, VigilanteSchema);
+    await queryInterface.createTable(VIGILANTE_VIGILANCIA_TABLE, VigilanteVigilanciaSchema);
   },
 
   async down(queryInterface) {
@@ -230,5 +253,15 @@ module.exports = {
     await queryInterface.dropTable(SITUACION_VALIDACION_TABLE);
     await queryInterface.dropTable(TIPO_VALIDACION_TABLE);
     await queryInterface.dropTable(VALIDACION_TABLE);
+    await queryInterface.dropTable(ESTATUS_VIGILANCIA_TABLE);
+    await queryInterface.dropTable(VIGILANCIA_APARTADO_TABLE);
+    await queryInterface.dropTable(VIGILANCIA_CATEGORIA_TABLE);
+    await queryInterface.dropTable(VIGILANCIA_TIPO_PREGUNTA_TABLE);
+    await queryInterface.dropTable(VIGILANCIA_PREGUNTA_TABLE);
+    await queryInterface.dropTable(VIGILANCIA_TABLE);
+    await queryInterface.dropTable(VIGILANCIA_OBSERVACION_TABLE);
+    await queryInterface.dropTable(VIGILANCIA_VIGILANCIA_PREGUNTA_TABLE);
+    await queryInterface.dropTable(VIGILANTE_TABLE);
+    await queryInterface.dropTable(VIGILANTE_VIGILANCIA_TABLE);
   },
 };
