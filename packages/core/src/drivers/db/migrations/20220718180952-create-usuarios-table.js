@@ -80,6 +80,9 @@ const { VIGILANCIA_OBSERVACION_TABLE, VigilanciaObservacionSchema } = require('.
 const { VIGILANCIA_VIGILANCIA_PREGUNTA_TABLE, VigilanciaVigilanciaPreguntaSchema } = require('../models/vigilanciaVigilanciaPregunta');
 const { VIGILANTE_TABLE, VigilanteSchema } = require('../models/vigilante');
 const { VIGILANTE_VIGILANCIA_TABLE, VigilanteVigilanciaSchema } = require('../models/vigilanteVigilancia');
+const { SESION_TABLE, SesionSchema } = require('../models/sesion');
+const { PERIODO_TABLE, PeriodoSchema } = require('../models/periodo');
+const { ORGANO_COLEGIADO_TABLE, OrganoColegiadoSchema } = require('../models/organoColegiado');
 
 module.exports = {
   async up(queryInterface) {
@@ -177,6 +180,9 @@ module.exports = {
     );
     await queryInterface.createTable(VIGILANTE_TABLE, VigilanteSchema);
     await queryInterface.createTable(VIGILANTE_VIGILANCIA_TABLE, VigilanteVigilanciaSchema);
+    await queryInterface.createTable(SESION_TABLE, SesionSchema);
+    await queryInterface.createTable(PERIODO_TABLE, PeriodoSchema);
+    await queryInterface.createTable(ORGANO_COLEGIADO_TABLE, OrganoColegiadoSchema);
   },
 
   async down(queryInterface) {
@@ -263,5 +269,8 @@ module.exports = {
     await queryInterface.dropTable(VIGILANCIA_VIGILANCIA_PREGUNTA_TABLE);
     await queryInterface.dropTable(VIGILANTE_TABLE);
     await queryInterface.dropTable(VIGILANTE_VIGILANCIA_TABLE);
+    await queryInterface.dropTable(SESION_TABLE);
+    await queryInterface.dropTable(PERIODO_TABLE);
+    await queryInterface.dropTable(ORGANO_COLEGIADO_TABLE);
   },
 };
