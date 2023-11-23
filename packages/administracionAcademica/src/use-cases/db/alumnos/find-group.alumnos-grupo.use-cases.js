@@ -8,6 +8,7 @@ const findAlumnosGrupoAsignatura = (findAllCalificacionesQuery) => async ({
       include: [
         { association: 'persona' },
         { association: 'situacion' },
+        { association: 'calificaciones' },
       ],
     }];
 
