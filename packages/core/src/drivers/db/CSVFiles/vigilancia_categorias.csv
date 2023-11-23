@@ -1,0 +1,24 @@
+id,nombre,descripcion,instruccion,created_at
+1,BECAS,Expediente de la institución,Expediente de la institución,2018-09-12 18:00:00
+2,EXPEDIENTE DEL ALUMNO,Información del expediente del alumno,Información del expediente del alumno,2018-09-12 18:00:00
+3,SERVICIO SOCIAL,Expediente de la institución,Expediente de la institución,2018-09-12 18:00:00
+4,EXPEDIENTE DEL ALUMNO,Información del expediente del alumno,Información del expediente del alumno,2018-09-12 18:00:00
+5,VALIDACIÓN,Documentos de Validación,Documentos de Validación,2018-09-12 18:00:00
+6,AVANCES ESCOLARES/DOCUMENTACIÓN DE ALUMNOS,Documentación y formatos correspondientes,Documentación y formatos correspondientes,2018-09-12 18:00:00
+7,REGLAMENTO INTERNO,Reglamentación vigente,Reglamentación vigente,2018-09-12 18:00:00
+8,LISTA DE ASISTENCIA,Listas de Asistencia cumplan con los requisitos correspondientes,Listas de Asistencia cumplan con los requisitos correspondientes,2018-09-12 18:00:00
+9,BOLETA DE CALIFICACIONES,Formatos de boleta de calificaciones con la información correcto,Formatos de boleta de calificaciones con la información correcto,2018-09-12 18:00:00
+10,ACREDITACIÓN DEL INMUEBLE,Documentación legal y permisos de la IES,Documentación legal y permisos de la IES,2018-09-12 18:00:00
+11,LICENCIA MUNICIPAL Y RVOE,Existencia y vigencia de la licencia municipal,Existencia y vigencia de la licencia municipal,2018-09-12 18:00:00
+12,PROTOCOLOS DE SEGURIDAD E INCLUSIÓN,Protocolos de seguridad,Protocolos de seguridad,2018-09-12 18:00:00
+13,INFRAESTRUCTURA,Condiciones de las aulas y su funcionalidad,Las aulas cumplen con la especificaciones del INFEJAL,2018-09-12 18:00:00
+14,CENTRO DE CÓMPUTO,Verificar los espacios y su funcionalidad,Verificar los espacios y su funcionalidad,2018-09-12 18:00:00
+15,BIBLIOTECA,Funcionalidad del área clasificación y servicios,Funcionalidad del área clasificación y servicios,2018-09-12 18:00:00
+16,LABORATORIO Y TALLERES,Funcionalidad de laboratorios y talleres,Funcionalidad de laboratorios y talleres,2018-09-12 18:00:00
+17,AREAS EN CÓMUN Y ÁREAS ADMINISTRATIVAS,Funcionalidad de las áreas comunes y administrativas,Funcionalidad de las áreas comunes y administrativas,2018-09-12 18:00:00
+18,SERVICIOS SANITARIOS,Funcionamiento e higiene del servicio sanitario del plantel,Funcionamiento e higiene del servicio sanitario del plantel,2018-09-12 18:00:00
+19,REGISTRO DEL RVOE,Documentación del Acuerdo con el que se otorgó el RVOE,Documentación del Acuerdo con el que se otorgó el RVOE,2018-09-12 18:00:00
+20,PLANTILLA DOCENTE Y PLAN DE ESTUDIOS,Área de docencia,Asignaturas registros y contratos,2018-09-12 18:00:00
+21,EVALUACIÓN DOCENTE,Evaluación docente,Evaluación docente,2018-09-12 18:00:00
+22,PLAN DE ESTUDIOS,Plan de Estudios,Plan de Estudios,2018-09-12 18:00:00
+23,INFORMACIÓN ADICIONAL,INFORMACIÓN ADICIONAL,INFORMACIÓN ADICIONAL,2018-09-12 18:00:00
