@@ -20,7 +20,6 @@ const OrganoColegiadoSchema = {
       model: INSTITUCION_TABLE,
       key: 'id',
     },
-    defaultValue: 1,
   },
   sesionId: {
     allowNull: false,
@@ -30,7 +29,6 @@ const OrganoColegiadoSchema = {
       model: SESION_TABLE,
       key: 'id',
     },
-    defaultValue: 1,
   },
   periodoId: {
     allowNull: false,
@@ -40,7 +38,6 @@ const OrganoColegiadoSchema = {
       model: PERIODO_TABLE,
       key: 'id',
     },
-    defaultValue: 1,
   },
   fecha: {
     type: DataTypes.DATE,
