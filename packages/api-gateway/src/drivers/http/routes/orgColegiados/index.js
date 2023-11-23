@@ -11,7 +11,7 @@ async function orgColegiadosRouter(fastify, opts, next) {
       schema: createOrgColegiadoSchema,
       onRequest: [fastify.authenticate],
     },
-    orgColegiadosAdapter.createCicloEscolar,
+    orgColegiadosAdapter.createOrgColegiado,
   );
 
   next();

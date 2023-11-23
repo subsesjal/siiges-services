@@ -1,4 +1,4 @@
-# `@siiges-ui/core`
+# `@siiges-services/core`
 This package is related to db connections, Sequelize models and configurations queries.
 
 # Models

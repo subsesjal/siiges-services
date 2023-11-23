@@ -4,6 +4,7 @@ const { Diligencia, DiligenciaSchema } = require('./diligencia');
 const { Estado, EstadoSchema } = require('./estado');
 const { EstatusSolicitud, EstatusSolicitudSchema } = require('./estatusSolicitud');
 const { File, FileSchema } = require('./file');
+const { TipoInstitucion, TipoInstitucionSchema } = require('./tipoInstitucion');
 const { Institucion, InstitucionSchema } = require('./institucion');
 const { Modalidad, ModalidadSchema } = require('./modalidad');
 const { Municipio, MunicipioSchema } = require('./municipio');
@@ -92,6 +93,7 @@ function setupModels(sequelize) {
   Estado.init(EstadoSchema, Estado.config(sequelize));
   EstatusSolicitud.init(EstatusSolicitudSchema, EstatusSolicitud.config(sequelize));
   File.init(FileSchema, File.config(sequelize));
+  TipoInstitucion.init(TipoInstitucionSchema, TipoInstitucion.config(sequelize));
   Institucion.init(InstitucionSchema, Institucion.config(sequelize));
   Modalidad.init(ModalidadSchema, Modalidad.config(sequelize));
   Municipio.init(MunicipioSchema, Municipio.config(sequelize));
@@ -203,6 +205,7 @@ function setupModels(sequelize) {
   Estado.associate(sequelize.models);
   EstatusSolicitud.associate(sequelize.models);
   File.associate(sequelize.models);
+  TipoInstitucion.associate(sequelize.models);
   Institucion.associate(sequelize.models);
   Municipio.associate(sequelize.models);
   Modalidad.associate(sequelize.models);

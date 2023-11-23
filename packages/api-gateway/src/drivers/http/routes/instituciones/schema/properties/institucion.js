@@ -1,5 +1,6 @@
 // Institucion
 const institucion = {
+  tipoInstitucionId: { type: 'integer' },
   nombre: { type: 'string' },
   razonSocial: { type: 'string' },
   claveIes: { type: 'string' },

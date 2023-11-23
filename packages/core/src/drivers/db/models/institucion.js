@@ -1,5 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { USUARIO_TABLE } = require('./usuario');
+const { TIPO_INSTITUCION_TABLE } = require('./tipoInstitucion');
 
 const INSTITUCION_TABLE = 'instituciones';
 
@@ -16,6 +17,15 @@ const InstitucionSchema = {
     field: 'usuario_id',
     references: {
       model: USUARIO_TABLE,
+      key: 'id',
+    },
+  },
+  tipoInstitucionId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'tipo_institucion_id',
+    references: {
+      model: TIPO_INSTITUCION_TABLE,
       key: 'id',
     },
   },

@@ -1,5 +1,5 @@
-const { createCicloEscolar } = require('./create.handlers.organo-colegiado.adapters');
+const { createOrgColegiado } = require('./create.handlers.organo-colegiado.adapters');
 
 module.exports = {
-  createCicloEscolar,
+  createOrgColegiado,
 };
