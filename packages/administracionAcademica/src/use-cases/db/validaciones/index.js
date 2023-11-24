@@ -15,12 +15,12 @@ module.exports = {
     validaciones.findOneNivelQuery,
   ),
   findOneAlumnoValidacion: findOneAlumnoValidacion(
-    validaciones.findOneValidacionesQuery,
+    validaciones.findOneValidacionQuery,
   ),
   updateAlumnoValidacion: updateAlumnoValidacion(
     validaciones.findOneSituacionesValidacionQuery,
     validaciones.findOneTipoValidacionesQuery,
-    validaciones.findOneValidacionesQuery,
+    validaciones.findOneValidacionQuery,
     validaciones.updateValidacionesQuery,
     validaciones.findOneUsuarioQuery,
     validaciones.findOneEstadoQuery,
