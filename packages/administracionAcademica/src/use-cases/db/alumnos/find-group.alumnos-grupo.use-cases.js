@@ -12,11 +12,24 @@ const findAlumnosGrupoAsignatura = (findAllCalificacionesQuery) => async ({
     }];
 
   const calificacionesGrupo = await findAllCalificacionesQuery(
-    { grupoId, asignaturaId },
+    { grupoId, asignaturaId, tipo: 1 },
     { include },
   );
 
-  return calificacionesGrupo.map((calificacion) => calificacion.alumno.dataValues);
+  const alumnos = await Promise.all(calificacionesGrupo
+    .filter((calificacion) => calificacion.tipo === 1)
+    .map(async ({ alumno }) => {
+      const alumnoJson = alumno.toJSON();
+      const calificacionesAlumno = await findAllCalificacionesQuery(
+        { alumnoId: alumnoJson.id, grupoId, asignaturaId },
+      );
+      return {
+        ...alumnoJson,
+        calificaciones: calificacionesAlumno,
+      };
+    }));
+
+  return alumnos;
 };
 
 module.exports = findAlumnosGrupoAsignatura;

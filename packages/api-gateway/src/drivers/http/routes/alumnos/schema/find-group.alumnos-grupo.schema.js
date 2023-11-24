@@ -1,6 +1,7 @@
 const { alumno } = require('./properties/alumno');
 const { persona } = require('../../usuarios/schema/properties/persona');
 const { situacion } = require('./properties/situacion');
+const { calificacion } = require('./properties/calificacion');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findAlumnosGrupoSchema = {
@@ -40,6 +41,16 @@ const findAlumnosGrupoSchema = {
                   id: { type: 'integer' },
                   ...situacion,
                   ...responseProperties,
+                },
+              },
+              calificaciones: {
+                type: 'array',
+                items: {
+                  properties: {
+                    id: { type: 'integer' },
+                    ...calificacion,
+                    ...responseProperties,
+                  },
                 },
               },
             },
