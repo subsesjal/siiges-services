@@ -7,7 +7,7 @@ module.exports = {
   createAlumnoValidacion: createAlumnoValidacion(
     validaciones.findOneSituacionesValidacionQuery,
     validaciones.findOneTipoValidacionesQuery,
-    validaciones.findOneValidacionesQuery,
+    validaciones.findOneValidacionQuery,
     validaciones.createValidacionesQuery,
     validaciones.findOneUsuarioQuery,
     validaciones.findOneEstadoQuery,
