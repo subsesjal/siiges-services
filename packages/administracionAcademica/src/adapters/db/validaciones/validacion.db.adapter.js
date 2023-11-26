@@ -11,8 +11,8 @@ const {
   Usuario,
   Estado,
   Nivel,
-  SituacionesValidacion,
-  TipoValidaciones,
+  SituacionValidacion,
+  TipoValidacion,
   Validacion,
 } = models;
 
@@ -22,8 +22,8 @@ module.exports = {
   findOneUsuarioQuery: findOneQuery(Usuario),
   findOneEstadoQuery: findOneQuery(Estado),
   findOneNivelQuery: findOneQuery(Nivel),
-  findOneSituacionesValidacionQuery: findOneQuery(SituacionesValidacion),
-  findOneTipoValidacionesQuery: findOneQuery(TipoValidaciones),
+  findOneSituacionesValidacionQuery: findOneQuery(SituacionValidacion),
+  findOneTipoValidacionesQuery: findOneQuery(TipoValidacion),
   createValidacionesQuery: createQuery(Validacion),
   updateValidacionesQuery: updateAndFindQuery(Validacion),
 };

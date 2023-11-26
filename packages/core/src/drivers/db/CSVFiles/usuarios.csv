@@ -3,4 +3,12 @@ id,rol_id,persona_id,usuario,correo,contrasena,estatus,actualizado,token_notific
 2,2,2,Ivan,ivan.narvaez@gmail.com,asd2314,1,1,,2022-09-07 21:28:31
 3,3,3,richi,richi.hct@gmail.com,asd2314,1,1,,2022-09-26 19:00:49
 4,3,4,lupita,lupita.hct@gmail.com,asd2314,1,1,,2022-09-26 19:09:41
-5,3,9,roberto,robert.hct@gmail.com,c2b0006eb38f648e89726c6968bf72bfdea0ee9630b8ccf56b8f5cb98dc3fd97,1,1,NULL,2023-10-08 23:14:54
+5,3,5,arianag,arianag.hct@gmail.com,f4ec8db501005a6df9a75e8ed23678474f51114238f763f5c3322988431520ba,1,1,,2022-09-26 19:09:41,NULL,NULL
+6,2,6,Taylor,Taylor.hct@gmail.com,f4ec8db501005a6df9a75e8ed23678474f51114238f763f5c3322988431520ba,1,1,,2022-09-26 19:09:41,NULL,NULL
+7,11,7,Chayanne,Chayanne@gmail.com,252a890f87c47a4638802f4066e250bf4f32d57519d4af09858caf72bae99e44,1,1,,2022-09-26 19:09:41,NULL,NULL
+8,3,8,SergioAndrade,serg@gmail.com,f4ec8db501005a6df9a75e8ed23678474f51114238f763f5c3322988431520ba,1,1,,2022-09-26 19:09:41,NULL,NULL
+9,5,9,Rick,Rick@gmail.com,826e1f6960941c5b35254dd7b9f940d0fcaac11171e177b18bb224166ce723e5,1,1,,2022-09-26 19:09:41,NULL,NULL
+10,5,10,ChumLee,chum@gmail.com,826e1f6960941c5b35254dd7b9f940d0fcaac11171e177b18bb224166ce723e5,1,1,,2022-09-26 19:09:41,NULL,NULL
+11,2,11,Laura,laura@gmail.com,f4ec8db501005a6df9a75e8ed23678474f51114238f763f5c3322988431520ba,1,1,,2022-09-26 19:09:41,NULL,NULL
+12,13,19,ce_sicyt,ce_sicyt@jalisco.gob.mx,f4ec8db501005a6df9a75e8ed23678474f51114238f763f5c3322988431520ba,1,1,NULL,2023-10-17 21:20:16.102,NULL,NULL
+13,12,20,ce_ies,ce_ies@jalisco.gob.mx,f4ec8db501005a6df9a75e8ed23678474f51114238f763f5c3322988431520ba,1,1,NULL,2023-10-17 21:20:39.603,NULL,NULL
