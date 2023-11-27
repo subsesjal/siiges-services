@@ -7,7 +7,7 @@ async function findOneOrgColegiado(request, reply) {
   try {
     const { orgColegiadoId } = request.params;
 
-    Logger.info('[Ciclo escolar]: find one Ciclo Escolar');
+    Logger.info('[Organo Colegiado]: find one Organos Colegiado');
 
     const orgColegiado = await this.opdServices.findOneOrgColegiado(
       { id: orgColegiadoId },

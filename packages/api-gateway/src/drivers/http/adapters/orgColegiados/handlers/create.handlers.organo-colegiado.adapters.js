@@ -5,7 +5,7 @@ async function createOrgColegiado(request, reply) {
   try {
     const { ...data } = request.body;
 
-    Logger.info('[Ciclo escolar]: creating Ciclo Escolar');
+    Logger.info('[Organos colegiados]: creating Organo Colegiado');
     const orgColegiado = await this.opdServices.createOrgColegiado(data);
 
     return reply
