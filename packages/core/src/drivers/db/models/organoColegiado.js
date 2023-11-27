@@ -20,7 +20,6 @@ const OrganoColegiadoSchema = {
       model: INSTITUCION_TABLE,
       key: 'id',
     },
-    defaultValue: 1,
   },
   sesionId: {
     allowNull: false,
@@ -30,7 +29,6 @@ const OrganoColegiadoSchema = {
       model: SESION_TABLE,
       key: 'id',
     },
-    defaultValue: 1,
   },
   periodoId: {
     allowNull: false,
@@ -40,7 +38,6 @@ const OrganoColegiadoSchema = {
       model: PERIODO_TABLE,
       key: 'id',
     },
-    defaultValue: 1,
   },
   fecha: {
     type: DataTypes.DATE,
@@ -66,8 +63,9 @@ const OrganoColegiadoSchema = {
 };
 
 class OrganoColegiado extends Model {
-  static associate() {
-    // this.belongsTo(models.Domicilio, { as: 'domicilio' });
+  static associate(models) {
+    this.belongsTo(models.Sesion, { as: 'sesion' });
+    this.belongsTo(models.Periodo, { as: 'periodo' });
   }
 
   static config(sequelize) {

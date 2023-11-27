@@ -82,7 +82,6 @@ const ValidacionSchema = {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'fecha_expedicion',
-    defaultValue: Sequelize.NOW,
   },
   nombreInstitucionEmisora: {
     allowNull: false,
@@ -98,13 +97,11 @@ const ValidacionSchema = {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'fecha_inicio_antecedente',
-    defaultValue: Sequelize.NOW,
   },
   fechaFinAntecedente: {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'fecha_fin_antecedente',
-    defaultValue: Sequelize.NOW,
   },
   cedulaProfesional: {
     allowNull: false,
@@ -120,7 +117,6 @@ const ValidacionSchema = {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'fecha_validacion',
-    defaultValue: Sequelize.NOW,
   },
   createdAt: {
     allowNull: false,

@@ -40,6 +40,7 @@
     "@siiges-services/inspecciones": "^1.0.0",
     "@siiges-services/instituciones": "^1.0.0",
     "@siiges-services/notificaciones": "^1.0.0",
+    "@siiges-services/opd": "^1.0.0",
     "@siiges-services/shared": "^0.0.1",
     "@siiges-services/solicitudes": "^1.0.0",
     "@siiges-services/usuario": "^1.0.0",

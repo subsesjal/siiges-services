@@ -1,5 +1,5 @@
 // const administracionAcademica = require('..');
 
-describe('@siiges-services/administracionAcademica', () => {
+describe('@siiges-services/opd', () => {
   it('needs tests', () => {});
 });

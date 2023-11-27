@@ -1,5 +1,5 @@
 // const core = require('..');
 
-describe('@siiges-ui/core', () => {
+describe('@siiges-services/core', () => {
   it('needs tests', () => {});
 });

@@ -4,6 +4,7 @@ const { DILIGENCIA_TABLE, DiligenciaSchema } = require('../models/diligencia');
 const { ESTATUS_SOLICITUD_TABLE, EstatusSolicitudSchema } = require('../models/estatusSolicitud');
 const { ESTADO_TABLE, EstadoSchema } = require('../models/estado');
 const { FILE_TABLE, FileSchema } = require('../models/file');
+const { TIPO_INSTITUCION_TABLE, TipoInstitucionSchema } = require('../models/tipoInstitucion');
 const { INSTITUCION_TABLE, InstitucionSchema } = require('../models/institucion');
 const { MODALIDAD_TABLE, ModalidadSchema } = require('../models/modalidad');
 const { MUNICIPIO_TABLE, MunicipioSchema } = require('../models/municipio');
@@ -94,6 +95,7 @@ module.exports = {
     await queryInterface.createTable(PERSONA_TABLE, PersonaSchema);
     await queryInterface.createTable(USUARIO_TABLE, UsuarioSchema);
     await queryInterface.createTable(FILE_TABLE, FileSchema);
+    await queryInterface.createTable(TIPO_INSTITUCION_TABLE, TipoInstitucionSchema);
     await queryInterface.createTable(INSTITUCION_TABLE, InstitucionSchema);
     await queryInterface.createTable(TIPO_INMUEBLE_TABLE, TipoInmuebleSchema);
     await queryInterface.createTable(PLANTEL_TABLE, PlantelSchema);
@@ -195,6 +197,7 @@ module.exports = {
     await queryInterface.dropTable(USUARIO_TABLE);
     await queryInterface.dropTable(REPRESENTANTE_TABLE);
     await queryInterface.dropTable(FILE_TABLE);
+    await queryInterface.dropTable(TIPO_INSTITUCION_TABLE);
     await queryInterface.dropTable(INSTITUCION_TABLE);
     await queryInterface.dropTable(TIPO_INMUEBLE_TABLE);
     await queryInterface.dropTable(PLANTEL_TABLE);
