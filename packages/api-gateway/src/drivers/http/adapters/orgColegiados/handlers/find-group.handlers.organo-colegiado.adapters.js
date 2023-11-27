@@ -3,21 +3,21 @@ const { Logger } = require('@siiges-services/shared');
 // Internal dependencies
 const errorHandler = require('../../../utils/errorHandler');
 
-async function findGroupCicloEscolar(request, reply) {
+async function findGroupOrgColegiados(request, reply) {
   try {
-    const { programaId } = request.params;
+    const { institucionId } = request.params;
 
-    Logger.info('[Ciclo escolar]: find group Ciclo Escolar');
-    const cicloEscolar = await this.administracionAcademicaServices
-      .findGroupCicloEscolar({ programaId });
+    Logger.info('[Organos Colegiados]: find group organos colegiados');
+    const orgColegiados = await this.opdServices
+      .findGroupOrgColegiados({ institucionId });
 
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: cicloEscolar });
+      .send({ data: orgColegiados });
   } catch (error) {
     return errorHandler(error, reply);
   }
 }
 
-module.exports = { findGroupCicloEscolar };
+module.exports = { findGroupOrgColegiados };

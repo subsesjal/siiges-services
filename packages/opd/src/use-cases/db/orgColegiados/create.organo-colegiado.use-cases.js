@@ -4,7 +4,7 @@ const createOrgColegiado = (
   findOneInstitucionQuery,
   createOrgColegiadoQuery,
 ) => async (data) => {
-  const INSTITUCION_OPD = 1;
+  const INSTITUCION_OPD = 2;
   const { institucionId } = data;
 
   const institucion = await findOneInstitucionQuery({

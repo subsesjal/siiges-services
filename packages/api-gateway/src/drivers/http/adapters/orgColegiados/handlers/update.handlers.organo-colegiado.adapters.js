@@ -3,24 +3,24 @@ const { Logger } = require('@siiges-services/shared');
 // Internal dependencies
 const errorHandler = require('../../../utils/errorHandler');
 
-async function updateCicloEscolar(request, reply) {
+async function updateOrgColegiado(request, reply) {
   try {
-    const { cicloEscolarId } = request.params;
+    const { orgColegiadoId } = request.params;
     const { ...data } = request.body;
 
-    Logger.info('[Ciclo escolar]: update Ciclo Escolar');
+    Logger.info('[Organo Colegiado]: update Organo Colegiado');
 
-    const cicloEscolar = await this.administracionAcademicaServices.updateCicloEscolar(
-      { id: cicloEscolarId, data },
+    const orgColegiado = await this.opdServices.updateOrgColegiado(
+      { id: orgColegiadoId, data },
     );
 
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: cicloEscolar });
+      .send({ data: orgColegiado });
   } catch (error) {
     return errorHandler(error, reply);
   }
 }
 
-module.exports = { updateCicloEscolar };
+module.exports = { updateOrgColegiado };

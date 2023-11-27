@@ -63,8 +63,9 @@ const OrganoColegiadoSchema = {
 };
 
 class OrganoColegiado extends Model {
-  static associate() {
-    // this.belongsTo(models.Domicilio, { as: 'domicilio' });
+  static associate(models) {
+    this.belongsTo(models.Sesion, { as: 'sesion' });
+    this.belongsTo(models.Periodo, { as: 'periodo' });
   }
 
   static config(sequelize) {
