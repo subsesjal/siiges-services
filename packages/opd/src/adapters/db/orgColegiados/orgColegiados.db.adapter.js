@@ -2,6 +2,7 @@ const { models, queries } = require('@siiges-services/core');
 
 const {
   OrganoColegiado,
+  Acuerdo,
 } = models;
 
 const {
@@ -16,4 +17,8 @@ module.exports = {
   findOneOrgColegiadoQuery: findOneQuery(OrganoColegiado),
   findAllOrgColegiadosQuery: findAllQuery(OrganoColegiado),
   updateOrgColegiadoQuery: updateAndFindQuery(OrganoColegiado),
+  createAcuerdoQuery: createQuery(Acuerdo),
+  findOneAcuerdoQuery: findOneQuery(Acuerdo),
+  findAllAcuerdosQuery: findAllQuery(Acuerdo),
+  updateAcuerdoQuery: updateAndFindQuery(Acuerdo),
 };

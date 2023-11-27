@@ -84,6 +84,7 @@ const { VIGILANTE_VIGILANCIA_TABLE, VigilanteVigilanciaSchema } = require('../mo
 const { SESION_TABLE, SesionSchema } = require('../models/sesion');
 const { PERIODO_TABLE, PeriodoSchema } = require('../models/periodo');
 const { ORGANO_COLEGIADO_TABLE, OrganoColegiadoSchema } = require('../models/organoColegiado');
+const { ACUERDO_TABLE, AcuerdoSchema } = require('../models/acuerdo');
 
 module.exports = {
   async up(queryInterface) {
@@ -185,6 +186,7 @@ module.exports = {
     await queryInterface.createTable(SESION_TABLE, SesionSchema);
     await queryInterface.createTable(PERIODO_TABLE, PeriodoSchema);
     await queryInterface.createTable(ORGANO_COLEGIADO_TABLE, OrganoColegiadoSchema);
+    await queryInterface.createTable(ACUERDO_TABLE, AcuerdoSchema);
   },
 
   async down(queryInterface) {
@@ -275,5 +277,6 @@ module.exports = {
     await queryInterface.dropTable(SESION_TABLE);
     await queryInterface.dropTable(PERIODO_TABLE);
     await queryInterface.dropTable(ORGANO_COLEGIADO_TABLE);
+    await queryInterface.dropTable(ACUERDO_TABLE);
   },
 };

@@ -84,6 +84,7 @@ const { VigilanteVigilancia, VigilanteVigilanciaSchema } = require('./vigilanteV
 const { Sesion, SesionSchema } = require('./sesion');
 const { Periodo, PeriodoSchema } = require('./periodo');
 const { OrganoColegiado, OrganoColegiadoSchema } = require('./organoColegiado');
+const { Acuerdo, AcuerdoSchema } = require('./acuerdo');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -197,6 +198,7 @@ function setupModels(sequelize) {
   Sesion.init(SesionSchema, Sesion.config(sequelize));
   Periodo.init(PeriodoSchema, Periodo.config(sequelize));
   OrganoColegiado.init(OrganoColegiadoSchema, OrganoColegiado.config(sequelize));
+  Acuerdo.init(AcuerdoSchema, Acuerdo.config(sequelize));
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -285,6 +287,7 @@ function setupModels(sequelize) {
   Sesion.associate(sequelize.models);
   Periodo.associate(sequelize.models);
   OrganoColegiado.associate(sequelize.models);
+  Acuerdo.associate(sequelize.models);
 }
 
 module.exports = setupModels;
