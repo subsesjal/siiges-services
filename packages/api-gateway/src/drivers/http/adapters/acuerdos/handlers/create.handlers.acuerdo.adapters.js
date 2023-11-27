@@ -8,7 +8,7 @@ async function createAcuerdo(request, reply) {
 
     Logger.info('[Acuerdos]: creating Acuerdo');
     const acuerdo = await this.opdServices.createAcuerdo(
-      organoColegiadoId,
+      { organoColegiadoId },
       data,
     );
 

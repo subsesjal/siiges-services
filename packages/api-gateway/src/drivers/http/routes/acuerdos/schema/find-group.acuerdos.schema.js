@@ -6,8 +6,8 @@ const findGroupAcuerdosSchema = {
   description: 'Get a group Acuerdos by Organos Colegiados.',
   params: {
     type: 'object',
-    properties: { orgColegiadoId: { type: 'integer' } },
-    required: ['orgColegiadoId'],
+    properties: { organoColegiadoId: { type: 'integer' } },
+    required: ['organoColegiadoId'],
   },
   response: {
     200: {

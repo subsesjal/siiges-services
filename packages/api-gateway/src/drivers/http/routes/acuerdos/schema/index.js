@@ -1,11 +1,11 @@
-const { createOrgColegiadoSchema } = require('./create.acuerdo.schema');
-const { findOneOrgColegiadoSchema } = require('./find-one.acuerdo.schema');
-const { findGroupOrgColegiadosSchema } = require('./find-group.acuerdos.schema');
-const { updateOrgColegiadoSchema } = require('./update.acuerdo.schema');
+const { createAcuerdoSchema } = require('./create.acuerdo.schema');
+const { findOneAcuerdoSchema } = require('./find-one.acuerdo.schema');
+const { findGroupAcuerdosSchema } = require('./find-group.acuerdos.schema');
+const { updateAcuerdoSchema } = require('./update.acuerdo.schema');
 
 module.exports = {
-  createOrgColegiadoSchema,
-  findOneOrgColegiadoSchema,
-  findGroupOrgColegiadosSchema,
-  updateOrgColegiadoSchema,
+  createAcuerdoSchema,
+  findOneAcuerdoSchema,
+  findGroupAcuerdosSchema,
+  updateAcuerdoSchema,
 };

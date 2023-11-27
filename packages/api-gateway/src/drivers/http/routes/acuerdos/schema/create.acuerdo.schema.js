@@ -10,6 +10,7 @@ const createAcuerdoSchema = {
     properties: {
       ...acuerdo,
     },
+    required: ['numero', 'estatus', 'fecha'],
   },
   response: {
     201: {

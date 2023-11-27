@@ -3,13 +3,13 @@ const { Logger } = require('@siiges-services/shared');
 // Internal dependencies
 const errorHandler = require('../../../utils/errorHandler');
 
-async function findGroupAcuerdo(request, reply) {
+async function findGroupAcuerdos(request, reply) {
   try {
     const { organoColegiadoId } = request.params;
 
     Logger.info('[Acuerdos]: find group acuerdos');
     const acuerdo = await this.opdServices
-      .findGroupAcuerdo({ organoColegiadoId });
+      .findGroupAcuerdos({ organoColegiadoId });
 
     return reply
       .code(200)
@@ -20,4 +20,4 @@ async function findGroupAcuerdo(request, reply) {
   }
 }
 
-module.exports = { findGroupAcuerdo };
+module.exports = { findGroupAcuerdos };
