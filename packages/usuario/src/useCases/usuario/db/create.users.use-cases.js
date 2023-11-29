@@ -6,6 +6,7 @@ const createUser = (
   findOneUserQuery,
   createInspector,
   createEvaluador,
+  createVigilante,
 ) => async (data) => {
   const include = [{
     association: 'persona',
@@ -38,6 +39,7 @@ const createUser = (
   const roles = {
     5: createEvaluador,
     6: createInspector,
+    16: createVigilante,
   };
   if (Object.keys(roles).includes(data.rolId.toString())) {
     await roles[data.rolId]({ personaId: newUser.personaId });
