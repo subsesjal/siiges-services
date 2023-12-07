@@ -14,7 +14,7 @@ const updateFile = require('./update.files.db.use-cases');
 module.exports = {
   getFileIdentifierObj,
   createFile: createFile(createFileQuery),
-  deleteFile: deleteFile(deleteFileQuery),
+  deleteFile: deleteFile(findOneFileQuery, deleteFileQuery),
   findOneFile: findOneFile(findOneFileQuery),
   updateFile: updateFile(updateFileQuery),
 };
