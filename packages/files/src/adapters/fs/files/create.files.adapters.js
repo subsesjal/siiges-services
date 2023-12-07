@@ -1,12 +1,12 @@
 // External dependencies
+const fs = require('fs');
 const boom = require('@hapi/boom');
 const { Logger } = require('@siiges-services/shared');
-const fs = require('fs');
 // Ineternal dependencies
 const { pathNotExist } = require('../path-exist.fs.adapters');
 
 function create(file, fileName, filePath) {
-  const tmpFilePath = file.path;
+  const tmpFilePath = file.filepath;
   const src = fs.createReadStream(tmpFilePath);
   const dest = fs.createWriteStream(filePath);
 

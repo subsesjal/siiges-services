@@ -7,7 +7,10 @@ const createFile = (createFileQuery) => async (data) => {
   checkers.throwErrorIfDataIsFalsy(fileCreated, 'files', data);
   Logger.info('[files] file created');
 
-  return fileCreated;
+  return {
+    ...fileCreated.dataValues,
+    url: `${process.env.SWAGGER_HOST}${fileCreated.ubicacion}`,
+  };
 };
 
 module.exports = createFile;

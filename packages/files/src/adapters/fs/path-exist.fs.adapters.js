@@ -1,5 +1,5 @@
-const { Logger } = require('@siiges-services/shared');
 const fs = require('fs');
+const { Logger } = require('@siiges-services/shared');
 
 function pathExist(directoryPath) {
   Logger.info('[files]: checking if the path exist');
