@@ -9,9 +9,9 @@ async function vigilanteRouter(fastify, opts, next) {
     '/vigilantes/:vigilanteId/vigilancias',
     {
       schema: findVigilanciasByVigilanteSchema,
-      onRequest: [fastify.authenticate],
+      // onRequest: [fastify.authenticate],
     },
-    vigilantesAdapter.findVigilanciasByVigilante,
+    vigilantesAdapter,
   );
 
   next();
