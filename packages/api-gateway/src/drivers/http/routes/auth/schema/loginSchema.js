@@ -7,6 +7,7 @@ const loginSchema = {
       usuario: { type: 'string' },
       contrasena: { type: 'string' },
     },
+    examples: [{ usuario: 'arianag', contrasena: 'Aa/1234567890' }],
   },
 };
 
