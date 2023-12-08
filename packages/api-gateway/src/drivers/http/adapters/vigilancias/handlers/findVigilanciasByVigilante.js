@@ -6,7 +6,7 @@ async function findVigilanciasByVigilante(req, reply) {
     const { vigilanteId } = req.params;
 
     Logger.info(`[Vigilantes/Vigilancias]: Obtaining vigilancias for vigilante with ID ${vigilanteId}`);
-    const vigilancias = await this.vigilanteServices.findVigilanciasByVigilante({ vigilanteId });
+    const vigilancias = await this.opdServices.findVigilanciasByVigilante({ vigilanteId });
 
     return reply
       .code(200)

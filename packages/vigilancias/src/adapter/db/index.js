@@ -1,7 +1,7 @@
 // External dependencies
-const { drivers, queries } = require('@siiges-services/core');
+const { models, queries } = require('@siiges-services/core');
 
-const { Vigilancia } = drivers.sequelize.models;
+const { Vigilancia } = models;
 
 const { findAllQuery } = queries;
 

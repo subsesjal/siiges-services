@@ -1,7 +1,6 @@
-// Suponiendo que VigilanteVigilancia es tu modelo para la tabla 'vigilantes_vigilancias'
-const { VigilanteVigilancia } = require('@siiges-services/core/src/drivers/db/models/vigilanteVigilancia');
-const { findAllQuery } = require('@siiges-services/core/src/adapters/db/find-all.db.adapter'); // Asegúrate de ajustar la ruta
+const findVigilanciasByVigilante = require('./findVigilanciasByVigilante');
+const vigilanciaService = require('../../../adapter/db/index');
 
-const findVigilanciasByVigilanteQuery = findAllQuery(VigilanteVigilancia);
-
-module.exports = { findVigilanciasByVigilanteQuery };
+module.exports = {
+  findVigilanciasByVigilante: findVigilanciasByVigilante(vigilanciaService.findAllVigilanciasQuery),
+};
