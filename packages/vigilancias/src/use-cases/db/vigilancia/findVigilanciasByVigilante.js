@@ -1,8 +1,5 @@
-const { checkers } = require('@siiges-services/shared');
-
-const findVigilanciasByVigilante = (findVigilanciasByVigilanteQuery) => async ({ vigilanteId }) => {
-  const findvigilancias = await findVigilanciasByVigilanteQuery({ vigilanteId });
-  checkers.throwErrorIfDataIsFalsy(findvigilancias.legth, 'vigilancia', vigilanteId);
+const findVigilanciasByVigilante = (findAllVigilanciasQuery) => async ({ vigilanteId }) => {
+  const findvigilancias = await findAllVigilanciasQuery({ vigilanteId });
 
   return findvigilancias;
 };

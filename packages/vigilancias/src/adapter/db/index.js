@@ -1,10 +1,5 @@
-// External dependencies
-const { models, queries } = require('@siiges-services/core');
-
-const { Vigilancia } = models;
-
-const { findAllQuery } = queries;
+const vigilancias = require('./vigilancias/vigilancias.db.adapter');
 
 module.exports = {
-  findAllVigilanciasQuery: findAllQuery(Vigilancia),
+  vigilancias,
 };

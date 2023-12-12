@@ -6,10 +6,10 @@ const {
 
 async function vigilanteRouter(fastify, opts, next) {
   await fastify.get(
-    '/:vigilanteId/vigilancias',
+    '/vigilante/:vigilanteId',
     {
       schema: findVigilanciasByVigilanteSchema,
-      // onRequest: [fastify.authenticate],
+      onRequest: [fastify.authenticate],
     },
     vigilantesAdapter.vigilantesAdapter,
   );

@@ -1,4 +1,3 @@
-const { vigilante } = require('./properties/vigilante');
 const { vigilancia } = require('./properties/vigilancia');
 const { responseProperties } = require('./properties/responseProperties');
 
@@ -23,14 +22,6 @@ const findVigilanciasByVigilanteSchema = {
             properties: {
               id: { type: 'integer' },
               ...vigilancia,
-              vigilante: {
-                type: 'object',
-                properties: {
-                  id: { type: 'integer' },
-                  ...vigilante,
-                  ...responseProperties,
-                },
-              },
               ...responseProperties,
             },
           },
