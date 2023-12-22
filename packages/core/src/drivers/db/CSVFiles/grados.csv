@@ -24,3 +24,4 @@ id,nombre,descripcion,numero_grado,created_at
 23,Flexible Cuatrimestral,Flexible Cuatrimestral,1,2021-12-07 12:27:48
 24,Flexible Semestral,Flexible Semestral,1,2021-12-07 12:27:48
 25,Optativa,Optativa,100,2021-12-13 11:48:42
+26,NULL,NULL,0,1900-01-01 00:00:00

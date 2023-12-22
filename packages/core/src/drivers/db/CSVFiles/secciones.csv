@@ -1,31 +1,31 @@
 id,nombre,descripcion,modulo,created_at
-1,Datos del plan de estudios,Datos del plan de estudios,PLAN DE ESTUDIOS,2018-11-19 0:00:00
-2,Coordinador del programa,Coordinador del programa,PLAN DE ESTUDIOS,2018-11-19 0:00:00
-3,Fundamentación del plan de estudios,Fundamentación del plan de estudios,PLAN DE ESTUDIOS,2018-11-19 0:00:00
-4,Perfil de ingreso,Perfil de ingreso,PLAN DE ESTUDIOS,2018-11-19 0:00:00
-5,Perfil de egreso,Perfil de egreso,PLAN DE ESTUDIOS,2018-11-19 0:00:00
-6,Curricula,Curricula,PLAN DE ESTUDIOS,2018-11-19 0:00:00
-7,Asignaturas,Asignaturas,PLAN DE ESTUDIOS,2018-11-19 0:00:00
-8,Asignaturas de formación electiva,Asignaturas de formación electiva,PLAN DE ESTUDIOS,2018-11-19 0:00:00
-9,Docentes,Docentes,PLAN DE ESTUDIOS,2018-11-19 0:00:00
-10,Trayectoria educativa,Trayectoria educativa,PLAN DE ESTUDIOS,2018-11-19 0:00:00
-11,Licencias de software,Licencias de software,PLAN DE ESTUDIOS,2018-11-19 0:00:00
-12,Herramienta educativa,Herramienta educativa,PLAN DE ESTUDIOS,2018-11-19 0:00:00
-13,Respaldos,Respaldos,PLAN DE ESTUDIOS,2018-11-19 0:00:00
-14,Datos de Institucion,Datos de la Institucion,DATOS GENERALES,2018-11-19 0:00:00
-15,Datos representante legal,Datos personales del representate legal,DATOS GENERALES,2018-11-19 0:00:00
-16,Diligencias,Datos personales del personal de diligencias,DATOS GENERALES,2018-11-19 0:00:00
-17,Datos plantel,Datos del plantel,PLANTEL,2018-11-19 0:00:00
-18,Ubicacion del plantel,Datos del docimicilio,PLANTEL,2018-11-19 0:00:00
-19,Descripcion del plantel,Datos del edificio del plantel,PLANTEL,2018-11-19 0:00:00
-20,Higiene del plantel,Datos de la infraestructura de limpieza,PLANTEL,2018-11-19 0:00:00
-21,Instituciones aledañas,Datos de los servicios de emergencia cercanos,PLANTEL,2018-11-19 0:00:00
-22,Infraestructura,Datos de la distribucion de los edificios,PLANTEL,2018-11-19 0:00:00
-23,Ratificacion del nombre,Ratificacion del nombre,PLANTEL,2018-11-19 0:00:00
-24,Plataforma educativa,Plataforma educativa,PLATAFORMA EDUCATIVA,2018-11-19 0:00:00
-25,Datos de Hardware y Software,Hardware y Software,PLATAFORMA EDUCATIVA,2018-11-19 0:00:00
-26,Roles de usuario,Caracteristicas de los roles de usuario,PLATAFORMA EDUCATIVA,2018-11-19 0:00:00
-27,Soporte tecnico ,Soporte tecnico,PLATAFORMA EDUCATIVA,2018-11-19 0:00:00
-28,Licencias de la plataforma,Licencias de la plataforma,PLATAFORMA EDUCATIVA,2018-11-19 0:00:00
-29,Anexos,Archivos anexos,ANEXOS,2018-11-19 0:00:00
-30,Trayectoria educativa,Nombre del programa,EVALUACION CURRICULAR,2018-11-19 0:00:00
+1,Datos del plan de estudios,Datos del plan de estudios,PLAN DE ESTUDIOS,2018/11/19 00:00
+2,Coordinador del programa,Coordinador del programa,PLAN DE ESTUDIOS,2018/11/19 00:00
+3,Fundamentación del plan de estudios,Fundamentación del plan de estudios,PLAN DE ESTUDIOS,2018/11/19 00:00
+4,Perfil de ingreso,Perfil de ingreso,PLAN DE ESTUDIOS,2018/11/19 00:00
+5,Perfil de egreso,Perfil de egreso,PLAN DE ESTUDIOS,2018/11/19 00:00
+6,Curricula,Curricula,PLAN DE ESTUDIOS,2018/11/19 00:00
+7,Asignaturas,Asignaturas,PLAN DE ESTUDIOS,2018/11/19 00:00
+8,Asignaturas de formación electiva,Asignaturas de formación electiva,PLAN DE ESTUDIOS,2018/11/19 00:00
+9,Docentes,Docentes,PLAN DE ESTUDIOS,2018/11/19 00:00
+10,Trayectoria educativa,Trayectoria educativa,PLAN DE ESTUDIOS,2018/11/19 00:00
+11,Licencias de software,Licencias de software,PLAN DE ESTUDIOS,2018/11/19 00:00
+12,Herramienta educativa,Herramienta educativa,PLAN DE ESTUDIOS,2018/11/19 00:00
+13,Respaldos,Respaldos,PLAN DE ESTUDIOS,2018/11/19 00:00
+14,Datos de Institucion,Datos de la Institucion,DATOS GENERALES,2018/11/19 00:00
+15,Datos representante legal,Datos personales del representate legal,DATOS GENERALES,2018/11/19 00:00
+16,Diligencias,Datos personales del personal de diligencias,DATOS GENERALES,2018/11/19 00:00
+17,Datos plantel,Datos del plantel,PLANTEL,2018/11/19 00:00
+18,Ubicacion del plantel,Datos del docimicilio,PLANTEL,2018/11/19 00:00
+19,Descripcion del plantel,Datos del edificio del plantel,PLANTEL,2018/11/19 00:00
+20,Higiene del plantel,Datos de la infraestructura de limpieza,PLANTEL,2018/11/19 00:00
+21,Instituciones aledañas,Datos de los servicios de emergencia cercanos,PLANTEL,2018/11/19 00:00
+22,Infraestructura,Datos de la distribucion de los edificios,PLANTEL,2018/11/19 00:00
+23,Ratificacion del nombre,Ratificacion del nombre,PLANTEL,2018/11/19 00:00
+24,Plataforma educativa,Plataforma educativa,PLATAFORMA EDUCATIVA,2018/11/19 00:00
+25,Datos de Hardware y Software,Hardware y Software,PLATAFORMA EDUCATIVA,2018/11/19 00:00
+26,Roles de usuario,Caracteristicas de los roles de usuario,PLATAFORMA EDUCATIVA,2018/11/19 00:00
+27,Soporte tecnico ,Soporte tecnico,PLATAFORMA EDUCATIVA,2018/11/19 00:00
+28,Licencias de la plataforma,Licencias de la plataforma,PLATAFORMA EDUCATIVA,2018/11/19 00:00
+29,Anexos,Archivos anexos,ANEXOS,2018/11/19 00:00
+30,Trayectoria educativa,Nombre del programa,EVALUACION CURRICULAR,2018/11/19 00:00
