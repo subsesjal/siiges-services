@@ -33,6 +33,7 @@
     "@fastify/jwt": "^7.0.0",
     "@fastify/static": "^6.5.0",
     "@fastify/swagger": "^7.4.1",
+    "@fastify/multipart": "^8.0.0",
     "@siiges-services/administracionacademica": "^1.0.0",
     "@siiges-services/authentication": "^1.0.0",
     "@siiges-services/core": "^1.0.0",
@@ -46,7 +47,6 @@
     "@siiges-services/usuario": "^1.0.0",
     "@siiges-services/vigilancias": "^1.0.0",
     "fastify": "^4.9.2",
-    "fastify-multer": "^2.0.3",
     "fastify-plugin": "^4.0.0"
   }
 }

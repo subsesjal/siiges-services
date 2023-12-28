@@ -2,7 +2,7 @@
 const { models, queries } = require('@siiges-services/core');
 
 const {
-  Usuario, UsuarioUsuario, Persona, Domicilio, Inspector, Evaluador,
+  Usuario, UsuarioUsuario, Persona, Domicilio, Inspector, Evaluador, Vigilante,
 } = models;
 
 const {
@@ -26,4 +26,5 @@ module.exports = {
   createDomicilioQuery: createQuery(Domicilio),
   createInspector: createQuery(Inspector),
   createEvaluador: createQuery(Evaluador),
+  createVigilante: createQuery(Vigilante),
 };

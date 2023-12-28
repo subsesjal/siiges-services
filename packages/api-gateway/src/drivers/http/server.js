@@ -1,7 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 // External dependencies
 const path = require('path');
 const Fastify = require('fastify');
-const multer = require('fastify-multer');
+const multipart = require('@fastify/multipart');
 const fastifyStatic = require('@fastify/static');
 const AutoLoad = require('@fastify/autoload');
 const helmet = require('@fastify/helmet');
@@ -11,12 +12,14 @@ const cors = require('@fastify/cors');
 const { Logger } = require('@siiges-services/shared');
 const { validateApiKey } = require('./utils/auth.handler');
 const { config } = require('../../../config/environment');
+const { maxFileSize } = require('./utils/constants');
 
 const fastify = Fastify({
   ajv: {
     customOptions: {
       allErrors: true,
     },
+    plugins: [multipart.ajvFilePlugin],
   },
   logger: process.env.NODE_ENV === 'development',
 });
@@ -31,7 +34,12 @@ fastify.register(AutoLoad, {
   dir: path.join(__dirname, 'plugins'),
 });
 
-fastify.register(multer.contentParser);
+fastify.register(multipart, {
+  attachFieldsToBody: true,
+  limits: {
+    fileSize: maxFileSize,
+  },
+});
 
 const options = {
   origin: (origin, cb) => {
