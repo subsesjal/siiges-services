@@ -22,6 +22,7 @@ const notificacionesAdapter = require('./notificaciones/handlers');
 const calificacionesAdapter = require('./calificaciones/handlers');
 const orgColegiadosAdapter = require('./orgColegiados/handlers');
 const acuerdosAdapter = require('./acuerdos/handlers');
+const vigilanciasAdapter = require('./vigilancias/handlers');
 
 module.exports = {
   diligenciasAdapter,
@@ -47,4 +48,5 @@ module.exports = {
   calificacionesAdapter,
   orgColegiadosAdapter,
   acuerdosAdapter,
+  vigilanciasAdapter,
 };

@@ -52,7 +52,6 @@ class VigilanteVigilancia extends Model {
   static associate(models) {
     this.belongsTo(models.Vigilante, { as: 'vigilante' });
     this.belongsTo(models.Vigilancia, { as: 'vigilancia' });
-    this.belongsTo(models.Inspeccion, { as: 'inspeccion' });
   }
 
   static config(sequelize) {
