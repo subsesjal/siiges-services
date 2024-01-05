@@ -35,6 +35,10 @@ const tipoEntidadObj = [
     id: 9,
     name: 'EVALUACION',
   },
+  {
+    id: 10,
+    name: 'VIGILANCIA',
+  },
 ];
 
 module.exports = tipoEntidadObj;
