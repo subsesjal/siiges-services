@@ -30,7 +30,7 @@ const VigilanciaPreguntaSchema = {
       key: 'id',
     },
   },
-  VigilanciaCategoriaId: {
+  vigilanciaCategoriaId: {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'vigilancia_categoria_id',

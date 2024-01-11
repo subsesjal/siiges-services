@@ -4,6 +4,7 @@ const { models, queries } = require('@siiges-services/core');
 const {
   VigilanteVigilancia,
   Vigilante,
+  VigilanciaPregunta,
 } = models;
 
 const {
@@ -14,4 +15,5 @@ const {
 module.exports = {
   findAllVigilanteVigilanciaQuery: findAllQuery(VigilanteVigilancia),
   findOneVigilanteQuery: findOneQuery(Vigilante),
+  findAllVigilanciaPreguntasQuery: findAllQuery(VigilanciaPregunta),
 };
