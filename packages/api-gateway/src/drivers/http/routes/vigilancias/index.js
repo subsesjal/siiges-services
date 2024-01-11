@@ -21,6 +21,16 @@ async function vigilanciasRouter(fastify, opts, next) {
     vigilanciasAdapter.findOneVigilante,
 
   );
+
+  await fastify.get(
+    '/preguntas',
+    {
+      schema: vigilanciasSchemas.findAllPreguntasSchema,
+      onRequest: [fastify.authenticate],
+    },
+    vigilanciasAdapter.findAllPreguntas,
+  );
+
   next();
 }
 
