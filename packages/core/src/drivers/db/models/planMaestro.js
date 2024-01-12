@@ -66,6 +66,8 @@ class PlanMaestro extends Model {
   static associate(models) {
     this.belongsTo(models.Sesion, { as: 'sesion' });
     this.belongsTo(models.Periodo, { as: 'periodo' });
+    this.hasOne(models.ObraYMantenimiento, { as: 'obrasYMantenimientos', foreignKey: 'planMaestroId' });
+    this.hasOne(models.Planeacion, { as: 'planeaciones', foreignKey: 'planMaestroId' });
   }
 
   static config(sequelize) {
