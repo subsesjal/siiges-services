@@ -1,7 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { DATO_DEL_PROYECTO_TABLE } = require('./datosDelProyecto');
+// const { DATO_DEL_PROYECTO_TABLE } = require('./datosDelProyecto');
 
-const TIPO_DE_PROYECTO_TABLE = 'tipoDeProyecto';
+const TIPO_DE_PROYECTO_TABLE = 'tipo_de_proyecto';
 
 const TipoDeProyectoSchema = {
   id: {
@@ -9,15 +9,6 @@ const TipoDeProyectoSchema = {
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
-  },
-  DatosDelProyectoId: {
-    allowNull: false,
-    type: DataTypes.INTEGER,
-    field: 'datos_del_proyecto_id',
-    references: {
-      model: DATO_DEL_PROYECTO_TABLE,
-      key: 'id',
-    },
   },
   obraNueva: {
     field: 'obra_nueva',
@@ -61,10 +52,6 @@ const TipoDeProyectoSchema = {
 };
 
 class TipoDeProyecto extends Model {
-  static associate(models) {
-    this.belongsTo(models.DatosDelProyecto, { as: 'DatosDelProyecto' });
-  }
-
   static config(sequelize) {
     return {
       sequelize,

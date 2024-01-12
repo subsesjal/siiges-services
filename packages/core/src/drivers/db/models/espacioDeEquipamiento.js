@@ -10,7 +10,7 @@ const EspacioDeEquipamientoSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  DatosDelProyectoId: {
+  datosDelProyectoId: {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'datos_del_proyecto_id',
@@ -51,7 +51,7 @@ const EspacioDeEquipamientoSchema = {
 
 class EspacioDeEquipamento extends Model {
   static associate(models) {
-    this.belongsTo(models.DatosDelProyecto, { as: 'DatosDelProyecto' });
+    this.belongsTo(models.DatosDelProyecto, { as: 'datosDelProyecto' });
   }
 
   static config(sequelize) {

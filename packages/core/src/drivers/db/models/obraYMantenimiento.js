@@ -56,7 +56,7 @@ const ObraYMantenimientoSchema = {
 
 class ObraYMantenimiento extends Model {
   static associate(models) {
-    this.belongsTo(models.PlanMaestro, { as: 'PlanMaestro' });
+    this.belongsTo(models.PlanMaestro, { as: 'planMaestro' });
   }
 
   static config(sequelize) {

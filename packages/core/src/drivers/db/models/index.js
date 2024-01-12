@@ -304,8 +304,6 @@ function setupModels(sequelize) {
   Acuerdo.associate(sequelize.models);
   PlanMaestro.associate(sequelize.models);
   DatosDelProyecto.associate(sequelize.models);
-  TipoDeProyecto.associate(sequelize.models);
-  ContratoYCalendario.associate(sequelize.models);
   ObraYMantenimiento.associate(sequelize.models);
   Planeacion.associate(sequelize.models);
   EspacioDeEquipamento.associate(sequelize.models);

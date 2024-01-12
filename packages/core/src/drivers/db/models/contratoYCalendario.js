@@ -1,5 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { DATO_DEL_PROYECTO_TABLE } = require('./datosDelProyecto');
+// const { DATO_DEL_PROYECTO_TABLE } = require('./datosDelProyecto');
 
 const CONTRATO_Y_CALENDARIO_TABLE = 'contratos_y_calendarios';
 
@@ -9,15 +9,6 @@ const ContratoYCalendarioSchema = {
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
-  },
-  DatosDelProyectoId: {
-    allowNull: false,
-    type: DataTypes.INTEGER,
-    field: 'datos_del_proyecto_id',
-    references: {
-      model: DATO_DEL_PROYECTO_TABLE,
-      key: 'id',
-    },
   },
   numeroDeContrato: {
     type: DataTypes.STRING,
@@ -55,10 +46,6 @@ const ContratoYCalendarioSchema = {
 };
 
 class ContratoYCalendario extends Model {
-  static associate(models) {
-    this.belongsTo(models.DatosDelProyecto, { as: 'DatosDelProyecto' });
-  }
-
   static config(sequelize) {
     return {
       sequelize,

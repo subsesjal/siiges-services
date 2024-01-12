@@ -56,13 +56,13 @@ const PlaneacionSchema = {
 
 class Planeacion extends Model {
   static associate(models) {
-    this.belongsTo(models.PlanMaestro, { as: 'PlanMaestro' });
+    this.belongsTo(models.PlanMaestro, { as: 'planMaestro' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      leName: PLANEACION_TABLE,
+      tableName: PLANEACION_TABLE,
       modelName: 'Planeacion',
       timestamps: false,
     };

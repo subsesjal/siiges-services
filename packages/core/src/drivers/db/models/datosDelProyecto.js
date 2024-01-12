@@ -1,5 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PLAN_MAESTRO_TABLE } = require('./planMaestro');
+const { CONTRATO_Y_CALENDARIO_TABLE } = require('./contratoYCalendario');
+const { TIPO_DE_PROYECTO_TABLE } = require('./tiposDeProyecto');
 
 const DATO_DEL_PROYECTO_TABLE = 'datos_del_proyecto';
 
@@ -19,10 +21,28 @@ const DatosDelProyectoSchema = {
       key: 'id',
     },
   },
+  tipoDeProyectoId: {
+    type: DataTypes.INTEGER,
+    field: 'tipo_de_proyecto_id',
+    allowNull: false,
+    references: {
+      model: TIPO_DE_PROYECTO_TABLE,
+      key: 'id',
+    },
+  },
+  contratoYCalendarioId: {
+    field: 'contrato_y_calendario_id',
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    unique: true,
+    references: {
+      model: CONTRATO_Y_CALENDARIO_TABLE,
+      key: 'id',
+    },
+  },
   nombre: {
     allowNull: false,
     type: DataTypes.STRING,
-    unique: true,
   },
   montoAutorizado: {
     type: DataTypes.INTEGER,
@@ -31,6 +51,10 @@ const DatosDelProyectoSchema = {
   montoContratado: {
     type: DataTypes.INTEGER,
     field: 'monto_contratado',
+  },
+  montoNoContratado: {
+    type: DataTypes.INTEGER,
+    field: 'monto_no_contratado',
   },
   montoEjercido: {
     type: DataTypes.INTEGER,
@@ -79,7 +103,13 @@ const DatosDelProyectoSchema = {
 
 class DatosDelProyecto extends Model {
   static associate(models) {
-    this.belongsTo(models.PlanMaestro, { as: 'PlanMaestro' });
+    this.belongsTo(models.PlanMaestro, { as: 'planMaestro' });
+    this.hasMany(models.EspacioDeEquipamento, {
+      as: 'espaciosDeEquipamento',
+      foreignKey: 'datosDelProyectoId',
+    });
+    this.belongsTo(models.ContratoYCalendario, { as: 'contratoYCalendario', foreignKey: 'contratoYCalendarioId' });
+    this.belongsTo(models.TipoDeProyecto, { as: 'tipoDeProyecto', foreignKey: 'tipoDeProyectoId' });
   }
 
   static config(sequelize) {
