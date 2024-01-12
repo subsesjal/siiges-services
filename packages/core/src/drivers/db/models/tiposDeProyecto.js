@@ -1,5 +1,4 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-// const { DATO_DEL_PROYECTO_TABLE } = require('./datosDelProyecto');
 
 const TIPO_DE_PROYECTO_TABLE = 'tipo_de_proyecto';
 

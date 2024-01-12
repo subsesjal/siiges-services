@@ -92,6 +92,13 @@ const { ContratoYCalendario, ContratoYCalendarioSchema } = require('./contratoYC
 const { ObraYMantenimiento, ObraYMantenimientoSchema } = require('./obraYMantenimiento');
 const { Planeacion, PlaneacionSchema } = require('./planeacion');
 const { EspacioDeEquipamento, EspacioDeEquipamientoSchema } = require('./espacioDeEquipamiento');
+const { PlanMaestro, PlanMaestroScema } = require('./planMaestro');
+const { DatosDelProyecto, DatosDelProyectoSchema } = require('./datosDelProyecto');
+const { TipoDeProyecto, TipoDeProyectoSchema } = require('./tiposDeProyecto');
+const { ContratoYCalendario, ContratoYCalendarioSchema } = require('./contratoYCalendario');
+const { ObraYMantenimiento, ObraYMantenimientoSchema } = require('./obraYMantenimiento');
+const { Planeacion, PlaneacionSchema } = require('./planeacion');
+const { EspacioDeEquipamento, EspacioDeEquipamientoSchema } = require('./espacioDeEquipamiento');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -206,6 +213,13 @@ function setupModels(sequelize) {
   Periodo.init(PeriodoSchema, Periodo.config(sequelize));
   OrganoColegiado.init(OrganoColegiadoSchema, OrganoColegiado.config(sequelize));
   Acuerdo.init(AcuerdoSchema, Acuerdo.config(sequelize));
+  PlanMaestro.init(PlanMaestroScema, PlanMaestro.config(sequelize));
+  DatosDelProyecto.init(DatosDelProyectoSchema, DatosDelProyecto.config(sequelize));
+  TipoDeProyecto.init(TipoDeProyectoSchema, TipoDeProyecto.config(sequelize));
+  ContratoYCalendario.init(ContratoYCalendarioSchema, ContratoYCalendario.config(sequelize));
+  ObraYMantenimiento.init(ObraYMantenimientoSchema, ObraYMantenimiento.config(sequelize));
+  Planeacion.init(PlaneacionSchema, Planeacion.config(sequelize));
+  EspacioDeEquipamento.init(EspacioDeEquipamientoSchema, EspacioDeEquipamento.config(sequelize));
   PlanMaestro.init(PlanMaestroScema, PlanMaestro.config(sequelize));
   DatosDelProyecto.init(DatosDelProyectoSchema, DatosDelProyecto.config(sequelize));
   TipoDeProyecto.init(TipoDeProyectoSchema, TipoDeProyecto.config(sequelize));
