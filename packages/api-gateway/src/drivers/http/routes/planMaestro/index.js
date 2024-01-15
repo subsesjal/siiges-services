@@ -6,7 +6,7 @@ async function orgColegiadosRouter(fastify, opts, next) {
     '/',
     {
       schema: schemas.createPlanMaestroSchema,
-    //   onRequest: [fastify.authenticate],
+      onRequest: [fastify.authenticate],
     },
     planesMaestrosAdapter.createPlanMaestro,
   );
@@ -15,7 +15,7 @@ async function orgColegiadosRouter(fastify, opts, next) {
     '/responsables/:planMaestroId',
     {
       schema: schemas.createResponsablesSchema,
-    //   onRequest: [fastify.authenticate],
+      onRequest: [fastify.authenticate],
     },
     planesMaestrosAdapter.createResponsables,
   );
@@ -24,7 +24,7 @@ async function orgColegiadosRouter(fastify, opts, next) {
     '/datosDelProyecto/:planMaestroId',
     {
       schema: schemas.createDatosDeProyectoSchema,
-    //   onRequest: [fastify.authenticate],
+      onRequest: [fastify.authenticate],
     },
     planesMaestrosAdapter.createDatosDeProyecto,
   );
@@ -33,7 +33,7 @@ async function orgColegiadosRouter(fastify, opts, next) {
     '/datosDelProyecto/:planMaestroId',
     {
       schema: schemas.findOneDatosDeProyectoSchema,
-      //   onRequest: [fastify.authenticate],
+      onRequest: [fastify.authenticate],
     },
     planesMaestrosAdapter.findOneDatosPlanMaestro,
   );
@@ -42,9 +42,18 @@ async function orgColegiadosRouter(fastify, opts, next) {
     '/responsables/:planMaestroId',
     {
       schema: schemas.findOneResponsablesSchema,
-      //   onRequest: [fastify.authenticate],
+      onRequest: [fastify.authenticate],
     },
     planesMaestrosAdapter.findOneResponsablesPlanMaestro,
+  );
+
+  await fastify.get(
+    '/',
+    {
+      schema: schemas.findAllPlanMaestroSchema,
+      onRequest: [fastify.authenticate],
+    },
+    planesMaestrosAdapter.findAllPlanMaestro,
   );
 
   next();
