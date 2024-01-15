@@ -5,7 +5,7 @@ const { PERIODO_TABLE } = require('./periodo');
 
 const PLAN_MAESTRO_TABLE = 'planes_maestros';
 
-const PlanMaestroScema = {
+const PlanMaestroSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -82,6 +82,6 @@ class PlanMaestro extends Model {
 
 module.exports = {
   PLAN_MAESTRO_TABLE,
-  PlanMaestroScema,
+  PlanMaestroSchema,
   PlanMaestro,
 };

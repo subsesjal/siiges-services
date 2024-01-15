@@ -85,7 +85,7 @@ const { SESION_TABLE, SesionSchema } = require('../models/sesion');
 const { PERIODO_TABLE, PeriodoSchema } = require('../models/periodo');
 const { ORGANO_COLEGIADO_TABLE, OrganoColegiadoSchema } = require('../models/organoColegiado');
 const { ACUERDO_TABLE, AcuerdoSchema } = require('../models/acuerdo');
-const { PLAN_MAESTRO_TABLE, PlanMaestroScema } = require('../models/planMaestro');
+const { PLAN_MAESTRO_TABLE, PlanMaestroSchema } = require('../models/planMaestro');
 const { DATO_DEL_PROYECTO_TABLE, DatosDelProyectoSchema } = require('../models/datosDelProyecto');
 const { TIPO_DE_PROYECTO_TABLE, TipoDeProyectoSchema } = require('../models/tiposDeProyecto');
 const { CONTRATO_Y_CALENDARIO_TABLE, ContratoYCalendarioSchema } = require('../models/contratoYCalendario');
@@ -194,7 +194,7 @@ module.exports = {
     await queryInterface.createTable(PERIODO_TABLE, PeriodoSchema);
     await queryInterface.createTable(ORGANO_COLEGIADO_TABLE, OrganoColegiadoSchema);
     await queryInterface.createTable(ACUERDO_TABLE, AcuerdoSchema);
-    await queryInterface.createTable(PLAN_MAESTRO_TABLE, PlanMaestroScema);
+    await queryInterface.createTable(PLAN_MAESTRO_TABLE, PlanMaestroSchema);
     await queryInterface.createTable(TIPO_DE_PROYECTO_TABLE, TipoDeProyectoSchema);
     await queryInterface.createTable(CONTRATO_Y_CALENDARIO_TABLE, ContratoYCalendarioSchema);
     await queryInterface.createTable(OBRA_Y_MANTENIMIENTO_TABLE, ObraYMantenimientoSchema);
