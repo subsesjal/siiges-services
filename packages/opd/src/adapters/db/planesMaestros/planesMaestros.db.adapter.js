@@ -31,6 +31,7 @@ module.exports = {
   updateDatosDelProyecto: updateAndFindQuery(DatosDelProyecto),
   findAllDatosDelProyectoQuery: findAllQuery(DatosDelProyecto),
   findOnePlanMaestroQuery: findOneQuery(PlanMaestro),
+  findAllPlanMaestroQuery: findAllQuery(PlanMaestro),
   findOnePlaneacionQuery: findOneQuery(Planeacion),
   findOneInstitucionQuery: findOneQuery(Institucion),
   findOnePeriodoQuery: findOneQuery(Periodo),

@@ -8,6 +8,7 @@ const { updateDatosDeProyecto } = require('./update.datos-de-proyecto.use-case')
 const { updatePlanMaestro } = require('./update.plan-maestro.use-case');
 const { updateResponsables } = require('./update.responsables.use-case');
 const { findOneResponsablesPlanMaestro } = require('./find-one.responsables-plan-maestro.use-case');
+const { findAllPlanMaestro } = require('./find-all.plan-maestro.use-case');
 
 module.exports = {
   createDatosDeProyecto: createDatosDeProyecto(
@@ -35,6 +36,9 @@ module.exports = {
   ),
   findOneResponsablesPlanMaestro: findOneResponsablesPlanMaestro(
     planesMaestros.findOnePlanMaestroQuery,
+  ),
+  findAllPlanMaestro: findAllPlanMaestro(
+    planesMaestros.findAllPlanMaestroQuery,
   ),
   updateDatosDeProyecto,
   updatePlanMaestro,
