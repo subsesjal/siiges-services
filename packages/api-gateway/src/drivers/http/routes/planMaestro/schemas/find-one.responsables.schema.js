@@ -4,7 +4,7 @@ const { responsable } = require('./properties/responsables');
 
 const findOneResponsablesSchema = {
   tags: ['Planes Maestros'],
-  description: 'findOne responsables.',
+  description: 'find responsables.',
   params: {
     type: 'object',
     properties: {

@@ -16,7 +16,7 @@ const { datosDelProyectoId: __, ...espaciosDeEquipamientoBody } = espaciosDeEqui
 
 const createDatosDeProyectoSchema = {
   tags: ['Planes Maestros'],
-  description: 'Create responsables.',
+  description: 'Create datos for plan maestro.',
   params: {
     type: 'object',
     properties: {

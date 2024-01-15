@@ -6,7 +6,7 @@ const { espaciosDeEquipamiento } = require('./properties/espacioYEquipamiento');
 
 const findOneDatosDeProyectoSchema = {
   tags: ['Planes Maestros'],
-  description: 'findOne responsables.',
+  description: 'find all the datos of a Plan maestro.',
   params: {
     type: 'object',
     properties: {
