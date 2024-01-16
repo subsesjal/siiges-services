@@ -12,11 +12,11 @@ const { findAllPlanMaestro } = require('./find-all.plan-maestro.use-case');
 
 module.exports = {
   createDatosDeProyecto: createDatosDeProyecto(
-    planesMaestros.createEspacioDeEquipamentoQuery,
+    planesMaestros.createProyectoEspacioQuery,
     planesMaestros.findOnePlanMaestroQuery,
-    planesMaestros.createDatosDelProyectoQuery,
-    planesMaestros.createTipoDeProyectoQuery,
-    planesMaestros.createContratoYCalendarioQuery,
+    planesMaestros.createProyectoQuery,
+    planesMaestros.createTipoProyectoQuery,
+    planesMaestros.createContratoQuery,
   ),
   createPlanMaestro: createPlanMaestro(
     planesMaestros.createPlanMaestroQuery,
@@ -25,13 +25,13 @@ module.exports = {
     planesMaestros.findOneSesionQuery,
   ),
   createResponsables: createResponsables(
-    planesMaestros.createPlaneacionQuery,
-    planesMaestros.createObraYMantenimientoQuery,
+    planesMaestros.createResponsablePlaneacionQuery,
+    planesMaestros.createResponsableObraQuery,
     planesMaestros.findOnePlanMaestroQuery,
-    planesMaestros.findOnePlaneacionQuery,
+    planesMaestros.findOneResponsablePlaneacionQuery,
   ),
   findOneDatosPlanMaestro: findOneDatosPlanMaestro(
-    planesMaestros.findAllDatosDelProyectoQuery,
+    planesMaestros.findAllProyectoQuery,
     planesMaestros.findOnePlanMaestroQuery,
   ),
   findOneResponsablesPlanMaestro: findOneResponsablesPlanMaestro(

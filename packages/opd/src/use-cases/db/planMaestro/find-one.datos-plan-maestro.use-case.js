@@ -1,17 +1,17 @@
 const { checkers } = require('@siiges-services/shared');
 
 const findOneDatosPlanMaestro = (
-  findAllDatosDelProyectoQuery,
+  findAllProyectoQuery,
   findOnePlanMaestroQuery,
 ) => async ({ planMaestroId }) => {
   await checkers.findValidator({ PlanMaestro: [planMaestroId, findOnePlanMaestroQuery] });
   const include = [
-    { association: 'contratoYCalendario' },
-    { association: 'espaciosDeEquipamento' },
-    { association: 'tipoDeProyecto' },
+    { association: 'contrato' },
+    { association: 'proyectoEspacio' },
+    { association: 'tipoProyecto' },
   ];
 
-  const planMaestro = await findAllDatosDelProyectoQuery({ planMaestroId }, {
+  const planMaestro = await findAllProyectoQuery({ planMaestroId }, {
     include,
   });
 

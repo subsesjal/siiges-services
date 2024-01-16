@@ -25,7 +25,7 @@ const findOneDatosDeProyectoSchema = {
             properties: {
               id: { type: 'integer' },
               ...datos,
-              contratoYCalendario: {
+              contrato: {
                 type: 'object',
                 properties: {
                   id: { type: 'integer' },
@@ -33,7 +33,7 @@ const findOneDatosDeProyectoSchema = {
                   ...responseProperties,
                 },
               },
-              tipoDeProyecto: {
+              tipoProyecto: {
                 type: 'object',
                 properties: {
                   id: { type: 'integer' },
@@ -41,7 +41,7 @@ const findOneDatosDeProyectoSchema = {
                   ...responseProperties,
                 },
               },
-              espaciosDeEquipamento: {
+              proyectoEspacio: {
                 type: 'array',
                 items: {
                   type: 'object',

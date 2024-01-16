@@ -4,8 +4,8 @@ const findOneResponsablesPlanMaestro = (
   findOnePlanMaestroQuery,
 ) => async ({ planMaestroId }) => {
   const include = [
-    { association: 'planeaciones' },
-    { association: 'obrasYMantenimientos' },
+    { association: 'responsablePlaneacion' },
+    { association: 'responsableObra' },
   ];
 
   const planMaestro = await findOnePlanMaestroQuery({ id: planMaestroId }, {

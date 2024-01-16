@@ -1,8 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const TIPO_DE_PROYECTO_TABLE = 'tipo_de_proyecto';
+const TIPO_PROYECTO_TABLE = 'tipo_proyectos';
 
-const TipoDeProyectoSchema = {
+const TipoProyectoSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -12,23 +12,29 @@ const TipoDeProyectoSchema = {
   obraNueva: {
     field: 'obra_nueva',
     type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
   obraDeContinuidad: {
     field: 'obra_de_continuidad',
     type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
   equipamiento: {
     type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
   adecuaciones: {
     type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
   mantenimiento: {
     type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
   proyectoSustentable: {
     field: 'codigo_sustentable',
     type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
   createdAt: {
     allowNull: false,
@@ -50,19 +56,19 @@ const TipoDeProyectoSchema = {
   },
 };
 
-class TipoDeProyecto extends Model {
+class TipoProyecto extends Model {
   static config(sequelize) {
     return {
       sequelize,
-      tableName: TIPO_DE_PROYECTO_TABLE,
-      modelName: 'TipoDeProyecto',
+      tableName: TIPO_PROYECTO_TABLE,
+      modelName: 'TipoProyecto',
       timespamps: false,
     };
   }
 }
 
 module.exports = {
-  TIPO_DE_PROYECTO_TABLE,
-  TipoDeProyectoSchema,
-  TipoDeProyecto,
+  TIPO_PROYECTO_TABLE,
+  TipoProyectoSchema,
+  TipoProyecto,
 };

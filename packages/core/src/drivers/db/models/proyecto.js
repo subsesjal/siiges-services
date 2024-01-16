@@ -1,11 +1,11 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PLAN_MAESTRO_TABLE } = require('./planMaestro');
-const { CONTRATO_Y_CALENDARIO_TABLE } = require('./contratoYCalendario');
-const { TIPO_DE_PROYECTO_TABLE } = require('./tiposDeProyecto');
+const { CONTRATO_TABLE } = require('./contrato');
+const { TIPO_PROYECTO_TABLE } = require('./tipoProyecto');
 
-const DATO_DEL_PROYECTO_TABLE = 'datos_del_proyecto';
+const PROYECTO_TABLE = 'proyectos';
 
-const DatosDelProyectoSchema = {
+const ProyectoSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -21,22 +21,22 @@ const DatosDelProyectoSchema = {
       key: 'id',
     },
   },
-  tipoDeProyectoId: {
+  tipoProyectoId: {
     type: DataTypes.INTEGER,
-    field: 'tipo_de_proyecto_id',
+    field: 'tipo_proyecto_id',
     allowNull: false,
     references: {
-      model: TIPO_DE_PROYECTO_TABLE,
+      model: TIPO_PROYECTO_TABLE,
       key: 'id',
     },
   },
-  contratoYCalendarioId: {
-    field: 'contrato_y_calendario_id',
+  contratoId: {
+    field: 'contrato_id',
     allowNull: false,
     type: DataTypes.INTEGER,
     unique: true,
     references: {
-      model: CONTRATO_Y_CALENDARIO_TABLE,
+      model: CONTRATO_TABLE,
       key: 'id',
     },
   },
@@ -101,29 +101,29 @@ const DatosDelProyectoSchema = {
   },
 };
 
-class DatosDelProyecto extends Model {
+class Proyecto extends Model {
   static associate(models) {
     this.belongsTo(models.PlanMaestro, { as: 'planMaestro' });
-    this.hasMany(models.EspacioDeEquipamento, {
-      as: 'espaciosDeEquipamento',
-      foreignKey: 'datosDelProyectoId',
+    this.hasMany(models.ProyectoEspacio, {
+      as: 'proyectoEspacio',
+      foreignKey: 'proyectoId',
     });
-    this.belongsTo(models.ContratoYCalendario, { as: 'contratoYCalendario', foreignKey: 'contratoYCalendarioId' });
-    this.belongsTo(models.TipoDeProyecto, { as: 'tipoDeProyecto', foreignKey: 'tipoDeProyectoId' });
+    this.belongsTo(models.Contrato, { as: 'contrato', foreignKey: 'contratoId' });
+    this.belongsTo(models.TipoProyecto, { as: 'tipoProyecto', foreignKey: 'tipoProyectoId' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: DATO_DEL_PROYECTO_TABLE,
-      modelName: 'DatosDelProyecto',
+      tableName: PROYECTO_TABLE,
+      modelName: 'Proyecto',
       timestamps: false,
     };
   }
 }
 
 module.exports = {
-  DATO_DEL_PROYECTO_TABLE,
-  DatosDelProyectoSchema,
-  DatosDelProyecto,
+  PROYECTO_TABLE,
+  ProyectoSchema,
+  Proyecto,
 };

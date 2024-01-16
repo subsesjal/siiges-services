@@ -1,38 +1,33 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { PLAN_MAESTRO_TABLE } = require('./planMaestro');
+const { PROYECTO_TABLE } = require('./proyecto');
 
-const PLANEACION_TABLE = 'planeaciones';
+const PROYECTO_ESPACIO_TABLE = 'proyectos_espacios';
 
-const PlaneacionSchema = {
+const ProyectoEspacioSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  planMaestroId: {
+  proyectoId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'plan_maestro_id',
+    field: 'proyecto_id',
     references: {
-      model: PLAN_MAESTRO_TABLE,
+      model: PROYECTO_TABLE,
       key: 'id',
     },
   },
   nombre: {
     type: DataTypes.STRING,
   },
-  cargo: {
-    type: DataTypes.STRING,
+  cantidad: {
+    type: DataTypes.INTEGER,
   },
-  correo: {
-    type: DataTypes.STRING,
-  },
-  telefono: {
-    type: DataTypes.STRING,
-  },
-  extension: {
-    type: DataTypes.STRING,
+  metrosCuadrados: {
+    type: DataTypes.INTEGER,
+    field: 'metros_cuadrados',
   },
   createdAt: {
     allowNull: false,
@@ -54,23 +49,23 @@ const PlaneacionSchema = {
   },
 };
 
-class Planeacion extends Model {
+class ProyectoEspacio extends Model {
   static associate(models) {
-    this.belongsTo(models.PlanMaestro, { as: 'planMaestro' });
+    this.belongsTo(models.Proyecto, { as: 'proyecto' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: PLANEACION_TABLE,
-      modelName: 'Planeacion',
+      tableName: PROYECTO_ESPACIO_TABLE,
+      modelName: 'ProyectoEspacio',
       timestamps: false,
     };
   }
 }
 
 module.exports = {
-  PLANEACION_TABLE,
-  PlaneacionSchema,
-  Planeacion,
+  PROYECTO_ESPACIO_TABLE,
+  ProyectoEspacioSchema,
+  ProyectoEspacio,
 };

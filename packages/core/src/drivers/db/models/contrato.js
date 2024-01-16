@@ -1,8 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const CONTRATO_Y_CALENDARIO_TABLE = 'contratos_y_calendarios';
+const CONTRATO_TABLE = 'contratos';
 
-const ContratoYCalendarioSchema = {
+const ContratoSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -44,19 +44,19 @@ const ContratoYCalendarioSchema = {
   },
 };
 
-class ContratoYCalendario extends Model {
+class Contrato extends Model {
   static config(sequelize) {
     return {
       sequelize,
-      tableName: CONTRATO_Y_CALENDARIO_TABLE,
-      modelName: 'ContratoYCalendario',
+      tableName: CONTRATO_TABLE,
+      modelName: 'Contrato',
       timestamps: false,
     };
   }
 }
 
 module.exports = {
-  CONTRATO_Y_CALENDARIO_TABLE,
-  ContratoYCalendarioSchema,
-  ContratoYCalendario,
+  CONTRATO_TABLE,
+  ContratoSchema,
+  Contrato,
 };

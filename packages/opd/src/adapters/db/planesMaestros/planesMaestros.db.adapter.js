@@ -2,15 +2,15 @@ const { models, queries } = require('@siiges-services/core');
 
 const {
   PlanMaestro,
-  DatosDelProyecto,
-  Planeacion,
-  ObraYMantenimiento,
+  Proyecto,
+  ResponsablePlaneacion,
+  ResponsableObra,
   Institucion,
   Periodo,
   Sesion,
-  EspacioDeEquipamento,
-  TipoDeProyecto,
-  ContratoYCalendario,
+  ProyectoEspacio,
+  TipoProyecto,
+  Contrato,
 } = models;
 
 const {
@@ -22,17 +22,17 @@ const {
 
 module.exports = {
   createPlanMaestroQuery: createQuery(PlanMaestro),
-  createDatosDelProyectoQuery: createQuery(DatosDelProyecto),
-  createPlaneacionQuery: createQuery(Planeacion),
-  createObraYMantenimientoQuery: createQuery(ObraYMantenimiento),
-  createEspacioDeEquipamentoQuery: createQuery(EspacioDeEquipamento),
-  createTipoDeProyectoQuery: createQuery(TipoDeProyecto),
-  createContratoYCalendarioQuery: createQuery(ContratoYCalendario),
-  updateDatosDelProyecto: updateAndFindQuery(DatosDelProyecto),
-  findAllDatosDelProyectoQuery: findAllQuery(DatosDelProyecto),
+  createProyectoQuery: createQuery(Proyecto),
+  createResponsablePlaneacionQuery: createQuery(ResponsablePlaneacion),
+  createResponsableObraQuery: createQuery(ResponsableObra),
+  createProyectoEspacioQuery: createQuery(ProyectoEspacio),
+  createTipoProyectoQuery: createQuery(TipoProyecto),
+  createContratoQuery: createQuery(Contrato),
+  updateProyecto: updateAndFindQuery(Proyecto),
+  findAllProyectoQuery: findAllQuery(Proyecto),
   findOnePlanMaestroQuery: findOneQuery(PlanMaestro),
   findAllPlanMaestroQuery: findAllQuery(PlanMaestro),
-  findOnePlaneacionQuery: findOneQuery(Planeacion),
+  findOneResponsablePlaneacionQuery: findOneQuery(ResponsablePlaneacion),
   findOneInstitucionQuery: findOneQuery(Institucion),
   findOnePeriodoQuery: findOneQuery(Periodo),
   findOneSesionQuery: findOneQuery(Sesion),

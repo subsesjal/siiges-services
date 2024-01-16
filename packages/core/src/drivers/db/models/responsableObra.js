@@ -1,33 +1,38 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { DATO_DEL_PROYECTO_TABLE } = require('./datosDelProyecto');
+const { PLAN_MAESTRO_TABLE } = require('./planMaestro');
 
-const ESPACIO_DE_EQIPAMIENTO_TABLE = 'espacios_de_equipamento';
+const RESPONSABLE_OBRA_TABLE = 'responsables_obras';
 
-const EspacioDeEquipamientoSchema = {
+const ResponsableObraSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  datosDelProyectoId: {
+  planMaestroId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'datos_del_proyecto_id',
+    field: 'plan_maestro_id',
     references: {
-      model: DATO_DEL_PROYECTO_TABLE,
+      model: PLAN_MAESTRO_TABLE,
       key: 'id',
     },
   },
   nombre: {
     type: DataTypes.STRING,
   },
-  cantidad: {
-    type: DataTypes.INTEGER,
+  cargo: {
+    type: DataTypes.STRING,
   },
-  metrosCuadrados: {
-    type: DataTypes.INTEGER,
-    field: 'metros_cuadrados',
+  correo: {
+    type: DataTypes.STRING,
+  },
+  telefono: {
+    type: DataTypes.STRING,
+  },
+  extension: {
+    type: DataTypes.STRING,
   },
   createdAt: {
     allowNull: false,
@@ -49,23 +54,23 @@ const EspacioDeEquipamientoSchema = {
   },
 };
 
-class EspacioDeEquipamento extends Model {
+class ResponsableObra extends Model {
   static associate(models) {
-    this.belongsTo(models.DatosDelProyecto, { as: 'datosDelProyecto' });
+    this.belongsTo(models.PlanMaestro, { as: 'planMaestro' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: ESPACIO_DE_EQIPAMIENTO_TABLE,
-      modelName: 'EspacioDeEquipamento',
+      tableName: RESPONSABLE_OBRA_TABLE,
+      modelName: 'ResponsableObra',
       timestamps: false,
     };
   }
 }
 
 module.exports = {
-  ESPACIO_DE_EQIPAMIENTO_TABLE,
-  EspacioDeEquipamientoSchema,
-  EspacioDeEquipamento,
+  RESPONSABLE_OBRA_TABLE,
+  ResponsableObraSchema,
+  ResponsableObra,
 };

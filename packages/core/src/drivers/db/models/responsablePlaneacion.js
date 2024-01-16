@@ -1,9 +1,9 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PLAN_MAESTRO_TABLE } = require('./planMaestro');
 
-const OBRA_Y_MANTENIMIENTO_TABLE = 'obras_y_mantenimientos';
+const RESPONSABLE_PLANEACION_TABLE = 'responsables_planeaciones';
 
-const ObraYMantenimientoSchema = {
+const ResponsablePlaneacionSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -54,7 +54,7 @@ const ObraYMantenimientoSchema = {
   },
 };
 
-class ObraYMantenimiento extends Model {
+class ResponsablePlaneacion extends Model {
   static associate(models) {
     this.belongsTo(models.PlanMaestro, { as: 'planMaestro' });
   }
@@ -62,15 +62,15 @@ class ObraYMantenimiento extends Model {
   static config(sequelize) {
     return {
       sequelize,
-      tableName: OBRA_Y_MANTENIMIENTO_TABLE,
-      modelName: 'ObraYMantenimiento',
+      tableName: RESPONSABLE_PLANEACION_TABLE,
+      modelName: 'ResponsablePlaneacion',
       timestamps: false,
     };
   }
 }
 
 module.exports = {
-  OBRA_Y_MANTENIMIENTO_TABLE,
-  ObraYMantenimientoSchema,
-  ObraYMantenimiento,
+  RESPONSABLE_PLANEACION_TABLE,
+  ResponsablePlaneacionSchema,
+  ResponsablePlaneacion,
 };

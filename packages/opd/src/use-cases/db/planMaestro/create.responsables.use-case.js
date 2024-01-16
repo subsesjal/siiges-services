@@ -2,16 +2,16 @@ const { checkers } = require('@siiges-services/shared');
 const boom = require('@hapi/boom');
 
 const createResponsables = (
-  createPlaneacionQuery,
-  createObraYMantenimientoQuery,
+  createResponsablePlaneacionQuery,
+  createResponsableObraQuery,
   findOnePlanMaestroQuery,
-  findOnePlaneacionQuery,
+  findOneResponsablePlaneacionQuery,
 ) => async ({ planMaestroId, data }) => {
   await checkers.findValidator({ Plan_maestro: [planMaestroId, findOnePlanMaestroQuery] });
 
   const { planeacion, obraYMantenimiento } = data;
 
-  const responsableDuplicate = await findOnePlaneacionQuery(
+  const responsableDuplicate = await findOneResponsablePlaneacionQuery(
     { planMaestroId },
     { attributes: ['id'] },
   );
@@ -19,8 +19,10 @@ const createResponsables = (
     throw boom.conflict(`The planMaestroId ${planMaestroId} is already in use`);
   }
 
-  const createdPlaneacion = await createPlaneacionQuery({ planMaestroId, ...planeacion });
-  const createdobraYMantenimiento = await createObraYMantenimientoQuery({
+  const createdPlaneacion = await createResponsablePlaneacionQuery({
+    planMaestroId, ...planeacion,
+  });
+  const createdobraYMantenimiento = await createResponsableObraQuery({
     planMaestroId,
     ...obraYMantenimiento,
   });

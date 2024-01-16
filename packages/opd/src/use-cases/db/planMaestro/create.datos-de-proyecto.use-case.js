@@ -1,31 +1,31 @@
 const { checkers } = require('@siiges-services/shared');
 
 const createDatosDeProyecto = (
-  createEspacioDeEquipamentoQuery,
+  createProyectoEspacioQuery,
   findOnePlanMaestroQuery,
-  createDatosDelProyectoQuery,
-  createTipoDeProyectoQuery,
-  createContratoYCalendarioQuery,
-) => async ({ planMaestroId, espacioDeEquipamento, ...data }) => {
+  createProyectoQuery,
+  createTipoProyectoQuery,
+  createContratoQuery,
+) => async ({ planMaestroId, proyectoEspacio, ...data }) => {
   await checkers.findValidator({ PlanMaestro: [planMaestroId, findOnePlanMaestroQuery] });
-  const { id: tipoDeProyectoId } = await createTipoDeProyectoQuery(data.tipoDeProyecto);
-  const { id: contratoYCalendarioId } = await createContratoYCalendarioQuery(
-    data.contratoYCalendario,
+  const { id: tipoProyectoId } = await createTipoProyectoQuery(data.tipoProyecto);
+  const { id: contratoId } = await createContratoQuery(
+    data.contrato,
   );
 
-  const datosDelProyecto = await createDatosDelProyectoQuery({
+  const datosDelProyecto = await createProyectoQuery({
     planMaestroId,
-    contratoYCalendarioId,
-    tipoDeProyectoId,
+    contratoId,
+    tipoProyectoId,
     montoNoContratado: data.montoAutorizado - data.montoContratado,
     remanente: data.montoAutorizado - data.montoEjercido,
     ...data,
   });
 
-  await Promise.all(espacioDeEquipamento.map(async (equipamientoData) => {
-    await createEspacioDeEquipamentoQuery({
+  await Promise.all(proyectoEspacio.map(async (equipamientoData) => {
+    await createProyectoEspacioQuery({
       ...equipamientoData,
-      datosDelProyectoId: datosDelProyecto.id,
+      proyectoId: datosDelProyecto.id,
     });
   }));
 

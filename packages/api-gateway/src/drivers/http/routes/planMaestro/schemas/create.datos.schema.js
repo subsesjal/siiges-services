@@ -29,19 +29,19 @@ const createDatosDeProyectoSchema = {
     type: 'object',
     properties: {
       ...datosBody,
-      contratoYCalendario: {
+      contrato: {
         type: 'object',
         properties: {
           ...contratoYContrato,
         },
       },
-      tipoDeProyecto: {
+      tipoProyecto: {
         type: 'object',
         properties: {
           ...TipoDeProyecto,
         },
       },
-      espacioDeEquipamento: {
+      proyectoEspacio: {
         type: 'array',
         items: {
           properties: {
@@ -59,7 +59,7 @@ const createDatosDeProyectoSchema = {
           type: 'object',
           properties: {
             ...datos,
-            contratoYCalendario: {
+            contrato: {
               type: 'object',
               properties: {
                 id: { type: 'integer' },
@@ -67,7 +67,7 @@ const createDatosDeProyectoSchema = {
                 ...responseProperties,
               },
             },
-            tipoDeProyecto: {
+            tipoProyecto: {
               type: 'object',
               properties: {
                 id: { type: 'integer' },
@@ -75,7 +75,7 @@ const createDatosDeProyectoSchema = {
                 ...responseProperties,
               },
             },
-            espacioDeEquipamento: {
+            proyectoEspacio: {
               type: 'object',
               properties: {
                 id: { type: 'integer' },

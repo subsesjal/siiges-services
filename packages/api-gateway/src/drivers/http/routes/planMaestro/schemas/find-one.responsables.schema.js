@@ -21,7 +21,7 @@ const findOneResponsablesSchema = {
           properties: {
             id: { type: 'integer' },
             ...planMaestro,
-            planeaciones: {
+            responsablePlaneacion: {
               type: 'object',
               properties: {
                 id: { type: 'integer' },
@@ -29,7 +29,7 @@ const findOneResponsablesSchema = {
                 ...responseProperties,
               },
             },
-            obrasYMantenimientos: {
+            responsableObra: {
               type: 'object',
               properties: {
                 id: { type: 'integer' },
