@@ -6,6 +6,13 @@ const findVigilanciasByVigilante = (
       association: 'vigilancia',
       include: [{
         association: 'programa',
+        include: [{
+          association: 'plantel',
+          include: [
+            { association: 'institucion' },
+            { association: 'domicilio' },
+          ],
+        }],
       }],
     },
   ];

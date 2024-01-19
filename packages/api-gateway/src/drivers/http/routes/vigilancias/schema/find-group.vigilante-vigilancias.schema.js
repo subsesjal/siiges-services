@@ -1,6 +1,9 @@
 const { vigilanteVigilancia } = require('./properties/vigilanteVigilancia');
 const { vigilancia } = require('./properties/vigilancia');
 const { programa } = require('../../solicitudes/schema/properties/programa');
+const { institucion } = require('../../instituciones/schema/properties/institucion');
+const { plantel } = require('../../instituciones/schema/properties/plantel');
+const { domicilio } = require('../../usuarios/schema/properties/domicilio');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findGroupVigilanteVigilanciasSchema = {
@@ -30,6 +33,30 @@ const findGroupVigilanteVigilanciasSchema = {
                       id: { type: 'integer' },
                       ...programa,
                       ...responseProperties,
+                      plantel: {
+                        type: 'object',
+                        properties: {
+                          id: { type: 'integer' },
+                          ...plantel,
+                          ...responseProperties,
+                          institucion: {
+                            type: 'object',
+                            properties: {
+                              id: { type: 'integer' },
+                              ...institucion,
+                              ...responseProperties,
+                            },
+                          },
+                          domicilio: {
+                            type: 'object',
+                            properties: {
+                              id: { type: 'integer' },
+                              ...domicilio,
+                              ...responseProperties,
+                            },
+                          },
+                        },
+                      },
                     },
                   },
                 },
