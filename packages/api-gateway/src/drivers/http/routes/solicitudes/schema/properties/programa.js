@@ -5,7 +5,7 @@ const programa = {
   solicitudId: { type: 'integer' },
   modalidadId: { type: 'integer' },
   plantelId: { type: 'integer' },
-  duracionPeriodos: { type: 'string', format: 'date-time' },
+  duracionPeriodos: { type: 'integer' },
   objetivos: { type: 'string' },
   antecedentes: { type: 'string' },
   creditos: { type: 'string' },
