@@ -85,6 +85,13 @@ const { Sesion, SesionSchema } = require('./sesion');
 const { Periodo, PeriodoSchema } = require('./periodo');
 const { OrganoColegiado, OrganoColegiadoSchema } = require('./organoColegiado');
 const { Acuerdo, AcuerdoSchema } = require('./acuerdo');
+const { PlanMaestro, PlanMaestroSchema } = require('./planMaestro');
+const { Proyecto, ProyectoSchema } = require('./proyecto');
+const { TipoProyecto, TipoProyectoSchema } = require('./tipoProyecto');
+const { Contrato, ContratoSchema } = require('./contrato');
+const { ResponsableObra, ResponsableObraSchema } = require('./responsableObra');
+const { ResponsablePlaneacion, ResponsablePlaneacionSchema } = require('./responsablePlaneacion');
+const { ProyectoEspacio, ProyectoEspacioSchema } = require('./proyectoEspacio');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -199,6 +206,13 @@ function setupModels(sequelize) {
   Periodo.init(PeriodoSchema, Periodo.config(sequelize));
   OrganoColegiado.init(OrganoColegiadoSchema, OrganoColegiado.config(sequelize));
   Acuerdo.init(AcuerdoSchema, Acuerdo.config(sequelize));
+  PlanMaestro.init(PlanMaestroSchema, PlanMaestro.config(sequelize));
+  Proyecto.init(ProyectoSchema, Proyecto.config(sequelize));
+  TipoProyecto.init(TipoProyectoSchema, TipoProyecto.config(sequelize));
+  Contrato.init(ContratoSchema, Contrato.config(sequelize));
+  ResponsableObra.init(ResponsableObraSchema, ResponsableObra.config(sequelize));
+  ResponsablePlaneacion.init(ResponsablePlaneacionSchema, ResponsablePlaneacion.config(sequelize));
+  ProyectoEspacio.init(ProyectoEspacioSchema, ProyectoEspacio.config(sequelize));
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -288,6 +302,11 @@ function setupModels(sequelize) {
   Periodo.associate(sequelize.models);
   OrganoColegiado.associate(sequelize.models);
   Acuerdo.associate(sequelize.models);
+  PlanMaestro.associate(sequelize.models);
+  Proyecto.associate(sequelize.models);
+  ResponsableObra.associate(sequelize.models);
+  ResponsablePlaneacion.associate(sequelize.models);
+  ProyectoEspacio.associate(sequelize.models);
 }
 
 module.exports = setupModels;

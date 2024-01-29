@@ -85,6 +85,13 @@ const { SESION_TABLE, SesionSchema } = require('../models/sesion');
 const { PERIODO_TABLE, PeriodoSchema } = require('../models/periodo');
 const { ORGANO_COLEGIADO_TABLE, OrganoColegiadoSchema } = require('../models/organoColegiado');
 const { ACUERDO_TABLE, AcuerdoSchema } = require('../models/acuerdo');
+const { PLAN_MAESTRO_TABLE, PlanMaestroSchema } = require('../models/planMaestro');
+const { PROYECTO_TABLE, ProyectoSchema } = require('../models/proyecto');
+const { TIPO_PROYECTO_TABLE, TipoProyectoSchema } = require('../models/tipoProyecto');
+const { CONTRATO_TABLE, ContratoSchema } = require('../models/contrato');
+const { RESPONSABLE_OBRA_TABLE, ResponsableObraSchema } = require('../models/responsableObra');
+const { RESPONSABLE_PLANEACION_TABLE, ResponsablePlaneacionSchema } = require('../models/responsablePlaneacion');
+const { PROYECTO_ESPACIO_TABLE, ProyectoEspacioSchema } = require('../models/proyectoEspacio');
 
 module.exports = {
   async up(queryInterface) {
@@ -187,6 +194,13 @@ module.exports = {
     await queryInterface.createTable(PERIODO_TABLE, PeriodoSchema);
     await queryInterface.createTable(ORGANO_COLEGIADO_TABLE, OrganoColegiadoSchema);
     await queryInterface.createTable(ACUERDO_TABLE, AcuerdoSchema);
+    await queryInterface.createTable(PLAN_MAESTRO_TABLE, PlanMaestroSchema);
+    await queryInterface.createTable(TIPO_PROYECTO_TABLE, TipoProyectoSchema);
+    await queryInterface.createTable(CONTRATO_TABLE, ContratoSchema);
+    await queryInterface.createTable(RESPONSABLE_OBRA_TABLE, ResponsableObraSchema);
+    await queryInterface.createTable(RESPONSABLE_PLANEACION_TABLE, ResponsablePlaneacionSchema);
+    await queryInterface.createTable(PROYECTO_TABLE, ProyectoSchema);
+    await queryInterface.createTable(PROYECTO_ESPACIO_TABLE, ProyectoEspacioSchema);
   },
 
   async down(queryInterface) {
@@ -278,5 +292,12 @@ module.exports = {
     await queryInterface.dropTable(PERIODO_TABLE);
     await queryInterface.dropTable(ORGANO_COLEGIADO_TABLE);
     await queryInterface.dropTable(ACUERDO_TABLE);
+    await queryInterface.dropTable(PLAN_MAESTRO_TABLE);
+    await queryInterface.dropTable(PROYECTO_TABLE);
+    await queryInterface.dropTable(TIPO_PROYECTO_TABLE);
+    await queryInterface.dropTable(CONTRATO_TABLE);
+    await queryInterface.dropTable(RESPONSABLE_OBRA_TABLE);
+    await queryInterface.dropTable(RESPONSABLE_PLANEACION_TABLE);
+    await queryInterface.dropTable(PROYECTO_ESPACIO_TABLE);
   },
 };
