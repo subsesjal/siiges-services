@@ -10,6 +10,11 @@ const createUserUser = (
   const primaryUser = await findOneUserQuery({ id: primaryId });
   checkers.throwErrorIfDataIsFalsy(primaryUser, 'usuario', primaryId);
 
+  const existingUser = await findOneUserQuery({ usuario: data.usuario });
+  if (existingUser) {
+    throw boom.conflict(`User ${data.usuario} already exist`);
+  }
+
   if (primaryUser.rolId !== 3) {
     throw boom.notFound(
       `[Usuarios]: can't found 'usuario' with id '${primaryId}' as 'representante'`,
