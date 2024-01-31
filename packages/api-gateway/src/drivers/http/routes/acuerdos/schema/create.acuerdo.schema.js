@@ -1,7 +1,7 @@
 const { responseProperties } = require('./properties/responseProperties');
 const { acuerdo } = require('./properties/acuerdo');
 
-const { organoColegiadoId, ...acuerdoosBody } = acuerdo;
+const { organoColegiadoId, ...acuerdosBody } = acuerdo;
 const createAcuerdoSchema = {
   tags: ['Organos Colegiados'],
   description: 'Create acuerdo.',
@@ -14,7 +14,7 @@ const createAcuerdoSchema = {
     title: 'Data body',
     type: 'object',
     properties: {
-      ...acuerdoosBody,
+      ...acuerdosBody,
     },
     required: ['numero', 'estatus', 'fecha'],
   },
