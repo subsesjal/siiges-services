@@ -66,6 +66,7 @@ class OrganoColegiado extends Model {
   static associate(models) {
     this.belongsTo(models.Sesion, { as: 'sesion' });
     this.belongsTo(models.Periodo, { as: 'periodo' });
+    this.belongsTo(models.Institucion, { as: 'institucion' });
   }
 
   static config(sequelize) {

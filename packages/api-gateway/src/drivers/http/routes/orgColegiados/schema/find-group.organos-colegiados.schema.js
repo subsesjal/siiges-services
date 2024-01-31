@@ -39,6 +39,14 @@ const findGroupOrgColegiadosSchema = {
                   ...responseProperties,
                 },
               },
+              institucion: {
+                type: 'object',
+                properties: {
+                  id: { type: 'integer' },
+                  nombre: { type: 'string' },
+                  ...responseProperties,
+                },
+              },
             },
           },
         },
