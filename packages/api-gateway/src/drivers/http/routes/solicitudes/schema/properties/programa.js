@@ -33,6 +33,7 @@ const programa = {
   perfilEgresoConocimientos: { type: 'string' },
   perfilEgresoHabilidades: { type: 'string' },
   perfilEgresoActitudes: { type: 'string' },
+  metodosInduccion: { type: 'string' },
   procesoSeleccion: { type: 'string' },
   mapaCurricular: { type: 'string' },
   flexibilidadCurricular: { type: 'string' },
