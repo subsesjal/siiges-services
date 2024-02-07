@@ -13,6 +13,7 @@ const {
   ...datosBody
 } = datos;
 const { datosDelProyectoId: __, ...espaciosDeEquipamientoBody } = espaciosDeEquipamiento;
+const { proyectoId: _, ...TipoDeProyectoBody } = TipoDeProyecto;
 
 const createDatosDeProyectoSchema = {
   tags: ['Planes Maestros'],
@@ -35,10 +36,12 @@ const createDatosDeProyectoSchema = {
           ...contratoYContrato,
         },
       },
-      tipoProyecto: {
-        type: 'object',
-        properties: {
-          ...TipoDeProyecto,
+      proyectoTipoProyecto: {
+        type: 'array',
+        items: {
+          properties: {
+            ...TipoDeProyectoBody,
+          },
         },
       },
       proyectoEspacio: {
@@ -58,6 +61,7 @@ const createDatosDeProyectoSchema = {
         data: {
           type: 'object',
           properties: {
+            id: { type: 'integer' },
             ...datos,
             contrato: {
               type: 'object',
@@ -67,22 +71,37 @@ const createDatosDeProyectoSchema = {
                 ...responseProperties,
               },
             },
-            tipoProyecto: {
-              type: 'object',
-              properties: {
-                id: { type: 'integer' },
-                ...TipoDeProyecto,
-                ...responseProperties,
+            proyectoTipoProyecto: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  id: { type: 'integer' },
+                  ...TipoDeProyecto,
+                  tipoProyecto: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      nombre: { type: 'string' },
+                      descripcion: { type: 'string' },
+                    },
+                  },
+                  ...responseProperties,
+                },
               },
             },
             proyectoEspacio: {
-              type: 'object',
-              properties: {
-                id: { type: 'integer' },
-                ...espaciosDeEquipamiento,
-                ...responseProperties,
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  id: { type: 'integer' },
+                  ...espaciosDeEquipamiento,
+                  ...responseProperties,
+                },
               },
             },
+            ...responseProperties,
           },
         },
       },
