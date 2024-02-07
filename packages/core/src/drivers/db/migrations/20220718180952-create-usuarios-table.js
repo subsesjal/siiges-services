@@ -88,6 +88,7 @@ const { ACUERDO_TABLE, AcuerdoSchema } = require('../models/acuerdo');
 const { PLAN_MAESTRO_TABLE, PlanMaestroSchema } = require('../models/planMaestro');
 const { PROYECTO_TABLE, ProyectoSchema } = require('../models/proyecto');
 const { TIPO_PROYECTO_TABLE, TipoProyectoSchema } = require('../models/tipoProyecto');
+const { PROYECTO_TIPO_PROYECTO_TABLE, ProyectoTipoProyectoSchema } = require('../models/proyectoTipoProyecto');
 const { CONTRATO_TABLE, ContratoSchema } = require('../models/contrato');
 const { RESPONSABLE_OBRA_TABLE, ResponsableObraSchema } = require('../models/responsableObra');
 const { RESPONSABLE_PLANEACION_TABLE, ResponsablePlaneacionSchema } = require('../models/responsablePlaneacion');
@@ -200,6 +201,7 @@ module.exports = {
     await queryInterface.createTable(RESPONSABLE_OBRA_TABLE, ResponsableObraSchema);
     await queryInterface.createTable(RESPONSABLE_PLANEACION_TABLE, ResponsablePlaneacionSchema);
     await queryInterface.createTable(PROYECTO_TABLE, ProyectoSchema);
+    await queryInterface.createTable(PROYECTO_TIPO_PROYECTO_TABLE, ProyectoTipoProyectoSchema);
     await queryInterface.createTable(PROYECTO_ESPACIO_TABLE, ProyectoEspacioSchema);
   },
 
@@ -295,6 +297,7 @@ module.exports = {
     await queryInterface.dropTable(PLAN_MAESTRO_TABLE);
     await queryInterface.dropTable(PROYECTO_TABLE);
     await queryInterface.dropTable(TIPO_PROYECTO_TABLE);
+    await queryInterface.dropTable(PROYECTO_TIPO_PROYECTO_TABLE);
     await queryInterface.dropTable(CONTRATO_TABLE);
     await queryInterface.dropTable(RESPONSABLE_OBRA_TABLE);
     await queryInterface.dropTable(RESPONSABLE_PLANEACION_TABLE);
