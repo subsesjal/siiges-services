@@ -88,6 +88,7 @@ const { Acuerdo, AcuerdoSchema } = require('./acuerdo');
 const { PlanMaestro, PlanMaestroSchema } = require('./planMaestro');
 const { Proyecto, ProyectoSchema } = require('./proyecto');
 const { TipoProyecto, TipoProyectoSchema } = require('./tipoProyecto');
+const { ProyectoTipoProyecto, ProyectoTipoProyectoSchema } = require('./proyectoTipoProyecto');
 const { Contrato, ContratoSchema } = require('./contrato');
 const { ResponsableObra, ResponsableObraSchema } = require('./responsableObra');
 const { ResponsablePlaneacion, ResponsablePlaneacionSchema } = require('./responsablePlaneacion');
@@ -209,6 +210,7 @@ function setupModels(sequelize) {
   PlanMaestro.init(PlanMaestroSchema, PlanMaestro.config(sequelize));
   Proyecto.init(ProyectoSchema, Proyecto.config(sequelize));
   TipoProyecto.init(TipoProyectoSchema, TipoProyecto.config(sequelize));
+  ProyectoTipoProyecto.init(ProyectoTipoProyectoSchema, ProyectoTipoProyecto.config(sequelize));
   Contrato.init(ContratoSchema, Contrato.config(sequelize));
   ResponsableObra.init(ResponsableObraSchema, ResponsableObra.config(sequelize));
   ResponsablePlaneacion.init(ResponsablePlaneacionSchema, ResponsablePlaneacion.config(sequelize));
@@ -307,6 +309,7 @@ function setupModels(sequelize) {
   ResponsableObra.associate(sequelize.models);
   ResponsablePlaneacion.associate(sequelize.models);
   ProyectoEspacio.associate(sequelize.models);
+  ProyectoTipoProyecto.associate(sequelize.models);
 }
 
 module.exports = setupModels;

@@ -1,7 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PLAN_MAESTRO_TABLE } = require('./planMaestro');
 const { CONTRATO_TABLE } = require('./contrato');
-const { TIPO_PROYECTO_TABLE } = require('./tipoProyecto');
 
 const PROYECTO_TABLE = 'proyectos';
 
@@ -18,15 +17,6 @@ const ProyectoSchema = {
     field: 'plan_maestro_id',
     references: {
       model: PLAN_MAESTRO_TABLE,
-      key: 'id',
-    },
-  },
-  tipoProyectoId: {
-    type: DataTypes.INTEGER,
-    field: 'tipo_proyecto_id',
-    allowNull: false,
-    references: {
-      model: TIPO_PROYECTO_TABLE,
       key: 'id',
     },
   },
@@ -109,7 +99,7 @@ class Proyecto extends Model {
       foreignKey: 'proyectoId',
     });
     this.belongsTo(models.Contrato, { as: 'contrato', foreignKey: 'contratoId' });
-    this.belongsTo(models.TipoProyecto, { as: 'tipoProyecto', foreignKey: 'tipoProyectoId' });
+    this.hasMany(models.ProyectoTipoProyecto, { as: 'proyectoTipoProyecto', foreignKey: 'proyectoId' });
   }
 
   static config(sequelize) {
