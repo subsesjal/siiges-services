@@ -5,6 +5,16 @@ const { responseProperties } = require('./properties/responseProperties');
 const findAllInstitucionesSchema = {
   tags: ['Institucion'],
   description: 'Return a list of instituciones.',
+  querystring: {
+    tipoInstitucionId: {
+      type: 'array',
+      items: {
+        type: 'integer',
+        enum: [1, 2],
+      },
+      description: 'Array of tipoInstitucionId values',
+    },
+  },
   response: {
     200: {
       type: 'object',
