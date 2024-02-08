@@ -9,32 +9,12 @@ const TipoProyectoSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  obraNueva: {
-    field: 'obra_nueva',
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
+  nombre: {
+    allowNull: false,
+    type: DataTypes.STRING,
   },
-  obraDeContinuidad: {
-    field: 'obra_de_continuidad',
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
-  },
-  equipamiento: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
-  },
-  adecuaciones: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
-  },
-  mantenimiento: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
-  },
-  proyectoSustentable: {
-    field: 'codigo_sustentable',
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
+  descripcion: {
+    type: DataTypes.STRING,
   },
   createdAt: {
     allowNull: false,
@@ -57,6 +37,10 @@ const TipoProyectoSchema = {
 };
 
 class TipoProyecto extends Model {
+  static associate(models) {
+    this.hasMany(models.ProyectoTipoProyecto, { as: 'proyectoTipoProyecto', foreignKey: 'tipoProyectoId' });
+  }
+
   static config(sequelize) {
     return {
       sequelize,

@@ -10,6 +10,7 @@ const {
   Sesion,
   ProyectoEspacio,
   TipoProyecto,
+  ProyectoTipoProyecto,
   Contrato,
 } = models;
 
@@ -26,7 +27,7 @@ module.exports = {
   createResponsablePlaneacionQuery: createQuery(ResponsablePlaneacion),
   createResponsableObraQuery: createQuery(ResponsableObra),
   createProyectoEspacioQuery: createQuery(ProyectoEspacio),
-  createTipoProyectoQuery: createQuery(TipoProyecto),
+  createTipoProyectoQuery: createQuery(ProyectoTipoProyecto),
   createContratoQuery: createQuery(Contrato),
   updateProyecto: updateAndFindQuery(Proyecto),
   findAllProyectoQuery: findAllQuery(Proyecto),
@@ -36,4 +37,5 @@ module.exports = {
   findOneInstitucionQuery: findOneQuery(Institucion),
   findOnePeriodoQuery: findOneQuery(Periodo),
   findOneSesionQuery: findOneQuery(Sesion),
+  findOneTipoProyectoQuery: findOneQuery(TipoProyecto),
 };

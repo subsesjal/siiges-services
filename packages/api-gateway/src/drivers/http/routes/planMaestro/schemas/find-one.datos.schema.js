@@ -33,12 +33,23 @@ const findOneDatosDeProyectoSchema = {
                   ...responseProperties,
                 },
               },
-              tipoProyecto: {
-                type: 'object',
-                properties: {
-                  id: { type: 'integer' },
-                  ...TipoDeProyecto,
-                  ...responseProperties,
+              proyectoTipoProyecto: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'integer' },
+                    ...TipoDeProyecto,
+                    tipoProyecto: {
+                      type: 'object',
+                      properties: {
+                        id: { type: 'integer' },
+                        nombre: { type: 'string' },
+                        descripcion: { type: 'string' },
+                      },
+                    },
+                    ...responseProperties,
+                  },
                 },
               },
               proyectoEspacio: {

@@ -5,9 +5,15 @@ const findAllInstituciones = (findAllInstitucionesQuery) => async ({ queryParams
     },
   ];
 
-  const { esNombreAutorizado } = queryParams;
+  const { esNombreAutorizado, tipoInstitucionId } = queryParams;
 
-  let instituciones = await findAllInstitucionesQuery(null, {
+  let where = null;
+
+  if (tipoInstitucionId) {
+    where = { tipoInstitucionId };
+  }
+
+  let instituciones = await findAllInstitucionesQuery(where, {
     include,
     strict: false,
   });

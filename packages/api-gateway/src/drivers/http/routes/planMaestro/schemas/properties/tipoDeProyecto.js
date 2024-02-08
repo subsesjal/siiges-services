@@ -1,10 +1,10 @@
 const TipoDeProyecto = {
-  obraNueva: { type: 'boolean' },
-  obraDeContinuidad: { type: 'boolean' },
-  equipamiento: { type: 'boolean' },
-  adecuaciones: { type: 'boolean' },
-  mantenimiento: { type: 'boolean' },
-  proyectoSustentable: { type: 'boolean' },
+  proyectoId: { type: 'integer' },
+  tipoProyectoId: {
+    type: 'integer',
+    minimum: 1,
+    maximum: 6,
+  },
 };
 
 module.exports = { TipoDeProyecto };

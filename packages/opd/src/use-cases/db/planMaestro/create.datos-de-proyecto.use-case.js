@@ -6,9 +6,17 @@ const createDatosDeProyecto = (
   createProyectoQuery,
   createTipoProyectoQuery,
   createContratoQuery,
-) => async ({ planMaestroId, proyectoEspacio, ...data }) => {
+  findOneTipoProyectoQuery,
+  findDatosPlanMaestro,
+) => async ({
+  planMaestroId, proyectoEspacio, proyectoTipoProyecto, ...data
+}) => {
+  // Validators
   await checkers.findValidator({ PlanMaestro: [planMaestroId, findOnePlanMaestroQuery] });
-  const { id: tipoProyectoId } = await createTipoProyectoQuery(data.tipoProyecto);
+  await Promise.all(proyectoTipoProyecto.map(async (tipoProyecto) => {
+    const { tipoProyectoId } = tipoProyecto;
+    await checkers.findValidator({ TipoProyecto: [tipoProyectoId, findOneTipoProyectoQuery] });
+  }));
   const { id: contratoId } = await createContratoQuery(
     data.contrato,
   );
@@ -16,12 +24,18 @@ const createDatosDeProyecto = (
   const datosDelProyecto = await createProyectoQuery({
     planMaestroId,
     contratoId,
-    tipoProyectoId,
     montoNoContratado: data.montoAutorizado - data.montoContratado,
     remanente: data.montoAutorizado - data.montoEjercido,
     ...data,
   });
 
+  await Promise.all(proyectoTipoProyecto.map(async (tipoProyecto) => {
+    const { tipoProyectoId } = tipoProyecto;
+    await createTipoProyectoQuery({
+      tipoProyectoId,
+      proyectoId: datosDelProyecto.id,
+    });
+  }));
   await Promise.all(proyectoEspacio.map(async (equipamientoData) => {
     await createProyectoEspacioQuery({
       ...equipamientoData,
@@ -29,7 +43,9 @@ const createDatosDeProyecto = (
     });
   }));
 
-  return datosDelProyecto;
+  const [findDatosProyecto] = await findDatosPlanMaestro({ id: datosDelProyecto.id });
+
+  return findDatosProyecto;
 };
 
 module.exports = { createDatosDeProyecto };
