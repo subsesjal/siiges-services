@@ -48,7 +48,7 @@ async function orgColegiadosRouter(fastify, opts, next) {
   );
 
   await fastify.get(
-    '/',
+    '/:institucionId',
     {
       schema: schemas.findAllPlanMaestroSchema,
       onRequest: [fastify.authenticate],

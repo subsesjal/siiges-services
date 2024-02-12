@@ -8,7 +8,7 @@ async function createAsignaturaPrograma(req, reply) {
 
     Logger.info('[asignatura]: Creating asignatura');
 
-    const newAsignatura = await this.opdServices.createAsignaturaPrograma(data);
+    const newAsignatura = await this.solicitudServices.createAsignaturaPrograma(data);
 
     return reply
       .code(201)
