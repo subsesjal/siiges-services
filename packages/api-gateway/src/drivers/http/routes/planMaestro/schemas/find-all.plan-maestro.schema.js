@@ -15,9 +15,15 @@ const convertCSVtoJSON = (data) => {
 const findAllPlanMaestroSchema = {
   tags: ['Planes Maestros'],
   description: 'find all planes maestros.',
+  params: {
+    type: 'object',
+    properties: {
+      institucionId: { type: 'integer' },
+    },
+    required: ['institucionId'],
+  },
   querystring: { // Aquí se define el esquema para los parámetros de consulta
     type: 'object',
-    required: ['periodoId', 'institucionId', 'sesionId'],
     properties: {
       periodoId: {
         type: 'integer',
@@ -28,10 +34,6 @@ const findAllPlanMaestroSchema = {
         type: 'integer',
         enum: convertCSVtoJSON(sesiones),
         description: 'Sesion de la consulta',
-      },
-      institucionId: {
-        type: 'integer',
-        description: 'El ID de la institucion',
       },
     },
   },

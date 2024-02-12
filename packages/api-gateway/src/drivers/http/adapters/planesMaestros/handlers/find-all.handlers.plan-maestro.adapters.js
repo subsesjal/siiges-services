@@ -3,7 +3,8 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function findAllPlanMaestro(request, reply) {
   try {
-    const { periodoId, sesionId, institucionId } = request.query;
+    const { periodoId, sesionId } = request.query;
+    const { institucionId } = request.params;
 
     Logger.info('[Planes Maestros]: Get Planes Maestros');
     const datosDeProyecto = await this.opdServices.findAllPlanMaestro({
