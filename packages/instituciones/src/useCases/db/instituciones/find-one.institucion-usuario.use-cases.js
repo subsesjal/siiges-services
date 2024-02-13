@@ -11,6 +11,18 @@ const findOneInstitucionUsuario = (findOneInstitucionQuery) => async (
       association: 'rector',
       include: [{ association: 'persona' }],
     },
+    {
+      association: 'planteles',
+      include: [
+        {
+          association: 'domicilio',
+          include: [{ association: 'estado' }, { association: 'municipio' }],
+        },
+        {
+          association: 'directores',
+          include: [{ association: 'persona' }],
+        }],
+    },
   ];
 
   const institucion = await findOneInstitucionQuery({ usuarioId }, {

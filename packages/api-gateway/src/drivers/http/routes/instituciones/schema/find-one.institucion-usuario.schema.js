@@ -1,4 +1,8 @@
 const { institucion } = require('./properties/institucion');
+const { plantel } = require('./properties/plantel');
+const { domicilio } = require('../../usuarios/schema/properties/domicilio');
+const { municipio } = require('../../usuarios/schema/properties/municipio');
+const { estado } = require('../../usuarios/schema/properties/estado');
 const { ratificacionNombre } = require('./properties/ratificacionNombre');
 const { rector } = require('./properties/rector');
 const { persona } = require('../../usuarios/schema/properties/persona');
@@ -28,10 +32,13 @@ const findOneInstitucionUsuarioSchema = {
             ...responseProperties,
             ratificacionesNombre: {
               type: 'array',
-              properties: {
-                id: { type: 'integer' },
-                ...ratificacionNombre,
-                ...responseProperties,
+              items: {
+                type: 'object',
+                properties: {
+                  id: { type: 'integer' },
+                  ...ratificacionNombre,
+                  ...responseProperties,
+                },
               },
             },
             rector: {
@@ -46,6 +53,41 @@ const findOneInstitucionUsuarioSchema = {
                     id: { type: 'integer' },
                     ...persona,
                     ...responseProperties,
+                  },
+                },
+              },
+            },
+            planteles: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  id: { type: 'integer' },
+                  ...plantel,
+                  ...responseProperties,
+                  domicilio: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...domicilio,
+                      ...responseProperties,
+                      municipio: {
+                        type: 'object',
+                        properties: {
+                          id: { type: 'integer' },
+                          ...municipio,
+                          ...responseProperties,
+                        },
+                      },
+                      estado: {
+                        type: 'object',
+                        properties: {
+                          id: { type: 'integer' },
+                          ...estado,
+                          ...responseProperties,
+                        },
+                      },
+                    },
                   },
                 },
               },
