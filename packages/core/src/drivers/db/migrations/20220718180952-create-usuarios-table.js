@@ -27,6 +27,7 @@ const { RECTOR_TABLE, RectorSchema } = require('../models/rector');
 const { DIRECTOR_TABLE, DirectorSchema } = require('../models/director');
 const { DOCENTE_TABLE, DocenteSchema } = require('../models/docente');
 const { TIPO_INSTALACION_TABLE, TipoInstalacionSchema } = require('../models/tipoInstalacion');
+const { AREA_TABLE, AreaSchema } = require('../models/area');
 const { ASIGNATURA_TABLE, AsignaturaSchema } = require('../models/asignatura');
 const { ASIGNATURA_DOCENTE_TABLE, AsignaturaDocenteSchema } = require('../models/asignaturaDocente');
 const { SECCION_TABLE, SeccionSchema } = require('../models/seccion');
@@ -126,6 +127,7 @@ module.exports = {
     await queryInterface.createTable(DIRECTOR_TABLE, DirectorSchema);
     await queryInterface.createTable(TIPO_INSTALACION_TABLE, TipoInstalacionSchema);
     await queryInterface.createTable(DOCENTE_TABLE, DocenteSchema);
+    await queryInterface.createTable(AREA_TABLE, AreaSchema);
     await queryInterface.createTable(ASIGNATURA_TABLE, AsignaturaSchema);
     await queryInterface.createTable(ASIGNATURA_DOCENTE_TABLE, AsignaturaDocenteSchema);
     await queryInterface.createTable(SECCION_TABLE, SeccionSchema);
@@ -236,6 +238,7 @@ module.exports = {
     await queryInterface.dropTable(DIRECTOR_TABLE);
     await queryInterface.dropTable(TIPO_INSTALACION_TABLE);
     await queryInterface.dropTable(DOCENTE_TABLE);
+    await queryInterface.dropTable(AREA_TABLE);
     await queryInterface.dropTable(ASIGNATURA_TABLE);
     await queryInterface.dropTable(ASIGNATURA_DOCENTE_TABLE);
     await queryInterface.dropTable(SECCION_TABLE);

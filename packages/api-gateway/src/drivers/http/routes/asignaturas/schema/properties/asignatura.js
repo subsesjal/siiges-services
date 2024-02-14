@@ -2,9 +2,9 @@
 const asignatura = {
   programaId: { type: 'integer' },
   gradoId: { type: 'integer' },
+  areaId: { type: 'integer' },
   academia: { type: 'string' },
   consecutivo: { type: 'integer' },
-  area: { type: 'integer' },
   nombre: { type: 'string' },
   clave: { type: 'string' },
   seriacion: { type: 'string' },

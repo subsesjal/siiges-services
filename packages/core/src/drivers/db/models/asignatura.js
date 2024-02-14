@@ -1,6 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PROGRAMA_TABLE } = require('./programa');
 const { GRADO_TABLE } = require('./grado');
+const { AREA_TABLE } = require('./area');
 
 const ASIGNATURA_TABLE = 'asignaturas';
 
@@ -29,6 +30,15 @@ const AsignaturaSchema = {
       key: 'id',
     },
   },
+  areaId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: 'area_id',
+    references: {
+      model: AREA_TABLE,
+      key: 'id',
+    },
+  },
   nombre: {
     allowNull: false,
     type: DataTypes.STRING,
@@ -37,9 +47,6 @@ const AsignaturaSchema = {
     type: DataTypes.STRING,
   },
   consecutivo: {
-    type: DataTypes.INTEGER,
-  },
-  area: {
     type: DataTypes.INTEGER,
   },
   clave: {
@@ -58,19 +65,16 @@ const AsignaturaSchema = {
   actividades: {
     type: DataTypes.STRING,
   },
-  modelo_instruccional: {
+  modeloInstruccional: {
+    field: 'modelo_instruccional',
     type: DataTypes.STRING,
   },
-  horas_docente: {
+  horasDocente: {
+    field: 'horas_docente',
     type: DataTypes.INTEGER,
   },
-  horas_independiente: {
-    type: DataTypes.INTEGER,
-  },
-  minimo_horas: {
-    type: DataTypes.INTEGER,
-  },
-  minimo_creditos: {
+  horasIndependiente: {
+    field: 'horas_independiente',
     type: DataTypes.INTEGER,
   },
   creditos: {
@@ -79,7 +83,8 @@ const AsignaturaSchema = {
   tipo: {
     type: DataTypes.INTEGER,
   },
-  fecha_autorizacion: {
+  fechaAutorizacion: {
+    field: 'fecha_autorizacion',
     type: DataTypes.DATE,
   },
   createdAt: {
