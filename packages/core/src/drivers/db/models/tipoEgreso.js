@@ -38,7 +38,7 @@ const TipoEgresoSchema = {
 
 class TipoEgreso extends Model {
   static associate(models) {
-    this.hasMany(models.PresupuestoEgreso, { as: 'presupuestoEgreso', foreignKey: 'tipoEgresoId' });
+    this.hasMany(models.Presupuesto, { as: 'presupuesto', foreignKey: 'tipoEgresoId' });
   }
 
   static config(sequelize) {

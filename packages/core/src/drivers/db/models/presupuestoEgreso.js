@@ -1,6 +1,4 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { TIPO_EGRESO_TABLE } = require('./tipoEgreso');
-const { PRESUPUESTO_TABLE } = require('./presupuesto');
 const { INSTITUCION_TABLE } = require('./institucion');
 const { SESION_TABLE } = require('./sesion');
 const { PERIODO_TABLE } = require('./periodo');
@@ -13,24 +11,6 @@ const PresupuestoEgresoSchema = {
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
-  },
-  tipoEgresoId: {
-    allowNull: false,
-    type: DataTypes.INTEGER,
-    field: 'tipo_egreso_id',
-    references: {
-      model: TIPO_EGRESO_TABLE,
-      key: 'id',
-    },
-  },
-  presupuestoId: {
-    allowNull: false,
-    type: DataTypes.INTEGER,
-    field: 'presupuesto_id',
-    references: {
-      model: PRESUPUESTO_TABLE,
-      key: 'id',
-    },
   },
   institucionId: {
     allowNull: false,
@@ -86,8 +66,7 @@ class PresupuestoEgreso extends Model {
   static associate(models) {
     this.belongsTo(models.Sesion, { as: 'sesion' });
     this.belongsTo(models.Periodo, { as: 'periodo' });
-    this.belongsTo(models.Presupuesto, { as: 'presupuesto' });
-    this.belongsTo(models.TipoEgreso, { as: 'tipoEgreso' });
+    this.hasMany(models.Presupuesto, { as: 'presupuesto', foreignKey: 'presupuestoEgresoId' });
   }
 
   static config(sequelize) {

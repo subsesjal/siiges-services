@@ -1,6 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { TIPO_PRESUPUESTO_TABLE } = require('./tipoPresupuesto');
 const { TIPO_RECURSO_PRESUPUESTO_TABLE } = require('./tipoRecursoPresupuesto');
+const { TIPO_EGRESO_TABLE } = require('./tipoEgreso');
 
 const PRESUPUESTO_TABLE = 'presupuestos';
 
@@ -10,6 +11,15 @@ const PresupuestoSchema = {
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
+  },
+  presupuestoEgresoId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'presupuesto_egreso_id',
+    references: {
+      model: TIPO_RECURSO_PRESUPUESTO_TABLE,
+      key: 'id',
+    },
   },
   tipoRecursoPresupuestoId: {
     allowNull: false,
@@ -28,6 +38,18 @@ const PresupuestoSchema = {
       model: TIPO_PRESUPUESTO_TABLE,
       key: 'id',
     },
+  },
+  tipoEgresoId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'tipo_egreso_id',
+    references: {
+      model: TIPO_EGRESO_TABLE,
+      key: 'id',
+    },
+  },
+  cantidad: {
+    type: DataTypes.INTEGER,
   },
   createdAt: {
     allowNull: false,
@@ -51,11 +73,15 @@ const PresupuestoSchema = {
 
 class Presupuesto extends Model {
   static associate(models) {
+    this.belongsTo(models.PresupuestoEgreso, { as: 'presupuestoEgreso' });
     this.belongsTo(models.TipoRecursoPresupuesto, {
       as: 'tipoRecursoPresupuesto',
     });
     this.belongsTo(models.TipoPresupuesto, {
       as: 'tipoPresupuesto',
+    });
+    this.belongsTo(models.TipoEgreso, {
+      as: 'tipoEgreso',
     });
   }
 
