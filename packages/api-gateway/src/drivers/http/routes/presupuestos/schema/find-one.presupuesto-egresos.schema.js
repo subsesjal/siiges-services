@@ -1,6 +1,5 @@
-const { responseProperties } = require('../../orgColegiados/schema/properties/responseProperties');
-const { presupuestos } = require('./properties/presupuestos');
-const { tipos } = require('./properties/tipos');
+// const { presupuestos } = require('./properties/presupuestos');
+// const { tipos } = require('./properties/tipos');
 
 const findOnePresupuestoSchema = {
   tags: ['Presupuestos'],
@@ -12,34 +11,12 @@ const findOnePresupuestoSchema = {
     },
     required: ['presupuestoEgresoId'],
   },
-  response: {
-    200: {
-      type: 'object',
-      properties: {
-        data: {
-          type: 'array',
-          items: {
-            properties: {
-              id: { type: 'integer' },
-              ...presupuestos,
-              tipoPresupuesto: {
-                type: 'object',
-                properties: { ...tipos },
-              },
-              tipoEgreso: {
-                type: 'object',
-                properties: { ...tipos },
-              },
-              tipoRecursoPresupuesto: {
-                type: 'object',
-                properties: { ...tipos },
-              },
-              ...responseProperties,
-            },
-          },
-        },
-      },
+  querystring: {
+    type: 'object',
+    properties: {
+      filter: { type: 'string' }, // Parámetro de consulta para filtrar por tipoPresupuestoId
     },
+    additionalProperties: false, // No se permiten propiedades adicionales en el objeto de consulta
   },
 };
 

@@ -4,9 +4,10 @@ const errorHandler = require('../../../utils/errorHandler');
 async function findOnePresupuesto(request, reply) {
   try {
     const { presupuestoEgresoId } = request.params;
+    const { filter } = request.query;
 
     Logger.info('[Presupuestos]: find a Presupuesto');
-    const presupuesto = await this.opdServices.findOnePresupuesto({ presupuestoEgresoId });
+    const presupuesto = await this.opdServices.findOnePresupuesto({ presupuestoEgresoId, filter });
 
     return reply
       .code(200)
