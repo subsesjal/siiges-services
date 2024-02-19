@@ -94,6 +94,11 @@ const { CONTRATO_TABLE, ContratoSchema } = require('../models/contrato');
 const { RESPONSABLE_OBRA_TABLE, ResponsableObraSchema } = require('../models/responsableObra');
 const { RESPONSABLE_PLANEACION_TABLE, ResponsablePlaneacionSchema } = require('../models/responsablePlaneacion');
 const { PROYECTO_ESPACIO_TABLE, ProyectoEspacioSchema } = require('../models/proyectoEspacio');
+const { PRESUPUESTO_EGRESO_TABLE, PresupuestoEgresoSchema } = require('../models/presupuestoEgreso');
+const { PRESUPUESTO_TABLE, PresupuestoSchema } = require('../models/presupuesto');
+const { TIPO_PRESUPUESTO_TABLE, TipoPresupuestoSchema } = require('../models/tipoPresupuesto');
+const { TIPO_RECURSO_PRESUPUESTO_TABLE, TipoRecursoPresupuestoSchema } = require('../models/tipoRecursoPresupuesto');
+const { TIPO_EGRESO_TABLE, TipoEgresoSchema } = require('../models/tipoEgreso');
 
 module.exports = {
   async up(queryInterface) {
@@ -205,6 +210,11 @@ module.exports = {
     await queryInterface.createTable(PROYECTO_TABLE, ProyectoSchema);
     await queryInterface.createTable(PROYECTO_TIPO_PROYECTO_TABLE, ProyectoTipoProyectoSchema);
     await queryInterface.createTable(PROYECTO_ESPACIO_TABLE, ProyectoEspacioSchema);
+    await queryInterface.createTable(TIPO_EGRESO_TABLE, TipoEgresoSchema);
+    await queryInterface.createTable(TIPO_PRESUPUESTO_TABLE, TipoPresupuestoSchema);
+    await queryInterface.createTable(TIPO_RECURSO_PRESUPUESTO_TABLE, TipoRecursoPresupuestoSchema);
+    await queryInterface.createTable(PRESUPUESTO_TABLE, PresupuestoSchema);
+    await queryInterface.createTable(PRESUPUESTO_EGRESO_TABLE, PresupuestoEgresoSchema);
   },
 
   async down(queryInterface) {
@@ -305,5 +315,10 @@ module.exports = {
     await queryInterface.dropTable(RESPONSABLE_OBRA_TABLE);
     await queryInterface.dropTable(RESPONSABLE_PLANEACION_TABLE);
     await queryInterface.dropTable(PROYECTO_ESPACIO_TABLE);
+    await queryInterface.dropTable(PRESUPUESTO_EGRESO_TABLE);
+    await queryInterface.dropTable(PRESUPUESTO_TABLE);
+    await queryInterface.dropTable(TIPO_PRESUPUESTO_TABLE);
+    await queryInterface.dropTable(TIPO_RECURSO_PRESUPUESTO_TABLE);
+    await queryInterface.dropTable(TIPO_EGRESO_TABLE);
   },
 };

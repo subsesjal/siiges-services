@@ -94,6 +94,11 @@ const { Contrato, ContratoSchema } = require('./contrato');
 const { ResponsableObra, ResponsableObraSchema } = require('./responsableObra');
 const { ResponsablePlaneacion, ResponsablePlaneacionSchema } = require('./responsablePlaneacion');
 const { ProyectoEspacio, ProyectoEspacioSchema } = require('./proyectoEspacio');
+const { PresupuestoEgreso, PresupuestoEgresoSchema } = require('./presupuestoEgreso');
+const { Presupuesto, PresupuestoSchema } = require('./presupuesto');
+const { TipoPresupuesto, TipoPresupuestoSchema } = require('./tipoPresupuesto');
+const { TipoRecursoPresupuesto, TipoRecursoPresupuestoSchema } = require('./tipoRecursoPresupuesto');
+const { TipoEgreso, TipoEgresoSchema } = require('./tipoEgreso');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -217,6 +222,14 @@ function setupModels(sequelize) {
   ResponsableObra.init(ResponsableObraSchema, ResponsableObra.config(sequelize));
   ResponsablePlaneacion.init(ResponsablePlaneacionSchema, ResponsablePlaneacion.config(sequelize));
   ProyectoEspacio.init(ProyectoEspacioSchema, ProyectoEspacio.config(sequelize));
+  PresupuestoEgreso.init(PresupuestoEgresoSchema, PresupuestoEgreso.config(sequelize));
+  Presupuesto.init(PresupuestoSchema, Presupuesto.config(sequelize));
+  TipoPresupuesto.init(TipoPresupuestoSchema, TipoPresupuesto.config(sequelize));
+  TipoRecursoPresupuesto.init(
+    TipoRecursoPresupuestoSchema,
+    TipoRecursoPresupuesto.config(sequelize),
+  );
+  TipoEgreso.init(TipoEgresoSchema, TipoEgreso.config(sequelize));
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -313,6 +326,11 @@ function setupModels(sequelize) {
   ResponsablePlaneacion.associate(sequelize.models);
   ProyectoEspacio.associate(sequelize.models);
   ProyectoTipoProyecto.associate(sequelize.models);
+  PresupuestoEgreso.associate(sequelize.models);
+  Presupuesto.associate(sequelize.models);
+  TipoPresupuesto.associate(sequelize.models);
+  TipoRecursoPresupuesto.associate(sequelize.models);
+  TipoEgreso.associate(sequelize.models);
 }
 
 module.exports = setupModels;
