@@ -42,6 +42,20 @@ const PresupuestoEgresoSchema = {
   fecha: {
     type: DataTypes.DATE,
   },
+  observacion: {
+    type: DataTypes.STRING,
+  },
+  cantidadEstatal: {
+    type: DataTypes.INTEGER,
+    field: 'cantidad_estatal',
+  },
+  cantidadFederal: {
+    type: DataTypes.INTEGER,
+    field: 'cantidad_federal',
+  },
+  total: {
+    type: DataTypes.INTEGER,
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,

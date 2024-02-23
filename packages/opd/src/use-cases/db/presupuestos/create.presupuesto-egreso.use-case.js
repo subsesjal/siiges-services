@@ -9,9 +9,11 @@ const createPresupuesto = (
   findOneTipoRecursoPresupuestoQuery,
   createPresupuestoEgresoQuery,
   createPresupuestoQuery,
-  findOnePresupuestoEgresoQuery,
+  // findOnePresupuestoEgresoQuery,
 ) => async ({ presupuesto, ...params }) => {
-  const { institucionId, periodoId, sesionId } = params;
+  const {
+    institucionId, periodoId, sesionId, cantidadEstatal, cantidadFederal,
+  } = params;
   // find validator
   const queryFunctions = {
     Institucion: [institucionId, findOneInstitucionQuery],
@@ -31,8 +33,15 @@ const createPresupuesto = (
       await checkers.findValidator(queryFunctionsPresupuestos);
     }));
   }
+
+  const total = (cantidadEstatal || 0) + (cantidadFederal || 0);
+  const parameters = {
+    ...params,
+    total,
+  };
+
   // Create presupuestos
-  const presupuestoEgreso = await createPresupuestoEgresoQuery(params);
+  const presupuestoEgreso = await createPresupuestoEgresoQuery(parameters);
 
   if (presupuesto) {
     await Promise.all(presupuesto.map(async (obj) => {

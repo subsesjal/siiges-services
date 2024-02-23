@@ -2,6 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { TIPO_PRESUPUESTO_TABLE } = require('./tipoPresupuesto');
 const { TIPO_RECURSO_PRESUPUESTO_TABLE } = require('./tipoRecursoPresupuesto');
 const { TIPO_EGRESO_TABLE } = require('./tipoEgreso');
+const { PRESUPUESTO_EGRESO_TABLE } = require('./presupuestoEgreso');
 
 const PRESUPUESTO_TABLE = 'presupuestos';
 
@@ -17,7 +18,7 @@ const PresupuestoSchema = {
     type: DataTypes.INTEGER,
     field: 'presupuesto_egreso_id',
     references: {
-      model: TIPO_RECURSO_PRESUPUESTO_TABLE,
+      model: PRESUPUESTO_EGRESO_TABLE,
       key: 'id',
     },
   },
