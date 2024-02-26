@@ -9,9 +9,11 @@ const createPresupuesto = (
   findOneTipoRecursoPresupuestoQuery,
   createPresupuestoEgresoQuery,
   createPresupuestoQuery,
-  findOnePresupuestoEgresoQuery,
+  // findOnePresupuestoEgresoQuery,
 ) => async ({ presupuesto, ...params }) => {
-  const { institucionId, periodoId, sesionId } = params;
+  const {
+    institucionId, periodoId, sesionId, cantidadEstatal, cantidadFederal,
+  } = params;
   // find validator
   const queryFunctions = {
     Institucion: [institucionId, findOneInstitucionQuery],
@@ -19,42 +21,53 @@ const createPresupuesto = (
     Sesion: [sesionId, findOneSesionQuery],
   };
   await checkers.findValidator(queryFunctions);
-  await Promise.all(presupuesto.map(async (obj) => {
-    const queryFunctionsPresupuestos = {
-      TipoEgreso: [obj.tipoEgresoId, findOneTipoEgresoQuery],
-      TipoPresupuesto: [obj.tipoPresupuestoId, findOneTipoPresupuestoQuery],
-      TipoRecursoPresupuesto: [
-        obj.tipoRecursoPresupuestoId, findOneTipoRecursoPresupuestoQuery],
-    };
-    await checkers.findValidator(queryFunctionsPresupuestos);
-  }));
+
+  if (presupuesto) {
+    await Promise.all(presupuesto.map(async (obj) => {
+      const queryFunctionsPresupuestos = {
+        TipoEgreso: [obj.tipoEgresoId, findOneTipoEgresoQuery],
+        TipoPresupuesto: [obj.tipoPresupuestoId, findOneTipoPresupuestoQuery],
+        TipoRecursoPresupuesto: [
+          obj.tipoRecursoPresupuestoId, findOneTipoRecursoPresupuestoQuery],
+      };
+      await checkers.findValidator(queryFunctionsPresupuestos);
+    }));
+  }
+
+  const total = (cantidadEstatal || 0) + (cantidadFederal || 0);
+  const parameters = {
+    ...params,
+    total,
+  };
 
   // Create presupuestos
-  const presupuestoEgreso = await createPresupuestoEgresoQuery(params);
+  const presupuestoEgreso = await createPresupuestoEgresoQuery(parameters);
 
-  await Promise.all(presupuesto.map(async (obj) => {
-    await createPresupuestoQuery({
-      ...obj,
-      presupuestoEgresoId: presupuestoEgreso.id,
-    });
-  }));
+  if (presupuesto) {
+    await Promise.all(presupuesto.map(async (obj) => {
+      await createPresupuestoQuery({
+        ...obj,
+        presupuestoEgresoId: presupuestoEgreso.id,
+      });
+    }));
+  }
 
   // get all information query
-  const include = [
-    {
-      association: 'presupuesto',
-      include: [
-        { association: 'tipoRecursoPresupuesto' },
-        { association: 'tipoPresupuesto' },
-        { association: 'tipoEgreso' },
-      ],
-    },
-  ];
-  const presupuestoData = await findOnePresupuestoEgresoQuery({
-    id: presupuestoEgreso.id,
-  }, { include });
+  // const include = [
+  //   {
+  //     association: 'presupuesto',
+  //     include: [
+  //       { association: 'tipoRecursoPresupuesto' },
+  //       { association: 'tipoPresupuesto' },
+  //       { association: 'tipoEgreso' },
+  //     ],
+  //   },
+  // ];
+  // const presupuestoData = await findOnePresupuestoEgresoQuery({
+  //   id: presupuestoEgreso.id,
+  // }, { include });
 
-  return presupuestoData;
+  return presupuestoEgreso;
 };
 
 module.exports = { createPresupuesto };

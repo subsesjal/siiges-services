@@ -213,8 +213,8 @@ module.exports = {
     await queryInterface.createTable(TIPO_EGRESO_TABLE, TipoEgresoSchema);
     await queryInterface.createTable(TIPO_PRESUPUESTO_TABLE, TipoPresupuestoSchema);
     await queryInterface.createTable(TIPO_RECURSO_PRESUPUESTO_TABLE, TipoRecursoPresupuestoSchema);
-    await queryInterface.createTable(PRESUPUESTO_TABLE, PresupuestoSchema);
     await queryInterface.createTable(PRESUPUESTO_EGRESO_TABLE, PresupuestoEgresoSchema);
+    await queryInterface.createTable(PRESUPUESTO_TABLE, PresupuestoSchema);
   },
 
   async down(queryInterface) {

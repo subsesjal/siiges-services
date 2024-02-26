@@ -32,13 +32,13 @@ const updateOrCreatePresupuesto = async ({
     });
     const dataBody = { ...presupuesto, presupuestoEgresoId };
     if (presupuestoExists) {
-      updatePresupuestoQuery({ id: presupuestoExists.id }, {
+      await updatePresupuestoQuery({ id: presupuestoExists.id }, {
         ...presupuesto,
         presupuestoEgresoId,
       });
     }
     if (!presupuestoExists) {
-      createPresupuestoQuery(dataBody);
+      await createPresupuestoQuery(dataBody);
     }
   }));
 };
