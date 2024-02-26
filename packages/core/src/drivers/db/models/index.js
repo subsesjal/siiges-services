@@ -67,6 +67,7 @@ const { Grupo, GrupoSchema } = require('./grupo');
 const { Formacion, FormacionSchema } = require('./formacion');
 const { FormacionRector, FormacionRectorSchema } = require('./formacionRector');
 const { FormacionDirector, FormacionDirectorSchema } = require('./formacionesDirectores');
+const { FormacionDocente, FormacionDocenteSchema } = require('./formacionesDocentes');
 const { AlumnoGrupo, AlumnoGrupoSchema } = require('./alumnoGrupo');
 const { Calificacion, CalificacionSchema } = require('./calificacion');
 const { SituacionValidacion, SituacionValidacionSchema } = require('./situacionValidacion');
@@ -186,6 +187,7 @@ function setupModels(sequelize) {
   Formacion.init(FormacionSchema, Formacion.config(sequelize));
   FormacionRector.init(FormacionRectorSchema, FormacionRector.config(sequelize));
   FormacionDirector.init(FormacionDirectorSchema, FormacionDirector.config(sequelize));
+  FormacionDocente.init(FormacionDocenteSchema, FormacionDocente.config(sequelize));
   AlumnoGrupo.init(AlumnoGrupoSchema, AlumnoGrupo.config(sequelize));
   Calificacion.init(CalificacionSchema, Calificacion.config(sequelize));
   SituacionValidacion.init(
@@ -301,6 +303,7 @@ function setupModels(sequelize) {
   Formacion.associate(sequelize.models);
   FormacionRector.associate(sequelize.models);
   FormacionDirector.associate(sequelize.models);
+  FormacionDocente.associate(sequelize.models);
   AlumnoGrupo.associate(sequelize.models);
   Calificacion.associate(sequelize.models);
   SituacionValidacion.associate(sequelize.models);
