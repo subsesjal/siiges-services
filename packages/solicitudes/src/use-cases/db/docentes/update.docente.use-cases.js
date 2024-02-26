@@ -1,5 +1,22 @@
 const { checkers } = require('@siiges-services/shared');
 
+const createOrUpdate = async (
+  updateQuery,
+  createQuery,
+  docenteId,
+  { id, ...dataValues },
+) => {
+  if (id) {
+    const result = await updateQuery({ id }, dataValues);
+    return result;
+  }
+  const includeFormacionDocente = [{
+    association: 'formacion',
+  }];
+  const result = await createQuery({ docenteId, formacion: dataValues }, includeFormacionDocente);
+  return result;
+};
+
 const updatedocente = (
   findOneDocenteQuery,
   findAsignaturasDocentesQuery,
@@ -9,10 +26,12 @@ const updatedocente = (
   updatePersonaQuery,
   createAsignaturasDocenteQuery,
   deleteAsignaturaDocenteQuery,
-) => async (identifierObj, changes) => {
-  const { docenteId } = identifierObj;
+  updateFormacionesDocenteQuery,
+  createFormacionesDocenteQuery,
+) => async (identifierObj, { formacionesDocente, ...changes }) => {
+  const { id: docenteId } = identifierObj;
 
-  const docente = await findOneDocenteQuery(docenteId);
+  const docente = await findOneDocenteQuery(identifierObj);
   checkers.throwErrorIfDataIsFalsy(docente, 'docentes', docenteId);
 
   let personaUpdated;
@@ -28,7 +47,7 @@ const updatedocente = (
 
   if (changesAsignaturasDocentes && changesAsignaturasDocentes.length > 0) {
     const asignaturasDocentes = await findAsignaturasDocentesQuery({
-      docenteId: docenteUpdated.id,
+      docenteId,
     });
     const newAsignaturasDocenteArray = [];
 
@@ -37,7 +56,7 @@ const updatedocente = (
       if (asignaturasDocentes.some(({ asignaturaId }) => asignaturaId === asignatura)) {
         const asignaturaDocente = await findOneAsignaturaDocenteQuery({
           asignaturaId: asignatura,
-          docenteId: docenteUpdated.id,
+          docenteId,
         });
         newAsignaturasDocenteArray.push(asignaturaDocente);
       } else {
@@ -59,7 +78,7 @@ const updatedocente = (
       if (changesAsignaturasDocentes.some((a) => a !== asignaturaId)) {
         const deleteAsignaturaDocente = await findOneAsignaturaDocenteQuery({
           asignaturaId,
-          docenteId: docenteUpdated.id,
+          docenteId,
         });
         if (deleteAsignaturaDocente) {
           await deleteAsignaturaDocenteQuery({ id: deleteAsignaturaDocente.id });
@@ -68,6 +87,20 @@ const updatedocente = (
     }));
 
     docenteUpdated.dataValues.asignaturasDocentes = newAsignaturasDocenteArray;
+  }
+
+  if (formacionesDocente.length) {
+    const newFormacionesDocente = [];
+    await Promise.all(formacionesDocente.map(async (formacionDocente) => {
+      const updateFormacionDocente = await createOrUpdate(
+        updateFormacionesDocenteQuery,
+        createFormacionesDocenteQuery,
+        docenteId,
+        formacionDocente,
+      );
+      newFormacionesDocente.push(updateFormacionDocente);
+    }));
+    docenteUpdated.dataValues.formacionesDocente = newFormacionesDocente;
   }
 
   return docenteUpdated;
