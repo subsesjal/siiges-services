@@ -67,6 +67,7 @@ const { GRUPO_TABLE, GrupoSchema } = require('../models/grupo');
 const { FORMACION_TABLE, FormacionSchema } = require('../models/formacion');
 const { FORMACION_RECTOR_TABLE, FormacionRectorSchema } = require('../models/formacionRector');
 const { FORMACION_DIRECTOR_TABLE, FormacionDirectorSchema } = require('../models/formacionesDirectores');
+const { FORMACION_DOCENTE_TABLE, FormacionDocenteSchema } = require('../models/formacionesDocentes');
 const { ALUMNO_GRUPO_TABLE, AlumnoGrupoSchema } = require('../models/alumnoGrupo');
 const { CALIFICACION_TABLE, CalificacionSchema } = require('../models/calificacion');
 const { VALIDACION_TABLE, ValidacionSchema } = require('../models/validacion');
@@ -180,6 +181,7 @@ module.exports = {
     await queryInterface.createTable(FORMACION_TABLE, FormacionSchema);
     await queryInterface.createTable(FORMACION_RECTOR_TABLE, FormacionRectorSchema);
     await queryInterface.createTable(FORMACION_DIRECTOR_TABLE, FormacionDirectorSchema);
+    await queryInterface.createTable(FORMACION_DOCENTE_TABLE, FormacionDocenteSchema);
     await queryInterface.createTable(ALUMNO_GRUPO_TABLE, AlumnoGrupoSchema);
     await queryInterface.createTable(CALIFICACION_TABLE, CalificacionSchema);
     await queryInterface.createTable(SITUACION_VALIDACION_TABLE, SituacionValidacionSchema);
@@ -288,6 +290,7 @@ module.exports = {
     await queryInterface.dropTable(FORMACION_TABLE);
     await queryInterface.dropTable(FORMACION_RECTOR_TABLE);
     await queryInterface.dropTable(FORMACION_DIRECTOR_TABLE);
+    await queryInterface.dropTable(FORMACION_DOCENTE_TABLE);
     await queryInterface.dropTable(ALUMNO_GRUPO_TABLE);
     await queryInterface.dropTable(CALIFICACION_TABLE);
     await queryInterface.dropTable(SITUACION_VALIDACION_TABLE);

@@ -1,15 +1,25 @@
-const { Logger } = require('@siiges-services/shared');
+const { Logger, checkers } = require('@siiges-services/shared');
 
 const create = (
   findOneAsignaturaQuery,
   createDocenteQuery,
   createAsignaturaDocenteQuery,
-) => async (data) => {
+  findOneNivelQuery,
+  createFormacionDocenteQuery,
+) => async ({ formacionesDocente, ...data }) => {
   const { programaId } = data;
   const include = [{
     association: 'persona',
     include: [{ association: 'domicilio' }],
   }];
+
+  if (formacionesDocente) {
+    await Promise.all(
+      formacionesDocente.map(async ({ nivelId }) => {
+        await checkers.findValidator({ Nivel: [nivelId, findOneNivelQuery] });
+      }),
+    );
+  }
 
   const newDocente = await createDocenteQuery(data, include);
 
@@ -30,9 +40,26 @@ const create = (
     }),
   );
 
+  const newFomacionesDocenteArray = [];
+  if (formacionesDocente) {
+    const includeFormacionDocente = [{
+      association: 'formacion',
+    }];
+    await Promise.all(
+      formacionesDocente.map(async (formacionDocente) => {
+        const newFormacionDocente = await createFormacionDocenteQuery({
+          docenteId: newDocente.id,
+          formacion: formacionDocente,
+        }, includeFormacionDocente);
+        newFomacionesDocenteArray.push(newFormacionDocente.formacion);
+      }),
+    );
+  }
+
   Logger.info('[docente/create]: Docente created');
 
   newDocente.dataValues.asignaturasDocentes = newAsignaturasDocenteArray;
+  newDocente.dataValues.formacionesDocente = newFomacionesDocenteArray;
 
   return newDocente;
 };

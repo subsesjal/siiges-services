@@ -2,6 +2,10 @@ const { docente } = require('./properties/docente');
 const { responseProperties } = require('./properties/responseProperties');
 const { persona } = require('../../usuarios/schema/properties/persona');
 const { asignaturaDocente } = require('./properties/asignaturaDocente');
+const { formacion } = require('./properties/formacion');
+
+const { personaId: _, ...docenteBody } = docente;
+const { id: __, domicilioId, ...personaBody } = persona;
 
 const updateDocenteSchema = {
   tags: ['Docentes'],
@@ -16,11 +20,26 @@ const updateDocenteSchema = {
   body: {
     type: 'object',
     properties: {
-      ...docente,
+      ...docenteBody,
       persona: {
         type: 'object',
         properties: {
-          ...persona,
+          ...personaBody,
+        },
+      },
+      formacionesDocente: {
+        type: 'array',
+        items: {
+          properties: {
+            id: { type: 'integer' },
+            ...formacion,
+          },
+        },
+      },
+      asignaturasDocentes: {
+        type: 'array',
+        items: {
+          type: 'integer',
         },
       },
     },
@@ -42,6 +61,16 @@ const updateDocenteSchema = {
                 id: { type: 'integer' },
                 ...persona,
                 ...responseProperties,
+              },
+            },
+            formacionesDocente: {
+              type: 'array',
+              items: {
+                properties: {
+                  id: { type: 'integer' },
+                  ...formacion,
+                  ...responseProperties,
+                },
               },
             },
             asignaturasDocentes: {

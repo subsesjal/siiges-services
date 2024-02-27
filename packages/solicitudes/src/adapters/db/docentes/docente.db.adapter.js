@@ -12,6 +12,9 @@ const {
   Docente,
   AsignaturaDocente,
   Persona,
+  FormacionDocente,
+  Formacion,
+  Nivel,
 } = models;
 
 module.exports = {
@@ -25,4 +28,7 @@ module.exports = {
   deleteAsignaturaDocenteQuery: deleteAndFindQuery(AsignaturaDocente),
   deleteDocenteQuery: deleteAndFindQuery(Docente),
   findAllDocentesQuery: findAllQuery(Docente),
+  findOneNivelQuery: findOneQuery(Nivel),
+  createFormacionDocenteQuery: createQuery(FormacionDocente),
+  updateFormacionDocenteQuery: updateAndFindQuery(Formacion),
 };

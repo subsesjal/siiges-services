@@ -1,4 +1,5 @@
 const { docente } = require('./properties/docente');
+const { formacion } = require('./properties/formacion');
 const { asignaturaDocente } = require('./properties/asignaturaDocente');
 const { persona } = require('../../usuarios/schema/properties/persona');
 const { responseProperties } = require('./properties/responseProperties');
@@ -17,6 +18,14 @@ const createDocenteSchema = {
           ...persona,
         },
         required: ['nombre', 'apellidoPaterno'],
+      },
+      formacionesDocente: {
+        type: 'array',
+        items: {
+          properties: {
+            ...formacion,
+          },
+        },
       },
       asignaturasDocentes: {
         type: 'array',
@@ -52,6 +61,16 @@ const createDocenteSchema = {
                 properties: {
                   id: { type: 'integer' },
                   ...asignaturaDocente,
+                  ...responseProperties,
+                },
+              },
+            },
+            formacionesDocente: {
+              type: 'array',
+              items: {
+                properties: {
+                  id: { type: 'integer' },
+                  ...formacion,
                   ...responseProperties,
                 },
               },

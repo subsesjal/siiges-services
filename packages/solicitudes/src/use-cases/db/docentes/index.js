@@ -10,6 +10,8 @@ module.exports = {
     asignaturas.findOneAsignaturaQuery,
     docentes.createQuery,
     docentes.createAsignaturaDocenteQuery,
+    docentes.findOneNivelQuery,
+    docentes.createFormacionDocenteQuery,
   ),
   findOneDocente: findOneDocente(
     docentes.findOneDocenteQuery,
@@ -23,6 +25,8 @@ module.exports = {
     docentes.updatePersonaQuery,
     docentes.createAsignaturaDocenteQuery,
     docentes.deleteAsignaturaDocenteQuery,
+    docentes.updateFormacionDocenteQuery,
+    docentes.createFormacionDocenteQuery,
   ),
   findGroupDocentesPrograma: findGroupDocentesPrograma(
     solicitudes.findOneProgramaQuery,
