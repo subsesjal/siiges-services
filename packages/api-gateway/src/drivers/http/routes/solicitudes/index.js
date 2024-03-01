@@ -1,23 +1,13 @@
 const { solicitudesAdapter, representativeAdapter, diligenciasAdapter } = require('../../adapters');
 const { updateSchema, findSchema, deleteSchema } = require('./representantes/schemas');
 const { findDiligenciasSolicitudSchema } = require('../diligencias/schema');
-const {
-  createSolicitudProgramaSchema,
-  findAllSolicitudesProgramasSchema,
-  findOneSolicitudProgramaSchema,
-  findAllSolicitudesUsuarioSchema,
-  updateSolicitudProgramaSchema,
-  setSolicitudSeccionSchema,
-  findOneSolicitudSeccionSchema,
-  updateSolcitudSeccionObservacionSchema,
-  findOneSolicitudDetalleSchema,
-} = require('./schema');
+const solicitudesSchema = require('./schema');
 
 async function solicitudRouter(fastify, opts, next) {
   await fastify.get(
     '/',
     {
-      schema: findAllSolicitudesProgramasSchema,
+      schema: solicitudesSchema.findAllSolicitudesProgramasSchema,
       onRequest: [fastify.authenticate],
     },
     solicitudesAdapter.findAllSolicitudesProgramas,
@@ -26,7 +16,7 @@ async function solicitudRouter(fastify, opts, next) {
   await fastify.get(
     '/:solicitudId',
     {
-      schema: findOneSolicitudProgramaSchema,
+      schema: solicitudesSchema.findOneSolicitudProgramaSchema,
       onRequest: [fastify.authenticate],
     },
     solicitudesAdapter.findOneSolicitudPrograma,
@@ -35,7 +25,7 @@ async function solicitudRouter(fastify, opts, next) {
   await fastify.get(
     '/:solicitudId/detalles',
     {
-      schema: findOneSolicitudDetalleSchema,
+      schema: solicitudesSchema.findOneSolicitudDetalleSchema,
       onRequest: [fastify.authenticate],
     },
     solicitudesAdapter.findOneSolicitudDetalle,
@@ -44,7 +34,7 @@ async function solicitudRouter(fastify, opts, next) {
   await fastify.post(
     '/:solicitudId/refrendo',
     {
-      // schema: createSolicitudRefrendoSchema,
+      // schema: solicitudesSchema.createSolicitudRefrendoSchema,
       onRequest: [fastify.authenticate],
     },
     solicitudesAdapter.createSolicitudPrograma,
@@ -53,7 +43,7 @@ async function solicitudRouter(fastify, opts, next) {
   await fastify.post(
     '/',
     {
-      schema: createSolicitudProgramaSchema,
+      schema: solicitudesSchema.createSolicitudProgramaSchema,
       onRequest: [fastify.authenticate],
     },
     solicitudesAdapter.createSolicitudPrograma,
@@ -62,7 +52,7 @@ async function solicitudRouter(fastify, opts, next) {
   await fastify.patch(
     '/:solicitudId',
     {
-      schema: updateSolicitudProgramaSchema,
+      schema: solicitudesSchema.updateSolicitudProgramaSchema,
       onRequest: [fastify.authenticate],
     },
     solicitudesAdapter.updateSolicitudPrograma,
@@ -107,25 +97,34 @@ async function solicitudRouter(fastify, opts, next) {
   await fastify.post(
     '/:solicitudId/secciones/:seccionId',
     {
-      schema: setSolicitudSeccionSchema,
+      schema: solicitudesSchema.setSolicitudSeccionSchema,
       onRequest: [fastify.authenticate],
     },
     solicitudesAdapter.setSolicitudSeccion,
   );
 
-  await fastify.post(
+  await fastify.patch(
     '/:solicitudId/secciones/:seccionId/observaciones',
     {
-      schema: updateSolcitudSeccionObservacionSchema,
+      schema: solicitudesSchema.updateSolcitudSeccionObservacionSchema,
       onRequest: [fastify.authenticate],
     },
     solicitudesAdapter.updateSolcitudSeccionObservacion,
   );
 
   await fastify.get(
+    '/:solicitudId/secciones/:seccionId/observaciones',
+    {
+      schema: solicitudesSchema.findOneSolcitudSeccionObservacionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesAdapter.findOneSolcitudSeccionObservacion,
+  );
+
+  await fastify.get(
     '/:solicitudId/secciones/:seccionId',
     {
-      schema: findOneSolicitudSeccionSchema,
+      schema: solicitudesSchema.findOneSolicitudSeccionSchema,
       onRequest: [fastify.authenticate],
     },
     solicitudesAdapter.findOneSolicitudSeccion,
@@ -134,7 +133,7 @@ async function solicitudRouter(fastify, opts, next) {
   await fastify.get(
     '/usuarios/:usuarioId',
     {
-      schema: findAllSolicitudesUsuarioSchema,
+      schema: solicitudesSchema.findAllSolicitudesUsuarioSchema,
       onRequest: [fastify.authenticate],
     },
     solicitudesAdapter.findSolicitudesUsuario,

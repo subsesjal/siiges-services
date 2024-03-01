@@ -8,6 +8,7 @@ const updateSolicitudProgramaSchema = require('./update.solicitud-programa.schem
 const setSolicitudSeccionSchema = require('./set.solicitud-seccion.schema');
 const findOneSolicitudSeccionSchema = require('./find-one.solicitud-seccion.schema');
 const updateSolcitudSeccionObservacionSchema = require('./update.seccion-observacion.schema');
+const { findOneSolcitudSeccionObservacionSchema } = require('./find-one.seccion-observacion.schema');
 
 module.exports = {
   createSolicitudProgramaSchema,
@@ -20,4 +21,5 @@ module.exports = {
   setSolicitudSeccionSchema,
   findOneSolicitudSeccionSchema,
   updateSolcitudSeccionObservacionSchema,
+  findOneSolcitudSeccionObservacionSchema,
 };
