@@ -1,97 +1,17 @@
-const {
-  createNuevaSolicitudPrograma,
-  createRefrendoSolicitudPrograma,
-  findAllSolicitudesProgramas,
-  findOneSolicitudPrograma,
-  findSolicitudesUsuario,
-  updateSolicitudPrograma,
-  setSolicitudSeccion,
-  updateSolcitudSeccionObservacion,
-  findOneSolicitudSeccion,
-  findOneSolicitudDetalle,
-} = require('./db/solicitudes');
-
-const {
-  createDiligencia,
-  findDiligenciasBySolicitud,
-  findOneDiligencia,
-  updateDiligencia,
-  deleteDiligencia,
-} = require('./db/diligencias');
-
-const {
-  createAsignaturaPrograma,
-  findOneAsignatura,
-  updateAsignatura,
-  deleteAsignatura,
-  findProgramaAsignaturas,
-} = require('./db/asignaturas');
-
-const {
-  createDocente,
-  findOneDocente,
-  updateDocente,
-  findGroupDocentesPrograma,
-  deleteDocente,
-} = require('./db/docentes');
-
-const {
-  createPlantelInfraestructura,
-  deletePlantelInfraestructura,
-  findGroupPlantelInfraestructura,
-  findGroupPlantelesUsuario,
-} = require('./db/planteles');
-
-const {
-  createTrayectoriaPrograma,
-  findOneTrayectoriaPrograma,
-  updateTrayectoriaPrograma,
-} = require('./db/trayectorias');
-
-const {
-  createEvaluaciones,
-  findOneEvaluaciones,
-  findAllEvaluadores,
-  updateEvaluaciones,
-  findCumplimiento,
-} = require('./db/evaluaciones');
+const solicitudesUseCases = require('./db/solicitudes');
+const diligenciasUseCases = require('./db/diligencias');
+const asignaturasUseCases = require('./db/asignaturas');
+const docentesUseCases = require('./db/docentes');
+const plantelesUseCases = require('./db/planteles');
+const trayectoriasUseCases = require('./db/trayectorias');
+const evaluacionesUseCases = require('./db/evaluaciones');
 
 module.exports = {
-  createNuevaSolicitudPrograma,
-  createRefrendoSolicitudPrograma,
-  findAllSolicitudesProgramas,
-  findOneSolicitudPrograma,
-  findSolicitudesUsuario,
-  createDiligencia,
-  findDiligenciasBySolicitud,
-  findOneDiligencia,
-  updateDiligencia,
-  deleteDiligencia,
-  createAsignaturaPrograma,
-  updateSolicitudPrograma,
-  findOneAsignatura,
-  updateAsignatura,
-  deleteAsignatura,
-  findProgramaAsignaturas,
-  createDocente,
-  findOneDocente,
-  updateDocente,
-  findGroupDocentesPrograma,
-  setSolicitudSeccion,
-  updateSolcitudSeccionObservacion,
-  deleteDocente,
-  createPlantelInfraestructura,
-  deletePlantelInfraestructura,
-  findGroupPlantelInfraestructura,
-  findGroupPlantelesUsuario,
-  findOneSolicitudSeccion,
-  createTrayectoriaPrograma,
-  findOneTrayectoriaPrograma,
-  updateTrayectoriaPrograma,
-  createEvaluaciones,
-  findOneEvaluaciones,
-  findAllEvaluadores,
-  updateEvaluaciones,
-  findOneSolicitudDetalle,
-  findCumplimiento,
+  ...solicitudesUseCases,
+  ...diligenciasUseCases,
+  ...asignaturasUseCases,
+  ...docentesUseCases,
+  ...plantelesUseCases,
+  ...trayectoriasUseCases,
+  ...evaluacionesUseCases,
 };
