@@ -103,22 +103,13 @@ async function solicitudRouter(fastify, opts, next) {
     solicitudesAdapter.setSolicitudSeccion,
   );
 
-  await fastify.patch(
+  await fastify.post(
     '/:solicitudId/secciones/:seccionId/observaciones',
     {
       schema: solicitudesSchema.updateSolcitudSeccionObservacionSchema,
       onRequest: [fastify.authenticate],
     },
     solicitudesAdapter.updateSolcitudSeccionObservacion,
-  );
-
-  await fastify.get(
-    '/:solicitudId/secciones/:seccionId/observaciones',
-    {
-      schema: solicitudesSchema.findOneSolcitudSeccionObservacionSchema,
-      onRequest: [fastify.authenticate],
-    },
-    solicitudesAdapter.findOneSolcitudSeccionObservacion,
   );
 
   await fastify.get(

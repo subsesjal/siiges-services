@@ -6,7 +6,6 @@ const findSolicitudesUsuario = require('./find.handlers.solicitudes-usuario.adap
 const updateSolicitudPrograma = require('./update.handlers.solicitud-programa.adapters');
 const setSolicitudSeccion = require('./set.handlers.solicitud-seccion.adapters');
 const updateSolcitudSeccionObservacion = require('./update.handlers.seccion-observacion.adapters');
-const { findOneSolcitudSeccionObservacion } = require('./find-one.handlers.seccion-observacion.adapters');
 const findOneSolicitudSeccion = require('./find-one.handlers.solicitud-seccion.adapters');
 const {
   createEvaluaciones,
@@ -31,5 +30,4 @@ module.exports = {
   updateEvaluaciones,
   findOneSolicitudDetalle,
   findCumplimiento,
-  findOneSolcitudSeccionObservacion,
 };
