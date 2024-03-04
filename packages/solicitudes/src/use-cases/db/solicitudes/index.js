@@ -54,11 +54,14 @@ module.exports = {
   findOneSolicitudSeccion: findOneSolicitudSeccion(
     solicitudes.findOneSolicitudQuery,
     solicitudes.findOneSolicitudSeccionQuery,
+    solicitudes.findOneSeccionQuery,
   ),
   updateSolcitudSeccionObservacion: updateSolcitudSeccionObservacion(
     solicitudes.findOneSolicitudSeccionQuery,
     solicitudes.createSolicitudSeccionQuery,
     solicitudes.updateSolicitudSeccionQuery,
+    solicitudes.findOneSeccionQuery,
+    solicitudes.findOneSolicitudQuery,
   ),
   findOneSolicitudDetalle: findOneSolicitudDetalle(
     solicitudes.findOneSolicitudProgramaQuery,

@@ -1,6 +1,7 @@
-const { solicitud } = require('./properties/solicitud');
 const { solicitudSeccion } = require('./properties/solicitudSeccion');
 const { responseProperties } = require('./properties/responseProperties');
+
+const { seccionId, solicitudId, ...solicitudSeccionBody } = solicitudSeccion;
 
 const updateSolcitudSeccionObservacionSchema = {
   tags: ['Solicitudes'],
@@ -9,19 +10,17 @@ const updateSolcitudSeccionObservacionSchema = {
     title: 'updateSolcitudSeccionObservacionSchema',
     type: 'object',
     properties: {
-      solicitudId: { type: 'integer' },
-      seccionId: { type: 'integer' },
+      solicitudId,
+      seccionId,
     },
     required: ['solicitudId', 'seccionId'],
   },
   body: {
     type: 'object',
     properties: {
-      ...solicitudSeccion,
-      ...solicitud,
+      ...solicitudSeccionBody,
     },
     required: ['observaciones'],
-    additionalProperties: false,
   },
   response: {
     200: {

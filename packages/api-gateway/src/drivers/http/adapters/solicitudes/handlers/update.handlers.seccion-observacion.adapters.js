@@ -8,14 +8,15 @@ async function updateSolcitudSeccionObservacion(req, reply) {
 
     Logger.info('[solicitudes]: Updating observacion');
 
-    const solicitud = await this.solicitudServices.updateSolcitudSeccionObservacion(
-      { ...data, seccionId, solicitudId },
-    );
+    const { statusCode, newSeccionObservaciones } = await this
+      .solicitudServices.updateSolcitudSeccionObservacion(
+        { ...data, seccionId, solicitudId },
+      );
 
     return reply
-      .code(200)
+      .code(statusCode)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: solicitud });
+      .send({ data: newSeccionObservaciones });
   } catch (error) {
     return errorHandler(error, reply);
   }
