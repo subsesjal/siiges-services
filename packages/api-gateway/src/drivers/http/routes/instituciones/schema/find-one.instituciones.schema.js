@@ -28,10 +28,13 @@ const findOneInstitucionSchema = {
             ...responseProperties,
             ratificacionesNombre: {
               type: 'array',
-              properties: {
-                id: { type: 'integer' },
-                ...ratificacionNombre,
-                ...responseProperties,
+              items: {
+                type: 'object',
+                properties: {
+                  id: { type: 'integer' },
+                  ...ratificacionNombre,
+                  ...responseProperties,
+                },
               },
             },
             rector: {

@@ -2,6 +2,8 @@ const findAllInstituciones = (findAllInstitucionesQuery) => async ({ queryParams
   const include = [
     {
       association: 'ratificacionesNombre',
+      limit: 1,
+      order: [['createdAt', 'DESC']],
     },
   ];
 
@@ -21,11 +23,8 @@ const findAllInstituciones = (findAllInstitucionesQuery) => async ({ queryParams
   if (esNombreAutorizado) {
     instituciones = instituciones.filter((obj) => {
       const hasRatificaciones = obj.ratificacionesNombre.length > 0;
-
-      const esNombreAutorizadoParam = queryParams.esNombreAutorizado === 'true';
-
       const hasAutorizado = obj.ratificacionesNombre.some(
-        (ratificacion) => ratificacion.esNombreAutorizado === esNombreAutorizadoParam,
+        (ratificacion) => ratificacion.esNombreAutorizado === esNombreAutorizado,
       );
 
       return hasRatificaciones && hasAutorizado;

@@ -14,6 +14,8 @@ const {
   findAllFormacionQuery,
   findOneFormacionRectorQuery,
   updateFormacionQuery,
+  updateRatificacionQuery,
+  createRatificacionQuery,
 } = require('../../../adapters/db');
 
 const findAllInstituciones = require('./find-all.instituciones.use-cases');
@@ -48,6 +50,8 @@ module.exports = {
     findOneInstitucionQuery,
     updateInstitucionQuery,
     updatePersonaQuery,
+    updateRatificacionQuery,
+    createRatificacionQuery,
     createRectorQuery,
   ),
   deleteInstitucion: deleteInstitucion(
