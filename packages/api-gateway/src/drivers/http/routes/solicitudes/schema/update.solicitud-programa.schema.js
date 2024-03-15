@@ -33,7 +33,6 @@ const createSolicitudProgramaSchema = {
         },
       },
     },
-    required: ['programa'],
     additionalProperties: false,
   },
   response: {

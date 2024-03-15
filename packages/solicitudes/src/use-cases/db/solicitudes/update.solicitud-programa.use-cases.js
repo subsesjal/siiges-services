@@ -10,7 +10,7 @@ const updateSolicitudPrograma = (
   deleteProgramaTurnoQuery,
 ) => async (identifierObj, data) => {
   const { ...changesSolicitud } = data;
-  const { ...changesPrograma } = data.programa;
+  const changesPrograma = data?.programa ?? {};
 
   const solicitud = await findOneSolicitudQuery(identifierObj);
   checkers.throwErrorIfDataIsFalsy(solicitud, 'solicitudes', identifierObj.id);
