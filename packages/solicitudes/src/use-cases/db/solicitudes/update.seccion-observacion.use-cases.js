@@ -14,9 +14,9 @@ const updateSolcitudSeccionObservacion = (
   } = data;
 
   // Validations checker
-  const solicitudValidation = await findOneSolicitudQuery({ id: solicitudId });
+  const solicitudValidation = await findOneSolicitudQuery({ id: solicitudId }, { attributes: ['id'] });
   checkers.throwErrorIfDataIsFalsy(solicitudValidation, 'Solicitud', solicitudId);
-  const seccionValidation = await findOneSeccionQuery({ id: seccionId });
+  const seccionValidation = await findOneSeccionQuery({ id: seccionId }, { attributes: ['id'] });
   checkers.throwErrorIfDataIsFalsy(seccionValidation, 'Seccion', seccionId);
 
   // find if exist
@@ -39,6 +39,25 @@ const updateSolcitudSeccionObservacion = (
     newSeccionObservaciones = await createSolcitudSeccionQuery(data);
     statusCode = 201;
   }
+
+  // const include = [
+  //   {
+  //     association: 'usuario',
+  //     attributes: ['id', 'usuario', 'correo'],
+  //   },
+  // ];
+
+  // const mailOptions = {
+  //   usuarioId: getInformation.usuario.id,
+  //   email: getInformation.usuario.correo,
+  //   params: {
+  //     email: getInformation.usuario.correo,
+  //     usuario: getInformation.usuario.usuario,
+  //     folio: getInformation.folio,
+  //     observacion: experiment,
+  //     seccion: seccionValidation.nombre,
+  //   },
+  // };
 
   return { statusCode, newSeccionObservaciones };
 };

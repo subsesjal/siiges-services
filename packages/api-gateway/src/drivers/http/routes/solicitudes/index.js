@@ -76,6 +76,15 @@ async function solicitudRouter(fastify, opts, next) {
     representativeAdapter.update,
   );
 
+  await fastify.post(
+    '/:solicitudId/observaciones',
+    {
+      schema: solicitudesSchema.createSendMailObservacionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesAdapter.createSendMailObservacion,
+  );
+
   await fastify.delete(
     '/:solicitudId/representantes/:usuarioId',
     {

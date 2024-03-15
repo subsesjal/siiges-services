@@ -10,6 +10,8 @@ const {
   SolicitudSeccion,
   Trayectoria,
   Seccion,
+  Plantel,
+  Institucion,
 } = models;
 
 const {
@@ -44,4 +46,27 @@ module.exports = {
   createTrayectoriaQuery: createQuery(Trayectoria),
   findOneTrayectoriaQuery: findOneQuery(Trayectoria),
   updateTrayectoriaQuery: updateAndFindQuery(Trayectoria),
+  findAllSolicitudSeccionQuery: findAllQuery(SolicitudSeccion),
+  findProgramasBySolicitudIdQuery: (solicitudId) => Programa.findOne({
+    where: {
+      solicitud_id: solicitudId,
+    },
+    include: [
+      {
+        model: Plantel,
+        as: 'plantel',
+        required: true,
+        include: [
+          {
+            model: Institucion,
+            as: 'institucion',
+            required: true,
+            attributes: ['nombre'],
+          },
+        ],
+        attributes: ['id'],
+      },
+    ],
+    attributes: [],
+  }),
 };

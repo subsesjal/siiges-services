@@ -12,6 +12,7 @@ const updateSolicitudPrograma = require('./update.solicitud-programa.use-cases')
 const setSolicitudSeccion = require('./set.solicitud-seccion.use-cases');
 const updateSolcitudSeccionObservacion = require('./update.seccion-observacion.use-cases');
 const findOneSolicitudSeccion = require('./find-one.solicitud-seccion.use-cases');
+const { createSendMailObservacion } = require('./create.send-mail-observaciones.use-cases');
 
 module.exports = {
   createNuevaSolicitudPrograma: createNuevaSolicitudPrograma(
@@ -65,5 +66,10 @@ module.exports = {
   ),
   findOneSolicitudDetalle: findOneSolicitudDetalle(
     solicitudes.findOneSolicitudProgramaQuery,
+  ),
+  createSendMailObservacion: createSendMailObservacion(
+    solicitudes.findAllSolicitudSeccionQuery,
+    solicitudes.updateSolicitudQuery,
+    solicitudes.findProgramasBySolicitudIdQuery,
   ),
 };
