@@ -1,4 +1,4 @@
-const { Logger, checkers } = require('@siiges-services/shared');
+const { Logger } = require('@siiges-services/shared');
 
 const services = require('./services');
 const db = require('./db');
@@ -6,15 +6,13 @@ const db = require('./db');
 const sendNotificationEmail = async ({
   usuarioId, email, asunto, template, params,
 }) => {
-  const paramsCleaned = checkers.cleanObject(params);
-
   // Save the notification on DB
   const notificationData = {
     usuarioId,
     email,
     asunto,
     template,
-    data: JSON.stringify(paramsCleaned),
+    data: JSON.stringify(params),
     status: 'pending',
   };
 

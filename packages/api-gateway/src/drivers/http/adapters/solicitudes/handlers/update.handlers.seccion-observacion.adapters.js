@@ -1,16 +1,20 @@
-const { Logger } = require('@siiges-services/shared');
+const { Logger, checkers } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
 async function updateSolcitudSeccionObservacion(req, reply) {
   try {
-    const { ...data } = req.body;
+    const { isClosed, observaciones: observacion } = req.body;
     const { solicitudId, seccionId } = req.params;
+
+    const { observacion: observaciones } = checkers.cleanObject({ observacion });
 
     Logger.info('[solicitudes]: Updating observacion');
 
     const { statusCode, newSeccionObservaciones } = await this
       .solicitudServices.updateSolcitudSeccionObservacion(
-        { ...data, seccionId, solicitudId },
+        {
+          isClosed, observaciones, seccionId, solicitudId,
+        },
       );
 
     return reply

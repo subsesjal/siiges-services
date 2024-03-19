@@ -14,9 +14,9 @@ const updateSolcitudSeccionObservacion = (
   } = data;
 
   // Validations checker
-  const solicitudValidation = await findOneSolicitudQuery({ id: solicitudId });
+  const solicitudValidation = await findOneSolicitudQuery({ id: solicitudId }, { attributes: ['id'] });
   checkers.throwErrorIfDataIsFalsy(solicitudValidation, 'Solicitud', solicitudId);
-  const seccionValidation = await findOneSeccionQuery({ id: seccionId });
+  const seccionValidation = await findOneSeccionQuery({ id: seccionId }, { attributes: ['id'] });
   checkers.throwErrorIfDataIsFalsy(seccionValidation, 'Seccion', seccionId);
 
   // find if exist

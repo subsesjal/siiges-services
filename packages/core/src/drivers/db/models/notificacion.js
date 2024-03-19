@@ -38,7 +38,7 @@ const NotificacionSchema = {
   },
   data: {
     allowNull: true,
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
   },
   sentAt: {
     allowNull: true,
