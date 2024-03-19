@@ -40,25 +40,6 @@ const updateSolcitudSeccionObservacion = (
     statusCode = 201;
   }
 
-  // const include = [
-  //   {
-  //     association: 'usuario',
-  //     attributes: ['id', 'usuario', 'correo'],
-  //   },
-  // ];
-
-  // const mailOptions = {
-  //   usuarioId: getInformation.usuario.id,
-  //   email: getInformation.usuario.correo,
-  //   params: {
-  //     email: getInformation.usuario.correo,
-  //     usuario: getInformation.usuario.usuario,
-  //     folio: getInformation.folio,
-  //     observacion: experiment,
-  //     seccion: seccionValidation.nombre,
-  //   },
-  // };
-
   return { statusCode, newSeccionObservaciones };
 };
 
