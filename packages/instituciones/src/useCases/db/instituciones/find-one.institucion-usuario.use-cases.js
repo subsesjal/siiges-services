@@ -6,7 +6,11 @@ const findOneInstitucionUsuario = (findOneInstitucionQuery) => async (
 ) => {
   const { usuarioId } = identifierObj;
   const include = [
-    { association: 'ratificacionesNombre' },
+    {
+      association: 'ratificacionesNombre',
+      limit: 1,
+      order: [['createdAt', 'DESC']],
+    },
     {
       association: 'rector',
       include: [{ association: 'persona' }],

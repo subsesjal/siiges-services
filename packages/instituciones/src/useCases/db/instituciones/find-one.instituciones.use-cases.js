@@ -5,7 +5,11 @@ const findOneInstitucion = (findOneInstitucionQuery) => async (
   attributes,
 ) => {
   const include = [
-    { association: 'ratificacionesNombre' },
+    {
+      association: 'ratificacionesNombre',
+      limit: 1,
+      order: [['createdAt', 'DESC']],
+    },
     {
       association: 'rector',
       include: [{ association: 'persona' }],

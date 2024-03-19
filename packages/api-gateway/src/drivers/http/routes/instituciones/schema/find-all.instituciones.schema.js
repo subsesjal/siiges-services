@@ -14,6 +14,9 @@ const findAllInstitucionesSchema = {
       },
       description: 'Array of tipoInstitucionId values',
     },
+    esNombreAutorizado: {
+      type: 'boolean',
+    },
   },
   response: {
     200: {
