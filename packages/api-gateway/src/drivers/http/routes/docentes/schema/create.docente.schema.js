@@ -26,8 +26,8 @@ const createDocenteSchema = {
           properties: {
             ...formacion,
           },
+          required: ['nivelId', 'nombre', 'institucion', 'descripcion', 'fechaGraduado'],
         },
-        required: ['nivelId', 'nombre', 'institucion', 'descripcion', 'fechaGraduado'],
       },
       asignaturasDocentes: {
         type: 'array',
