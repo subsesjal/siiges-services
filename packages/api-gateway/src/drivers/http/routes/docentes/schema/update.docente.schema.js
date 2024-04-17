@@ -27,7 +27,7 @@ const updateDocenteSchema = {
           ...personaBody,
         },
       },
-      formacionesDocente: {
+      formacionesDocentes: {
         type: 'array',
         items: {
           properties: {
@@ -43,7 +43,6 @@ const updateDocenteSchema = {
         },
       },
     },
-    required: ['programaId'],
   },
   response: {
     200: {
@@ -63,7 +62,7 @@ const updateDocenteSchema = {
                 ...responseProperties,
               },
             },
-            formacionesDocente: {
+            formacionesDocentes: {
               type: 'array',
               items: {
                 properties: {

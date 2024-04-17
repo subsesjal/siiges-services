@@ -6,16 +6,16 @@ const create = (
   createAsignaturaDocenteQuery,
   findOneNivelQuery,
   createFormacionDocenteQuery,
-) => async ({ formacionesDocente, ...data }) => {
+) => async ({ formacionesDocentes, ...data }) => {
   const { programaId } = data;
   const include = [{
     association: 'persona',
     include: [{ association: 'domicilio' }],
   }];
 
-  if (formacionesDocente) {
+  if (formacionesDocentes) {
     await Promise.all(
-      formacionesDocente.map(async ({ nivelId }) => {
+      formacionesDocentes.map(async ({ nivelId }) => {
         await checkers.findValidator({ Nivel: [nivelId, findOneNivelQuery] });
       }),
     );
@@ -23,7 +23,7 @@ const create = (
 
   const newDocente = await createDocenteQuery(data, include);
 
-  const newAsignaturasDocenteArray = [];
+  const newAsignaturasDocentesArray = [];
   await Promise.all(
     data.asignaturasDocentes.map(async (asignaturaDocente) => {
       const asignatura = await findOneAsignaturaQuery({
@@ -35,18 +35,19 @@ const create = (
           asignaturaId: asignaturaDocente,
           docenteId: newDocente.id,
         });
-        newAsignaturasDocenteArray.push(newAsignaturaDocente);
+        newAsignaturaDocente.dataValues.asignatura = asignatura;
+        newAsignaturasDocentesArray.push(newAsignaturaDocente);
       }
     }),
   );
 
   const newFomacionesDocenteArray = [];
-  if (formacionesDocente) {
+  if (formacionesDocentes) {
     const includeFormacionDocente = [{
       association: 'formacion',
     }];
     await Promise.all(
-      formacionesDocente.map(async (formacionDocente) => {
+      formacionesDocentes.map(async (formacionDocente) => {
         const newFormacionDocente = await createFormacionDocenteQuery({
           docenteId: newDocente.id,
           formacion: formacionDocente,
@@ -58,8 +59,8 @@ const create = (
 
   Logger.info('[docente/create]: Docente created');
 
-  newDocente.dataValues.asignaturasDocentes = newAsignaturasDocenteArray;
-  newDocente.dataValues.formacionesDocente = newFomacionesDocenteArray;
+  newDocente.dataValues.asignaturasDocentes = newAsignaturasDocentesArray;
+  newDocente.dataValues.formacionesDocentes = newFomacionesDocenteArray;
 
   return newDocente;
 };
