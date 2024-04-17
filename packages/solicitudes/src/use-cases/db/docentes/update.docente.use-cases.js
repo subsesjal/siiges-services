@@ -28,7 +28,7 @@ const updatedocente = (
   deleteAsignaturaDocenteQuery,
   updateFormacionesDocenteQuery,
   createFormacionesDocenteQuery,
-) => async (identifierObj, { formacionesDocente, ...changes }) => {
+) => async (identifierObj, { formacionesDocentes, ...changes }) => {
   const { id: docenteId } = identifierObj;
 
   const docente = await findOneDocenteQuery(identifierObj);
@@ -49,7 +49,7 @@ const updatedocente = (
     const asignaturasDocentes = await findAsignaturasDocentesQuery({
       docenteId,
     });
-    const newAsignaturasDocenteArray = [];
+    const newAsignaturasDocentesArray = [];
 
     // Find and create relation asignatura - docente
     await Promise.all(changesAsignaturasDocentes.map(async (asignatura) => {
@@ -58,17 +58,17 @@ const updatedocente = (
           asignaturaId: asignatura,
           docenteId,
         });
-        newAsignaturasDocenteArray.push(asignaturaDocente);
+        newAsignaturasDocentesArray.push(asignaturaDocente);
       } else {
         const asignaturaFound = await findOneAsignaturaQuery({
           id: asignatura,
         });
         if (asignaturaFound) {
-          const newAsignaturaDocente = await createAsignaturasDocenteQuery({
+          const newAsignaturaDocentes = await createAsignaturasDocenteQuery({
             asignaturaId: asignatura,
             docenteId: docenteUpdated.id,
           });
-          newAsignaturasDocenteArray.push(newAsignaturaDocente);
+          newAsignaturasDocentesArray.push(newAsignaturaDocentes);
         }
       }
     }));
@@ -86,21 +86,21 @@ const updatedocente = (
       }
     }));
 
-    docenteUpdated.dataValues.asignaturasDocentes = newAsignaturasDocenteArray;
+    docenteUpdated.dataValues.asignaturasDocentes = newAsignaturasDocentesArray;
   }
 
-  if (formacionesDocente.length) {
-    const newFormacionesDocente = [];
-    await Promise.all(formacionesDocente.map(async (formacionDocente) => {
+  if (formacionesDocentes.length) {
+    const newFormacionesDocentes = [];
+    await Promise.all(formacionesDocentes.map(async (formacionDocente) => {
       const updateFormacionDocente = await createOrUpdate(
         updateFormacionesDocenteQuery,
         createFormacionesDocenteQuery,
         docenteId,
         formacionDocente,
       );
-      newFormacionesDocente.push(updateFormacionDocente);
+      newFormacionesDocentes.push(updateFormacionDocente);
     }));
-    docenteUpdated.dataValues.formacionesDocente = newFormacionesDocente;
+    docenteUpdated.dataValues.formacionesDocentes = newFormacionesDocentes;
   }
 
   return docenteUpdated;

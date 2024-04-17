@@ -6,16 +6,16 @@ const create = (
   createAsignaturaDocenteQuery,
   findOneNivelQuery,
   createFormacionDocenteQuery,
-) => async ({ formacionesDocente, ...data }) => {
+) => async ({ formacionesDocentes, ...data }) => {
   const { programaId } = data;
   const include = [{
     association: 'persona',
     include: [{ association: 'domicilio' }],
   }];
 
-  if (formacionesDocente) {
+  if (formacionesDocentes) {
     await Promise.all(
-      formacionesDocente.map(async ({ nivelId }) => {
+      formacionesDocentes.map(async ({ nivelId }) => {
         await checkers.findValidator({ Nivel: [nivelId, findOneNivelQuery] });
       }),
     );
@@ -35,18 +35,19 @@ const create = (
           asignaturaId: asignaturaDocente,
           docenteId: newDocente.id,
         });
+        newAsignaturaDocente.dataValues.asignatura = asignatura;
         newAsignaturasDocenteArray.push(newAsignaturaDocente);
       }
     }),
   );
 
   const newFomacionesDocenteArray = [];
-  if (formacionesDocente) {
+  if (formacionesDocentes) {
     const includeFormacionDocente = [{
       association: 'formacion',
     }];
     await Promise.all(
-      formacionesDocente.map(async (formacionDocente) => {
+      formacionesDocentes.map(async (formacionDocente) => {
         const newFormacionDocente = await createFormacionDocenteQuery({
           docenteId: newDocente.id,
           formacion: formacionDocente,
@@ -59,7 +60,7 @@ const create = (
   Logger.info('[docente/create]: Docente created');
 
   newDocente.dataValues.asignaturasDocentes = newAsignaturasDocenteArray;
-  newDocente.dataValues.formacionesDocente = newFomacionesDocenteArray;
+  newDocente.dataValues.formacionesDocentes = newFomacionesDocenteArray;
 
   return newDocente;
 };

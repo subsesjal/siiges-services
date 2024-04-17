@@ -11,6 +11,12 @@ const findGroupDocentesPrograma = (
   const include = [
     { association: 'persona' },
     {
+      association: 'formacionesDocentes',
+      include: [
+        { association: 'formacion' },
+      ],
+    },
+    {
       association: 'asignaturasDocentes',
       include: [
         { association: 'asignatura' },
