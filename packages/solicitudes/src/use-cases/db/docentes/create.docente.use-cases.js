@@ -23,7 +23,7 @@ const create = (
 
   const newDocente = await createDocenteQuery(data, include);
 
-  const newAsignaturasDocenteArray = [];
+  const newAsignaturasDocentesArray = [];
   await Promise.all(
     data.asignaturasDocentes.map(async (asignaturaDocente) => {
       const asignatura = await findOneAsignaturaQuery({
@@ -36,7 +36,7 @@ const create = (
           docenteId: newDocente.id,
         });
         newAsignaturaDocente.dataValues.asignatura = asignatura;
-        newAsignaturasDocenteArray.push(newAsignaturaDocente);
+        newAsignaturasDocentesArray.push(newAsignaturaDocente);
       }
     }),
   );
@@ -59,7 +59,7 @@ const create = (
 
   Logger.info('[docente/create]: Docente created');
 
-  newDocente.dataValues.asignaturasDocentes = newAsignaturasDocenteArray;
+  newDocente.dataValues.asignaturasDocentes = newAsignaturasDocentesArray;
   newDocente.dataValues.formacionesDocentes = newFomacionesDocenteArray;
 
   return newDocente;

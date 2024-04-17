@@ -64,11 +64,11 @@ const updatedocente = (
           id: asignatura,
         });
         if (asignaturaFound) {
-          const newAsignaturaDocentes = await createAsignaturasDocenteQuery({
+          const newAsignaturaDocente = await createAsignaturasDocenteQuery({
             asignaturaId: asignatura,
             docenteId: docenteUpdated.id,
           });
-          newAsignaturasDocentesArray.push(newAsignaturaDocentes);
+          newAsignaturasDocentesArray.push(newAsignaturaDocente);
         }
       }
     }));
