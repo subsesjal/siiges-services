@@ -90,7 +90,7 @@ const updatedocente = (
   }
 
   if (formacionesDocentes.length) {
-    const newFormacionesDocentes = [];
+    const newFormacionesDocentesArray = [];
     await Promise.all(formacionesDocentes.map(async (formacionDocente) => {
       const updateFormacionDocente = await createOrUpdate(
         updateFormacionesDocenteQuery,
@@ -98,9 +98,9 @@ const updatedocente = (
         docenteId,
         formacionDocente,
       );
-      newFormacionesDocentes.push(updateFormacionDocente);
+      newFormacionesDocentesArray.push(updateFormacionDocente);
     }));
-    docenteUpdated.dataValues.formacionesDocentes = newFormacionesDocentes;
+    docenteUpdated.dataValues.formacionesDocentes = newFormacionesDocentesArray;
   }
 
   return docenteUpdated;
