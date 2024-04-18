@@ -1,22 +1,4 @@
-const {
-  findAllInstitucionesQuery,
-  findOneInstitucionQuery,
-  createInstitucionQuery,
-  updateInstitucionQuery,
-  deleteInstitucionQuery,
-  createRectorQuery,
-  deleteRectorQuery,
-  updatePersonaQuery,
-  createFormacionRectorQuery,
-  findOneRectorQuery,
-  findOneNivelQuery,
-  findAllFormacionRectorQuery,
-  findAllFormacionQuery,
-  findOneFormacionRectorQuery,
-  updateFormacionQuery,
-  updateRatificacionQuery,
-  createRatificacionQuery,
-} = require('../../../adapters/db');
+const institucionAdapter = require('../../../adapters/db');
 
 const findAllInstituciones = require('./find-all.instituciones.use-cases');
 const findOneInstitucion = require('./find-one.instituciones.use-cases');
@@ -33,45 +15,49 @@ const {
 } = require('./formacionesRectores');
 
 const findFormacionRector = findOneFormacionRector(
-  findOneRectorQuery,
-  findOneFormacionRectorQuery,
+  institucionAdapter.findOneRectorQuery,
+  institucionAdapter.findOneFormacionRectorQuery,
 );
 
 module.exports = {
-  findAllInstituciones: findAllInstituciones(findAllInstitucionesQuery),
-  findOneInstitucion: findOneInstitucion(findOneInstitucionQuery),
-  findOneInstitucionUsuario: findOneInstitucionUsuario(findOneInstitucionQuery),
-  findPlantelesInstitucion: findPlantelesInstitucion(findOneInstitucionQuery),
+  findAllInstituciones: findAllInstituciones(institucionAdapter.findAllInstitucionesQuery),
+  findOneInstitucion: findOneInstitucion(institucionAdapter.findOneInstitucionQuery),
+  findOneInstitucionUsuario: findOneInstitucionUsuario(
+    institucionAdapter.findOneInstitucionQuery,
+    institucionAdapter.findOneUsuarioUsuarioQuery,
+    institucionAdapter.findOneUsuarioQuery,
+  ),
+  findPlantelesInstitucion: findPlantelesInstitucion(institucionAdapter.findOneInstitucionQuery),
   createInstitucion: createInstitucion(
-    createInstitucionQuery,
-    createRectorQuery,
+    institucionAdapter.createInstitucionQuery,
+    institucionAdapter.createRectorQuery,
   ),
   updateInstitucion: updateInstitucion(
-    findOneInstitucionQuery,
-    updateInstitucionQuery,
-    updatePersonaQuery,
-    updateRatificacionQuery,
-    createRatificacionQuery,
-    createRectorQuery,
+    institucionAdapter.findOneInstitucionQuery,
+    institucionAdapter.updateInstitucionQuery,
+    institucionAdapter.updatePersonaQuery,
+    institucionAdapter.updateRatificacionQuery,
+    institucionAdapter.createRatificacionQuery,
+    institucionAdapter.createRectorQuery,
   ),
   deleteInstitucion: deleteInstitucion(
-    findOneInstitucionQuery,
-    deleteInstitucionQuery,
-    deleteRectorQuery,
+    institucionAdapter.findOneInstitucionQuery,
+    institucionAdapter.deleteInstitucionQuery,
+    institucionAdapter.deleteRectorQuery,
   ),
   createFormacionRector: createFormacionRector(
-    createFormacionRectorQuery,
-    findOneRectorQuery,
-    findOneNivelQuery,
+    institucionAdapter.createFormacionRectorQuery,
+    institucionAdapter.findOneRectorQuery,
+    institucionAdapter.findOneNivelQuery,
   ),
   findAllFormacionRector: findAllFormacionRector(
-    findAllFormacionRectorQuery,
-    findAllFormacionQuery,
+    institucionAdapter.findAllFormacionRectorQuery,
+    institucionAdapter.findAllFormacionQuery,
   ),
   findOneFormacionRector: findFormacionRector,
   updateFormacionRector: updateFormacionRector(
     findFormacionRector,
-    findOneNivelQuery,
-    updateFormacionQuery,
+    institucionAdapter.findOneNivelQuery,
+    institucionAdapter.updateFormacionQuery,
   ),
 };

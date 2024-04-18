@@ -1,4 +1,8 @@
-const findSolicitudesUsuario = (findSolicitudesQuery) => async (identifierObj) => {
+const findSolicitudesUsuario = (
+  findSolicitudesQuery,
+  findOneUsuarioQuery,
+  findOneUsuarioUsuarioQuery,
+) => async (identifierObj) => {
   const include = [{
     association: 'programa',
     include: [{
@@ -16,7 +20,15 @@ const findSolicitudesUsuario = (findSolicitudesQuery) => async (identifierObj) =
     association: 'estatusSolicitud',
   }];
 
-  const solicitudes = await findSolicitudesQuery(identifierObj, {
+  let { usuarioId } = identifierObj;
+  const { rolId } = await findOneUsuarioQuery({ id: usuarioId });
+  if (rolId === 4 || rolId === 12) {
+    const { principalId } = await findOneUsuarioUsuarioQuery({ secundarioId: usuarioId });
+    if (principalId) {
+      usuarioId = principalId;
+    }
+  }
+  const solicitudes = await findSolicitudesQuery({ usuarioId }, {
     undefined,
     include,
     strict: false,

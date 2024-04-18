@@ -1,10 +1,14 @@
 const { checkers } = require('@siiges-services/shared');
 
-const findOneInstitucionUsuario = (findOneInstitucionQuery) => async (
+const findOneInstitucionUsuario = (
+  findOneInstitucionQuery,
+  findOneUsuarioUsuarioQuery,
+  findOneUsuarioQuery,
+) => async (
   identifierObj,
   attributes,
 ) => {
-  const { usuarioId } = identifierObj;
+  let { usuarioId } = identifierObj;
   const include = [
     {
       association: 'ratificacionesNombre',
@@ -28,6 +32,14 @@ const findOneInstitucionUsuario = (findOneInstitucionQuery) => async (
         }],
     },
   ];
+
+  const { rolId } = await findOneUsuarioQuery({ id: usuarioId });
+  if (rolId === 4 || rolId === 12) {
+    const { principalId } = await findOneUsuarioUsuarioQuery({ secundarioId: usuarioId });
+    if (principalId) {
+      usuarioId = principalId;
+    }
+  }
 
   const institucion = await findOneInstitucionQuery({ usuarioId }, {
     attributes,
