@@ -1,6 +1,33 @@
 const { Logger, checkers } = require('@siiges-services/shared');
 
+const findDocenteById = async (docenteId, findOneDocenteQuery) => {
+  const include = [
+    {
+      association: 'persona',
+      include: [{ association: 'domicilio' }],
+    },
+    {
+      association: 'formacionesDocentes',
+      include: [
+        { association: 'formacion' },
+      ],
+    },
+    {
+      association: 'asignaturasDocentes',
+      include: [
+        { association: 'asignatura' },
+      ],
+    },
+  ];
+
+  return findOneDocenteQuery({ id: docenteId }, {
+    include,
+    strict: false,
+  });
+};
+
 const create = (
+  findOneDocenteQuery,
   findOneAsignaturaQuery,
   createDocenteQuery,
   createAsignaturaDocenteQuery,
@@ -33,7 +60,7 @@ const create = (
       if (asignatura) {
         const newAsignaturaDocente = await createAsignaturaDocenteQuery({
           asignaturaId: asignaturaDocente,
-          docenteId: newDocente.id,
+          docenteId: newDocente.dataValues.id,
         });
         newAsignaturaDocente.dataValues.asignatura = asignatura;
         newAsignaturasDocentesArray.push(newAsignaturaDocente);
@@ -49,7 +76,7 @@ const create = (
     await Promise.all(
       formacionesDocentes.map(async (formacionDocente) => {
         const newFormacionDocente = await createFormacionDocenteQuery({
-          docenteId: newDocente.id,
+          docenteId: newDocente.dataValues.id,
           formacion: formacionDocente,
         }, includeFormacionDocente);
         newFomacionesDocenteArray.push(newFormacionDocente.formacion);
@@ -62,7 +89,9 @@ const create = (
   newDocente.dataValues.asignaturasDocentes = newAsignaturasDocentesArray;
   newDocente.dataValues.formacionesDocentes = newFomacionesDocenteArray;
 
-  return newDocente;
+  const docente = await findDocenteById(newDocente.dataValues.id, findOneDocenteQuery);
+
+  return docente;
 };
 
 module.exports = create;
