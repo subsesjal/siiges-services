@@ -7,6 +7,7 @@ const deleteDocente = require('./delete.docente.use-cases');
 
 module.exports = {
   createDocente: create(
+    docentes.findOneDocenteQuery,
     asignaturas.findOneAsignaturaQuery,
     docentes.createQuery,
     docentes.createAsignaturaDocenteQuery,

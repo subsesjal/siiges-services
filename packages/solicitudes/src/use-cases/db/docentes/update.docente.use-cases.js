@@ -28,10 +28,29 @@ const updatedocente = (
   deleteAsignaturaDocenteQuery,
   updateFormacionesDocenteQuery,
   createFormacionesDocenteQuery,
-) => async (identifierObj, { formacionesDocentes, ...changes }) => {
+) => async (identifierObj, changes) => {
   const { id: docenteId } = identifierObj;
 
-  const docente = await findOneDocenteQuery(identifierObj);
+  const include = [
+    { association: 'persona' },
+    {
+      association: 'formacionesDocentes',
+      include: [
+        { association: 'formacion' },
+      ],
+    },
+    {
+      association: 'asignaturasDocentes',
+      include: [
+        { association: 'asignatura' },
+      ],
+    },
+  ];
+
+  let docente = await findOneDocenteQuery(identifierObj, {
+    include,
+    strict: false,
+  });
   checkers.throwErrorIfDataIsFalsy(docente, 'docentes', docenteId);
 
   let personaUpdated;
@@ -43,16 +62,14 @@ const updatedocente = (
     docenteUpdated.dataValues.persona = personaUpdated.dataValues;
   }
 
-  const changesAsignaturasDocentes = changes.asignaturasDocentes;
-
-  if (changesAsignaturasDocentes && changesAsignaturasDocentes.length > 0) {
+  const newAsignaturasDocentesArray = [];
+  if (changes.asignaturasDocentes && changes.asignaturasDocentes.length > 0) {
     const asignaturasDocentes = await findAsignaturasDocentesQuery({
       docenteId,
     });
-    const newAsignaturasDocentesArray = [];
 
     // Find and create relation asignatura - docente
-    await Promise.all(changesAsignaturasDocentes.map(async (asignatura) => {
+    await Promise.all(changes.asignaturasDocentes.map(async (asignatura) => {
       if (asignaturasDocentes.some(({ asignaturaId }) => asignaturaId === asignatura)) {
         const asignaturaDocente = await findOneAsignaturaDocenteQuery({
           asignaturaId: asignatura,
@@ -75,7 +92,7 @@ const updatedocente = (
 
     // Delete relation asignatura - docente
     await Promise.all(asignaturasDocentes.map(async ({ asignaturaId }) => {
-      if (changesAsignaturasDocentes.some((a) => a !== asignaturaId)) {
+      if (changes.asignaturasDocentes.some((a) => a !== asignaturaId)) {
         const deleteAsignaturaDocente = await findOneAsignaturaDocenteQuery({
           asignaturaId,
           docenteId,
@@ -85,13 +102,12 @@ const updatedocente = (
         }
       }
     }));
-
-    docenteUpdated.dataValues.asignaturasDocentes = newAsignaturasDocentesArray;
   }
+  docenteUpdated.dataValues.asignaturasDocentes = newAsignaturasDocentesArray;
 
-  if (formacionesDocentes.length) {
-    const newFormacionesDocentesArray = [];
-    await Promise.all(formacionesDocentes.map(async (formacionDocente) => {
+  const newFormacionesDocentesArray = [];
+  if (changes.formacionesDocentes && changes.formacionesDocentes.length) {
+    await Promise.all(changes.formacionesDocentes.map(async (formacionDocente) => {
       const updateFormacionDocente = await createOrUpdate(
         updateFormacionesDocenteQuery,
         createFormacionesDocenteQuery,
@@ -100,10 +116,16 @@ const updatedocente = (
       );
       newFormacionesDocentesArray.push(updateFormacionDocente);
     }));
-    docenteUpdated.dataValues.formacionesDocentes = newFormacionesDocentesArray;
   }
 
-  return docenteUpdated;
+  docenteUpdated.dataValues.formacionesDocentes = newFormacionesDocentesArray;
+
+  docente = await findOneDocenteQuery(identifierObj, {
+    include,
+    strict: false,
+  });
+
+  return docente;
 };
 
 module.exports = updatedocente;

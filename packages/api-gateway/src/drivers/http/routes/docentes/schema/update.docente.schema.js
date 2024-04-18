@@ -2,7 +2,9 @@ const { docente } = require('./properties/docente');
 const { responseProperties } = require('./properties/responseProperties');
 const { persona } = require('../../usuarios/schema/properties/persona');
 const { asignaturaDocente } = require('./properties/asignaturaDocente');
+const { asignatura } = require('../../asignaturas/schema/properties/asignatura');
 const { formacion } = require('./properties/formacion');
+const { formacionDocente } = require('./properties/formacionDocente');
 
 const { personaId: _, ...docenteBody } = docente;
 const { id: __, domicilioId, ...personaBody } = persona;
@@ -67,8 +69,16 @@ const updateDocenteSchema = {
               items: {
                 properties: {
                   id: { type: 'integer' },
-                  ...formacion,
+                  ...formacionDocente,
                   ...responseProperties,
+                  formacion: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...formacion,
+                      ...responseProperties,
+                    },
+                  },
                 },
               },
             },
@@ -79,6 +89,14 @@ const updateDocenteSchema = {
                   id: { type: 'integer' },
                   ...asignaturaDocente,
                   ...responseProperties,
+                  asignatura: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...asignatura,
+                      ...responseProperties,
+                    },
+                  },
                 },
               },
             },
