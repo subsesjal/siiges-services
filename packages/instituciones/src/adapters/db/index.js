@@ -22,6 +22,8 @@ const {
   FormacionRector,
   FormacionDirector,
   Nivel,
+  UsuarioUsuario,
+  Usuario,
 } = drivers.sequelize.models;
 
 const {
@@ -88,4 +90,6 @@ module.exports = {
   findOneFormacionDirectorQuery: findOneQuery(FormacionDirector),
   findAllFormacionDirectorQuery: findAllQuery(FormacionDirector),
   updateFormacionQuery: updateAndFindQuery(Formacion),
+  findOneUsuarioUsuarioQuery: findOneQuery(UsuarioUsuario),
+  findOneUsuarioQuery: findOneQuery(Usuario),
 };

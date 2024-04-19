@@ -11,6 +11,14 @@ const { responseProperties } = require('./properties/responseProperties');
 const findAllSolicitudesUsuarioSchema = {
   tags: ['Solicitudes'],
   description: 'Return a list of solicitudes by user.',
+  params: {
+    title: 'findOneSolicitudUserSchema',
+    type: 'object',
+    properties: {
+      usuarioId: { type: 'integer' },
+    },
+    required: ['usuarioId'],
+  },
   response: {
     200: {
       type: 'object',

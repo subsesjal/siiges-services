@@ -36,6 +36,8 @@ module.exports = {
   ),
   findSolicitudesUsuario: findSolicitudesUsuario(
     solicitudes.findAllSolicitudesProgramasQuery,
+    solicitudes.findOneUsuarioQuery,
+    solicitudes.findOneUsuarioUsuarioQuery,
   ),
   updateSolicitudPrograma: updateSolicitudPrograma(
     solicitudes.findOneSolicitudQuery,
