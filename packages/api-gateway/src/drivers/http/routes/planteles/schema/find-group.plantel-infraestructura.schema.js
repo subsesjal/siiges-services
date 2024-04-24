@@ -1,4 +1,6 @@
 const { infraestructura } = require('./properties/infraestructura');
+const { asignaturaInfraestructura } = require('./properties/asignaturaInfraestructura');
+const { asignatura } = require('../../asignaturas/schema/properties/asignatura');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findGroupPlantelInfraestructuraSchema = {
@@ -9,7 +11,7 @@ const findGroupPlantelInfraestructuraSchema = {
     properties: {
       plantelId: { type: 'integer' },
     },
-    required: ['plantelId'],
+    required: ['plantelId', 'programaId'],
   },
   response: {
     200: {
@@ -22,6 +24,24 @@ const findGroupPlantelInfraestructuraSchema = {
               id: { type: 'integer' },
               ...infraestructura,
               ...responseProperties,
+              asignaturasInfraestructura: {
+                type: 'array',
+                items: {
+                  properties: {
+                    id: { type: 'integer' },
+                    ...asignaturaInfraestructura,
+                    ...responseProperties,
+                    asignatura: {
+                      type: 'object',
+                      properties: {
+                        id: { type: 'integer' },
+                        ...asignatura,
+                        ...responseProperties,
+                      },
+                    },
+                  },
+                },
+              },
             },
           },
         },

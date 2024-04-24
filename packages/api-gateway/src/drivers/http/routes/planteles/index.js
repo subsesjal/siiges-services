@@ -70,7 +70,7 @@ async function plantelRouter(fastify, opts, next) {
 
   // Infraestructuras
   await fastify.get(
-    '/:plantelId/infraestructuras',
+    '/:plantelId/programas/:programaId/infraestructuras',
     {
       schema: findGroupPlantelInfraestructuraSchema,
       onRequest: [fastify.authenticate],

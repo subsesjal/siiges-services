@@ -24,6 +24,8 @@ module.exports = {
   ),
   findGroupPlantelInfraestructura: findGroupPlantelInfraestructura(
     planteles.findAllInfraestructuraQuery,
+    planteles.findOneInfraestructuraQuery,
+    planteles.findAllInfraestructuraProgramaQuery,
   ),
   findGroupPlantelesUsuario: findGroupPlantelesUsuario(
     planteles.findOneInstitucionQuery,
