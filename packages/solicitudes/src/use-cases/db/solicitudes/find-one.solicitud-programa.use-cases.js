@@ -5,6 +5,7 @@ const findOneSolicitudPrograma = (findOneSolicitudProgramaQuery) => async (ident
     association: 'programa',
     include: [
       { association: 'programaTurnos' },
+      { association: 'evaluacion' },
       {
         association: 'plantel',
         include: [{
