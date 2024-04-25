@@ -25,7 +25,7 @@ module.exports = {
     evaluaciones.updateEvaluacionQuery,
     evaluaciones.findOneProgramaQuery,
     evaluaciones.findOneEvaluadorQuery,
-    evaluaciones.findOneModalidadQuery,
+    evaluaciones.findOneCumplimientodQuery,
     evaluaciones.findOneEvaluacionQuery,
   ),
   findCumplimiento: findCumplimiento(
