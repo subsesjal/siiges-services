@@ -28,6 +28,7 @@ const {
   createUpdatePlantelSeguridadSchema,
   createDirectorSchema,
   updateDirectorSchema,
+  findOnePlantelInfraestructuraSchema,
 } = require('./schema');
 
 async function plantelRouter(fastify, opts, next) {
@@ -70,21 +71,21 @@ async function plantelRouter(fastify, opts, next) {
 
   // Infraestructuras
   await fastify.get(
-    '/:plantelId/infraestructuras',
+    '/:plantelId/infraestructuras/:infraestructuraId',
+    {
+      schema: findOnePlantelInfraestructuraSchema,
+      onRequest: [fastify.authenticate],
+    },
+    plantelesAdapter.findOnePlantelInfraestructura,
+  );
+
+  await fastify.get(
+    '/:plantelId/programas/:programaId/infraestructuras',
     {
       schema: findGroupPlantelInfraestructuraSchema,
       onRequest: [fastify.authenticate],
     },
     plantelesAdapter.findGroupPlantelInfraestructura,
-  );
-
-  await fastify.get(
-    '/usuarios/:usuarioId',
-    {
-      schema: findGroupPlantelesUsuarioSchema,
-      onRequest: [fastify.authenticate],
-    },
-    plantelesAdapter.findGroupPlantelesUsuario,
   );
 
   await fastify.post(
@@ -261,6 +262,15 @@ async function plantelRouter(fastify, opts, next) {
     },
     institucionesAdapter.updateDirectorPlantel,
 
+  );
+
+  await fastify.get(
+    '/usuarios/:usuarioId',
+    {
+      schema: findGroupPlantelesUsuarioSchema,
+      onRequest: [fastify.authenticate],
+    },
+    plantelesAdapter.findGroupPlantelesUsuario,
   );
 
   next();

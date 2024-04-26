@@ -5,6 +5,7 @@ const findGroupPlantelHigiene = require('./find-group.handlers.plantel-higiene.a
 const createPlantelInfraestructura = require('./create.handlers.plantel-infraestructura.adapters');
 const deletePlantelInfraestructura = require('./delete.handlers.plantel-infraestructura.adapters');
 const findGroupPlantelInfraestructura = require('./find-group.handlers.plantel-infraestructura.adapters');
+const findOnePlantelInfraestructura = require('./find-one.handlers.plantel-infraestructura.adapters');
 const findGroupPlantelesUsuario = require('./find-group.handlers.planteles-usuario.adapters');
 const findAllEdificiosNiveles = require('./find-all.handlers.edificios-niveles.adapters');
 const createUpdatePlantelNiveles = require('./create-update.handlers.plantel-niveles.adapters');
@@ -38,4 +39,5 @@ module.exports = {
   findAllFormacionDirector,
   findOneFormacionDirector,
   updateFormacionDirector,
+  findOnePlantelInfraestructura,
 };

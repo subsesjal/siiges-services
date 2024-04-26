@@ -7,10 +7,9 @@ const createPlantelInfraestructura = (
   findOnePlantelQuery,
   findOneProgramaQuery,
   findOneAsignaturaQuery,
-  createPlantelInfraestructuraQuery,
+  createInfraestructuraQuery,
   createInfraestructuraProgramaQuery,
   createAsignaturaInfraestructuraQuery,
-
 ) => async (identifierObj, data) => {
   const { plantelId } = identifierObj;
 
@@ -22,7 +21,7 @@ const createPlantelInfraestructura = (
   const newData = { plantelId, ...data };
 
   if (data.tipoInstalacionId !== AULA_ID) {
-    infraestructura = await createPlantelInfraestructuraQuery(newData);
+    infraestructura = await createInfraestructuraQuery(newData);
   } else if (newData.programaId) {
     const { programaId } = newData;
 
@@ -31,7 +30,7 @@ const createPlantelInfraestructura = (
     checkers.throwErrorIfDataIsFalsy(programa, 'programas', programaId);
 
     // create infraestructura
-    infraestructura = await createPlantelInfraestructuraQuery(newData);
+    infraestructura = await createInfraestructuraQuery(newData);
 
     // create infraestructura - programa
     const infraestructuraPrograma = await createInfraestructuraProgramaQuery({

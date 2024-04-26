@@ -22,7 +22,8 @@ module.exports = {
   findOneInfraestructuraQuery: findOneQuery(Infraestructura),
   createInfraestructuraQuery: createQuery(Infraestructura),
   deleteInfraestructuraQuery: deleteAndFindQuery(Infraestructura),
-  createInfraestructuraProgramaQuery: createQuery(InfraestructuraPrograma),
   createAsignaturaInfraestructuraQuery: createQuery(AsignaturaInfraestructura),
   findAllInfraestructuraQuery: findAllQuery(Infraestructura),
+  findAllInfraestructuraProgramaQuery: findAllQuery(InfraestructuraPrograma),
+  createInfraestructuraProgramaQuery: createQuery(InfraestructuraPrograma),
 };

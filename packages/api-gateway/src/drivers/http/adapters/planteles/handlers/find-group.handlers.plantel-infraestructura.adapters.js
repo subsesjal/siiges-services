@@ -3,12 +3,12 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function findGroupPlantelInfraestructura(req, reply) {
   try {
-    const { plantelId } = req.params;
+    const { plantelId, programaId } = req.params;
 
     Logger.info(`[infraestructura]: Getting infraestructura by plantel with id: ${plantelId}`);
     const plantel = await this.solicitudServices.findGroupPlantelInfraestructura({
       plantelId,
-
+      programaId,
     });
 
     return reply
