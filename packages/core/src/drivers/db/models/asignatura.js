@@ -112,7 +112,7 @@ class Asignatura extends Model {
     this.belongsTo(models.Programa, { as: 'programa' });
     this.belongsTo(models.Grado, { as: 'grado' });
     this.hasMany(models.AsignaturaDocente, { as: 'asignaturasDocentes', foreignKey: 'asignaturaId' });
-    this.hasMany(models.AsignaturaInfraestructura, { as: 'asignaturasInfraestructuras', foreignKey: 'asignaturaId' });
+    this.hasMany(models.AsignaturaInfraestructura, { as: 'asignaturasInfraestructura', foreignKey: 'asignaturaId' });
   }
 
   static config(sequelize) {

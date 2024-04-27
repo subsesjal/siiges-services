@@ -3,6 +3,7 @@ const { Op } = require('sequelize');
 const findGroupPlantelInfraestructura = (
   findAllInfraestructuraQuery,
   findOneInfraestructuraQuery,
+  findOneProgramaQuery,
   findAllProgramaInfraestructuraQuery,
 ) => async (identifierObj) => {
   const AULA_ID = 1;
@@ -26,21 +27,27 @@ const findGroupPlantelInfraestructura = (
   const infraestructuras = plantelInfraestructuras
     .map((infraestructura) => infraestructura.toJSON());
 
-  const programaInfraestructuras = await findAllProgramaInfraestructuraQuery({
-    programaId,
-  });
+  // find programa
+  const programa = await findOneProgramaQuery({ id: programaId, plantelId });
+  let infraestructurasAsignaturas = [];
 
-  const infraestructurasAsignaturas = await Promise.all(programaInfraestructuras
-    .map(async (programaInfraestructura) => {
-      const plantelInfraestructuraAsignatura = await findOneInfraestructuraQuery({
-        id: programaInfraestructura.infraestructuraId,
-      }, {
-        include,
-        strict: false,
-      });
+  if (programa) {
+    const programaInfraestructuras = await findAllProgramaInfraestructuraQuery({
+      programaId,
+    });
 
-      return plantelInfraestructuraAsignatura.toJSON();
-    }));
+    infraestructurasAsignaturas = await Promise.all(programaInfraestructuras
+      .map(async (programaInfraestructura) => {
+        const plantelInfraestructuraAsignatura = await findOneInfraestructuraQuery({
+          id: programaInfraestructura.infraestructuraId,
+        }, {
+          include,
+          strict: false,
+        });
+
+        return plantelInfraestructuraAsignatura.toJSON();
+      }));
+  }
 
   return [...infraestructuras, ...infraestructurasAsignaturas];
 };

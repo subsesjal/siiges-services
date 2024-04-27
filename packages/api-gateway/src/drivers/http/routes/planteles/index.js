@@ -29,6 +29,7 @@ const {
   createDirectorSchema,
   updateDirectorSchema,
   findOnePlantelInfraestructuraSchema,
+  updateInfraestructuraSchema,
 } = require('./schema');
 
 async function plantelRouter(fastify, opts, next) {
@@ -95,6 +96,15 @@ async function plantelRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     plantelesAdapter.createPlantelInfraestructura,
+  );
+
+  await fastify.patch(
+    '/:plantelId/infraestructuras/:infraestructuraId',
+    {
+      schema: updateInfraestructuraSchema,
+      onRequest: [fastify.authenticate],
+    },
+    plantelesAdapter.updateInfraestructura,
   );
 
   await fastify.delete(

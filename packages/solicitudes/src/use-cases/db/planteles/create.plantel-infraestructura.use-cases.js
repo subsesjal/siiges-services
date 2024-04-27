@@ -26,7 +26,7 @@ const createPlantelInfraestructura = (
     const { programaId } = newData;
 
     // find programa
-    const programa = await findOneProgramaQuery({ id: programaId });
+    const programa = await findOneProgramaQuery({ id: programaId, plantelId });
     checkers.throwErrorIfDataIsFalsy(programa, 'programas', programaId);
 
     // create infraestructura
@@ -41,9 +41,9 @@ const createPlantelInfraestructura = (
     infraestructura.dataValues.infraestructuraPrograma = infraestructuraPrograma;
 
     // save asignaturas - infraestructura
-    const newAsignaturasInfraestructuraArray = [];
+    const asignaturasInfraestructuraArray = [];
     await Promise.all(
-      newData.asignaturasInfraestructuras.map(async (asignaturaInfraestructura) => {
+      newData.asignaturasInfraestructura.map(async (asignaturaInfraestructura) => {
         const asignatura = await findOneAsignaturaQuery({
           id: asignaturaInfraestructura,
           programaId,
@@ -53,12 +53,12 @@ const createPlantelInfraestructura = (
             asignaturaId: asignaturaInfraestructura,
             infraestructuraId: infraestructura.id,
           });
-          newAsignaturasInfraestructuraArray.push(newAsignaturaInfraestructura);
+          asignaturasInfraestructuraArray.push(newAsignaturaInfraestructura);
         }
       }),
     );
 
-    infraestructura.dataValues.asignaturasInfraestructuras = newAsignaturasInfraestructuraArray;
+    infraestructura.dataValues.asignaturasInfraestructura = asignaturasInfraestructuraArray;
   } else {
     // error if tipo instalacion programaId = null
     throw boom.badRequest(
