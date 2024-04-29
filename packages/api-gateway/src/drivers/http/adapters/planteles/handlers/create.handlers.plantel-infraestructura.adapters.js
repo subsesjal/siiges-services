@@ -6,7 +6,7 @@ async function createPlantelInfraestructura(req, reply) {
     const { plantelId } = req.params;
     const { ...data } = req.body;
 
-    Logger.info('[api/higiene/create]: creating link between plantel and higiene');
+    Logger.info('[api/higiene/create]: creating link between plantel and infraestructura');
     const plantelInfraestructura = await this.solicitudServices.createPlantelInfraestructura({
       plantelId,
     }, data);

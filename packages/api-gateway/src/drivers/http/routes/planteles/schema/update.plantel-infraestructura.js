@@ -3,30 +3,34 @@ const { asignaturaInfraestructura } = require('./properties/asignaturaInfraestru
 const { infraestructuraPrograma } = require('./properties/infraestructuraPrograma');
 const { responseProperties } = require('./properties/responseProperties');
 
-const createPlantelInfraestructuraSchema = {
+const updateInfraestructuraSchema = {
   tags: ['Plantel'],
-  description: 'Given an object with plantel infraestructura required data, then save a record of infraestrucutra-plantel in database.',
+  description: 'Given an object with plantel infraestructura required data and the id of the infraestructura, then update a record of infraestrucutra-plantel in database.',
   params: {
-    title: 'createInfraestructuraSchema',
+    title: 'updateInfraestructuraSchema',
     type: 'object',
     properties: {
       plantelId: { type: 'integer' },
     },
-    required: ['plantelId'],
+    required: ['plantelId', 'infraestructuraId'],
   },
   body: {
     type: 'object',
     properties: {
-      ...infraestructura,
-      asignaturasInfraestructuras: {
+      programaId: { type: 'integer' },
+      nombre: { type: 'string' },
+      ubicacion: { type: 'string' },
+      capacidad: { type: 'integer' },
+      metros: { type: 'integer' },
+      recursos: { type: 'string' },
+      asignaturasInfraestructura: {
         type: 'array',
-        minItems: 1,
         items: {
           type: 'integer',
         },
       },
     },
-    required: ['tipoInstalacionId', 'nombre', 'ubicacion', 'capacidad', 'metros'],
+    required: ['programaId'],
   },
   response: {
     201: {
@@ -38,7 +42,7 @@ const createPlantelInfraestructuraSchema = {
             id: { type: 'integer' },
             ...infraestructura,
             ...responseProperties,
-            asignaturasInfraestructuras: {
+            asignaturasInfraestructura: {
               type: 'array',
               items: {
                 properties: {
@@ -63,4 +67,4 @@ const createPlantelInfraestructuraSchema = {
   },
 };
 
-module.exports = createPlantelInfraestructuraSchema;
+module.exports = updateInfraestructuraSchema;

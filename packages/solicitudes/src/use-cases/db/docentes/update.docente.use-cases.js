@@ -92,7 +92,7 @@ const updatedocente = (
 
     // Delete relation asignatura - docente
     await Promise.all(asignaturasDocentes.map(async ({ asignaturaId }) => {
-      if (changes.asignaturasDocentes.some((a) => a !== asignaturaId)) {
+      if (changes.asignaturasDocentes.every((a) => a !== asignaturaId)) {
         const deleteAsignaturaDocente = await findOneAsignaturaDocenteQuery({
           asignaturaId,
           docenteId,
