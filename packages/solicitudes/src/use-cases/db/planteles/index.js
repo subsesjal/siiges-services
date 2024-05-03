@@ -19,6 +19,7 @@ module.exports = {
     planteles.createInfraestructuraQuery,
     planteles.createInfraestructuraProgramaQuery,
     planteles.createAsignaturaInfraestructuraQuery,
+    planteles.findOneAsignaturaInfraestructuraQuery,
   ),
   updateInfraestructura: updateInfraestructura(
     planteles.findOnePlantelQuery,

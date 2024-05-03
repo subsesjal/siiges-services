@@ -10,6 +10,7 @@ const createPlantelInfraestructura = (
   createInfraestructuraQuery,
   createInfraestructuraProgramaQuery,
   createAsignaturaInfraestructuraQuery,
+  findOneAsignaturaInfraestructuraQuery,
 ) => async (identifierObj, data) => {
   const { plantelId } = identifierObj;
 
@@ -40,6 +41,7 @@ const createPlantelInfraestructura = (
 
     infraestructura.dataValues.infraestructuraPrograma = infraestructuraPrograma;
 
+    const include = [{ association: 'asignatura' }];
     // save asignaturas - infraestructura
     const asignaturasInfraestructuraArray = [];
     await Promise.all(
@@ -49,9 +51,16 @@ const createPlantelInfraestructura = (
           programaId,
         });
         if (asignatura) {
-          const newAsignaturaInfraestructura = await createAsignaturaInfraestructuraQuery({
+          await createAsignaturaInfraestructuraQuery({
             asignaturaId: asignaturaInfraestructura,
             infraestructuraId: infraestructura.id,
+          });
+
+          const newAsignaturaInfraestructura = await findOneAsignaturaInfraestructuraQuery({
+            asignaturaId: asignaturaInfraestructura,
+            infraestructuraId: infraestructura.id,
+          }, {
+            include,
           });
           asignaturasInfraestructuraArray.push(newAsignaturaInfraestructura);
         }

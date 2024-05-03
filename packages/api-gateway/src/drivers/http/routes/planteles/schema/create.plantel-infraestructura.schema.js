@@ -2,6 +2,7 @@ const { infraestructura } = require('./properties/infraestructura');
 const { asignaturaInfraestructura } = require('./properties/asignaturaInfraestructura');
 const { infraestructuraPrograma } = require('./properties/infraestructuraPrograma');
 const { responseProperties } = require('./properties/responseProperties');
+const { asignatura } = require('../../asignaturas/schema/properties/asignatura');
 
 const createPlantelInfraestructuraSchema = {
   tags: ['Plantel'],
@@ -45,6 +46,14 @@ const createPlantelInfraestructuraSchema = {
                   id: { type: 'integer' },
                   ...asignaturaInfraestructura,
                   ...responseProperties,
+                  asignatura: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...asignatura,
+                      ...responseProperties,
+                    },
+                  },
                 },
               },
             },
