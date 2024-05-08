@@ -100,6 +100,11 @@ const { PRESUPUESTO_TABLE, PresupuestoSchema } = require('../models/presupuesto'
 const { TIPO_PRESUPUESTO_TABLE, TipoPresupuestoSchema } = require('../models/tipoPresupuesto');
 const { TIPO_RECURSO_PRESUPUESTO_TABLE, TipoRecursoPresupuestoSchema } = require('../models/tipoRecursoPresupuesto');
 const { TIPO_EGRESO_TABLE, TipoEgresoSchema } = require('../models/tipoEgreso');
+const { ESTATUS_CERTIFICADO_TABLE, EstatusCertificadoSchema } = require('../models/estatusCertificado');
+const { FOLIOS_TABLE, FoliosSchema } = require('../models/folios');
+const { GRADO_ACADEMICO_TABLE, GradoAcademicoSchema } = require('../models/gradoAcademico');
+const { TIPO_CERTIFICADO_TABLE, TipoCertificadoSchema } = require('../models/tipoCertificado');
+const { TIPO_DOCUMENTO_TABLE, TipoDocumentoSchema } = require('../models/tipoDocumento');
 
 module.exports = {
   async up(queryInterface) {
@@ -217,6 +222,11 @@ module.exports = {
     await queryInterface.createTable(TIPO_RECURSO_PRESUPUESTO_TABLE, TipoRecursoPresupuestoSchema);
     await queryInterface.createTable(PRESUPUESTO_EGRESO_TABLE, PresupuestoEgresoSchema);
     await queryInterface.createTable(PRESUPUESTO_TABLE, PresupuestoSchema);
+    await queryInterface.createTable(ESTATUS_CERTIFICADO_TABLE, EstatusCertificadoSchema);
+    await queryInterface.createTable(FOLIOS_TABLE, FoliosSchema);
+    await queryInterface.createTable(GRADO_ACADEMICO_TABLE, GradoAcademicoSchema);
+    await queryInterface.createTable(TIPO_CERTIFICADO_TABLE, TipoCertificadoSchema);
+    await queryInterface.createTable(TIPO_DOCUMENTO_TABLE, TipoDocumentoSchema);
   },
 
   async down(queryInterface) {
@@ -323,5 +333,10 @@ module.exports = {
     await queryInterface.dropTable(TIPO_PRESUPUESTO_TABLE);
     await queryInterface.dropTable(TIPO_RECURSO_PRESUPUESTO_TABLE);
     await queryInterface.dropTable(TIPO_EGRESO_TABLE);
+    await queryInterface.dropTable(ESTATUS_CERTIFICADO_TABLE);
+    await queryInterface.dropTable(FOLIOS_TABLE);
+    await queryInterface.dropTable(GRADO_ACADEMICO_TABLE);
+    await queryInterface.dropTable(TIPO_CERTIFICADO_TABLE);
+    await queryInterface.dropTable(TIPO_DOCUMENTO_TABLE);
   },
 };
