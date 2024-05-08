@@ -76,45 +76,37 @@ const ValidacionSchema = {
   },
   estatus: {
     type: DataTypes.STRING,
-    allowNull: false,
+    defaultValue: 0,
   },
   fechaExpedicion: {
-    allowNull: false,
     type: DataTypes.DATE,
     field: 'fecha_expedicion',
   },
   nombreInstitucionEmisora: {
-    allowNull: false,
     type: DataTypes.STRING,
     field: 'nombre_institucion_emisora',
   },
   claveCentroTrabajoEmisor: {
-    allowNull: false,
     type: DataTypes.STRING,
     field: 'clave_centro_trabajo_emisor',
   },
   fechaInicioAntecedente: {
-    allowNull: false,
     type: DataTypes.DATE,
     field: 'fecha_inicio_antecedente',
   },
   fechaFinAntecedente: {
-    allowNull: false,
     type: DataTypes.DATE,
     field: 'fecha_fin_antecedente',
   },
   cedulaProfesional: {
-    allowNull: false,
     type: DataTypes.STRING,
     field: 'cedula_profesional',
   },
   archivoValidacion: {
-    allowNull: false,
     type: DataTypes.STRING,
     field: 'archivo_validaciOn',
   },
   fechaValidacion: {
-    allowNull: false,
     type: DataTypes.DATE,
     field: 'fecha_validacion',
   },
