@@ -17,7 +17,15 @@ const createValidacionSchema = {
     properties: {
       ...data,
     },
-    required: ['nivelId', 'estadoId', 'usuarioId'],
+    required: [
+      'alumnoId',
+      'usuarioId',
+      'estadoId',
+      'nivelId',
+      'tipoValidacionId',
+      'situacionValidacionId',
+      'folio',
+    ],
   },
   response: {
     201: {

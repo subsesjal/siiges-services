@@ -103,7 +103,7 @@ async function asignaturaRouter(fastify, opts, next) {
     },
     alumnosAdapter.updateAlumnoValidacion,
   );
- 
+
   await fastify.get(
     '/grupos/:grupoId/asignatura/:asignaturaId',
     {
