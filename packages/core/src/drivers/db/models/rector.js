@@ -53,6 +53,7 @@ class Rector extends Model {
   static associate(models) {
     this.belongsTo(models.Institucion, { as: 'institucion' });
     this.belongsTo(models.Persona, { as: 'persona' });
+    this.hasMany(models.FormacionRector, { as: 'formacionesRectores', foreignKey: 'rectorId' });
   }
 
   static config(sequelize) {

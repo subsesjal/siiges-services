@@ -53,6 +53,7 @@ class Director extends Model {
   static associate(models) {
     this.belongsTo(models.Plantel, { as: 'plantel' });
     this.belongsTo(models.Persona, { as: 'persona' });
+    this.hasMany(models.FormacionDirector, { as: 'formacionesDirectores', foreignKey: 'directorId' });
   }
 
   static config(sequelize) {
