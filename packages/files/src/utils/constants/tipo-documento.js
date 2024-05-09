@@ -151,6 +151,14 @@ const tipoDocumentoObj = [
     id: 38,
     name: 'DICTAMEN_IMPI',
   },
+  {
+    id: 39,
+    name: 'FDA02',
+  },
+  {
+    id: 40,
+    name: 'ARCHIVO_VALIDACION_ALUMNO',
+  },
 ];
 
 module.exports = tipoDocumentoObj;

@@ -35,6 +35,8 @@
   "dependencies": {
     "@siiges-services/core": "^1.0.0",
     "@siiges-services/shared": "^0.0.1",
-    "mime-types": "^2.1.35"
+    "mime-types": "^2.1.35",
+    "jspdf-autotable": "^3.8.2",
+    "jspdf": "^2.5.1"
   }
 }

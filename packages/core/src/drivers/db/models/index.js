@@ -264,15 +264,15 @@ function setupModels(sequelize) {
   TipoInstalacion.associate(sequelize.models);
   Docente.associate(sequelize.models);
   Area.associate(sequelize.models);
-  Asignatura.associate(sequelize.models);
-  AsignaturaDocente.associate(sequelize.models);
   Seccion.associate(sequelize.models);
   SolicitudSeccion.associate(sequelize.models);
   Higiene.associate(sequelize.models);
   PlantelHigiene.associate(sequelize.models);
+  AsignaturaDocente.associate(sequelize.models);
+  AsignaturaInfraestructura.associate(sequelize.models);
+  Asignatura.associate(sequelize.models);
   Infraestructura.associate(sequelize.models);
   InfraestructuraPrograma.associate(sequelize.models);
-  AsignaturaInfraestructura.associate(sequelize.models);
   EstatusInspeccion.associate(sequelize.models);
   InspeccionApartado.associate(sequelize.models);
   InspeccionCategoria.associate(sequelize.models);

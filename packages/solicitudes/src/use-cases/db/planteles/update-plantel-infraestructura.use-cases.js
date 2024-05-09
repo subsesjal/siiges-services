@@ -54,13 +54,14 @@ const updateInfraestructura = (
         infraestructuraId,
       });
 
+      const include = [{ association: 'asignatura' }];
       // Find and create relation asignatura - infraestructura
       await Promise.all(data.asignaturasInfraestructura.map(async (asignatura) => {
         if (asignaturasInfraestructura.some(({ asignaturaId }) => asignaturaId === asignatura)) {
           const asignaturaInfraestructura = await findOneAsignaturaInfraestructuraQuery({
             asignaturaId: asignatura,
             infraestructuraId,
-          });
+          }, { include });
           newAsignaturasInfraestructuraArray.push(asignaturaInfraestructura);
         } else {
           const asignaturaFound = await findOneAsignaturaQuery({
@@ -68,9 +69,15 @@ const updateInfraestructura = (
             programaId,
           });
           if (asignaturaFound) {
-            const newAsignaturaInfraestructura = await createAsignaturaInfraestructuraQuery({
+            await createAsignaturaInfraestructuraQuery({
               asignaturaId: asignatura,
               infraestructuraId,
+            });
+            const newAsignaturaInfraestructura = await findOneAsignaturaInfraestructuraQuery({
+              asignaturaId: asignatura,
+              infraestructuraId,
+            }, {
+              include,
             });
             newAsignaturasInfraestructuraArray.push(newAsignaturaInfraestructura);
           }
