@@ -6,6 +6,12 @@ const { responseProperties } = require('./properties/responseProperties');
 const createSolicitudProgramaSchema = {
   tags: ['Solicitudes'],
   description: 'Given an object with solicitud and programa required data, then save the first time a new solicitud in database.',
+  querystring: {
+    type: 'object',
+    properties: {
+      solicitudId: { type: 'integer' },
+    },
+  },
   body: {
     type: 'object',
     properties: {
@@ -23,10 +29,8 @@ const createSolicitudProgramaSchema = {
             },
           },
         },
-        required: ['cicloId', 'nivelId', 'modalidadId', 'plantelId', 'programaTurnos'],
       },
     },
-    required: ['tipoSolicitudId', 'usuarioId', 'estatusSolicitudId', 'programa'],
     additionalProperties: false,
   },
   response: {
