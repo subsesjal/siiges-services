@@ -5,7 +5,7 @@ const errorHandler = require('../../../utils/errorHandler');
 async function createSolicitudPrograma(req, reply) {
   try {
     const { ...data } = req.body;
-    const { solicitudId } = req.params;
+    const { solicitudId } = req.query;
     const { tipoSolicitudId } = data;
 
     Logger.info('[solicitudes]: Creating solicitud');
