@@ -9,7 +9,10 @@ const findAllInspectoresProgramas = (findAllInspectoresQuery) => async () => {
     },
   ];
 
-  const inspectores = await findAllInspectoresQuery(null, { include });
+  const inspectores = await findAllInspectoresQuery(null, {
+    include,
+    strict: false,
+  });
 
   // Iterate through each inspector and calculate inspeccionesCompletadas and inspeccionesPendientes
   const modifiedInspectores = inspectores.map((inspector) => {
