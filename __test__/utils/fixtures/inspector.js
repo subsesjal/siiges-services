@@ -18,7 +18,9 @@ const solicitud = {
 const inspectorProgramas = {
   programaId: 3,
   inspectorId: 1,
-  inspeccionId: 1,
+  estatusInspeccionId: 1,
+  fechaAsignada: '2024-10-28T15:24:07.000Z',
+  folio: 'SUBSES.DISE.21.374',
 };
 
 const inspectorProgramasError = {
