@@ -37,9 +37,10 @@ module.exports = {
   ),
   createInspectorProgramas: createInspectorProgramas(
     inspecciones.createInspectorProgramasQuery,
+    inspecciones.createInspeccionQuery,
     inspecciones.findOneInspectorQuery,
     inspecciones.findOneProgramasQuery,
-    inspecciones.findOneInspeccionQuery,
+    inspecciones.findOneInspectoresProgramasQuery,
   ),
   findAllInspectores: findAllInspectores(
     inspecciones.findAllInspectoresQuery,
