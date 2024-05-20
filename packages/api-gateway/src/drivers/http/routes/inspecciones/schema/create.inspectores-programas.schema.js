@@ -1,17 +1,21 @@
-const { inspectoresProgramas } = require('./properties/inspectorPrograma');
+const { inspectorPrograma } = require('./properties/inspectorPrograma');
 const { responseProperties } = require('./properties/responseProperties');
 
 const createInspectoresProgramasSchema = {
   tags: ['Inspecciones'],
-  description: 'Create a new inspector program',
+  description: 'Create a new inspector programa',
   body: {
     type: 'object',
     properties: {
-      ...inspectoresProgramas,
+      inspectorId: { type: 'integer' },
+      programaId: { type: 'integer' },
+      estatusInspeccionId: { type: 'integer' },
+      fechaAsignada: { type: 'string', format: 'date-time' },
+      folio: { type: 'string' },
     },
-    required: ['inspectorId', 'programaId', 'inspeccionId'],
+    required: ['inspectorId', 'programaId', 'estatusInspeccionId', 'fechaAsignada', 'folio'],
   },
-  reponse: {
+  response: {
     201: {
       type: 'object',
       properties: {
@@ -19,7 +23,7 @@ const createInspectoresProgramasSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...inspectoresProgramas,
+            ...inspectorPrograma,
             ...responseProperties,
           },
         },
