@@ -35,13 +35,13 @@ describe('Test for inspectores', () => {
         .send(inspectorProgramas)
         .set(inspector.headers);
       expect(statusCode).toEqual(statusCodeName.created);
-      expect(body.data.inspectorId).toEqual(inspectorProgramas.inspeccionId);
+      expect(body.data.programaId).toEqual(inspectorProgramas.programaId);
     });
     it('should a error', async () => {
       const { statusCode } = await api.post('/api/v1/inspecciones/inspectores-programas')
         .send(inspectorProgramasError)
         .set(inspector.headers);
-      expect(statusCode).toEqual(statusCodeName.notFound);
+      expect(statusCode).toEqual(statusCodeName.conflict);
     });
   });
   describe('[GET] /api/v1/inspecciones/inspectores-programass', () => {
