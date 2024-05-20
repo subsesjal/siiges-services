@@ -3,11 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <title>SIIGES</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #333;
+    }
+    h1 {
+      color: #333;
+    }
+    p {
+      color: #333;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    th {
+      background-color: #f8f8f8;
+    }
+  </style>
 </head>
 <body>
   <h1>Observaciones añadidas a tu solicitud</h1>
-  <p>Estimada institución {nombre},</p>
-  <p>Favor de atender las observaciones de la solicitud {folio}.</p>
+  <p>Estimada institución <strong>{nombre}</strong>,</p>
+  <p>Favor de atender las observaciones de la solicitud <strong>{folio}</strong>.</p>
   <table style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">
     <thead>
       <tr tyle="background-color: #f8f8f8;">
@@ -24,6 +48,6 @@
   <p>Saludos cordiales.</p>
   <p>Atentamente,</p>
   <p>El equipo de SIIGES</p>
-  <p>Nota: Este es un mensaje generado automáticamente, por favor no respondas a esta dirección de correo electrónico.</p>
+  <h3 style="color: red;"><b>Nota: Este es un mensaje generado automáticamente, por favor no respondas a esta dirección de correo electrónico.</b></h3>
 </body>
 </html>
