@@ -25,8 +25,10 @@ const inspectorProgramas = {
 
 const inspectorProgramasError = {
   programaId: 3,
-  inspectorId: 1,
-  inspeccionId: 100,
+  inspectorId: 100,
+  estatusInspeccionId: 1,
+  fechaAsignada: '2024-10-28T15:24:07.000Z',
+  folio: 'SUBSES.DISE.21.374',
 };
 
 const createInpector = async () => {
