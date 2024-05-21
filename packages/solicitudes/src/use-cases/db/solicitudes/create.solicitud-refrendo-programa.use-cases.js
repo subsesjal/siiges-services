@@ -67,7 +67,12 @@ const createRefrendoSolicitudPrograma = (
   const folioSolcitud = createFolioSolicitud(totalSolicitudes, solicitudDataWithoutIds
     .programa.nivelId);
 
-  const newData = { ...solicitudDataWithoutIds, folio: folioSolcitud, tipoSolicitudId: 2 };
+  const newData = {
+    ...solicitudDataWithoutIds,
+    folio: folioSolcitud,
+    tipoSolicitudId: 2,
+    estatusSolicitudId: 2,
+  };
 
   // Create a new solicitud object with the extracted data
   const newSolicitud = await createSolicitudProgramaQuery({
