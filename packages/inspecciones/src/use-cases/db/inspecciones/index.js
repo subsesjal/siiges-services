@@ -51,8 +51,8 @@ module.exports = {
     inspecciones.deleteInspectoresProgramasQuery,
   ),
   updateInspectoresProgramas: updateInspectoresProgramas(
-    inspecciones.findOneInspectoresProgramasQuery,
-    inspecciones.updateInspectoresProgramasQuery,
+    inspecciones.findOneInspeccionQuery,
+    inspecciones.updateInspeccionQuery,
   ),
   findOneInspectoresProgramas: findOneInspectoresProgramas(
     inspecciones.findOneInspectorQuery,
