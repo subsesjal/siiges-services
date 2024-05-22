@@ -1,23 +1,5 @@
-const {
-  createInspeccion,
-  findAllInspeccionPreguntas,
-  createInspeccionRespuestas,
-  deleteInspeccion,
-  createInspeccionObservacion,
-  createInspectorProgramas,
-  findAllInspectores,
-  deleteInspectoresProgramas,
-  updateInspectoresProgramas,
-} = require('./db/inspecciones');
+const inspecciones = require('./db/inspecciones');
 
 module.exports = {
-  createInspeccion,
-  findAllInspeccionPreguntas,
-  createInspeccionRespuestas,
-  createInspeccionObservacion,
-  deleteInspeccion,
-  createInspectorProgramas,
-  findAllInspectores,
-  deleteInspectoresProgramas,
-  updateInspectoresProgramas,
+  ...inspecciones,
 };
