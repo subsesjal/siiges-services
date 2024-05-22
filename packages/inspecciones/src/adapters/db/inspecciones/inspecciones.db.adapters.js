@@ -41,4 +41,5 @@ module.exports = {
   findAllInspectoresProgramasQuery: findAllQuery(InspectorPrograma),
   deleteInspectoresProgramasQuery: deleteAndFindQuery(InspectorPrograma),
   updateInspectoresProgramasQuery: updateAndFindQuery(InspectorPrograma),
+  updateInspeccionQuery: updateAndFindQuery(Inspeccion),
 };
