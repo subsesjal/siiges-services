@@ -6,6 +6,7 @@ const deleteInspeccionSchema = require('./delete.inspeccion.schema');
 const createInspectoresProgramasSchema = require('./create.inspectores-programas.schema');
 const findAllInspectoresProgramasSchema = require('./find-all.inspectores-programas.schema');
 const { deleteInspectoresProgramasSchema } = require('./delete.inspectores-programas.schema');
+const { findOneInspectoresProgramasSchema } = require('./find-one.inspectores-programas.schema');
 
 module.exports = {
   createInspeccionSchema,
@@ -16,4 +17,5 @@ module.exports = {
   createInspectoresProgramasSchema,
   findAllInspectoresProgramasSchema,
   deleteInspectoresProgramasSchema,
+  findOneInspectoresProgramasSchema,
 };
