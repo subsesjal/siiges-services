@@ -7,6 +7,7 @@ const createInspectoresProgramas = require('./create.handlers.inspectores-progra
 const findAllInspectoresProgramas = require('./find-all.handlers.inspectores-programas.adapters');
 const { deleteInspectoresProgramas } = require('./delete.handlers.inspectores-programas.adpaters');
 const { updateInspectoresProgramas } = require('./update.handlers.inspectores-programas.adapters');
+const { findOneInspectoresProgramas } = require('./find-one.handlers.inspectores-programas.adpaters');
 
 module.exports = {
   createInspeccion,
@@ -18,4 +19,5 @@ module.exports = {
   findAllInspectoresProgramas,
   deleteInspectoresProgramas,
   updateInspectoresProgramas,
+  findOneInspectoresProgramas,
 };
