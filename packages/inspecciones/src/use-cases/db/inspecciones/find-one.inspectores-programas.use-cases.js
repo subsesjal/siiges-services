@@ -4,9 +4,15 @@ const findOneInspectoresProgramas = (
   findOneInspectorQuery,
   findInspectoresProgramasQuery,
   findAllInspeccionQuery,
-) => async ({ inspectorId }) => {
-  const inspector = await findOneInspectorQuery({ id: inspectorId });
-  checkers.throwErrorIfDataIsFalsy(inspector, 'Inspectores-programas', inspectorId);
+  findOneUsuarioQuery,
+) => async ({ usuarioId }) => {
+  const persona = await findOneUsuarioQuery({ id: usuarioId });
+  checkers.throwErrorIfDataIsFalsy(persona, 'Usuarios', usuarioId);
+  const { personaId } = persona;
+
+  const inspector = await findOneInspectorQuery({ personaId });
+  checkers.throwErrorIfDataIsFalsy(inspector, 'Inspector usuario', usuarioId);
+  const { id: inspectorId } = inspector;
 
   const inspeccionPrograma = await findInspectoresProgramasQuery({ inspectorId });
   checkers.throwErrorIfDataIsFalsy(inspeccionPrograma, 'Inspectores-programas', inspectorId);

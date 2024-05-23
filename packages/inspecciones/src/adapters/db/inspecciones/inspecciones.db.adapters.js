@@ -9,6 +9,7 @@ const {
   InspectorPrograma,
   Programa,
   Inspector,
+  Usuario,
 } = models;
 
 const {
@@ -42,4 +43,5 @@ module.exports = {
   deleteInspectoresProgramasQuery: deleteAndFindQuery(InspectorPrograma),
   updateInspectoresProgramasQuery: updateAndFindQuery(InspectorPrograma),
   updateInspeccionQuery: updateAndFindQuery(Inspeccion),
+  findOneUsuarioQuery: findOneQuery(Usuario),
 };
