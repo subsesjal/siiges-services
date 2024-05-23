@@ -78,7 +78,7 @@ async function inspeccionRouter(fastify, opts, next) {
   );
 
   await fastify.get(
-    '/inspectores-programas/:inspectorId',
+    '/inspectores-programas/:usuarioId',
     {
       schema: findOneInspectoresProgramasSchema,
       onRequest: [fastify.authenticate],

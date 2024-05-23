@@ -58,5 +58,6 @@ module.exports = {
     inspecciones.findOneInspectorQuery,
     inspecciones.findAllInspectoresProgramasQuery,
     inspecciones.findAllInspeccionQuery,
+    inspecciones.findOneUsuarioQuery,
   ),
 };

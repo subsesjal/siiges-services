@@ -7,9 +7,9 @@ const findOneInspectoresProgramasSchema = {
     title: 'find One Inspector Program',
     type: 'object',
     properties: {
-      inspectorId: { type: 'integer' },
+      usuarioId: { type: 'integer' },
     },
-    required: ['inspectorId'],
+    required: ['usuarioId'],
   },
   response: {
     200: {
