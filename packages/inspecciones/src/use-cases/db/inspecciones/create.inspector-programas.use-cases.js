@@ -7,8 +7,10 @@ const createInspectorProgramas = (
   findOneInspectorQuery,
   findOneProgramaQuery,
   findOneInspectoresProgramasQuery,
+  updateSolicitudQuery,
 ) => async (data) => {
   const { programaId, inspectorId } = data;
+  const ESTATUS_INSPECCION_FISICA = 7;
 
   const inspectorPrograma = await findOneInspectoresProgramasQuery(
     { programaId },
@@ -33,7 +35,12 @@ const createInspectorProgramas = (
   });
   checkers.throwErrorIfDataIsFalsy(newInspectorProgramas, 'inspectoresProgramas', newInspectorProgramas.id);
 
-  return newInspectorProgramas;
+  await updateSolicitudQuery(
+    { id: programa.solicitudId },
+    { estatusSolicitudId: ESTATUS_INSPECCION_FISICA },
+  );
+
+  return programa;
 };
 
 module.exports = createInspectorProgramas;
