@@ -40,7 +40,7 @@ const createInspectorProgramas = (
     { estatusSolicitudId: ESTATUS_INSPECCION_FISICA },
   );
 
-  return programa;
+  return newInspectorProgramas;
 };
 
 module.exports = createInspectorProgramas;
