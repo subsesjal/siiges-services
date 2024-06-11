@@ -100,6 +100,7 @@ const { PRESUPUESTO_TABLE, PresupuestoSchema } = require('../models/presupuesto'
 const { TIPO_PRESUPUESTO_TABLE, TipoPresupuestoSchema } = require('../models/tipoPresupuesto');
 const { TIPO_RECURSO_PRESUPUESTO_TABLE, TipoRecursoPresupuestoSchema } = require('../models/tipoRecursoPresupuesto');
 const { TIPO_EGRESO_TABLE, TipoEgresoSchema } = require('../models/tipoEgreso');
+const { TRAYECTORIA_TABLE, TrayectoriaSchema} = require('../models/trayectoria');
 
 module.exports = {
   async up(queryInterface) {
@@ -217,6 +218,7 @@ module.exports = {
     await queryInterface.createTable(TIPO_RECURSO_PRESUPUESTO_TABLE, TipoRecursoPresupuestoSchema);
     await queryInterface.createTable(PRESUPUESTO_EGRESO_TABLE, PresupuestoEgresoSchema);
     await queryInterface.createTable(PRESUPUESTO_TABLE, PresupuestoSchema);
+    await queryInterface.createTable(TRAYECTORIA_TABLE, TrayectoriaSchema);
   },
 
   async down(queryInterface) {
@@ -323,5 +325,6 @@ module.exports = {
     await queryInterface.dropTable(TIPO_PRESUPUESTO_TABLE);
     await queryInterface.dropTable(TIPO_RECURSO_PRESUPUESTO_TABLE);
     await queryInterface.dropTable(TIPO_EGRESO_TABLE);
+    await queryInterface.dropTable(TRAYECTORIA_TABLE);
   },
 };
