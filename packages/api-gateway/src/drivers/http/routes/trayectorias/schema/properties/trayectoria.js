@@ -1,11 +1,11 @@
 // Trayectoria
 const trayectoria = {
   programaId: { type: 'integer' },
-  programaSeguimiento: { type: 'text' },
-  tipoTutoria: { type: 'text' },
+  programaSeguimiento: { type: 'string' },
+  tipoTutoria: { type: 'string' },
   estadisticasTitulacion: { type: 'string' },
-  funcionTutorial: { type: 'text' },
-  modalidadesTitulacion: { type: 'text' },
+  funcionTutorial: { type: 'string' },
+  modalidadesTitulacion: { type: 'string' },
   tasaEgreso: { type: 'string' },
 };
 
