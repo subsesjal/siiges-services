@@ -159,6 +159,18 @@ const tipoDocumentoObj = [
     id: 40,
     name: 'ARCHIVO_VALIDACION_ALUMNO',
   },
+  {
+    id: 41,
+    name: 'ARCHIVO_CERTIFICADO',
+  },
+  {
+    id: 42,
+    name: 'ARCHIVO_NACIMIENTO',
+  },
+  {
+    id: 43,
+    name: 'ARCHIVO_CURP',
+  },
 ];
 
 module.exports = tipoDocumentoObj;
