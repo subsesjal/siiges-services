@@ -61,7 +61,7 @@ const findOneSolicitudDetalleSchema = {
                   },
                 },
                 trayectoria: {
-                  type: 'object',
+                  type: ['object', 'null'],
                   properties: {
                     id: { type: 'integer' },
                     ...trayectoria,
