@@ -1,3 +1,4 @@
 id,usuario_id,tipo_institucion_id,nombre,razon_social,clave_ies,historia,vision,mision,valores_institucionales,created_at
-1,3,2,Hogwarts,Razon Social,IES,historia de la institucion,vision de la institcuon,mision de la institcuon,,2022-09-06 17:25:38
-2,4,2,Hero Academy,Razon Social,IES,historia de la institucion,vision de la institcuon,mision de la institcuon,,2022-09-06 17:26:17
+1,5,1,Hogwarts,Razon Social,IES,historia de la institucion,vision de la institcuon,mision de la institcuon,,2022-09-06 17:25:38
+2,4,2,Universidad Tecnológica de la Zona Metropolitana de Guadalajara,Razon Social,IES,historia de la institucion,vision de la institcuon,mision de la institcuon,,2022-09-06 17:26:17
+3,4,2,Universidad Tecnológica de Jalisco,Razon Social,IES,historia de la institucion,vision de la institcuon,mision de la institcuon,,2022-09-06 17:26:17
