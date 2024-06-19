@@ -5,24 +5,25 @@ const { alumnoId, ...data } = validacion;
 
 const createValidacionSchema = {
   tags: ['Alumnos'],
-  description:
-    'Validate students.',
+  description: 'Validate students.',
   params: {
     type: 'object',
-    properties: { alumnoId },
+    properties: {
+      alumnoId: { type: 'number' },
+    },
     required: ['alumnoId'],
   },
   body: {
     type: 'object',
     properties: {
-      ...data,
+      ...data, // Asegúrate de que esto expanda las propiedades correctamente
+      folio: { type: 'string' },
     },
     required: [
-      'alumnoId',
-      'usuarioId',
+      'usuarioId', // Verifica que estas propiedades realmente existan en `data`
       'estadoId',
       'nivelId',
-      'tipoValidacionId',
+
       'situacionValidacionId',
       'folio',
     ],
@@ -35,8 +36,7 @@ const createValidacionSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...validacion,
-            ...responseProperties,
+            ...responseProperties, // Inclusión de propiedades adicionales
           },
         },
       },
