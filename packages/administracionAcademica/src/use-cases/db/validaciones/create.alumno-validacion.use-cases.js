@@ -25,14 +25,14 @@ const createAlumnoValidacion = (
     Usuario: [usuarioId, findOneUsuarioQuery],
     Estado: [estadoId, findOneEstadoQuery],
     Nivel: [nivelId, findOneNivelQuery],
-    SituacionesValidacion: [tipoValidacionId, findOneSituacionesValidacionQuery],
-    TipoValidaciones: [situacionValidacionId, findOneTipoValidacionesQuery],
+    SituacionesValidacion: [situacionValidacionId, findOneSituacionesValidacionQuery],
+    TipoValidaciones: [tipoValidacionId, findOneTipoValidacionesQuery],
   };
   const { Alumno, ...validatorFunctions } = queryFunctions;
   await checkers.findValidator({ Alumno });
   const alumnoDuplicate = await findOneValidacionesQuery({ alumnoId }, { attributes: ['id'] });
   if (alumnoDuplicate) {
-    throw boom.conflict(`Alumno ${alumnoId} already exists`);
+    throw boom.conflict(`Validación with alumnoId: ${alumnoId} already exists`);
   }
   await checkers.findValidator(validatorFunctions);
 
