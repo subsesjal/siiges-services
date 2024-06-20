@@ -1,5 +1,6 @@
 const {
   inspecciones,
+  solicitudes,
 } = require('../../../adapters/db');
 
 const createInspeccion = require('./create.inspeccion.use-cases');
@@ -42,6 +43,8 @@ module.exports = {
     inspecciones.findOneInspectorQuery,
     inspecciones.findOneProgramasQuery,
     inspecciones.findOneInspectoresProgramasQuery,
+    solicitudes.updateSolicitudQuery,
+
   ),
   findAllInspectores: findAllInspectores(
     inspecciones.findAllInspectoresQuery,
