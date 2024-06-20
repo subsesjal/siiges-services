@@ -26,11 +26,43 @@ tipoDocumento ${tipoDocumento}`);
     tipoDocumentoId: tipoDocumentoItem.id,
     tipoEntidadId: tipoEntidadItem.id,
   };
-  if (tipoDocumentoItem.name.startsWith('FDA')) {
-    await findFileFDA02(entidadId, fileMetdata, {
+
+  /**
+ * Objeto `filesFDA` que contiene funciones para encontrar archivos FDA específicos.
+ * Cada propiedad del objeto representa un código de archivo FDA y
+ * está asociada a una función asíncrona
+ * que busca el archivo correspondiente basado en los parámetros proporcionados.
+ *
+ * Propiedades:
+ *  - FDA01: Función asíncrona que utiliza `FDA.findFileFDA01` para buscar el archivo FDA01.
+ *           Requiere `entidadId`, `fileMetdata`, `tipoDocumentoItem.name`, y `tipoEntidadItem.name`
+ *           como parámetros para la búsqueda.
+ *  - FDA02: Función asíncrona que utiliza `findFileFDA02` para buscar el archivo FDA02.
+ *           Similar a FDA01, requiere `entidadId`, `fileMetdata`, `tipoDocumentoItem.name`,
+ *           y `tipoEntidadItem.name` como parámetros para la búsqueda.
+ *
+ * Parámetros:
+ *  - entidadId: Identificador de la entidad para la cual se busca el archivo.
+ *  - fileMetdata: Metadatos del archivo proporcionados para la búsqueda.
+ *  - tipoDocumentoItem.name: Nombre del tipo de documento utilizado en la búsqueda.
+ *  - tipoEntidadItem.name: Nombre del tipo de entidad utilizado en la búsqueda.
+ *
+ * Ejemplo de uso:
+ * ```
+ * const resultadoFDA01 = await filesFDA.FDA01();
+ * const resultadoFDA02 = await filesFDA['FDA02']();
+ * ```
+ */
+  const filesFDA = {
+    FDA01: () => null, // Añadir funcion para buscar archivo FDA01
+    FDA02: () => findFileFDA02(entidadId, fileMetdata, {
       tipoDocumento: tipoDocumentoItem.name,
       tipoEntidad: tipoEntidadItem.name,
-    });
+    }),
+  };
+
+  if (tipoDocumentoItem.name.startsWith('FDA')) {
+    await filesFDA[tipoDocumentoItem.name]();
   }
 
   return fileMetdata;
