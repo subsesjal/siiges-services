@@ -18,7 +18,6 @@ const createValidacionSchema = {
       ...data,
     },
     required: [
-      'alumnoId',
       'usuarioId',
       'estadoId',
       'nivelId',
