@@ -2,6 +2,7 @@
 const fs = require('fs');
 
 const { turnos } = require('./constants');
+const { HEADER_MAIN_TITTLE } = require('./constants/fd02-constants');
 
 const textFont = 'Helvetica';
 
@@ -140,12 +141,6 @@ function seccionIntitucionTabla({
   currentPositionY: currentPosition, solicitud, doc, niveles,
 }) {
   let currentPositionY = currentPosition;
-  const headers1 = [
-    'NOMBRE DE LA INSTITUCIÓN',
-    'NIVEL Y NOMBRE DEL PLAN DE ESTUDIOS',
-    'DURACIÓN DEL PROGRAMA',
-    'NOMBRE COMPLETO DE LA RAZÓN SOCIAL',
-  ];
   const nombreNivel = niveles
     .find(({ id }) => +id === solicitud?.programa.nivelId).descripcion;
   const dataColumn1 = [
@@ -155,7 +150,7 @@ function seccionIntitucionTabla({
     solicitud.programa.plantel.institucion.razonSocial,
   ];
 
-  const tableData1 = headers1.map((header, index) => [
+  const tableData = HEADER_MAIN_TITTLE.map((header, index) => [
     header,
     dataColumn1[index],
   ]);
@@ -183,7 +178,7 @@ function seccionIntitucionTabla({
   };
 
   const textHeight = doc.getTextDimensions(
-    tableData1.join('\n'),
+    tableData.join('\n'),
     tableOptions,
   ).h;
 
@@ -193,7 +188,7 @@ function seccionIntitucionTabla({
   }
 
   doc.autoTable({
-    body: tableData1,
+    body: tableData,
     ...tableOptions,
   });
 

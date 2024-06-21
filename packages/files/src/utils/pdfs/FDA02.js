@@ -8,6 +8,23 @@ const {
   ciclos, modalidades, niveles,
 } = require('./constants');
 const {
+  HEADER_TABLA_REDES_SOCIALES,
+  HEADER_TABLA_DOMICILIO2,
+  TITLE_DOMICILIO,
+  HEADER_TABLA_DOMICILIO,
+  HEADER_TABLA_ESTUDIANTIL,
+  tituloRepresentante,
+  HEADER_NOMBRE_DATOS,
+  TABLA_REPRESENTANTE,
+  rowsDomicilio2,
+  rowsDomicilio,
+  HEADER_TABLA_CORREO,
+  HEADER_NOMBRE_PUESTO,
+  diligenteBody,
+  columnStyles,
+  HEADER_GRADO_EDUCATIVO,
+} = require('./constants/fd02-constants');
+const {
   crearCelda, crearSeccion,
   seccionIntitucionTabla,
   formatearFecha,
@@ -50,73 +67,53 @@ function GenerarFDA02(solicitud) {
 
   currentPositionY = updateCurrentPositionY(doc);
 
-  const headers = ['NIVEL DE ESTUDIO', 'TURNO', 'MODALIDAD', 'CICLO'];
-  const tablePrograma = [[nombreNivel, turnoTipo, modalidadTipo, ciclosTipo]];
-  generateTableWithStyles(headers, tablePrograma, doc, currentPositionY);
+  const rowsEstudiantil = [[nombreNivel, turnoTipo, modalidadTipo, ciclosTipo]];
+  generateTableWithStyles(HEADER_TABLA_ESTUDIANTIL, rowsEstudiantil, doc, currentPositionY);
 
   currentPositionY = updateCurrentPositionY(doc);
 
-  const tablaData1 = generarTablaData(['CALLE Y NÚMERO', 'COLONIA'], [
-    [
-      `${solicitud.programa.plantel.domicilio.calle
-      }  ${solicitud.programa.plantel.domicilio.numeroExterior}`,
-      solicitud.programa.plantel.domicilio.colonia,
-    ],
-  ]);
-  currentPositionY += generateTableAndSection('DOMICILIO DE LA INSTITUCIÓN', tablaData1, doc, currentPositionY);
+  const domicilioData = generarTablaData(
+    HEADER_TABLA_DOMICILIO,
+    rowsDomicilio(solicitud.programa.plantel.domicilio),
+  );
+  currentPositionY += generateTableAndSection(
+    TITLE_DOMICILIO,
+    domicilioData,
+    doc,
+    currentPositionY,
+  );
+
+  currentPositionY = updateCurrentPositionY(doc, -20);
+  generateTableWithStyles(
+    HEADER_TABLA_DOMICILIO2,
+    rowsDomicilio2(solicitud.programa.plantel.domicilio),
+    doc,
+    currentPositionY + 20,
+  );
 
   currentPositionY = updateCurrentPositionY(doc, -20);
 
-  const headers2 = [
-    'CÓDIGO POSTAL',
-    'DELEGACIÓN O MUNICIPIO',
-    'ENTIDAD FEDERATIVA',
-  ];
-  const tableData2 = [
-    [
-      solicitud.programa.plantel.domicilio.codigoPostal,
-      solicitud.programa.plantel.domicilio.municipio.nombre,
-      solicitud.programa.plantel.domicilio.estado.nombre,
-    ],
-  ];
-  generateTableWithStyles(headers2, tableData2, doc, currentPositionY + 20);
-
-  currentPositionY = updateCurrentPositionY(doc, -20);
-
-  const headers3 = [
-    'NÚMERO TELEFÓNICO',
-    'REDES SOCIALES',
-    'CORREO ELECTRÓNICO',
-  ];
-  const tableData3 = [
+  const rowsRedesSociales = [
     [
       `${solicitud.programa.plantel.telefono1},\n${solicitud.programa.plantel.telefono2},\n${solicitud.programa.plantel.telefono3}`,
       solicitud.programa.plantel.redesSociales,
       `${solicitud.programa.plantel.correo1},\n${solicitud.programa.plantel.correo2},\n${solicitud.programa.plantel.correo3}`,
     ],
   ];
-  generateTableWithStyles(headers3, tableData3, doc, currentPositionY + 20);
+  generateTableWithStyles(
+    HEADER_TABLA_REDES_SOCIALES,
+    rowsRedesSociales,
+    doc,
+    currentPositionY + 20,
+  );
 
   currentPositionY = updateCurrentPositionY(doc);
 
-  const tituloRepresentante = 'DATOS DEL SOLICITANTE (PERSONA FÍSICA O REPRESENTANTE LEGAL DE LA PERSONA JURÍDICA';
   const tablaRepresentante = {
-    headers: ['Nombre', 'datos'],
-    body: [
-      ['NOMBRE (S)', solicitud.usuario.persona.nombre],
-      ['APELLIDO PATERNO', solicitud.usuario.persona.apellidoPaterno],
-      ['APELLIDO MATERNO', solicitud.usuario.persona.apellidoMaterno],
-      ['NACIONALIDAD', solicitud.usuario.persona.nacionalidad],
-    ],
+    headers: HEADER_NOMBRE_DATOS,
+    body: TABLA_REPRESENTANTE(solicitud.usuario.persona),
     showHead: false,
-    columnStyles: {
-      0: {
-        fillColor: [172, 178, 183],
-      },
-      1: {
-        fontStyle: 'bold',
-      },
-    },
+    columnStyles,
   };
 
   currentPositionY += generateTableAndSection(
@@ -127,67 +124,52 @@ function GenerarFDA02(solicitud) {
   );
   currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
 
-  const headers6 = ['CALLE Y NÚMERO', 'COLONIA'];
-  const tableData6 = [
-    [
-      `${solicitud.programa.plantel.domicilio.calle
-      }  ${
-        solicitud.programa.plantel.domicilio.numeroExterior}`,
-      solicitud.programa.plantel.domicilio.estado.nombre,
-    ],
-  ];
-  generateTableWithStyles(headers6, tableData6, doc, currentPositionY);
+  generateTableWithStyles(
+    HEADER_TABLA_DOMICILIO,
+    rowsDomicilio(solicitud.programa.plantel.domicilio),
+    doc,
+    currentPositionY,
+  );
   currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
 
-  const headers7 = [
-    'CÓDIGO POSTAL',
-    'DELEGACIÓN O MUNICIPIO',
-    'ENTIDAD FEDERATIVA',
-  ];
-  const tableData7 = [
-    [
-      solicitud.programa.plantel.domicilio.codigoPostal,
-      solicitud.programa.plantel.domicilio.municipio.nombre,
-      solicitud.programa.plantel.domicilio.estado.nombre,
-    ],
-  ];
-  generateTableWithStyles(headers7, tableData7, doc, currentPositionY);
+  generateTableWithStyles(
+    HEADER_TABLA_DOMICILIO2,
+    rowsDomicilio2(solicitud.programa.plantel.domicilio),
+    doc,
+    currentPositionY,
+  );
   currentPositionY = updateCurrentPositionY(doc, 20);
-  const headers8 = ['NÚMERO TELEFÓNICO', 'CORREO ELECTRÓNICO'];
-  const tableData8 = [[solicitud.usuario.persona.celular, solicitud.usuario.persona.correo]];
-  generateTableWithStyles(headers8, tableData8, doc, currentPositionY);
+  const headersNumeroYCorreo = ['NÚMERO TELEFÓNICO', 'CORREO ELECTRÓNICO'];
+  const tableNumeroYCorreo = [
+    [solicitud.usuario.persona.celular, solicitud.usuario.persona.correo]];
+  generateTableWithStyles(headersNumeroYCorreo, tableNumeroYCorreo, doc, currentPositionY);
   currentPositionY = updateCurrentPositionY(doc, 10);
 
   const rectorPersona = solicitud.programa.plantel.institucion?.rector?.persona;
-  const tablaData9 = {
+  const tablaNombreYApellido = {
     headers: ['NOMBRE (S)', 'APELLIDO PATERNO', 'APELLIDO MATERNO'],
     body: [[rectorPersona?.nombre || ' ', rectorPersona?.apellidoPaterno || ' ', rectorPersona?.apellidoMaterno || ' ']],
   };
 
-  currentPositionY += generateTableAndSection('DATOS DEL RECTOR', tablaData9, doc, currentPositionY);
+  currentPositionY += generateTableAndSection('DATOS DEL RECTOR', tablaNombreYApellido, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
 
-  const headers10 = [
-    'CORREO INSTITUCIONAL',
-    'CORREO PERSONAL',
-    'TELÉFONO CELULAR',
-  ];
   const { correo: correoRector, celular: celularRector } = solicitud
     .programa.plantel.institucion.rector?.persona ?? {};
-  const tableData10 = [
+  const tableCorreoRector = [
     ['', correoRector, celularRector],
   ];
-  generateTableWithStyles(headers10, tableData10, doc, currentPositionY);
+  generateTableWithStyles(HEADER_TABLA_CORREO, tableCorreoRector, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
 
   const formacionRector = solicitud.programa.plantel
     .institucion.rector?.formacionesRectores?.formacion ?? {};
-  const tablaData11 = {
-    headers: ['GRADO EDUCATIVO', 'NOMBRE DE LOS ESTUDIOS'],
+  const tablaGradoEducativo = {
+    headers: HEADER_GRADO_EDUCATIVO,
     body: [[formacionRector.nombre, formacionRector.institucion]],
   };
 
-  currentPositionY += generateTableAndSection('FORMACIÓN ACADÉMICA', tablaData11, doc, currentPositionY);
+  currentPositionY += generateTableAndSection('FORMACIÓN ACADÉMICA', tablaGradoEducativo, doc, currentPositionY);
   currentPositionY = updateCurrentPositionY(doc, 10);
 
   const { directores } = solicitud.programa.plantel;
@@ -204,20 +186,15 @@ function GenerarFDA02(solicitud) {
   currentPositionY += generateTableAndSection('DATOS DEL DIRECTOR', tablaDirectores, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
 
-  const correoDirectorHeader = [
-    'CORREO INSTITUCIONAL',
-    'CORREO PERSONAL',
-    'TELÉFONO CELULAR',
-  ];
   const correoDirectorBody = [
     ['', '', ''],
   ];
 
-  generateTableWithStyles(correoDirectorHeader, correoDirectorBody, doc, currentPositionY);
+  generateTableWithStyles(HEADER_TABLA_CORREO, correoDirectorBody, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
 
   const formacionDirector = {
-    headers: ['GRADO EDUCATIVO', 'NOMBRE DE LOS ESTUDIOS'],
+    headers: HEADER_GRADO_EDUCATIVO,
     body: [
       ['', ''],
     ],
@@ -229,28 +206,11 @@ function GenerarFDA02(solicitud) {
 
   if (diligencias && diligencias.length) {
     diligencias.forEach((diligente, index) => {
-      const nombreDiligente = `${diligente.persona.nombre} ${diligente.persona.apellidoPaterno} ${diligente.persona.apellidoMaterno}`;
       const tablaDataDiligencia = {
-        headers: ['Nombre', 'datos'],
-        body: [
-          ['NOMBRE COMPLETO', nombreDiligente],
-          ['CARGO', ''],
-          ['NÚMERO TELEFÓNICO', diligente.persona.celular || '4747466124, 3787900984'],
-          ['CORREO ELECTRÓNICO', diligente.persona.correoPrimario || 'primer@gmail.com'],
-          [
-            'HORARIO DE ATENCIÓN',
-            `${new Date(diligente.horaInicio).getHours()} horas a la(s) ${new Date(diligente.horaFin).getHours()} horas` || '9 A 14 Y DE 16 A 19 HORAS',
-          ],
-        ],
+        headers: HEADER_NOMBRE_DATOS,
+        body: diligenteBody(diligente),
         showHead: false,
-        columnStyles: {
-          0: {
-            fillColor: [172, 178, 183],
-          },
-          1: {
-            fontStyle: 'bold',
-          },
-        },
+        columnStyles,
       };
       currentPositionY += generateTableAndSection(`Diligente ${index + 1}`, tablaDataDiligencia, doc, currentPositionY);
     });
@@ -260,21 +220,10 @@ function GenerarFDA02(solicitud) {
   currentPositionY = updateCurrentPositionY(doc, 10);
 
   const nombresPropuestos = {
-    headers: ['Nombre', 'datos'],
-    body: [
-      ['NOMBRE PROPUESTO No. 1', '                                                             '],
-      ['NOMBRE PROPUESTO No. 2', '                                                             '],
-      ['NOMBRE PROPUESTO No. 3', '                                                             '],
-    ],
+    headers: HEADER_NOMBRE_DATOS,
+    body: HEADER_NOMBRE_PUESTO,
     showHead: false,
-    columnStyles: {
-      0: {
-        fillColor: [172, 178, 183],
-      },
-      1: {
-        fontStyle: 'bold',
-      },
-    },
+    columnStyles,
   };
 
   currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
