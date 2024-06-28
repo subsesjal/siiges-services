@@ -32,7 +32,7 @@ const TrayectoriaSchema = {
   },
   estadisticasTitulacion: {
     allowNull: true,
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'estadisticas_titulacion',
   },
   funcionTutorial: {
@@ -47,7 +47,7 @@ const TrayectoriaSchema = {
   },
   tasaEgreso: {
     allowNull: true,
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'tasa_egreso',
   },
   createdAt: {
