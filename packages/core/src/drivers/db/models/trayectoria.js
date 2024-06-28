@@ -22,12 +22,12 @@ const TrayectoriaSchema = {
   },
   programaSeguimiento: {
     allowNull: true,
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'programa_seguimiento',
   },
   tipoTutoria: {
     allowNull: true,
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'tipo_tutoria',
   },
   estadisticasTitulacion: {
@@ -37,12 +37,12 @@ const TrayectoriaSchema = {
   },
   funcionTutorial: {
     allowNull: true,
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'funcion_tutorial',
   },
   modalidadesTitulacion: {
     allowNull: true,
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     field: 'modalidades_titulacion',
   },
   tasaEgreso: {
