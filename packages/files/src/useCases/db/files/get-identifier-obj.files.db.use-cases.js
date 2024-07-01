@@ -4,6 +4,9 @@ const { checkers, Logger } = require('@siiges-services/shared');
 const { findOneDocumentType } = require('../document-type');
 const { findOneEntityType } = require('../entity-type');
 const { findFileFDA02 } = require('../FDA');
+const { findFileFDP05 } = require('../FDA');
+const { findFileFDP02 } = require('../FDA');
+const { findFileFDP06 } = require('../FDA');
 
 const getFileIdentifierObj = async (fileData) => {
   const { tipoEntidad, entidadId, tipoDocumento } = fileData;
@@ -53,15 +56,26 @@ tipoDocumento ${tipoDocumento}`);
  * const resultadoFDA02 = await filesFDA['FDA02']();
  * ```
  */
-  const filesFDA = {
-    FDA01: () => null, // Añadir funcion para buscar archivo FDA01
+  const filesFDA = { // Añadir funcion para buscar archivo FDA01
     FDA02: () => findFileFDA02(entidadId, fileMetdata, {
+      tipoDocumento: tipoDocumentoItem.name,
+      tipoEntidad: tipoEntidadItem.name,
+    }),
+    FDP05: () => findFileFDP05(entidadId, fileMetdata, {
+      tipoDocumento: tipoDocumentoItem.name,
+      tipoEntidad: tipoEntidadItem.name,
+    }),
+    FDP02: () => findFileFDP02(entidadId, fileMetdata, {
+      tipoDocumento: tipoDocumentoItem.name,
+      tipoEntidad: tipoEntidadItem.name,
+    }),
+    FDP06: () => findFileFDP06(entidadId, fileMetdata, {
       tipoDocumento: tipoDocumentoItem.name,
       tipoEntidad: tipoEntidadItem.name,
     }),
   };
 
-  if (tipoDocumentoItem.name.startsWith('FDA')) {
+  if (tipoDocumentoItem.name.startsWith('FD')) {
     await filesFDA[tipoDocumentoItem.name]();
   }
 
