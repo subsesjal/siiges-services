@@ -2,7 +2,7 @@
 const fs = require('fs');
 
 const { turnos } = require('./constants');
-const { HEADER_MAIN_TITTLE } = require('./constants/fd02-constants');
+const { HEADER_MAIN_TITTLE } = require('./constants/fdp06-constants');
 
 const textFont = 'Helvetica';
 
@@ -138,7 +138,7 @@ function generateTable({
 }
 
 function seccionIntitucionTabla({
-  currentPositionY: currentPosition, solicitud, doc, niveles,
+  currentPositionY: currentPosition, solicitud, doc, niveles, modalidadTipo, tipoSolicitud,
 }) {
   let currentPositionY = currentPosition;
   const nombreNivel = niveles
@@ -146,8 +146,10 @@ function seccionIntitucionTabla({
   const dataColumn1 = [
     solicitud.programa.plantel.institucion.nombre,
     `${nombreNivel} en ${solicitud.programa.nombre}`,
+    modalidadTipo,
     solicitud.programa.duracionPeriodos,
-    solicitud.programa.plantel.institucion.razonSocial,
+    tipoSolicitud,
+    `${solicitud.programa.plantel.domicilio.calle} ${solicitud.programa.plantel.domicilio.numeroExterior} ${solicitud.programa.plantel.domicilio.numeroInterior} ${solicitud.programa.plantel.domicilio.colonia} CP. ${solicitud.programa.plantel.domicilio.codigoPostal} / Núm. ${solicitud.programa.plantel.telefono1}`,
   ];
 
   const tableData = HEADER_MAIN_TITTLE.map((header, index) => [
@@ -197,12 +199,25 @@ function seccionIntitucionTabla({
 }
 
 function formatearFecha(fechaCreacion) {
+  const meses = [
+    'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO',
+    'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE',
+  ];
+
   const fecha = new Date(fechaCreacion);
-  return `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
+  const dia = fecha.getDate();
+  const mes = meses[fecha.getMonth()];
+  const año = fecha.getFullYear();
+
+  return `${dia} DE ${mes} DE ${año}`;
 }
 
 function buscarDescripcionPorId(array, id) {
   return array.find(({ id: itemId }) => +itemId === id).descripcion;
+}
+
+function buscarNombrePorId(array, id) {
+  return array.find(({ id: itemId }) => +itemId === id).nombre;
 }
 
 function generarTiposDeTurno(programaTurnos) {
@@ -325,4 +340,5 @@ module.exports = {
   agregarImagenYPaginaPie,
   generarPDF,
   generarTablaData,
+  buscarNombrePorId,
 };

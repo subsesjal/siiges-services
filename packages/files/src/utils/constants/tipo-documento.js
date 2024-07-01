@@ -171,6 +171,18 @@ const tipoDocumentoObj = [
     id: 43,
     name: 'ARCHIVO_CURP',
   },
+  {
+    id: 44,
+    name: 'FDP05',
+  },
+  {
+    id: 45,
+    name: 'FDP02',
+  },
+  {
+    id: 46,
+    name: 'FDP06',
+  },
 ];
 
 module.exports = tipoDocumentoObj;
