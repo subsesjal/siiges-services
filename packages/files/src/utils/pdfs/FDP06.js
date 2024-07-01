@@ -53,7 +53,9 @@ function GenerarFDP06(solicitud) {
   currentPositionY = updateCurrentPositionY(doc, -20);
   currentPositionY = updateCurrentPositionY(doc, -20);
 
-  // configurarFuenteYAgregarTexto(doc, 'bold', 10, [125, 125, 125], 'SOLO APLICA PARA EL 1° Y 2° CICLO ESCOLAR (SEMESTRE O CUATRIMESTRE) POR CADA ASIGNATURA', 10, 140);
+  // configurarFuenteYAgregarTexto(doc, 'bold', 10, [125, 125, 125],
+  // 'SOLO APLICA PARA EL 1° Y 2° CICLO ESCOLAR (SEMESTRE O CUATRIMESTRE)
+  // POR CADA ASIGNATURA', 10, 140);
 
   currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
 
