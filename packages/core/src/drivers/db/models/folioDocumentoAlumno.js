@@ -33,7 +33,7 @@ const FolioDocumentoAlumnoSchema = {
   },
   fojaId: {
     allowNull: false,
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     field: 'foja_id',
     references: {
       model: FOJA_TABLE,
@@ -42,7 +42,7 @@ const FolioDocumentoAlumnoSchema = {
   },
   libroId: {
     allowNull: false,
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     field: 'libro_id',
     references: {
       model: LIBRO_TABLE,
