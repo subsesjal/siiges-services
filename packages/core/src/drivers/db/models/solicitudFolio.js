@@ -1,5 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { TIPO_DOCUMENTO_TABLE } = require('./tipoDocumento');
+const { TIPO_SOLICITUD_FOLIO_TABLE } = require('./tipoSolicitudFolio');
 const { PROGRAMA_TABLE } = require('./programa');
 const { ESTATUS_SOLICITUD_FOLIO_TABLE } = require('./estatusSolicitudFolio');
 
@@ -18,6 +19,15 @@ const SolicitudFolioSchema = {
     field: 'tipo_documento_id',
     references: {
       model: TIPO_DOCUMENTO_TABLE,
+      key: 'id',
+    },
+  },
+  tipoSolicitudFolioId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'tipo_solicitud_folio_id',
+    references: {
+      model: TIPO_SOLICITUD_FOLIO_TABLE,
       key: 'id',
     },
   },
