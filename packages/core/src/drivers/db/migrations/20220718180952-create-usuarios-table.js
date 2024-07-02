@@ -100,6 +100,11 @@ const { PRESUPUESTO_TABLE, PresupuestoSchema } = require('../models/presupuesto'
 const { TIPO_PRESUPUESTO_TABLE, TipoPresupuestoSchema } = require('../models/tipoPresupuesto');
 const { TIPO_RECURSO_PRESUPUESTO_TABLE, TipoRecursoPresupuestoSchema } = require('../models/tipoRecursoPresupuesto');
 const { TIPO_EGRESO_TABLE, TipoEgresoSchema } = require('../models/tipoEgreso');
+const { TIPO_CERTIFICADOS_TABLE, TipoCertificadosSchema } = require('../models/tipoCertificados');
+const { SOLICITUD_FOLIOS_TABLE, SolicitudFoliosSchema } = require('../models/solicitudFolios');
+const { LIBRO_TABLE, LibroSchema } = require('../models/libro');
+const { FOJA_TABLE, FojaSchema } = require('../models/foja');
+const { SOLICITUDES_CERTIFICADOS_ALUMNOS_TABLE, SolicitudesCertificadosAlumnosSchema } = require('../models/solicitudesCertificadosAlumnos');
 
 module.exports = {
   async up(queryInterface) {
@@ -217,6 +222,14 @@ module.exports = {
     await queryInterface.createTable(TIPO_RECURSO_PRESUPUESTO_TABLE, TipoRecursoPresupuestoSchema);
     await queryInterface.createTable(PRESUPUESTO_EGRESO_TABLE, PresupuestoEgresoSchema);
     await queryInterface.createTable(PRESUPUESTO_TABLE, PresupuestoSchema);
+    await queryInterface.createTable(SOLICITUD_FOLIOS_TABLE, SolicitudFoliosSchema);
+    await queryInterface.createTable(TIPO_CERTIFICADOS_TABLE, TipoCertificadosSchema);
+    await queryInterface.createTable(LIBRO_TABLE, LibroSchema);
+    await queryInterface.createTable(FOJA_TABLE, FojaSchema);
+    await queryInterface.createTable(
+      SOLICITUDES_CERTIFICADOS_ALUMNOS_TABLE,
+      SolicitudesCertificadosAlumnosSchema,
+    );
   },
 
   async down(queryInterface) {
@@ -323,5 +336,10 @@ module.exports = {
     await queryInterface.dropTable(TIPO_PRESUPUESTO_TABLE);
     await queryInterface.dropTable(TIPO_RECURSO_PRESUPUESTO_TABLE);
     await queryInterface.dropTable(TIPO_EGRESO_TABLE);
+    await queryInterface.dropTable(TIPO_CERTIFICADOS_TABLE);
+    await queryInterface.dropTable(SOLICITUD_FOLIOS_TABLE);
+    await queryInterface.dropTable(LIBRO_TABLE);
+    await queryInterface.dropTable(FOJA_TABLE);
+    await queryInterface.dropTable(SOLICITUDES_CERTIFICADOS_ALUMNOS_TABLE);
   },
 };
