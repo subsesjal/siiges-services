@@ -3,10 +3,12 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function findAllSolicitudesProgramas(req, reply) {
   try {
-    const { estatus } = req.query;
+    const { usuarioId, estatusSolicitudId } = req.query;
 
     Logger.info('[solicitudes]: Getting solicitudes list');
-    const solicitudes = await this.solicitudServices.findAllSolicitudesProgramas(estatus);
+    const solicitudes = await this.solicitudServices.findAllSolicitudesProgramas({
+      usuarioId, estatusSolicitudId,
+    });
 
     return reply
       .code(200)

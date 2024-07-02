@@ -1,4 +1,15 @@
-const findAllSolicitudesProgramas = (findAllSolicitudesQuery) => async (queryParams) => {
+const findUsuarios = async (findUsuario, findUsuarioUsuarios, id) => {
+  const { rolId } = await findUsuario({ id });
+  if (rolId === 3) return id;
+  const { principalId } = await findUsuarioUsuarios({ secundarioId: id });
+  return principalId;
+};
+
+const findAllSolicitudesProgramas = (
+  findAllSolicitudesQuery,
+  findOneUsuarioQuery,
+  findOneUsuarioUsuarioQuery,
+) => async (queryParams) => {
   const include = [{
     association: 'programa',
     include: [
@@ -21,9 +32,18 @@ const findAllSolicitudesProgramas = (findAllSolicitudesQuery) => async (queryPar
 
   let query = {};
   if (queryParams && queryParams.length > 0) {
-    query = {
-      estatusSolicitudId: queryParams,
-    };
+    const { usuarioId, estatusSolicitudId } = queryParams;
+    if (usuarioId) {
+      const usuario = await findUsuarios(
+        findOneUsuarioQuery,
+        findOneUsuarioUsuarioQuery,
+        usuarioId,
+      );
+      query = {
+        usuarioId: usuario,
+      };
+    }
+    if (estatusSolicitudId) query.estatusSolicitudId = estatusSolicitudId;
   }
 
   const solicitudes = await findAllSolicitudesQuery(

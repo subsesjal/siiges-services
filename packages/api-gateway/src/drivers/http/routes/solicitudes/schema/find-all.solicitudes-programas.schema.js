@@ -13,7 +13,10 @@ const findAllSolicitudesProgramasSchema = {
   tags: ['Solicitudes'],
   description: 'Return a list of solicitudes.',
   querystring: {
-    estatus: {
+    usuarioId: {
+      type: 'string',
+    },
+    estatusSolicitudId: {
       type: 'array',
       items: {
         type: 'integer',
