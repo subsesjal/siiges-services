@@ -30,6 +30,8 @@ module.exports = {
   ),
   findAllSolicitudesProgramas: findAllSolicitudesProgramas(
     solicitudes.findAllSolicitudesProgramasQuery,
+    solicitudes.findOneUsuarioQuery,
+    solicitudes.findOneUsuarioUsuarioQuery,
   ),
   findOneSolicitudPrograma: findOneSolicitudPrograma(
     solicitudes.findOneSolicitudProgramaQuery,
