@@ -100,6 +100,14 @@ const { Presupuesto, PresupuestoSchema } = require('./presupuesto');
 const { TipoPresupuesto, TipoPresupuestoSchema } = require('./tipoPresupuesto');
 const { TipoRecursoPresupuesto, TipoRecursoPresupuestoSchema } = require('./tipoRecursoPresupuesto');
 const { TipoEgreso, TipoEgresoSchema } = require('./tipoEgreso');
+const { TipoSolicitudFolio, TipoSolicitudFolioSchema } = require('./tipoSolicitudFolio');
+const { TipoDocumento, TipoDocumentoSchema } = require('./tipoDocumento');
+const { EstatusSolicitudFolio, EstatusSolicitudFolioSchema } = require('./estatusSolicitudFolio');
+const { SolicitudFolio, SolicitudFolioSchema } = require('./solicitudFolio');
+const { SolicitudFolioAlumno, SolicitudFolioAlumnoSchema } = require('./solicitudFolioAlumno');
+const { Libro, LibroSchema } = require('./libro');
+const { Foja, FojaSchema } = require('./foja');
+const { FolioDocumentoAlumno, FolioDocumentoAlumnoSchema } = require('./folioDocumentoAlumno');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -232,6 +240,14 @@ function setupModels(sequelize) {
     TipoRecursoPresupuesto.config(sequelize),
   );
   TipoEgreso.init(TipoEgresoSchema, TipoEgreso.config(sequelize));
+  TipoSolicitudFolio.init(TipoSolicitudFolioSchema, TipoSolicitud.config(sequelize));
+  TipoDocumento.init(TipoDocumentoSchema, TipoDocumento.config(sequelize));
+  EstatusSolicitudFolio.init(EstatusSolicitudFolioSchema, EstatusSolicitudFolio.config(sequelize));
+  SolicitudFolio.init(SolicitudFolioSchema, SolicitudFolio.config(sequelize));
+  SolicitudFolioAlumno.init(SolicitudFolioAlumnoSchema, SolicitudFolioAlumno.config(sequelize));
+  Libro.init(LibroSchema, Libro.config(sequelize));
+  Foja.init(FojaSchema, Foja.config(sequelize));
+  FolioDocumentoAlumno.init(FolioDocumentoAlumnoSchema, FolioDocumentoAlumno.config(sequelize));
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -334,6 +350,14 @@ function setupModels(sequelize) {
   TipoPresupuesto.associate(sequelize.models);
   TipoRecursoPresupuesto.associate(sequelize.models);
   TipoEgreso.associate(sequelize.models);
+  TipoSolicitudFolio.associate(sequelize.models);
+  TipoDocumento.associate(sequelize.models);
+  EstatusSolicitudFolio.associate(sequelize.models);
+  SolicitudFolio.associate(sequelize.models);
+  SolicitudFolioAlumno.associate(sequelize.models);
+  Libro.associate(sequelize.models);
+  Foja.associate(sequelize.models);
+  FolioDocumentoAlumno.associate(sequelize.models);
 }
 
 module.exports = setupModels;
