@@ -62,6 +62,21 @@ const findFileFDP02 = (
     association: 'programa',
     include: [
       { association: 'programaTurnos' },
+      {
+        association: 'docentes',
+        include: [
+          { association: 'persona' },
+          {
+            association: 'formacionesDocentes',
+            include: [{ association: 'formacion' }],
+          },
+          {
+            association: 'asignaturasDocentes',
+            include: [{ association: 'asignatura' }],
+          },
+        ],
+      },
+      { association: 'asignaturas' },
       { association: 'trayectoria' },
       {
         association: 'plantel',
@@ -115,6 +130,9 @@ const findFileFDP02 = (
     include,
     strict: false,
   });
+
+  // Depuración: verificar los datos obtenidos
+  console.log(JSON.stringify(solicitud, null, 2));
 
   checkers.throwErrorIfDataIsFalsy(solicitud, 'solicitud', solicitudId);
 

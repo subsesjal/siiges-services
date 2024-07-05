@@ -4,7 +4,7 @@ const fs = require('fs');
 const { turnos } = require('./constants');
 const { HEADER_MAIN_TITTLE } = require('./constants/fdp06-constants');
 
-const textFont = 'Helvetica';
+const textFont = 'Nutmegb';
 
 function crearCelda(doc, x, y, width, height, texto) {
   doc.rect(x, y, width, height, 'F');
@@ -147,7 +147,7 @@ function seccionIntitucionTabla({
     solicitud.programa.plantel.institucion.nombre,
     `${nombreNivel} en ${solicitud.programa.nombre}`,
     modalidadTipo,
-    solicitud.programa.duracionPeriodos,
+    `${solicitud.programa.duracionPeriodos} Periodos`,
     tipoSolicitud,
     `${solicitud.programa.plantel.domicilio.calle} ${solicitud.programa.plantel.domicilio.numeroExterior} ${solicitud.programa.plantel.domicilio.numeroInterior} ${solicitud.programa.plantel.domicilio.colonia} CP. ${solicitud.programa.plantel.domicilio.codigoPostal} / Núm. ${solicitud.programa.plantel.telefono1}`,
   ];

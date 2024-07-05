@@ -36,42 +36,25 @@ function GenerarFDP05(solicitud) {
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
   doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
 
-  doc.setFillColor(6, 98, 211);
+  doc.setFillColor(0, 127, 204);
   crearCelda(doc, 150, 40, 45, 7, 'FDP05');
 
   configurarFuenteYAgregarTexto(doc, 'bold', 11, [69, 133, 244], 'TRAYECTORIA EDUCATIVA Y TUTORÍA DE LOS ESTUDIANTES', 20, 50);
   configurarFuenteYAgregarTexto(doc, 'bold', 12, [0, 0, 0], fechaFormateada, 152, 58);
 
-  // const seguimientoTrayec = solicitud.trayectoria.programaSeguimiento;
-
-  const tablaSeguimiento = [
-    ['', '']];
+  const tablaSeguimiento = [[solicitud.programa.trayectoria.programaSeguimiento]];
   generateTableWithStyles(HEADER_PROGRAMA_SEGUIMIENTO, tablaSeguimiento, doc, currentPositionY, 'center');
   currentPositionY = updateCurrentPositionY(doc, 5);
 
-  // const nombresTuto = {
-  //   headers: HEADER_NOMBRE_DATOS,
-  //   body: HEADER_OPC_TUTORIAL,
-  //   showHead: false,
-  //   columnStyles,
-  // };
-
-  // currentPositionY += generateTbleASe('2. FUNCIÓN TUTURIAL', nombresTuto, doc, currentPositionY);
-  // currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
-  // currentPositionY += 5;
-
-  const tablaFuncTuto = [
-    ['', '']];
+  const tablaFuncTuto = [[solicitud.programa.trayectoria.funcionTutorial]];
   generateTableWithStyles(HEADER_FUNC_TUTO, tablaFuncTuto, doc, currentPositionY, 'center');
   currentPositionY = updateCurrentPositionY(doc, 5);
 
-  const tablaEstudio = [
-    ['', '']];
+  const tablaEstudio = [[solicitud.programa.trayectoria.tipoTutoria]];
   generateTableWithStyles(HEADER_TIPO_TUTORIA, tablaEstudio, doc, currentPositionY, 'center');
   currentPositionY = updateCurrentPositionY(doc, 5);
 
-  const tablaModelo = [
-    ['', '']];
+  const tablaModelo = [[solicitud.programa.trayectoria.tasaEgreso]];
   generateTableWithStyles(HEADER_TASA_EGRESOS, tablaModelo, doc, currentPositionY, 'center');
   currentPositionY = updateCurrentPositionY(doc, 15);
   currentPositionY += 5;

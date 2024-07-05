@@ -1,10 +1,4 @@
 const HEADER_NOMBRE_DATOS = ['Nombre', 'datos'];
-const HEADER_INGRESO_EGRESO = [
-  ['CONOCIMIENTOS', '                                                             '],
-  ['HABILIDADES', '                                                             '],
-  ['ACTITUDES', '                                                             '],
-];
-
 const HEADER_METODOS_INDUCCION = ['2. MÉTODOS DE INDUCCIÓN'];
 const HEADER_SELECCION_ESTD = ['4. PROCESO DE SELECCIÓN DE ESTUDIANTES'];
 const HEADER_MAPA_CURRICULAR = ['6. MAPA CURRICULAR'];
@@ -15,14 +9,6 @@ const HEADER_ESTRUCTURA_PLAN = ['10. ESTRUCTURA DEL PLAN DE ESTUDIOS'];
 const HEADER_ACTUALIZACION_PLAN = ['13. ACTUALIZACIÓN DEL PLAN DE ESTUDIOS'];
 const HEADER_PROYECTO_SEG = ['14. PROYECTO DE SEGUIMIENTO A EGRESADOS'];
 const HEADER_VINCULACION = ['15. VINCULACIÓN CON COLEGIOS DE PROFESIONISTAS, ACADEMIAS, ASOCIACIONES PROFESIONALES, ETC.'];
-// const titulo_
-
-const rowsDocente = (docente) => [
-  [
-    `${docente.apellidoPaterno} ${docente.apellidoMaterno} ${docente.nombre}`,
-    // persona.formacionesDocentes.descripcion,
-  ],
-];
 
 const columnStyles = {
   0: {
@@ -30,6 +16,9 @@ const columnStyles = {
   },
   1: {
     fontStyle: 'bold',
+  },
+  2: {
+    rowSpan: 2,
   },
 };
 
@@ -60,38 +49,134 @@ const bodyApartado = [
 ];
 
 const HEADER_PRIM_SEM = '1ER SEMESTRE / CUATRIMESTRE';
-const HEADER_SEGUNDO_SEM = ['2DO SEMESTRE / CUATRIMESTRE'];
-const HEADER_TERCER_SEM = ['3ER SEMESTRE / CUATRIMESTRE'];
-const HEADER_CUARTO_SEM = ['4TO SEMESTRE / CUATRIMESTRE'];
+const HEADER_SEG_SEM = '2DO SEMESTRE / CUATRIMESTRE';
+const HEADER_TERC_SEM = '3ER SEMESTRE / CUATRIMESTRE';
+const HEADER_CUAR_SEM = '4TO SEMESTRE / CUATRIMESTRE';
 const HEADER_DOCENTE = [
   {
-    content: 'ÁREA', rowsSpan: 2, styles: { halign: 'center' },
+    content: 'ÁREA', rowSpan: 2, styles: { halign: 'center', valign: 'middle', fontSize: 7 },
   },
   {
-    content: 'ASIGNATURA O UNIDAD DE APRENDIZAJE', rowsSpan: 2, styles: { halign: 'center' },
+    content: 'ASIGNATURA\n O\n UNIDAD DE APRENDIZAJE', rowSpan: 2, styles: { halign: 'center', valign: 'middle', fontSize: 7 },
   },
   {
-    content: 'CLAVE', rowsSpan: 2, styles: { halign: 'center' },
+    content: 'CLAVE', rowSpan: 2, styles: { halign: 'center', valign: 'middle', fontSize: 7 },
   },
   {
-    content: 'SERIACIÓN', rowsSpan: 2, styles: { halign: 'center' },
+    content: 'SERIACIÓN', rowSpan: 2, styles: { halign: 'center', valign: 'middle', fontSize: 7 },
   },
   {
-    content: 'HORAS', colSpan: 2, styles: { halign: 'center' },
+    content: 'HORAS', colSpan: 2, styles: { halign: 'center', valign: 'middle', fontSize: 7 },
   },
   {
-    content: 'CRÉDITOS', rowSpan: 2, styles: { halign: 'center' },
+    content: 'CRÉDITOS', rowSpan: 2, styles: { halign: 'center', valign: 'middle', fontSize: 7 },
   },
   {
-    content: 'INSTALACIONES', rowSpan: 2, styles: { halign: 'center' },
+    content: 'INSTALACIONES', rowSpan: 2, styles: { halign: 'center', valign: 'middle', fontSize: 7 },
   },
 ];
 
+const HEADER_TOTAL = [
+  { content: 'TOTAL CON DOCENTE: ', rowSpan: 2, styles: { halign: 'left', valign: 'middle', fontSize: 7 } },
+  { content: 'TOTAL INDEPENDIENTE: ', rowSpan: 2, styles: { halign: 'left', valign: 'middle', fontSize: 7 } },
+  { content: 'TOTAL DE CRÉDITOS: ', rowSpan: 2, styles: { halign: 'left', valign: 'middle', fontSize: 7 } },
+];
+
+const HEADER_AREA = [
+  {
+    content: 'ÁREA', styles: { halign: 'center', valign: 'middle', fontSize: 7 },
+  },
+  {
+    content: 'ASIGNATURA\n O\n UNIDAD DE APRENDIZAJE', styles: { halign: 'center', valign: 'middle', fontSize: 7 },
+  },
+  {
+    content: 'CLAVE', styles: { halign: 'center', valign: 'middle', fontSize: 7 },
+  },
+  {
+    content: 'SERIACIÓN', styles: { halign: 'center', valign: 'middle', fontSize: 7 },
+  },
+  {
+    content: 'HORAS', cellWidth: 'auto', styles: { halign: 'center', valign: 'middle', fontSize: 7 },
+  },
+  {
+    content: 'CRÉDITOS', styles: { halign: 'center', valign: 'middle', fontSize: 7 },
+  },
+  {
+    content: 'INSTALACIONES', styles: { halign: 'center', valign: 'middle', fontSize: 7 },
+  }];
+
+const HEADER_FORM = {
+  content: 'FORMACIÓN ELECTIVA',
+  styles:
+  {
+    halign: 'center', valign: 'middle', fontSize: 7, textColor: [0, 0, 0], fontStyle: 'bold', fillColor: [172, 178, 183],
+  },
+};
+
+const HEADER_HORAS_1 = [
+  {
+    content: 'NÚMERO MÍNIMO DE HORAS QUE SE DEBERÁN ACREDITAR EN LAS ASIGNATURAS DE FORMACIÓN ELECTIVA, BAJO LA CONDUCCIÓN DE UN DOCENTE',
+    styles: {
+      halign: 'center', valign: 'middle', fontSize: 7, fillColor: [255, 255, 255],
+    },
+  },
+  { content: '                                                                ', styles: { halign: 'center', valign: 'middle', fontSize: 7 } },
+];
+const HEADER_HORAS_2 = {
+  content: 'NÚMERO MÍNIMO DE CRÉDITOS QUE SE DEBERÁN ACREDITAR EN LAS ASIGNATURAS DE FORMACIÓN ELECTIVA',
+  styles: {
+    halign: 'center', valign: 'middle', fontSize: 7, textColor: [0, 0, 0], fontStyle: 'bold',
+  },
+};
+const HEADER_HORAS_3 = [
+  {
+    content: 'TOTAL DE HORAS DE TRABAJO BAJO LA CONDUCCIÓN DE UN DOCENTE DURANTE TODA LA CARRERA',
+    styles: {
+      halign: 'center', valign: 'middle', fontSize: 7, fillColor: [255, 255, 255],
+    },
+  },
+  { content: '                                                                ', styles: { halign: 'center', valign: 'middle', fontSize: 7 } },
+];
+const HEADER_HORAS_4 = {
+  content: 'TOTAL DE HORAS DE TRABAJO DE MANERA INDEPENDIENTE DURANTE TODA LA CARRERA',
+  styles: {
+    halign: 'center', valign: 'middle', fontSize: 7, textColor: [0, 0, 0], fontStyle: 'bold', fillColor: [255, 255, 255],
+  },
+};
+const HEADER_HORAS_5 = [{
+  content: '                                                         TOTAL DE CRÉDITOS DE LA CARRERA                                                         ',
+  styles: {
+    halign: 'center', valign: 'middle', fontSize: 7, fillColor: [255, 255, 255],
+  },
+},
+{ content: '                                                                ', styles: { halign: 'center', valign: 'middle', fontSize: 7 } },
+];
+
+const cicloTxt = {
+  1: 'SEMESTRE',
+  2: 'CUATRIMESTRE',
+  3: 'SEMESTRE CURRICULUM FLEXIBLE',
+  4: 'CUATRIMESTRE CURRICULUM FLEXIBLE',
+};
+
+const gradoTxt = {
+  1: 'PRIMER',
+  2: 'SEGUNDO',
+  3: 'TERCERO',
+  4: 'CUARTO',
+  5: 'QUINTO',
+  6: 'SEXTO',
+  7: 'SÉPTIMO',
+  8: 'OCTAVO',
+  9: 'NOVENO',
+  10: 'DÉCIMO',
+  11: 'UNDÉCIMO',
+  12: 'DUODÉCIMO',
+};
+
 module.exports = {
   HEADER_NOMBRE_DATOS,
-  HEADER_INGRESO_EGRESO,
   HEADER_MAIN_TITTLE,
-  rowsDocente,
   columnStyles,
   HEADER_METODOS_INDUCCION,
   HEADER_SELECCION_ESTD,
@@ -106,8 +191,18 @@ module.exports = {
   HEADER_PROYECTO_SEG,
   HEADER_VINCULACION,
   HEADER_PRIM_SEM,
-  HEADER_SEGUNDO_SEM,
-  HEADER_TERCER_SEM,
-  HEADER_CUARTO_SEM,
+  HEADER_SEG_SEM,
+  HEADER_TERC_SEM,
+  HEADER_CUAR_SEM,
   HEADER_DOCENTE,
+  HEADER_TOTAL,
+  HEADER_AREA,
+  HEADER_FORM,
+  HEADER_HORAS_1,
+  HEADER_HORAS_2,
+  HEADER_HORAS_3,
+  HEADER_HORAS_4,
+  HEADER_HORAS_5,
+  cicloTxt,
+  gradoTxt,
 };
