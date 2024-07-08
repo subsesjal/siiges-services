@@ -3,7 +3,13 @@ const { checkers, Logger } = require('@siiges-services/shared');
 // Internal dependencies
 const { findOneDocumentType } = require('../document-type');
 const { findOneEntityType } = require('../entity-type');
+const { findFileFDA01 } = require('../FDA');
 const { findFileFDA02 } = require('../FDA');
+const { findFileFDA03 } = require('../FDA');
+const { findFileFDA04 } = require('../FDA');
+const { findFileFDA05 } = require('../FDA');
+const { findFileFDA06 } = require('../FDA');
+const { findFileFDP01 } = require('../FDA');
 
 const getFileIdentifierObj = async (fileData) => {
   const { tipoEntidad, entidadId, tipoDocumento } = fileData;
@@ -14,7 +20,6 @@ entidadId ${entidadId}
 tipoDocumento ${tipoDocumento}`);
   const tipoEntidadItem = await findOneEntityType(tipoEntidad);
   const tipoDocumentoItem = await findOneDocumentType(tipoDocumento);
-
   checkers.throwErrorIfDataIsFalsy(tipoEntidadItem, 'tipoEntidad', tipoEntidad);
   checkers.throwErrorIfDataIsFalsy(entidadId, 'entidadId', entidadId);
   checkers.throwErrorIfDataIsFalsy(tipoDocumentoItem, 'tipoDocumento', tipoDocumento);
@@ -54,14 +59,37 @@ tipoDocumento ${tipoDocumento}`);
  * ```
  */
   const filesFDA = {
-    FDA01: () => null, // Añadir funcion para buscar archivo FDA01
+    FDP01: () => findFileFDP01(entidadId, fileMetdata, {
+      tipoDocumento: tipoDocumentoItem.name,
+      tipoEntidad: tipoEntidadItem.name,
+    }), // Añadir funcion para buscar archivo FDA01
+    FDA01: () => findFileFDA01(entidadId, fileMetdata, {
+      tipoDocumento: tipoDocumentoItem.name,
+      tipoEntidad: tipoEntidadItem.name,
+    }),
     FDA02: () => findFileFDA02(entidadId, fileMetdata, {
+      tipoDocumento: tipoDocumentoItem.name,
+      tipoEntidad: tipoEntidadItem.name,
+    }),
+    FDA03: () => findFileFDA03(entidadId, fileMetdata, {
+      tipoDocumento: tipoDocumentoItem.name,
+      tipoEntidad: tipoEntidadItem.name,
+    }),
+    FDA04: () => findFileFDA04(entidadId, fileMetdata, {
+      tipoDocumento: tipoDocumentoItem.name,
+      tipoEntidad: tipoEntidadItem.name,
+    }),
+    FDA05: () => findFileFDA05(entidadId, fileMetdata, {
+      tipoDocumento: tipoDocumentoItem.name,
+      tipoEntidad: tipoEntidadItem.name,
+    }),
+    FDA06: () => findFileFDA06(entidadId, fileMetdata, {
       tipoDocumento: tipoDocumentoItem.name,
       tipoEntidad: tipoEntidadItem.name,
     }),
   };
 
-  if (tipoDocumentoItem.name.startsWith('FDA')) {
+  if (tipoDocumentoItem.name.startsWith('FD')) {
     await filesFDA[tipoDocumentoItem.name]();
   }
 

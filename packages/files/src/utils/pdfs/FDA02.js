@@ -42,6 +42,23 @@ const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encodin
 const img2 = fs.readFileSync(path.join(__dirname, '/images/img2.png'), { encoding: 'base64' });
 const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encoding: 'base64' });
 
+function addHeaderContent(doc) {
+  doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
+  doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
+  doc.setFillColor(6, 98, 211);
+  crearCelda(doc, 150, 40, 45, 7, 'FDA02');
+}
+function redefineAddPage(doc) {
+  const originalAddPage = doc.addPage;
+
+  // eslint-disable-next-line no-param-reassign, func-names
+  doc.addPage = function (...args) {
+    originalAddPage.apply(this, args);
+    addHeaderContent(this);
+    return this;
+  };
+}
+
 function GenerarFDA02(solicitud) {
   const doc = new jsPDF();
   let currentPositionY = 67;
@@ -52,11 +69,8 @@ function GenerarFDA02(solicitud) {
   const ciclosTipo = buscarDescripcionPorId(ciclos, solicitud.programa.cicloId);
   const turnoTipo = generarTiposDeTurno(solicitud.programa.programaTurnos);
 
-  doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
-  doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
-
-  doc.setFillColor(6, 98, 211);
-  crearCelda(doc, 150, 40, 45, 7, 'FDA02');
+  redefineAddPage(doc);
+  addHeaderContent(doc);
 
   configurarFuenteYAgregarTexto(doc, 'bold', 12, [69, 133, 244], 'OFICIO DE ENTREGA DE DOCUMENTACIÓN', 20, 50);
   configurarFuenteYAgregarTexto(doc, 'bold', 12, [0, 0, 0], fechaFormateada, 152, 58);
@@ -138,7 +152,8 @@ function GenerarFDA02(solicitud) {
     doc,
     currentPositionY,
   );
-  currentPositionY = updateCurrentPositionY(doc, 20);
+  doc.addPage();
+  currentPositionY = 55;
   const headersNumeroYCorreo = ['NÚMERO TELEFÓNICO', 'CORREO ELECTRÓNICO'];
   const tableNumeroYCorreo = [
     [solicitud.usuario.persona.celular, solicitud.usuario.persona.correo]];
@@ -200,8 +215,7 @@ function GenerarFDA02(solicitud) {
     ],
   };
   currentPositionY += generateTableAndSection('FORMACIÓN ACADÉMICA', formacionDirector, doc, currentPositionY);
-  currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
-
+  currentPositionY = doc.previousAutoTable.finalY;
   const { diligencias } = solicitud;
 
   if (diligencias && diligencias.length) {
@@ -225,13 +239,9 @@ function GenerarFDA02(solicitud) {
     showHead: false,
     columnStyles,
   };
-
-  currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
-
   currentPositionY += generateTableAndSection('NOMBRES PROPUESTOS PARA LA INSTITUCIÓN EDUCATIVA', nombresPropuestos, doc, currentPositionY);
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
-  currentPositionY += 30;
-
+  currentPositionY = doc.previousAutoTable.finalY;
+  currentPositionY += 10;
   currentPositionY += crearSeccion(
     currentPositionY,
     doc,
@@ -239,7 +249,7 @@ function GenerarFDA02(solicitud) {
     'center',
   );
   currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
-  currentPositionY += 35;
+  currentPositionY += 5;
   currentPositionY += crearSeccion(
     currentPositionY,
     doc,
