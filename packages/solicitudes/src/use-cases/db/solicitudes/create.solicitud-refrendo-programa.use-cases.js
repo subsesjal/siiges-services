@@ -71,7 +71,7 @@ const createRefrendoSolicitudPrograma = (
     ...solicitudDataWithoutIds,
     folio: folioSolcitud,
     tipoSolicitudId: 2,
-    estatusSolicitudId: 2,
+    estatusSolicitudId: 1,
   };
 
   // Create a new solicitud object with the extracted data
