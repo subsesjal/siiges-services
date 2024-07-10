@@ -4,7 +4,7 @@ const fs = require('fs');
 const { turnos } = require('./constants');
 const { HEADER_MAIN_TITTLE } = require('./constants/fd02-constants');
 
-const textFont = 'Helvetica';
+const textFont = 'Nutmegb';
 
 function crearCelda(doc, x, y, width, height, texto) {
   doc.rect(x, y, width, height, 'F');
@@ -131,6 +131,7 @@ function generateTable({
     styles: {
       lineColor: [0, 0, 0],
       lineWidth: 0.3,
+      font: 'Nutmegb',
     },
     headStyles,
     showHead,
@@ -162,6 +163,7 @@ function seccionIntitucionTabla({
     styles: {
       lineColor: [0, 0, 0],
       lineWidth: 0.3,
+      font: 'Nutmegb',
     },
     headStyles: {
       fontSize: 15,
@@ -197,8 +199,17 @@ function seccionIntitucionTabla({
 }
 
 function formatearFecha(fechaCreacion) {
+  const meses = [
+    'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO',
+    'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE',
+  ];
+
   const fecha = new Date(fechaCreacion);
-  return `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
+  const dia = fecha.getDate();
+  const mes = meses[fecha.getMonth()];
+  const año = fecha.getFullYear();
+
+  return `${dia} DE ${mes} DE ${año}`;
 }
 
 function buscarDescripcionPorId(array, id) {
@@ -225,6 +236,9 @@ function generateTableWithStyles(headers, tableData, doc, currentPositionY) {
       fillColor: [172, 178, 183],
       fontSize: 12,
       textColor: [20, 20, 20],
+      font: 'Nutmegb',
+      halign: 'center',
+      valign: 'middle',
     },
     doc,
   });

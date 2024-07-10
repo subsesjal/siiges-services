@@ -1,27 +1,51 @@
 const HEADER_SEMESTRE = [
   {
-    content: 'No.', styles: { halign: 'center', valign: 'middle', fontSize: 7 },
+    content: 'No.',
+    styles: {
+      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+    },
   },
   {
-    content: 'NOMBRE DEL DOCENTE', styles: { halign: 'center', valign: 'middle', fontSize: 7 },
+    content: 'NOMBRE DEL DOCENTE',
+    styles: {
+      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+    },
   },
   {
-    content: 'FORMACIÓN PROFESIONAL', styles: { halign: 'center', valign: 'middle', fontSize: 7 },
+    content: 'FORMACIÓN PROFESIONAL',
+    styles: {
+      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+    },
   },
   {
-    content: 'ASIGNATURA PARA LA QUE SE PROPONE', styles: { halign: 'center', valign: 'middle', fontSize: 7 },
+    content: 'ASIGNATURA PARA LA QUE SE PROPONE',
+    styles: {
+      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+    },
   },
   {
-    content: 'EXPERIENCIA LABORAL', styles: { halign: 'center', valign: 'middle', fontSize: 7 },
+    content: 'EXPERIENCIA LABORAL',
+    styles: {
+      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+    },
   },
   {
-    content: 'DOCENTE DE ASIGNATURA Ó TIEMPO COMPLETO', styles: { halign: 'center', valign: 'middle', fontSize: 7 },
+    content: 'DOCENTE DE ASIGNATURA Ó TIEMPO COMPLETO',
+    styles: {
+      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+    },
   },
   {
-    content: 'SE ACEPTA', styles: { halign: 'center', valign: 'middle', fontSize: 6 },
+    content: 'SE ACEPTA',
+    styles: {
+      halign: 'center', valign: 'middle', fontSize: 6, font: 'Nutmegb',
+    },
   },
   {
-    content: 'OBSERVACIONES', styles: { halign: 'center', valign: 'middle', fontSize: 7 },
+    content: 'OBSERVACIONES',
+    styles: {
+      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+    },
   },
 ];
 
@@ -87,9 +111,17 @@ const tablaGrado = (
 
     const tituloGrado = `${gradoText} ${cicloText}`;
 
+    if (index !== 0) {
+      doc.addPage();
+      // eslint-disable-next-line no-param-reassign
+      currentPositionY = 45;
+    }
+
+    // eslint-disable-next-line no-param-reassign
     currentPositionY += generateTableAndSection(tituloGrado, tabla, doc, currentPositionY);
     // Añadir separación entre tablas
     if (index < grados.length - 1) {
+      // eslint-disable-next-line no-param-reassign
       currentPositionY += 5;
     }
   });
@@ -103,6 +135,7 @@ const columnStyles = {
   },
   1: {
     fontStyle: 'bold',
+    font: 'Nutmegb',
   },
 };
 

@@ -3,9 +3,9 @@ const { GenerarFDA02 } = require('../../../utils/pdfs');
 const { GenerarFDP05 } = require('../../../utils/pdfs');
 const { GenerarFDP06 } = require('../../../utils/pdfs');
 const { GenerarFDP02 } = require('../../../utils/pdfs');
-const { findFileFDP05 } = require('./find-one.FDP05.db.use-cases');
-const { findFileFDP06 } = require('./find-one.FDP06.db.use-cases');
-const { findFileFDP02 } = require('./find-one.FDP02.db.use-cases');
+const { findFileFDP05 } = require('../FDP/find-one.FDP05.db.use-cases');
+const { findFileFDP06 } = require('../FDP/find-one.FDP06.db.use-cases');
+const { findFileFDP02 } = require('../FDP/find-one.FDP02.db.use-cases');
 
 const { findFileFDA02 } = require('./find-one.FDA02.db.use-cases');
 

@@ -8,9 +8,6 @@ const {
   HEADER_PROGRAMA_SEGUIMIENTO,
   HEADER_TIPO_TUTORIA,
   HEADER_TASA_EGRESOS,
-  // columnStyles,
-  // HEADER_OPC_TUTORIAL,
-  // HEADER_NOMBRE_DATOS,
   HEADER_FUNC_TUTO,
 } = require('./constants/fdp05-constants');
 const {
@@ -19,7 +16,6 @@ const {
   configurarFuenteYAgregarTexto,
   generateTableWithStyles,
   updateCurrentPositionY,
-  // generateTableAndSection,
   agregarImagenYPaginaPie,
 } = require('./pdfHandler');
 
@@ -27,9 +23,27 @@ const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encodin
 const img2 = fs.readFileSync(path.join(__dirname, '/images/img2.png'), { encoding: 'base64' });
 const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encoding: 'base64' });
 
+function addHeaderContent(doc) {
+  doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
+  doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
+  doc.setFillColor(6, 98, 211);
+}
+function redefineAddPage(doc) {
+  const originalAddPage = doc.addPage;
+  // eslint-disable-next-line no-param-reassign
+  doc.addPage = function (...args) {
+    originalAddPage.apply(this, args);
+    addHeaderContent(this);
+    return this;
+  };
+}
+
 function GenerarFDP05(solicitud) {
   const doc = new jsPDF();
   let currentPositionY = 67;
+
+  redefineAddPage(doc);
+  addHeaderContent(doc);
 
   const fechaFormateada = formatearFecha(solicitud.createdAt);
 

@@ -17,26 +17,15 @@ const {
   HEADER_OBJ_GEN_PLAN,
   HEADER_OBJ_PT_CMP_PLAN,
   HEADER_ESTRUCTURA_PLAN,
-  HEADER_APARTADO,
-  bodyApartado,
   HEADER_ACTUALIZACION_PLAN,
   HEADER_PROYECTO_SEG,
   HEADER_VINCULACION,
-  // HEADER_PRIM_SEM,
   HEADER_DOCENTE,
-  HEADER_TOTAL,
-  // HEADER_SEG_SEM,
-  // HEADER_TERC_SEM,
-  // HEADER_CUAR_SEM,
-  HEADER_AREA,
-  HEADER_FORM,
-  HEADER_HORAS_1,
   HEADER_HORAS_2,
-  HEADER_HORAS_3,
   HEADER_HORAS_4,
-  HEADER_HORAS_5,
-  gradoTxt,
-  cicloTxt,
+  getSemesterTitle,
+  sortAsignaturas,
+  getAreaName,
 } = require('./constants/fdp02-constants');
 const {
   crearCelda, crearSeccion,
@@ -48,15 +37,34 @@ const {
   generateTableAndSection,
   agregarImagenYPaginaPie,
   buscarDescripcionPorId,
+  generateTotalsTable,
 } = require('./pdfHandler02');
 
 const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
 const img2 = fs.readFileSync(path.join(__dirname, '/images/img2.png'), { encoding: 'base64' });
 const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encoding: 'base64' });
 
+function addHeaderContent(doc) {
+  doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
+  doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
+  doc.setFillColor(6, 98, 211);
+}
+function redefineAddPage(doc) {
+  const originalAddPage = doc.addPage;
+  // eslint-disable-next-line no-param-reassign
+  doc.addPage = function (...args) {
+    originalAddPage.apply(this, args);
+    addHeaderContent(this);
+    return this;
+  };
+}
+
 function GenerarFDP02(solicitud) {
   const doc = new jsPDF();
   let currentPositionY = 67;
+
+  redefineAddPage(doc);
+  addHeaderContent(doc);
 
   const fechaFormateada = formatearFecha(solicitud.createdAt);
   const modalidadTipo = buscarDescripcionPorId(modalidades, solicitud.programa.modalidadId);
@@ -75,7 +83,7 @@ function GenerarFDP02(solicitud) {
   configurarFuenteYAgregarTexto(doc, 'bold', 12, [0, 0, 0], fechaFormateada, 152, 58);
   configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], solicitud.programa.plantel.institucion.nombre, 50, 60);
   configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], `${nombreNivel} en ${solicitud.programa.nombre}`, 50, 70);
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], solicitud.programa.vigencia || 'Donde está la vigencia???', 50, 80);
+  configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], solicitud.programa.vigencia || '', 50, 80);
   currentPositionY += 20;
 
   currentPositionY += seccionIntitucionTabla({
@@ -86,11 +94,7 @@ function GenerarFDP02(solicitud) {
   currentPositionY = updateCurrentPositionY(doc, -20);
   currentPositionY = updateCurrentPositionY(doc, -20);
 
-  // configurarFuenteYAgregarTexto(doc, 'bold', 10, [125, 125, 125],
-  // 'SOLO APLICA PARA EL 1° Y 2° CICLO ESCOLAR (SEMESTRE O CUATRIMESTRE) POR CADA ASIGNATURA',
-  // 10, 140);
-
-  currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
+  currentPositionY = updateCurrentPositionY(doc);
 
   const headerEstudio = ['1. ANTECEDENTES ACADÉMICOS DE INGRESO'];
   const tablaEstudio = [[solicitud.programa.antecedenteAcademico]];
@@ -104,39 +108,35 @@ function GenerarFDP02(solicitud) {
   const perfilIngreso = {
     headers: HEADER_NOMBRE_DATOS,
     body: [
-      ['CONOCIMIENTOS', solicitud.programa.perfilIngresoConocimientos],
-      ['HABILIDADES', solicitud.programa.perfilIngresoHabilidades],
-      ['ACTITUDES', solicitud.programa.perfilIngresoActitudes],
+      [{ content: 'CONOCIMIENTOS', styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } }, solicitud.programa.perfilIngresoConocimientos],
+      [{ content: 'HABILIDADES', styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } }, solicitud.programa.perfilIngresoHabilidades],
+      [{ content: 'ACTITUDES', styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } }, solicitud.programa.perfilIngresoActitudes],
     ],
     showHead: false,
     columnStyles,
   };
 
-  currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
-
   currentPositionY += generateTableAndSection('3. PERFIL DE INGRESO', perfilIngreso, doc, currentPositionY);
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 5;
 
   const tablaModelo = [[solicitud.programa.procesoSeleccion]];
   generateTableWithStyles(HEADER_SELECCION_ESTD, tablaModelo, doc, currentPositionY, 'center');
   currentPositionY = updateCurrentPositionY(doc, 5);
 
-  currentPositionY = updateCurrentPositionY(doc, 60); // Espacio después de la celda
-
   const perfilEgreso = {
     headers: HEADER_NOMBRE_DATOS,
     body: [
-      ['CONOCIMIENTOS', solicitud.programa.perfilEgresoConocimientos],
-      ['HABILIDADES', solicitud.programa.perfilEgresoHabilidades],
-      ['ACTITUDES', solicitud.programa.perfilEgresoActitudes],
+      [{ content: 'CONOCIMIENTOS', styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } }, solicitud.programa.perfilEgresoConocimientos],
+      [{ content: 'HABILIDADES', styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } }, solicitud.programa.perfilEgresoHabilidades],
+      [{ content: 'ACTITUDES', styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } }, solicitud.programa.perfilEgresoActitudes],
     ],
     showHead: false,
     columnStyles,
   };
 
   currentPositionY += generateTableAndSection('5. PERFIL DE EGRESO', perfilEgreso, doc, currentPositionY);
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 5;
 
   const tablaMapa = [[solicitud.programa.mapaCurricular]];
@@ -155,189 +155,243 @@ function GenerarFDP02(solicitud) {
   generateTableWithStyles(HEADER_OBJ_PT_CMP_PLAN, tablaCompetencias, doc, currentPositionY, 'center');
   currentPositionY = updateCurrentPositionY(doc, 5);
 
+  doc.addPage();
+  currentPositionY = 40;
   generateTableWithStyles(HEADER_ESTRUCTURA_PLAN, [], doc, currentPositionY, 'center');
-  currentPositionY += updateCurrentPositionY(doc, 20);
-
-  const apartadoBody = bodyApartado;
-  generateTableWithStyles(HEADER_APARTADO, apartadoBody, doc, currentPositionY);
-  currentPositionY += updateCurrentPositionY(doc); // Espacio después de la celda
-
-  // const tablaPrimSem = {
-  //   headers: HEADER_DOCENTE,
-  //   body: [
-  //     ['', '', '', '',
-  //       {
-  //         content: 'CON DOCENTE:',
-  //         styles: {
-  //           halign: 'center', valign: 'middle', fontSize: 7, textColor: [0, 0, 0], fontStyle: 'bold', fillColor: [172, 178, 183],
-  //         },
-  //       },
-  //       {
-  //         content: 'INDEP:',
-  //         styles: {
-  //           halign: 'center', valign: 'middle', fontSize: 7, textColor: [0, 0, 0], fontStyle: 'bold', fillColor: [172, 178, 183],
-  //         },
-  //       },
-  //       ''], ['Formación General'], ['Formación Básica'], ['Formación Disciplinar'], ['Formación Especializante'], ['Formación Técnica'],
-  //   ],
-  // };
-
-  // currentPositionY += generateTableAndSection(HEADER_PRIM_SEM, tablaPrimSem, doc, currentPositionY);
-  // currentPositionY = doc.previousAutoTable.finalY;
-
-  // // Primer Semestre
-  // const correoDirectorBody = [
-  //   ['', '', ''],
-  // ];
-  // generateTableWithStyles(HEADER_TOTAL, correoDirectorBody, doc, currentPositionY);
-  // currentPositionY = updateCurrentPositionY(doc);
-
-  // // Segundo Semestre
-  // currentPositionY += generateTableAndSection(HEADER_SEG_SEM, tablaPrimSem, doc, currentPositionY);
-  // currentPositionY = doc.previousAutoTable.finalY;
-
-  // generateTableWithStyles(HEADER_TOTAL, correoDirectorBody, doc, currentPositionY);
-  // currentPositionY = updateCurrentPositionY(doc);
-
-  // // Tercer Semestre
-  // currentPositionY += generateTableAndSection(HEADER_TERC_SEM, tablaPrimSem, doc, currentPositionY);
-  // currentPositionY = doc.previousAutoTable.finalY;
-
-  // generateTableWithStyles(HEADER_TOTAL, correoDirectorBody, doc, currentPositionY);
-  // currentPositionY = updateCurrentPositionY(doc);
-
-  // // Cuarto Semestre
-  // currentPositionY += generateTableAndSection(HEADER_CUAR_SEM, tablaPrimSem, doc, currentPositionY);
-  // currentPositionY = doc.previousAutoTable.finalY;
-
-  // generateTableWithStyles(HEADER_TOTAL, correoDirectorBody, doc, currentPositionY);
-  // currentPositionY = updateCurrentPositionY(doc);
-
-  // Funciona a medias, ya muestra las tablas con los semestres, falta mostrar los datos.
-  const obtenerMateriasPorSemestre = (materias) => {
-    const semestres = {};
-
-    materias.forEach((materia) => {
-      const { gradoId, consecutivo, id } = materia;
-      if (!semestres[gradoId]) {
-        semestres[gradoId] = [];
-      }
-      semestres[gradoId].push({ ...materia, key: consecutivo || id });
-    });
-
-    Object.keys(semestres).forEach((semestre) => {
-      semestres[semestre].sort((a, b) => a.key - b.key);
-    });
-
-    return semestres;
-  };
-
-  const areaTxt = {
-    1: 'Formación General',
-    2: 'Formación Básica',
-    3: 'Formación Disciplinar',
-    4: 'Formación Electiva',
-    5: 'Formación Técnica',
-    6: 'Formación Especializante',
-  };
-
-  const semestres = obtenerMateriasPorSemestre(solicitud.programa.asignaturas);
-
-  Object.keys(semestres).forEach((semestre) => {
-    const materias = semestres[semestre].map((materia) => ({
-      area: areaTxt[materia.areaId] || '',
-      nombre: materia.nombre,
-      clave: materia.clave,
-      seriacion: materia.seriacion,
-      horasDocente: materia.horasDocente,
-      horasIndependiente: materia.horasIndependiente,
-      creditos: materia.creditos,
-      instalaciones: materia.academia,
-    }));
-
-    const tablaSemestre = {
-      headers: HEADER_DOCENTE,
-      body: materias.map(({
-        area,
-        nombre,
-        clave,
-        seriacion,
-        horasDocente,
-        horasIndependiente,
-        creditos,
-        instalaciones,
-      }) => [
-        area,
-        nombre,
-        clave,
-        seriacion,
-        horasDocente,
-        horasIndependiente,
-        creditos,
-        instalaciones,
-      ]),
-    };
-
-    const headerSemestre = `${gradoTxt[semestre]} ${cicloTxt[solicitud.programa.cicloId]}`;
-
-    currentPositionY += generateTableAndSection(
-      headerSemestre,
-      tablaSemestre,
-      doc,
-      currentPositionY,
-    );
-    currentPositionY = doc.previousAutoTable.finalY;
-
-    const totalCreditos = materias.reduce((total, { creditos }) => total + creditos, 0);
-    const totalHorasDocente = materias.reduce((total, { horasDocente }) => total + horasDocente, 0);
-    const totalHorasIndependiente = materias
-      .reduce((total, { horasIndependiente }) => total + horasIndependiente, 0);
-
-    const totalesBody = [
-      [`Total Horas con Docente: ${totalHorasDocente}`, `Total Horas Independientes: ${totalHorasIndependiente}`, `Total Créditos: ${totalCreditos}`],
-    ];
-
-    generateTableWithStyles(HEADER_TOTAL, totalesBody, doc, currentPositionY);
-    currentPositionY = updateCurrentPositionY(doc, 5);
-  });
-
-  const formBody = [
-    [HEADER_FORM, '', '', '', '', ''],
-  ];
-
-  generateTableWithStyles(HEADER_AREA, formBody, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
 
-  // Dos recuadros
-  const horasMinBody = [
-    [HEADER_HORAS_2, {
-      content: '                                                                ',
-      styles: {
-        halign: 'center', valign: 'middle', fontSize: 7, textColor: [0, 0, 0], fillColor: [172, 178, 183],
-      },
-    }],
-  ];
+  const asignaturas = sortAsignaturas(solicitud.programa.asignaturas);
 
-  generateTableWithStyles(HEADER_HORAS_1, horasMinBody, doc, currentPositionY);
-  currentPositionY = updateCurrentPositionY(doc);
+  const asignaturasPorSemestre = asignaturas.reduce((acc, asignatura) => {
+    if (!acc[asignatura.gradoId]) acc[asignatura.gradoId] = { generales: [], electivas: [] };
+    if (asignatura.areaId === 4) {
+      acc[asignatura.gradoId].electivas.push(asignatura);
+    } else {
+      acc[asignatura.gradoId].generales.push(asignatura);
+    }
+    return acc;
+  }, {});
 
-  const horasBody = [
-    [HEADER_HORAS_4, {
-      content: '                                                                ',
+  let totalHorasDocente = 0;
+  let totalHorasIndependiente = 0;
+  let totalCreditosAsig = 0;
+  let tablaContador = 0;
+
+  Object.keys(asignaturasPorSemestre).forEach((gradoId, index, array) => {
+    if (asignaturasPorSemestre[gradoId].generales.length > 0) {
+      const tituloSemestre = getSemesterTitle(parseInt(gradoId, 10), solicitud.programa.cicloId);
+      const tablaSemestre = {
+        headers: HEADER_DOCENTE,
+        body: [
+          ['', '', '', '',
+            {
+              content: 'CON DOCENTE:',
+              styles: {
+                halign: 'center', valign: 'middle', fontSize: 7, textColor: [0, 0, 0], fontStyle: 'bold', fillColor: [172, 178, 183], font: 'Nutmegb',
+              },
+            },
+            {
+              content: 'INDEP:',
+              styles: {
+                halign: 'center', valign: 'middle', fontSize: 7, textColor: [0, 0, 0], fontStyle: 'bold', fillColor: [172, 178, 183], font: 'Nutmegb',
+              },
+            },
+            '',
+          ],
+          ...asignaturasPorSemestre[gradoId].generales.map((asignatura) => [
+            { content: `${getAreaName(asignatura.areaId)}`, styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } },
+            { content: `${asignatura.nombre}`, styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } },
+            { content: `${asignatura.clave}`, styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } },
+            { content: `${asignatura.seriacion}`, styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } },
+            { content: `${asignatura.horasDocente}`, styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } },
+            { content: `${asignatura.horasIndependiente}`, styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } },
+            { content: `${asignatura.creditos}`, styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } },
+            { content: `${asignatura.academia}`, styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } },
+          ]),
+        ],
+      };
+
+      currentPositionY += generateTableAndSection(
+        tituloSemestre,
+        tablaSemestre,
+        doc,
+        currentPositionY,
+      );
+      currentPositionY = doc.previousAutoTable.finalY;
+
+      const totalDocente = asignaturasPorSemestre[gradoId].generales
+        .reduce((sum, asignatura) => sum + (asignatura.horasDocente || 0), 0);
+      const totalIndep = asignaturasPorSemestre[gradoId].generales
+        .reduce((sum, asignatura) => sum + (asignatura.horasIndependiente || 0), 0);
+      const totalCreditos = asignaturasPorSemestre[gradoId].generales
+        .reduce((sum, asignatura) => sum + parseFloat(asignatura.creditos || 0), 0);
+
+      totalHorasDocente += totalDocente;
+      totalHorasIndependiente += totalIndep;
+      totalCreditosAsig += totalCreditos;
+
+      const HEADER_TOTAL = [
+        {
+          content: `TOTAL DOCENTE:  ${totalDocente}`,
+          styles: {
+            halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+          },
+        },
+        {
+          content: `TOTAL INDEP:  ${totalIndep}`,
+          styles: {
+            halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+          },
+        },
+        {
+          content: `TOTAL CRÉDITOS:   ${totalCreditos}`,
+          styles: {
+            halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+          },
+        },
+      ];
+
+      currentPositionY = generateTotalsTable(HEADER_TOTAL, doc, currentPositionY);
+      currentPositionY = updateCurrentPositionY(doc);
+
+      tablaContador += 1;
+      if (tablaContador % 1 === 0 && index !== array.length - 1) {
+        doc.addPage();
+        currentPositionY = 40;
+      }
+
+      if (index === array.length - 1) {
+        doc.addPage();
+        currentPositionY = 40;
+      }
+    }
+  });
+
+  Object.keys(asignaturasPorSemestre).forEach((gradoId, index, array) => {
+    if (asignaturasPorSemestre[gradoId].electivas.length > 0) {
+      const tituloSemestre = `ELECTIVA - ${getSemesterTitle(parseInt(gradoId, 10), solicitud.programa.cicloId)}`;
+      const tablaSemestre = {
+        headers: HEADER_DOCENTE,
+        body: [
+          ['', '', '', '',
+            {
+              content: 'CON DOCENTE:',
+              styles: {
+                halign: 'center', valign: 'middle', fontSize: 7, textColor: [0, 0, 0], fontStyle: 'bold', fillColor: [172, 178, 183], font: 'Nutmegb',
+              },
+            },
+            {
+              content: 'INDEP:',
+              styles: {
+                halign: 'center', valign: 'middle', fontSize: 7, textColor: [0, 0, 0], fontStyle: 'bold', fillColor: [172, 178, 183], font: 'Nutmegb',
+              },
+            },
+            '',
+          ],
+          ...asignaturasPorSemestre[gradoId].electivas.map((asignatura) => [
+            { content: `${getAreaName(asignatura.areaId)}`, styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } },
+            { content: `${asignatura.nombre}`, styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } },
+            { content: `${asignatura.clave}`, styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } },
+            { content: `${asignatura.seriacion}`, styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } },
+            { content: `${asignatura.horasDocente}`, styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } },
+            { content: `${asignatura.horasIndependiente}`, styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } },
+            { content: `${asignatura.creditos}`, styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } },
+            { content: `${asignatura.academia}`, styles: { halign: 'center', valign: 'middle', font: 'Nutmegb' } },
+          ]),
+        ],
+      };
+
+      currentPositionY += generateTableAndSection(
+        tituloSemestre,
+        tablaSemestre,
+        doc,
+        currentPositionY,
+      );
+      currentPositionY = doc.previousAutoTable.finalY;
+
+      tablaContador += 1;
+      if (tablaContador % 1 === 0 && index !== array.length - 1) {
+        doc.addPage();
+        currentPositionY = 40;
+      }
+    }
+
+    if (index === array.length - 1) {
+      currentPositionY = updateCurrentPositionY(doc, 5);
+      currentPositionY = doc.previousAutoTable.finalY;
+
+      const HEADER_HORAS_1 = [
+        {
+          content: 'NÚMERO MÍNIMO DE HORAS QUE SE DEBERÁN ACREDITAR EN LAS ASIGNATURAS DE FORMACIÓN ELECTIVA, BAJO LA CONDUCCIÓN DE UN DOCENTE',
+          styles: {
+            halign: 'center', valign: 'middle', fontSize: 7, fillColor: [255, 255, 255], font: 'Nutmegb',
+          },
+        },
+        {
+          content: solicitud.programa.minimoHorasOptativas || 0,
+          styles: {
+            halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb', cellWidth: 20,
+          },
+        },
+      ];
+
+      const horasMinBody = [
+        [HEADER_HORAS_2, {
+          content: [solicitud.programa.minimoCreditosOptativas || 0],
+          styles: {
+            halign: 'center', valign: 'middle', fontSize: 7, textColor: [0, 0, 0], fillColor: [172, 178, 183], fontStyle: 'bold',
+          },
+        }],
+      ];
+
+      generateTableWithStyles(HEADER_HORAS_1, horasMinBody, doc, currentPositionY);
+      currentPositionY = updateCurrentPositionY(doc);
+    }
+  });
+
+  currentPositionY = updateCurrentPositionY(doc, 5);
+  currentPositionY = doc.previousAutoTable.finalY + 5;
+
+  const HEADER_HORAS_3 = [
+    {
+      content: 'TOTAL DE HORAS DE TRABAJO BAJO LA CONDUCCIÓN DE UN DOCENTE DURANTE TODA LA CARRERA',
       styles: {
-        halign: 'center', valign: 'middle', fontSize: 7, textColor: [0, 0, 0], fillColor: [172, 178, 183],
+        halign: 'center', valign: 'middle', fontSize: 7, fillColor: [255, 255, 255], font: 'Nutmegb',
       },
     },
     {
-      content: '                                                                ',
+      content: [totalHorasDocente],
       styles: {
-        halign: 'center', valign: 'middle', fontSize: 7, textColor: [0, 0, 0], fillColor: [172, 178, 183],
+        halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb', fontStyle: 'bold',
       },
-    }],
+    },
+  ];
+
+  const horasBody = [
+    [HEADER_HORAS_4, {
+      content: [totalHorasIndependiente],
+      styles: {
+        halign: 'center', valign: 'middle', fontSize: 7, fontStyle: 'bold', textColor: [0, 0, 0], fillColor: [172, 178, 183], font: 'Nutmegb', cellWidth: 20,
+      },
+    },
+    ],
   ];
   generateTableWithStyles(HEADER_HORAS_3, horasBody, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
 
+  const HEADER_HORAS_5 = [{
+    content: 'TOTAL DE CRÉDITOS DE LA CARRERA',
+    styles: {
+      halign: 'center', valign: 'middle', fontSize: 7, fillColor: [255, 255, 255], font: 'Nutmegb',
+    },
+  },
+  {
+    content: [`${totalCreditosAsig}`],
+    styles: {
+      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb', cellWidth: 20,
+    },
+  },
+  ];
   generateTableWithStyles(HEADER_HORAS_5, [], doc, currentPositionY);
   currentPositionY = updateCurrentPositionY(doc);
 
@@ -353,8 +407,8 @@ function GenerarFDP02(solicitud) {
   generateTableWithStyles(HEADER_VINCULACION, tablaVinculacion, doc, currentPositionY, 'center');
   currentPositionY = updateCurrentPositionY(doc, 5);
 
-  currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = updateCurrentPositionY(doc);
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 15;
 
   currentPositionY += crearSeccion(
@@ -363,7 +417,7 @@ function GenerarFDP02(solicitud) {
     'BAJO PROTESTA DE DECIR VERDAD',
     'center',
   );
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 20;
   currentPositionY += crearSeccion(
     currentPositionY,

@@ -99,6 +99,7 @@ function generarSeccionyTabla({
     styles: {
       lineColor: [0, 0, 0],
       lineWidth: 0.3,
+      font: 'Nutmegb',
     },
     headStyles: {
       fillColor: [172, 178, 183],
@@ -131,6 +132,7 @@ function generateTable({
     styles: {
       lineColor: [0, 0, 0],
       lineWidth: 0.3,
+      font: 'Nutmegb',
     },
     headStyles,
     showHead,
@@ -164,6 +166,7 @@ function seccionIntitucionTabla({
     styles: {
       lineColor: [0, 0, 0],
       lineWidth: 0.3,
+      font: 'Nutmegb',
     },
     headStyles: {
       fontSize: 15,
@@ -240,6 +243,9 @@ function generateTableWithStyles(headers, tableData, doc, currentPositionY) {
       fillColor: [172, 178, 183],
       fontSize: 12,
       textColor: [20, 20, 20],
+      font: 'Nutmegb',
+      halign: 'center',
+      valign: 'middle',
     },
     doc,
   });

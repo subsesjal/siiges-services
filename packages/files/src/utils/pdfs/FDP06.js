@@ -69,11 +69,7 @@ function GenerarFDP06(solicitud) {
   currentPositionY = updateCurrentPositionY(doc, -20);
   currentPositionY = updateCurrentPositionY(doc, -20);
 
-  // configurarFuenteYAgregarTexto(doc, 'bold', 10, [125, 125, 125],
-  // 'SOLO APLICA PARA EL 1° Y 2° CICLO ESCOLAR (SEMESTRE O CUATRIMESTRE)
-  // POR CADA ASIGNATURA', 10, 140);
-
-  currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
+  currentPositionY = updateCurrentPositionY(doc);
 
   currentPositionY = tablaGrado(
     solicitud,
@@ -83,10 +79,8 @@ function GenerarFDP06(solicitud) {
   );
 
   currentPositionY = updateCurrentPositionY(doc, 5);
-
-  currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
-  currentPositionY += 5;
+  currentPositionY = doc.previousAutoTable.finalY;
+  currentPositionY += 10;
 
   currentPositionY += crearSeccion(
     currentPositionY,
@@ -94,8 +88,9 @@ function GenerarFDP06(solicitud) {
     'BAJO PROTESTA DE DECIR VERDAD',
     'center',
   );
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
-  currentPositionY += 10;
+  currentPositionY = doc.previousAutoTable.finalY;
+  currentPositionY += 15;
+  // eslint-disable-next-line no-unused-vars
   currentPositionY += crearSeccion(
     currentPositionY,
     doc,
