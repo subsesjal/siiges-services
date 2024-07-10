@@ -100,6 +100,14 @@ const { PRESUPUESTO_TABLE, PresupuestoSchema } = require('../models/presupuesto'
 const { TIPO_PRESUPUESTO_TABLE, TipoPresupuestoSchema } = require('../models/tipoPresupuesto');
 const { TIPO_RECURSO_PRESUPUESTO_TABLE, TipoRecursoPresupuestoSchema } = require('../models/tipoRecursoPresupuesto');
 const { TIPO_EGRESO_TABLE, TipoEgresoSchema } = require('../models/tipoEgreso');
+const { TIPO_SOLICITUD_FOLIO_TABLE, TipoSolicitudFolioSchema } = require('../models/tipoSolicitudFolio');
+const { TIPO_DOCUMENTO_TABLE, TipoDocumentoSchema } = require('../models/tipoDocumento');
+const { ESTATUS_SOLICITUD_FOLIO_TABLE, EstatusSolicitudFolioSchema } = require('../models/estatusSolicitudFolio');
+const { SOLICITUD_FOLIO_TABLE, SolicitudFolioSchema } = require('../models/solicitudFolio');
+const { SOLICITUD_FOLIO_ALUMNO_TABLE, SolicitudFolioAlumnoSchema } = require('../models/solicitudFolioAlumno');
+const { LIBRO_TABLE, LibroSchema } = require('../models/libro');
+const { FOJA_TABLE, FojaSchema } = require('../models/foja');
+const { FOLIO_DOCUMENTO_ALUMNO_TABLE, FolioDocumentoAlumnoSchema } = require('../models/folioDocumentoAlumno');
 
 module.exports = {
   async up(queryInterface) {
@@ -217,6 +225,14 @@ module.exports = {
     await queryInterface.createTable(TIPO_RECURSO_PRESUPUESTO_TABLE, TipoRecursoPresupuestoSchema);
     await queryInterface.createTable(PRESUPUESTO_EGRESO_TABLE, PresupuestoEgresoSchema);
     await queryInterface.createTable(PRESUPUESTO_TABLE, PresupuestoSchema);
+    await queryInterface.createTable(TIPO_SOLICITUD_FOLIO_TABLE, TipoSolicitudFolioSchema);
+    await queryInterface.createTable(TIPO_DOCUMENTO_TABLE, TipoDocumentoSchema);
+    await queryInterface.createTable(ESTATUS_SOLICITUD_FOLIO_TABLE, EstatusSolicitudFolioSchema);
+    await queryInterface.createTable(SOLICITUD_FOLIO_TABLE, SolicitudFolioSchema);
+    await queryInterface.createTable(SOLICITUD_FOLIO_ALUMNO_TABLE, SolicitudFolioAlumnoSchema);
+    await queryInterface.createTable(LIBRO_TABLE, LibroSchema);
+    await queryInterface.createTable(FOJA_TABLE, FojaSchema);
+    await queryInterface.createTable(FOLIO_DOCUMENTO_ALUMNO_TABLE, FolioDocumentoAlumnoSchema);
   },
 
   async down(queryInterface) {
@@ -323,5 +339,13 @@ module.exports = {
     await queryInterface.dropTable(TIPO_PRESUPUESTO_TABLE);
     await queryInterface.dropTable(TIPO_RECURSO_PRESUPUESTO_TABLE);
     await queryInterface.dropTable(TIPO_EGRESO_TABLE);
+    await queryInterface.dropTable(TIPO_SOLICITUD_FOLIO_TABLE);
+    await queryInterface.dropTable(TIPO_DOCUMENTO_TABLE);
+    await queryInterface.dropTable(ESTATUS_SOLICITUD_FOLIO_TABLE);
+    await queryInterface.dropTable(SOLICITUD_FOLIO_TABLE);
+    await queryInterface.dropTable(SOLICITUD_FOLIO_ALUMNO_TABLE);
+    await queryInterface.dropTable(LIBRO_TABLE);
+    await queryInterface.dropTable(FOJA_TABLE);
+    await queryInterface.dropTable(FOLIO_DOCUMENTO_ALUMNO_TABLE);
   },
 };
