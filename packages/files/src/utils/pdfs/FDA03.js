@@ -50,10 +50,22 @@ function GenerarFDA03(solicitud) {
 
   const TablaRepresentante = {
     headers: HEADER_NOMBRE_DATOS,
-    body: TABLA_REPRESENTANTE(solicitud.programa.plantel.institucion.rector.persona),
+    body: [],
     showHead: false,
     columnStyles: columnStylesFirstAndSecondTable,
   };
+
+  if (
+    solicitud
+    && solicitud.programa
+    && solicitud.programa.plantel
+    && solicitud.programa.plantel.institucion
+    && solicitud.programa.plantel.institucion.rector
+    && solicitud.programa.plantel.institucion.rector.persona
+  ) {
+    // eslint-disable-next-line max-len
+    TablaRepresentante.body = TABLA_REPRESENTANTE(solicitud.programa.plantel.institucion.rector.persona);
+  }
 
   currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
 

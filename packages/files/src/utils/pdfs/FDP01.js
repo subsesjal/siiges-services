@@ -5,13 +5,13 @@ const { jsPDF } = require('jspdf');
 require('jspdf-autotable');
 
 const {
-  ciclos, modalidades, niveles,
+  niveles,
 } = require('./constants');
 const {
   HEADER_NOMBRE_DATOS,
   HEADER_NOMBRE_PUESTO,
   columnStyles,
-  HEADER_IDEARIO
+  HEADER_IDEARIO,
 } = require('./constants/fdp01-constants');
 const {
   crearCelda, crearSeccion,
@@ -66,25 +66,25 @@ function GenerarFDP01(solicitud) {
   const headerEstudio = ['2. ESTUDIO DE OFERTA Y DEMANDA'];
   const tablaEstudio = [
     ['', '']];
-  generateTableWithStyles(headerEstudio, tablaEstudio, doc, currentPositionY,'center');
+  generateTableWithStyles(headerEstudio, tablaEstudio, doc, currentPositionY, 'center');
   currentPositionY = updateCurrentPositionY(doc, 5);
 
   const headerFuentes = ['3. FUENTES DE INFORMACIÓN'];
   const tablaFuentes = [
     ['', '']];
-  generateTableWithStyles(headerFuentes, tablaFuentes, doc, currentPositionY,'center');
+  generateTableWithStyles(headerFuentes, tablaFuentes, doc, currentPositionY, 'center');
   currentPositionY = updateCurrentPositionY(doc, 5);
 
   const headerModelo = ['4. MODELO EDUCATIVO'];
   const tablaModelo = [
     ['', '']];
-  generateTableWithStyles(headerModelo, tablaModelo, doc, currentPositionY,'center');
+  generateTableWithStyles(headerModelo, tablaModelo, doc, currentPositionY, 'center');
   currentPositionY = updateCurrentPositionY(doc, 5);
 
   const headerPoliticas = ['5. POLÍTICAS DE FUNCIONAMIENTO'];
   const tablaPoliticas = [
     ['', '']];
-  generateTableWithStyles(headerPoliticas, tablaPoliticas, doc, currentPositionY,'center');
+  generateTableWithStyles(headerPoliticas, tablaPoliticas, doc, currentPositionY, 'center');
   currentPositionY = updateCurrentPositionY(doc, 5);
 
   const nombresIdeario = {

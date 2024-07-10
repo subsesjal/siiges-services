@@ -65,39 +65,46 @@ const findFileFDA04 = (
       { association: 'trayectoria' },
       {
         association: 'plantel',
-        include: [{
-          association: 'domicilio',
-          include: [
-            { association: 'estado' },
-            { association: 'municipio' },
-          ],
-        },
-        {
-          association: 'directores',
-          include: [
-            { association: 'persona' },
-            {
-              association: 'formacionesDirectores',
-              include: [{ association: 'formacion' }],
-            },
-          ],
-        },
-        {
-          association: 'institucion',
-          include: [
-            { association: 'ratificacionesNombre' },
-            {
-              association: 'rector',
-              include: [
-                { association: 'persona' },
-                {
-                  association: 'formacionesRectores',
-                  include: [{ association: 'formacion' }],
-                },
-              ],
-            },
-          ],
-        }],
+        include: [
+          { association: 'plantelEdificioNiveles' },
+          { association: 'plantelSeguridadSistemas' },
+          { association: 'plantelHigienes' },
+          { association: 'saludInstituciones' },
+          { association: 'infraestructuras' },
+          { association: 'tipoInmueble' },
+          {
+            association: 'domicilio',
+            include: [
+              { association: 'estado' },
+              { association: 'municipio' },
+            ],
+          },
+          {
+            association: 'directores',
+            include: [
+              { association: 'persona' },
+              {
+                association: 'formacionesDirectores',
+                include: [{ association: 'formacion' }],
+              },
+            ],
+          },
+          {
+            association: 'institucion',
+            include: [
+              { association: 'ratificacionesNombre' },
+              {
+                association: 'rector',
+                include: [
+                  { association: 'persona' },
+                  {
+                    association: 'formacionesRectores',
+                    include: [{ association: 'formacion' }],
+                  },
+                ],
+              },
+            ],
+          }],
       }],
   },
   {
@@ -116,6 +123,8 @@ const findFileFDA04 = (
     strict: false,
   });
 
+  // eslint-disable-next-line no-console
+  console.log(JSON.stringify(solicitud, null, 2));
   checkers.throwErrorIfDataIsFalsy(solicitud, 'solicitud', solicitudId);
 
   const file = await GenerarFDA04(solicitud);

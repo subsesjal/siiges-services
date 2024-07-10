@@ -7,14 +7,21 @@ require('jspdf-autotable');
 const {
   modalidades, ciclos,
 } = require('./constants');
-// const {
-// } = require('./constants/fda04-constants');
+const {
+  tablaDomicilio,
+  tablaHigiene,
+  tablaInfraestructuraPrograma,
+  tablaRelacionInstituciones,
+  tablaDatosPlan,
+} = require('./constants/fda04-constants');
+
 const {
   configurarFuenteYAgregarTexto,
   updateCurrentPositionY,
   generateTableAndSection,
   agregarImagenYPaginaPie,
   buscarDescripcionPorId,
+  crearSeccion,
 } = require('./pdfHandler');
 
 const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
@@ -54,127 +61,17 @@ function GenerarFDA04(solicitud) {
   };
   currentPositionY -= 10;
   const textoCiclos = ciclosTipo === 'Semestral' ? 'Semestres' : 'Cuatrimestres';
-  const tablaDatosPlan = [
-    { tipo: 'titulo', contenido: '1. DATOS DEL PLAN DE ESTUDIOS' },
-    {
-      tipo: 'fila',
-      contenido: [
-        { texto: 'NOMBRE DE LA INSTITUCIÓN', medida: 91, color: 'blanco' },
-        { texto: solicitud.programa.plantel.institucion.nombre, medida: 91, color: 'blanco' },
-      ],
-      repetirVeces: 1,
-    },
-    {
-      tipo: 'fila',
-      contenido: [
-        { texto: 'TIPO Y NOMBRE DEL PLAN DE ESTUDIOS', medida: 91, color: 'blanco' },
-        { texto: '', medida: 91, color: 'blanco' },
-      ],
-      repetirVeces: 1,
-    },
-    {
-      tipo: 'fila',
-      contenido: [
-        { texto: 'MODALIDAD', medida: 91, color: 'blanco' },
-        { texto: modalidadTipo, medida: 91, color: 'blanco' },
-      ],
-      repetirVeces: 1,
-    },
-    {
-      tipo: 'fila',
-      contenido: [
-        { texto: 'DURACIÓN DEL PROGRAMA', medida: 91, color: 'blanco' },
-        { texto: `${solicitud.programa.duracionPeriodos} ${textoCiclos}`, medida: 91, color: 'blanco' },
-      ],
-      repetirVeces: 1,
-    },
-    {
-      tipo: 'fila',
-      contenido: [
-        {
-          texto: 'NOMBRE COMPLETO DE LA PERSONA FÍSICA O JURÍDICA',
-          medida: 91,
-          color: 'blanco',
-          bold: true,
-          tamano: 8.7,
-          acomodoLetra: 'center',
-        },
-        { texto: '', medida: 91, color: 'blanco' },
-      ],
-      repetirVeces: 1,
-    },
-  ];
-
-  tablaDatosPlan.forEach((item) => {
+  tablaDatosPlan(solicitud, textoCiclos, modalidadTipo).forEach((item) => {
     // eslint-disable-next-line no-use-before-define
     switchTablas(item, doc, tituloTabla);
   });
 
   currentPositionY = updateCurrentPositionY(doc, 40);
 
-  const tablaDomicilio = [
-    { tipo: 'titulo', contenido: '2. DOMICILIO DE LA INSTITUCIÓN' },
-    {
-      tipo: 'fila',
-      contenido: [
-        { texto: 'CALLE Y NÚMERO', medida: 121.4, color: 'gris' },
-        { texto: 'COLONIA', medida: 60.66, color: 'gris' },
-      ],
-      repetirVeces: 1,
-    },
-    {
-      tipo: 'fila',
-      contenido: [
-        { texto: solicitud.programa.plantel.domicilio.calle, medida: 121.4, color: 'blanco' },
-        { texto: solicitud.programa.plantel.domicilio.colonia, medida: 60.66, color: 'blanco' },
-      ],
-      repetirVeces: 1,
-    },
-    {
-      tipo: 'fila',
-      contenido: [
-        { texto: 'CÓDIGO POSTAL', medida: 60.66, color: 'gris' },
-        { texto: 'DELEGACIÓN O MUNICIPIO', medida: 60.66, color: 'gris' },
-        { texto: 'ENTIDAD FEDERATIVA', medida: 60.66, color: 'gris' },
-      ],
-      repetirVeces: 1,
-    },
-    {
-      tipo: 'fila',
-      contenido: [
-        { texto: solicitud.programa.plantel.domicilio.codigoPostal.toString(), medida: 60.66, color: 'blanco' },
-        { texto: solicitud.programa.plantel.domicilio.municipio.nombre, medida: 60.66, color: 'blanco' },
-        { texto: solicitud.programa.plantel.domicilio.estado.nombre, medida: 60.66, color: 'blanco' },
-      ],
-      repetirVeces: 1,
-    },
-    {
-      tipo: 'fila',
-      contenido: [
-        { texto: 'NÚMERO TELEFÓNICO', medida: 60.66, color: 'gris' },
-        { texto: 'REDES SOCIALES', medida: 60.66, color: 'gris' },
-        { texto: 'CORREO ELECTRÓNICO', medida: 60.66, color: 'gris' },
-      ],
-      repetirVeces: 1,
-    },
-    {
-      tipo: 'fila',
-      contenido: [
-        { texto: solicitud.programa.plantel.telefono1, medida: 60.66, color: 'blanco' },
-        { texto: solicitud.programa.plantel.redesSociales == null ? 'sin dato' : solicitud.programa.plantel.redesSociales, medida: 60.66, color: 'blanco' },
-        { texto: solicitud.programa.plantel.correo1, medida: 60.66, color: 'blanco' },
-      ],
-      repetirVeces: 1,
-    },
-  ];
-
-  tablaDomicilio.forEach((item) => {
+  tablaDomicilio(solicitud).forEach((item) => {
     // eslint-disable-next-line no-use-before-define
     switchTablas(item, doc, tituloTabla);
   });
-
-  currentPositionY = updateCurrentPositionY(doc, 47);
-
   const tablaDescripcionPlantel = [
     { tipo: 'titulo', contenido: '3. DESCRIPCIÓN DEL PLANTEL' },
     {
@@ -188,34 +85,70 @@ function GenerarFDA04(solicitud) {
     {
       tipo: 'fila',
       contenido: [
-        { texto: 'CONSTRUIDO PARA LA ESCUELA', medida: 81, color: 'blanco' },
-        { texto: 'x', medida: 10, color: 'blanco' },
-        { texto: 'Descripcion', medida: 81, color: 'blanco' },
-        { texto: 'NO.', medida: 10, color: 'blanco' },
+        {
+          texto: 'CONSTRUIDO PARA LA ESCUELA',
+          medida: 81,
+          color: 'blanco',
+        },
+        {
+          texto: solicitud.programa.plantel && solicitud.programa.plantel.tipoInmueble && solicitud.programa.plantel.tipoInmueble.nombre && solicitud.programa.plantel.tipoInmueble.nombre.includes('construido') ? 'x' : '',
+          medida: 10,
+          color: 'blanco',
+        },
+        {
+          texto: 'Descripcion',
+          medida: 81,
+          color: 'blanco',
+        },
+        {
+          texto: 'NO.',
+          medida: 10,
+          color: 'blanco',
+        },
       ],
       repetirVeces: 1,
     },
     {
       tipo: 'fila',
       contenido: [
-        { texto: 'ADAPTADO', medida: 81, color: 'blanco' },
-        { texto: '', medida: 10, color: 'blanco' },
         {
-          texto: 'RECUBRIMIENTOS PLÁSTICOS EN PISOS Y ESCALONES',
+          texto: 'ADAPTADO',
+          medida: 81,
+          color: 'blanco',
+        },
+        {
+          texto: solicitud.programa.plantel && solicitud.programa.plantel.tipoInmueble && solicitud.programa.plantel.tipoInmueble.nombre && solicitud.programa.plantel.tipoInmueble.nombre.includes('adaptado') ? 'x' : '',
+          medida: 10,
+          color: 'blanco',
+        },
+        {
+          texto: 'RECUBRIMIENTOS PLÁSTICOS EN PISOS Y ESCALONE',
           medida: 81,
           color: 'blanco',
           bold: true,
           tamano: 8.3,
         },
-        { texto: '', medida: 10, color: 'blanco' },
+        {
+          texto: '',
+          medida: 10,
+          color: 'blanco',
+        },
       ],
       repetirVeces: 1,
     },
     {
       tipo: 'fila',
       contenido: [
-        { texto: 'MIXTO', medida: 81, color: 'blanco' },
-        { texto: '', medida: 10, color: 'blanco' },
+        {
+          texto: 'MIXTO',
+          medida: 81,
+          color: 'blanco',
+        },
+        {
+          texto: solicitud.programa.plantel && solicitud.programa.plantel.tipoInmueble && solicitud.programa.plantel.tipoInmueble.nombre && solicitud.programa.plantel.tipoInmueble.nombre.includes('mixto') ? 'x' : '',
+          medida: 10,
+          color: 'blanco',
+        },
         {
           texto: 'ALARMA CONTRA INCENDIOS Y/O TERREMOTOS',
           medida: 81,
@@ -223,17 +156,37 @@ function GenerarFDA04(solicitud) {
           bold: true,
           tamano: 8.7,
         },
-        { texto: '', medida: 10, color: 'blanco' },
+        {
+          texto: '',
+          medida: 10,
+          color: 'blanco',
+        },
       ],
       repetirVeces: 1,
     },
     {
       tipo: 'fila',
       contenido: [
-        { texto: 'DIMENSIONES DEL PLANTEL EN M2', medida: 81, color: 'blanco' },
-        { texto: '', medida: 10, color: 'blanco' },
-        { texto: 'SEÑALAMIENTOS DE EVACUACIÓN', medida: 81, color: 'blanco' },
-        { texto: '', medida: 10, color: 'blanco' },
+        {
+          texto: 'DIMENSIONES DEL PLANTEL EN M2',
+          medida: 81,
+          color: 'blanco',
+        },
+        {
+          texto: solicitud.programa.plantel && solicitud.programa.plantel.dimensiones ? solicitud.programa.plantel.dimensiones : 'S/I',
+          medida: 10,
+          color: 'blanco',
+        },
+        {
+          texto: 'SEÑALAMIENTOS DE EVACUACIÓN',
+          medida: 81,
+          color: 'blanco',
+        },
+        {
+          texto: '',
+          medida: 10,
+          color: 'blanco',
+        },
       ],
       repetirVeces: 1,
     },
@@ -250,8 +203,8 @@ function GenerarFDA04(solicitud) {
       tipo: 'fila',
       contenido: [
         { texto: 'SÓTANO', medida: 81, color: 'blanco' },
-        { texto: 'x', medida: 10, color: 'blanco' },
-        { texto: 'ESCALERA DE EMERGENCIAS', medida: 81, color: 'blanco' },
+        { texto: '', medida: 10, color: 'blanco' },
+        { texto: 'ESCALERAS DE EMERGENCIA', medida: 81, color: 'blanco' },
         { texto: '', medida: 10, color: 'blanco' },
       ],
       repetirVeces: 1,
@@ -281,7 +234,7 @@ function GenerarFDA04(solicitud) {
       contenido: [
         { texto: 'SEGUNDO PISO', medida: 81, color: 'blanco' },
         { texto: '', medida: 10, color: 'blanco' },
-        { texto: 'PUNTO DE REUNIÓN PARA EVACUAR', medida: 81, color: 'blanco' },
+        { texto: 'PUNTOS DE REUNIÓN PARA EVACUACION', medida: 81, color: 'blanco' },
         { texto: '', medida: 10, color: 'blanco' },
       ],
       repetirVeces: 1,
@@ -296,167 +249,161 @@ function GenerarFDA04(solicitud) {
     },
   ];
 
+  currentPositionY = updateCurrentPositionY(doc, 47);
+  solicitud.programa.plantel.plantelSeguridadSistemas.forEach((seguridad) => {
+    // Verificar si seguridad y seguridad.seguridadSistema están definidos
+    // eslint-disable-next-line max-len
+    const descripcion = seguridad && seguridad.seguridadSistema && seguridad.seguridadSistema.descripcion
+      ? seguridad.seguridadSistema.descripcion.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()
+      : '';
+
+    const index = tablaDescripcionPlantel.findIndex((item) => {
+      let texto = '';
+
+      // Verificar la existencia de item.contenido y sus elementos antes de acceder
+      if (item.contenido && item.contenido[2] && item.contenido[2].texto) {
+        texto = item.contenido[2].texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+      }
+
+      if (descripcion === 'botiquin') {
+        // Verificar la existencia de item.contenido[1] y su elemento antes de acceder
+        texto = item.contenido && item.contenido[1] && item.contenido[1].texto
+          ? item.contenido[1].texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()
+          : '';
+      }
+
+      // Uso de expresión regular para buscar coincidencias parciales
+      const regex = new RegExp(`\\b${descripcion.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\s+/g, '\\s+')}\\b`, 'i');
+      return regex.test(texto);
+    });
+
+    if (index !== -1) {
+      if (descripcion === 'botiquin') {
+        // Verificar la existencia de item.contenido[2] antes de acceder
+        // eslint-disable-next-line max-len
+        if (tablaDescripcionPlantel[index].contenido && tablaDescripcionPlantel[index].contenido[2]) {
+          tablaDescripcionPlantel[index].contenido[2].texto = 'x';
+        }
+      } else {
+        // Verificar la existencia de item.contenido[3] antes de acceder
+        // eslint-disable-next-line max-len, no-lonely-if
+        if (tablaDescripcionPlantel[index].contenido && tablaDescripcionPlantel[index].contenido[3]) {
+          tablaDescripcionPlantel[index].contenido[3].texto = 'x';
+        }
+      }
+    }
+  });
+
+  // Iterate over plantelEdificioNiveles
+  solicitud.programa.plantel.plantelEdificioNiveles.forEach((nivel) => {
+    // Verificar si nivel y nivel.edificioNivel están definidos
+    const descripcion = nivel && nivel.edificioNivel && nivel.edificioNivel.descripcion
+      ? nivel.edificioNivel.descripcion.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()
+      : '';
+
+    // Buscar el índice correspondiente en tablaDescripcionPlantel
+    const index = tablaDescripcionPlantel.findIndex((item) => {
+      // Verificar la existencia de item.contenido[0] y su propiedad texto
+      const texto = item.contenido && item.contenido[0] && item.contenido[0].texto
+        ? item.contenido[0].texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()
+        : '';
+      return texto === descripcion;
+    });
+
+    // Si se encuentra el índice y es válido
+    if (index !== -1) {
+      // Verificar la existencia de tablaDescripcionPlantel[index].contenido[1] antes de acceder
+      if (tablaDescripcionPlantel[index].contenido && tablaDescripcionPlantel[index].contenido[1]) {
+        tablaDescripcionPlantel[index].contenido[1].texto = 'x';
+      }
+    }
+  });
+
   tablaDescripcionPlantel.forEach((item) => {
     // eslint-disable-next-line no-use-before-define
     switchTablas(item, doc, tituloTabla);
   });
+  // Inicializar una variable para almacenar todas las descripciones
+  let descripcionesHigiene = '';
 
-  // const tablaHigiene = [
-  //   { tipo: 'titulo', contenido: '4. HIGIENE DEL PLANTEL' },
-  //   {
-  //     tipo: 'fila',
-  //     contenido: [
-  //       { texto: 'CONCEPTO', medida: 91, color: 'gris' },
-  //       { texto: 'DESCRIPCIÓN', medida: 91, color: 'gris' },
-  //     ],
-  //     repetirVeces: 1,
-  //   },
-  //   {
-  //     tipo: 'fila',
-  //     contenido: [
-  //       { texto: 'Sanitarios', medida: 91, color: 'blanco' },
-  //       { texto: '', medida: 91, color: 'blanco' },
-  //     ],
-  //     altura: 40,
-  //     repetirVeces: 1,
-  //   },
-  //   {
-  //     tipo: 'fila',
-  //     contenido: [
-  //       { texto: '', medida: 91, color: 'blanco' },
-  //       { texto: '', medida: 91, color: 'blanco' },
-  //     ],
-  //     repetirVeces: 6,
-  //   },
-  // ];
+  // Recorrer plantelHigienes y concatenar las descripciones
+  solicitud.programa.plantel.plantelHigienes.forEach((higiene, index) => {
+    descripcionesHigiene += `${higiene && higiene.descripcion ? higiene.descripcion : ''}`;
+    if (index < solicitud.programa.plantel.plantelHigienes.length - 1) {
+      descripcionesHigiene += '\n'; // Agregar salto de línea excepto al final
+    }
+  });
 
-  // doc.addPage();
-  // currentPositionY = 55;
-  // tablaHigiene.forEach((item) => {
-  //   // eslint-disable-next-line no-use-before-define
-  //   switchTablas(item, doc, tituloTabla);
-  // });
+  tablaHigiene[2].contenido[1].texto = descripcionesHigiene || '';
+  tablaHigiene[3].contenido[1].texto = solicitud.programa.plantel.plantelHigienes[2] && solicitud.programa.plantel.plantelHigienes[2].higiene ? solicitud.programa.plantel.plantelHigienes[2].higiene.descripcion || '' : '';
+  tablaHigiene[4].contenido[1].texto = solicitud.programa.plantel.plantelHigienes[3] && solicitud.programa.plantel.plantelHigienes[3].higiene ? solicitud.programa.plantel.plantelHigienes[3].higiene.descripcion || '' : '';
+  tablaHigiene[5].contenido[1].texto = solicitud.programa.plantel.plantelHigienes[4] && solicitud.programa.plantel.plantelHigienes[4].higiene ? solicitud.programa.plantel.plantelHigienes[4].higiene.descripcion || '' : '';
 
-  // const tablaInfraestructuraPrograma = [
-  //   { tipo: 'titulo', contenido: '5. INFRAESTRUCTURA PARA EL PROGRAMA' },
-  //   {
-  //     tipo: 'fila',
-  //     contenido: [
-  //       { texto: 'ESPACIOS Y EQUIPAMIENTOS', medida: 182, color: 'gris' },
-  //     ],
-  //     repetirVeces: 1,
-  //   },
-  //   {
-  //     tipo: 'fila',
-  //     contenido: [
-  //       { texto: 'INSTALACIONES', medida: 30.33, color: 'gris' },
-  //       { texto: 'CAPACIDAD PROMEDIO (No. DE ALUMNOS)', medida: 30.33, color: 'gris' },
-  //       { texto: 'METROS', medida: 30.33, color: 'gris' },
-  //       { texto: 'RECURSOS MATERIALES', medida: 30.33, color: 'gris' },
-  //       { texto: 'UBICACIÓN', medida: 30.33, color: 'gris' },
-  //       { texto: 'ASIGNATURAS QUE ATIENDE', medida: 30.33, color: 'gris' },
-  //     ],
-  //     repetirVeces: 1,
-  //   },
-  //   {
-  //     tipo: 'fila',
-  //     contenido: [
-  //       { texto: 'Aulas', medida: 182, color: 'gris' },
-  //     ],
-  //     repetirVeces: 1,
-  //   },
-  //   {
-  //     tipo: 'fila',
-  //     contenido: [
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //     ],
-  //     repetirVeces: 6,
-  //   },
-  //   {
-  //     tipo: 'fila',
-  //     contenido: [
-  //       { texto: 'LABORATORIOS Y TALLERES', medida: 182, color: 'gris' },
-  //     ],
-  //     repetirVeces: 1,
-  //   },
-  //   {
-  //     tipo: 'fila',
-  //     contenido: [
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //     ],
-  //     repetirVeces: 4,
-  //   },
-  //   {
-  //     tipo: 'fila',
-  //     contenido: [
-  //       { texto: 'LABORATORIO DE CÓMPUTO', medida: 182, color: 'gris' },
-  //     ],
-  //     repetirVeces: 1,
-  //   },
-  //   {
-  //     tipo: 'fila',
-  //     contenido: [
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //     ],
-  //     repetirVeces: 2,
-  //   },
-  //   {
-  //     tipo: 'fila',
-  //     contenido: [
-  //       { texto: 'BIBLIOTECA FÍSICA Y VIRTUAL', medida: 182, color: 'gris' },
-  //     ],
-  //     repetirVeces: 1,
-  //   },
-  //   {
-  //     tipo: 'fila',
-  //     contenido: [
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //       { texto: '', medida: 30.33, color: 'blanco' },
-  //     ],
-  //     repetirVeces: 2,
-  //   },
-  // ];
+  doc.addPage();
+  currentPositionY = 55;
+  tablaHigiene.forEach((item) => {
+    // eslint-disable-next-line no-use-before-define
+    switchTablas(item, doc, tituloTabla);
+  });
+  let asignaturasGrupo1 = [];
+  let asignaturasGrupo2 = [];
+  // Iterar sobre cada objeto en infraestructuras
+  solicitud.programa.plantel.infraestructuras.forEach((obj) => {
+    // Verificar si obj y obj.asignaturasInfraestructura están definidos
+    const asignaturas = obj && obj.asignaturasInfraestructura
+      ? obj.asignaturasInfraestructura.map((item) => (item && item.asignatura ? item.asignatura.nombre : ''))
+      : [];
 
-  // doc.addPage();
-  // currentPositionY = 55;
+    // Aplicar criterios para asignar a diferentes variables
+    if (obj && obj.id) {
+      if (obj.id === 1) {
+        asignaturasGrupo1 = asignaturasGrupo1.concat(asignaturas);
+      } else if (obj.id === 2) {
+        asignaturasGrupo2 = asignaturasGrupo2.concat(asignaturas);
+      }
+    }
+  });
 
-  // tablaInfraestructuraPrograma.forEach((item) => {
-  //   // eslint-disable-next-line no-use-before-define
-  //   switchTablas(item, doc, tituloTabla);
-  // });
-  // currentPositionY += 10;
-  // currentPositionY += crearSeccion(
-  //   currentPositionY,
-  //   doc,
-  //   'BAJO PROTESTA DE DECIR VERDAD',
-  //   'center',
-  // );
-  // currentPositionY -= 200;
-  // currentPositionY += crearSeccion(
-  //   currentPositionY,
-  //   doc,
-  //   `${solicitud.usuario.persona.nombre} ${solicitud.usuario.persona.apellidoPaterno} ${solicitud.usuario.persona.apellidoMaterno}`,
-  //   'center',
-  // );
+  // Convertir arrays en strings separados por coma
+  const asignaturasGrupo1Str = asignaturasGrupo1.join(', ');
+  const asignaturasGrupo2Str = asignaturasGrupo2.join(', ');
+  const tabla = tablaInfraestructuraPrograma(solicitud);
+
+  if (tabla[4] && tabla[4].contenido && tabla[4].contenido[5]) {
+    tabla[4].contenido[5].texto = asignaturasGrupo1Str ?? '';
+  }
+
+  if (tabla[5] && tabla[5].contenido && tabla[5].contenido[5]) {
+    tabla[5].contenido[5].texto = asignaturasGrupo2Str ?? '';
+  }
+  doc.addPage();
+  currentPositionY = 55;
+
+  tablaInfraestructuraPrograma(solicitud).forEach((item) => {
+    // eslint-disable-next-line no-use-before-define
+    switchTablas(item, doc, tituloTabla);
+  });
+
+  currentPositionY += 10;
+
+  tablaRelacionInstituciones(solicitud).forEach((item) => {
+    // eslint-disable-next-line no-use-before-define
+    switchTablas(item, doc, tituloTabla);
+  });
+  currentPositionY += 10;
+  crearSeccion(
+    currentPositionY,
+    doc,
+    'BAJO PROTESTA DE DECIR VERDAD',
+    'center',
+  );
+  currentPositionY += 5;
+  crearSeccion(
+    currentPositionY,
+    doc,
+    `${solicitud.usuario.persona.nombre} ${solicitud.usuario.persona.apellidoPaterno} ${solicitud.usuario.persona.apellidoMaterno}`,
+    'center',
+  );
 
   agregarImagenYPaginaPie(doc, img3);
   doc.internal.events.subscribe('addPage', () => {
