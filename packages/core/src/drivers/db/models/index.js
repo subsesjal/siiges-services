@@ -240,7 +240,7 @@ function setupModels(sequelize) {
     TipoRecursoPresupuesto.config(sequelize),
   );
   TipoEgreso.init(TipoEgresoSchema, TipoEgreso.config(sequelize));
-  TipoSolicitudFolio.init(TipoSolicitudFolioSchema, TipoSolicitud.config(sequelize));
+  TipoSolicitudFolio.init(TipoSolicitudFolioSchema, TipoSolicitudFolio.config(sequelize));
   TipoDocumento.init(TipoDocumentoSchema, TipoDocumento.config(sequelize));
   EstatusSolicitudFolio.init(EstatusSolicitudFolioSchema, EstatusSolicitudFolio.config(sequelize));
   SolicitudFolio.init(SolicitudFolioSchema, SolicitudFolio.config(sequelize));
