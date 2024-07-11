@@ -55,14 +55,7 @@ function GenerarFDA03(solicitud) {
     columnStyles: columnStylesFirstAndSecondTable,
   };
 
-  if (
-    solicitud
-    && solicitud.programa
-    && solicitud.programa.plantel
-    && solicitud.programa.plantel.institucion
-    && solicitud.programa.plantel.institucion.rector
-    && solicitud.programa.plantel.institucion.rector.persona
-  ) {
+  if (solicitud?.programa?.plantel?.institucion?.rector?.persona) {
     // eslint-disable-next-line max-len
     TablaRepresentante.body = TABLA_REPRESENTANTE(solicitud.programa.plantel.institucion.rector.persona);
   }

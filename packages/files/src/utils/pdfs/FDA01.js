@@ -28,16 +28,13 @@ function GenerarFDA01(solicitud) {
   const fechaFormateada = formatter.format(fechaRecepcion).toUpperCase();
   const modalidadTipo = buscarDescripcionPorId(modalidades, solicitud.programa.modalidadId);
   const ciclosTipo = buscarDescripcionPorId(ciclos, solicitud.programa.cicloId);
-  let tipoSolicitud = '';
-  if (solicitud.tipoSolicitudId === 1) {
-    tipoSolicitud = 'RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS';
-  } else if (solicitud.tipoSolicitudId === 2) {
-    tipoSolicitud = 'REFRENDO DEL PLAN Y PROGRAMA DE ESTUDIO';
-  } else if (solicitud.tipoSolicitudId === 3) {
-    tipoSolicitud = 'CAMBIO DE DOMICILIO';
-  } else {
-    tipoSolicitud = 'TIPO DE SOLICITUD DESCONOCIDO'; // Por si el valor no coincide con ninguno de los casos
-  }
+  const TIPO_SOLICITUD_MAPPING = {
+    1: 'RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS',
+    2: 'REFRENDO DEL PLAN Y PROGRAMA DE ESTUDIO',
+    3: 'CAMBIO DE DOMICILIO',
+  };
+  const tipoSolicitud = TIPO_SOLICITUD_MAPPING[solicitud.tipoSolicitudId] || 'TIPO DE SOLICITUD DESCONOCIDO';
+
   const turnoTipo = generarTiposDeTurno(solicitud.programa.programaTurnos);
   const nombreNivel = niveles
     .find(({ id }) => +id === solicitud?.programa.nivelId).descripcion;
