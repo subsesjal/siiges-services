@@ -22,7 +22,7 @@ function getUbication({ tipoEntidad, tipoDocumento }, fileName) {
 async function uploadFile(fileMetdata, identifierObj, fileUploaded, solicitudId) {
   const { findOneFile, createFile, updateFile } = require('../files');
   const previousFile = await findOneFile(identifierObj);
-  const rutaArchivo = `FDP02_solicitudId_${solicitudId}.pdf`;
+  const rutaArchivo = `OFAD_solicitudId_${solicitudId}.pdf`;
   const ubication = getUbication(fileMetdata, rutaArchivo);
   const data = createData(identifierObj, rutaArchivo, ubication);
   const ruta = path.join(__dirname, '../../../../../../public', ubication);
@@ -54,29 +54,14 @@ async function uploadFile(fileMetdata, identifierObj, fileUploaded, solicitudId)
 
   return createFile(data);
 }
-const findFileFDP02 = (
+const findFileOFAD = (
   findOneSolicitudProgramaQuery,
-  GenerarFDP02,
+  GenerarOFAD,
 ) => async (solicitudId, fileMetdata, data) => {
   const include = [{
     association: 'programa',
     include: [
       { association: 'programaTurnos' },
-      {
-        association: 'docentes',
-        include: [
-          { association: 'persona' },
-          {
-            association: 'formacionesDocentes',
-            include: [{ association: 'formacion' }],
-          },
-          {
-            association: 'asignaturasDocentes',
-            include: [{ association: 'asignatura' }],
-          },
-        ],
-      },
-      { association: 'asignaturas' },
       { association: 'trayectoria' },
       {
         association: 'plantel',
@@ -131,13 +116,10 @@ const findFileFDP02 = (
     strict: false,
   });
 
-  // Depuración: verificar los datos obtenidos
-  // console.log(JSON.stringify(solicitud, null, 2));
-
   checkers.throwErrorIfDataIsFalsy(solicitud, 'solicitud', solicitudId);
 
-  const file = await GenerarFDP02(solicitud);
+  const file = await GenerarOFAD(solicitud);
   await uploadFile(data, fileMetdata, file, solicitudId);
 };
 
-module.exports = { findFileFDP02 };
+module.exports = { findFileOFAD };
