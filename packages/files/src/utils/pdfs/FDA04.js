@@ -27,7 +27,7 @@ const {
 const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
 const img2 = fs.readFileSync(path.join(__dirname, '/images/img2.png'), { encoding: 'base64' });
 const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encoding: 'base64' });
-let currentPositionY = 67;
+let currentPositionY = 0;
 
 function addHeaderContent(doc) {
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
@@ -59,7 +59,7 @@ function GenerarFDA04(solicitud) {
     body: [],
     showHead: false,
   };
-  currentPositionY -= 10;
+  currentPositionY = 60;
   const textoCiclos = ciclosTipo === 'Semestral' ? 'Semestres' : 'Cuatrimestres';
   tablaDatosPlan(solicitud, textoCiclos, modalidadTipo).forEach((item) => {
     // eslint-disable-next-line no-use-before-define
