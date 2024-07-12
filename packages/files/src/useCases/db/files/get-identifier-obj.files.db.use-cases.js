@@ -4,9 +4,9 @@ const { checkers, Logger } = require('@siiges-services/shared');
 const { findOneDocumentType } = require('../document-type');
 const { findOneEntityType } = require('../entity-type');
 const { findFileFDA02 } = require('../FDA');
-const { findFileFDP05 } = require('../FDA');
-const { findFileFDP02 } = require('../FDA');
-const { findFileFDP06 } = require('../FDA');
+const { findFileFDP05 } = require('../FDP');
+const { findFileFDP02 } = require('../FDP');
+const { findFileFDP06 } = require('../FDP');
 
 const getFileIdentifierObj = async (fileData) => {
   const { tipoEntidad, entidadId, tipoDocumento } = fileData;

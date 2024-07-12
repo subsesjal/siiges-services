@@ -131,9 +131,6 @@ const findFileFDP02 = (
     strict: false,
   });
 
-  // Depuración: verificar los datos obtenidos
-  console.log(JSON.stringify(solicitud, null, 2));
-
   checkers.throwErrorIfDataIsFalsy(solicitud, 'solicitud', solicitudId);
 
   const file = await GenerarFDP02(solicitud);
