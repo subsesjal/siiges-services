@@ -5,6 +5,7 @@ const nivelesCSV = path.join(__dirname, '../../../../../core/src/drivers/db/CSVF
 const modalidadesCSV = path.join(__dirname, '../../../../../core/src/drivers/db/CSVFiles/modalidades.csv');
 const ciclosCSV = path.join(__dirname, '../../../../../core/src/drivers/db/CSVFiles/ciclos.csv');
 const turnosCSV = path.join(__dirname, '../../../../../core/src/drivers/db/CSVFiles/turnos.csv');
+const tipoSolicitudCSV = path.join(__dirname, '../../../../../core/src/drivers/db/CSVFiles/tipo_solicitudes.csv');
 
 const csvToJsonConvert = (csvFile) => csvToJson
   .fieldDelimiter(',')
@@ -14,10 +15,12 @@ const niveles = csvToJsonConvert(nivelesCSV);
 const modalidades = csvToJsonConvert(modalidadesCSV);
 const ciclos = csvToJsonConvert(ciclosCSV);
 const turnos = csvToJsonConvert(turnosCSV);
+const tiposSolicitud = csvToJsonConvert(tipoSolicitudCSV);
 
 module.exports = {
   niveles,
   modalidades,
   ciclos,
   turnos,
+  tiposSolicitud,
 };
