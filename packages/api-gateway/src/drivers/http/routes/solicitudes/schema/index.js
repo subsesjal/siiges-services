@@ -1,4 +1,4 @@
-const createSolicitudProgramaSchema = require('./create.domicilio-programa.schema');
+const createSolicitudProgramaSchema = require('./create.solicitud-programa.schema');
 const createSolicitudRefrendoSchema = require('./create.solicitud-refrendo.schema');
 const findAllSolicitudesProgramasSchema = require('./find-all.solicitudes-programas.schema');
 const findOneSolicitudProgramaSchema = require('./find-one.solicitud-programa.schema');
