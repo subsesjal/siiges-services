@@ -9,6 +9,7 @@ const NotificacionServices = require('@siiges-services/notificaciones');
 const AdministracionAcademicaServices = require('@siiges-services/administracionacademica');
 const OpdServices = require('@siiges-services/opd');
 const VigilanciaServices = require('@siiges-services/vigilancias');
+const SolicitudFolioServices = require('@siiges-services/solicitudesfolios');
 
 async function services(fastify) {
   await Promise.all([fastify.decorate('usuarioServices', UsuarioServices)]);
@@ -21,6 +22,7 @@ async function services(fastify) {
   await Promise.all([fastify.decorate('administracionAcademicaServices', AdministracionAcademicaServices)]);
   await Promise.all([fastify.decorate('opdServices', OpdServices)]);
   await Promise.all([fastify.decorate('vigilanciaServices', VigilanciaServices)]);
+  await Promise.all([fastify.decorate('solicitudFolioServices', SolicitudFolioServices)]);
 }
 
 module.exports = PluginLoader(services);
