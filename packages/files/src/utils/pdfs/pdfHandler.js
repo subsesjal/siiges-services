@@ -13,23 +13,31 @@ function crearCelda(doc, x, y, width, height, texto) {
   doc.setFont(textFont, 'bold');
   doc.setFontSize(10);
   let setFillColor = [0, 0, 0];
+  // eslint-disable-next-line max-len
+  let textoX = x + (width - (doc.getStringUnitWidth(texto) * doc.internal.getFontSize()) / doc.internal.scaleFactor) / 2; // Centered position by default
 
   const textoWidth = (doc.getStringUnitWidth(texto) * doc.internal.getFontSize())
     / doc.internal.scaleFactor;
   const textoX = x + (width - textoWidth) / 2 + 10; // Calcula la posición X centrada
 
-  if (texto.includes('FD')) setFillColor = [255, 255, 255];
+  if (texto.includes('FDA') || texto.includes('FDP')) {
+    setFillColor = [255, 255, 255];
+    // eslint-disable-next-line max-len
+    textoX = x + width - (doc.getStringUnitWidth(texto) * doc.internal.getFontSize()) / doc.internal.scaleFactor - 2; // Right aligned position with no margin
+  }
+
   doc.setTextColor(setFillColor[0], setFillColor[1], setFillColor[2]);
-  doc.text(texto, textoX, y + 5); // Usar la posición X centrada
+  doc.text(texto, textoX, y + 5); // Adjust Y position as needed
 }
 
 function crearSeccion(currentPosition, doc, contenido, alineacion = 'justify') {
   const margenIzquierdo = 20;
   let currentPositionY = currentPosition;
+
   // Contenido de la sección
-  doc.setFont(textFont);
-  doc.setFontSize(10);
-  doc.setTextColor(0, 0, 0);
+  doc.setFont(textFont); // Set the font family (assuming textFont is defined)
+  doc.setFontSize(10); // Set the font size
+  doc.setTextColor(0, 0, 0); // Set text color
 
   const textHeight = doc.getTextDimensions(contenido, { maxWidth: 175 }).h;
 
@@ -49,12 +57,13 @@ function crearSeccion(currentPosition, doc, contenido, alineacion = 'justify') {
     const textoX = (doc.internal.pageSize.getWidth() - textoWidth) / 2;
     doc.text(contenido, textoX, currentPositionY, { maxWidth: 175 });
   } else {
+    // Set font style to normal (not bold)
     doc.text(textX, currentPositionY, contenido, {
       maxWidth: 175,
       align: alineacion,
     });
   }
-
+  doc.setFont('normal');
   // currentPositionY += textHeight + 5; // Espacio después de cada sección
   return currentPositionY;
 }
@@ -136,6 +145,69 @@ function generateTable({
     headStyles,
     showHead,
   });
+}
+
+function crearFilaFecha({
+  currentPositionY: currentPosition, fecha, doc,
+}) {
+  let currentPositionY = currentPosition;
+
+  const tableData = [
+    ['FECHA', fecha],
+  ];
+
+  const pageWidth = doc.internal.pageSize.width;
+  const rightMargin = 15; // Ajusta este valor para mover más a la derecha
+  const tableWidth = 70; // Ajusta este valor para hacer la tabla más estrecha
+
+  const tableOptions = {
+    startY: currentPositionY,
+    // eslint-disable-next-line max-len
+    margin: { left: pageWidth - tableWidth - rightMargin, right: rightMargin }, // Posicionar la tabla más a la derecha
+    tableWidth, // Ajustar el ancho de la tabla
+    theme: 'grid',
+    styles: {
+      lineColor: [0, 0, 0],
+      lineWidth: 0.3,
+      fontSize: 10, // Ajustar el tamaño de fuente si es necesario
+      cellPadding: 1, // Ajustar el padding para reducir la altura de las celdas
+    },
+    headStyles: {
+      fontSize: 12,
+    },
+    showHead: false,
+    columnStyles: {
+      0: {
+        fillColor: [172, 178, 183],
+        cellWidth: tableWidth / 2, // Ajustar el ancho de la columna
+      },
+      1: {
+        fontStyle: 'bold',
+        cellWidth: tableWidth / 2, // Ajustar el ancho de la columna
+      },
+    },
+  };
+
+  // Calcular la altura del texto para verificar si es necesario agregar una nueva página
+  const textHeight = doc.getTextDimensions(
+    tableData.join('\n'),
+    tableOptions,
+  ).h;
+
+  if (currentPositionY + textHeight > doc.internal.pageSize.height - 20) {
+    doc.addPage();
+    currentPositionY = 20; // Reiniciar la posición vertical en la nueva página
+  }
+
+  // Generar la tabla
+  doc.autoTable({
+    body: tableData,
+    ...tableOptions,
+  });
+
+  // Actualizar la posición vertical después de la tabla
+  currentPositionY = doc.previousAutoTable.finalY + 10; // Espacio después de la tabla
+  return currentPositionY;
 }
 
 function seccionIntitucionTabla({
@@ -339,4 +411,5 @@ module.exports = {
   agregarImagenYPaginaPie,
   generarPDF,
   generarTablaData,
+  crearFilaFecha,
 };

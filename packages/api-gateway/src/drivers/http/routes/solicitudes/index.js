@@ -49,6 +49,15 @@ async function solicitudRouter(fastify, opts, next) {
     solicitudesAdapter.createSolicitudPrograma,
   );
 
+  await fastify.post(
+    '/:programaId/cambioDomicilio/:plantelId',
+    {
+      schema: solicitudesSchema.createDomicilioSolicitudProgramaSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesAdapter.createDomicilioSolicitudPrograma,
+  );
+
   await fastify.patch(
     '/:solicitudId',
     {
