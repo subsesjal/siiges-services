@@ -14,7 +14,6 @@ function crearCelda(doc, x, y, width, height, texto) {
   doc.setFontSize(10);
   let setFillColor = [0, 0, 0];
   // eslint-disable-next-line max-len
-  let textoX = x + (width - (doc.getStringUnitWidth(texto) * doc.internal.getFontSize()) / doc.internal.scaleFactor) / 2; // Centered position by default
 
   const textoWidth = (doc.getStringUnitWidth(texto) * doc.internal.getFontSize())
     / doc.internal.scaleFactor;
