@@ -9,7 +9,7 @@ const findAllSolicitudesProgramas = (
   findAllSolicitudesQuery,
   findOneUsuarioQuery,
   findOneUsuarioUsuarioQuery,
-) => async (queryParams) => {
+) => async ({ usuarioId, estatusSolicitudId }) => {
   const include = [{
     association: 'programa',
     include: [
@@ -31,20 +31,17 @@ const findAllSolicitudesProgramas = (
   }];
 
   let query = {};
-  if (queryParams && queryParams.length > 0) {
-    const { usuarioId, estatusSolicitudId } = queryParams;
-    if (usuarioId) {
-      const usuario = await findUsuarios(
-        findOneUsuarioQuery,
-        findOneUsuarioUsuarioQuery,
-        usuarioId,
-      );
-      query = {
-        usuarioId: usuario,
-      };
-    }
-    if (estatusSolicitudId) query.estatusSolicitudId = estatusSolicitudId;
+  if (usuarioId) {
+    const usuario = await findUsuarios(
+      findOneUsuarioQuery,
+      findOneUsuarioUsuarioQuery,
+      usuarioId,
+    );
+    query = {
+      usuarioId: usuario,
+    };
   }
+  if (estatusSolicitudId) query.estatusSolicitudId = estatusSolicitudId;
 
   const solicitudes = await findAllSolicitudesQuery(
     query,
