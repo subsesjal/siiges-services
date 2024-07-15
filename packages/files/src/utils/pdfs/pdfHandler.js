@@ -17,7 +17,7 @@ function crearCelda(doc, x, y, width, height, texto) {
 
   const textoWidth = (doc.getStringUnitWidth(texto) * doc.internal.getFontSize())
     / doc.internal.scaleFactor;
-  const textoX = x + (width - textoWidth) / 2 + 10; // Calcula la posición X centrada
+  let textoX = x + (width - textoWidth) / 2 + 10; // Calcula la posición X centrada
 
   if (texto.includes('FDA') || texto.includes('FDP')) {
     setFillColor = [255, 255, 255];
