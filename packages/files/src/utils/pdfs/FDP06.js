@@ -5,7 +5,7 @@ const { jsPDF } = require('jspdf');
 require('jspdf-autotable');
 
 const {
-  tipoSolicitudes, modalidades, niveles,
+  tiposSolicitud, modalidades, niveles,
 } = require('./constants');
 const {
   tablaGrado,
@@ -50,7 +50,7 @@ function GenerarFDP06(solicitud) {
 
   const fechaFormateada = formatearFecha(solicitud.createdAt);
   const modalidadTipo = buscarDescripcionPorId(modalidades, solicitud.programa.modalidadId);
-  const tipoSolicitud = buscarNombrePorId(tipoSolicitudes, solicitud.tipoSolicitudId);
+  const tipoSolicitud = buscarNombrePorId(tiposSolicitud, solicitud.tipoSolicitudId);
 
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
   doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
