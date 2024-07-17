@@ -17,12 +17,7 @@ const findAllSolicitudesProgramasSchema = {
       type: 'string',
     },
     estatusSolicitudId: {
-      type: 'array',
-      items: {
-        type: 'integer',
-        enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 100, 200],
-      },
-      description: 'Array of estatus values',
+      type: 'string',
     },
   },
   response: {

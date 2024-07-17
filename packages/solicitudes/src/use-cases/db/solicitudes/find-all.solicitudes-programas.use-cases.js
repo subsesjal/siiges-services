@@ -41,7 +41,7 @@ const findAllSolicitudesProgramas = (
       usuarioId: usuario,
     };
   }
-  if (estatusSolicitudId) query.estatusSolicitudId = estatusSolicitudId;
+  if (estatusSolicitudId) query.estatusSolicitudId = estatusSolicitudId.split(',');
 
   const solicitudes = await findAllSolicitudesQuery(
     query,
