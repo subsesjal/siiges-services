@@ -25,20 +25,25 @@ function removeIds(obj) {
   return newObj;
 }
 
-const createRefrendoSolicitudPrograma = (
+const createDomicilioSolicitudPrograma = (
   findOneUsuarioQuery,
+  findOneProgramaQuery,
+  findOnePlantelQuery,
   findOneSolicitudQuery,
   countSolicitudesQuery,
   createSolicitudProgramaQuery,
-) => async (identifierObj, data) => {
-  const { tipoSolicitudId } = data;
-  const { solicitudId } = identifierObj;
+) => async ({ programaId, plantelId, usuarioId }) => {
+  // Validation for the user, program and plantel
+  const usuario = await findOneUsuarioQuery({ id: usuarioId });
+  checkers.throwErrorIfDataIsFalsy(usuario, 'usuarios', usuarioId);
+  const programa = await findOneProgramaQuery({ id: programaId });
+  checkers.throwErrorIfDataIsFalsy(programa, 'programas', programaId);
+  const { usuarioId: solicitudUsuarioId, solicitudId } = programa;
+  if (solicitudUsuarioId !== usuarioId) boom.badRequest('[solicitudes]: The user is not the owner of the program');
+  const plantel = await findOnePlantelQuery({ id: plantelId });
+  checkers.throwErrorIfDataIsFalsy(plantel, 'planteles', plantelId);
+  if (plantel.usuarioId !== usuarioId) boom.badRequest('[solicitudes]: The user is not the owner of the plantel');
 
-  if (tipoSolicitudId !== 2) {
-    throw boom.badRequest(
-      '[solicitudes]: Tipo Solicitud is not correct',
-    );
-  }
   const include = [{
     association: 'programa',
     include: [
@@ -48,6 +53,7 @@ const createRefrendoSolicitudPrograma = (
     ],
   },
   { association: 'representante' },
+  { association: 'diligencias' },
   ];
 
   const solicitud = await findOneSolicitudQuery({ id: solicitudId }, {
@@ -70,9 +76,10 @@ const createRefrendoSolicitudPrograma = (
   const newData = {
     ...solicitudDataWithoutIds,
     folio: folioSolcitud,
-    tipoSolicitudId: 2,
+    tipoSolicitudId: 3,
     estatusSolicitudId: 1,
   };
+  newData.programa.plantelId = plantelId;
 
   // Create a new solicitud object with the extracted data
   const newSolicitud = await createSolicitudProgramaQuery({
@@ -84,4 +91,4 @@ const createRefrendoSolicitudPrograma = (
   return newSolicitud;
 };
 
-module.exports = createRefrendoSolicitudPrograma;
+module.exports = { createDomicilioSolicitudPrograma };

@@ -1,35 +1,46 @@
 const { fdaAdapter } = require('../../../adapters/db');
+const { GenerarFDA01 } = require('../../../utils/pdfs');
 const { GenerarFDA02 } = require('../../../utils/pdfs');
-const { GenerarFDP05 } = require('../../../utils/pdfs');
-const { GenerarFDP06 } = require('../../../utils/pdfs');
-const { GenerarFDP02 } = require('../../../utils/pdfs');
-const { GenerarOFAD } = require('../../../utils/pdfs');
-const { findFileFDP05 } = require('../FDP/find-one.FDP05.db.use-cases');
-const { findFileFDP06 } = require('../FDP/find-one.FDP06.db.use-cases');
-const { findFileFDP02 } = require('../FDP/find-one.FDP02.db.use-cases');
-const { findFileOFAD } = require('../OFAD/find-one.OFAD.db.use-cases');
-
+const { GenerarFDA03 } = require('../../../utils/pdfs');
+const { GenerarFDA04 } = require('../../../utils/pdfs/FDA04');
+const { GenerarFDA05 } = require('../../../utils/pdfs');
+const { GenerarFDA06 } = require('../../../utils/pdfs');
+const { GenerarFDP01 } = require('../../../utils/pdfs');
+const { findFileFDP01 } = require('../FDP/find-one.FDP01.db.use-cases');
+const { findFileFDA01 } = require('./find-one.FDA01.db.use-cases');
 const { findFileFDA02 } = require('./find-one.FDA02.db.use-cases');
+const { findFileFDA03 } = require('./find-one.FDA03.db.use-cases');
+const { findFileFDA04 } = require('./find-one.FDA04.db.use-cases');
+const { findFileFDA05 } = require('./find-one.FDA05.db.use-cases');
+const { findFileFDA06 } = require('./find-one.FDA06.db.use-cases');
 
 module.exports = {
+  findFileFDA01: findFileFDA01(
+    fdaAdapter.findOneSolicitudProgramaQuery,
+    GenerarFDA01,
+  ),
   findFileFDA02: findFileFDA02(
     fdaAdapter.findOneSolicitudProgramaQuery,
     GenerarFDA02,
   ),
-  findFileFDP05: findFileFDP05(
+  findFileFDA03: findFileFDA03(
     fdaAdapter.findOneSolicitudProgramaQuery,
-    GenerarFDP05,
+    GenerarFDA03,
   ),
-  findFileFDP06: findFileFDP06(
+  findFileFDA04: findFileFDA04(
     fdaAdapter.findOneSolicitudProgramaQuery,
-    GenerarFDP06,
+    GenerarFDA04,
   ),
-  findFileFDP02: findFileFDP02(
+  findFileFDA05: findFileFDA05(
     fdaAdapter.findOneSolicitudProgramaQuery,
-    GenerarFDP02,
+    GenerarFDA05,
   ),
-  findFileOFAD: findFileOFAD(
+  findFileFDA06: findFileFDA06(
     fdaAdapter.findOneSolicitudProgramaQuery,
-    GenerarOFAD,
+    GenerarFDA06,
+  ),
+  findFileFDP01: findFileFDP01(
+    fdaAdapter.findOneSolicitudProgramaQuery,
+    GenerarFDP01,
   ),
 };

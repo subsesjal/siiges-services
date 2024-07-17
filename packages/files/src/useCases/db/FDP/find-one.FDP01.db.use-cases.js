@@ -22,7 +22,7 @@ function getUbication({ tipoEntidad, tipoDocumento }, fileName) {
 async function uploadFile(fileMetdata, identifierObj, fileUploaded, solicitudId) {
   const { findOneFile, createFile, updateFile } = require('../files');
   const previousFile = await findOneFile(identifierObj);
-  const rutaArchivo = `FDP02_solicitudId_${solicitudId}.pdf`;
+  const rutaArchivo = `FDP01_solicitudId_${solicitudId}.pdf`;
   const ubication = getUbication(fileMetdata, rutaArchivo);
   const data = createData(identifierObj, rutaArchivo, ubication);
   const ruta = path.join(__dirname, '../../../../../../public', ubication);
@@ -54,29 +54,14 @@ async function uploadFile(fileMetdata, identifierObj, fileUploaded, solicitudId)
 
   return createFile(data);
 }
-const findFileFDP02 = (
+const findFileFDP01 = (
   findOneSolicitudProgramaQuery,
-  GenerarFDP02,
+  GenerarFDP01,
 ) => async (solicitudId, fileMetdata, data) => {
   const include = [{
     association: 'programa',
     include: [
       { association: 'programaTurnos' },
-      {
-        association: 'docentes',
-        include: [
-          { association: 'persona' },
-          {
-            association: 'formacionesDocentes',
-            include: [{ association: 'formacion' }],
-          },
-          {
-            association: 'asignaturasDocentes',
-            include: [{ association: 'asignatura' }],
-          },
-        ],
-      },
-      { association: 'asignaturas' },
       { association: 'trayectoria' },
       {
         association: 'plantel',
@@ -133,8 +118,8 @@ const findFileFDP02 = (
 
   checkers.throwErrorIfDataIsFalsy(solicitud, 'solicitud', solicitudId);
 
-  const file = await GenerarFDP02(solicitud);
+  const file = await GenerarFDP01(solicitud);
   await uploadFile(data, fileMetdata, file, solicitudId);
 };
 
-module.exports = { findFileFDP02 };
+module.exports = { findFileFDP01 };

@@ -22,7 +22,7 @@ function getUbication({ tipoEntidad, tipoDocumento }, fileName) {
 async function uploadFile(fileMetdata, identifierObj, fileUploaded, solicitudId) {
   const { findOneFile, createFile, updateFile } = require('../files');
   const previousFile = await findOneFile(identifierObj);
-  const rutaArchivo = `FDP02_solicitudId_${solicitudId}.pdf`;
+  const rutaArchivo = `FDA04_solicitudId_${solicitudId}.pdf`;
   const ubication = getUbication(fileMetdata, rutaArchivo);
   const data = createData(identifierObj, rutaArchivo, ubication);
   const ruta = path.join(__dirname, '../../../../../../public', ubication);
@@ -54,65 +54,57 @@ async function uploadFile(fileMetdata, identifierObj, fileUploaded, solicitudId)
 
   return createFile(data);
 }
-const findFileFDP02 = (
+const findFileFDA04 = (
   findOneSolicitudProgramaQuery,
-  GenerarFDP02,
+  GenerarFDA04,
 ) => async (solicitudId, fileMetdata, data) => {
   const include = [{
     association: 'programa',
     include: [
       { association: 'programaTurnos' },
-      {
-        association: 'docentes',
-        include: [
-          { association: 'persona' },
-          {
-            association: 'formacionesDocentes',
-            include: [{ association: 'formacion' }],
-          },
-          {
-            association: 'asignaturasDocentes',
-            include: [{ association: 'asignatura' }],
-          },
-        ],
-      },
-      { association: 'asignaturas' },
       { association: 'trayectoria' },
       {
         association: 'plantel',
-        include: [{
-          association: 'domicilio',
-          include: [
-            { association: 'estado' },
-            { association: 'municipio' },
-          ],
-        },
-        {
-          association: 'directores',
-          include: [
-            { association: 'persona' },
-            {
-              association: 'formacionesDirectores',
-              include: [{ association: 'formacion' }],
-            },
-          ],
-        },
-        {
-          association: 'institucion',
-          include: [
-            { association: 'ratificacionesNombre' },
-            {
-              association: 'rector',
-              include: [
-                { association: 'persona' },
-                {
-                  association: 'formacionesRectores',
-                  include: [{ association: 'formacion' }],
-                },
-              ],
-            },
-          ],
-        }],
+        include: [
+          { association: 'plantelEdificioNiveles' },
+          { association: 'plantelSeguridadSistemas' },
+          { association: 'plantelHigienes' },
+          { association: 'saludInstituciones' },
+          { association: 'infraestructuras' },
+          { association: 'tipoInmueble' },
+          {
+            association: 'domicilio',
+            include: [
+              { association: 'estado' },
+              { association: 'municipio' },
+            ],
+          },
+          {
+            association: 'directores',
+            include: [
+              { association: 'persona' },
+              {
+                association: 'formacionesDirectores',
+                include: [{ association: 'formacion' }],
+              },
+            ],
+          },
+          {
+            association: 'institucion',
+            include: [
+              { association: 'ratificacionesNombre' },
+              {
+                association: 'rector',
+                include: [
+                  { association: 'persona' },
+                  {
+                    association: 'formacionesRectores',
+                    include: [{ association: 'formacion' }],
+                  },
+                ],
+              },
+            ],
+          }],
       }],
   },
   {
@@ -131,10 +123,12 @@ const findFileFDP02 = (
     strict: false,
   });
 
+  // eslint-disable-next-line no-console
+  console.log(JSON.stringify(solicitud, null, 2));
   checkers.throwErrorIfDataIsFalsy(solicitud, 'solicitud', solicitudId);
 
-  const file = await GenerarFDP02(solicitud);
+  const file = await GenerarFDA04(solicitud);
   await uploadFile(data, fileMetdata, file, solicitudId);
 };
 
-module.exports = { findFileFDP02 };
+module.exports = { findFileFDA04 };
