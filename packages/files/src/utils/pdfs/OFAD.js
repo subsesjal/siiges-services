@@ -25,7 +25,7 @@ function GenerarOFAD(solicitud) {
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
   doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
 
-  const tipoDeSolicitud = solicitud.tipoSolicitud === 1 ? 'OFICIO ADMISORIO DE RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS' : 'OFICIO ADMISORIO DE REFRENDO DEL RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS';
+  const tipoDeSolicitud = solicitud.tipoSolicitudId === 1 ? 'OFICIO ADMISORIO DE RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS' : 'OFICIO ADMISORIO DE REFRENDO DEL RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS';
 
   let content = `SECRETARÍA DE INNOVACIÓN CIENCIA Y TECNOLOGÍA
   SUBSECRETARÍA DE EDUCACIÓN SUPERIOR
@@ -54,7 +54,7 @@ function GenerarOFAD(solicitud) {
   currentPositionY = crearSeccion(currentPositionY, doc, content, 'left');
   currentPositionY += 15;
 
-  const textoInicialRVOE = solicitud.tipoSolicitud === 1 ? `Que en relación a su solicitud para obtener el Reconocimiento de Validez Oficial de Estudios (RVOE) presentada en esta Dirección General de Incorporación y Servicios Escolares, con fecha ${fecha.toLowerCase()}, a través de la cual pretende ofertar e impartir` : `Que en relación a su solicitud para refrendo (actualización) el Reconocimiento de Validez Oficial de Estudios (RVOE) presentada en esta Dirección General de Incorporación y Servicios Escolares, con fecha ${fecha.toLowerCase()}, a través de la cual pretende continuar impartiendo`;
+  const textoInicialRVOE = solicitud.tipoSolicitudId === 1 ? `Que en relación a su solicitud para obtener el Reconocimiento de Validez Oficial de Estudios (RVOE) presentada en esta Dirección General de Incorporación y Servicios Escolares, con fecha ${fecha.toLowerCase()}, a través de la cual pretende ofertar e impartir` : `Que en relación a su solicitud para refrendo (actualización) el Reconocimiento de Validez Oficial de Estudios (RVOE) presentada en esta Dirección General de Incorporación y Servicios Escolares, con fecha ${fecha.toLowerCase()}, a través de la cual pretende continuar impartiendo`;
 
   const nombreNivel = niveles
     .find(({ id }) => +id === solicitud?.programa.nivelId).descripcion;
