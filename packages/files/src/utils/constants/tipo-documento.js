@@ -173,27 +173,43 @@ const tipoDocumentoObj = [
   },
   {
     id: 44,
-    name: 'FDP01',
-  },
-  {
-    id: 45,
     name: 'FDA01',
   },
   {
-    id: 46,
+    id: 45,
     name: 'FDA03',
   },
   {
-    id: 47,
-    name: 'FDA06',
+    id: 46,
+    name: 'FDA04',
   },
   {
-    id: 48,
+    id: 47,
     name: 'FDA05',
   },
   {
+    id: 48,
+    name: 'FDA06',
+  },
+  {
     id: 49,
-    name: 'FDA04',
+    name: 'FDP01',
+  },
+  {
+    id: 50,
+    name: 'FDP02',
+  },
+  {
+    id: 51,
+    name: 'FDP05',
+  },
+  {
+    id: 52,
+    name: 'FDP06',
+  },
+  {
+    id: 53,
+    name: 'OFICIO_ADMISORIO',
   },
 ];
 
