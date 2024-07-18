@@ -35,7 +35,8 @@ function GenerarOFAD(solicitud) {
   currentPositionY = crearSeccion(currentPositionY, doc, content, 'right');
   currentPositionY += 15;
 
-  content = `${solicitud?.oficioAdmisorio || 'Folio'}`;
+  const mockFolio = 'SUBSES.DGISE.22.279';
+  content = `${solicitud?.oficioAdmisorio || mockFolio}`;
 
   currentPositionY = crearSeccion(currentPositionY, doc, content, 'right');
   currentPositionY += 20;
@@ -58,10 +59,11 @@ function GenerarOFAD(solicitud) {
 
   const nombreNivel = niveles
     .find(({ id }) => +id === solicitud?.programa.nivelId).descripcion;
+  const anioRecepcion = new Date(solicitud.fechaRecepcion);
 
   const tieneNumeroInterior = solicitud.programa.plantel.domicilio.numeroInterior ? ` número interior ${solicitud.programa.plantel.domicilio.numeroInterior},` : '';
 
-  content = `${textoInicialRVOE} el plan y programa de estudio de la ${nombreNivel} en ${solicitud.programa.nombre} con número de Folio ${solicitud.folio}, en el domicilio ${solicitud.programa.plantel.domicilio.calle}, número ${solicitud.programa.plantel.domicilio.numeroExterior},${tieneNumeroInterior} colonia ${solicitud.programa.plantel.domicilio.colonia} me permitió informarle que esta Dirección tiene a bien emitir el presente oficio admisorio en virtud de haber presentado toda la documentación administrativa y académica requerida para continuar con cada una de las etapas establecidas en el Instructivo para la Obtención del Reconocimiento de Validez Oficial de Estudios de Educación Superior del Estado de Jalisco ${fecha}.`;
+  content = `${textoInicialRVOE} el plan y programa de estudio de la ${nombreNivel} en ${solicitud.programa.nombre} con número de Folio ${solicitud.folio}, en el domicilio ${solicitud.programa.plantel.domicilio.calle}, número ${solicitud.programa.plantel.domicilio.numeroExterior},${tieneNumeroInterior} colonia ${solicitud.programa.plantel.domicilio.colonia} me permitió informarle que esta Dirección tiene a bien emitir el presente oficio admisorio en virtud de haber presentado toda la documentación administrativa y académica requerida para continuar con cada una de las etapas establecidas en el Instructivo para la Obtención del Reconocimiento de Validez Oficial de Estudios de Educación Superior del Estado de Jalisco ${anioRecepcion.getFullYear()}.`;
 
   currentPositionY = crearSeccion(currentPositionY, doc, content, 'justify');
   currentPositionY += 35;
