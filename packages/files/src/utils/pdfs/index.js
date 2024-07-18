@@ -1,3 +1,4 @@
+
 const { GenerarFDA01 } = require('./FDA01');
 const { GenerarFDA02 } = require('./FDA02');
 const { GenerarFDA03 } = require('./FDA03');
@@ -8,6 +9,7 @@ const { GenerarFDP01 } = require('./FDP01');
 const { GenerarFDP02 } = require('./FDP02');
 const { GenerarFDP05 } = require('./FDP05');
 const { GenerarFDP06 } = require('./FDP06');
+const { GenerarOFAD } = require('./OFAD');
 
 module.exports = {
   GenerarFDA01,
@@ -20,4 +22,5 @@ module.exports = {
   GenerarFDP02,
   GenerarFDP05,
   GenerarFDP06,
+  GenerarOFAD,
 };

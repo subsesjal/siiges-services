@@ -13,6 +13,7 @@ const { findFileFDP01 } = require('../FDA');
 const { findFileFDP02 } = require('../FDP');
 const { findFileFDP05 } = require('../FDP');
 const { findFileFDP06 } = require('../FDP');
+const { findFileOFAD } = require('../FDA');
 
 const getFileIdentifierObj = async (fileData) => {
   const { tipoEntidad, entidadId, tipoDocumento } = fileData;
@@ -102,9 +103,13 @@ tipoDocumento ${tipoDocumento}`);
       tipoDocumento: tipoDocumentoItem.name,
       tipoEntidad: tipoEntidadItem.name,
     }),
+    OFAD: () => findFileOFAD(entidadId, fileMetdata, {
+      tipoDocumento: tipoDocumentoItem.name,
+      tipoEntidad: tipoEntidadItem.name,
+    }),
   };
 
-  if (tipoDocumentoItem.name.startsWith('FD')) {
+  if (tipoDocumentoItem.name.startsWith('FD') || tipoDocumentoItem.name.startsWith('OFAD')) {
     await filesFDA[tipoDocumentoItem.name]();
   }
 
