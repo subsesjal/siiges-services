@@ -69,6 +69,7 @@ function GenerarFDP02(solicitud) {
   const fechaFormateada = formatearFecha(solicitud.createdAt);
   const modalidadTipo = buscarDescripcionPorId(modalidades, solicitud.programa.modalidadId);
   const ciclosTipo = buscarDescripcionPorId(ciclos, solicitud.programa.cicloId);
+  const fechaVigencia = formatearFecha(solicitud.programa.vigencia);
 
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
   doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
@@ -83,7 +84,7 @@ function GenerarFDP02(solicitud) {
   configurarFuenteYAgregarTexto(doc, 'bold', 12, [0, 0, 0], fechaFormateada, 152, 58);
   configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], solicitud.programa.plantel.institucion.nombre, 50, 60);
   configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], `${nombreNivel} en ${solicitud.programa.nombre}`, 50, 70);
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], solicitud.programa.vigencia || '', 50, 80);
+  configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], fechaVigencia || '', 50, 80);
   currentPositionY += 20;
 
   currentPositionY += seccionIntitucionTabla({
