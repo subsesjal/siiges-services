@@ -8,9 +8,13 @@ const {
 const {
   createQuery,
   countQuery,
+  findAllQuery,
+  findOneQuery,
 } = queries;
 
 module.exports = {
   createSolicitudFolioQuery: createQuery(SolicitudFolio),
   countSolicitudesFoliosQuery: countQuery(SolicitudFolio),
+  findAllSolicitudesFoliosQuery: findAllQuery(SolicitudFolio),
+  findOneSolicitudFolioQuery: findOneQuery(SolicitudFolio),
 };

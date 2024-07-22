@@ -85,9 +85,10 @@ const SolicitudFolioSchema = {
 
 class SolicitudFolio extends Model {
   static associate(models) {
-    this.belongsTo(models.TipoSolicitud, { as: 'tipoSolicitud' });
-    this.belongsTo(models.EstatusSolicitud, { as: 'estatusSolicitud' });
-    this.hasOne(models.Programa, { as: 'programa', foreignKey: 'solicitudId' });
+    this.belongsTo(models.TipoSolicitudFolio, { as: 'tipoSolicitudFolio' });
+    this.belongsTo(models.TipoDocumento, { as: 'tipoDocumento' });
+    this.belongsTo(models.EstatusSolicitudFolio, { as: 'estatusSolicitudFolio' });
+    this.belongsTo(models.Programa, { as: 'programa' });
   }
 
   static config(sequelize) {

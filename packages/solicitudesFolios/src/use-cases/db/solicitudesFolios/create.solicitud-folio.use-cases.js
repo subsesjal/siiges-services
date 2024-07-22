@@ -4,10 +4,17 @@ const createSolicitudFolio = (
   createSolicitudFolioQuery,
   countSolicitudesFoliosQuery,
 ) => async (data) => {
-  const totalSolicitudes = await countSolicitudesFoliosQuery();
-  const folioSolcitud = createFolioSolicitud(totalSolicitudes, data.programa.nivelId);
+  const currentYear = new Date().getFullYear();
 
-  const newData = { folioSolcitud, ...data };
+  const totalSolicitudes = await countSolicitudesFoliosQuery(null, {
+    isDeleting: false,
+    searchColumn: 'fecha',
+    searchText: currentYear.toString(),
+    searchType: 'date',
+  });
+  const folioSolicitud = await createFolioSolicitud(totalSolicitudes, data.tipoDocumentoId);
+
+  const newData = { folioSolicitud, ...data };
 
   const newSolicitudFolio = await createSolicitudFolioQuery({
     ...newData,

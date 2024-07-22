@@ -1,15 +1,21 @@
 const { checkers } = require('@siiges-services/shared');
 const boom = require('@hapi/boom');
 
-const createFolioSolicitud = (totalSolicitudes, nivelId) => {
-  if (checkers.isUndefined(totalSolicitudes)) throw boom.badRequest('totalSolciitudes is undefined');
+const TIPO_DOCUMENTO_MAPPING = {
+  1: 'T',
+  2: 'C',
+};
 
-  if (checkers.isUndefined(nivelId)) throw boom.badRequest('nivelId is undefined');
+const createFolioSolicitud = (totalSolicitudes, tipoDocumentoId) => {
+  if (checkers.isUndefined(totalSolicitudes)) throw boom.badRequest('totalSolciitudes is undefined');
+  if (checkers.isUndefined(tipoDocumentoId)) throw boom.badRequest('tipoDocumentoId is undefined');
 
   const numeroConsecutivo = totalSolicitudes + 1;
   const d = new Date();
   const currentYear = d.getFullYear();
-  return `${currentYear}${numeroConsecutivo.toString().padStart(3, '0')}`;
+
+  // SFC20240001
+  return `SF${TIPO_DOCUMENTO_MAPPING[tipoDocumentoId]}${currentYear}${numeroConsecutivo.toString().padStart(4, '0')}`;
 };
 
 module.exports = {
