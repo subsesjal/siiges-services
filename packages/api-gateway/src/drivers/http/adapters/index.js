@@ -25,6 +25,7 @@ const acuerdosAdapter = require('./acuerdos/handlers');
 const vigilanciasAdapter = require('./vigilancias/handlers');
 const planesMaestrosAdapter = require('./planesMaestros/handlers');
 const presupuestosAdapter = require('./presupuestos/handlers');
+const solicitudesFoliosAdapter = require('./solicitudesFolios/handlers');
 
 module.exports = {
   diligenciasAdapter,
@@ -53,4 +54,5 @@ module.exports = {
   vigilanciasAdapter,
   planesMaestrosAdapter,
   presupuestosAdapter,
+  solicitudesFoliosAdapter,
 };
