@@ -27,7 +27,7 @@ function GenerarOFAD(solicitud) {
 
   const tipoDeSolicitud = solicitud.tipoSolicitudId === 1 ? 'OFICIO ADMISORIO DE RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS' : 'OFICIO ADMISORIO DE REFRENDO DEL RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS';
 
-  let content = `SECRETARÍA DE INNOVACIÓN CIENCIA Y TECNOLOGÍA
+  let content = `SECRETARÍA DE INNOVACIÓN, CIENCIA Y TECNOLOGÍA
   SUBSECRETARÍA DE EDUCACIÓN SUPERIOR
   DIRECCIÓN GENERAL DE INCORPORACIÓN Y SERVICIOS ESCOLARES
 `;
@@ -63,12 +63,12 @@ function GenerarOFAD(solicitud) {
 
   const tieneNumeroInterior = solicitud.programa.plantel.domicilio.numeroInterior ? ` número interior ${solicitud.programa.plantel.domicilio.numeroInterior},` : '';
 
-  content = `${textoInicialRVOE} el plan y programa de estudio de la ${nombreNivel} en ${solicitud.programa.nombre} con número de Folio ${solicitud.folio}, en el domicilio ${solicitud.programa.plantel.domicilio.calle}, número ${solicitud.programa.plantel.domicilio.numeroExterior},${tieneNumeroInterior} colonia ${solicitud.programa.plantel.domicilio.colonia} me permitió informarle que esta Dirección tiene a bien emitir el presente oficio admisorio en virtud de haber presentado toda la documentación administrativa y académica requerida para continuar con cada una de las etapas establecidas en el Instructivo para la Obtención del Reconocimiento de Validez Oficial de Estudios de Educación Superior del Estado de Jalisco ${anioRecepcion.getFullYear()}.`;
+  content = `${textoInicialRVOE} el plan y programa de estudio de la ${nombreNivel} en ${solicitud.programa.nombre} con número de Folio ${solicitud.folio}, en el domicilio ${solicitud.programa.plantel.domicilio.calle}, número ${solicitud.programa.plantel.domicilio.numeroExterior},${tieneNumeroInterior} colonia ${solicitud.programa.plantel.domicilio.colonia} me permito informarle que esta Dirección tiene a bien emitir el presente oficio admisorio en virtud de haber presentado toda la documentación administrativa y académica requerida para continuar con cada una de las etapas establecidas en el Instructivo para la Obtención del Reconocimiento de Validez Oficial de Estudios de Educación Superior del Estado de Jalisco ${anioRecepcion.getFullYear()}.`;
 
   currentPositionY = crearSeccion(currentPositionY, doc, content, 'justify');
   currentPositionY += 35;
 
-  content = 'En uso de las facultades que me confiere en el artículo 3° fracción VI de la Constitución Política de los Estados Unidos Mexicanos; capítulo II del Reconocimiento de Validez Oficial de Estudios de la Ley de Educación Superior del Estado de Jalisco.';
+  content = 'En uso de las facultades que me confiere el artículo 3° fracción VI de la Constitución Política de los Estados Unidos Mexicanos; capítulo II del Reconocimiento de Validez Oficial de Estudios de la Ley de Educación Superior del Estado de Jalisco.';
 
   currentPositionY = crearSeccion(currentPositionY, doc, content, 'justify');
   currentPositionY += 15;
@@ -95,7 +95,7 @@ function GenerarOFAD(solicitud) {
   currentPositionY = crearSeccion(
     currentPositionY,
     doc,
-    'DIRECTOR GENERAL DE INCORPORACIÓN Y SERVICIOS ESCOLARES',
+    'DIRECTOR GENERAL DE INCORPORACIÓN Y',
     'center',
   );
   currentPositionY += 5;
@@ -103,7 +103,7 @@ function GenerarOFAD(solicitud) {
   currentPositionY = crearSeccion(
     currentPositionY,
     doc,
-    'Y SERVICIOS ESCOLARES',
+    'SERVICIOS ESCOLARES',
     'center',
   );
 
