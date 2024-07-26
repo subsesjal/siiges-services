@@ -1,3 +1,4 @@
+// adapters/solicitudFolios/index.js
 const {
   solicitudesFolios,
 } = require('../../../adapters/db');
@@ -7,6 +8,7 @@ const findOneSolicitudFolio = require('./find-one.solicitud-programa.use-cases')
 const findAllSolicitudesFolios = require('./find-all.solicitudes-folios.use-cases');
 const createAlumnoFolio = require('./create.solicitud-folio-alumnos.use-cases');
 const findOneSolicitudFolioAlumno = require('./find-one.solicitud-folio-alumnos.use-cases');
+const findOneSolicitudesFolioAlumno = require('./find-one.solicitudes-folios-alumno.use-cases');
 
 module.exports = {
   createSolicitudFolio: createSolicitudFolio(
@@ -22,7 +24,10 @@ module.exports = {
   createAlumnoFolio: createAlumnoFolio(
     solicitudesFolios.createAlumnoFolioQuery,
   ),
-  findOneSolicitudFolioAlumno: findOneSolicitudFolioAlumno(
+  findOneSolicitudFolioAlumno: findOneSolicitudesFolioAlumno(
+    solicitudesFolios.findOneSolicitudFolioAlumnoQuery,
+  ),
+  findOneAlumno: findOneSolicitudFolioAlumno(
     solicitudesFolios.findOneSolicitudFolioAlumnoQuery,
   ),
 };

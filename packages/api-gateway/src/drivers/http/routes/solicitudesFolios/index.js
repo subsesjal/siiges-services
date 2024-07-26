@@ -4,6 +4,7 @@ const {
   findOneSolicitudFolioSchema,
   findAllSolicitudesFoliosSchema,
   createAlumnoFolioSchema,
+  findOneAlumnoSchema,
 } = require('./schema');
 
 async function trayectoriaRouter(fastify, opts, next) {
@@ -17,6 +18,12 @@ async function trayectoriaRouter(fastify, opts, next) {
     '/:solicitudFolioId',
     { schema: findOneSolicitudFolioSchema },
     solicitudesFoliosAdapter.findOneSolicitudFolio,
+  );
+
+  await fastify.get(
+    '/solicitudesFoliosAlumnos/:solicitudFolioAlumnoId',
+    { schema: findOneAlumnoSchema },
+    solicitudesFoliosAdapter.findOneSolicitudFolioAlumno,
   );
 
   await fastify.post(
