@@ -20,9 +20,9 @@ async function trayectoriaRouter(fastify, opts, next) {
   );
 
   await fastify.get(
-    '/solicitudesFoliosAlumnos/:id',
+    '/solicitudesFoliosAlumnos/:solicitudFolioAlumnoId',
     { schema: findOneAlumnoSchema },
-    solicitudesFoliosAdapter.findOneAlumno,
+    solicitudesFoliosAdapter.findOneSolicitudFolioAlumno,
   );
 
   await fastify.post(

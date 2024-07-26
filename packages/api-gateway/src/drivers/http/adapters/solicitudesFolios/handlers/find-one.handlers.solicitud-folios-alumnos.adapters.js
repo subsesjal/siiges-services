@@ -1,9 +1,9 @@
 const errorHandler = require('../../../utils/errorHandler');
 
-async function findOneAlumno(req, reply) {
+async function findOneSolicitudFolioAlumno(req, reply) {
   try {
-    const { id } = req.params;
-    const alumno = await this.solicitudFolioServices.findOneAlumno({ id });
+    const { solicitudFolioAlumnoId } = req.params;
+    const alumno = await this.solicitudFolioServices.findOneAlumno({ id: solicitudFolioAlumnoId });
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
@@ -13,4 +13,4 @@ async function findOneAlumno(req, reply) {
   }
 }
 
-module.exports = { findOneAlumno };
+module.exports = { findOneSolicitudFolioAlumno };
