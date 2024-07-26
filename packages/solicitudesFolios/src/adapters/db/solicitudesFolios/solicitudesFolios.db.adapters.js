@@ -17,5 +17,5 @@ module.exports = {
   countSolicitudesFoliosQuery: countQuery(SolicitudFolio),
   findAllSolicitudesFoliosQuery: findAllQuery(SolicitudFolio),
   findOneSolicitudFolioQuery: findOneQuery(SolicitudFolio),
-  findOneAlumnoQuery: findOneQuery(SolicitudFolioAlumno),
+  findOneSolicitudFolioAlumnoQuery: findOneQuery(SolicitudFolioAlumno),
 };

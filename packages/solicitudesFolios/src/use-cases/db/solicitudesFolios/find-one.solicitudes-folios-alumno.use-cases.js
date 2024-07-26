@@ -1,6 +1,6 @@
 const { checkers } = require('@siiges-services/shared');
 
-const findOneAlumno = (findOneAlumnoQuery) => async ({ id }) => {
+const findOneSolicitudFolioAlumno = (findOneSolicitudFolioAlumnoQuery) => async ({ id }) => {
   try {
     if (!id) throw new Error('ID is required');
 
@@ -13,7 +13,7 @@ const findOneAlumno = (findOneAlumnoQuery) => async ({ id }) => {
       },
     ];
 
-    const alumno = await findOneAlumnoQuery({ id }, { include });
+    const alumno = await findOneSolicitudFolioAlumnoQuery({ id }, { include });
     checkers.throwErrorIfDataIsFalsy(alumno, 'solicitudes-folios-alumnos', id);
 
     return alumno;
@@ -22,4 +22,4 @@ const findOneAlumno = (findOneAlumnoQuery) => async ({ id }) => {
   }
 };
 
-module.exports = findOneAlumno;
+module.exports = findOneSolicitudFolioAlumno;
