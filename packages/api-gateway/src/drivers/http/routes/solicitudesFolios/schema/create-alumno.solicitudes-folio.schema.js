@@ -1,8 +1,18 @@
 const { responseProperties } = require('./properties/responseProperties');
+const { solicituFolioAlumno } = require('./properties/solicitudFolioAlumno');
+const { alumno } = require('./properties/alumno');
 
 const createAlumnoFolioSchema = {
   tags: ['Agregar una solicitud folio a un alumno'],
   description: 'Given an object with solicitud folio required data, then save the first time a new solicitudes_folios_alumnos in database.',
+  params: {
+    type: 'object',
+    properties: {
+      solicitudFolioId: { type: 'integer' },
+      alumnoId: { type: 'integer' },
+    },
+    required: ['solicitudFolioId', 'alumnoId'],
+  },
   body: {
     type: 'object',
     properties: {
@@ -18,26 +28,11 @@ const createAlumnoFolioSchema = {
         data: {
           type: 'object',
           properties: {
-            id: { type: 'integer' },
-            alumnoId: { type: 'integer' },
-            solicitudFolioId: { type: 'integer' },
-            fechaTermino: { type: 'string', format: 'date-time' },
-            fechaElaboracion: { type: 'string', format: 'date-time' },
+            ...solicituFolioAlumno,
             ...responseProperties,
             alumno: {
               type: 'object',
-              properties: {
-                id: { type: 'integer' },
-                persona: {
-                  type: 'object',
-                  properties: {
-                    nombre: { type: 'string' },
-                    apellidoPaterno: { type: 'string' },
-                    apellidoMaterno: { type: 'string' },
-                    ...responseProperties,
-                  },
-                },
-              },
+              properties: alumno,
             },
           },
         },

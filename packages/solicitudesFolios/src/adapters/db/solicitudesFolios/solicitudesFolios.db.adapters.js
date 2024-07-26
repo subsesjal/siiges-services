@@ -19,4 +19,5 @@ module.exports = {
   findAllSolicitudesFoliosQuery: findAllQuery(SolicitudFolio),
   findOneSolicitudFolioQuery: findOneQuery(SolicitudFolio),
   createAlumnoFolioQuery: createQuery(SolicitudFolioAlumno),
+  findOneSolicitudFolioAlumnoQuery: findOneQuery(SolicitudFolioAlumno),
 };
