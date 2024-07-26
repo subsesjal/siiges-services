@@ -5,6 +5,7 @@ const {
 const createSolicitudFolio = require('./create.solicitud-folio.use-cases');
 const findOneSolicitudFolio = require('./find-one.solicitud-programa.use-cases');
 const findAllSolicitudesFolios = require('./find-all.solicitudes-folios.use-cases');
+const createAlumnoFolio = require('./create-alumno.solicitud-folio.use-cases');
 
 module.exports = {
   createSolicitudFolio: createSolicitudFolio(
@@ -17,5 +18,7 @@ module.exports = {
   findOneSolicitudFolio: findOneSolicitudFolio(
     solicitudesFolios.findOneSolicitudFolioQuery,
   ),
-
+  createAlumnoFolio: createAlumnoFolio(
+    solicitudesFolios.createAlumnoFolioQuery,
+  ),
 };
