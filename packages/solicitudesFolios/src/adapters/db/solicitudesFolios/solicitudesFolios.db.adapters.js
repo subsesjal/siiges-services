@@ -4,7 +4,7 @@ const { models, queries } = require('@siiges-services/core');
 const {
   SolicitudFolio,
   SolicitudFolioAlumno,
-  SolicitudFolio, SolicitudFolioAlumno,
+  SolicitudFolio,
 } = models;
 
 const {
