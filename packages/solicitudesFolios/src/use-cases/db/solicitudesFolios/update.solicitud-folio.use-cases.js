@@ -1,15 +1,15 @@
 const { checkers } = require('@siiges-services/shared');
 
-const createSolicitudFolio = (
+const updateSolicitudFolio = (
   findOneSolicitudFolioQuery,
   updateSolicitudFolioQuery,
 ) => async (identifierObj, data) => {
   const solicitud = await findOneSolicitudFolioQuery(identifierObj);
-  checkers.throwErrorIfDataIsFalsy(solicitud, 'solicitudes', identifierObj.id);
+  checkers.throwErrorIfDataIsFalsy(solicitud, 'solicitudes-folios', identifierObj.id);
 
-  const solicitudUpdated = await updateSolicitudFolioQuery(identifierObj, data);
+  const solicitudFolioUpdated = await updateSolicitudFolioQuery(identifierObj, data);
 
-  return solicitudUpdated;
+  return solicitudFolioUpdated;
 };
 
-module.exports = createSolicitudFolio;
+module.exports = updateSolicitudFolio;
