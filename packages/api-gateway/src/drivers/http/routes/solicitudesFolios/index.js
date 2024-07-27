@@ -4,6 +4,7 @@ const {
   findOneSolicitudFolioSchema,
   findAllSolicitudesFoliosSchema,
   findOneAlumnoSchema,
+  udpateSolicitudFolioSchema,
 } = require('./schema');
 
 async function trayectoriaRouter(fastify, opts, next) {
@@ -29,6 +30,12 @@ async function trayectoriaRouter(fastify, opts, next) {
     '/',
     { schema: createSolicitudFolioSchema },
     solicitudesFoliosAdapter.createSolicitudFolio,
+  );
+
+  await fastify.patch(
+    '/:solicitudFolioId',
+    { schema: udpateSolicitudFolioSchema },
+    solicitudesFoliosAdapter.updateSolicitudFolio,
   );
 
   next();
