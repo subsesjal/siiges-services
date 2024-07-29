@@ -9,11 +9,16 @@ const findAllSolicitudesFolios = require('./find-all.solicitudes-folios.use-case
 const createAlumnoFolio = require('./create.solicitud-folio-alumnos.use-cases');
 const findOneSolicitudFolioAlumno = require('./find-one.solicitud-folio-alumnos.use-cases');
 const findOneSolicitudesFolioAlumno = require('./find-one.solicitudes-folios-alumno.use-cases');
+const updateSolicitudFolio = require('./update.solicitud-folio.use-cases');
 
 module.exports = {
   createSolicitudFolio: createSolicitudFolio(
     solicitudesFolios.createSolicitudFolioQuery,
     solicitudesFolios.countSolicitudesFoliosQuery,
+  ),
+  updateSolicitudFolio: updateSolicitudFolio(
+    solicitudesFolios.findOneSolicitudFolioQuery,
+    solicitudesFolios.updateSolicitudFolioQuery,
   ),
   findAllSolicitudesFolios: findAllSolicitudesFolios(
     solicitudesFolios.findAllSolicitudesFoliosQuery,

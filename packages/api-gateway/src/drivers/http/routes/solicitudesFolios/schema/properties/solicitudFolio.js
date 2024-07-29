@@ -5,7 +5,6 @@ const solicitudFolio = {
   estatusSolicitudFolioId: { type: 'integer' },
   programaId: { type: 'integer' },
   fecha: { type: 'string', format: 'date-time' },
-  folioSolicitud: { type: 'string' },
   folioPago: { type: 'string' },
 };
 
