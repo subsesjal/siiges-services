@@ -1,28 +1,22 @@
-const createAlumnoFolio = (createAlumnoFolioQuery) => async (data) => {
+const { checkers } = require('@siiges-services/shared');
+
+const createAlumnoFolio = (
+  findOneAlumnoQuery,
+  findOneSolicitudFolioQuery,
+  createAlumnoFolioQuery,
+) => async (idObj, data) => {
   const {
     solicitudFolioId,
     alumnoId,
-    fechaTermino,
-    fechaElaboracion,
-  } = data;
+  } = idObj;
 
-  if (!solicitudFolioId) {
-    throw new Error(`Solicitud folio no encontrado con id: ${solicitudFolioId}`);
-  }
+  const solicitudFolio = await findOneSolicitudFolioQuery({ id: solicitudFolioId });
+  checkers.throwErrorIfDataIsFalsy(solicitudFolio, 'solicitudes-folios', solicitudFolioId);
 
-  if (!alumnoId) {
-    throw new Error(`Alumno no encontrado con id: ${alumnoId}`);
-  }
+  const alumno = await findOneAlumnoQuery({ id: alumnoId });
+  checkers.throwErrorIfDataIsFalsy(alumno, 'alumno', alumnoId);
 
-  if (!fechaTermino) {
-    throw new Error(`Fecha de terminación no encontrado con id: ${fechaTermino}`);
-  }
-
-  if (!fechaElaboracion) {
-    throw new Error(`Fecha de elaboración no encontrado con id: ${fechaElaboracion}`);
-  }
-
-  const result = await createAlumnoFolioQuery(data);
+  const result = await createAlumnoFolioQuery({ ...data, ...idObj });
   return result;
 };
 

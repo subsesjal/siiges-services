@@ -1,6 +1,7 @@
 const { responseProperties } = require('./properties/responseProperties');
 const { solicituFolioAlumno } = require('./properties/solicitudFolioAlumno');
-const { alumno } = require('./properties/alumno');
+const { alumno } = require('../../alumnos/schema/properties/alumno');
+const { persona } = require('../../usuarios/schema/properties/persona');
 
 const createAlumnoFolioSchema = {
   tags: ['Agregar una solicitud folio a un alumno'],
@@ -32,7 +33,17 @@ const createAlumnoFolioSchema = {
             ...responseProperties,
             alumno: {
               type: 'object',
-              properties: alumno,
+              properties: {
+                ...alumno,
+                ...responseProperties,
+                persona: {
+                  type: 'object',
+                  properties: {
+                    ...persona,
+                    ...responseProperties,
+                  },
+                },
+              },
             },
           },
         },
