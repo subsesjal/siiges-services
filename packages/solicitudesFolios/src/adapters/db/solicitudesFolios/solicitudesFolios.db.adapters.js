@@ -2,7 +2,8 @@
 const { models, queries } = require('@siiges-services/core');
 
 const {
-  SolicitudFolio, SolicitudFolioAlumno,
+  SolicitudFolio,
+  SolicitudFolioAlumno,
 } = models;
 
 const {
@@ -10,10 +11,12 @@ const {
   countQuery,
   findAllQuery,
   findOneQuery,
+  updateAndFindQuery,
 } = queries;
 
 module.exports = {
   createSolicitudFolioQuery: createQuery(SolicitudFolio),
+  updateSolicitudFolioQuery: updateAndFindQuery(SolicitudFolio),
   countSolicitudesFoliosQuery: countQuery(SolicitudFolio),
   findAllSolicitudesFoliosQuery: findAllQuery(SolicitudFolio),
   findOneSolicitudFolioQuery: findOneQuery(SolicitudFolio),
