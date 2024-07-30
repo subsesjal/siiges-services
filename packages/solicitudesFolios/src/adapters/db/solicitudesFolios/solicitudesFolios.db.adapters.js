@@ -16,6 +16,7 @@ const {
 } = queries;
 
 module.exports = {
+  updateAndFindSolicitudQuery: updateAndFindQuery(SolicitudFolioAlumno),
   createSolicitudFolioQuery: createQuery(SolicitudFolio),
   updateSolicitudFolioQuery: updateAndFindQuery(SolicitudFolio),
   countSolicitudesFoliosQuery: countQuery(SolicitudFolio),
