@@ -1,10 +1,6 @@
 const findAllSolicitudFolioAlumnos = (
   findAllSolicitudFolioAlumnosQuery,
-) => async (query = {}) => {
-  const filteredQuery = Object.fromEntries(
-    // eslint-disable-next-line no-unused-vars
-    Object.entries(query).filter(([_, value]) => value !== undefined),
-  );
+) => async (query) => {
   const include = [
     {
       association: 'alumno',
@@ -13,7 +9,7 @@ const findAllSolicitudFolioAlumnos = (
   ];
 
   const solicitudes = await findAllSolicitudFolioAlumnosQuery(
-    filteredQuery,
+    query,
     {
       include,
     },
