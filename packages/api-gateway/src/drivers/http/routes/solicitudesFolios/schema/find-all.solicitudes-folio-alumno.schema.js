@@ -19,19 +19,21 @@ const findAllSolicitudFolioAlumnoSchema = {
       properties: {
         data: {
           type: 'array',
-          properties: {
-            ...solicitudFolioAlumno,
-            ...responseProperties,
-            alumno: {
-              type: 'object',
-              properties: {
-                ...alumno,
-                ...responseProperties,
-                persona: {
-                  type: 'object',
-                  properties: {
-                    ...persona,
-                    ...responseProperties,
+          items: {
+            properties: {
+              ...solicitudFolioAlumno,
+              ...responseProperties,
+              alumno: {
+                type: 'object',
+                properties: {
+                  ...alumno,
+                  ...responseProperties,
+                  persona: {
+                    type: 'object',
+                    properties: {
+                      ...persona,
+                      ...responseProperties,
+                    },
                   },
                 },
               },
