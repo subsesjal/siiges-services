@@ -21,17 +21,17 @@ const findAllSolicitudFolioAlumnoSchema = {
           type: 'array',
           properties: {
             ...solicitudFolioAlumno,
-            // ...responseProperties,
+            ...responseProperties,
             alumno: {
               type: 'object',
               properties: {
                 ...alumno,
-                // ...responseProperties,
+                ...responseProperties,
                 persona: {
                   type: 'object',
                   properties: {
                     ...persona,
-                    // ...responseProperties,
+                    ...responseProperties,
                   },
                 },
               },
