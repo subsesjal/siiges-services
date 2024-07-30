@@ -1,5 +1,5 @@
 const { responseProperties } = require('./properties/responseProperties');
-const { solicituFolioAlumno } = require('./properties/solicitudFolioAlumno');
+const { solicitudFolioAlumno } = require('./properties/solicitudFolioAlumno');
 const { alumno } = require('../../alumnos/schema/properties/alumno');
 const { persona } = require('../../usuarios/schema/properties/persona');
 
@@ -29,7 +29,7 @@ const createAlumnoFolioSchema = {
         data: {
           type: 'object',
           properties: {
-            ...solicituFolioAlumno,
+            ...solicitudFolioAlumno,
             ...responseProperties,
             alumno: {
               type: 'object',

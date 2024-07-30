@@ -1,5 +1,6 @@
-const { solicitudFolioAlumnos } = require('./properties/solicitudFolioAlumnos');
+const { solicitudFolioAlumno } = require('./properties/solicitudFolioAlumno');
 const { responseProperties } = require('./properties/responseProperties');
+const { alumno } = require('../../alumnos/schema/properties/alumno');
 const { persona } = require('../../usuarios/schema/properties/persona');
 
 const updateSolicitudFolioAlumnoSchema = {
@@ -16,25 +17,24 @@ const updateSolicitudFolioAlumnoSchema = {
   body: {
     type: 'object',
     properties: {
-      fechaTermino: { type: 'string', format: 'date-time' },
-      fechaElaboracion: { type: 'string', format: 'date-time' },
+      ...solicitudFolioAlumno,
     },
-    required: ['fechaTermino', 'fechaElaboracion'],
     additionalProperties: false,
   },
   response: {
-    200: {
+    201: {
       type: 'object',
       properties: {
         data: {
           type: 'object',
           properties: {
-            ...solicitudFolioAlumnos,
+            ...solicitudFolioAlumno,
             ...responseProperties,
             alumno: {
               type: 'object',
               properties: {
-                id: { type: 'integer' },
+                ...alumno,
+                ...responseProperties,
                 persona: {
                   type: 'object',
                   properties: {

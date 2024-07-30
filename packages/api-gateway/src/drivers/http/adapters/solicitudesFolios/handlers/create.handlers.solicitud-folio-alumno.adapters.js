@@ -3,18 +3,13 @@ const errorHandler = require('../../../utils/errorHandler');
 async function createSolicitudFolioAlumno(req, reply) {
   try {
     const { solicitudFolioId, alumnoId } = req.params;
-    const { fechaTermino, fechaElaboracion } = req.body;
+    const { ...data } = req.body;
 
-    const solicitudFolioAlumno = await this.solicitudFolioServices.createSolicitudFolioAlumno(
-      {
-        solicitudFolioId,
-        alumnoId,
-      },
-      {
-        fechaTermino,
-        fechaElaboracion,
-      },
-    );
+    const solicitudFolioAlumno = await this.solicitudFolioServices.createSolicitudFolioAlumno({
+      solicitudFolioId,
+      alumnoId,
+      ...data,
+    });
 
     return reply
       .code(201)

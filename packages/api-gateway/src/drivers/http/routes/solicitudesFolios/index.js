@@ -1,55 +1,71 @@
 const { solicitudesFoliosAdapter } = require('../../adapters');
-const {
-  createSolicitudFolioSchema,
-  findOneSolicitudFolioSchema,
-  findAllSolicitudesFoliosSchema,
-  createSolicitudFolioAlumnoSchema,
-  findOneAlumnoSchema,
-  updateSolicitudFolioAlumnoSchema,
-  udpateSolicitudFolioSchema,
-} = require('./schema');
+const solicitudSchemas = require('./schema');
 
 async function trayectoriaRouter(fastify, opts, next) {
+  // Solicitud Folios
+
   await fastify.get(
     '/',
-    { schema: findAllSolicitudesFoliosSchema },
+    {
+      schema: solicitudSchemas.findAllSolicitudesFoliosSchema,
+      onRequest: [fastify.authenticate],
+    },
     solicitudesFoliosAdapter.findAllSolicitudesFolios,
-  );
-
-  await fastify.patch(
-    '/solicitudesFoliosAlumnos/:solicitudFolioAlumnoId',
-    { schema: updateSolicitudFolioAlumnoSchema },
-    solicitudesFoliosAdapter.updateSolicitudFolioAlumno,
   );
 
   await fastify.get(
     '/:solicitudFolioId',
-    { schema: findOneSolicitudFolioSchema },
+    {
+      schema: solicitudSchemas.findOneSolicitudFolioSchema,
+      onRequest: [fastify.authenticate],
+    },
     solicitudesFoliosAdapter.findOneSolicitudFolio,
   );
 
+  await fastify.post(
+    '/',
+    {
+      schema: solicitudSchemas.createSolicitudFolioSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesFoliosAdapter.createSolicitudFolio,
+  );
+
+  await fastify.patch(
+    '/:solicitudFolioId',
+    {
+      schema: solicitudSchemas.udpateSolicitudFolioSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesFoliosAdapter.updateSolicitudFolio,
+  );
+
+  // Solicitud Folio Alumno
   await fastify.get(
     '/solicitudesFoliosAlumnos/:solicitudFolioAlumnoId',
-    { schema: findOneAlumnoSchema },
+    {
+      schema: solicitudSchemas.findOneSolicitudFolioAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
     solicitudesFoliosAdapter.findOneSolicitudFolioAlumno,
   );
 
   await fastify.post(
-    '/',
-    { schema: createSolicitudFolioSchema },
-    solicitudesFoliosAdapter.createSolicitudFolio,
-  );
-
-  await fastify.post(
     '/:solicitudFolioId/alumnos/:alumnoId',
-    { schema: createSolicitudFolioAlumnoSchema },
+    {
+      schema: solicitudSchemas.createSolicitudFolioAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
     solicitudesFoliosAdapter.createSolicitudFolioAlumno,
   );
 
   await fastify.patch(
-    '/:solicitudFolioId',
-    { schema: udpateSolicitudFolioSchema },
-    solicitudesFoliosAdapter.updateSolicitudFolio,
+    '/solicitudesFoliosAlumnos/:solicitudFolioAlumnoId',
+    {
+      schema: solicitudSchemas.updateSolicitudFolioAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesFoliosAdapter.updateSolicitudFolioAlumno,
   );
 
   next();

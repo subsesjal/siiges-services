@@ -1,4 +1,5 @@
-const solicituFolioAlumno = {
+// Solicitud Folio Alumno
+const solicitudFolioAlumno = {
   id: { type: 'integer' },
   alumnoId: { type: 'integer' },
   solicitudFolioId: { type: 'integer' },
@@ -6,4 +7,4 @@ const solicituFolioAlumno = {
   fechaElaboracion: { type: 'string', format: 'date-time' },
 };
 
-module.exports = { solicituFolioAlumno };
+module.exports = { solicitudFolioAlumno };
