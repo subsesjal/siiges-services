@@ -9,7 +9,7 @@ async function findAllSolicitudFolioAlumnos(req, reply) {
 
     Logger.info('[solicitudes]: Getting solicitudes list');
     const alumnosSolicitudes = await this.solicitudFolioServices.findAllSolicitudFolioAlumnos({
-      solicitud_folio_id: solicitudFolioId,
+      solicitudFolioId,
     });
 
     return reply
