@@ -9,7 +9,6 @@ const findAllSolicitudesFolios = require('./find-all.solicitudes-folios.use-case
 const findOneSolicitudFolioAlumno = require('./find-one.solicitudes-folios-alumno.use-cases');
 const updateSolicitudFolioAlumno = require('./update.solicitud-folio-alumno.use-cases');
 const createSolicitudFolioAlumno = require('./create.solicitud-folio-alumnos.use-cases');
-const findOneSolicitudFolioAlumno = require('./find-one.solicitud-folio-alumnos.use-cases');
 const findOneSolicitudesFolioAlumno = require('./find-one.solicitudes-folios-alumno.use-cases');
 const updateSolicitudFolio = require('./update.solicitud-folio.use-cases');
 
