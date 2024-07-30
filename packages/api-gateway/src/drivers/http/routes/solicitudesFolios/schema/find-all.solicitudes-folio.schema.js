@@ -9,19 +9,13 @@ const findAllSolicitudesProgramasSchema = {
   tags: ['Solicitudes Folios'],
   description: 'Return a list of solicitudes.',
   querystring: {
-    estatusSolicitudFolioId: {
-      type: 'string',
+    type: 'object',
+    properties: {
+      estatusSolicitudFolioId: { type: 'string' },
+      tipoDocumentoId: { type: 'string' },
+      tipoSolicitudFolioId: { type: 'string' },
+      programaId: { type: 'string' },
     },
-    tipoDocumentoId: {
-      type: 'string',
-    },
-    tipoSolicitudFolioId: {
-      type: 'string',
-    },
-    programaId: {
-      type: 'string',
-    },
-
   },
   response: {
     200: {
@@ -33,6 +27,7 @@ const findAllSolicitudesProgramasSchema = {
             type: 'object',
             properties: {
               id: { type: 'integer' },
+              folioSolicitud: { type: 'string' },
               ...solicitudFolio,
               ...responseProperties,
               estatusSolicitudFolio: {

@@ -4,13 +4,19 @@ const { responseProperties } = require('./properties/responseProperties');
 
 const createSolicitudFolioSchema = {
   tags: ['Solicitudes Folios'],
-  description: 'Given an object with solicitud folio required data, then save the first time a new solicitud in database.',
+  description: 'Given an object with solicitud folio required data, then update a solicitud in database.',
+  params: {
+    type: 'object',
+    properties: {
+      solicitudFolioId: { type: 'integer' },
+    },
+    required: ['solicitudFolioId'],
+  },
   body: {
     type: 'object',
     properties: {
       ...solicitudFolio,
     },
-    required: ['tipoDocumentoId', 'tipoSolicitudFolioId', 'estatusSolicitudFolioId', 'programaId', 'fecha', 'folioPago'],
   },
   response: {
     201: {
