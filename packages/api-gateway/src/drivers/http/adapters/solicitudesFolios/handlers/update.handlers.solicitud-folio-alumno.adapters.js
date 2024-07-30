@@ -3,14 +3,14 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function updateSolicitudFolioAlumno(req, reply) {
   try {
-    const { fechaTermino, fechaElaboracion } = req.body;
     const { solicitudFolioAlumnoId } = req.params;
+    const { ...data } = req.body;
 
     Logger.info('[solicitudesFoliosAlumnos]: Updating record');
 
     const updatedRecord = await this.solicitudFolioServices.updateSolicitudFolioAlumno(
       { id: solicitudFolioAlumnoId },
-      { fechaTermino, fechaElaboracion },
+      data,
     );
 
     return reply
