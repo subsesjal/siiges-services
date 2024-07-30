@@ -10,6 +10,7 @@ const {
   createQuery,
   findOneQuery,
   updateAndFindQuery,
+  findAllQuery,
 } = queries;
 
 module.exports = {
@@ -17,4 +18,5 @@ module.exports = {
   createSolicitudFolioAlumnoQuery: createQuery(SolicitudFolioAlumno),
   findOneSolicitudFolioAlumnoQuery: findOneQuery(SolicitudFolioAlumno),
   findOneAlumnoQuery: findOneQuery(Alumno),
+  findAllSolicitudFolioAlumnosQuery: findAllQuery(SolicitudFolioAlumno),
 };

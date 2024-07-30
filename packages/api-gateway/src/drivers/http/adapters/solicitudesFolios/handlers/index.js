@@ -7,6 +7,7 @@ const { updateSolicitudFolio } = require('./update.handlers.solicitud-folio.adap
 const { createSolicitudFolioAlumno } = require('./create.handlers.solicitud-folio-alumno.adapters');
 const { findOneSolicitudFolioAlumno } = require('./find-one.handlers.solicitud-folio-alumno.adapters');
 const { updateSolicitudFolioAlumno } = require('./update.handlers.solicitud-folio-alumno.adapters');
+const { findAllSolicitudFolioAlumnos } = require('./find-all.handlers.solicitudes-folios-alumnos.adapters');
 
 module.exports = {
   createSolicitudFolio,
@@ -16,4 +17,5 @@ module.exports = {
   findOneSolicitudFolioAlumno,
   updateSolicitudFolioAlumno,
   updateSolicitudFolio,
+  findAllSolicitudFolioAlumnos,
 };
