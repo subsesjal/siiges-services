@@ -27,6 +27,24 @@ Hacer Fork del proyecto:
 > [!IMPORTANT]
 > Verifica que el puerto y el nombre de la base de datos sean los mismos que los especificados en el archivo Docker ubicado en ***development.env***
 
+> [!IMPORTANT]
+> Antes de hacer las instalaciones de las independencias, deberás acceder al repositorio remoto con el siguiente comando.
+
+```git remote add upstream https://github.com/subsesjal/siiges-services.git```
+
+> [!NOTE]
+> Verificar que tu repo esté conectada remotamente con este comando.
+
+```git remote -v```
+
+> [!NOTE]
+> Debe dar un mensaje como este.
+
+> origin  https://github.com/yourUsername/siiges-services.git (fetch)
+> origin  https://github.com/yourUsername/siiges-services.git (push)
+> upstream        https://github.com/subsesjal/siiges-services.git (fetch)
+> upstream        https://github.com/subsesjal/siiges-services.git (push)
+
 ### Instalaciones necesarias dentro del directorio raíz
 ```yarn install or yarn```
 
