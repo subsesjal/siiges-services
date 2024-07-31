@@ -5,6 +5,7 @@ const createSolicitudFolioAlumnoSchema = require('./create.solicitud-folio-alumn
 const findOneSolicitudFolioAlumnoSchema = require('./find-one.solicitud-folio-alumno.schema');
 const updateSolicitudFolioAlumnoSchema = require('./update.solicitud-folio-alumno.schema');
 const udpateSolicitudFolioSchema = require('./update.solicitud-folio.schema');
+const findAllSolicitudFolioAlumnoSchema = require('./find-all.solicitudes-folio-alumno.schema');
 
 module.exports = {
   createSolicitudFolioSchema,
@@ -14,4 +15,5 @@ module.exports = {
   findOneSolicitudFolioAlumnoSchema,
   updateSolicitudFolioAlumnoSchema,
   udpateSolicitudFolioSchema,
+  findAllSolicitudFolioAlumnoSchema,
 };

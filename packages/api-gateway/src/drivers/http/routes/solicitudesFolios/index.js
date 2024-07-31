@@ -68,6 +68,15 @@ async function trayectoriaRouter(fastify, opts, next) {
     solicitudesFoliosAdapter.updateSolicitudFolioAlumno,
   );
 
+  await fastify.get(
+    '/:solicitudFolioId/alumnos',
+    {
+      schema: solicitudSchemas.findAllSolicitudFolioAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesFoliosAdapter.findAllSolicitudFolioAlumnos,
+  );
+
   next();
 }
 
