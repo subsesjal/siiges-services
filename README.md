@@ -14,7 +14,7 @@ Hacer Fork del proyecto:
 - [Backend](https://github.com/subsesjal/siiges-services)
 
 ### Clonar el repositorio
->[!NOTE]
+> [!NOTE]
 > Debes estar dentro del proyecto que hiciste **Fork**.
 
 ```git clone https://github.com/yourUsername/siiges-services```
@@ -45,17 +45,30 @@ Hacer Fork del proyecto:
 > upstream        https://github.com/subsesjal/siiges-services.git (fetch)
 > upstream        https://github.com/subsesjal/siiges-services.git (push)
 
-### Instalaciones necesarias dentro del directorio raíz
+> [!IMPORTANT]
+> Actualizar para traer los cambios más recientes con este comando.
+
+```git fetch upstream && git rebase upstream/master```
+
+### Instalaciones los módulos
 ```yarn install or yarn```
 
 ### Levantar Docker
+> [!NOTE]
+> Posicionarse en la ruta raíz siiges-services/ y ejecutar el comando.
+> Cuando finalice puedes levantarlo otra vez desde la terminal o desde Docker Desktop.
+
 ```docker-compose up```
 
-### Levantar Backend
-> Posiciónate en la ruta siiges-services/packages/api-gateway/ y ejecuta el siguiente comando:
-
-```NODE_ENV=development npm run start:dev```
-
 ### Migrar tablas y datos de MySQL
+> [!NOTE]
+> Posicionarse en la ruta raíz siiges-services/packages/core y ejecutar el comando.
+
 ```NODE_ENV=development npm run migrations:run```
 ```NODE_ENV=development npm run seeds:run```
+
+### Levantar Backend
+> [!NOTE]
+> Posicionarse en la ruta siiges-services/packages/api-gateway/ y ejecutar el comando.
+
+```NODE_ENV=development npm run start:dev```
