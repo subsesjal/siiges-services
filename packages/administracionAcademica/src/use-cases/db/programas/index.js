@@ -27,6 +27,5 @@ module.exports = {
   findOnePrograma: findOnePrograma(
     programas.findOneProgramaQuery,
     programas.includeProgramasQuery,
-    programas.whereProgramasQuery,
   ),
 };
