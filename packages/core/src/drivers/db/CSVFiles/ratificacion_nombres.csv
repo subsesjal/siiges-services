@@ -1,3 +1,3 @@
 id,institucion_id,autoridad,nombre_propuesto1,nombre_propuesto2,nombre_propuesto3,nombre_solicitado,nombre_autorizado,es_nombre_autorizado,fecha_autorizacion,created_at
 1,1,SICYT,Universidad SICYT 1,Universidad SICYT 2,Universidad SICYT 3,,,1,2023-10-12 2:35:00,2023-10-12 2:35:00
-2,4,,Centro Educativo El Salto,Centro Educativo El Salto,Centro Educativo El Salto,,,0,,2024-07-29 21:54:45
+2,4,SICYT,Centro Educativo El Salto,Centro Educativo El Salto,Centro Educativo El Salto,,,0,2023-10-12 2:35:00,2024-07-29 21:54:45

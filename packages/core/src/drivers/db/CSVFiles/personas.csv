@@ -1,40 +1,40 @@
-id,domicilio_id,nombre,apellido_paterno,apellido_materno,fecha_nacimiento,sexo,nacionalidad,telefono,celular,curp,rfc,ine,correo,correo_secundario,titulo_cargo,fotografia,created_at,updated_at
-1,1,Hector Esau,Macias,Javier,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-05 18:16:04,
-2,1,Ivan,Narvaez,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-07 21:28:31,
-3,1,SIN DATO,SIN DATO,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:00:49,
-4,1,SIN DATO,SIN DATO,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41,
-5,1,Director 1,dir 1,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41,
-6,1,Director 2,dir 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41,
-7,1,Director 3,dir 3,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41,
-8,1,Director 4,dir 4,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41,
-9,1,Roberto,Cervantes Torres,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:14:54,
-10,1,alumno1,apellido paterno alumno,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:26:43,
-11,1,alumno2,apellido paterno alumno2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17,
-12,1,Diligente 1,apellido diligente 1,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17,
-13,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17,
-14,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17,
-15,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17,
-16,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17,
-17,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17,
-18,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17,
-19,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17,
-20,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17,
-21,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17,
-22,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17,
-23,1,Roberto,Cervantes,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17,
-24,1,Evaluador 1 Joel,Duran,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-11-29 5:23:10,
-25,1,Capturador,OPD,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-11-29 5:23:10,
-26,9,Joel,Duran,Castro,,,Mexicana,3322114455,3322114455,NULL,,,,,Representante legal,uploads/photos/img-usuario.png,2024-07-29 21:52:26,2024-07-30 18:31:17
-27,1,Adriana,De Los Reyes,Moreno,,,,,,AQSWDEFRGTHYJUKILO,,,,,,uploads/photos/img-usuario.png,2024-07-29 21:54:45,
-28,1,Adriana,De Los Reyes,Moreno,,masculino,Mexicana,,,qawsedrftgyhujikol,,,joel.duran@jalisco.gob.mx,,,uploads/photos/img-usuario.png,2024-07-29 22:01:45,
-29,1,Adriana,De Los Reyes,Moreno,,masculino,Mexicana,,,qawserdftgyhujikol,,,joel.duran@jalisco.gob.mx,,,uploads/photos/img-usuario.png,2024-07-29 22:04:23,
-30,1,Cecilia,Pezzi,Durazo,,,,,,,,,,,,uploads/photos/img-usuario.png,2024-07-30 17:50:40,
-31,1,Mitzi Judith,Pérez,Alvarado,,,,,,,,,,,,uploads/photos/img-usuario.png,2024-07-30 17:59:11,
-32,1,Mónica del Rocío,Martínez,García,,,,,,,,,,,,uploads/photos/img-usuario.png,2024-07-30 18:03:56,
-33,1,Patricia,Obregón,Salado,,,,,,,,,,,,uploads/photos/img-usuario.png,2024-07-30 18:05:49,
-34,1,Ana Fernanda,Navarro,González,,,,3322114455,3322114455,,,,joel.druan@jalisco.gob.mx,,Vocal académica,uploads/photos/img-usuario.png,2024-07-30 18:57:26,
-35,1,Mario Alberto,González,Campos,,,,3322114455,3322114455,,,,joel.druan@jalisco.gob.mx,,Consejero,uploads/photos/img-usuario.png,2024-07-30 18:58:19,
-36,1,Evaluador,Para migrar ,SIIGES,,,,,,,,,,,asdsadsad,uploads/photos/img-usuario.png,2024-07-30 20:23:12,
-37,1,Martin,R,Tolkien,,,,,,,,,,,Revision de Documnetacion,uploads/photos/img-usuario.png,2024-07-30 20:54:48,
-38,1,Connan,Detective ,Inspector,,,,,,,,,,,Inspector,uploads/photos/img-usuario.png,2024-07-31 18:43:49,
-39,1,Joel,D,C,,masculino,M<exicana,,,QAWSEDRFTGYHUJIKOL,,,joel.duran@jalisco.gob.mx,,,uploads/photos/img-usuario.png,2024-07-31 20:42:55,
+id,domicilio_id,nombre,apellido_paterno,apellido_materno,fecha_nacimiento,sexo,nacionalidad,telefono,celular,curp,rfc,ine,correo,correo_secundario,titulo_cargo,fotografia,created_at
+1,1,Hector Esau,Macias,Javier,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-05 18:16:04
+2,1,Ivan,Narvaez,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-07 21:28:31
+3,1,SIN DATO,SIN DATO,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:00:49
+4,1,SIN DATO,SIN DATO,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41
+5,1,Director 1,dir 1,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41
+6,1,Director 2,dir 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41
+7,1,Director 3,dir 3,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41
+8,1,Director 4,dir 4,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2022-09-26 19:09:41
+9,1,Roberto,Cervantes Torres,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:14:54
+10,1,alumno1,apellido paterno alumno,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:26:43
+11,1,alumno2,apellido paterno alumno2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17
+12,1,Diligente 1,apellido diligente 1,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17
+13,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17
+14,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17
+15,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17
+16,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17
+17,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17
+18,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17
+19,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17
+20,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17
+21,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17
+22,1,Diligente 2,apellido diligente 2,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17
+23,1,Roberto,Cervantes,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-10-08 23:27:17
+24,1,Evaluador 1 Joel,Duran,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-11-29 5:23:10
+25,1,Capturador,OPD,,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2023-11-29 5:23:10
+26,9,Joel,Duran,Castro,2022-09-05 18:16:04,,Mexicana,3322114455,3322114455,,,,,,Representante legal,uploads/photos/img-usuario.png,2024-07-29 21:52:26
+27,1,Adriana,De Los Reyes,Moreno,2022-09-05 18:16:04,,,,,AQSWDEFRGTHYJUKILO,,,,,,uploads/photos/img-usuario.png,2024-07-29 21:54:45
+28,1,Adriana,De Los Reyes,Moreno,2022-09-05 18:16:04,masculino,Mexicana,,,qawsedrftgyhujikol,,,joel.duran@jalisco.gob.mx,,,uploads/photos/img-usuario.png,2024-07-29 22:01:45
+29,1,Adriana,De Los Reyes,Moreno,2022-09-05 18:16:04,masculino,Mexicana,,,qawserdftgyhujikol,,,joel.duran@jalisco.gob.mx,,,uploads/photos/img-usuario.png,2024-07-29 22:04:23
+30,1,Cecilia,Pezzi,Durazo,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2024-07-30 17:50:40
+31,1,Mitzi Judith,Pérez,Alvarado,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2024-07-30 17:59:11
+32,1,Mónica del Rocío,Martínez,García,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2024-07-30 18:03:56
+33,1,Patricia,Obregón,Salado,2022-09-05 18:16:04,,,,,,,,,,,uploads/photos/img-usuario.png,2024-07-30 18:05:49
+34,1,Ana Fernanda,Navarro,González,2022-09-05 18:16:04,,,3322114455,3322114455,,,,joel.druan@jalisco.gob.mx,,Vocal académica,uploads/photos/img-usuario.png,2024-07-30 18:57:26
+35,1,Mario Alberto,González,Campos,2022-09-05 18:16:04,,,3322114455,3322114455,,,,joel.druan@jalisco.gob.mx,,Consejero,uploads/photos/img-usuario.png,2024-07-30 18:58:19
+36,1,Evaluador,Para migrar ,SIIGES,2022-09-05 18:16:04,,,,,,,,,,asdsadsad,uploads/photos/img-usuario.png,2024-07-30 20:23:12
+37,1,Martin,R,Tolkien,2022-09-05 18:16:04,,,,,,,,,,Revision de Documnetacion,uploads/photos/img-usuario.png,2024-07-30 20:54:48
+38,1,Connan,Detective ,Inspector,2022-09-05 18:16:04,,,,,,,,,,Inspector,uploads/photos/img-usuario.png,2024-07-31 18:43:49
+39,1,Joel,D,C,2022-09-05 18:16:04,masculino,M<exicana,,,QAWSEDRFTGYHUJIKOL,,,joel.duran@jalisco.gob.mx,,,uploads/photos/img-usuario.png,2024-07-31 20:42:55
