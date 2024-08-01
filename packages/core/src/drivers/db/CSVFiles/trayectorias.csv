@@ -1,0 +1,469 @@
+id,programa_id,programa_seguimiento,tipo_tutoria,estadisticas_titulacion,funcion_tutorial,modalidades_titulacion,tasa_egreso,created_at,updated_at,deleted_at
+1,9,"El Centro Educativo El Salto se preocupa por dar un seguimiento continuo y permanente a las alumnas desde su ingreso hasta el egreso del programa educativo con el fin de poder cumplir con las metas y objetivos establecidos, a través de un acompañamiento continuo y permanente que abarque tanto el aspecto académico como el desarrollo integral de las alumnas. 
+
+Se ofrecerá la carrera Técnico Superior Universitario en Hotelería, modalidad escolarizada, con duración de dos años, divididos en seis cuatrimestres, con capacidad para atender a 25 alumnas por cohorte generacional.
+De acuerdo a la naturaleza del plan de estudios se brindará la modalidad de tutoría individual y personalizada. 
+
+La tutoría se llevará mediante un acompañamiento de tipo personal que el tutor realizará a lo largo del proceso formativo de la alumna, para ayudarla a mejorar su rendimiento académico, solucionar problemas dentro de la institución, desarrollar hábitos de estudio, espacios para la reflexión y convivencia social, promoviendo el desarrollo humano y académico de las alumnas, con el propósito de que logren la permanencia y culminación del programa de estudios
+
+Objetivo general:
+
+Apoyar a las estudiantes del Centro Educativo El Salto en su trayecto educativo, a través de la implementación de acciones y estrategias específicas   para que estén en condiciones de conseguir el máximo aprovechamiento así como satisfacer sus necesidades de desarrollo personal y social y de esta manera promover su autonomía y formación integral, así como mejorar la eficiencia terminal a través de un acompañamiento individual a lo largo de la trayectoria educativa, para atender puntualmente problemas específicos.
+
+Objetivos específicos:
+
+Orientar individualmente a las alumnas del centro educativo, en aspectos relacionados con su trayectoria educativa, así como lo relacionado a trámites administrativos, orientación psicológica y su desarrollo social dentro y fuera de la institución a través de las tutorías para guiar a las alumnas en las necesidades que pudieran tener.
+
+Promover el desarrollo de las capacidades y habilidades del estudiante    acorde con sus aptitudes, intereses, expectativas y recursos económicos, mediante al apoyo en su caminar coherente con el programa de estudios, a fin de potenciar las mismas.
+
+Potenciar el desarrollo de los tutorados a través de una atención integral adecuada y oportuna a fin de alcanzar el perfil profesional requerido.
+
+Contribuir a elevar la calidad del proceso educativo, brindando orientación académica complementaria, promoviendo el desarrollo de actitudes y habilidades, con el fin de mejorar su desempeño, mejorando los indicadores de retención, aprobación y egreso.
+
+Reforzar su autoestima, favoreciendo una mayor motivación y desarrollo de habilidades (comprensión, análisis, clasificación, síntesis, argumentación, evaluación, experimentación y organización), para poder encontrar soluciones a los problemas que se le presenten.","La tutoría se llevará mediante un acompañamiento de tipo personal que el tutor realizará a lo largo del proceso formativo de la alumna, para ayudarla a mejorar su rendimiento académico, solucionar problemas dentro de la institución, desarrollar hábitos de estudio, espacios para la reflexión y convivencia social, promoviendo el desarrollo humano y académico de las alumnas, con el propósito de que logren la permanencia y culminación del programa de estudios.
+
+El Centro Educativo El Salto se preocupa por dar un seguimiento continuo y permanente a las alumnas desde su ingreso hasta el egreso del programa educativo con el fin de poder cumplir con las metas y objetivos establecidos, a través de un acompañamiento continuo y permanente que abarque tanto el aspecto académico como el desarrollo integral de las alumnas. 
+
+Ofrecerá la carrera Técnico Superior Universitario en Hotelería, modalidad escolarizada, con duración de dos años, divididos en seis cuatrimestres, con capacidad para atender a 25 alumnas por cohorte generacional.
+De acuerdo a la naturaleza de del plan de estudios se brindará la modalidad de tutoría individual y personalizada. ","Base de datos
+La institución cuenta con una propuesta de base de datos para emitir reportes estadísticos de titulación por cohorte generacional, misma que se encuentra como anexo en el presente documento y se menciona en el Reglamento Institucional (capítulo II, “De la titulación de alumnos”, página 21).
+
+Para la institución educativa es muy importante que las alumnas terminen en tiempo y forma el programa educativo, por lo que les proporcionaremos las herramientas necesarias para lograr la eficiencia terminal. Es por lo que desarrollamos el presente Programa de Seguimiento a la Trayectoria Educativa y Tutoría de los Estudiantes.
+
+Se anexan en el documento de formatos establecidos.
+Se anexa el Reglamento Institucional en en los anexos.","
+Objetivo general:
+
+Apoyar a las estudiantes del Centro Educativo El Salto en su trayecto educativo, a través de la implementación de acciones y estrategias   para que estén en condiciones de conseguir el máximo aprovechamiento académico, así como satisfacer sus necesidades de desarrollo personal y social y de esta manera promover su autonomía y formación integral.
+
+Resolver problemas relacionados con la deserción, el rezago y el abandono de los estudios y de mejorar la eficiencia terminal, a través de un acompañamiento individual a lo largo de la trayectoria educativa, para atender puntualmente problemas específicos.
+
+Objetivos específicos:
+
+Orientar individualmente a las alumnas del centro educativo, en aspectos relacionados con su trayectoria educativa, así como lo relacionado a trámites administrativos, orientación psicológica y su desarrollo social dentro y fuera de la institución a través de las tutorías para guiar a las alumnas en las necesidades que pudieran tener.
+
+Promover el desarrollo de las capacidades y habilidades del estudiante    acorde con sus aptitudes, intereses, expectativas y recursos económicos, mediante al apoyo en su caminar coherente con el programa de estudios, a fin de potenciar las mismas.
+
+Potenciar el desarrollo de los tutorados a través de una atención integral adecuada y oportuna a fin de alcanzar el perfil profesional requerido.
+
+Contribuir a elevar la calidad del proceso educativo, brindando orientación académica complementaria, promoviendo el desarrollo de actitudes y habilidades, con el fin de mejorar su desempeño, mejorando los indicadores de retención, aprobación y egreso.
+
+Reforzar su autoestima, favoreciendo una mayor motivación y desarrollo de habilidades (comprensión, análisis, clasificación, síntesis, argumentación, evaluación, experimentación y organización), para poder encontrar soluciones a los problemas que se le presenten.
+
+Función tutorial académica:
+
+Es el acompañamiento que se les dará a las alumnas desde que ingresan hasta que concluyen sus estudios en el Centro Educativo el Salto; tiene como objetivo mejorar el rendimiento académico, tener buenos hábitos de estudio y evitar la reprobación, rezago o abandono de los estudios.
+
+Promueve el desarrollo de las competencias necesarias que requiere la carrera Técnico Superior Universitario en Hotelería, apoyando a las alumnas en su trayecto educativo, acorde a sus aptitudes, intereses y expectativas.
+Esta tutoría se hará de manera individual. Al inicio del ciclo escolar se le asignará a cada alumna un tutor y se trazará el Plan de Acción Tutorial con el cual se va a trabajar. La tutoría se hará dentro de la institución en un horario previamente asignado, fuera de su horario de clases.
+
+Función tutorial psicológica:
+
+Atiende los problemas emocionales y psicológicos que pudieran tener las alumnas a lo largo de su trayectoria educativa y que condicionen su desempeño académico y social. Refuerza su autoestima y seguridad personal y la ayuda a incentivar su capacidad de pensar, criticar, analizar, sintetizar y encontrar soluciones a los problemas o dificultades que se le presenten.
+
+En caso de ser necesario, las alumnas que lo requieran serán canalizadas con profesionales de la Universidad Panamericana con quien tenemos un convenio de colaboración. 
+
+El procedimiento para llevar a cabo lo anterior se hará de la siguiente manera:
+
+Si el tutor detecta algún problema emocional o alguna situación especial que crea que necesita atención especializada, lo reportará a la dirección. Una vez que la dirección analiza la situación y cree que se necesita un apoyo externo, canaliza a la alumna con expertos de la Universidad Panamericana Campus Aguascalientes para la atención de la alumna.
+
+Función tutorial social:
+
+Se refiere a privilegiar un ambiente de respeto y cordialidad entre la comunidad educativa, es decir, alumnas, docentes, personal de la institución y padres de familia, respetando las normas establecidas para evitar posibles conflictos y crear un ambiente seguro para evitar factores que afecten la integridad física o psicológica de las alumnas.
+
+Se refiere también a la participación y formación ciudadana, así como a tener hábitos de vida saludables. Es crear un clima armónico de trabajo en la que todos trabajan en equipo para lograrlo.
+
+Función tutorial administrativa:
+
+Orienta y verifica que las estudiantes realicen los trámites administrativos correctamente y hace recomendaciones específicas cuando sea necesario; estos trámites pueden ser: proceso de inscripción, trámite de becas, servicio social entre otros. También asesora sobre la elección de sus experiencias educativas.
+Ésta función tutorial la realiza el área de control escolar y la orientación sobre las experiencias educativas la hará el tutor directamente.
+
+Función tutorial con los padres de familia:
+
+Orienta a las familias en todo lo referente a las alumnas dentro del centro educativo, esto es, programa de estudios, reglamento, conducta, aprovechamiento, entre otros, a través de asambleas mensuales con cada uno de ellos y mediante reuniones de padres de familia en las que se tratarán temas de interés que les puedan ayudar a mejorar ciertos aspectos con sus hijas, para que de esta manera puedan tener un mejor rendimiento escolar.
+
+Así mismo ésta función tutorial pretende mejorar la comunicación entre la familia, docentes, tutores y demás personal de la institución, tratando de que las relaciones entre todos los implicados sean fluidas y positivas. 
+
+
+
+
+Objetivo general:
+
+Apoyar a las estudiantes del Centro Educativo El Salto en su trayecto educativo, a través de la implementación de acciones y estrategias   para que estén en condiciones de conseguir el máximo aprovechamiento académico, así como satisfacer sus necesidades de desarrollo personal y social y de esta manera promover su autonomía y formación integral.
+
+Resolver problemas relacionados con la deserción, el rezago y el abandono de los estudios y de mejorar la eficiencia terminal, a través de un acompañamiento individual a lo largo de la trayectoria educativa, para atender puntualmente problemas específicos.
+
+Objetivos específicos:
+
+Orientar individualmente a las alumnas del centro educativo, en aspectos relacionados con su trayectoria educativa, así como lo relacionado a trámites administrativos, orientación psicológica y su desarrollo social dentro y fuera de la institución a través de las tutorías para guiar a las alumnas en las necesidades que pudieran tener.
+
+Promover el desarrollo de las capacidades y habilidades del estudiante    acorde con sus aptitudes, intereses, expectativas y recursos económicos, mediante al apoyo en su caminar coherente con el programa de estudios, a fin de potenciar las mismas.
+
+Potenciar el desarrollo de los tutorados a través de una atención integral adecuada y oportuna a fin de alcanzar el perfil profesional requerido.
+
+Contribuir a elevar la calidad del proceso educativo, brindando orientación académica complementaria, promoviendo el desarrollo de actitudes y habilidades, con el fin de mejorar su desempeño, mejorando los indicadores de retención, aprobación y egreso.
+
+Reforzar su autoestima, favoreciendo una mayor motivación y desarrollo de habilidades (comprensión, análisis, clasificación, síntesis, argumentación, evaluación, experimentación y organización), para poder encontrar soluciones a los problemas que se le presenten.
+
+Función tutorial académica:
+
+Es el acompañamiento que se les dará a las alumnas desde que ingresan hasta que concluyen sus estudios en el Centro Educativo el Salto; tiene como objetivo mejorar el rendimiento académico, tener buenos hábitos de estudio y evitar la reprobación, rezago o abandono de los estudios.
+
+Promueve el desarrollo de las competencias necesarias que requiere la carrera Técnico Superior Universitario en Hotelería, apoyando a las alumnas en su trayecto educativo, acorde a sus aptitudes, intereses y expectativas.
+Esta tutoría se hará de manera individual. Al inicio del ciclo escolar se le asignará a cada alumna un tutor y se trazará el Plan de Acción Tutorial con el cual se va a trabajar. La tutoría se hará dentro de la institución en un horario previamente asignado, fuera de su horario de clases.
+
+Función tutorial psicológica:
+
+Atiende los problemas emocionales y psicológicos que pudieran tener las alumnas a lo largo de su trayectoria educativa y que condicionen su desempeño académico y social. Refuerza su autoestima y seguridad personal y la ayuda a incentivar su capacidad de pensar, criticar, analizar, sintetizar y encontrar soluciones a los problemas o dificultades que se le presenten.
+
+En caso de ser necesario, las alumnas que lo requieran serán canalizadas con profesionales de la Universidad Panamericana con quien tenemos un convenio de colaboración. 
+
+El procedimiento para llevar a cabo lo anterior se hará de la siguiente manera:
+
+Si el tutor detecta algún problema emocional o alguna situación especial que crea que necesita atención especializada, lo reportará a la dirección. Una vez que la dirección analiza la situación y cree que se necesita un apoyo externo, canaliza a la alumna con expertos de la Universidad Panamericana Campus Aguascalientes para la atención de la alumna.
+
+Función tutorial social:
+
+Se refiere a privilegiar un ambiente de respeto y cordialidad entre la comunidad educativa, es decir, alumnas, docentes, personal de la institución y padres de familia, respetando las normas establecidas para evitar posibles conflictos y crear un ambiente seguro para evitar factores que afecten la integridad física o psicológica de las alumnas.
+
+Se refiere también a la participación y formación ciudadana, así como a tener hábitos de vida saludables. Es crear un clima armónico de trabajo en la que todos trabajan en equipo para lograrlo.
+
+Función tutorial administrativa:
+
+Orienta y verifica que las estudiantes realicen los trámites administrativos correctamente y hace recomendaciones específicas cuando sea necesario; estos trámites pueden ser: proceso de inscripción, trámite de becas, servicio social entre otros. También asesora sobre la elección de sus experiencias educativas.
+Ésta función tutorial la realiza el área de control escolar y la orientación sobre las experiencias educativas la hará el tutor directamente.
+
+Función tutorial con los padres de familia:
+
+Orienta a las familias en todo lo referente a las alumnas dentro del centro educativo, esto es, programa de estudios, reglamento, conducta, aprovechamiento, entre otros, a través de asambleas mensuales con cada uno de ellos y mediante reuniones de padres de familia en las que se tratarán temas de interés que les puedan ayudar a mejorar ciertos aspectos con sus hijas, para que de esta manera puedan tener un mejor rendimiento escolar.
+
+Así mismo ésta función tutorial pretende mejorar la comunicación entre la familia, docentes, tutores y demás personal de la institución, tratando de que las relaciones entre todos los implicados sean fluidas y positivas. ","Según lo establecido dentro de nuestro Reglamento Institucional (capítulo II, “De la titulación de alumnos”, página 19-21), las modalidades de titulación serán las siguientes:
+
+1.	Desempeño académico sobresaliente, a partir de un promedio de 9.5.
+2.	Exámenes. Puede ser escrito u oral, o ambos.
+3.	Tesis.
+
+
+Tiempo aproximado de titulación. 
+Según lo establecido en el Reglamento Institucional (capítulo II, “De la titulación de alumnos”, página 21), se maneja de la siguiente manera:
+1.	Desempeño académico sobresaliente: 6 meses.
+2.	Exámenes: 6 meses
+3.	Tesis: 6 meses.
+
+Cabe mencionar que lo anterior dependerá de los tiempos de validación de documentos por parte de la SICYT.","Tiempo mínimo y máximo para concluir el plan de estudios.
+Ofreceremos la carrera Técnico Superior Universitario en Hotelería, modalidad escolarizada, curriculum no flexible, periodo cuatrimestral, con 14 semanas de duración aproximado por cuatrimestre. Por lo que el tiempo mínimo y máximo para concluir el plan de estudios es de dos años.
+
+Tiempo aproximado de titulación
+Según lo establecido en el Reglamento Institucional (capítulo II, “De la titulación de alumnos”, página 21), será de 6 meses aproximadamente, dependiendo de la modalidad de titulación seleccionada por las alumnas.",2024-07-30 18:06:55,2024-07-30 18:07:55,
+2,10,"El Centro Educativo El Salto se preocupa por dar un seguimiento continuo y permanente a las alumnas desde su ingreso hasta el egreso del programa educativo con el fin de poder cumplir con las metas y objetivos establecidos, a través de un acompañamiento continuo y permanente que abarque tanto el aspecto académico como el desarrollo integral de las alumnas. 
+
+Se ofrecerá la carrera Técnico Superior Universitario en Hotelería, modalidad escolarizada, con duración de dos años, divididos en seis cuatrimestres, con capacidad para atender a 25 alumnas por cohorte generacional.
+De acuerdo a la naturaleza del plan de estudios se brindará la modalidad de tutoría individual y personalizada. 
+
+La tutoría se llevará mediante un acompañamiento de tipo personal que el tutor realizará a lo largo del proceso formativo de la alumna, para ayudarla a mejorar su rendimiento académico, solucionar problemas dentro de la institución, desarrollar hábitos de estudio, espacios para la reflexión y convivencia social, promoviendo el desarrollo humano y académico de las alumnas, con el propósito de que logren la permanencia y culminación del programa de estudios
+
+Objetivo general:
+
+Apoyar a las estudiantes del Centro Educativo El Salto en su trayecto educativo, a través de la implementación de acciones y estrategias específicas   para que estén en condiciones de conseguir el máximo aprovechamiento así como satisfacer sus necesidades de desarrollo personal y social y de esta manera promover su autonomía y formación integral, así como mejorar la eficiencia terminal a través de un acompañamiento individual a lo largo de la trayectoria educativa, para atender puntualmente problemas específicos.
+
+Objetivos específicos:
+
+Orientar individualmente a las alumnas del centro educativo, en aspectos relacionados con su trayectoria educativa, así como lo relacionado a trámites administrativos, orientación psicológica y su desarrollo social dentro y fuera de la institución a través de las tutorías para guiar a las alumnas en las necesidades que pudieran tener.
+
+Promover el desarrollo de las capacidades y habilidades del estudiante    acorde con sus aptitudes, intereses, expectativas y recursos económicos, mediante al apoyo en su caminar coherente con el programa de estudios, a fin de potenciar las mismas.
+
+Potenciar el desarrollo de los tutorados a través de una atención integral adecuada y oportuna a fin de alcanzar el perfil profesional requerido.
+
+Contribuir a elevar la calidad del proceso educativo, brindando orientación académica complementaria, promoviendo el desarrollo de actitudes y habilidades, con el fin de mejorar su desempeño, mejorando los indicadores de retención, aprobación y egreso.
+
+Reforzar su autoestima, favoreciendo una mayor motivación y desarrollo de habilidades (comprensión, análisis, clasificación, síntesis, argumentación, evaluación, experimentación y organización), para poder encontrar soluciones a los problemas que se le presenten.","La tutoría se llevará mediante un acompañamiento de tipo personal que el tutor realizará a lo largo del proceso formativo de la alumna, para ayudarla a mejorar su rendimiento académico, solucionar problemas dentro de la institución, desarrollar hábitos de estudio, espacios para la reflexión y convivencia social, promoviendo el desarrollo humano y académico de las alumnas, con el propósito de que logren la permanencia y culminación del programa de estudios.
+
+El Centro Educativo El Salto se preocupa por dar un seguimiento continuo y permanente a las alumnas desde su ingreso hasta el egreso del programa educativo con el fin de poder cumplir con las metas y objetivos establecidos, a través de un acompañamiento continuo y permanente que abarque tanto el aspecto académico como el desarrollo integral de las alumnas. 
+
+Ofrecerá la carrera Técnico Superior Universitario en Hotelería, modalidad escolarizada, con duración de dos años, divididos en seis cuatrimestres, con capacidad para atender a 25 alumnas por cohorte generacional.
+De acuerdo a la naturaleza de del plan de estudios se brindará la modalidad de tutoría individual y personalizada. ","Base de datos
+La institución cuenta con una propuesta de base de datos para emitir reportes estadísticos de titulación por cohorte generacional, misma que se encuentra como anexo en el presente documento y se menciona en el Reglamento Institucional (capítulo II, “De la titulación de alumnos”, página 21).
+
+Para la institución educativa es muy importante que las alumnas terminen en tiempo y forma el programa educativo, por lo que les proporcionaremos las herramientas necesarias para lograr la eficiencia terminal. Es por lo que desarrollamos el presente Programa de Seguimiento a la Trayectoria Educativa y Tutoría de los Estudiantes.
+
+Se anexan en el documento de formatos establecidos.
+Se anexa el Reglamento Institucional en en los anexos.","
+Objetivo general:
+
+Apoyar a las estudiantes del Centro Educativo El Salto en su trayecto educativo, a través de la implementación de acciones y estrategias   para que estén en condiciones de conseguir el máximo aprovechamiento académico, así como satisfacer sus necesidades de desarrollo personal y social y de esta manera promover su autonomía y formación integral.
+
+Resolver problemas relacionados con la deserción, el rezago y el abandono de los estudios y de mejorar la eficiencia terminal, a través de un acompañamiento individual a lo largo de la trayectoria educativa, para atender puntualmente problemas específicos.
+
+Objetivos específicos:
+
+Orientar individualmente a las alumnas del centro educativo, en aspectos relacionados con su trayectoria educativa, así como lo relacionado a trámites administrativos, orientación psicológica y su desarrollo social dentro y fuera de la institución a través de las tutorías para guiar a las alumnas en las necesidades que pudieran tener.
+
+Promover el desarrollo de las capacidades y habilidades del estudiante    acorde con sus aptitudes, intereses, expectativas y recursos económicos, mediante al apoyo en su caminar coherente con el programa de estudios, a fin de potenciar las mismas.
+
+Potenciar el desarrollo de los tutorados a través de una atención integral adecuada y oportuna a fin de alcanzar el perfil profesional requerido.
+
+Contribuir a elevar la calidad del proceso educativo, brindando orientación académica complementaria, promoviendo el desarrollo de actitudes y habilidades, con el fin de mejorar su desempeño, mejorando los indicadores de retención, aprobación y egreso.
+
+Reforzar su autoestima, favoreciendo una mayor motivación y desarrollo de habilidades (comprensión, análisis, clasificación, síntesis, argumentación, evaluación, experimentación y organización), para poder encontrar soluciones a los problemas que se le presenten.
+
+Función tutorial académica:
+
+Es el acompañamiento que se les dará a las alumnas desde que ingresan hasta que concluyen sus estudios en el Centro Educativo el Salto; tiene como objetivo mejorar el rendimiento académico, tener buenos hábitos de estudio y evitar la reprobación, rezago o abandono de los estudios.
+
+Promueve el desarrollo de las competencias necesarias que requiere la carrera Técnico Superior Universitario en Hotelería, apoyando a las alumnas en su trayecto educativo, acorde a sus aptitudes, intereses y expectativas.
+Esta tutoría se hará de manera individual. Al inicio del ciclo escolar se le asignará a cada alumna un tutor y se trazará el Plan de Acción Tutorial con el cual se va a trabajar. La tutoría se hará dentro de la institución en un horario previamente asignado, fuera de su horario de clases.
+
+Función tutorial psicológica:
+
+Atiende los problemas emocionales y psicológicos que pudieran tener las alumnas a lo largo de su trayectoria educativa y que condicionen su desempeño académico y social. Refuerza su autoestima y seguridad personal y la ayuda a incentivar su capacidad de pensar, criticar, analizar, sintetizar y encontrar soluciones a los problemas o dificultades que se le presenten.
+
+En caso de ser necesario, las alumnas que lo requieran serán canalizadas con profesionales de la Universidad Panamericana con quien tenemos un convenio de colaboración. 
+
+El procedimiento para llevar a cabo lo anterior se hará de la siguiente manera:
+
+Si el tutor detecta algún problema emocional o alguna situación especial que crea que necesita atención especializada, lo reportará a la dirección. Una vez que la dirección analiza la situación y cree que se necesita un apoyo externo, canaliza a la alumna con expertos de la Universidad Panamericana Campus Aguascalientes para la atención de la alumna.
+
+Función tutorial social:
+
+Se refiere a privilegiar un ambiente de respeto y cordialidad entre la comunidad educativa, es decir, alumnas, docentes, personal de la institución y padres de familia, respetando las normas establecidas para evitar posibles conflictos y crear un ambiente seguro para evitar factores que afecten la integridad física o psicológica de las alumnas.
+
+Se refiere también a la participación y formación ciudadana, así como a tener hábitos de vida saludables. Es crear un clima armónico de trabajo en la que todos trabajan en equipo para lograrlo.
+
+Función tutorial administrativa:
+
+Orienta y verifica que las estudiantes realicen los trámites administrativos correctamente y hace recomendaciones específicas cuando sea necesario; estos trámites pueden ser: proceso de inscripción, trámite de becas, servicio social entre otros. También asesora sobre la elección de sus experiencias educativas.
+Ésta función tutorial la realiza el área de control escolar y la orientación sobre las experiencias educativas la hará el tutor directamente.
+
+Función tutorial con los padres de familia:
+
+Orienta a las familias en todo lo referente a las alumnas dentro del centro educativo, esto es, programa de estudios, reglamento, conducta, aprovechamiento, entre otros, a través de asambleas mensuales con cada uno de ellos y mediante reuniones de padres de familia en las que se tratarán temas de interés que les puedan ayudar a mejorar ciertos aspectos con sus hijas, para que de esta manera puedan tener un mejor rendimiento escolar.
+
+Así mismo ésta función tutorial pretende mejorar la comunicación entre la familia, docentes, tutores y demás personal de la institución, tratando de que las relaciones entre todos los implicados sean fluidas y positivas. 
+
+
+
+
+Objetivo general:
+
+Apoyar a las estudiantes del Centro Educativo El Salto en su trayecto educativo, a través de la implementación de acciones y estrategias   para que estén en condiciones de conseguir el máximo aprovechamiento académico, así como satisfacer sus necesidades de desarrollo personal y social y de esta manera promover su autonomía y formación integral.
+
+Resolver problemas relacionados con la deserción, el rezago y el abandono de los estudios y de mejorar la eficiencia terminal, a través de un acompañamiento individual a lo largo de la trayectoria educativa, para atender puntualmente problemas específicos.
+
+Objetivos específicos:
+
+Orientar individualmente a las alumnas del centro educativo, en aspectos relacionados con su trayectoria educativa, así como lo relacionado a trámites administrativos, orientación psicológica y su desarrollo social dentro y fuera de la institución a través de las tutorías para guiar a las alumnas en las necesidades que pudieran tener.
+
+Promover el desarrollo de las capacidades y habilidades del estudiante    acorde con sus aptitudes, intereses, expectativas y recursos económicos, mediante al apoyo en su caminar coherente con el programa de estudios, a fin de potenciar las mismas.
+
+Potenciar el desarrollo de los tutorados a través de una atención integral adecuada y oportuna a fin de alcanzar el perfil profesional requerido.
+
+Contribuir a elevar la calidad del proceso educativo, brindando orientación académica complementaria, promoviendo el desarrollo de actitudes y habilidades, con el fin de mejorar su desempeño, mejorando los indicadores de retención, aprobación y egreso.
+
+Reforzar su autoestima, favoreciendo una mayor motivación y desarrollo de habilidades (comprensión, análisis, clasificación, síntesis, argumentación, evaluación, experimentación y organización), para poder encontrar soluciones a los problemas que se le presenten.
+
+Función tutorial académica:
+
+Es el acompañamiento que se les dará a las alumnas desde que ingresan hasta que concluyen sus estudios en el Centro Educativo el Salto; tiene como objetivo mejorar el rendimiento académico, tener buenos hábitos de estudio y evitar la reprobación, rezago o abandono de los estudios.
+
+Promueve el desarrollo de las competencias necesarias que requiere la carrera Técnico Superior Universitario en Hotelería, apoyando a las alumnas en su trayecto educativo, acorde a sus aptitudes, intereses y expectativas.
+Esta tutoría se hará de manera individual. Al inicio del ciclo escolar se le asignará a cada alumna un tutor y se trazará el Plan de Acción Tutorial con el cual se va a trabajar. La tutoría se hará dentro de la institución en un horario previamente asignado, fuera de su horario de clases.
+
+Función tutorial psicológica:
+
+Atiende los problemas emocionales y psicológicos que pudieran tener las alumnas a lo largo de su trayectoria educativa y que condicionen su desempeño académico y social. Refuerza su autoestima y seguridad personal y la ayuda a incentivar su capacidad de pensar, criticar, analizar, sintetizar y encontrar soluciones a los problemas o dificultades que se le presenten.
+
+En caso de ser necesario, las alumnas que lo requieran serán canalizadas con profesionales de la Universidad Panamericana con quien tenemos un convenio de colaboración. 
+
+El procedimiento para llevar a cabo lo anterior se hará de la siguiente manera:
+
+Si el tutor detecta algún problema emocional o alguna situación especial que crea que necesita atención especializada, lo reportará a la dirección. Una vez que la dirección analiza la situación y cree que se necesita un apoyo externo, canaliza a la alumna con expertos de la Universidad Panamericana Campus Aguascalientes para la atención de la alumna.
+
+Función tutorial social:
+
+Se refiere a privilegiar un ambiente de respeto y cordialidad entre la comunidad educativa, es decir, alumnas, docentes, personal de la institución y padres de familia, respetando las normas establecidas para evitar posibles conflictos y crear un ambiente seguro para evitar factores que afecten la integridad física o psicológica de las alumnas.
+
+Se refiere también a la participación y formación ciudadana, así como a tener hábitos de vida saludables. Es crear un clima armónico de trabajo en la que todos trabajan en equipo para lograrlo.
+
+Función tutorial administrativa:
+
+Orienta y verifica que las estudiantes realicen los trámites administrativos correctamente y hace recomendaciones específicas cuando sea necesario; estos trámites pueden ser: proceso de inscripción, trámite de becas, servicio social entre otros. También asesora sobre la elección de sus experiencias educativas.
+Ésta función tutorial la realiza el área de control escolar y la orientación sobre las experiencias educativas la hará el tutor directamente.
+
+Función tutorial con los padres de familia:
+
+Orienta a las familias en todo lo referente a las alumnas dentro del centro educativo, esto es, programa de estudios, reglamento, conducta, aprovechamiento, entre otros, a través de asambleas mensuales con cada uno de ellos y mediante reuniones de padres de familia en las que se tratarán temas de interés que les puedan ayudar a mejorar ciertos aspectos con sus hijas, para que de esta manera puedan tener un mejor rendimiento escolar.
+
+Así mismo ésta función tutorial pretende mejorar la comunicación entre la familia, docentes, tutores y demás personal de la institución, tratando de que las relaciones entre todos los implicados sean fluidas y positivas. ","Según lo establecido dentro de nuestro Reglamento Institucional (capítulo II, “De la titulación de alumnos”, página 19-21), las modalidades de titulación serán las siguientes:
+
+1.	Desempeño académico sobresaliente, a partir de un promedio de 9.5.
+2.	Exámenes. Puede ser escrito u oral, o ambos.
+3.	Tesis.
+
+
+Tiempo aproximado de titulación. 
+Según lo establecido en el Reglamento Institucional (capítulo II, “De la titulación de alumnos”, página 21), se maneja de la siguiente manera:
+1.	Desempeño académico sobresaliente: 6 meses.
+2.	Exámenes: 6 meses
+3.	Tesis: 6 meses.
+
+Cabe mencionar que lo anterior dependerá de los tiempos de validación de documentos por parte de la SICYT.","Tiempo mínimo y máximo para concluir el plan de estudios.
+Ofreceremos la carrera Técnico Superior Universitario en Hotelería, modalidad escolarizada, curriculum no flexible, periodo cuatrimestral, con 14 semanas de duración aproximado por cuatrimestre. Por lo que el tiempo mínimo y máximo para concluir el plan de estudios es de dos años.
+
+Tiempo aproximado de titulación
+Según lo establecido en el Reglamento Institucional (capítulo II, “De la titulación de alumnos”, página 21), será de 6 meses aproximadamente, dependiendo de la modalidad de titulación seleccionada por las alumnas.",2024-07-31 18:47:15,,
+3,11,"El Centro Educativo El Salto se preocupa por dar un seguimiento continuo y permanente a las alumnas desde su ingreso hasta el egreso del programa educativo con el fin de poder cumplir con las metas y objetivos establecidos, a través de un acompañamiento continuo y permanente que abarque tanto el aspecto académico como el desarrollo integral de las alumnas. 
+
+Se ofrecerá la carrera Técnico Superior Universitario en Hotelería, modalidad escolarizada, con duración de dos años, divididos en seis cuatrimestres, con capacidad para atender a 25 alumnas por cohorte generacional.
+De acuerdo a la naturaleza del plan de estudios se brindará la modalidad de tutoría individual y personalizada. 
+
+La tutoría se llevará mediante un acompañamiento de tipo personal que el tutor realizará a lo largo del proceso formativo de la alumna, para ayudarla a mejorar su rendimiento académico, solucionar problemas dentro de la institución, desarrollar hábitos de estudio, espacios para la reflexión y convivencia social, promoviendo el desarrollo humano y académico de las alumnas, con el propósito de que logren la permanencia y culminación del programa de estudios
+
+Objetivo general:
+
+Apoyar a las estudiantes del Centro Educativo El Salto en su trayecto educativo, a través de la implementación de acciones y estrategias específicas   para que estén en condiciones de conseguir el máximo aprovechamiento así como satisfacer sus necesidades de desarrollo personal y social y de esta manera promover su autonomía y formación integral, así como mejorar la eficiencia terminal a través de un acompañamiento individual a lo largo de la trayectoria educativa, para atender puntualmente problemas específicos.
+
+Objetivos específicos:
+
+Orientar individualmente a las alumnas del centro educativo, en aspectos relacionados con su trayectoria educativa, así como lo relacionado a trámites administrativos, orientación psicológica y su desarrollo social dentro y fuera de la institución a través de las tutorías para guiar a las alumnas en las necesidades que pudieran tener.
+
+Promover el desarrollo de las capacidades y habilidades del estudiante    acorde con sus aptitudes, intereses, expectativas y recursos económicos, mediante al apoyo en su caminar coherente con el programa de estudios, a fin de potenciar las mismas.
+
+Potenciar el desarrollo de los tutorados a través de una atención integral adecuada y oportuna a fin de alcanzar el perfil profesional requerido.
+
+Contribuir a elevar la calidad del proceso educativo, brindando orientación académica complementaria, promoviendo el desarrollo de actitudes y habilidades, con el fin de mejorar su desempeño, mejorando los indicadores de retención, aprobación y egreso.
+
+Reforzar su autoestima, favoreciendo una mayor motivación y desarrollo de habilidades (comprensión, análisis, clasificación, síntesis, argumentación, evaluación, experimentación y organización), para poder encontrar soluciones a los problemas que se le presenten.","La tutoría se llevará mediante un acompañamiento de tipo personal que el tutor realizará a lo largo del proceso formativo de la alumna, para ayudarla a mejorar su rendimiento académico, solucionar problemas dentro de la institución, desarrollar hábitos de estudio, espacios para la reflexión y convivencia social, promoviendo el desarrollo humano y académico de las alumnas, con el propósito de que logren la permanencia y culminación del programa de estudios.
+
+El Centro Educativo El Salto se preocupa por dar un seguimiento continuo y permanente a las alumnas desde su ingreso hasta el egreso del programa educativo con el fin de poder cumplir con las metas y objetivos establecidos, a través de un acompañamiento continuo y permanente que abarque tanto el aspecto académico como el desarrollo integral de las alumnas. 
+
+Ofrecerá la carrera Técnico Superior Universitario en Hotelería, modalidad escolarizada, con duración de dos años, divididos en seis cuatrimestres, con capacidad para atender a 25 alumnas por cohorte generacional.
+De acuerdo a la naturaleza de del plan de estudios se brindará la modalidad de tutoría individual y personalizada. ","Base de datos
+La institución cuenta con una propuesta de base de datos para emitir reportes estadísticos de titulación por cohorte generacional, misma que se encuentra como anexo en el presente documento y se menciona en el Reglamento Institucional (capítulo II, “De la titulación de alumnos”, página 21).
+
+Para la institución educativa es muy importante que las alumnas terminen en tiempo y forma el programa educativo, por lo que les proporcionaremos las herramientas necesarias para lograr la eficiencia terminal. Es por lo que desarrollamos el presente Programa de Seguimiento a la Trayectoria Educativa y Tutoría de los Estudiantes.
+
+Se anexan en el documento de formatos establecidos.
+Se anexa el Reglamento Institucional en en los anexos.","
+Objetivo general:
+
+Apoyar a las estudiantes del Centro Educativo El Salto en su trayecto educativo, a través de la implementación de acciones y estrategias   para que estén en condiciones de conseguir el máximo aprovechamiento académico, así como satisfacer sus necesidades de desarrollo personal y social y de esta manera promover su autonomía y formación integral.
+
+Resolver problemas relacionados con la deserción, el rezago y el abandono de los estudios y de mejorar la eficiencia terminal, a través de un acompañamiento individual a lo largo de la trayectoria educativa, para atender puntualmente problemas específicos.
+
+Objetivos específicos:
+
+Orientar individualmente a las alumnas del centro educativo, en aspectos relacionados con su trayectoria educativa, así como lo relacionado a trámites administrativos, orientación psicológica y su desarrollo social dentro y fuera de la institución a través de las tutorías para guiar a las alumnas en las necesidades que pudieran tener.
+
+Promover el desarrollo de las capacidades y habilidades del estudiante    acorde con sus aptitudes, intereses, expectativas y recursos económicos, mediante al apoyo en su caminar coherente con el programa de estudios, a fin de potenciar las mismas.
+
+Potenciar el desarrollo de los tutorados a través de una atención integral adecuada y oportuna a fin de alcanzar el perfil profesional requerido.
+
+Contribuir a elevar la calidad del proceso educativo, brindando orientación académica complementaria, promoviendo el desarrollo de actitudes y habilidades, con el fin de mejorar su desempeño, mejorando los indicadores de retención, aprobación y egreso.
+
+Reforzar su autoestima, favoreciendo una mayor motivación y desarrollo de habilidades (comprensión, análisis, clasificación, síntesis, argumentación, evaluación, experimentación y organización), para poder encontrar soluciones a los problemas que se le presenten.
+
+Función tutorial académica:
+
+Es el acompañamiento que se les dará a las alumnas desde que ingresan hasta que concluyen sus estudios en el Centro Educativo el Salto; tiene como objetivo mejorar el rendimiento académico, tener buenos hábitos de estudio y evitar la reprobación, rezago o abandono de los estudios.
+
+Promueve el desarrollo de las competencias necesarias que requiere la carrera Técnico Superior Universitario en Hotelería, apoyando a las alumnas en su trayecto educativo, acorde a sus aptitudes, intereses y expectativas.
+Esta tutoría se hará de manera individual. Al inicio del ciclo escolar se le asignará a cada alumna un tutor y se trazará el Plan de Acción Tutorial con el cual se va a trabajar. La tutoría se hará dentro de la institución en un horario previamente asignado, fuera de su horario de clases.
+
+Función tutorial psicológica:
+
+Atiende los problemas emocionales y psicológicos que pudieran tener las alumnas a lo largo de su trayectoria educativa y que condicionen su desempeño académico y social. Refuerza su autoestima y seguridad personal y la ayuda a incentivar su capacidad de pensar, criticar, analizar, sintetizar y encontrar soluciones a los problemas o dificultades que se le presenten.
+
+En caso de ser necesario, las alumnas que lo requieran serán canalizadas con profesionales de la Universidad Panamericana con quien tenemos un convenio de colaboración. 
+
+El procedimiento para llevar a cabo lo anterior se hará de la siguiente manera:
+
+Si el tutor detecta algún problema emocional o alguna situación especial que crea que necesita atención especializada, lo reportará a la dirección. Una vez que la dirección analiza la situación y cree que se necesita un apoyo externo, canaliza a la alumna con expertos de la Universidad Panamericana Campus Aguascalientes para la atención de la alumna.
+
+Función tutorial social:
+
+Se refiere a privilegiar un ambiente de respeto y cordialidad entre la comunidad educativa, es decir, alumnas, docentes, personal de la institución y padres de familia, respetando las normas establecidas para evitar posibles conflictos y crear un ambiente seguro para evitar factores que afecten la integridad física o psicológica de las alumnas.
+
+Se refiere también a la participación y formación ciudadana, así como a tener hábitos de vida saludables. Es crear un clima armónico de trabajo en la que todos trabajan en equipo para lograrlo.
+
+Función tutorial administrativa:
+
+Orienta y verifica que las estudiantes realicen los trámites administrativos correctamente y hace recomendaciones específicas cuando sea necesario; estos trámites pueden ser: proceso de inscripción, trámite de becas, servicio social entre otros. También asesora sobre la elección de sus experiencias educativas.
+Ésta función tutorial la realiza el área de control escolar y la orientación sobre las experiencias educativas la hará el tutor directamente.
+
+Función tutorial con los padres de familia:
+
+Orienta a las familias en todo lo referente a las alumnas dentro del centro educativo, esto es, programa de estudios, reglamento, conducta, aprovechamiento, entre otros, a través de asambleas mensuales con cada uno de ellos y mediante reuniones de padres de familia en las que se tratarán temas de interés que les puedan ayudar a mejorar ciertos aspectos con sus hijas, para que de esta manera puedan tener un mejor rendimiento escolar.
+
+Así mismo ésta función tutorial pretende mejorar la comunicación entre la familia, docentes, tutores y demás personal de la institución, tratando de que las relaciones entre todos los implicados sean fluidas y positivas. 
+
+
+
+
+Objetivo general:
+
+Apoyar a las estudiantes del Centro Educativo El Salto en su trayecto educativo, a través de la implementación de acciones y estrategias   para que estén en condiciones de conseguir el máximo aprovechamiento académico, así como satisfacer sus necesidades de desarrollo personal y social y de esta manera promover su autonomía y formación integral.
+
+Resolver problemas relacionados con la deserción, el rezago y el abandono de los estudios y de mejorar la eficiencia terminal, a través de un acompañamiento individual a lo largo de la trayectoria educativa, para atender puntualmente problemas específicos.
+
+Objetivos específicos:
+
+Orientar individualmente a las alumnas del centro educativo, en aspectos relacionados con su trayectoria educativa, así como lo relacionado a trámites administrativos, orientación psicológica y su desarrollo social dentro y fuera de la institución a través de las tutorías para guiar a las alumnas en las necesidades que pudieran tener.
+
+Promover el desarrollo de las capacidades y habilidades del estudiante    acorde con sus aptitudes, intereses, expectativas y recursos económicos, mediante al apoyo en su caminar coherente con el programa de estudios, a fin de potenciar las mismas.
+
+Potenciar el desarrollo de los tutorados a través de una atención integral adecuada y oportuna a fin de alcanzar el perfil profesional requerido.
+
+Contribuir a elevar la calidad del proceso educativo, brindando orientación académica complementaria, promoviendo el desarrollo de actitudes y habilidades, con el fin de mejorar su desempeño, mejorando los indicadores de retención, aprobación y egreso.
+
+Reforzar su autoestima, favoreciendo una mayor motivación y desarrollo de habilidades (comprensión, análisis, clasificación, síntesis, argumentación, evaluación, experimentación y organización), para poder encontrar soluciones a los problemas que se le presenten.
+
+Función tutorial académica:
+
+Es el acompañamiento que se les dará a las alumnas desde que ingresan hasta que concluyen sus estudios en el Centro Educativo el Salto; tiene como objetivo mejorar el rendimiento académico, tener buenos hábitos de estudio y evitar la reprobación, rezago o abandono de los estudios.
+
+Promueve el desarrollo de las competencias necesarias que requiere la carrera Técnico Superior Universitario en Hotelería, apoyando a las alumnas en su trayecto educativo, acorde a sus aptitudes, intereses y expectativas.
+Esta tutoría se hará de manera individual. Al inicio del ciclo escolar se le asignará a cada alumna un tutor y se trazará el Plan de Acción Tutorial con el cual se va a trabajar. La tutoría se hará dentro de la institución en un horario previamente asignado, fuera de su horario de clases.
+
+Función tutorial psicológica:
+
+Atiende los problemas emocionales y psicológicos que pudieran tener las alumnas a lo largo de su trayectoria educativa y que condicionen su desempeño académico y social. Refuerza su autoestima y seguridad personal y la ayuda a incentivar su capacidad de pensar, criticar, analizar, sintetizar y encontrar soluciones a los problemas o dificultades que se le presenten.
+
+En caso de ser necesario, las alumnas que lo requieran serán canalizadas con profesionales de la Universidad Panamericana con quien tenemos un convenio de colaboración. 
+
+El procedimiento para llevar a cabo lo anterior se hará de la siguiente manera:
+
+Si el tutor detecta algún problema emocional o alguna situación especial que crea que necesita atención especializada, lo reportará a la dirección. Una vez que la dirección analiza la situación y cree que se necesita un apoyo externo, canaliza a la alumna con expertos de la Universidad Panamericana Campus Aguascalientes para la atención de la alumna.
+
+Función tutorial social:
+
+Se refiere a privilegiar un ambiente de respeto y cordialidad entre la comunidad educativa, es decir, alumnas, docentes, personal de la institución y padres de familia, respetando las normas establecidas para evitar posibles conflictos y crear un ambiente seguro para evitar factores que afecten la integridad física o psicológica de las alumnas.
+
+Se refiere también a la participación y formación ciudadana, así como a tener hábitos de vida saludables. Es crear un clima armónico de trabajo en la que todos trabajan en equipo para lograrlo.
+
+Función tutorial administrativa:
+
+Orienta y verifica que las estudiantes realicen los trámites administrativos correctamente y hace recomendaciones específicas cuando sea necesario; estos trámites pueden ser: proceso de inscripción, trámite de becas, servicio social entre otros. También asesora sobre la elección de sus experiencias educativas.
+Ésta función tutorial la realiza el área de control escolar y la orientación sobre las experiencias educativas la hará el tutor directamente.
+
+Función tutorial con los padres de familia:
+
+Orienta a las familias en todo lo referente a las alumnas dentro del centro educativo, esto es, programa de estudios, reglamento, conducta, aprovechamiento, entre otros, a través de asambleas mensuales con cada uno de ellos y mediante reuniones de padres de familia en las que se tratarán temas de interés que les puedan ayudar a mejorar ciertos aspectos con sus hijas, para que de esta manera puedan tener un mejor rendimiento escolar.
+
+Así mismo ésta función tutorial pretende mejorar la comunicación entre la familia, docentes, tutores y demás personal de la institución, tratando de que las relaciones entre todos los implicados sean fluidas y positivas. ","Según lo establecido dentro de nuestro Reglamento Institucional (capítulo II, “De la titulación de alumnos”, página 19-21), las modalidades de titulación serán las siguientes:
+
+1.	Desempeño académico sobresaliente, a partir de un promedio de 9.5.
+2.	Exámenes. Puede ser escrito u oral, o ambos.
+3.	Tesis.
+
+
+Tiempo aproximado de titulación. 
+Según lo establecido en el Reglamento Institucional (capítulo II, “De la titulación de alumnos”, página 21), se maneja de la siguiente manera:
+1.	Desempeño académico sobresaliente: 6 meses.
+2.	Exámenes: 6 meses
+3.	Tesis: 6 meses.
+
+Cabe mencionar que lo anterior dependerá de los tiempos de validación de documentos por parte de la SICYT.","Tiempo mínimo y máximo para concluir el plan de estudios.
+Ofreceremos la carrera Técnico Superior Universitario en Hotelería, modalidad escolarizada, curriculum no flexible, periodo cuatrimestral, con 14 semanas de duración aproximado por cuatrimestre. Por lo que el tiempo mínimo y máximo para concluir el plan de estudios es de dos años.
+
+Tiempo aproximado de titulación
+Según lo establecido en el Reglamento Institucional (capítulo II, “De la titulación de alumnos”, página 21), será de 6 meses aproximadamente, dependiendo de la modalidad de titulación seleccionada por las alumnas.",2024-07-31 18:48:59,,

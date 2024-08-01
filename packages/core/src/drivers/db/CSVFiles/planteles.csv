@@ -1,5 +1,8 @@
-id,institucion_id,domicilio_id,tipo_inmueble_id,correo1,correo2,correo3,clave_centro_trabajo,telefono1,telefono2,telefono3,pagina_web,redes_sociales,created_at
-1,1,2,1,hector.cervantes@jalisco.gob.mx,sicyt@jalisco.gob.mx,,,,,,,,2022-09-07 22:41:31
-2,1,3,2,hector.cervantes@jalisco.gob.mx,sicyt@jalisco.gob.mx,,,,,,,,2022-09-07 22:46:08
-3,2,4,2,hector.cervantes@jalisco.gob.mx,sicyt@jalisco.gob.mx,,,,,,,,2022-09-27 2:05:43
-4,2,5,3,hector.cervantes@jalisco.gob.mx,sicyt@jalisco.gob.mx,,,,,,,,2022-09-27 18:25:50
+id,institucion_id,domicilio_id,tipo_inmueble_id,correo1,correo2,correo3,clave_centro_trabajo,telefono1,telefono2,telefono3,pagina_web,redes_sociales,especificaciones,dimensiones,created_at,updated_at,deleted_at
+1,1,2,1,hector.cervantes@jalisco.gob.mx,sicyt@jalisco.gob.mx,,,,,,,,,,2022-09-07 22:41:31,,
+2,1,3,2,hector.cervantes@jalisco.gob.mx,sicyt@jalisco.gob.mx,,,,,,,,,,2022-09-07 22:46:08,,
+3,2,4,2,hector.cervantes@jalisco.gob.mx,sicyt@jalisco.gob.mx,,,,,,,,,,2022-09-27 2:05:43,,
+4,2,5,3,hector.cervantes@jalisco.gob.mx,sicyt@jalisco.gob.mx,,,,,,,,,,2022-09-27 18:25:50,,
+5,4,7,1,joel.duran@jalisco.gob.mx,joel.duran@jalisco.gob.mx,joel.duran@jalisco.gob.mx,PSU1421212,3322114455,3322114455,3322114455,,,,1708.86,2024-07-29 22:01:45,2024-07-30 18:59:39,NULL
+6,4,8,1,joel.duran@jalisco.gob.mx,joel.duran@jalisco.gob.mx,joel.duran@jalisco.gob.mx,PSU143212312,3322114455,3322114455,3322114455,,,,,2024-07-29 22:04:22,,
+7,4,10,1,joel.duran@jalisco.gob.mx,joel.duran@jalisco.gob.mx,joel.duran@jalisco.gob.mx,SDT-12222,3322114455,3322114455,3322114455,,,,,2024-07-31 20:42:53,,

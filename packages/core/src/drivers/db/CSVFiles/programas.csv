@@ -1,9 +1,807 @@
-id,ciclo_id,nivel_id,solicitud_id,modalidad_id,plantel_id,duracion_periodos,objetivos,antecedentes,creditos,minimo_horas_optativas,minimo_creditos_optativas,vigencia,fecha_surte_efecto,acuerdo_rvoe,nombre,tipo,actualizacion,seguimiento_egresados,convenios_vinculacion,fuentes_informacion,estudio_oferta_demanda,lineas_generacion_aplicacion_conocimiento,necesidad_profesional,necesidad_institucional,necesidad_social,recursos_operacion,antecedente_academico,perfil_ingreso_conocimientos,perfil_ingreso_habilidades,perfil_ingreso_actitudes,perfil_egreso_conocimientos,perfil_egreso_habilidades,perfil_egreso_actitudes,metodos_induccion,proceso_seleccion,mapa_curricular,flexibilidad_curricular,objetivo_general,objetivos_particulares,calificacion_minima,calificacion_maxima,calificacion_aprobatoria,calificacion_decimal,created_at
-1,2,3,1,1,1,,,,,0,,2023-04-23 22:43:56,2023-04-23 22:43:56,,Derecho,0,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,1,2023-04-23 22:43:56
-2,2,2,2,1,1,,,,,0,,2023-04-23 22:43:56,2023-04-23 22:43:56,,Informática Administrativa,0,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,1,2023-04-23 22:44:32
-3,2,2,3,1,2,,,,,0,,2023-04-23 22:43:56,2023-04-23 22:43:56,,Lenguas,0,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,1,2023-04-23 22:45:12
-4,2,2,4,1,2,,,,,0,,2023-04-23 22:43:56,2023-04-23 22:43:56,,Administración,0,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,1,2023-04-23 22:45:29
-5,2,2,5,1,3,,,,,0,,2023-04-23 22:43:56,2023-04-23 22:43:56,,Turismo,0,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,1,2023-04-23 22:46:33
-6,2,2,6,1,3,,,,,0,,2023-04-23 22:43:56,2023-04-23 22:43:56,,Salud Publica,0,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,1,2023-04-23 22:48:09
-7,2,2,7,1,4,,,,,0,,2023-04-23 22:43:56,2023-04-23 22:43:56,,Ingeniería en Sistemas,0,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,1,2023-04-23 22:48:32
-8,2,2,8,1,4,,,,,0,,2023-04-23 22:43:56,2023-04-23 22:43:56,,Medicina,0,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,1,2023-04-23 22:48:38
+id,ciclo_id,nivel_id,solicitud_id,modalidad_id,plantel_id,duracion_periodos,objetivos,antecedentes,creditos,minimo_horas_optativas,minimo_creditos_optativas,vigencia,fecha_surte_efecto,acuerdo_rvoe,nombre,tipo,actualizacion,seguimiento_egresados,convenios_vinculacion,fuentes_informacion,estudio_oferta_demanda,lineas_generacion_aplicacion_conocimiento,necesidad_profesional,necesidad_institucional,necesidad_social,recursos_operacion,antecedente_academico,perfil_ingreso_conocimientos,perfil_ingreso_habilidades,perfil_ingreso_actitudes,perfil_egreso_conocimientos,perfil_egreso_habilidades,perfil_egreso_actitudes,metodos_induccion,proceso_seleccion,mapa_curricular,flexibilidad_curricular,objetivo_general,objetivos_particulares,calificacion_minima,calificacion_maxima,calificacion_aprobatoria,calificacion_decimal,created_at,updated_at,deleted_at
+1,2,3,1,1,1,,,,,0,,2023-04-23 22:43:56,2023-04-23 22:43:56,,Derecho,0,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,1,2023-04-23 22:43:56,,
+2,2,2,2,1,1,,,,,0,,2023-04-23 22:43:56,2023-04-23 22:43:56,,Informática Administrativa,0,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,1,2023-04-23 22:44:32,,
+3,2,2,3,1,2,,,,,0,,2023-04-23 22:43:56,2023-04-23 22:43:56,,Lenguas,0,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,1,2023-04-23 22:45:12,,
+4,2,2,4,1,2,,,,,0,,2023-04-23 22:43:56,2023-04-23 22:43:56,,Administración,0,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,1,2023-04-23 22:45:29,,
+5,2,2,5,1,3,,,,,0,,2023-04-23 22:43:56,2023-04-23 22:43:56,,Turismo,0,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,1,2023-04-23 22:46:33,,
+6,2,2,6,1,3,,,,,0,,2023-04-23 22:43:56,2023-04-23 22:43:56,,Salud Publica,0,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,1,2023-04-23 22:48:09,,
+7,2,2,7,1,4,,,,,0,,2023-04-23 22:43:56,2023-04-23 22:43:56,,Ingeniería en Sistemas,0,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,1,2023-04-23 22:48:32,,
+8,2,2,8,1,4,,,,,0,,2023-04-23 22:43:56,2023-04-23 22:43:56,,Medicina,0,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,1,2023-04-23 22:48:38,,
+9,2,3,9,1,5,6,,,190,,,,,,Hotelería,,"La institución educativa se preocupa por evaluar y actualizar el plan y programas de estudio, con el fin de priorizar y ordenar el proceso del aprendizaje con base a las necesidades y áreas de oportunidad que podamos detectar.
+En el contexto de asegurar la calidad de nuestra evaluación y actualización curricular, definiremos prácticas de control, mejoramiento y garantía de la calidad a los diversos componentes del plan y programas de estudio, mismas que se realizarán a través de nuestras academias, integradas por la coordinación académica, docentes y personal directivo de la Institución","Hoy en día los cambios económicos, tecnológicos, sociales y culturales que se viven en nuestro país, crean nuevos retos a las instituciones de educación superior; uno de éstos, es la evaluación constante del impacto que en la sociedad tienen los procesos académicos, por ello es preciso la generación de estrategias para conocer el impacto de su acción y al mismo tiempo, identificar nuevas demandas formativas en cada una de las prácticas profesionales, todo ello con la finalidad de responder a las necesidades sociales.
+
+Debe de existir una retroalimentación permanente de los planes de estudio de acuerdo a las nuevas exigencias del contexto social y laboral, para establecer un modelo de evaluación integral de la calidad de la educación.
+
+Así mismo, se debe proveer información amplia y objetiva a los docentes y directivos, fortaleciendo con ello el diseño y revisión de los planes y programas de estudio, así como la planeación académica con visión estratégica a largo plazo, así como establecer un modelo de evaluación integral de la calidad de la educación. 
+
+Todo ello permitirá contar con mejores indicadores, en función de las nuevas exigencias que plantean los ámbitos social y productivo de la región, el estado y el país.
+
+El Proyecto de Seguimiento a Egresados, tiene la finalidad de estrechar la vinculación entre el Centro Educativo El Salto y las alumnas egresadas para conocer los diferentes aspectos del proceso de transición de la institución al mercado laboral, haciendo un seguimiento cuantitativo y cualitativo de las graduadas y de las enseñanzas del programa educativo, para proporcionar información adecuada para la toma de decisiones, conservando siempre el contacto ágil y eficaz con las egresadas. 
+
+En este seguimiento estará involucrada toda la comunidad educativa, y será encabezado por la dirección junto con la coordinación académica. 
+Pretendemos realizarlo cada año, al finalizar el ciclo escolar; esto es para poder establecer una retroalimentación adecuada, para la toma de decisiones. 
+
+1.	Objetivo general
+
+Desarrollar un esquema básico para conocer la situación laboral, los factores de empleabilidad y la valoración de los conocimientos y competencias adquiridas en la Carrera Técnico Superior Universitario en Hotelería del Centro Educativo el Salto, desde el ámbito del empleo por parte de las alumnas graduadas, recabando información confiable y pertinente  sobre la ubicación y las actividades en que se desempeñan, el grado de satisfacción y el nivel de exigencia de los empleadores en el desempeño profesional de nuestras egresadas, lo que permitirá la toma de decisiones institucionales, y la actualización de los programas de estudio.
+
+2.	Objetivos específicos
+
+Contar con información confiable sobre el desempeño profesional de las egresadas y de su relación con los aciertos y posibles fallas en su formación, para enriquecer con ello la toma de decisiones, e implementar acciones que permitan superar el nivel académico del centro educativo.
+
+Comparar la congruencia entre los resultados obtenidos en el proceso educativo de nuestro programa de estudio y las necesidades y exigencias del campo profesional, a través del análisis del desempeño de las egresadas en el mercado laboral.
+
+Fortalecer la calidad académica del programa de estudios y proporcionar las competencias o habilidades pertinentes del egresado que el mercado laboral requiere.
+
+Conocer el grado de satisfacción de las egresadas respecto a la calidad de la formación recibida en la institución educativa, mediante encuestas de satisfacción y una retroalimentación pertinente, para poder identificar las áreas de mejora del programa de estudios.
+
+
+Describir la opinión de los empleadores sobre la actitud de nuestras egresadas frente a los retos cotidianos que enfrentan en el desempeño de sus actividades a través de reuniones con los empleadores para fortalecer la retroalimentación y trabajar en las áreas de mejora que se presenten.
+
+
+Fomentar y mantener la vinculación de la institución con sus egresadas por medio del proyecto de seguimiento de egresados para la obtención de beneficios conjuntos. 
+
+
+Consolidar los lazos de unión con las alumnas graduadas mediante actividades y convivencias que se tendrán programadas una vez que egresen de la institución, esto con el fin de reforzar su pertenencia a la institución y que difundan la importancia y trascendencia que tiene el Centro Educativo El Salto en la región.
+
+Establecer una bolsa de trabajo entre las egresadas y el grupo empresarial de la zona.
+
+Conocer la demanda del empleador a través de un acercamiento constante con ellos para fortalecer el profesionalismo del egresado. 
+
+Llevar el registro de las egresadas de nuestro centro educativo mediante una base de datos para evaluar la eficiencia terminal y dar seguimiento al proyecto de seguimiento de egresadas.
+
+Promover servicios de apoyo institucional, buscar la inserción de las egresadas al campo laboral, procurar la concertación, operación de convenios y programas encaminados al mejoramiento.
+
+3.	Metodología de seguimiento
+
+a)	Diagnóstico del egresado
+Para desarrollar de manera efectiva el diagnóstico de nuestras egresadas, tomaremos como instrumento de validación la encuesta.
+Esta encuesta se aplica a las alumnas que ya no están estudiando en nuestra institución.
+Los resultados de las mismas, nos permitirán obtener y actualizar nuestra base de datos para tomar decisiones con mayor eficacia y eficiencia.
+
+b)	Educación continua 
+Son las actividades dirigidas a alumnas y egresadas, a través de programas, cursos, talleres, conferencias y actualizaciones, con la finalidad de actualizar y profesionalizar su desempeño académico y laboral.
+
+c)	Base de datos
+El Centro Educativo El salto contará con una base de datos actualizada de nuestras egresadas, para estar en continuo contacto con ellas y para poderles hacer llegar información relevante; ésto se realizará a través de las redes sociales, correo electrónico y llamadas telefónicas.
+De la misma manera, contaremos con una base de datos de las empresas y establecimientos con los que tengamos algún convenio de colaboración.
+
+d)	Formación integral
+Buscamos complementar la formación profesional de nuestras egresadas con actividades para su desarrollo y poder fortalecer su calidad de vida y la de su comunidad.
+Para realizar lo anterior, se llevará a cabo lo siguiente:
+
+Un encuentro anual con nuestras egresadas, en donde podrán compartir sus experiencias laborales y sus expectativas de vida.
+
+Actividades deportivas, culturales, de integración y superación.
+
+e)	Bolsa de trabajo
+Tiene como objetivo la inserción de las egresadas al mercado profesional, así como detectar los requerimientos cualitativos de los empleadores, por lo que, a través de este servicio, nuestras egresadas pueden registrarse como candidatas para obtener una plaza laboral por empresas que previamente se registrarán con nosotros.
+Al momento que exista alguna vacante, se le informará al egresado registrado en nuestra base de datos.
+La difusión de la bolsa de trabajo se hará por medio de nuestras redes sociales y por visitas a las alumnas que cursan el último cuatrimestre.
+
+f)	Evaluación
+Se realizará una evaluación del programa de Seguimiento a Egresados del Centro Educativo El Salto de dos maneras:
+
+1.	A través de una encuesta de satisfacción que se les aplicará a las alumnas en las reuniones anuales que se van a tener con ellas como instrumento de evaluación y también se conocerán las sugerencias que puedan hacer para poder fortalecer el programa educativo.
+
+2.	A los empleadores también se les aplicará una encuesta a través de visitas que les realizaremos, con el fin de conocer el grado de satisfacción con las egresadas y conocer sus necesidades.
+
+Podemos concluir que, el hacer un seguimiento cuantitativo y cualitativo de nuestras egresadas, esto nos proporcionará información confiable y pertinente para la planeación y toma de decisiones institucionales para la mejor toma de decisiones y con esto fortalecer nuestro plan y programas de estudio.
+Es importante realizar un análisis y actualización constante de los programas de estudio, según el resultado de la evaluación de las encuestas que apliquemos entre otros indicadores","Las exigencias que actualmente demanda el desarrollo, han obligado a las Instituciones de Educación Superior (IES) a que busquen vínculos más estrechos con la sociedad en aspectos específicos que tienen relación con el desarrollo económico; tal es el caso de la búsqueda de enlaces con el sector productivo",,,"1.	Líneas de Generación y Aplicación del Conocimiento
+
+Conscientes de que la generación del conocimiento y su aplicación implican la concepción y estudio de metodologías para resolver problemas y contribuir al desarrollo socioeconómico, el Centro Educativo El Salto, ha estructurado algunas Líneas de Generación y Aplicación del Conocimiento (LGAC). ",,,,,Bachillerato,"
+Utiliza el lenguaje oral y escrito con claridad, fluidez y adecuadamente para interactuar en distintos contextos sociales.
+
+Reconoce y aprecia la diversidad lingüística del país.
+
+Emplea la argumentación y el razonamiento al analizar situaciones, identificar problemas, formular preguntas, emitir juicios y proponer diversas soluciones.
+
+Selecciona, analiza, evalúa y comparte información proveniente de diversas fuentes y aprovecha los recursos tecnológicos a su alcance para profundizar y ampliar sus aprendizajes de manera permanente.
+
+Emplea los conocimientos adquiridos a fin de interpretar y explicar los procesos   sociales, económicos y culturales, así como tomar decisiones y actuar tanto en lo individual como lo colectivo, en aras de promover la salud y cuidado del medio ambiente como   forma para mejorar la   calidad de vida.
+
+Conoce los derechos humanos y los valores que favorecen a la vida democrática, los pone en práctica al analizar situaciones y tomar decisiones con responsabilidad   y apego a la ley.
+
+Reconoce y valora distintas prácticas y procesos culturales a fin de contribuir y tener una convivencia respetuosa.
+
+Asume la interculturalidad con riqueza y forma de convivencia con la diversidad social, étnica, cultural y lingüística.
+
+Conoce y valora sus características y potencialidades como ser humano, se identifica como parte de un grupo y emprende proyectos personales; se esfuerza por lograr sus propósitos   y asume con responsabilidad las consecuencias de sus acciones.
+
+Aprecia y participa en diversas manifestaciones artísticas. Integra conocimientos y saberes    de las culturas como medio para conocer las ideas y los sentimientos de otros, así como para manifestar los propios.
+
+Se reconoce como ser competente con potencialidades físicas y cognitivas que le permiten mejorar su capacidad, favorece el estilo de vida activo y saludable, así como es capaz de interactuar en contextos lúdicos, recreativos y deportivos.","
+Capacidad de análisis, síntesis y de desarrollo.
+
+Hábitos de estudio y de trabajo.
+
+Aptitud para trabajar en equipo.
+
+Capacidad para relacionarse con personas de diferentes edades y circunstancias. 
+
+Facilidad de adaptación al cambio.
+
+Saber trabajar bajo presión.
+
+Habilidad para resolver problemas y enfrentar nuevos retos.
+
+Habilidad para la toma de decisiones.
+
+Comunicación oral y escrita.
+
+Autocrítica, autoevaluación y adaptación.
+
+Capacidad de escucha.
+
+Innovación y emprendimiento.","Responsabilidad.
+
+Profesionalidad al prestar sus servicios profesionales. 
+
+Vocación de servicio y sentido ético.
+
+Empatía y responsabilidad social.
+
+Aptitudes verbales y numéricas.
+
+Pensamiento crítico.
+
+Respeto por la dignidad de las personas, la diversidad cultural y la búsqueda del bien común.
+
+Hábitos de estudio, responsabilidad, disciplina y organización del tiempo.","Desarrollar habilidades para satisfacer las necesidades y preferencias del cliente mediante la atención y servicio.
+
+Manejar información de la empresa para promover sus servicios a través de estrategias de mercadotecnia. 
+
+Supervisar la administración de la recepción.
+
+
+Diseñar métodos de conteo físico de productos.
+
+Coordinar grupos de trabajo en línea.
+
+Proveer de los recursos necesarios para realizar tareas al grupo de trabajo.
+
+Capacitar al personal de reciente ingreso.
+
+Almacenar higiénicamente materias primas, alimentos y bebidas.
+
+Aplicar prácticas sanitarias para el servicio de alimentos y bebidas. 
+
+Verificar el funcionamiento y estado del equipo de cocina.
+
+Manejar la materia prima de manera adecuada y de forma higiénica. 
+
+Coordinar la elaboración de menús para distintos eventos.
+
+Verificar el sabor y la presentación de cada alimento preparado.
+
+Planificar los insumos necesarios para la limpieza de las instalaciones.
+
+Efectuar el proceso de limpieza de las habitaciones, respondiendo a las especificaciones de tratamiento década material presente en los muebles, blancos y superficies.
+
+Programar y supervisar los trabajos de limpieza de habitaciones y áreas de estancia para alojamiento temporal. 
+
+Preparar la estación y equipo de operación en servicio de especialidades para la atención del comensal.
+
+Supervisar al personal, instalaciones y equipo de operación para los servicios de alimentos y bebidas. 
+
+Supervisar la atención al comensal durante su estancia en el establecimiento.
+
+Preparar y operar los equipos e insumos para el lavado y planchado de blancos y otros textiles.","Lograr Incorporarse exitosamente al campo laboral gracias a las competencias y habilidades desarrolladas.
+
+Lograr Ejercer el liderazgo adecuado para desarrollar con éxito cada tarea a su cargo.
+
+Lograr Supervisar el funcionamiento de áreas de alimentos, bebidas y servicios de lavandería y textiles.
+
+Utilizar de forma calificada equipos industriales para la preparación, conservación y servicio de alimentos, para los servicios de lavandería y planchado y para el mantenimiento e higiene de las instalaciones.
+
+Emprender un negocio propio","Lograr un alto desempeño en empresas de servicio del campo de la hospitalidad.
+
+Realizar todas las acciones que emprenda con espíritu de servicio, profesionalismo y responsabilidad social. 
+Obtener resultados de excelencia al trabajar bajo presión.
+
+Aplicar la creatividad e iniciativa necesarias para encontrar alternativas de solución a problemas específicos
+","Curso de inducción para las alumnas, en las que se verán los siguientes aspectos:
+
+Inducción al sistema y metodología.
+Requisitos de admisión.
+contenido del plan y programa de estudios.
+Trámites de inscripción.
+Cuotas.
+Programa de becas.
+Material didáctico.
+Requisitos técnicos.
+Servicios de apoyo.
+Programa de tutorías
+Análisis del Reglamento Institucional.
+Exámenes.
+
+Curso propedéutico.
+
+Al inicio del cuatrimestre a las alumnas de nuevo ingreso se les proporcionará   un curso que permita realizar un diagnóstico, y nivelación académica en   general.","El proceso se realizará de la siguiente manera:
+
+Llenar una ficha con sus datos generales.
+
+Presentar un examen de conocimientos generales.
+
+Presentar un examen psicométrico.
+
+Presentar una prueba de inglés para evaluar su nivel.
+
+Realizar una entrevista con la dirección y coordinación académica del centro educativo para ampliar la información en cuanto al plan de estudios, así como para conocer sus expectativas, intereses y dudas que pudieran existir.
+
+Una vez realizado lo anterior, y habiendo aprobado los exámenes presentados, se prosigue con lo siguiente:
+
+Realizar el trámite de inscripción en el tiempo establecido para tal efecto.
+
+Presentar dentro de los plazos que fije la coordinación de servicios escolares, los documentos que se requieran, así como el pago correspondiente.
+
+Asistir a las entrevistas y al curso de inducción que la institución establezca.
+
+Curso de inducción
+
+Tiene como principal objetivo dar a conocer a las alumnas de nuevo ingreso, el Plan y Programa de Estudios a detalle, así como aspectos relacionados con el centro educativo tales como la misión, visión, valores institucionales, reglamento, instalaciones, tutorías, becas, servicios escolares y en general de todos los servicios que se ofrecen y así poder contribuir a la integración de las alumnas a la vida universitaria y favorecer la interacción social y familiar.
+
+Al finalizar el curso las alumnas:
+
+Conocerán los diferentes servicios, departamentos y actividades que brinda la institución para un mejor aprovechamiento de las mismas.
+
+Conocerán a sus compañeras y tutor, y realizarán actividades que favorezcan su integración al grupo y la institución.
+
+Contenido:
+
+La dirección del centro educativo da la bienvenida a las alumnas y hace la presentación de la Coordinación Académica de la institución.
+
+Descripción de la Función Tutorial.
+
+Explicación de las distintas áreas y sus funciones.
+
+Integración grupal.
+
+Revisión del reglamento.
+
+Recorrido por las instalaciones.
+
+Presentación de actividades deportivas, artísticas y culturales.
+
+Dentro del curso de inducción, hay una sesión especial con padres de familia, en la que se les explica la forma como se trabajará con ellos y con las alumnas durante la estancia en la institución.","La UNESCO afirma que la misión de la educación superior es: 
+Proveer de un sano entrenamiento tanto en las disciplinas especializadas como en las básicas, pero también una buena educación general, así como educar ciudadanos para una sociedad más abierta y justa basada en la solidaridad, el respeto por los derechos humanos y el uso compartido del conocimiento y la información en el contexto de la globalización y el cambio acelerado. ",Currículo no flexible,"Formar alumnas altamente capacitadas en la industria de la hotelería, hospitalidad y cualquier institución de servicios orientados a la  mejora de esta industria, con una visión empresarial,  a través de un plan de estudios basado en una sólida formación científica y humana, ofreciéndoles una educación integral en un marco de respeto por la dignidad de la persona, la responsabilidad social y el valor del trabajo y con una visión  basada en la ética, los valores, el conocimiento científico y el manejo de la tecnología, a través  de nuestros programas de estudio  y de proyectos  encaminados a la solución de problemas  y del desarrollo económico de su entorno, para que puedan desenvolverse exitosamente en cualquier industria de este sector, de manera eficiente y competitiva en puestos operativos, supervisión o emprendan un proyecto.","•	Desarrollar en el alumnado las competencias propias de las áreas de recepción, lavandería, ama de llaves, alimentos y bebidas a través de la práctica constante en los laboratorios y talleres, para que puedan desenvolverse con facilidad en cualquier puesto que desempeñen.
+
+•	Impartir educación de calidad a través de un programa de formación integral que provea a los educandos de los medios necesarios que contribuyan a su formación humana, espiritual, cultural y profesional.
+
+•	Proporcionar los conocimientos, habilidades, destrezas y actitudes necesarias, mediante una atención y seguimiento personalizado a través de un programa de tutorías previamente establecido al inicio del ciclo escolar, para que puedan desarrollarse profesionalmente en el ámbito que elijan, y   emprender proyectos productivos en el ramo de los alimentos y bebidas y en los servicios de hotelería y hospitalidad.
+
+•	Desarrollar un alto sentido de responsabilidad a través del trabajo en equipo y de constantes prácticas y actividades donde la alumna tome la función de líder, con la intención de que pueda desempeñar su actividad sin contratiempos.
+
+",,,,,2024-07-29 22:06:01,2024-07-31 18:39:12,
+10,2,3,10,1,5,6,,,190,,,,,,Hotelería,,"La institución educativa se preocupa por evaluar y actualizar el plan y programas de estudio, con el fin de priorizar y ordenar el proceso del aprendizaje con base a las necesidades y áreas de oportunidad que podamos detectar.
+En el contexto de asegurar la calidad de nuestra evaluación y actualización curricular, definiremos prácticas de control, mejoramiento y garantía de la calidad a los diversos componentes del plan y programas de estudio, mismas que se realizarán a través de nuestras academias, integradas por la coordinación académica, docentes y personal directivo de la Institución","Hoy en día los cambios económicos, tecnológicos, sociales y culturales que se viven en nuestro país, crean nuevos retos a las instituciones de educación superior; uno de éstos, es la evaluación constante del impacto que en la sociedad tienen los procesos académicos, por ello es preciso la generación de estrategias para conocer el impacto de su acción y al mismo tiempo, identificar nuevas demandas formativas en cada una de las prácticas profesionales, todo ello con la finalidad de responder a las necesidades sociales.
+
+Debe de existir una retroalimentación permanente de los planes de estudio de acuerdo a las nuevas exigencias del contexto social y laboral, para establecer un modelo de evaluación integral de la calidad de la educación.
+
+Así mismo, se debe proveer información amplia y objetiva a los docentes y directivos, fortaleciendo con ello el diseño y revisión de los planes y programas de estudio, así como la planeación académica con visión estratégica a largo plazo, así como establecer un modelo de evaluación integral de la calidad de la educación. 
+
+Todo ello permitirá contar con mejores indicadores, en función de las nuevas exigencias que plantean los ámbitos social y productivo de la región, el estado y el país.
+
+El Proyecto de Seguimiento a Egresados, tiene la finalidad de estrechar la vinculación entre el Centro Educativo El Salto y las alumnas egresadas para conocer los diferentes aspectos del proceso de transición de la institución al mercado laboral, haciendo un seguimiento cuantitativo y cualitativo de las graduadas y de las enseñanzas del programa educativo, para proporcionar información adecuada para la toma de decisiones, conservando siempre el contacto ágil y eficaz con las egresadas. 
+
+En este seguimiento estará involucrada toda la comunidad educativa, y será encabezado por la dirección junto con la coordinación académica. 
+Pretendemos realizarlo cada año, al finalizar el ciclo escolar; esto es para poder establecer una retroalimentación adecuada, para la toma de decisiones. 
+
+1.	Objetivo general
+
+Desarrollar un esquema básico para conocer la situación laboral, los factores de empleabilidad y la valoración de los conocimientos y competencias adquiridas en la Carrera Técnico Superior Universitario en Hotelería del Centro Educativo el Salto, desde el ámbito del empleo por parte de las alumnas graduadas, recabando información confiable y pertinente  sobre la ubicación y las actividades en que se desempeñan, el grado de satisfacción y el nivel de exigencia de los empleadores en el desempeño profesional de nuestras egresadas, lo que permitirá la toma de decisiones institucionales, y la actualización de los programas de estudio.
+
+2.	Objetivos específicos
+
+Contar con información confiable sobre el desempeño profesional de las egresadas y de su relación con los aciertos y posibles fallas en su formación, para enriquecer con ello la toma de decisiones, e implementar acciones que permitan superar el nivel académico del centro educativo.
+
+Comparar la congruencia entre los resultados obtenidos en el proceso educativo de nuestro programa de estudio y las necesidades y exigencias del campo profesional, a través del análisis del desempeño de las egresadas en el mercado laboral.
+
+Fortalecer la calidad académica del programa de estudios y proporcionar las competencias o habilidades pertinentes del egresado que el mercado laboral requiere.
+
+Conocer el grado de satisfacción de las egresadas respecto a la calidad de la formación recibida en la institución educativa, mediante encuestas de satisfacción y una retroalimentación pertinente, para poder identificar las áreas de mejora del programa de estudios.
+
+
+Describir la opinión de los empleadores sobre la actitud de nuestras egresadas frente a los retos cotidianos que enfrentan en el desempeño de sus actividades a través de reuniones con los empleadores para fortalecer la retroalimentación y trabajar en las áreas de mejora que se presenten.
+
+
+Fomentar y mantener la vinculación de la institución con sus egresadas por medio del proyecto de seguimiento de egresados para la obtención de beneficios conjuntos. 
+
+
+Consolidar los lazos de unión con las alumnas graduadas mediante actividades y convivencias que se tendrán programadas una vez que egresen de la institución, esto con el fin de reforzar su pertenencia a la institución y que difundan la importancia y trascendencia que tiene el Centro Educativo El Salto en la región.
+
+Establecer una bolsa de trabajo entre las egresadas y el grupo empresarial de la zona.
+
+Conocer la demanda del empleador a través de un acercamiento constante con ellos para fortalecer el profesionalismo del egresado. 
+
+Llevar el registro de las egresadas de nuestro centro educativo mediante una base de datos para evaluar la eficiencia terminal y dar seguimiento al proyecto de seguimiento de egresadas.
+
+Promover servicios de apoyo institucional, buscar la inserción de las egresadas al campo laboral, procurar la concertación, operación de convenios y programas encaminados al mejoramiento.
+
+3.	Metodología de seguimiento
+
+a)	Diagnóstico del egresado
+Para desarrollar de manera efectiva el diagnóstico de nuestras egresadas, tomaremos como instrumento de validación la encuesta.
+Esta encuesta se aplica a las alumnas que ya no están estudiando en nuestra institución.
+Los resultados de las mismas, nos permitirán obtener y actualizar nuestra base de datos para tomar decisiones con mayor eficacia y eficiencia.
+
+b)	Educación continua 
+Son las actividades dirigidas a alumnas y egresadas, a través de programas, cursos, talleres, conferencias y actualizaciones, con la finalidad de actualizar y profesionalizar su desempeño académico y laboral.
+
+c)	Base de datos
+El Centro Educativo El salto contará con una base de datos actualizada de nuestras egresadas, para estar en continuo contacto con ellas y para poderles hacer llegar información relevante; ésto se realizará a través de las redes sociales, correo electrónico y llamadas telefónicas.
+De la misma manera, contaremos con una base de datos de las empresas y establecimientos con los que tengamos algún convenio de colaboración.
+
+d)	Formación integral
+Buscamos complementar la formación profesional de nuestras egresadas con actividades para su desarrollo y poder fortalecer su calidad de vida y la de su comunidad.
+Para realizar lo anterior, se llevará a cabo lo siguiente:
+
+Un encuentro anual con nuestras egresadas, en donde podrán compartir sus experiencias laborales y sus expectativas de vida.
+
+Actividades deportivas, culturales, de integración y superación.
+
+e)	Bolsa de trabajo
+Tiene como objetivo la inserción de las egresadas al mercado profesional, así como detectar los requerimientos cualitativos de los empleadores, por lo que, a través de este servicio, nuestras egresadas pueden registrarse como candidatas para obtener una plaza laboral por empresas que previamente se registrarán con nosotros.
+Al momento que exista alguna vacante, se le informará al egresado registrado en nuestra base de datos.
+La difusión de la bolsa de trabajo se hará por medio de nuestras redes sociales y por visitas a las alumnas que cursan el último cuatrimestre.
+
+f)	Evaluación
+Se realizará una evaluación del programa de Seguimiento a Egresados del Centro Educativo El Salto de dos maneras:
+
+1.	A través de una encuesta de satisfacción que se les aplicará a las alumnas en las reuniones anuales que se van a tener con ellas como instrumento de evaluación y también se conocerán las sugerencias que puedan hacer para poder fortalecer el programa educativo.
+
+2.	A los empleadores también se les aplicará una encuesta a través de visitas que les realizaremos, con el fin de conocer el grado de satisfacción con las egresadas y conocer sus necesidades.
+
+Podemos concluir que, el hacer un seguimiento cuantitativo y cualitativo de nuestras egresadas, esto nos proporcionará información confiable y pertinente para la planeación y toma de decisiones institucionales para la mejor toma de decisiones y con esto fortalecer nuestro plan y programas de estudio.
+Es importante realizar un análisis y actualización constante de los programas de estudio, según el resultado de la evaluación de las encuestas que apliquemos entre otros indicadores","Las exigencias que actualmente demanda el desarrollo, han obligado a las Instituciones de Educación Superior (IES) a que busquen vínculos más estrechos con la sociedad en aspectos específicos que tienen relación con el desarrollo económico; tal es el caso de la búsqueda de enlaces con el sector productivo",,,"1.	Líneas de Generación y Aplicación del Conocimiento
+
+Conscientes de que la generación del conocimiento y su aplicación implican la concepción y estudio de metodologías para resolver problemas y contribuir al desarrollo socioeconómico, el Centro Educativo El Salto, ha estructurado algunas Líneas de Generación y Aplicación del Conocimiento (LGAC). ",,,,,Bachillerato,"
+Utiliza el lenguaje oral y escrito con claridad, fluidez y adecuadamente para interactuar en distintos contextos sociales.
+
+Reconoce y aprecia la diversidad lingüística del país.
+
+Emplea la argumentación y el razonamiento al analizar situaciones, identificar problemas, formular preguntas, emitir juicios y proponer diversas soluciones.
+
+Selecciona, analiza, evalúa y comparte información proveniente de diversas fuentes y aprovecha los recursos tecnológicos a su alcance para profundizar y ampliar sus aprendizajes de manera permanente.
+
+Emplea los conocimientos adquiridos a fin de interpretar y explicar los procesos   sociales, económicos y culturales, así como tomar decisiones y actuar tanto en lo individual como lo colectivo, en aras de promover la salud y cuidado del medio ambiente como   forma para mejorar la   calidad de vida.
+
+Conoce los derechos humanos y los valores que favorecen a la vida democrática, los pone en práctica al analizar situaciones y tomar decisiones con responsabilidad   y apego a la ley.
+
+Reconoce y valora distintas prácticas y procesos culturales a fin de contribuir y tener una convivencia respetuosa.
+
+Asume la interculturalidad con riqueza y forma de convivencia con la diversidad social, étnica, cultural y lingüística.
+
+Conoce y valora sus características y potencialidades como ser humano, se identifica como parte de un grupo y emprende proyectos personales; se esfuerza por lograr sus propósitos   y asume con responsabilidad las consecuencias de sus acciones.
+
+Aprecia y participa en diversas manifestaciones artísticas. Integra conocimientos y saberes    de las culturas como medio para conocer las ideas y los sentimientos de otros, así como para manifestar los propios.
+
+Se reconoce como ser competente con potencialidades físicas y cognitivas que le permiten mejorar su capacidad, favorece el estilo de vida activo y saludable, así como es capaz de interactuar en contextos lúdicos, recreativos y deportivos.","
+Capacidad de análisis, síntesis y de desarrollo.
+
+Hábitos de estudio y de trabajo.
+
+Aptitud para trabajar en equipo.
+
+Capacidad para relacionarse con personas de diferentes edades y circunstancias. 
+
+Facilidad de adaptación al cambio.
+
+Saber trabajar bajo presión.
+
+Habilidad para resolver problemas y enfrentar nuevos retos.
+
+Habilidad para la toma de decisiones.
+
+Comunicación oral y escrita.
+
+Autocrítica, autoevaluación y adaptación.
+
+Capacidad de escucha.
+
+Innovación y emprendimiento.","Responsabilidad.
+
+Profesionalidad al prestar sus servicios profesionales. 
+
+Vocación de servicio y sentido ético.
+
+Empatía y responsabilidad social.
+
+Aptitudes verbales y numéricas.
+
+Pensamiento crítico.
+
+Respeto por la dignidad de las personas, la diversidad cultural y la búsqueda del bien común.
+
+Hábitos de estudio, responsabilidad, disciplina y organización del tiempo.","Desarrollar habilidades para satisfacer las necesidades y preferencias del cliente mediante la atención y servicio.
+
+Manejar información de la empresa para promover sus servicios a través de estrategias de mercadotecnia. 
+
+Supervisar la administración de la recepción.
+
+
+Diseñar métodos de conteo físico de productos.
+
+Coordinar grupos de trabajo en línea.
+
+Proveer de los recursos necesarios para realizar tareas al grupo de trabajo.
+
+Capacitar al personal de reciente ingreso.
+
+Almacenar higiénicamente materias primas, alimentos y bebidas.
+
+Aplicar prácticas sanitarias para el servicio de alimentos y bebidas. 
+
+Verificar el funcionamiento y estado del equipo de cocina.
+
+Manejar la materia prima de manera adecuada y de forma higiénica. 
+
+Coordinar la elaboración de menús para distintos eventos.
+
+Verificar el sabor y la presentación de cada alimento preparado.
+
+Planificar los insumos necesarios para la limpieza de las instalaciones.
+
+Efectuar el proceso de limpieza de las habitaciones, respondiendo a las especificaciones de tratamiento década material presente en los muebles, blancos y superficies.
+
+Programar y supervisar los trabajos de limpieza de habitaciones y áreas de estancia para alojamiento temporal. 
+
+Preparar la estación y equipo de operación en servicio de especialidades para la atención del comensal.
+
+Supervisar al personal, instalaciones y equipo de operación para los servicios de alimentos y bebidas. 
+
+Supervisar la atención al comensal durante su estancia en el establecimiento.
+
+Preparar y operar los equipos e insumos para el lavado y planchado de blancos y otros textiles.","Lograr Incorporarse exitosamente al campo laboral gracias a las competencias y habilidades desarrolladas.
+
+Lograr Ejercer el liderazgo adecuado para desarrollar con éxito cada tarea a su cargo.
+
+Lograr Supervisar el funcionamiento de áreas de alimentos, bebidas y servicios de lavandería y textiles.
+
+Utilizar de forma calificada equipos industriales para la preparación, conservación y servicio de alimentos, para los servicios de lavandería y planchado y para el mantenimiento e higiene de las instalaciones.
+
+Emprender un negocio propio","Lograr un alto desempeño en empresas de servicio del campo de la hospitalidad.
+
+Realizar todas las acciones que emprenda con espíritu de servicio, profesionalismo y responsabilidad social. 
+Obtener resultados de excelencia al trabajar bajo presión.
+
+Aplicar la creatividad e iniciativa necesarias para encontrar alternativas de solución a problemas específicos
+","Curso de inducción para las alumnas, en las que se verán los siguientes aspectos:
+
+Inducción al sistema y metodología.
+Requisitos de admisión.
+contenido del plan y programa de estudios.
+Trámites de inscripción.
+Cuotas.
+Programa de becas.
+Material didáctico.
+Requisitos técnicos.
+Servicios de apoyo.
+Programa de tutorías
+Análisis del Reglamento Institucional.
+Exámenes.
+
+Curso propedéutico.
+
+Al inicio del cuatrimestre a las alumnas de nuevo ingreso se les proporcionará   un curso que permita realizar un diagnóstico, y nivelación académica en   general.","El proceso se realizará de la siguiente manera:
+
+Llenar una ficha con sus datos generales.
+
+Presentar un examen de conocimientos generales.
+
+Presentar un examen psicométrico.
+
+Presentar una prueba de inglés para evaluar su nivel.
+
+Realizar una entrevista con la dirección y coordinación académica del centro educativo para ampliar la información en cuanto al plan de estudios, así como para conocer sus expectativas, intereses y dudas que pudieran existir.
+
+Una vez realizado lo anterior, y habiendo aprobado los exámenes presentados, se prosigue con lo siguiente:
+
+Realizar el trámite de inscripción en el tiempo establecido para tal efecto.
+
+Presentar dentro de los plazos que fije la coordinación de servicios escolares, los documentos que se requieran, así como el pago correspondiente.
+
+Asistir a las entrevistas y al curso de inducción que la institución establezca.
+
+Curso de inducción
+
+Tiene como principal objetivo dar a conocer a las alumnas de nuevo ingreso, el Plan y Programa de Estudios a detalle, así como aspectos relacionados con el centro educativo tales como la misión, visión, valores institucionales, reglamento, instalaciones, tutorías, becas, servicios escolares y en general de todos los servicios que se ofrecen y así poder contribuir a la integración de las alumnas a la vida universitaria y favorecer la interacción social y familiar.
+
+Al finalizar el curso las alumnas:
+
+Conocerán los diferentes servicios, departamentos y actividades que brinda la institución para un mejor aprovechamiento de las mismas.
+
+Conocerán a sus compañeras y tutor, y realizarán actividades que favorezcan su integración al grupo y la institución.
+
+Contenido:
+
+La dirección del centro educativo da la bienvenida a las alumnas y hace la presentación de la Coordinación Académica de la institución.
+
+Descripción de la Función Tutorial.
+
+Explicación de las distintas áreas y sus funciones.
+
+Integración grupal.
+
+Revisión del reglamento.
+
+Recorrido por las instalaciones.
+
+Presentación de actividades deportivas, artísticas y culturales.
+
+Dentro del curso de inducción, hay una sesión especial con padres de familia, en la que se les explica la forma como se trabajará con ellos y con las alumnas durante la estancia en la institución.","La UNESCO afirma que la misión de la educación superior es: 
+Proveer de un sano entrenamiento tanto en las disciplinas especializadas como en las básicas, pero también una buena educación general, así como educar ciudadanos para una sociedad más abierta y justa basada en la solidaridad, el respeto por los derechos humanos y el uso compartido del conocimiento y la información en el contexto de la globalización y el cambio acelerado. ",Currículo no flexible,"Formar alumnas altamente capacitadas en la industria de la hotelería, hospitalidad y cualquier institución de servicios orientados a la  mejora de esta industria, con una visión empresarial,  a través de un plan de estudios basado en una sólida formación científica y humana, ofreciéndoles una educación integral en un marco de respeto por la dignidad de la persona, la responsabilidad social y el valor del trabajo y con una visión  basada en la ética, los valores, el conocimiento científico y el manejo de la tecnología, a través  de nuestros programas de estudio  y de proyectos  encaminados a la solución de problemas  y del desarrollo económico de su entorno, para que puedan desenvolverse exitosamente en cualquier industria de este sector, de manera eficiente y competitiva en puestos operativos, supervisión o emprendan un proyecto.","•	Desarrollar en el alumnado las competencias propias de las áreas de recepción, lavandería, ama de llaves, alimentos y bebidas a través de la práctica constante en los laboratorios y talleres, para que puedan desenvolverse con facilidad en cualquier puesto que desempeñen.
+
+•	Impartir educación de calidad a través de un programa de formación integral que provea a los educandos de los medios necesarios que contribuyan a su formación humana, espiritual, cultural y profesional.
+
+•	Proporcionar los conocimientos, habilidades, destrezas y actitudes necesarias, mediante una atención y seguimiento personalizado a través de un programa de tutorías previamente establecido al inicio del ciclo escolar, para que puedan desarrollarse profesionalmente en el ámbito que elijan, y   emprender proyectos productivos en el ramo de los alimentos y bebidas y en los servicios de hotelería y hospitalidad.
+
+•	Desarrollar un alto sentido de responsabilidad a través del trabajo en equipo y de constantes prácticas y actividades donde la alumna tome la función de líder, con la intención de que pueda desempeñar su actividad sin contratiempos.
+
+",,,,,2024-07-31 18:47:15,2024-07-31 18:47:56,
+11,2,3,11,1,6,6,,,190,,,,,,Hotelería,,"La institución educativa se preocupa por evaluar y actualizar el plan y programas de estudio, con el fin de priorizar y ordenar el proceso del aprendizaje con base a las necesidades y áreas de oportunidad que podamos detectar.
+En el contexto de asegurar la calidad de nuestra evaluación y actualización curricular, definiremos prácticas de control, mejoramiento y garantía de la calidad a los diversos componentes del plan y programas de estudio, mismas que se realizarán a través de nuestras academias, integradas por la coordinación académica, docentes y personal directivo de la Institución","Hoy en día los cambios económicos, tecnológicos, sociales y culturales que se viven en nuestro país, crean nuevos retos a las instituciones de educación superior; uno de éstos, es la evaluación constante del impacto que en la sociedad tienen los procesos académicos, por ello es preciso la generación de estrategias para conocer el impacto de su acción y al mismo tiempo, identificar nuevas demandas formativas en cada una de las prácticas profesionales, todo ello con la finalidad de responder a las necesidades sociales.
+
+Debe de existir una retroalimentación permanente de los planes de estudio de acuerdo a las nuevas exigencias del contexto social y laboral, para establecer un modelo de evaluación integral de la calidad de la educación.
+
+Así mismo, se debe proveer información amplia y objetiva a los docentes y directivos, fortaleciendo con ello el diseño y revisión de los planes y programas de estudio, así como la planeación académica con visión estratégica a largo plazo, así como establecer un modelo de evaluación integral de la calidad de la educación. 
+
+Todo ello permitirá contar con mejores indicadores, en función de las nuevas exigencias que plantean los ámbitos social y productivo de la región, el estado y el país.
+
+El Proyecto de Seguimiento a Egresados, tiene la finalidad de estrechar la vinculación entre el Centro Educativo El Salto y las alumnas egresadas para conocer los diferentes aspectos del proceso de transición de la institución al mercado laboral, haciendo un seguimiento cuantitativo y cualitativo de las graduadas y de las enseñanzas del programa educativo, para proporcionar información adecuada para la toma de decisiones, conservando siempre el contacto ágil y eficaz con las egresadas. 
+
+En este seguimiento estará involucrada toda la comunidad educativa, y será encabezado por la dirección junto con la coordinación académica. 
+Pretendemos realizarlo cada año, al finalizar el ciclo escolar; esto es para poder establecer una retroalimentación adecuada, para la toma de decisiones. 
+
+1.	Objetivo general
+
+Desarrollar un esquema básico para conocer la situación laboral, los factores de empleabilidad y la valoración de los conocimientos y competencias adquiridas en la Carrera Técnico Superior Universitario en Hotelería del Centro Educativo el Salto, desde el ámbito del empleo por parte de las alumnas graduadas, recabando información confiable y pertinente  sobre la ubicación y las actividades en que se desempeñan, el grado de satisfacción y el nivel de exigencia de los empleadores en el desempeño profesional de nuestras egresadas, lo que permitirá la toma de decisiones institucionales, y la actualización de los programas de estudio.
+
+2.	Objetivos específicos
+
+Contar con información confiable sobre el desempeño profesional de las egresadas y de su relación con los aciertos y posibles fallas en su formación, para enriquecer con ello la toma de decisiones, e implementar acciones que permitan superar el nivel académico del centro educativo.
+
+Comparar la congruencia entre los resultados obtenidos en el proceso educativo de nuestro programa de estudio y las necesidades y exigencias del campo profesional, a través del análisis del desempeño de las egresadas en el mercado laboral.
+
+Fortalecer la calidad académica del programa de estudios y proporcionar las competencias o habilidades pertinentes del egresado que el mercado laboral requiere.
+
+Conocer el grado de satisfacción de las egresadas respecto a la calidad de la formación recibida en la institución educativa, mediante encuestas de satisfacción y una retroalimentación pertinente, para poder identificar las áreas de mejora del programa de estudios.
+
+
+Describir la opinión de los empleadores sobre la actitud de nuestras egresadas frente a los retos cotidianos que enfrentan en el desempeño de sus actividades a través de reuniones con los empleadores para fortalecer la retroalimentación y trabajar en las áreas de mejora que se presenten.
+
+
+Fomentar y mantener la vinculación de la institución con sus egresadas por medio del proyecto de seguimiento de egresados para la obtención de beneficios conjuntos. 
+
+
+Consolidar los lazos de unión con las alumnas graduadas mediante actividades y convivencias que se tendrán programadas una vez que egresen de la institución, esto con el fin de reforzar su pertenencia a la institución y que difundan la importancia y trascendencia que tiene el Centro Educativo El Salto en la región.
+
+Establecer una bolsa de trabajo entre las egresadas y el grupo empresarial de la zona.
+
+Conocer la demanda del empleador a través de un acercamiento constante con ellos para fortalecer el profesionalismo del egresado. 
+
+Llevar el registro de las egresadas de nuestro centro educativo mediante una base de datos para evaluar la eficiencia terminal y dar seguimiento al proyecto de seguimiento de egresadas.
+
+Promover servicios de apoyo institucional, buscar la inserción de las egresadas al campo laboral, procurar la concertación, operación de convenios y programas encaminados al mejoramiento.
+
+3.	Metodología de seguimiento
+
+a)	Diagnóstico del egresado
+Para desarrollar de manera efectiva el diagnóstico de nuestras egresadas, tomaremos como instrumento de validación la encuesta.
+Esta encuesta se aplica a las alumnas que ya no están estudiando en nuestra institución.
+Los resultados de las mismas, nos permitirán obtener y actualizar nuestra base de datos para tomar decisiones con mayor eficacia y eficiencia.
+
+b)	Educación continua 
+Son las actividades dirigidas a alumnas y egresadas, a través de programas, cursos, talleres, conferencias y actualizaciones, con la finalidad de actualizar y profesionalizar su desempeño académico y laboral.
+
+c)	Base de datos
+El Centro Educativo El salto contará con una base de datos actualizada de nuestras egresadas, para estar en continuo contacto con ellas y para poderles hacer llegar información relevante; ésto se realizará a través de las redes sociales, correo electrónico y llamadas telefónicas.
+De la misma manera, contaremos con una base de datos de las empresas y establecimientos con los que tengamos algún convenio de colaboración.
+
+d)	Formación integral
+Buscamos complementar la formación profesional de nuestras egresadas con actividades para su desarrollo y poder fortalecer su calidad de vida y la de su comunidad.
+Para realizar lo anterior, se llevará a cabo lo siguiente:
+
+Un encuentro anual con nuestras egresadas, en donde podrán compartir sus experiencias laborales y sus expectativas de vida.
+
+Actividades deportivas, culturales, de integración y superación.
+
+e)	Bolsa de trabajo
+Tiene como objetivo la inserción de las egresadas al mercado profesional, así como detectar los requerimientos cualitativos de los empleadores, por lo que, a través de este servicio, nuestras egresadas pueden registrarse como candidatas para obtener una plaza laboral por empresas que previamente se registrarán con nosotros.
+Al momento que exista alguna vacante, se le informará al egresado registrado en nuestra base de datos.
+La difusión de la bolsa de trabajo se hará por medio de nuestras redes sociales y por visitas a las alumnas que cursan el último cuatrimestre.
+
+f)	Evaluación
+Se realizará una evaluación del programa de Seguimiento a Egresados del Centro Educativo El Salto de dos maneras:
+
+1.	A través de una encuesta de satisfacción que se les aplicará a las alumnas en las reuniones anuales que se van a tener con ellas como instrumento de evaluación y también se conocerán las sugerencias que puedan hacer para poder fortalecer el programa educativo.
+
+2.	A los empleadores también se les aplicará una encuesta a través de visitas que les realizaremos, con el fin de conocer el grado de satisfacción con las egresadas y conocer sus necesidades.
+
+Podemos concluir que, el hacer un seguimiento cuantitativo y cualitativo de nuestras egresadas, esto nos proporcionará información confiable y pertinente para la planeación y toma de decisiones institucionales para la mejor toma de decisiones y con esto fortalecer nuestro plan y programas de estudio.
+Es importante realizar un análisis y actualización constante de los programas de estudio, según el resultado de la evaluación de las encuestas que apliquemos entre otros indicadores","Las exigencias que actualmente demanda el desarrollo, han obligado a las Instituciones de Educación Superior (IES) a que busquen vínculos más estrechos con la sociedad en aspectos específicos que tienen relación con el desarrollo económico; tal es el caso de la búsqueda de enlaces con el sector productivo",,,"1.	Líneas de Generación y Aplicación del Conocimiento
+
+Conscientes de que la generación del conocimiento y su aplicación implican la concepción y estudio de metodologías para resolver problemas y contribuir al desarrollo socioeconómico, el Centro Educativo El Salto, ha estructurado algunas Líneas de Generación y Aplicación del Conocimiento (LGAC). ",,,,,Bachillerato,"
+Utiliza el lenguaje oral y escrito con claridad, fluidez y adecuadamente para interactuar en distintos contextos sociales.
+
+Reconoce y aprecia la diversidad lingüística del país.
+
+Emplea la argumentación y el razonamiento al analizar situaciones, identificar problemas, formular preguntas, emitir juicios y proponer diversas soluciones.
+
+Selecciona, analiza, evalúa y comparte información proveniente de diversas fuentes y aprovecha los recursos tecnológicos a su alcance para profundizar y ampliar sus aprendizajes de manera permanente.
+
+Emplea los conocimientos adquiridos a fin de interpretar y explicar los procesos   sociales, económicos y culturales, así como tomar decisiones y actuar tanto en lo individual como lo colectivo, en aras de promover la salud y cuidado del medio ambiente como   forma para mejorar la   calidad de vida.
+
+Conoce los derechos humanos y los valores que favorecen a la vida democrática, los pone en práctica al analizar situaciones y tomar decisiones con responsabilidad   y apego a la ley.
+
+Reconoce y valora distintas prácticas y procesos culturales a fin de contribuir y tener una convivencia respetuosa.
+
+Asume la interculturalidad con riqueza y forma de convivencia con la diversidad social, étnica, cultural y lingüística.
+
+Conoce y valora sus características y potencialidades como ser humano, se identifica como parte de un grupo y emprende proyectos personales; se esfuerza por lograr sus propósitos   y asume con responsabilidad las consecuencias de sus acciones.
+
+Aprecia y participa en diversas manifestaciones artísticas. Integra conocimientos y saberes    de las culturas como medio para conocer las ideas y los sentimientos de otros, así como para manifestar los propios.
+
+Se reconoce como ser competente con potencialidades físicas y cognitivas que le permiten mejorar su capacidad, favorece el estilo de vida activo y saludable, así como es capaz de interactuar en contextos lúdicos, recreativos y deportivos.","
+Capacidad de análisis, síntesis y de desarrollo.
+
+Hábitos de estudio y de trabajo.
+
+Aptitud para trabajar en equipo.
+
+Capacidad para relacionarse con personas de diferentes edades y circunstancias. 
+
+Facilidad de adaptación al cambio.
+
+Saber trabajar bajo presión.
+
+Habilidad para resolver problemas y enfrentar nuevos retos.
+
+Habilidad para la toma de decisiones.
+
+Comunicación oral y escrita.
+
+Autocrítica, autoevaluación y adaptación.
+
+Capacidad de escucha.
+
+Innovación y emprendimiento.","Responsabilidad.
+
+Profesionalidad al prestar sus servicios profesionales. 
+
+Vocación de servicio y sentido ético.
+
+Empatía y responsabilidad social.
+
+Aptitudes verbales y numéricas.
+
+Pensamiento crítico.
+
+Respeto por la dignidad de las personas, la diversidad cultural y la búsqueda del bien común.
+
+Hábitos de estudio, responsabilidad, disciplina y organización del tiempo.","Desarrollar habilidades para satisfacer las necesidades y preferencias del cliente mediante la atención y servicio.
+
+Manejar información de la empresa para promover sus servicios a través de estrategias de mercadotecnia. 
+
+Supervisar la administración de la recepción.
+
+
+Diseñar métodos de conteo físico de productos.
+
+Coordinar grupos de trabajo en línea.
+
+Proveer de los recursos necesarios para realizar tareas al grupo de trabajo.
+
+Capacitar al personal de reciente ingreso.
+
+Almacenar higiénicamente materias primas, alimentos y bebidas.
+
+Aplicar prácticas sanitarias para el servicio de alimentos y bebidas. 
+
+Verificar el funcionamiento y estado del equipo de cocina.
+
+Manejar la materia prima de manera adecuada y de forma higiénica. 
+
+Coordinar la elaboración de menús para distintos eventos.
+
+Verificar el sabor y la presentación de cada alimento preparado.
+
+Planificar los insumos necesarios para la limpieza de las instalaciones.
+
+Efectuar el proceso de limpieza de las habitaciones, respondiendo a las especificaciones de tratamiento década material presente en los muebles, blancos y superficies.
+
+Programar y supervisar los trabajos de limpieza de habitaciones y áreas de estancia para alojamiento temporal. 
+
+Preparar la estación y equipo de operación en servicio de especialidades para la atención del comensal.
+
+Supervisar al personal, instalaciones y equipo de operación para los servicios de alimentos y bebidas. 
+
+Supervisar la atención al comensal durante su estancia en el establecimiento.
+
+Preparar y operar los equipos e insumos para el lavado y planchado de blancos y otros textiles.","Lograr Incorporarse exitosamente al campo laboral gracias a las competencias y habilidades desarrolladas.
+
+Lograr Ejercer el liderazgo adecuado para desarrollar con éxito cada tarea a su cargo.
+
+Lograr Supervisar el funcionamiento de áreas de alimentos, bebidas y servicios de lavandería y textiles.
+
+Utilizar de forma calificada equipos industriales para la preparación, conservación y servicio de alimentos, para los servicios de lavandería y planchado y para el mantenimiento e higiene de las instalaciones.
+
+Emprender un negocio propio","Lograr un alto desempeño en empresas de servicio del campo de la hospitalidad.
+
+Realizar todas las acciones que emprenda con espíritu de servicio, profesionalismo y responsabilidad social. 
+Obtener resultados de excelencia al trabajar bajo presión.
+
+Aplicar la creatividad e iniciativa necesarias para encontrar alternativas de solución a problemas específicos
+","Curso de inducción para las alumnas, en las que se verán los siguientes aspectos:
+
+Inducción al sistema y metodología.
+Requisitos de admisión.
+contenido del plan y programa de estudios.
+Trámites de inscripción.
+Cuotas.
+Programa de becas.
+Material didáctico.
+Requisitos técnicos.
+Servicios de apoyo.
+Programa de tutorías
+Análisis del Reglamento Institucional.
+Exámenes.
+
+Curso propedéutico.
+
+Al inicio del cuatrimestre a las alumnas de nuevo ingreso se les proporcionará   un curso que permita realizar un diagnóstico, y nivelación académica en   general.","El proceso se realizará de la siguiente manera:
+
+Llenar una ficha con sus datos generales.
+
+Presentar un examen de conocimientos generales.
+
+Presentar un examen psicométrico.
+
+Presentar una prueba de inglés para evaluar su nivel.
+
+Realizar una entrevista con la dirección y coordinación académica del centro educativo para ampliar la información en cuanto al plan de estudios, así como para conocer sus expectativas, intereses y dudas que pudieran existir.
+
+Una vez realizado lo anterior, y habiendo aprobado los exámenes presentados, se prosigue con lo siguiente:
+
+Realizar el trámite de inscripción en el tiempo establecido para tal efecto.
+
+Presentar dentro de los plazos que fije la coordinación de servicios escolares, los documentos que se requieran, así como el pago correspondiente.
+
+Asistir a las entrevistas y al curso de inducción que la institución establezca.
+
+Curso de inducción
+
+Tiene como principal objetivo dar a conocer a las alumnas de nuevo ingreso, el Plan y Programa de Estudios a detalle, así como aspectos relacionados con el centro educativo tales como la misión, visión, valores institucionales, reglamento, instalaciones, tutorías, becas, servicios escolares y en general de todos los servicios que se ofrecen y así poder contribuir a la integración de las alumnas a la vida universitaria y favorecer la interacción social y familiar.
+
+Al finalizar el curso las alumnas:
+
+Conocerán los diferentes servicios, departamentos y actividades que brinda la institución para un mejor aprovechamiento de las mismas.
+
+Conocerán a sus compañeras y tutor, y realizarán actividades que favorezcan su integración al grupo y la institución.
+
+Contenido:
+
+La dirección del centro educativo da la bienvenida a las alumnas y hace la presentación de la Coordinación Académica de la institución.
+
+Descripción de la Función Tutorial.
+
+Explicación de las distintas áreas y sus funciones.
+
+Integración grupal.
+
+Revisión del reglamento.
+
+Recorrido por las instalaciones.
+
+Presentación de actividades deportivas, artísticas y culturales.
+
+Dentro del curso de inducción, hay una sesión especial con padres de familia, en la que se les explica la forma como se trabajará con ellos y con las alumnas durante la estancia en la institución.","La UNESCO afirma que la misión de la educación superior es: 
+Proveer de un sano entrenamiento tanto en las disciplinas especializadas como en las básicas, pero también una buena educación general, así como educar ciudadanos para una sociedad más abierta y justa basada en la solidaridad, el respeto por los derechos humanos y el uso compartido del conocimiento y la información en el contexto de la globalización y el cambio acelerado. ",Currículo no flexible,"Formar alumnas altamente capacitadas en la industria de la hotelería, hospitalidad y cualquier institución de servicios orientados a la  mejora de esta industria, con una visión empresarial,  a través de un plan de estudios basado en una sólida formación científica y humana, ofreciéndoles una educación integral en un marco de respeto por la dignidad de la persona, la responsabilidad social y el valor del trabajo y con una visión  basada en la ética, los valores, el conocimiento científico y el manejo de la tecnología, a través  de nuestros programas de estudio  y de proyectos  encaminados a la solución de problemas  y del desarrollo económico de su entorno, para que puedan desenvolverse exitosamente en cualquier industria de este sector, de manera eficiente y competitiva en puestos operativos, supervisión o emprendan un proyecto.","•	Desarrollar en el alumnado las competencias propias de las áreas de recepción, lavandería, ama de llaves, alimentos y bebidas a través de la práctica constante en los laboratorios y talleres, para que puedan desenvolverse con facilidad en cualquier puesto que desempeñen.
+
+•	Impartir educación de calidad a través de un programa de formación integral que provea a los educandos de los medios necesarios que contribuyan a su formación humana, espiritual, cultural y profesional.
+
+•	Proporcionar los conocimientos, habilidades, destrezas y actitudes necesarias, mediante una atención y seguimiento personalizado a través de un programa de tutorías previamente establecido al inicio del ciclo escolar, para que puedan desarrollarse profesionalmente en el ámbito que elijan, y   emprender proyectos productivos en el ramo de los alimentos y bebidas y en los servicios de hotelería y hospitalidad.
+
+•	Desarrollar un alto sentido de responsabilidad a través del trabajo en equipo y de constantes prácticas y actividades donde la alumna tome la función de líder, con la intención de que pueda desempeñar su actividad sin contratiempos.
+
+",,,,,2024-07-31 18:48:58,2024-07-31 18:49:10,

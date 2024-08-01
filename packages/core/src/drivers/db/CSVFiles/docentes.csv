@@ -1,0 +1,5 @@
+id,persona_id,programa_id,es_aceptado,tipo_docente,tipo_contratacion,antiguedad,experiencias,observaciones,created_at
+1,30,9,1,1,1,12,No se guardó dato,,2024-07-30 17:50:40
+2,31,9,1,1,1,12,No hay,,2024-07-30 17:59:11
+3,32,9,1,1,1,12,No hay,,2024-07-30 18:03:56
+4,33,9,1,1,1,12,Salado,,2024-07-30 18:05:49

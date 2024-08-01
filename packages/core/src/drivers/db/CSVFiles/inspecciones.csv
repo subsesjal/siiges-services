@@ -1,0 +1,2 @@
+id,programa_id,estatus_inspeccion_id,fecha,fecha_asignada,resultado,folio,created_at
+1,9,1,2024-07-31 18:44:33,2024-07-31 6:00:00,,SICYT.INSPECCION.01,2024-07-31 18:44:33
