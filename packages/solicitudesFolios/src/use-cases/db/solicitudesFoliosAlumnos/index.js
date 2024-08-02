@@ -13,6 +13,7 @@ module.exports = {
     solicitudesFoliosAlumnos.findOneAlumnoQuery,
     solicitudesFolios.findOneSolicitudFolioQuery,
     solicitudesFoliosAlumnos.createSolicitudFolioAlumnoQuery,
+    solicitudesFoliosAlumnos.findOneSolicitudFolioAlumnoQuery,
   ),
   findOneSolicitudFolioAlumno: findOneSolicitudFolioAlumno(
     solicitudesFoliosAlumnos.findOneSolicitudFolioAlumnoQuery,
