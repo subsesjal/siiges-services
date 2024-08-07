@@ -211,6 +211,10 @@ const tipoDocumentoObj = [
     id: 53,
     name: 'OFICIO_ADMISORIO',
   },
+  {
+    id: 54,
+    name: 'COMPROBANTE_PAGO_FOLIOS',
+  },
 ];
 
 module.exports = tipoDocumentoObj;
