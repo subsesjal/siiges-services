@@ -64,7 +64,7 @@ const SolicitudFolioSchema = {
     field: 'folio_pago',
   },
   observaciones: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.TEXT,
   },
   createdAt: {
