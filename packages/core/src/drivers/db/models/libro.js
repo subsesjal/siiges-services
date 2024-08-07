@@ -1,4 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
+const { TIPO_DOCUMENTO_TABLE } = require('./tipoDocumento');
 
 const LIBRO_TABLE = 'libros';
 
@@ -8,6 +9,15 @@ const LibroSchema = {
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
+  },
+  tipoDocumentoId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'tipo_documento_id',
+    references: {
+      model: TIPO_DOCUMENTO_TABLE,
+      key: 'id',
+    },
   },
   nombre: {
     type: DataTypes.STRING,

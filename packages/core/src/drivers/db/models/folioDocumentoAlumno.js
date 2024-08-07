@@ -3,6 +3,7 @@ const { ALUMNO_TABLE } = require('./alumno');
 const { FOJA_TABLE } = require('./foja');
 const { LIBRO_TABLE } = require('./libro');
 const { TIPO_DOCUMENTO_TABLE } = require('./tipoDocumento');
+const { SOLICITUD_FOLIO_ALUMNO_TABLE } = require('./solicitudFolioAlumno');
 
 const FOLIO_DOCUMENTO_ALUMNO_TABLE = 'folios_documentos_alumnos';
 
@@ -12,6 +13,15 @@ const FolioDocumentoAlumnoSchema = {
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
+  },
+  solicitudFolioAlumnoId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'solicitud_folio_alumno_id',
+    references: {
+      model: SOLICITUD_FOLIO_ALUMNO_TABLE,
+      key: 'id',
+    },
   },
   alumnoId: {
     allowNull: false,
@@ -77,7 +87,7 @@ const FolioDocumentoAlumnoSchema = {
 class FolioDocumentoAlumno extends Model {
   static associate(models) {
     this.belongsTo(models.Alumno, { as: 'alumno' });
-    this.belongsTo(models.SolicitudFolio, { as: 'solicitudFolio' });
+    this.belongsTo(models.SolicitudFolioAlumno, { as: 'solicitudFolioAlumno' });
   }
 
   static config(sequelize) {
