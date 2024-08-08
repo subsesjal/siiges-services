@@ -41,7 +41,7 @@ const CalificacionSchema = {
   },
   calificacion: {
     allowNull: true,
-    type: DataTypes.DOUBLE,
+    type: DataTypes.STRING,
   },
   fechaExamen: {
     allowNull: true,
