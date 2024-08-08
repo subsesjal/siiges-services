@@ -122,7 +122,7 @@ function GenerarFDA04(solicitud) {
           color: 'blanco',
         },
         {
-          texto: 'RECUBRIMIENTOS PLÁSTICOS EN PISOS Y ESCALONE',
+          texto: 'RECUBRIMIENTOS PLÁSTICOS EN PISOS Y ESCALONES',
           medida: 81,
           color: 'blanco',
           bold: true,
