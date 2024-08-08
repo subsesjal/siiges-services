@@ -2,7 +2,16 @@ const { checkers } = require('@siiges-services/shared');
 
 const findOneSolicitudFolio = (findOneSolicitudFolioQuery) => async (identifierObj) => {
   const include = [
-    { association: 'programa' },
+    {
+      association: 'programa',
+      include: [{
+        association: 'plantel',
+        include: [
+          { association: 'institucion' },
+          { association: 'domicilio' },
+        ],
+      }],
+    },
     { association: 'estatusSolicitudFolio' },
     { association: 'tipoDocumento' },
     { association: 'tipoSolicitudFolio' },

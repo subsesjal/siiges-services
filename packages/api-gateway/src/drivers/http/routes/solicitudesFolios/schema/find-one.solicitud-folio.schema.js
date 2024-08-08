@@ -3,6 +3,9 @@ const { tipoDocumento } = require('./properties/tipoDocumento');
 const { tipoSolicitudFolio } = require('./properties/tipoSolicitudFolio');
 const { programa } = require('../../solicitudes/schema/properties/programa');
 const { estatusSolicitudFolio } = require('./properties/estatusSolicitudFolio');
+const { plantel } = require('../../instituciones/schema/properties/plantel');
+const { institucion } = require('../../instituciones/schema/properties/institucion');
+const { domicilio } = require('../../usuarios/schema/properties/domicilio');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findOneSolicitudFolioSchema = {
@@ -56,6 +59,30 @@ const findOneSolicitudFolioSchema = {
                 id: { type: 'integer' },
                 ...programa,
                 ...responseProperties,
+                plantel: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'integer' },
+                    ...plantel,
+                    ...responseProperties,
+                    institucion: {
+                      type: 'object',
+                      properties: {
+                        id: { type: 'integer' },
+                        ...institucion,
+                        ...responseProperties,
+                      },
+                    },
+                    domicilio: {
+                      type: 'object',
+                      properties: {
+                        id: { type: 'integer' },
+                        ...domicilio,
+                        ...responseProperties,
+                      },
+                    },
+                  },
+                },
               },
             },
           },
