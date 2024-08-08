@@ -37,8 +37,8 @@ const TITLE_DOMICILIO = 'DOMICILIO DE LA INSTITUCIÓN';
 const tituloRepresentante = 'DATOS DEL SOLICITANTE (PERSONA FÍSICA O REPRESENTANTE LEGAL DE LA PERSONA JURÍDICA';
 const TABLA_REPRESENTANTE = (representante) => [
   ['NOMBRE (S)', representante.nombre],
-  ['APELLIDO PATERNO', representante.apellidoPaterno],
-  ['APELLIDO MATERNO', representante.apellidoMaterno],
+  ['PRIMER APELLIDO', representante.apellidoPaterno],
+  ['SEGUNDO APELLIDO', representante.apellidoMaterno],
   ['NACIONALIDAD', representante.nacionalidad],
 ];
 const rowsDomicilio2 = (domicilio) => [
