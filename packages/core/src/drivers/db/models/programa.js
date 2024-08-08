@@ -189,15 +189,15 @@ const ProgramaSchema = {
     field: 'objetivos_particulares',
   },
   calificacionMinima: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DOUBLE,
     field: 'calificacion_minima',
   },
   calificacionMaxima: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DOUBLE,
     field: 'calificacion_maxima',
   },
   calificacionAprobatoria: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DOUBLE,
     field: 'calificacion_aprobatoria',
   },
   calificacionDecimal: {
