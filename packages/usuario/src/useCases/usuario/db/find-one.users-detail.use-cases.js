@@ -13,7 +13,8 @@ const findOneUserDetail = (findOneQuery) => async (
             { association: 'municipio' },
           ],
         }],
-  }];
+  }, { association: 'rol' },
+  ];
 
   const user = await findOneQuery(identifierObj, { undefined, include });
   checkers.throwErrorIfDataIsFalsy(user, 'usuario', identifierObj);

@@ -1,4 +1,5 @@
 const { usuario } = require('./properties/usuario');
+const { rol } = require('./properties/rol');
 const { persona } = require('./properties/persona');
 const { domicilio } = require('./properties/domicilio');
 const { municipio } = require('./properties/municipio');
@@ -26,6 +27,14 @@ const getUsuarioDetalleSchema = {
             id: { type: 'integer' },
             ...usuario,
             ...responseProperties,
+            rol: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...rol,
+                ...responseProperties,
+              },
+            },
             persona: {
               type: 'object',
               properties: {
