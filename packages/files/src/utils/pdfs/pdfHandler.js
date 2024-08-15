@@ -290,6 +290,60 @@ function buscarDescripcionPorId(array, id) {
 function generarTiposDeTurno(programaTurnos) {
   return programaTurnos.map((turno) => turnos.find(({ id }) => +id === turno.turnoId).nombre).join(', ');
 }
+function agregarTextoJustificado(doc, texto, x, y, width, fontSize) {
+  const maxY = 260;
+  const words = texto.split(/\s+/); // Divide el texto en palabras
+  const spaceWidth = doc.getTextWidth(' ');
+  const lineHeight = fontSize * 0.5; // Ajusta la altura de la línea según sea necesario
+  let currentLine = '';
+  const lines = [];
+
+  doc.setFontSize(fontSize);
+
+  words.forEach((word) => {
+    const testLine = `${currentLine + word} `;
+    const testWidth = doc.getTextWidth(testLine);
+    if (testWidth > width && currentLine !== '') {
+      lines.push(currentLine.trim());
+      currentLine = `${word} `;
+    } else {
+      currentLine = testLine;
+    }
+  });
+
+  lines.push(currentLine.trim()); // Agrega la última línea
+
+  lines.forEach((line, index) => {
+    // Verifica si la posición actual y más la altura de la línea superan el máximo permitido
+    if (y + lineHeight > maxY) {
+      doc.addPage(); // Añade una nueva página
+      y = 60; // Reinicia la posición y en la nueva página (margen superior)
+      doc.setFont('Nutmegb', 'normal');
+      doc.setFontSize(12);
+      doc.setFont(textFont);
+    }
+
+    const wordsInLine = line.split(' ');
+    let gapSize = spaceWidth;
+
+    if (index !== lines.length - 1 && wordsInLine.length > 1) {
+      // Calcula el espacio adicional entre palabras para la justificación
+      const lineWidth = doc.getTextWidth(line);
+      const extraSpace = (width - lineWidth) / (wordsInLine.length - 1);
+      gapSize += extraSpace;
+    }
+
+    let positionX = x;
+    wordsInLine.forEach((word, wordIndex) => {
+      doc.text(word, positionX, y);
+      positionX += doc.getTextWidth(word) + (wordIndex < wordsInLine.length - 1 ? gapSize : 0);
+    });
+
+    y += lineHeight;
+  });
+
+  return y;
+}
 
 function configurarFuenteYAgregarTexto(doc, fuente, tamaño, color, texto, x, y) {
   doc.setFont(textFont, fuente);
@@ -411,4 +465,5 @@ module.exports = {
   generarPDF,
   generarTablaData,
   crearFilaFecha,
+  agregarTextoJustificado,
 };
