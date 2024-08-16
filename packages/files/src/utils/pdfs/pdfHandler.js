@@ -317,7 +317,7 @@ function agregarTextoJustificado(doc, texto, x, y, width, fontSize) {
     // Verifica si la posición actual y más la altura de la línea superan el máximo permitido
     if (y + lineHeight > maxY) {
       doc.addPage(); // Añade una nueva página
-      y = 60; // Reinicia la posición y en la nueva página (margen superior)
+      y = 55; // Reinicia la posición y en la nueva página (margen superior)
       doc.setFont('Nutmegb', 'normal');
       doc.setFontSize(12);
       doc.setFont(textFont);

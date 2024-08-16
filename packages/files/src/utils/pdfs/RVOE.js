@@ -19,17 +19,17 @@ const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encodin
 const img2 = fs.readFileSync(path.join(__dirname, '/images/img2.png'), { encoding: 'base64' });
 const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encoding: 'base64' });
 
-function addHeaderContent(doc) {
+function addHeaderContent(doc, oficio) {
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
   doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
-  doc.setFillColor(6, 98, 211);
-  crearCelda(doc, 150, 40, 45, 7, 'RVOE');
+  doc.setFontSize(12);
+  doc.text(oficio, 155 + 45 / 2, 275 + 7 / 2, { align: 'center' });
 }
-function redefineAddPage(doc) {
+function redefineAddPage(doc, oficio) {
   const originalAddPage = doc.addPage;
   doc.addPage = function (...args) {
     originalAddPage.apply(this, args);
-    addHeaderContent(this);
+    addHeaderContent(this, oficio);
     return this;
   };
 }
@@ -76,9 +76,10 @@ function GenerarRVOE(solicitud) {
   const fechaFormateada = formatearFecha(solicitud.createdAt);
   const fechaSurteEfectoFormateada = formatearFecha(solicitud?.programa?.fechaSurteEfecto);
   const modalidadTipo = buscarDescripcionPorId(modalidades, solicitud.programa.modalidadId);
-  let currentPositionY = 60;
-  redefineAddPage(doc);
-  addHeaderContent(doc);
+  let currentPositionY = 55;
+  const oficio = solicitud?.programa?.acuerdoRvoe;
+  redefineAddPage(doc, oficio);
+  addHeaderContent(doc, oficio);
   const tittle = 'ACUERDO DE RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS';
   const type = '(RVOE)';
   // Add main title text
@@ -132,7 +133,8 @@ del Reconocimiento de Validez Oficial de Estudios de Educación Superior del Est
   currentPositionY += 7;
   currentPositionY = agregarTextoJustificado(doc, content, leftMargin, currentPositionY, usableWidth, 12);
   doc.addPage();
-  currentPositionY = 60;
+  currentPositionY = 55;
+  doc.setFont('Nutmegb', 'bold');
   content = 'C L Á U S U L A S';
   currentPositionY = crearSeccion(currentPositionY, doc, content, 'center');
   currentPositionY += 7;
@@ -170,13 +172,20 @@ del Reconocimiento de Validez Oficial de Estudios de Educación Superior del Est
   la modificación de nombre institucional, NO interrumpirá ni generará una nueva vigencia para el acuerdo 
   presente.`;
   currentPositionY = agregarTextoJustificado(doc, content, leftMargin, currentPositionY, usableWidth, 12);
-  currentPositionY += 5;
   content = 'Cualquier acuerdo posterior a este que modifique el número de RVOE, como lo es el cambio de domicilio o la modificación de nombre institucional, NO interrumpirá ni generará una nueva vigencia para el acuerdo presente.';
   currentPositionY = agregarTextoJustificado(doc, content, leftMargin, currentPositionY, usableWidth, 12);
-  currentPositionY += 5;
   content = 'Se aclara que el actual acuerdo de RVOE continuará vigente en tanto no concluya la última generación de alumnos ya inscritos en dicho plan, a la fecha de entrada en vigor de este acuerdo y posterior a ello quedará sin efectos.';
   currentPositionY = agregarTextoJustificado(doc, content, leftMargin, currentPositionY, usableWidth, 12);
-  content = 'QUINTA.- En caso de que desee suspender definitivamente la prestación del servicio educativo, el C. Salvador Jiménez Esparza, se obliga a dar aviso por escrito a la Secretaría de Innovación, Ciencia y Tecnología, con anticipación de por lo menos sesenta días naturales previstos a la fecha de cierre de actividades académicas, comprometiéndose además, a entregar los archivos correspondientes y no dejar alumnos inscritos con ciclos inconclusos, ni obligaciones pendientes por cumplir. Para el cumplimiento de estas obligaciones, deberán apegarse tanto al marco jurídico vigente.';
+  currentPositionY += 5;
+  content = `QUINTA.- En caso de que desee suspender definitivamente la prestación del servicio educativo, el C. 
+  ${solicitud?.programa?.plantel?.institucion?.rector?.persona?.nombre} 
+  ${solicitud?.programa?.plantel?.institucion?.rector?.persona?.apellidoPaterno} 
+  ${solicitud?.programa?.plantel?.institucion?.rector?.persona?.apellidoMaterno}, 
+  se obliga a dar aviso por escrito a la Secretaría de Innovación, Ciencia y Tecnología, 
+  con anticipación de por lo menos sesenta días naturales previstos a la fecha de cierre de 
+  actividades académicas, comprometiéndose además, a entregar los archivos correspondientes y no 
+  dejar alumnos inscritos con ciclos inconclusos, ni obligaciones pendientes por cumplir. 
+  Para el cumplimiento de estas obligaciones, deberán apegarse tanto al marco jurídico vigente.`;
   currentPositionY = agregarTextoJustificado(doc, content, leftMargin, currentPositionY, usableWidth, 12);
   currentPositionY += 5;
   content = 'SEXTA.- Que el incumplimiento a cualquiera de las obligaciones derivadas de las  Leyes, Reglamentos, Políticas y Lineamientos del presente Acuerdo y las demás aplicables, será motivo para las sanciones a que diera lugar.';
