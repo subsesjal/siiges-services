@@ -1,3 +1,4 @@
+const deleteSolicitud = require('./delete.handlers.solicitud.adapters');
 const createSolicitudPrograma = require('./create.handlers.solicitud-programa.adapters');
 const findAllSolicitudesProgramas = require('./find-all.handlers.solicitudes-programas.adapters');
 const findOneSolicitudPrograma = require('./find-one.handlers.solicitud-programa.adapters');
@@ -18,6 +19,7 @@ const {
 const { createDomicilioSolicitudPrograma } = require('./create.handlers.domicilio-solicitud-programa.adapters');
 
 module.exports = {
+  deleteSolicitud,
   createSolicitudPrograma,
   findAllSolicitudesProgramas,
   findOneSolicitudPrograma,
