@@ -1,5 +1,4 @@
-const { solicitudFolio } = require('./properties/solicitudFolio');
-const { programa } = require('../../solicitudes/schema/properties/programa');
+const { solicitudFolioAlumno } = require('./properties/solicitudFolioAlumno');
 const { responseProperties } = require('./properties/responseProperties');
 
 const createSolicitudFolioSchema = {
@@ -12,30 +11,16 @@ const createSolicitudFolioSchema = {
     },
     required: ['solicitudFolioId'],
   },
-  body: {
-    type: 'object',
-    properties: {
-      ...solicitudFolio,
-    },
-  },
   response: {
-    201: {
+    200: {
       type: 'object',
       properties: {
         data: {
-          type: 'object',
-          properties: {
-            id: { type: 'integer' },
-            folioSolicitud: { type: 'string' },
-            ...solicitudFolio,
-            ...responseProperties,
-            programa: {
-              type: 'object',
-              properties: {
-                id: { type: 'integer' },
-                ...programa,
-                ...responseProperties,
-              },
+          type: 'array',
+          items: {
+            properties: {
+              ...solicitudFolioAlumno,
+              ...responseProperties,
             },
           },
         },

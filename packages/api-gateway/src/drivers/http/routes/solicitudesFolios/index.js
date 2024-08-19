@@ -86,6 +86,15 @@ async function trayectoriaRouter(fastify, opts, next) {
     solicitudesFoliosAdapter.deleteSolicitudFolioAlumno,
   );
 
+  await fastify.patch(
+    '/:solicitudFolioId/asignacionFolios',
+    {
+      // schema: solicitudSchemas.udpateSolicitudFolioSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesFoliosAdapter.asignacionFolioAlumno,
+  );
+
   next();
 }
 
