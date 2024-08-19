@@ -1,5 +1,8 @@
 const { solicitudFolio } = require('./properties/solicitudFolio');
 const { programa } = require('../../solicitudes/schema/properties/programa');
+const { usuario } = require('../../solicitudes/schema/properties/usuario');
+const { plantel } = require('../../instituciones/schema/properties/plantel');
+const { institucion } = require('../../instituciones/schema/properties/institucion');
 const { responseProperties } = require('./properties/responseProperties');
 
 const createSolicitudFolioSchema = {
@@ -35,6 +38,30 @@ const createSolicitudFolioSchema = {
                 id: { type: 'integer' },
                 ...programa,
                 ...responseProperties,
+                plantel: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'integer' },
+                    ...plantel,
+                    ...responseProperties,
+                    institucion: {
+                      type: 'object',
+                      properties: {
+                        id: { type: 'integer' },
+                        ...institucion,
+                        ...responseProperties,
+                        usuario: {
+                          type: 'object',
+                          properties: {
+                            id: { type: 'integer' },
+                            ...usuario,
+                            ...responseProperties,
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
               },
             },
           },

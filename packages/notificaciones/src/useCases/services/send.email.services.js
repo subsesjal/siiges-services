@@ -2,6 +2,7 @@
 const path = require('path');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
+const { Logger } = require('@siiges-services/shared');
 const { config } = require('../../../config/environment');
 
 const generateMapObservaciones = (dataParsed, template) => {
@@ -19,6 +20,10 @@ const generateMapObservaciones = (dataParsed, template) => {
 const sendEmail = async ({
   email, asunto, template, data,
 }) => {
+  Logger.info('[notificaciones]: send email', {
+    email, asunto, template, data,
+  });
+
   const dataParsed = JSON.parse(data);
   generateMapObservaciones(dataParsed, template);
   const templatePath = path.join(__dirname, 'templates', `${template}.html`);

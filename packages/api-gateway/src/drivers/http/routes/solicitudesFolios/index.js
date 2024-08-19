@@ -40,6 +40,15 @@ async function trayectoriaRouter(fastify, opts, next) {
     solicitudesFoliosAdapter.updateSolicitudFolio,
   );
 
+  await fastify.patch(
+    '/:solicitudFolioId/observaciones',
+    {
+      schema: solicitudSchemas.udpateSolicitudFolioSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesFoliosAdapter.updateObservaciones,
+  );
+
   // Solicitud Folio Alumno
   await fastify.get(
     '/solicitudesFoliosAlumnos/:solicitudFolioAlumnoId',
