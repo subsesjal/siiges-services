@@ -7,6 +7,7 @@ const findOneSolicitudFolioAlumno = require('./find-one.solicitud-folio-alumno.u
 const createSolicitudFolioAlumno = require('./create.solicitud-folio-alumnos.use-cases');
 const updateSolicitudFolioAlumno = require('./update.solicitud-folio-alumno.use-cases');
 const findAllSolicitudFolioAlumnos = require('./find-all.solicitud-folio-alumnos.use-cases');
+const deleteSolicitudFolioAlumno = require('./delete.solicitud-folio-alumno.use-cases');
 
 module.exports = {
   createSolicitudFolioAlumno: createSolicitudFolioAlumno(
@@ -24,5 +25,9 @@ module.exports = {
   ),
   findAllSolicitudFolioAlumnos: findAllSolicitudFolioAlumnos(
     solicitudesFoliosAlumnos.findAllSolicitudFolioAlumnosQuery,
+  ),
+  deleteSolicitudFolioAlumno: deleteSolicitudFolioAlumno(
+    solicitudesFoliosAlumnos.findOneSolicitudFolioAlumnoQuery,
+    solicitudesFoliosAlumnos.deleteSolicitudFolioAlumnoQuery,
   ),
 };

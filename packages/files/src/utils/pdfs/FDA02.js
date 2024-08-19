@@ -162,7 +162,7 @@ function GenerarFDA02(solicitud) {
 
   const rectorPersona = solicitud.programa.plantel.institucion?.rector?.persona;
   const tablaNombreYApellido = {
-    headers: ['NOMBRE (S)', 'APELLIDO PATERNO', 'APELLIDO MATERNO'],
+    headers: ['NOMBRE (S)', 'PRIMER APELLIDO', 'SEGUNDO APELLIDO'],
     body: [[rectorPersona?.nombre || ' ', rectorPersona?.apellidoPaterno || ' ', rectorPersona?.apellidoMaterno || ' ']],
   };
 
@@ -190,7 +190,7 @@ function GenerarFDA02(solicitud) {
   const { directores } = solicitud.programa.plantel;
 
   const tablaDirectores = {
-    headers: ['NOMBRE (S)', 'APELLIDO PATERNO', 'APELLIDO MATERNO'],
+    headers: ['NOMBRE (S)', 'PRIMER APELLIDO', 'SEGUNDO APELLIDO'],
     body: directores?.map((director) => [
       director.persona.nombre,
       director.persona.apellidoPaterno,

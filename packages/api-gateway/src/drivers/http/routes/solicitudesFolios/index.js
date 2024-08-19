@@ -86,6 +86,15 @@ async function trayectoriaRouter(fastify, opts, next) {
     solicitudesFoliosAdapter.findAllSolicitudFolioAlumnos,
   );
 
+  await fastify.delete(
+    '/solicitudesFoliosAlumnos/:solicitudFolioAlumnoId',
+    {
+      schema: solicitudSchemas.deleteSolicitudFolioAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesFoliosAdapter.deleteSolicitudFolioAlumno,
+  );
+
   next();
 }
 
