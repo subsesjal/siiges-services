@@ -22,6 +22,7 @@ module.exports = {
   createFolioDocumentoAlumnoQuery: createQuery(FolioDocumentoAlumno),
   countFoliosDocumentosAlumnosQuery: countQuery(FolioDocumentoAlumno),
   findOneSolicitudFolioAlumnoQuery: findOneQuery(SolicitudFolioAlumno),
+  findOneFolioDocumentoAlumnoQuery: findOneQuery(FolioDocumentoAlumno),
   findOneAlumnoQuery: findOneQuery(Alumno),
   findAllSolicitudFolioAlumnosQuery: findAllQuery(SolicitudFolioAlumno),
   deleteSolicitudFolioAlumnoQuery: deleteAndFindQuery(SolicitudFolioAlumno),

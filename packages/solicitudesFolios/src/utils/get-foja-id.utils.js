@@ -17,7 +17,7 @@ const getFojaId = async (
   }
 
   const totalFoliosFoja = await countFoliosDocumentosAlumnosQuery(null, {
-    isDeleting: false,
+    isDeleting: true,
     searchColumn: 'fojaId',
     searchText: lastFoja.id,
   });

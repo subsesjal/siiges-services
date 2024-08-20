@@ -1,27 +1,37 @@
-const { checkers } = require('@siiges-services/shared');
-const boom = require('@hapi/boom');
+const DOCUMENTOS_MAP = {
+  Certificado: 'C',
+  Título: 'T',
+};
 
-const createFolioDocumento = async (tipoDocumentoId, findOneLibroQuery, createLibroQuery) => {
-  if (checkers.isUndefined(tipoDocumentoId)) {
-    throw boom.badRequest('tipoDocumentoId is undefined');
-  }
+const SOLICITUDES_MAP = {
+  Total: 'T',
+  Parcial: 'P',
+  Duplicado: 'D',
+};
 
-  const año = new Date().getFullYear();
-  let libro = await findOneLibroQuery({ descripcion: año, tipoDocumentoId });
+const createFolioDocumento = async ({
+  nivel,
+  tipoDocumento,
+  tipoSolicitudFolio,
+  libro,
+  año,
+  countFolios,
+}) => {
+  const totalFoliosLibro = await countFolios(null, {
+    isDeleting: true,
+    searchColumn: 'libroId',
+    searchText: libro.id,
+  });
 
-  if (!libro) {
-    const consecutivo = await findOneLibroQuery({ descripcion: año - 1, tipoDocumentoId });
+  const nuevoConsecutivo = totalFoliosLibro + 1;
+  const consecutivoFormateado = String(nuevoConsecutivo).padStart(6, '0');
 
-    const nombre = consecutivo ? consecutivo.nombre + 1 : 6;
+  const letraTipoDocumento = DOCUMENTOS_MAP[tipoDocumento];
+  const letraTipoSolicitud = SOLICITUDES_MAP[tipoSolicitudFolio];
 
-    libro = await createLibroQuery({
-      tipoDocumentoId,
-      nombre,
-      descripcion: año,
-    });
-  }
+  const folio = `${nivel}${letraTipoDocumento}${letraTipoSolicitud}${libro.nombre}${año}${consecutivoFormateado}`;
 
-  return libro;
+  return folio;
 };
 
 module.exports = {

@@ -34,6 +34,7 @@ module.exports = {
   assignFoliosAlumnos: assignFoliosAlumnos(
     solicitudesFolios.findOneSolicitudFolioQuery,
     solicitudesFoliosAlumnos.findAllSolicitudFolioAlumnosQuery,
+    solicitudesFoliosAlumnos.findOneFolioDocumentoAlumnoQuery,
     solicitudesFoliosAlumnos.createFolioDocumentoAlumnoQuery,
     solicitudesFoliosAlumnos.countFoliosDocumentosAlumnosQuery,
     solicitudesFolios.findOneLibroQuery,
