@@ -41,9 +41,9 @@ async function checkExistingFolios(solicitudFoliosAlumnos, findOneFolioDocumento
  *
  * @param {Object} La solicitud de folio que contiene los datos del programa.
  * @param {Array} Arreglo de objetos que representan la solicitud de folio de los alumnos.
- * @param {Object} libro - Objeto que representa el libro donde se registran los folios.
- * @param {Function} findAllFojaQuery - Función para encontrar todas las fojas.
- * @param {Function} createFojaQuery - Función para crear una foja.
+ * @param {Object} Objeto que representa el libro donde se registran los folios.
+ * @param {Function} Función para encontrar todas las fojas.
+ * @param {Function} Función para crear una foja.
  * @param {Function} Función para contar los folios de documentos de alumnos.
  * @param {Function} Función para crear un folio documento de alumno.
  */
@@ -93,15 +93,6 @@ async function assignFoliosToAlumnos(
 /**
  * Asigna folios a los alumnos de una solicitud de folio.
  *
- * @param {Function} Función para obtener una solicitud de folio.
- * @param {Function} Función para obtener todas las solicitudes de folio de alumnos.
- * @param {Function} Función para encontrar un folio documento de alumno.
- * @param {Function} Función para crear un folio documento de alumno.
- * @param {Function} Función para contar los folios de documentos de alumnos.
- * @param {Function} Función para encontrar un libro.
- * @param {Function} Función para crear un libro.
- * @param {Function} Función para encontrar todas las fojas.
- * @param {Function} Función para crear una foja.
  * @returns {Function} Función que asigna los folios.
  */
 const assignFoliosAlumnos = (
