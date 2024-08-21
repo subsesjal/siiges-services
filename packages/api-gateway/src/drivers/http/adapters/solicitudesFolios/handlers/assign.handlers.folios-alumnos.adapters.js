@@ -15,7 +15,7 @@ async function asignacionFolioAlumno(req, reply) {
       { id: solicitudFolioId },
     );
 
-    Logger.info('[solicitudes]: Getting solicitud folio');
+    Logger.info('[notification]: Sending notification');
     this.notificacionServices.sendNotificationEmail({
       usuarioId: solicitudFolio?.programa?.plantel?.institucion?.usuario?.id,
       email: solicitudFolio?.programa?.plantel?.institucion?.usuario?.correo,
