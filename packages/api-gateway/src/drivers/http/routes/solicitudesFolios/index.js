@@ -40,7 +40,7 @@ async function trayectoriaRouter(fastify, opts, next) {
     solicitudesFoliosAdapter.updateSolicitudFolio,
   );
 
-  await fastify.patch(
+  await fastify.post(
     '/:solicitudFolioId/observaciones',
     {
       schema: solicitudSchemas.udpateSolicitudFolioSchema,
@@ -98,7 +98,7 @@ async function trayectoriaRouter(fastify, opts, next) {
   await fastify.post(
     '/:solicitudFolioId/asignacionFolios',
     {
-      // schema: solicitudSchemas.udpateSolicitudFolioSchema,
+      schema: solicitudSchemas.assignFoliosAlumnosSchema,
       onRequest: [fastify.authenticate],
     },
     solicitudesFoliosAdapter.asignacionFolioAlumno,

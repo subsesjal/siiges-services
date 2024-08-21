@@ -6,16 +6,21 @@ const findAllSolicitudFolioAlumnos = (
       association: 'alumno',
       include: [{ association: 'persona' }],
     },
+    {
+      association: 'folioDocumentoAlumno',
+      include: [
+        { association: 'foja' },
+        { association: 'libro' },
+      ],
+    },
   ];
 
-  const solicitudes = await findAllSolicitudFolioAlumnosQuery(
+  const solicitudesFoliosAlumnos = await findAllSolicitudFolioAlumnosQuery(
     query,
-    {
-      include,
-    },
+    { include, strict: false },
   );
 
-  return solicitudes;
+  return solicitudesFoliosAlumnos;
 };
 
 module.exports = findAllSolicitudFolioAlumnos;

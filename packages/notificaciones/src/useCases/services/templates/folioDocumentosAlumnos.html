@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>SIIGES - Folios asignados</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #0056b3;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    p {
+      margin-bottom: 15px;
+    }
+    .title {
+      font-weight: bold;
+      color: #0056b3;
+      margin-bottom: 10px;
+    }
+    .content {
+      background-color: #f2f2f2;
+      padding: 15px;
+      border-left: 4px solid #0056b3;
+      border-radius: 4px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+    .important-note {
+      color: red;
+      font-weight: bold;
+      font-size: 14px;
+      margin-top: 30px;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #0056b3;
+      color: #fff;
+      font-weight: bold;
+    }
+    tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Folios de <strong>{tipoDocumento}</strong> asignados</h1>
+    <p>Estimada institución <strong>{nombre}</strong>,</p>
+    <p>La siguiente tabla corresponde a los folios asignados a la solicitud <strong>#{folioSolicitud}</strong>:</p>
+    <div class="title">Detalles de la solicitud:</div>
+    <div>Nombre del Plan de Estudios: <strong>{programa}</strong></div>
+    <div>Nivel: <strong>{nivel}</strong></div>
+    <div>No. de RVOE: <strong>{rvoe}</strong></div>
+    <div>Tipo de Solicitud: <strong>{tipoSolicitudFolio}</strong></div>
+    <div class="">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre Alumno</th>
+            <th>Folio</th>
+          </tr>
+        </thead>
+        <tbody>
+          {foliosAlumnos}
+        </tbody>
+      </table>
+    </div>
+    <p>Saludos cordiales,</p>
+    <p>El equipo de SIIGES</p>
+    <p class="important-note">Nota: Este es un mensaje generado automáticamente, por favor no respondas a esta dirección de correo electrónico.</p>
+  </div>
+</body>
+</html>

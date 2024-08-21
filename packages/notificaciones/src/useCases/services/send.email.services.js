@@ -4,17 +4,11 @@ const fs = require('fs');
 const nodemailer = require('nodemailer');
 const { Logger } = require('@siiges-services/shared');
 const { config } = require('../../../config/environment');
+const templateHelper = require('../helpers');
 
-const generateMapObservaciones = (dataParsed, template) => {
-  if (template === 'observacionSolicitud') {
-    const { observacion } = dataParsed;
-    const mapObservaciones = observacion.map((dato) => {
-      const { nombre, observaciones } = dato;
-      return `<tr><td style="border: 1px solid #ddd;padding: 8px;">${nombre}</td><td style="border: 1px solid #ddd;padding: 8px;">${observaciones}</td></tr>`;
-    });
-    const newDataParsed = dataParsed;
-    newDataParsed.observacion = mapObservaciones.join('');
-  }
+const ADD_DETAILS_MAPPING = {
+  observacionSolicitud: templateHelper.generateMapObservaciones,
+  folioDocumentosAlumnos: templateHelper.generateMapFoliosAlumnos,
 };
 
 const sendEmail = async ({
@@ -24,8 +18,11 @@ const sendEmail = async ({
     email, asunto, template, data,
   });
 
-  const dataParsed = JSON.parse(data);
-  generateMapObservaciones(dataParsed, template);
+  let dataParsed = JSON.parse(data);
+  const detailMapping = ADD_DETAILS_MAPPING[template];
+  dataParsed = detailMapping ? detailMapping(dataParsed) : dataParsed;
+
+  // generateMapObservaciones(dataParsed, template);
   const templatePath = path.join(__dirname, 'templates', `${template}.html`);
   const templateContent = fs.readFileSync(templatePath, 'utf8');
 

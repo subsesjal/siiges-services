@@ -1,6 +1,6 @@
 const { checkers } = require('@siiges-services/shared');
 
-const ATENDER_OBSERVACIONES_ESTATUS = 3;
+const ESTATUS_ATENDER_OBSERVACIONES = 4;
 
 const updateSolicitudFolio = (
   findOneSolicitudFolioQuery,
@@ -28,7 +28,7 @@ const updateSolicitudFolio = (
       },
     ];
 
-    updatedData.estatusSolicitudFolioId = ATENDER_OBSERVACIONES_ESTATUS;
+    updatedData.estatusSolicitudFolioId = ESTATUS_ATENDER_OBSERVACIONES;
   }
 
   const solicitudFolioUpdated = await updateSolicitudFolioQuery(
