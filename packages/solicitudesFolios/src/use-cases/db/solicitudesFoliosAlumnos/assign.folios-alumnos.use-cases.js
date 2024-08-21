@@ -4,6 +4,31 @@ const { getFojaId } = require('../../../utils/get-foja-id.utils');
 const { getLibroId } = require('../../../utils/get-libro-id.utils');
 const { createFolioDocumento } = require('../../../utils/create-folio-documento.utils');
 
+const ESTATUS_FOLIOS_ASIGNADOS = 3;
+
+const includeSolicitud = [
+  {
+    association: 'programa',
+    include: [{ association: 'nivel' }],
+  },
+  { association: 'tipoDocumento' },
+  { association: 'tipoSolicitudFolio' },
+];
+
+const includeFolios = [
+  {
+    association: 'alumno',
+    include: [{ association: 'persona' }],
+  },
+  {
+    association: 'folioDocumentoAlumno',
+    include: [
+      { association: 'foja' },
+      { association: 'libro' },
+    ],
+  },
+];
+
 /**
  * Obtiene la solicitud de folio con sus asociaciones necesarias.
  *
@@ -97,6 +122,7 @@ async function assignFoliosToAlumnos(
  */
 const assignFoliosAlumnos = (
   findOneSolicitudFolioQuery,
+  updateSolicitudFolioQuery,
   findAllSolicitudFolioAlumnosQuery,
   findOneFolioDocumentoAlumnoQuery,
   createFolioDocumentoAlumnoQuery,
@@ -106,19 +132,10 @@ const assignFoliosAlumnos = (
   findAllFojaQuery,
   createFojaQuery,
 ) => async (identifierObj) => {
-  const include = [
-    {
-      association: 'programa',
-      include: [{ association: 'nivel' }],
-    },
-    { association: 'tipoDocumento' },
-    { association: 'tipoSolicitudFolio' },
-  ];
-
   const solicitudFolio = await getSolicitudFolio(
     findOneSolicitudFolioQuery,
     identifierObj,
-    include,
+    includeSolicitud,
   );
 
   const solicitudFoliosAlumnos = await findAllSolicitudFolioAlumnosQuery({
@@ -150,8 +167,17 @@ const assignFoliosAlumnos = (
     createFolioDocumentoAlumnoQuery,
   );
 
-  // eslint-disable-next-line consistent-return
-  return solicitudFoliosAlumnos;
+  await updateSolicitudFolioQuery(
+    identifierObj,
+    { estatusSolicitudFolio: ESTATUS_FOLIOS_ASIGNADOS },
+  );
+
+  const solicitudesFoliosAlumnosUpdated = await findAllSolicitudFolioAlumnosQuery(
+    { solicitudFolioId: solicitudFolio.id },
+    { includeFolios, strict: false },
+  );
+
+  return solicitudesFoliosAlumnosUpdated;
 };
 
 module.exports = assignFoliosAlumnos;

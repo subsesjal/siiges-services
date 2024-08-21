@@ -7,10 +7,14 @@ const findOneSolicitudFolio = (findOneSolicitudFolioQuery) => async (identifierO
       include: [{
         association: 'plantel',
         include: [
-          { association: 'institucion' },
+          {
+            association: 'institucion',
+            include: [{ association: 'usuario' }],
+          },
           { association: 'domicilio' },
         ],
-      }],
+      },
+      { association: 'nivel' }],
     },
     { association: 'estatusSolicitudFolio' },
     { association: 'tipoDocumento' },

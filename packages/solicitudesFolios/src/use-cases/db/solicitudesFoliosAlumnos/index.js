@@ -33,6 +33,7 @@ module.exports = {
   ),
   assignFoliosAlumnos: assignFoliosAlumnos(
     solicitudesFolios.findOneSolicitudFolioQuery,
+    solicitudesFolios.updateSolicitudFolioQuery,
     solicitudesFoliosAlumnos.findAllSolicitudFolioAlumnosQuery,
     solicitudesFoliosAlumnos.findOneFolioDocumentoAlumnoQuery,
     solicitudesFoliosAlumnos.createFolioDocumentoAlumnoQuery,

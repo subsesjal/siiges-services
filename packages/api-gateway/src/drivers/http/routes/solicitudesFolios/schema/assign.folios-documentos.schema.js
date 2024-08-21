@@ -6,16 +6,9 @@ const { libro } = require('./properties/libro');
 const { alumno } = require('../../alumnos/schema/properties/alumno');
 const { persona } = require('../../usuarios/schema/properties/persona');
 
-const findAllSolicitudFolioAlumnoSchema = {
+const assignFoliosAlumnosSchema = {
   tags: ['Alumnos de una Solicitud de Folios'],
-  description: 'Return a list of alumnos de una solicitud de folios.',
-  params: {
-    type: 'object',
-    properties: {
-      solicitudFolioId: { type: 'integer' },
-    },
-    required: ['solicitudFolioId'],
-  },
+  description: 'Return a list of folios assigned.',
   response: {
     200: {
       type: 'object',
@@ -75,4 +68,4 @@ const findAllSolicitudFolioAlumnoSchema = {
   },
 };
 
-module.exports = findAllSolicitudFolioAlumnoSchema;
+module.exports = assignFoliosAlumnosSchema;

@@ -18,6 +18,7 @@ const FolioDocumentoAlumnoSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'solicitud_folio_alumno_id',
+    unique: true,
     references: {
       model: SOLICITUD_FOLIO_ALUMNO_TABLE,
       key: 'id',
@@ -88,6 +89,9 @@ class FolioDocumentoAlumno extends Model {
   static associate(models) {
     this.belongsTo(models.Alumno, { as: 'alumno' });
     this.belongsTo(models.SolicitudFolioAlumno, { as: 'solicitudFolioAlumno' });
+    this.belongsTo(models.TipoDocumento, { as: 'tipoDocumento' });
+    this.belongsTo(models.Foja, { as: 'foja' });
+    this.belongsTo(models.Libro, { as: 'libro' });
   }
 
   static config(sequelize) {
