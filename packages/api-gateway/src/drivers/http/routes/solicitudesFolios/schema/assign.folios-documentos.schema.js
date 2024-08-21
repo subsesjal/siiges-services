@@ -9,8 +9,15 @@ const { persona } = require('../../usuarios/schema/properties/persona');
 const assignFoliosAlumnosSchema = {
   tags: ['Alumnos de una Solicitud de Folios'],
   description: 'Return a list of folios assigned.',
+  params: {
+    type: 'object',
+    properties: {
+      solicitudFolioId: { type: 'integer' },
+    },
+    required: ['solicitudFolioId'],
+  },
   response: {
-    200: {
+    201: {
       type: 'object',
       properties: {
         data: {

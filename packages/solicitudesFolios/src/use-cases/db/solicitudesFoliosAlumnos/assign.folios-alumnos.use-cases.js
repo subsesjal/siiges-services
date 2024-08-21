@@ -174,7 +174,7 @@ const assignFoliosAlumnos = (
 
   const solicitudesFoliosAlumnosUpdated = await findAllSolicitudFolioAlumnosQuery(
     { solicitudFolioId: solicitudFolio.id },
-    { includeFolios, strict: false },
+    { include: includeFolios, strict: false },
   );
 
   return solicitudesFoliosAlumnosUpdated;
