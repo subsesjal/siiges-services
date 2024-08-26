@@ -69,7 +69,7 @@ const swaggerObject = {
   },
   uiConfig: {
     docExpansion: 'list',
-    deepLinking: false,
+    deepLinking: true,
     defaultModelRendering: 'model',
     operationsSorter: 'method',
   },
