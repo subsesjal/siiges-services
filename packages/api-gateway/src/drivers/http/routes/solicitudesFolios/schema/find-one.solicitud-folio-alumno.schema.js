@@ -20,6 +20,7 @@ const findOneAlumnoSchema = {
         data: {
           type: 'object',
           properties: {
+            id: { type: 'integer' },
             ...solicitudFolioAlumno,
             ...responseProperties,
             alumno: {
