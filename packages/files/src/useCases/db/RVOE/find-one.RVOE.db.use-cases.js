@@ -1,6 +1,3 @@
-/* eslint-disable new-cap */
-/* eslint-disable no-undef */
-/* eslint-disable global-require */
 const fs = require('fs');
 const path = require('path');
 const { checkers } = require('@siiges-services/shared');
@@ -26,26 +23,16 @@ async function uploadFile(fileMetdata, identifierObj, fileUploaded, solicitudId)
   const ubication = getUbication(fileMetdata, rutaArchivo);
   const data = createData(identifierObj, rutaArchivo, ubication);
   const ruta = path.join(__dirname, '../../../../../../public', ubication);
-
-  // Asegurarse de que las carpetas de destino existan
   fs.mkdirSync(path.dirname(ruta), { recursive: true });
-
-  // Crear un buffer a partir de los datos del archivo
   const fileBuffer = Buffer.from(fileUploaded);
-
-  // Crear un stream de escritura
   const dest = fs.createWriteStream(ruta);
-
-  // Escribir el buffer en el stream de escritura
   dest.write(fileBuffer);
 
-  // Manejar el evento 'finish'
   dest.on('finish', () => {
     Logger.info(`[files/fs.create]: ${rutaArchivo} file created`);
     return rutaArchivo;
   });
 
-  // Manejar el evento 'error'
   dest.on('error', (err) => {
     throw boom.conflict(`There was a conflict: ${err}`);
   });
