@@ -108,13 +108,13 @@ tipoDocumento ${tipoDocumento}`);
       tipoDocumento: tipoDocumentoItem.name,
       tipoEntidad: tipoEntidadItem.name,
     }),
-    RVOE: () => findFileRVOE(entidadId, fileMetdata, {
+    ACUERDO_RVOE: () => findFileRVOE(entidadId, fileMetdata, {
       tipoDocumento: tipoDocumentoItem.name,
       tipoEntidad: tipoEntidadItem.name,
     }),
   };
 
-  if (tipoDocumentoItem.name.startsWith('FD') || tipoDocumentoItem.name.startsWith('OFICIO_ADMISORIO') || tipoDocumentoItem.name.startsWith('RVOE')) {
+  if (tipoDocumentoItem.name.startsWith('FD') || tipoDocumentoItem.name.startsWith('OFICIO_ADMISORIO') || tipoDocumentoItem.name.startsWith('ACUERDO_RVOE')) {
     await filesFDA[tipoDocumentoItem.name]();
   }
 

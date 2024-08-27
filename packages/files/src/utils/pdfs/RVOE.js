@@ -200,7 +200,6 @@ del Reconocimiento de Validez Oficial de Estudios de Educación Superior del Est
   content = `${solicitud.programa.plantel.institucion?.rector?.persona?.nombre} ${solicitud.programa.plantel.institucion?.rector?.persona?.apellidoPaterno} ${solicitud.programa.plantel.institucion?.rector?.persona?.apellidoMaterno}`;
   crearSeccion(currentPositionY, doc, content, 'center');
   agregarImagenYPaginaPie(doc, img3);
-
   const pdfDataUri = doc.output('arraybuffer');
   return pdfDataUri;
 }

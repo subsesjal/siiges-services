@@ -213,7 +213,7 @@ const tipoDocumentoObj = [
   },
   {
     id: 54,
-    name: 'RVOE',
+    name: 'ACUERDO_RVOE',
   },
 ];
 
