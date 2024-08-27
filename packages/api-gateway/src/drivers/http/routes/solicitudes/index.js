@@ -66,7 +66,14 @@ async function solicitudRouter(fastify, opts, next) {
     },
     solicitudesAdapter.updateSolicitudPrograma,
   );
-
+  await fastify.delete(
+    '/:solicitudId',
+    {
+      schema: solicitudesSchema.deleteSolicitudSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesAdapter.deleteSolicitud,
+  );
   await fastify.get(
     '/:solicitudId/representantes/:usuarioId',
     {

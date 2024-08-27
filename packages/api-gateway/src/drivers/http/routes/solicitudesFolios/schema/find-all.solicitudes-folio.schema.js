@@ -4,24 +4,23 @@ const { tipoSolicitudFolio } = require('./properties/tipoSolicitudFolio');
 const { programa } = require('../../solicitudes/schema/properties/programa');
 const { estatusSolicitudFolio } = require('./properties/estatusSolicitudFolio');
 const { responseProperties } = require('./properties/responseProperties');
+const { institucion } = require('../../instituciones/schema/properties/institucion');
+const { plantel } = require('../../instituciones/schema/properties/plantel');
+const { domicilio } = require('../../usuarios/schema/properties/domicilio');
+const { estado } = require('../../usuarios/schema/properties/estado');
+const { municipio } = require('../../usuarios/schema/properties/municipio');
 
 const findAllSolicitudesProgramasSchema = {
   tags: ['Solicitudes Folios'],
   description: 'Return a list of solicitudes.',
   querystring: {
-    estatusSolicitudFolioId: {
-      type: 'string',
+    type: 'object',
+    properties: {
+      estatusSolicitudFolioId: { type: 'string' },
+      tipoDocumentoId: { type: 'string' },
+      tipoSolicitudFolioId: { type: 'string' },
+      programaId: { type: 'string' },
     },
-    tipoDocumentoId: {
-      type: 'string',
-    },
-    tipoSolicitudFolioId: {
-      type: 'string',
-    },
-    programaId: {
-      type: 'string',
-    },
-
   },
   response: {
     200: {
@@ -33,6 +32,7 @@ const findAllSolicitudesProgramasSchema = {
             type: 'object',
             properties: {
               id: { type: 'integer' },
+              folioSolicitud: { type: 'string' },
               ...solicitudFolio,
               ...responseProperties,
               estatusSolicitudFolio: {
@@ -65,6 +65,46 @@ const findAllSolicitudesProgramasSchema = {
                   id: { type: 'integer' },
                   ...programa,
                   ...responseProperties,
+                  plantel: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...plantel,
+                      ...responseProperties,
+                      domicilio: {
+                        type: 'object',
+                        properties: {
+                          id: { type: 'integer' },
+                          ...domicilio,
+                          ...responseProperties,
+                          municipio: {
+                            type: 'object',
+                            properties: {
+                              id: { type: 'integer' },
+                              ...municipio,
+                              ...responseProperties,
+                            },
+                          },
+                          estado: {
+                            type: 'object',
+                            properties: {
+                              id: { type: 'integer' },
+                              ...estado,
+                              ...responseProperties,
+                            },
+                          },
+                        },
+                      },
+                      institucion: {
+                        type: 'object',
+                        properties: {
+                          id: { type: 'integer' },
+                          ...institucion,
+                          ...responseProperties,
+                        },
+                      },
+                    },
+                  },
                 },
               },
             },

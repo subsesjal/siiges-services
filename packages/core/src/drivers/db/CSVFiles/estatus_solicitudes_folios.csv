@@ -1,5 +1,6 @@
 id,nombre,descripcion,created_at
-1,ENVIADO,Solicitud enviada,2018-08-08 0:00:00
-2,EN REVISIÓN,Solicitu en revisión,2018-08-08 0:00:00
-3,ASIGNADO,Folio Asignados,2018-08-08 0:00:00
-4,CANCELADO,Solicitud cancelada,2018-08-08 0:00:00
+1,EN CAPTURA,Solicitud en Captura,2018-08-08 0:00:00
+2,REVISION,Solicitud Lista para Revisión,2018-08-08 0:00:00
+3,FOLIOS ASIGNADOS,Folios Asignados,2018-08-08 0:00:00
+4,ATENDER OBSERVACIONES,Atender Observaciones de la Solicitud,2018-08-08 0:00:00
+5,CANCELADA,Solicitud cancelada,2018-08-08 0:00:00

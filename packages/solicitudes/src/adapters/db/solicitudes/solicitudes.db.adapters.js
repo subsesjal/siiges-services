@@ -50,6 +50,7 @@ module.exports = {
   findOneTrayectoriaQuery: findOneQuery(Trayectoria),
   updateTrayectoriaQuery: updateAndFindQuery(Trayectoria),
   findAllSolicitudSeccionQuery: findAllQuery(SolicitudSeccion),
+  deleteSolicitudQuery: deleteQuery(Solicitud),
   findProgramasBySolicitudIdQuery: (solicitudId) => Programa.findOne({
     where: {
       solicitud_id: solicitudId,

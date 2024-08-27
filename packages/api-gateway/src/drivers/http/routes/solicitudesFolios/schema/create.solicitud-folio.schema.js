@@ -8,12 +8,7 @@ const createSolicitudFolioSchema = {
   body: {
     type: 'object',
     properties: {
-      tipoDocumentoId: { type: 'integer' },
-      tipoSolicitudFolioId: { type: 'integer' },
-      estatusSolicitudFolioId: { type: 'integer' },
-      programaId: { type: 'integer' },
-      fecha: { type: 'string', format: 'date-time' },
-      folioPago: { type: 'string' },
+      ...solicitudFolio,
     },
     required: ['tipoDocumentoId', 'tipoSolicitudFolioId', 'estatusSolicitudFolioId', 'programaId', 'fecha', 'folioPago'],
   },
@@ -25,7 +20,7 @@ const createSolicitudFolioSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            folio: { type: 'string' },
+            folioSolicitud: { type: 'string' },
             ...solicitudFolio,
             ...responseProperties,
             programa: {

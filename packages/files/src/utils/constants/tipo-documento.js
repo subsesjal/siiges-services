@@ -213,6 +213,10 @@ const tipoDocumentoObj = [
   },
   {
     id: 54,
+    name: 'COMPROBANTE_PAGO_FOLIOS',
+  },
+    {
+    id: 55,
     name: 'ACUERDO_RVOE',
   },
 ];

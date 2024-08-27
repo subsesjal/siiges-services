@@ -1,0 +1,31 @@
+id,tipo_entidad_id,entidad_id,tipo_documento_id,nombre,ubicacion,created_at,updated_at
+1,5,9,37,formato_pedagogico_01_1722290779184.pdf,/uploads/PROGRAMA/FORMATO_PEDAGOGICO_01/formato_pedagogico_01_1722290779184.pdf,2024-07-29 22:06:19,
+2,5,9,6,mapa_curricular_1722290954438.pdf,/uploads/PROGRAMA/MAPA_CURRICULAR/mapa_curricular_1722290954438.pdf,2024-07-29 22:09:14,
+3,5,9,7,reglas_academicas_1722290960411.pdf,/uploads/PROGRAMA/REGLAS_ACADEMICAS/reglas_academicas_1722290960411.pdf,2024-07-29 22:09:20,
+4,5,9,8,asignaturas_detalle_1722290978131.pdf,/uploads/PROGRAMA/ASIGNATURAS_DETALLE/asignaturas_detalle_1722290978131.pdf,2024-07-29 22:09:38,
+5,5,9,9,propuesta_hemerografica_1722290983076.pdf,/uploads/PROGRAMA/PROPUESTA_HEMEROGRAFICA/propuesta_hemerografica_1722290983076.pdf,2024-07-29 22:09:43,
+6,6,9,10,informe_resultados_trayectoria_educativa_1722362805427.pdf,/uploads/TRAYECTORIA/INFORME_RESULTADOS_TRAYECTORIA_EDUCATIVA/informe_resultados_trayectoria_educativa_1722362805427.pdf,2024-07-30 18:06:45,
+7,6,9,11,instrumentos_trayectoria_educativa_1722362809796.pdf,/uploads/TRAYECTORIA/INSTRUMENTOS_TRAYECTORIA_EDUCATIVA/instrumentos_trayectoria_educativa_1722362809796.pdf,2024-07-30 18:06:49,
+8,6,9,12,trayectoria_educativa_1722362814307.pdf,/uploads/TRAYECTORIA/TRAYECTORIA_EDUCATIVA/trayectoria_educativa_1722362814307.pdf,2024-07-30 18:06:54,
+9,1,9,1,logotipo_1722364200783.jpeg,/uploads/INSTITUCION/LOGOTIPO/logotipo_1722364200783.jpeg,2024-07-30 18:30:00,
+10,4,9,2,firma_representante_1722364273830.jpeg,/uploads/REPRESENTANTE/FIRMA_REPRESENTANTE/firma_representante_1722364273830.jpeg,2024-07-30 18:31:13,
+11,8,9,15,identificacion_representante_1722370820110.pdf,/uploads/SOLICITUD/IDENTIFICACION_REPRESENTANTE/identificacion_representante_1722370820110.pdf,2024-07-30 20:20:20,
+12,8,9,16,comprobante_pago_rvoe_1722370825539.pdf,/uploads/SOLICITUD/COMPROBANTE_PAGO_RVOE/comprobante_pago_rvoe_1722370825539.pdf,2024-07-30 20:20:25,
+13,8,9,18,fotografia_inmueble_1722370829476.pdf,/uploads/SOLICITUD/FOTOGRAFIA_INMUEBLE/fotografia_inmueble_1722370829476.pdf,2024-07-30 20:20:29,
+14,8,9,21,constancia_infejal_1722370834466.pdf,/uploads/SOLICITUD/CONSTANCIA_INFEJAL/constancia_infejal_1722370834466.pdf,2024-07-30 20:20:34,
+15,8,9,22,licencia_municipal_1722370838691.pdf,/uploads/SOLICITUD/LICENCIA_MUNICIPAL/licencia_municipal_1722370838691.pdf,2024-07-30 20:20:38,
+16,8,9,38,dictamen_impi_1722370842982.pdf,/uploads/SOLICITUD/DICTAMEN_IMPI/dictamen_impi_1722370842982.pdf,2024-07-30 20:20:42,
+17,8,9,23,secretaria_salud_1722370847878.pdf,/uploads/SOLICITUD/SECRETARIA_SALUD/secretaria_salud_1722370847878.pdf,2024-07-30 20:20:47,
+18,8,9,24,comprobante_telefono_1722370858048.pdf,/uploads/SOLICITUD/COMPROBANTE_TELEFONO/comprobante_telefono_1722370858048.pdf,2024-07-30 20:20:58,
+19,8,9,26,proyecto_vinculacion_1722370862737.pdf,/uploads/SOLICITUD/PROYECTO_VINCULACION/proyecto_vinculacion_1722370862737.pdf,2024-07-30 20:21:02,
+20,8,9,28,plan_mejora_1722370868704.pdf,/uploads/SOLICITUD/PLAN_MEJORA/plan_mejora_1722370868704.pdf,2024-07-30 20:21:08,
+21,8,9,33,forma_migratoria_1722370872421.pdf,/uploads/SOLICITUD/FORMA_MIGRATORIA/forma_migratoria_1722370872421.pdf,2024-07-30 20:21:12,
+22,8,9,27,programa_superacion_1722370877021.pdf,/uploads/SOLICITUD/PROGRAMA_SUPERACION/programa_superacion_1722370877021.pdf,2024-07-30 20:21:17,
+23,5,9,36,dictamen_evaluacion_1722371255646.pdf,/uploads/PROGRAMA/DICTAMEN_EVALUACION/dictamen_evaluacion_1722371255646.pdf,2024-07-30 20:27:35,
+24,8,9,39,FDA02_solicitudId_9.pdf,/uploads/SOLICITUD/FDA02/FDA02_solicitudId_9.pdf,2024-07-30 21:45:41,2024-07-31 17:37:44
+25,8,9,47,FDA05_solicitudId_9.pdf,/uploads/SOLICITUD/FDA05/FDA05_solicitudId_9.pdf,2024-07-30 21:45:41,2024-07-31 17:37:44
+26,8,9,44,FDA01_solicitudId_9.pdf,/uploads/SOLICITUD/FDA01/FDA01_solicitudId_9.pdf,2024-07-30 21:45:41,2024-07-31 17:37:44
+27,8,9,48,FDA06_solicitudId_9.pdf,/uploads/SOLICITUD/FDA06/FDA06_solicitudId_9.pdf,2024-07-30 21:45:41,2024-07-31 17:37:44
+28,8,9,45,FDA03_solicitudId_9.pdf,/uploads/SOLICITUD/FDA03/FDA03_solicitudId_9.pdf,2024-07-30 21:45:41,2024-07-31 17:37:44
+29,8,9,46,FDA04_solicitudId_9.pdf,/uploads/SOLICITUD/FDA04/FDA04_solicitudId_9.pdf,2024-07-30 21:45:49,2024-07-31 17:37:56
+30,8,9,53,OFAD_solicitudId_9.pdf,/uploads/SOLICITUD/OFICIO_ADMISORIO/OFAD_solicitudId_9.pdf,2024-07-31 18:39:13,2024-07-31 18:41:57

@@ -1,6 +1,9 @@
 const { programasAdapter } = require('../../adapters');
 const {
-  findAllProgramasSchema, findPlantelProgramasSchema, findInstitucionProgramasSchema,
+  findAllProgramasSchema,
+  findPlantelProgramasSchema,
+  findInstitucionProgramasSchema,
+  findOneProgramaSchema,
 } = require('./schema');
 
 async function programasRouter(fastify, opts, next) {
@@ -29,6 +32,15 @@ async function programasRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     programasAdapter.findInstitucionProgramas,
+  );
+
+  await fastify.get(
+    '/:programaId',
+    {
+      schema: findOneProgramaSchema,
+      onRequest: [fastify.authenticate],
+    },
+    programasAdapter.findOnePrograma,
   );
 
   next();

@@ -63,6 +63,10 @@ const SolicitudFolioSchema = {
     type: DataTypes.STRING,
     field: 'folio_pago',
   },
+  observaciones: {
+    allowNull: true,
+    type: DataTypes.TEXT,
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,

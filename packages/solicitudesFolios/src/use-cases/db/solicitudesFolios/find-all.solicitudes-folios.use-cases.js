@@ -6,7 +6,24 @@ const findAllSolicitudesFolios = (
     Object.entries(query).filter(([_, value]) => value !== undefined),
   );
   const include = [
-    { association: 'programa' },
+    {
+      association: 'programa',
+      include: [
+        {
+          association: 'plantel',
+          include: [
+            {
+              association: 'domicilio',
+              include: [
+                { association: 'estado' },
+                { association: 'municipio' },
+              ],
+            },
+            { association: 'institucion' },
+          ],
+        },
+      ],
+    },
     { association: 'estatusSolicitudFolio' },
     { association: 'tipoDocumento' },
     { association: 'tipoSolicitudFolio' },
