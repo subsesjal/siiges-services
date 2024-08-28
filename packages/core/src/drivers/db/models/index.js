@@ -113,6 +113,8 @@ const { SolicitudRevEquiv, SolicitudRevEquivSchema } = require('./solicitudesRev
 const { Interesado, InteresadoSchema } = require('./interesados');
 const { SolicitudRevEquivInteresado, SolicitudRevEquivInteresadoSchema } = require('./solicitudRevEquivInteresado');
 const { InstitucionProcedencia, InstitucionProcedenciaSchema } = require('./institucionesProcedencia');
+const { AsignaturaAntecedente, AsignaturaAntecedenteSchema } = require('./asignaturaAntecedentes');
+const { AsignaturaEquivalente, AsignaturaEquivalenteSchema } = require('./asignaturaEquivalente');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -260,6 +262,8 @@ function setupModels(sequelize) {
     .config(sequelize));
   InstitucionProcedencia.init(InstitucionProcedenciaSchema, InstitucionProcedencia
     .config(sequelize));
+  AsignaturaAntecedente.init(AsignaturaAntecedenteSchema, AsignaturaAntecedente.config(sequelize));
+  AsignaturaEquivalente.init(AsignaturaEquivalenteSchema, AsignaturaEquivalente.config(sequelize));
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -375,6 +379,8 @@ function setupModels(sequelize) {
   Interesado.associate(sequelize.models);
   SolicitudRevEquivInteresado.associate(sequelize.models);
   InstitucionProcedencia.associate(sequelize.models);
+  AsignaturaAntecedente.associate(sequelize.models);
+  AsignaturaEquivalente.associate(sequelize.models);
 }
 
 module.exports = setupModels;
