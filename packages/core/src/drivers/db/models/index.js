@@ -108,6 +108,11 @@ const { SolicitudFolioAlumno, SolicitudFolioAlumnoSchema } = require('./solicitu
 const { Libro, LibroSchema } = require('./libro');
 const { Foja, FojaSchema } = require('./foja');
 const { FolioDocumentoAlumno, FolioDocumentoAlumnoSchema } = require('./folioDocumentoAlumno');
+const { InstitucionDestino, InstitucionDestinoSchema } = require('./destino');
+const { SolicitudRevEquiv, SolicitudRevEquivSchema } = require('./solicitudesRevEquiv');
+const { Interesado, InteresadoSchema } = require('./interesados');
+const { SolicitudRevEquivInteresado, SolicitudRevEquivInteresadoSchema } = require('./solicitudRevEquivInteresado');
+const { InstitucionProcedencia, InstitucionProcedenciaSchema } = require('./institucionesProcedencia');
 
 function setupModels(sequelize) {
   // Initialize models
@@ -248,6 +253,13 @@ function setupModels(sequelize) {
   Libro.init(LibroSchema, Libro.config(sequelize));
   Foja.init(FojaSchema, Foja.config(sequelize));
   FolioDocumentoAlumno.init(FolioDocumentoAlumnoSchema, FolioDocumentoAlumno.config(sequelize));
+  InstitucionDestino.init(InstitucionDestinoSchema, InstitucionDestino.config(sequelize));
+  SolicitudRevEquiv.init(SolicitudRevEquivSchema, SolicitudRevEquiv.config(sequelize));
+  Interesado.init(InteresadoSchema, Interesado.config(sequelize));
+  SolicitudRevEquivInteresado.init(SolicitudRevEquivInteresadoSchema, SolicitudRevEquivInteresado
+    .config(sequelize));
+  InstitucionProcedencia.init(InstitucionProcedenciaSchema, InstitucionProcedencia
+    .config(sequelize));
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -358,6 +370,11 @@ function setupModels(sequelize) {
   Libro.associate(sequelize.models);
   Foja.associate(sequelize.models);
   FolioDocumentoAlumno.associate(sequelize.models);
+  InstitucionDestino.associate(sequelize.models);
+  SolicitudRevEquiv.associate(sequelize.models);
+  Interesado.associate(sequelize.models);
+  SolicitudRevEquivInteresado.associate(sequelize.models);
+  InstitucionProcedencia.associate(sequelize.models);
 }
 
 module.exports = setupModels;
