@@ -108,6 +108,11 @@ const { SOLICITUD_FOLIO_ALUMNO_TABLE, SolicitudFolioAlumnoSchema } = require('..
 const { LIBRO_TABLE, LibroSchema } = require('../models/libro');
 const { FOJA_TABLE, FojaSchema } = require('../models/foja');
 const { FOLIO_DOCUMENTO_ALUMNO_TABLE, FolioDocumentoAlumnoSchema } = require('../models/folioDocumentoAlumno');
+const { INSTITUCION_DESTINO_TABLE, InstitucionDestinoSchema } = require('../models/destino');
+const { SOLICITUD_REV_EQUIV_TABLE, SolicitudRevEquivSchema } = require('../models/solicitudesRevEquiv');
+const { INTERESADO_TABLE, InteresadoSchema } = require('../models/interesados');
+const { SOLICITUD_REV_EQUIV_INTERESADO_TABLE, SolicitudRevEquivInteresadoSchema } = require('../models/solicitudRevEquivInteresado');
+const { INSTITUCION_PROCEDENCIA_TABLE, InstitucionProcedenciaSchema } = require('../models/institucionesProcedencia');
 
 module.exports = {
   async up(queryInterface) {
@@ -233,6 +238,14 @@ module.exports = {
     await queryInterface.createTable(LIBRO_TABLE, LibroSchema);
     await queryInterface.createTable(FOJA_TABLE, FojaSchema);
     await queryInterface.createTable(FOLIO_DOCUMENTO_ALUMNO_TABLE, FolioDocumentoAlumnoSchema);
+    await queryInterface.createTable(INSTITUCION_DESTINO_TABLE, InstitucionDestinoSchema);
+    await queryInterface.createTable(SOLICITUD_REV_EQUIV_TABLE, SolicitudRevEquivSchema);
+    await queryInterface.createTable(INTERESADO_TABLE, InteresadoSchema);
+    await queryInterface.createTable(
+      SOLICITUD_REV_EQUIV_INTERESADO_TABLE,
+      SolicitudRevEquivInteresadoSchema,
+    );
+    await queryInterface.createTable(INSTITUCION_PROCEDENCIA_TABLE, InstitucionProcedenciaSchema);
   },
 
   async down(queryInterface) {
@@ -347,5 +360,10 @@ module.exports = {
     await queryInterface.dropTable(LIBRO_TABLE);
     await queryInterface.dropTable(FOJA_TABLE);
     await queryInterface.dropTable(FOLIO_DOCUMENTO_ALUMNO_TABLE);
+    await queryInterface.dropTable(INSTITUCION_DESTINO_TABLE);
+    await queryInterface.dropTable(SOLICITUD_REV_EQUIV_TABLE);
+    await queryInterface.dropTable(INTERESADO_TABLE);
+    await queryInterface.dropTable(SOLICITUD_REV_EQUIV_INTERESADO_TABLE);
+    await queryInterface.dropTable(INSTITUCION_PROCEDENCIA_TABLE);
   },
 };
