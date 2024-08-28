@@ -233,7 +233,7 @@ const tipoDocumentoObj = [
   },
   {
     id: 59,
-    name: 'PAGO_TRAMITE',
+    name: 'COMPROBANTE_PAGO_TRAMITE',
   },
   {
     id: 60,
