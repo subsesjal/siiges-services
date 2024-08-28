@@ -113,6 +113,8 @@ const { SOLICITUD_REV_EQUIV_TABLE, SolicitudRevEquivSchema } = require('../model
 const { INTERESADO_TABLE, InteresadoSchema } = require('../models/interesados');
 const { SOLICITUD_REV_EQUIV_INTERESADO_TABLE, SolicitudRevEquivInteresadoSchema } = require('../models/solicitudRevEquivInteresado');
 const { INSTITUCION_PROCEDENCIA_TABLE, InstitucionProcedenciaSchema } = require('../models/institucionesProcedencia');
+const { ASIGNATURA_ANTECEDENTE_TABLE, AsignaturaAntecedenteSchema } = require('../models/asignaturaAntecedentes');
+const { ASIGNATURA_EQUIVALENTE_TABLE, AsignaturaEquivalenteSchema } = require('../models/asignaturaEquivalente');
 
 module.exports = {
   async up(queryInterface) {
@@ -246,6 +248,8 @@ module.exports = {
       SolicitudRevEquivInteresadoSchema,
     );
     await queryInterface.createTable(INSTITUCION_PROCEDENCIA_TABLE, InstitucionProcedenciaSchema);
+    await queryInterface.createTable(ASIGNATURA_ANTECEDENTE_TABLE, AsignaturaAntecedenteSchema);
+    await queryInterface.createTable(ASIGNATURA_EQUIVALENTE_TABLE, AsignaturaEquivalenteSchema);
   },
 
   async down(queryInterface) {
@@ -365,5 +369,7 @@ module.exports = {
     await queryInterface.dropTable(INTERESADO_TABLE);
     await queryInterface.dropTable(SOLICITUD_REV_EQUIV_INTERESADO_TABLE);
     await queryInterface.dropTable(INSTITUCION_PROCEDENCIA_TABLE);
+    await queryInterface.dropTable(ASIGNATURA_ANTECEDENTE_TABLE);
+    await queryInterface.dropTable(ASIGNATURA_EQUIVALENTE_TABLE);
   },
 };
