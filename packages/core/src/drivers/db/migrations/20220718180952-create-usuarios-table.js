@@ -108,12 +108,12 @@ const { SOLICITUD_FOLIO_ALUMNO_TABLE, SolicitudFolioAlumnoSchema } = require('..
 const { LIBRO_TABLE, LibroSchema } = require('../models/libro');
 const { FOJA_TABLE, FojaSchema } = require('../models/foja');
 const { FOLIO_DOCUMENTO_ALUMNO_TABLE, FolioDocumentoAlumnoSchema } = require('../models/folioDocumentoAlumno');
-const { INSTITUCION_DESTINO_TABLE, InstitucionDestinoSchema } = require('../models/destino');
-const { SOLICITUD_REV_EQUIV_TABLE, SolicitudRevEquivSchema } = require('../models/solicitudesRevEquiv');
-const { INTERESADO_TABLE, InteresadoSchema } = require('../models/interesados');
-const { SOLICITUD_REV_EQUIV_INTERESADO_TABLE, SolicitudRevEquivInteresadoSchema } = require('../models/solicitudRevEquivInteresado');
-const { INSTITUCION_PROCEDENCIA_TABLE, InstitucionProcedenciaSchema } = require('../models/institucionesProcedencia');
-const { ASIGNATURA_ANTECEDENTE_TABLE, AsignaturaAntecedenteSchema } = require('../models/asignaturaAntecedentes');
+const { INSTITUCION_DESTINO_TABLE, InstitucionDestinoSchema } = require('../models/institucionDestino');
+const { INSTITUCION_PROCEDENCIA_TABLE, InstitucionProcedenciaSchema } = require('../models/institucionProcedencia');
+const { INTERESADO_TABLE, InteresadoSchema } = require('../models/interesado');
+const { ESTATUS_SOLICITUD_REV_EQUIV_TABLE, EstatusSolicitudRevEquivSchema } = require('../models/estatusSolicitudRevEquiv');
+const { SOLICITUD_REV_EQUIV_TABLE, SolicitudRevEquivSchema } = require('../models/solicitudRevEquiv');
+const { ASIGNATURA_ANTECEDENTE_TABLE, AsignaturaAntecedenteSchema } = require('../models/asignaturaAntecedente');
 const { ASIGNATURA_EQUIVALENTE_TABLE, AsignaturaEquivalenteSchema } = require('../models/asignaturaEquivalente');
 
 module.exports = {
@@ -241,13 +241,11 @@ module.exports = {
     await queryInterface.createTable(FOJA_TABLE, FojaSchema);
     await queryInterface.createTable(FOLIO_DOCUMENTO_ALUMNO_TABLE, FolioDocumentoAlumnoSchema);
     await queryInterface.createTable(INSTITUCION_DESTINO_TABLE, InstitucionDestinoSchema);
-    await queryInterface.createTable(SOLICITUD_REV_EQUIV_TABLE, SolicitudRevEquivSchema);
-    await queryInterface.createTable(INTERESADO_TABLE, InteresadoSchema);
-    await queryInterface.createTable(
-      SOLICITUD_REV_EQUIV_INTERESADO_TABLE,
-      SolicitudRevEquivInteresadoSchema,
-    );
     await queryInterface.createTable(INSTITUCION_PROCEDENCIA_TABLE, InstitucionProcedenciaSchema);
+    await queryInterface.createTable(INTERESADO_TABLE, InteresadoSchema);
+    await queryInterface
+      .createTable(ESTATUS_SOLICITUD_REV_EQUIV_TABLE, EstatusSolicitudRevEquivSchema);
+    await queryInterface.createTable(SOLICITUD_REV_EQUIV_TABLE, SolicitudRevEquivSchema);
     await queryInterface.createTable(ASIGNATURA_ANTECEDENTE_TABLE, AsignaturaAntecedenteSchema);
     await queryInterface.createTable(ASIGNATURA_EQUIVALENTE_TABLE, AsignaturaEquivalenteSchema);
   },
@@ -365,10 +363,10 @@ module.exports = {
     await queryInterface.dropTable(FOJA_TABLE);
     await queryInterface.dropTable(FOLIO_DOCUMENTO_ALUMNO_TABLE);
     await queryInterface.dropTable(INSTITUCION_DESTINO_TABLE);
-    await queryInterface.dropTable(SOLICITUD_REV_EQUIV_TABLE);
-    await queryInterface.dropTable(INTERESADO_TABLE);
-    await queryInterface.dropTable(SOLICITUD_REV_EQUIV_INTERESADO_TABLE);
     await queryInterface.dropTable(INSTITUCION_PROCEDENCIA_TABLE);
+    await queryInterface.dropTable(INTERESADO_TABLE);
+    await queryInterface.dropTable(ESTATUS_SOLICITUD_REV_EQUIV_TABLE);
+    await queryInterface.dropTable(SOLICITUD_REV_EQUIV_TABLE);
     await queryInterface.dropTable(ASIGNATURA_ANTECEDENTE_TABLE);
     await queryInterface.dropTable(ASIGNATURA_EQUIVALENTE_TABLE);
   },

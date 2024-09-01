@@ -1,6 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { SOLICITUD_REV_EQUIV_TABLE } = require('./solicitudesRevEquiv');
 const { ASIGNATURA_TABLE } = require('./asignatura');
+const { INTERESADO_TABLE } = require('./interesado');
 
 const ASIGNATURA_EQUIVALENTE_TABLE = 'asignaturas_equivalentes';
 
@@ -11,17 +11,17 @@ const AsignaturaEquivalenteSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  solicitudRevEquivId: {
+  interesadoId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'solicitud_rev_equiv_id',
+    field: 'interesado_id',
     references: {
-      model: SOLICITUD_REV_EQUIV_TABLE,
+      model: INTERESADO_TABLE,
       key: 'id',
     },
   },
   asignaturaId: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.INTEGER,
     field: 'asignatura_id',
     references: {
@@ -30,7 +30,7 @@ const AsignaturaEquivalenteSchema = {
     },
   },
   nombre: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.STRING,
   },
   calificacion: {

@@ -1,31 +1,22 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { TIPO_INSTITUCION_TABLE } = require('./tipoInstitucion');
-const { PROGRAMA_TABLE } = require('./programa');
+const { ESTADO_TABLE } = require('./estado');
 
-const INSTITUCION_DESTINO_TABLE = 'instituciones_destino';
+const INSTITUCION_PROCEDENCIA_TABLE = 'instituciones_procedencia';
 
-const InstitucionDestinoSchema = {
+const InstitucionProcedenciaSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  tipointitucionId: {
+  tipoInstitucionId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'tipointitucion_id',
+    field: 'tipo_institucion_id',
     references: {
       model: TIPO_INSTITUCION_TABLE,
-      key: 'id',
-    },
-  },
-  programaId: {
-    allowNull: false,
-    type: DataTypes.INTEGER,
-    field: 'programa_id',
-    references: {
-      model: PROGRAMA_TABLE,
       key: 'id',
     },
   },
@@ -33,9 +24,14 @@ const InstitucionDestinoSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  RVOE: {
+  estadoId: {
     allowNull: false,
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
+    field: 'estado_id',
+    references: {
+      model: ESTADO_TABLE,
+      key: 'id',
+    },
   },
   nombreCarrera: {
     allowNull: false,
@@ -60,24 +56,24 @@ const InstitucionDestinoSchema = {
   },
 };
 
-class InstitucionDestino extends Model {
+class InstitucionProcedencia extends Model {
   static associate(models) {
-    this.belongsTo(models.TipoInstitucion, { as: 'tipointitucion' });
-    this.belongsTo(models.Programa, { as: 'programa' });
+    this.belongsTo(models.TipoInstitucion, { as: 'tipoInstitucion' });
+    this.belongsTo(models.Estado, { as: 'estado' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: INSTITUCION_DESTINO_TABLE,
-      modelName: 'InstitucionDestino',
+      tableName: INSTITUCION_PROCEDENCIA_TABLE,
+      modelName: 'InstitucionProcedencia',
       timestamps: false,
     };
   }
 }
 
 module.exports = {
-  INSTITUCION_DESTINO_TABLE,
-  InstitucionDestinoSchema,
-  InstitucionDestino,
+  INSTITUCION_PROCEDENCIA_TABLE,
+  InstitucionProcedenciaSchema,
+  InstitucionProcedencia,
 };

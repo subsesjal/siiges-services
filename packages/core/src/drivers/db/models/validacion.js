@@ -104,7 +104,7 @@ const ValidacionSchema = {
   },
   archivoValidacion: {
     type: DataTypes.STRING,
-    field: 'archivo_validaciOn',
+    field: 'archivo_validacion',
   },
   fechaValidacion: {
     type: DataTypes.DATE,

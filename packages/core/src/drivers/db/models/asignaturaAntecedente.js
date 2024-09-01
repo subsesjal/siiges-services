@@ -1,24 +1,14 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { SOLICITUD_REV_EQUIV_TABLE } = require('./solicitudesRevEquiv');
-const { INTERESADO_TABLE } = require('./interesados');
+const { INTERESADO_TABLE } = require('./interesado');
 
-const SOLICITUD_REV_EQUIV_INTERESADO_TABLE = 'solicitudes_rev_equiv_interesados';
+const ASIGNATURA_ANTECEDENTE_TABLE = 'asignaturas_antecedentes';
 
-const SolicitudRevEquivInteresadoSchema = {
+const AsignaturaAntecedenteSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
-  },
-  solicitudesRevEquivId: {
-    allowNull: false,
-    type: DataTypes.INTEGER,
-    field: 'solicitudes_rev_equiv_id',
-    references: {
-      model: SOLICITUD_REV_EQUIV_TABLE,
-      key: 'id',
-    },
   },
   interesadoId: {
     allowNull: false,
@@ -28,6 +18,14 @@ const SolicitudRevEquivInteresadoSchema = {
       model: INTERESADO_TABLE,
       key: 'id',
     },
+  },
+  nombre: {
+    allowNull: false,
+    type: DataTypes.STRING,
+  },
+  calificacion: {
+    allowNull: false,
+    type: DataTypes.STRING,
   },
   createdAt: {
     allowNull: false,
@@ -47,24 +45,23 @@ const SolicitudRevEquivInteresadoSchema = {
   },
 };
 
-class SolicitudRevEquivInteresado extends Model {
+class AsignaturaAntecedente extends Model {
   static associate(models) {
     this.belongsTo(models.SolicitudRevEquiv, { as: 'solicitudRevEquiv' });
-    this.belongsTo(models.Interesado, { as: 'interesado' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: SOLICITUD_REV_EQUIV_INTERESADO_TABLE,
-      modelName: 'SolicitudRevEquivInteresado',
+      tableName: ASIGNATURA_ANTECEDENTE_TABLE,
+      modelName: 'AsignaturaAntecedente',
       timestamps: false,
     };
   }
 }
 
 module.exports = {
-  SOLICITUD_REV_EQUIV_INTERESADO_TABLE,
-  SolicitudRevEquivInteresadoSchema,
-  SolicitudRevEquivInteresado,
+  ASIGNATURA_ANTECEDENTE_TABLE,
+  AsignaturaAntecedenteSchema,
+  AsignaturaAntecedente,
 };

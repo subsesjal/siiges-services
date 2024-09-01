@@ -10,6 +10,16 @@ const SolicitudRevEquivSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
+  interesadoId: {
+    allowNull: false,
+    unique: true,
+    type: DataTypes.INTEGER,
+    field: 'interesado_id',
+    references: {
+      model: TIPO_TRAMITE_TABLE,
+      key: 'id',
+    },
+  },
   tipoTramiteId: {
     allowNull: false,
     type: DataTypes.INTEGER,
@@ -19,10 +29,14 @@ const SolicitudRevEquivSchema = {
       key: 'id',
     },
   },
-  estatusSolicitudRevEquiv: {
+  estatusSolicitudRevEquivId: {
     allowNull: false,
-    type: DataTypes.STRING,
-    field: 'estatus_solicitud_rev_equiv',
+    type: DataTypes.INTEGER,
+    field: 'estatus_solicitud_rev_equiv_id',
+    references: {
+      model: TIPO_TRAMITE_TABLE,
+      key: 'id',
+    },
   },
   fecha: {
     allowNull: false,
@@ -58,6 +72,7 @@ const SolicitudRevEquivSchema = {
 class SolicitudRevEquiv extends Model {
   static associate(models) {
     this.belongsTo(models.TipoTramite, { as: 'tipoTramite' });
+    this.belongsTo(models.EstatusSolicitudRevEquiv, { as: 'estatusSolicitudRevEquiv' });
   }
 
   static config(sequelize) {
