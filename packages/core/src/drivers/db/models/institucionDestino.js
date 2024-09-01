@@ -33,9 +33,10 @@ const InstitucionDestinoSchema = {
     allowNull: true,
     type: DataTypes.STRING,
   },
-  acuerdo_rvoe: {
+  acuerdoRvoe: {
     allowNull: true,
     type: DataTypes.STRING,
+    field: 'acuerdo_rvoe',
   },
   nombreCarrera: {
     allowNull: true,

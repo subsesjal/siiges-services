@@ -1,5 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { TIPO_TRAMITE_TABLE } = require('./tipoTramite');
+const { INTERESADO_TABLE } = require('./interesado');
+const { ESTATUS_SOLICITUD_REV_EQUIV_TABLE } = require('./estatusSolicitudRevEquiv');
 
 const SOLICITUD_REV_EQUIV_TABLE = 'solicitudes_rev_equiv';
 
@@ -16,7 +18,7 @@ const SolicitudRevEquivSchema = {
     type: DataTypes.INTEGER,
     field: 'interesado_id',
     references: {
-      model: TIPO_TRAMITE_TABLE,
+      model: INTERESADO_TABLE,
       key: 'id',
     },
   },
@@ -34,7 +36,7 @@ const SolicitudRevEquivSchema = {
     type: DataTypes.INTEGER,
     field: 'estatus_solicitud_rev_equiv_id',
     references: {
-      model: TIPO_TRAMITE_TABLE,
+      model: ESTATUS_SOLICITUD_REV_EQUIV_TABLE,
       key: 'id',
     },
   },
