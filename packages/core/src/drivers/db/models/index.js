@@ -302,53 +302,54 @@ function setupModels(sequelize) {
   AsignaturaAntecedente.init(AsignaturaAntecedenteSchema, AsignaturaAntecedente.config(sequelize));
   AsignaturaEquivalente.init(AsignaturaEquivalenteSchema, AsignaturaEquivalente.config(sequelize));
   // Siiges 2.0
-  Academia.init(Academia, AcademiaSchema.config(sequelize));
-  AlumnoObservacion.init(AlumnoObservacion, AlumnoObservacionSchema.config(sequelize));
+  Academia.init(AcademiaSchema, Academia.config(sequelize));
+  ProgramaEvaluacion.init(ProgramaEvaluacionSchema, ProgramaEvaluacion.config(sequelize));
+  EvaluacionApartado.init(EvaluacionApartadoSchema, EvaluacionApartado.config(sequelize));
+  MixtaNoescolarizada.init(MixtaNoescolarizadaSchema, MixtaNoescolarizada.config(sequelize));
+  AlumnoObservacion.init(AlumnoObservacionSchema, AlumnoObservacion.config(sequelize));
+  Hemerobibliografica.init(HemerobibliograficaSchema, Hemerobibliografica.config(sequelize));
   AsignaturaHemerobibliografica.init(
-    AsignaturaHemerobibliografica,
-    AsignaturaHemerobibliograficaSchema.config(sequelize),
+    AsignaturaHemerobibliograficaSchema,
+    AsignaturaHemerobibliografica.config(sequelize),
   );
-  Asociacion.init(Asociacion, AsociacionSchema.config(sequelize));
-  Bitacora.init(Bitacora, BitacoraSchema.config(sequelize));
+  Asociacion.init(AsociacionSchema, Asociacion.config(sequelize));
+  Bitacora.init(BitacoraSchema, Bitacora.config(sequelize));
   CategoriaEvaluacionPregunta.init(
-    CategoriaEvaluacionPregunta,
-    CategoriaEvaluacionPreguntaSchema.config(sequelize),
+    CategoriaEvaluacionPreguntaSchema,
+    CategoriaEvaluacionPregunta.config(sequelize),
   );
-  Dictamen.init(Dictamen, DictamenSchema.config(sequelize));
-  Documento.init(Documento, DocumentoSchema.config(sequelize));
-  Equivalencia.init(Equivalencia, EquivalenciaSchema.config(sequelize));
-  Escala.init(Escala, EscalaSchema.config(sequelize));
-  Espejo.init(Espejo, EspejoSchema.config(sequelize));
-  EstatusCalificacion.init(EstatusCalificacion, EstatusCalificacionSchema.config(sequelize));
-  EvaluacionApartado.init(EvaluacionApartado, EvaluacionApartadoSchema.config(sequelize));
-  EvaluacionPregunta.init(EvaluacionPregunta, EvaluacionPreguntaSchema.config(sequelize));
-  EvaluacionProceso.init(EvaluacionProceso, EvaluacionProcesoSchema.config(sequelize));
+  Dictamen.init(DictamenSchema, Dictamen.config(sequelize));
+  Documento.init(DocumentoSchema, Documento.config(sequelize));
+  Equivalencia.init(EquivalenciaSchema, Equivalencia.config(sequelize));
+  Escala.init(EscalaSchema, Escala.config(sequelize));
+  Espejo.init(EspejoSchema, Espejo.config(sequelize));
+  EstatusCalificacion.init(EstatusCalificacionSchema, EstatusCalificacion.config(sequelize));
+  EvaluacionPregunta.init(EvaluacionPreguntaSchema, EvaluacionPregunta.config(sequelize));
+  EvaluacionProceso.init(EvaluacionProcesoSchema, EvaluacionProceso.config(sequelize));
   EvaluacionesEvaluacionPregunta.init(
-    EvaluacionesEvaluacionPregunta,
-    EvaluacionesEvaluacionPreguntaSchema.config(sequelize),
+    EvaluacionesEvaluacionPreguntaSchema,
+    EvaluacionesEvaluacionPregunta.config(sequelize),
   );
-  EvaluadorModalidad.init(EvaluadorModalidad, EvaluadorModalidadSchema.config(sequelize));
-  Experiencia.init(Experiencia, ExperienciaSchema.config(sequelize));
-  Hemerobibliografica.init(Hemerobibliografica, HemerobibliograficaSchema.config(sequelize));
-  Institucional.init(Institucional, InstitucionalSchema.config(sequelize));
-  MixtaNoescolarizada.init(MixtaNoescolarizada, MixtaNoescolarizadaSchema.config(sequelize));
-  Modulo.init(Modulo, ModuloSchema.config(sequelize));
-  ModuloRol.init(ModuloRol, ModuloRolSchema.config(sequelize));
-  Noticia.init(Noticia, NoticiaSchema.config(sequelize));
-  OficioDetalle.init(OficioDetalle, OficioDetalleSchema.config(sequelize));
-  Oficio.init(Oficio, OficioSchema.config(sequelize));
-  Pago.init(Pago, PagoSchema.config(sequelize));
-  Perfil.init(Perfil, PerfilSchema.config(sequelize));
-  PlantelDictamen.init(PlantelDictamen, PlantelDictamenSchema.config(sequelize));
-  ProgramaEvaluacion.init(ProgramaEvaluacion, ProgramaEvaluacionSchema.config(sequelize));
-  Respaldo.init(Respaldo, RespaldoSchema.config(sequelize));
+  EvaluadorModalidad.init(EvaluadorModalidadSchema, EvaluadorModalidad.config(sequelize));
+  Experiencia.init(ExperienciaSchema, Experiencia.config(sequelize));
+  Institucional.init(InstitucionalSchema, Institucional.config(sequelize));
+  Modulo.init(ModuloSchema, Modulo.config(sequelize));
+  ModuloRol.init(ModuloRolSchema, ModuloRol.config(sequelize));
+  Noticia.init(NoticiaSchema, Noticia.config(sequelize));
+  Oficio.init(OficioSchema, Oficio.config(sequelize));
+  OficioDetalle.init(OficioDetalleSchema, OficioDetalle.config(sequelize));
+  Pago.init(PagoSchema, Pago.config(sequelize));
+  Perfil.init(PerfilSchema, Perfil.config(sequelize));
+  PlantelDictamen.init(PlantelDictamenSchema, PlantelDictamen.config(sequelize));
+  ProgramaEvaluacion.init(ProgramaEvaluacionSchema, ProgramaEvaluacion.config(sequelize));
+  Respaldo.init(RespaldoSchema, Respaldo.config(sequelize));
   SolicitudEstatusSolicitud.init(
-    SolicitudEstatusSolicitud,
-    SolicitudEstatusSolicitudSchema.config(sequelize),
+    SolicitudEstatusSolicitudSchema,
+    SolicitudEstatusSolicitud.config(sequelize),
   );
-  SolicitudUsuario.init(SolicitudUsuario, SolicitudUsuarioSchema.config(sequelize));
-  Testigo.init(Testigo, TestigoSchema.config(sequelize));
-  TituloElectronico.init(TituloElectronico, TituloElectronicoSchema.config(sequelize));
+  SolicitudUsuario.init(SolicitudUsuarioSchema, SolicitudUsuario.config(sequelize));
+  Testigo.init(TestigoSchema, Testigo.config(sequelize));
+  TituloElectronico.init(TituloElectronicoSchema, TituloElectronico.config(sequelize));
   // Siiges 2.0 Fin
 
   // Associations

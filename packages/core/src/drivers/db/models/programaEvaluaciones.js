@@ -80,7 +80,7 @@ const ProgramaEvaluacionSchema = {
 class ProgramaEvaluacion extends Model {
   static associate(models) {
     this.belongsTo(models.Programa, { as: 'programa' });
-    this.belongsTo(models.Cumplimiento, { as: 'cumplimiento' });
+    this.belongsTo(models.Cumplimiento, { as: 'cumplimientoDetalle' }); // Cambiar alias para evitar colisión
     this.belongsTo(models.Evaluador, { as: 'evaluador' });
   }
 
