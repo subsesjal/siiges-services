@@ -116,6 +116,42 @@ const { SOLICITUD_REV_EQUIV_TABLE, SolicitudRevEquivSchema } = require('../model
 const { ASIGNATURA_ANTECEDENTE_TABLE, AsignaturaAntecedenteSchema } = require('../models/asignaturaAntecedente');
 const { ASIGNATURA_EQUIVALENTE_TABLE, AsignaturaEquivalenteSchema } = require('../models/asignaturaEquivalente');
 
+const { ACADEMIA_TABLE, AcademiaSchema } = require('../models/academias');
+const { ALUMNO_OBSERVACION_TABLE, AlumnoObservacionSchema } = require('../models/alumnoObservaciones');
+const { ASIGNATURA_HEMEROBIBLIOGRAFICA_TABLE, AsignaturaHemerobibliograficaSchema } = require('../models/asignaturasHemerobibliograficas');
+const { ASOCIACION_TABLE, AsociacionSchema } = require('../models/asociaciones');
+const { BITACORA_TABLE, BitacoraSchema } = require('../models/bitacoras');
+const { CATEGORIA_EVALUACION_PREGUNTA_TABLE, CategoriaEvaluacionPreguntaSchema } = require('../models/categoriasEvaluacionPregunta');
+const { DICTAMEN_TABLE, DictamenSchema } = require('../models/dictamenes');
+const { DOCUMENTO_TABLE, DocumentoSchema } = require('../models/documentos');
+const { EQUIVALENCIA_TABLE, EquivalenciaSchema } = require('../models/equivalencias');
+const { ESCALA_TABLE, EscalaSchema } = require('../models/escalas');
+const { ESPEJO_TABLE, EspejoSchema } = require('../models/espejos');
+const { ESTATUS_CALIFICACION_TABLE, EstatusCalificacionSchema } = require('../models/estatusCalificaciones');
+const { EVALUACION_APARTADO_TABLE, EvaluacionApartadoSchema } = require('../models/evaluacionApartados');
+const { EVALUACION_PREGUNTA_TABLE, EvaluacionPreguntaSchema } = require('../models/evaluacionPreguntas');
+const { EVALUACION_PROCESO_TABLE, EvaluacionProcesoSchema } = require('../models/evaluacionProcesos');
+const { EVALUACIONES_EVALUACION_PREGUNTA_TABLE, EvaluacionesEvaluacionPreguntaSchema } = require('../models/evaluacionesEvaluacionPreguntas');
+const { EVALUADOR_MODALIDAD_TABLE, EvaluadorModalidadSchema } = require('../models/evaluadoresModalidades');
+const { EXPERIENCIA_TABLE, ExperienciaSchema } = require('../models/experiencias');
+const { HEMEROBIBLIOGRAFICA_TABLE, HemerobibliograficaSchema } = require('../models/hemerobibliograficas');
+const { INSTITUCIONAL_TABLE, InstitucionalSchema } = require('../models/institucionales');
+const { MIXTA_NOESCOLARIZADA_TABLE, MixtaNoescolarizadaSchema } = require('../models/mixtaNoEscolarizadas');
+const { MODULO_TABLE, ModuloSchema } = require('../models/modulos');
+const { MODULO_ROL_TABLE, ModuloRolSchema } = require('../models/modulosRoles');
+const { NOTICIA_TABLE, NoticiaSchema } = require('../models/noticias');
+const { OFICIO_DETALLE_TABLE, OficioDetalleSchema } = require('../models/oficioDetalles');
+const { OFICIO_TABLE, OficioSchema } = require('../models/oficios');
+const { PAGO_TABLE, PagoSchema } = require('../models/pagos');
+const { PERFIL_TABLE, PerfilSchema } = require('../models/perfiles');
+const { PLANTEL_DICTAMEN_TABLE, PlantelDictamenSchema } = require('../models/plantelDictamenes');
+const { PROGRAMA_EVALUACION_TABLE, ProgramaEvaluacionSchema } = require('../models/programaEvaluaciones');
+const { RESPALDO_TABLE, RespaldoSchema } = require('../models/respaldos');
+const { SOLICITUD_ESTADO_SOLICITUD_TABLE, SolicitudEstatusSolicitudSchema } = require('../models/solicitudesEstatusSolicitudes');
+const { SOLICITUD_USUARIO_TABLE, SolicitudUsuarioSchema } = require('../models/solicitudes_usuarios');
+const { TESTIGO_TABLE, TestigoSchema } = require('../models/testigos');
+const { TITULO_ELECTRONICO_TABLE, TituloElectronicoSchema } = require('../models/titulosElectronicos');
+
 module.exports = {
   async up(queryInterface) {
     await queryInterface.createTable(ROL_TABLE, RolSchema);
@@ -248,6 +284,54 @@ module.exports = {
     await queryInterface.createTable(SOLICITUD_REV_EQUIV_TABLE, SolicitudRevEquivSchema);
     await queryInterface.createTable(ASIGNATURA_ANTECEDENTE_TABLE, AsignaturaAntecedenteSchema);
     await queryInterface.createTable(ASIGNATURA_EQUIVALENTE_TABLE, AsignaturaEquivalenteSchema);
+
+    await queryInterface.createTable(ACADEMIA_TABLE, AcademiaSchema);
+    await queryInterface.createTable(PROGRAMA_EVALUACION_TABLE, ProgramaEvaluacionSchema);
+    await queryInterface.createTable(EVALUACION_APARTADO_TABLE, EvaluacionApartadoSchema);
+    await queryInterface.createTable(MIXTA_NOESCOLARIZADA_TABLE, MixtaNoescolarizadaSchema);
+    await queryInterface.createTable(ALUMNO_OBSERVACION_TABLE, AlumnoObservacionSchema);
+    await queryInterface.createTable(HEMEROBIBLIOGRAFICA_TABLE, HemerobibliograficaSchema);
+    await queryInterface.createTable(
+      ASIGNATURA_HEMEROBIBLIOGRAFICA_TABLE,
+      AsignaturaHemerobibliograficaSchema,
+    );
+    await queryInterface.createTable(ASOCIACION_TABLE, AsociacionSchema);
+    await queryInterface.createTable(BITACORA_TABLE, BitacoraSchema);
+    await queryInterface.createTable(
+      CATEGORIA_EVALUACION_PREGUNTA_TABLE,
+      CategoriaEvaluacionPreguntaSchema,
+    );
+    await queryInterface.createTable(DICTAMEN_TABLE, DictamenSchema);
+    await queryInterface.createTable(DOCUMENTO_TABLE, DocumentoSchema);
+    await queryInterface.createTable(EQUIVALENCIA_TABLE, EquivalenciaSchema);
+    await queryInterface.createTable(ESCALA_TABLE, EscalaSchema);
+    await queryInterface.createTable(ESPEJO_TABLE, EspejoSchema);
+    await queryInterface.createTable(ESTATUS_CALIFICACION_TABLE, EstatusCalificacionSchema);
+    await queryInterface.createTable(EVALUACION_PREGUNTA_TABLE, EvaluacionPreguntaSchema);
+    await queryInterface.createTable(EVALUACION_PROCESO_TABLE, EvaluacionProcesoSchema);
+    await queryInterface.createTable(
+      EVALUACIONES_EVALUACION_PREGUNTA_TABLE,
+      EvaluacionesEvaluacionPreguntaSchema,
+    );
+    await queryInterface.createTable(EVALUADOR_MODALIDAD_TABLE, EvaluadorModalidadSchema);
+    await queryInterface.createTable(EXPERIENCIA_TABLE, ExperienciaSchema);
+    await queryInterface.createTable(INSTITUCIONAL_TABLE, InstitucionalSchema);
+    await queryInterface.createTable(MODULO_TABLE, ModuloSchema);
+    await queryInterface.createTable(MODULO_ROL_TABLE, ModuloRolSchema);
+    await queryInterface.createTable(NOTICIA_TABLE, NoticiaSchema);
+    await queryInterface.createTable(OFICIO_TABLE, OficioSchema);
+    await queryInterface.createTable(OFICIO_DETALLE_TABLE, OficioDetalleSchema);
+    await queryInterface.createTable(PAGO_TABLE, PagoSchema);
+    await queryInterface.createTable(PERFIL_TABLE, PerfilSchema);
+    await queryInterface.createTable(PLANTEL_DICTAMEN_TABLE, PlantelDictamenSchema);
+    await queryInterface.createTable(RESPALDO_TABLE, RespaldoSchema);
+    await queryInterface.createTable(
+      SOLICITUD_ESTADO_SOLICITUD_TABLE,
+      SolicitudEstatusSolicitudSchema,
+    );
+    await queryInterface.createTable(SOLICITUD_USUARIO_TABLE, SolicitudUsuarioSchema);
+    await queryInterface.createTable(TESTIGO_TABLE, TestigoSchema);
+    await queryInterface.createTable(TITULO_ELECTRONICO_TABLE, TituloElectronicoSchema);
   },
 
   async down(queryInterface) {
@@ -369,5 +453,41 @@ module.exports = {
     await queryInterface.dropTable(SOLICITUD_REV_EQUIV_TABLE);
     await queryInterface.dropTable(ASIGNATURA_ANTECEDENTE_TABLE);
     await queryInterface.dropTable(ASIGNATURA_EQUIVALENTE_TABLE);
+
+    await queryInterface.dropTable(ACADEMIA_TABLE);
+    await queryInterface.dropTable(PROGRAMA_EVALUACION_TABLE);
+    await queryInterface.dropTable(EVALUACION_APARTADO_TABLE);
+    await queryInterface.dropTable(MIXTA_NOESCOLARIZADA_TABLE);
+    await queryInterface.dropTable(ALUMNO_OBSERVACION_TABLE);
+    await queryInterface.dropTable(HEMEROBIBLIOGRAFICA_TABLE);
+    await queryInterface.dropTable(ASIGNATURA_HEMEROBIBLIOGRAFICA_TABLE);
+    await queryInterface.dropTable(ASOCIACION_TABLE);
+    await queryInterface.dropTable(BITACORA_TABLE);
+    await queryInterface.dropTable(CATEGORIA_EVALUACION_PREGUNTA_TABLE);
+    await queryInterface.dropTable(DICTAMEN_TABLE);
+    await queryInterface.dropTable(DOCUMENTO_TABLE);
+    await queryInterface.dropTable(EQUIVALENCIA_TABLE);
+    await queryInterface.dropTable(ESCALA_TABLE);
+    await queryInterface.dropTable(ESPEJO_TABLE);
+    await queryInterface.dropTable(ESTATUS_CALIFICACION_TABLE);
+    await queryInterface.dropTable(EVALUACION_PREGUNTA_TABLE);
+    await queryInterface.dropTable(EVALUACION_PROCESO_TABLE);
+    await queryInterface.dropTable(EVALUACIONES_EVALUACION_PREGUNTA_TABLE);
+    await queryInterface.dropTable(EVALUADOR_MODALIDAD_TABLE);
+    await queryInterface.dropTable(EXPERIENCIA_TABLE);
+    await queryInterface.dropTable(INSTITUCIONAL_TABLE);
+    await queryInterface.dropTable(MODULO_TABLE);
+    await queryInterface.dropTable(MODULO_ROL_TABLE);
+    await queryInterface.dropTable(NOTICIA_TABLE);
+    await queryInterface.dropTable(OFICIO_TABLE);
+    await queryInterface.dropTable(OFICIO_DETALLE_TABLE);
+    await queryInterface.dropTable(PAGO_TABLE);
+    await queryInterface.dropTable(PERFIL_TABLE);
+    await queryInterface.dropTable(PLANTEL_DICTAMEN_TABLE);
+    await queryInterface.dropTable(RESPALDO_TABLE);
+    await queryInterface.dropTable(SOLICITUD_ESTADO_SOLICITUD_TABLE);
+    await queryInterface.dropTable(SOLICITUD_USUARIO_TABLE);
+    await queryInterface.dropTable(TESTIGO_TABLE);
+    await queryInterface.dropTable(TITULO_ELECTRONICO_TABLE);
   },
 };
