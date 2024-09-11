@@ -108,6 +108,50 @@ const { SolicitudFolioAlumno, SolicitudFolioAlumnoSchema } = require('./solicitu
 const { Libro, LibroSchema } = require('./libro');
 const { Foja, FojaSchema } = require('./foja');
 const { FolioDocumentoAlumno, FolioDocumentoAlumnoSchema } = require('./folioDocumentoAlumno');
+const { InstitucionDestino, InstitucionDestinoSchema } = require('./institucionDestino');
+const { InstitucionProcedencia, InstitucionProcedenciaSchema } = require('./institucionProcedencia');
+const { Interesado, InteresadoSchema } = require('./interesado');
+const { EstatusSolicitudRevEquiv, EstatusSolicitudRevEquivSchema } = require('./estatusSolicitudRevEquiv');
+const { SolicitudRevEquiv, SolicitudRevEquivSchema } = require('./solicitudRevEquiv');
+const { AsignaturaAntecedente, AsignaturaAntecedenteSchema } = require('./asignaturaAntecedente');
+const { AsignaturaEquivalente, AsignaturaEquivalenteSchema } = require('./asignaturaEquivalente');
+// Siiges 1.0
+const { Academia, AcademiaSchema } = require('./academias');
+const { AlumnoObservacion, AlumnoObservacionSchema } = require('./alumnoObservaciones');
+const { AsignaturaHemerobibliografica, AsignaturaHemerobibliograficaSchema } = require('./asignaturasHemerobibliograficas');
+const { Asociacion, AsociacionSchema } = require('./asociaciones');
+const { Bitacora, BitacoraSchema } = require('./bitacoras');
+const { CategoriaEvaluacionPregunta, CategoriaEvaluacionPreguntaSchema } = require('./categoriasEvaluacionPregunta');
+const { Dictamen, DictamenSchema } = require('./dictamenes');
+const { Documento, DocumentoSchema } = require('./documentos');
+const { Equivalencia, EquivalenciaSchema } = require('./equivalencias');
+const { Escala, EscalaSchema } = require('./escalas');
+const { Espejo, EspejoSchema } = require('./espejos');
+const { EstatusCalificacion, EstatusCalificacionSchema } = require('./estatusCalificaciones');
+const { EvaluacionApartado, EvaluacionApartadoSchema } = require('./evaluacionApartados');
+const { EvaluacionPregunta, EvaluacionPreguntaSchema } = require('./evaluacionPreguntas');
+const { EvaluacionProceso, EvaluacionProcesoSchema } = require('./evaluacionProcesos');
+const { EvaluacionesEvaluacionPregunta, EvaluacionesEvaluacionPreguntaSchema } = require('./evaluacionesEvaluacionPreguntas');
+const { EvaluadorModalidad, EvaluadorModalidadSchema } = require('./evaluadoresModalidades');
+const { Experiencia, ExperienciaSchema } = require('./experiencias');
+const { Hemerobibliografica, HemerobibliograficaSchema } = require('./hemerobibliograficas');
+const { Institucional, InstitucionalSchema } = require('./institucionales');
+const { MixtaNoescolarizada, MixtaNoescolarizadaSchema } = require('./mixtaNoEscolarizadas');
+const { Modulo, ModuloSchema } = require('./modulos');
+const { ModuloRol, ModuloRolSchema } = require('./modulosRoles');
+const { Noticia, NoticiaSchema } = require('./noticias');
+const { OficioDetalle, OficioDetalleSchema } = require('./oficioDetalles');
+const { Oficio, OficioSchema } = require('./oficios');
+const { Pago, PagoSchema } = require('./pagos');
+const { Perfil, PerfilSchema } = require('./perfiles');
+const { PlantelDictamen, PlantelDictamenSchema } = require('./plantelDictamenes');
+const { ProgramaEvaluacion, ProgramaEvaluacionSchema } = require('./programaEvaluaciones');
+const { Respaldo, RespaldoSchema } = require('./respaldos');
+const { SolicitudEstatusSolicitud, SolicitudEstatusSolicitudSchema } = require('./solicitudesEstatusSolicitudes');
+const { SolicitudUsuario, SolicitudUsuarioSchema } = require('./solicitudes_usuarios');
+const { Testigo, TestigoSchema } = require('./testigos');
+const { TituloElectronico, TituloElectronicoSchema } = require('./titulosElectronicos');
+// Siiges 1.0 Fin
 
 function setupModels(sequelize) {
   // Initialize models
@@ -248,6 +292,65 @@ function setupModels(sequelize) {
   Libro.init(LibroSchema, Libro.config(sequelize));
   Foja.init(FojaSchema, Foja.config(sequelize));
   FolioDocumentoAlumno.init(FolioDocumentoAlumnoSchema, FolioDocumentoAlumno.config(sequelize));
+  InstitucionDestino.init(InstitucionDestinoSchema, InstitucionDestino.config(sequelize));
+  InstitucionProcedencia.init(InstitucionProcedenciaSchema, InstitucionProcedencia
+    .config(sequelize));
+  Interesado.init(InteresadoSchema, Interesado.config(sequelize));
+  EstatusSolicitudRevEquiv.init(EstatusSolicitudRevEquivSchema, EstatusSolicitudRevEquiv
+    .config(sequelize));
+  SolicitudRevEquiv.init(SolicitudRevEquivSchema, SolicitudRevEquiv.config(sequelize));
+  AsignaturaAntecedente.init(AsignaturaAntecedenteSchema, AsignaturaAntecedente.config(sequelize));
+  AsignaturaEquivalente.init(AsignaturaEquivalenteSchema, AsignaturaEquivalente.config(sequelize));
+  // Siiges 2.0
+  Academia.init(AcademiaSchema, Academia.config(sequelize));
+  ProgramaEvaluacion.init(ProgramaEvaluacionSchema, ProgramaEvaluacion.config(sequelize));
+  EvaluacionApartado.init(EvaluacionApartadoSchema, EvaluacionApartado.config(sequelize));
+  MixtaNoescolarizada.init(MixtaNoescolarizadaSchema, MixtaNoescolarizada.config(sequelize));
+  AlumnoObservacion.init(AlumnoObservacionSchema, AlumnoObservacion.config(sequelize));
+  Hemerobibliografica.init(HemerobibliograficaSchema, Hemerobibliografica.config(sequelize));
+  AsignaturaHemerobibliografica.init(
+    AsignaturaHemerobibliograficaSchema,
+    AsignaturaHemerobibliografica.config(sequelize),
+  );
+  Asociacion.init(AsociacionSchema, Asociacion.config(sequelize));
+  Bitacora.init(BitacoraSchema, Bitacora.config(sequelize));
+  CategoriaEvaluacionPregunta.init(
+    CategoriaEvaluacionPreguntaSchema,
+    CategoriaEvaluacionPregunta.config(sequelize),
+  );
+  Dictamen.init(DictamenSchema, Dictamen.config(sequelize));
+  Documento.init(DocumentoSchema, Documento.config(sequelize));
+  Equivalencia.init(EquivalenciaSchema, Equivalencia.config(sequelize));
+  Escala.init(EscalaSchema, Escala.config(sequelize));
+  Espejo.init(EspejoSchema, Espejo.config(sequelize));
+  EstatusCalificacion.init(EstatusCalificacionSchema, EstatusCalificacion.config(sequelize));
+  EvaluacionPregunta.init(EvaluacionPreguntaSchema, EvaluacionPregunta.config(sequelize));
+  EvaluacionProceso.init(EvaluacionProcesoSchema, EvaluacionProceso.config(sequelize));
+  EvaluacionesEvaluacionPregunta.init(
+    EvaluacionesEvaluacionPreguntaSchema,
+    EvaluacionesEvaluacionPregunta.config(sequelize),
+  );
+  EvaluadorModalidad.init(EvaluadorModalidadSchema, EvaluadorModalidad.config(sequelize));
+  Experiencia.init(ExperienciaSchema, Experiencia.config(sequelize));
+  Institucional.init(InstitucionalSchema, Institucional.config(sequelize));
+  Modulo.init(ModuloSchema, Modulo.config(sequelize));
+  ModuloRol.init(ModuloRolSchema, ModuloRol.config(sequelize));
+  Noticia.init(NoticiaSchema, Noticia.config(sequelize));
+  Oficio.init(OficioSchema, Oficio.config(sequelize));
+  OficioDetalle.init(OficioDetalleSchema, OficioDetalle.config(sequelize));
+  Pago.init(PagoSchema, Pago.config(sequelize));
+  Perfil.init(PerfilSchema, Perfil.config(sequelize));
+  PlantelDictamen.init(PlantelDictamenSchema, PlantelDictamen.config(sequelize));
+  ProgramaEvaluacion.init(ProgramaEvaluacionSchema, ProgramaEvaluacion.config(sequelize));
+  Respaldo.init(RespaldoSchema, Respaldo.config(sequelize));
+  SolicitudEstatusSolicitud.init(
+    SolicitudEstatusSolicitudSchema,
+    SolicitudEstatusSolicitud.config(sequelize),
+  );
+  SolicitudUsuario.init(SolicitudUsuarioSchema, SolicitudUsuario.config(sequelize));
+  Testigo.init(TestigoSchema, Testigo.config(sequelize));
+  TituloElectronico.init(TituloElectronicoSchema, TituloElectronico.config(sequelize));
+  // Siiges 2.0 Fin
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -358,6 +461,50 @@ function setupModels(sequelize) {
   Libro.associate(sequelize.models);
   Foja.associate(sequelize.models);
   FolioDocumentoAlumno.associate(sequelize.models);
+  InstitucionDestino.associate(sequelize.models);
+  InstitucionProcedencia.associate(sequelize.models);
+  Interesado.associate(sequelize.models);
+  EstatusSolicitudRevEquiv.associate(sequelize.models);
+  SolicitudRevEquiv.associate(sequelize.models);
+  AsignaturaAntecedente.associate(sequelize.models);
+  AsignaturaEquivalente.associate(sequelize.models);
+  // Siiges 2.0
+  Academia.associate(sequelize.models);
+  AlumnoObservacion.associate(sequelize.models);
+  AsignaturaHemerobibliografica.associate(sequelize.models);
+  Asociacion.associate(sequelize.models);
+  Bitacora.associate(sequelize.models);
+  CategoriaEvaluacionPregunta.associate(sequelize.models);
+  Dictamen.associate(sequelize.models);
+  Documento.associate(sequelize.models);
+  Equivalencia.associate(sequelize.models);
+  Escala.associate(sequelize.models);
+  Espejo.associate(sequelize.models);
+  EstatusCalificacion.associate(sequelize.models);
+  EvaluacionApartado.associate(sequelize.models);
+  EvaluacionPregunta.associate(sequelize.models);
+  EvaluacionProceso.associate(sequelize.models);
+  EvaluacionesEvaluacionPregunta.associate(sequelize.models);
+  EvaluadorModalidad.associate(sequelize.models);
+  Experiencia.associate(sequelize.models);
+  Hemerobibliografica.associate(sequelize.models);
+  Institucional.associate(sequelize.models);
+  MixtaNoescolarizada.associate(sequelize.models);
+  Modulo.associate(sequelize.models);
+  ModuloRol.associate(sequelize.models);
+  Noticia.associate(sequelize.models);
+  OficioDetalle.associate(sequelize.models);
+  Oficio.associate(sequelize.models);
+  Pago.associate(sequelize.models);
+  Perfil.associate(sequelize.models);
+  PlantelDictamen.associate(sequelize.models);
+  ProgramaEvaluacion.associate(sequelize.models);
+  Respaldo.associate(sequelize.models);
+  SolicitudEstatusSolicitud.associate(sequelize.models);
+  SolicitudUsuario.associate(sequelize.models);
+  Testigo.associate(sequelize.models);
+  TituloElectronico.associate(sequelize.models);
+  // Siiges 2.0 Fin
 }
 
 module.exports = setupModels;

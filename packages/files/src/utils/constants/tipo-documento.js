@@ -215,8 +215,32 @@ const tipoDocumentoObj = [
     id: 54,
     name: 'COMPROBANTE_PAGO_FOLIOS',
   },
-    {
+  {
     id: 55,
+    name: 'PROGRAMA_AUTORIZADO',
+  },
+  {
+    id: 56,
+    name: 'IDENTIFICACION_OFICIAL',
+  },
+  {
+    id: 57,
+    name: 'ANTECEDENTE_ACADEMICO',
+  },
+  {
+    id: 58,
+    name: 'PROPUESTA',
+  },
+  {
+    id: 59,
+    name: 'COMPROBANTE_PAGO_TRAMITE',
+  },
+  {
+    id: 60,
+    name: 'RESOLUCION',
+  },
+  {
+    id: 61,
     name: 'ACUERDO_RVOE',
   },
 ];
