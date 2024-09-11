@@ -16,7 +16,7 @@ const setSolicitudSeccion = (
   let solicitudSeccion;
   if (solicitudSeccionFound) {
     const isClosed = !solicitudSeccionFound.isClosed;
-    solicitudSeccion = updateSolicitudSeccionQuery(solicitudSeccionFound.id, {
+    solicitudSeccion = updateSolicitudSeccionQuery({ id: solicitudSeccionFound.id }, {
       isClosed,
     });
   } else {
