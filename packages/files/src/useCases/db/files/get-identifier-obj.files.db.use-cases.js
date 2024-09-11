@@ -14,6 +14,7 @@ const { findFileFDP02 } = require('../FDP');
 const { findFileFDP05 } = require('../FDP');
 const { findFileFDP06 } = require('../FDP');
 const { findFileOFAD } = require('../OFAD');
+const { findFileRVOE } = require('../RVOE');
 
 const getFileIdentifierObj = async (fileData) => {
   const { tipoEntidad, entidadId, tipoDocumento } = fileData;
@@ -107,9 +108,13 @@ tipoDocumento ${tipoDocumento}`);
       tipoDocumento: tipoDocumentoItem.name,
       tipoEntidad: tipoEntidadItem.name,
     }),
+    ACUERDO_RVOE: () => findFileRVOE(entidadId, fileMetdata, {
+      tipoDocumento: tipoDocumentoItem.name,
+      tipoEntidad: tipoEntidadItem.name,
+    }),
   };
 
-  if (tipoDocumentoItem.name.startsWith('FD') || tipoDocumentoItem.name.startsWith('OFICIO_ADMISORIO')) {
+  if (tipoDocumentoItem.name.startsWith('FD') || tipoDocumentoItem.name.startsWith('OFICIO_ADMISORIO') || tipoDocumentoItem.name.startsWith('ACUERDO_RVOE')) {
     await filesFDA[tipoDocumentoItem.name]();
   }
 
