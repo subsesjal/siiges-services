@@ -8,6 +8,8 @@ const findAllInspectoresProgramas = require('./find-all.handlers.inspectores-pro
 const { deleteInspectoresProgramas } = require('./delete.handlers.inspectores-programas.adpaters');
 const { updateInspectoresProgramas } = require('./update.handlers.inspectores-programas.adapters');
 const { findOneInspectoresProgramas } = require('./find-one.handlers.inspectores-programas.adpaters');
+const { findOneInspeccionesPreguntas } = require('./find-one.handlers.inspecciones-preguntas.adpaters');
+const findAllInspecciones = require('./find-all.handlers.inspecciones.adapters');
 
 module.exports = {
   createInspeccion,
@@ -20,4 +22,6 @@ module.exports = {
   deleteInspectoresProgramas,
   updateInspectoresProgramas,
   findOneInspectoresProgramas,
+  findAllInspecciones,
+  findOneInspeccionesPreguntas,
 };

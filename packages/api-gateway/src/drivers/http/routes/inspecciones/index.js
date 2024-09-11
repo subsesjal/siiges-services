@@ -10,6 +10,8 @@ const {
   findAllInspectoresProgramasSchema,
   deleteInspectoresProgramasSchema,
   findOneInspectoresProgramasSchema,
+  findAllInspeccionesSchema,
+  findOneInspeccionesPreguntasSchema,
 } = require('./schema');
 const updateInspectoresProgramasSchema = require('./schema/update.inspectores-programas.schema');
 
@@ -102,6 +104,24 @@ async function inspeccionRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     inspeccionesAdapter.updateInspectoresProgramas,
+  );
+
+  await fastify.get(
+    '/',
+    {
+      schema: findAllInspeccionesSchema,
+      onRequest: [fastify.authenticate],
+    },
+    inspeccionesAdapter.findAllInspecciones,
+  );
+
+  await fastify.get(
+    '/inspeccionesPreguntas/:inspeccionId',
+    {
+      schema: findOneInspeccionesPreguntasSchema,
+      onRequest: [fastify.authenticate],
+    },
+    inspeccionesAdapter.findOneInspeccionesPreguntas,
   );
 
   next();

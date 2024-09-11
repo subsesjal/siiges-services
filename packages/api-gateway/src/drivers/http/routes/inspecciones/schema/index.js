@@ -7,6 +7,8 @@ const createInspectoresProgramasSchema = require('./create.inspectores-programas
 const findAllInspectoresProgramasSchema = require('./find-all.inspectores-programas.schema');
 const { deleteInspectoresProgramasSchema } = require('./delete.inspectores-programas.schema');
 const { findOneInspectoresProgramasSchema } = require('./find-one.inspectores-programas.schema');
+const findAllInspeccionesSchema = require('./find-all.inspecciones.schema');
+const { findOneInspeccionesPreguntasSchema } = require('./find-one.inspecciones-preguntas.schema');
 
 module.exports = {
   createInspeccionSchema,
@@ -18,4 +20,6 @@ module.exports = {
   findAllInspectoresProgramasSchema,
   deleteInspectoresProgramasSchema,
   findOneInspectoresProgramasSchema,
+  findAllInspeccionesSchema,
+  findOneInspeccionesPreguntasSchema,
 };
