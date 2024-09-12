@@ -131,7 +131,7 @@ async function inspeccionRouter(fastify, opts, next) {
       schema: findAllInspeccionObservacionesSchema,
       onRequest: [fastify.authenticate],
     },
-    inspeccionesAdapter.findOneObservacion,
+    inspeccionesAdapter.findAllInspeccionObservaciones,
   );
   next();
 }
