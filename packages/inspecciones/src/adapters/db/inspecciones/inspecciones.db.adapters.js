@@ -46,4 +46,5 @@ module.exports = {
   findOneUsuarioQuery: findOneQuery(Usuario),
   findAllInspeccionesQuery: findAllQuery(Inspeccion),
   findAllInspeccionInspeccionPreguntaQuery: findAllQuery(InspeccionInspeccionPregunta),
+  findAllInspeccionObservacionesQuery: findAllQuery(InspeccionObservacion),
 };

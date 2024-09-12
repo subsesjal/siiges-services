@@ -15,6 +15,7 @@ const updateInspectoresProgramas = require('./update.inspectores-programas-use-c
 const { findOneInspectoresProgramas } = require('./find-one.inspectores-programas.use-cases');
 const findAllInspecciones = require('./find-all.inspecciones.use-cases');
 const { findOneInspeccionesPreguntas } = require('./find-one.inspecciones-preguntas.use-cases');
+const { findAllInspeccionObservaciones } = require('./find-all.inspecciones-observaciones.use-cases');
 
 module.exports = {
   createInspeccion: createInspeccion(
@@ -70,5 +71,8 @@ module.exports = {
   ),
   findOneInspeccionesPreguntas: findOneInspeccionesPreguntas(
     inspecciones.findAllInspeccionInspeccionPreguntaQuery,
+  ),
+  findAllInspeccionObservaciones: findAllInspeccionObservaciones(
+    inspecciones.findAllInspeccionObservacionesQuery,
   ),
 };
