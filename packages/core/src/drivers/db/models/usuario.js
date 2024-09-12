@@ -51,7 +51,7 @@ const UsuarioSchema = {
   actualizado: {
     allowNull: false,
     type: Sequelize.BOOLEAN,
-    defaultValue: false,
+    defaultValue: true,
   },
   tokenNotificaciones: {
     type: DataTypes.STRING,

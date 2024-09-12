@@ -1,18 +1,4 @@
-const {
-  createQuery,
-  createUserUsersQuery,
-  createDomicilioQuery,
-  findAllQuery,
-  findAllUserUsersQuery,
-  findOneUserQuery,
-  deleteQuery,
-  updateUserQuery,
-  updatePersonaQuery,
-  updateDomicilioQuery,
-  createInspector,
-  createEvaluador,
-  createVigilante,
-} = require('../../adapters/db');
+const adapters = require('../../adapters/db');
 
 const findOneUser = require('./db/find-one.users.use-cases');
 const findAllUsers = require('./db/find-all.users.use-cases');
@@ -22,26 +8,35 @@ const createUserUser = require('./db/create.user-user.use-cases');
 const deleteUser = require('./db/delete.users.use-cases');
 const updateUser = require('./db/update.users.use-cases');
 const findOneUserDetail = require('./db/find-one.users-detail.use-cases');
+const registerUser = require('./db/register.users.use-cases');
 
 module.exports = {
-  findAllUsers: findAllUsers(findAllQuery),
-  findAllUserUsers: findAllUserUsers(findAllUserUsersQuery, findOneUserQuery),
-  findOneUser: findOneUser(findOneUserQuery),
-  findOneUserDetail: findOneUserDetail(findOneUserQuery),
+  findAllUsers: findAllUsers(adapters.findAllQuery),
+  findAllUserUsers: findAllUserUsers(adapters.findAllUserUsersQuery, adapters.findOneUserQuery),
+  findOneUser: findOneUser(adapters.findOneUserQuery),
+  findOneUserDetail: findOneUserDetail(adapters.findOneUserQuery),
   createUser: createUser(
-    createQuery,
-    findOneUserQuery,
-    createInspector,
-    createEvaluador,
-    createVigilante,
+    adapters.createQuery,
+    adapters.findOneUserQuery,
+    adapters.createInspector,
+    adapters.createEvaluador,
+    adapters.createVigilante,
   ),
-  createUserUser: createUserUser(createUserUsersQuery, createQuery, findOneUserQuery),
+  registerUser: registerUser(
+    adapters.createQuery,
+    adapters.findOneUserQuery,
+  ),
+  createUserUser: createUserUser(
+    adapters.createUserUsersQuery,
+    adapters.createQuery,
+    adapters.findOneUserQuery,
+  ),
   updateUser: updateUser(
-    findOneUserQuery,
-    updateUserQuery,
-    updatePersonaQuery,
-    updateDomicilioQuery,
-    createDomicilioQuery,
+    adapters.findOneUserQuery,
+    adapters.updateUserQuery,
+    adapters.updatePersonaQuery,
+    adapters.updateDomicilioQuery,
+    adapters.createDomicilioQuery,
   ),
-  deleteUser: deleteUser(deleteQuery),
+  deleteUser: deleteUser(adapters.deleteQuery),
 };
