@@ -29,8 +29,8 @@ const createUserWithoutPerson = {
   contrasena: 'Qwerty1234@',
 };
 const loginUser = {
-  usuario: 'Calamateo',
-  contrasena: '1234Qwerty@',
+  usuario: 'arianag',
+  contrasena: 'Aa/1234567890',
 };
 const updateUserInformation = {
   correo: 'test@gmail.com',
@@ -49,7 +49,7 @@ const updateUserInformation = {
   },
 };
 const userPasswordIncorrect = {
-  usuario: 'calamateo',
+  usuario: 'arianag',
   contrasena: '34jifj3933wfA',
 };
 const errorPasswordUserCreate = {

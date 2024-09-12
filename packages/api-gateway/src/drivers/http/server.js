@@ -57,8 +57,16 @@ fastify.register(cors, {
 
 fastify.addHook('preHandler', validateApiKey);
 
+// Public routes
 fastify.register(AutoLoad, {
-  dir: path.join(__dirname, 'routes'),
+  dir: path.join(__dirname, 'routes/publics'),
+  ignorePattern: /.*(schema).*/,
+  options: { prefix: 'api/v1/public' },
+});
+
+// Private routes
+fastify.register(AutoLoad, {
+  dir: path.join(__dirname, 'routes/privates'),
   ignorePattern: /.*(schema).*/,
   options: { prefix: 'api/v1' },
 });
