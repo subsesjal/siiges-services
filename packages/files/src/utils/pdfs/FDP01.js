@@ -22,6 +22,7 @@ const {
   updateCurrentPositionY,
   generateTableAndSection,
   agregarImagenYPaginaPie,
+  crearFilaFecha,
 } = require('./pdfHandler');
 
 const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
@@ -41,7 +42,11 @@ function GenerarFDP01(solicitud) {
   crearCelda(doc, 150, 40, 45, 7, 'FDP01');
 
   configurarFuenteYAgregarTexto(doc, 'bold', 12, [69, 133, 244], 'DEL PLAN DE ESTUDIOS', 20, 50);
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [0, 0, 0], fechaFormateada, 152, 58);
+  currentPositionY = crearFilaFecha({
+    currentPositionY,
+    fecha: fechaFormateada,
+    doc,
+  });
 
   currentPositionY += seccionIntitucionTabla({
     doc, solicitud, niveles, currentPositionY,

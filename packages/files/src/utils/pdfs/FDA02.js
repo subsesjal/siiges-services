@@ -136,7 +136,7 @@ function GenerarFDA02(solicitud) {
     doc,
     currentPositionY,
   );
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
 
   generateTableWithStyles(
     HEADER_TABLA_DOMICILIO,
@@ -144,7 +144,7 @@ function GenerarFDA02(solicitud) {
     doc,
     currentPositionY,
   );
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
 
   generateTableWithStyles(
     HEADER_TABLA_DOMICILIO2,
@@ -175,7 +175,7 @@ function GenerarFDA02(solicitud) {
     ['', correoRector, celularRector],
   ];
   generateTableWithStyles(HEADER_TABLA_CORREO, tableCorreoRector, doc, currentPositionY);
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
 
   const formacionRector = solicitud.programa.plantel
     .institucion.rector?.formacionesRectores?.formacion ?? {};
@@ -206,7 +206,7 @@ function GenerarFDA02(solicitud) {
   ];
 
   generateTableWithStyles(HEADER_TABLA_CORREO, correoDirectorBody, doc, currentPositionY);
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
 
   const formacionDirector = {
     headers: HEADER_GRADO_EDUCATIVO,
@@ -229,7 +229,7 @@ function GenerarFDA02(solicitud) {
       currentPositionY += generateTableAndSection(`Diligente ${index + 1}`, tablaDataDiligencia, doc, currentPositionY);
     });
   }
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
 
   currentPositionY = updateCurrentPositionY(doc, 10);
 
@@ -248,7 +248,7 @@ function GenerarFDA02(solicitud) {
     'BAJO PROTESTA DE DECIR VERDAD',
     'center',
   );
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 5;
   currentPositionY += crearSeccion(
     currentPositionY,
