@@ -8,6 +8,7 @@ const updateAlumno = require('./update.alumno.use-cases');
 const findGroupAlumnosPrograma = require('./find-group.alumnos-programa.use-cases');
 const deleteAlumno = require('./delete.alumno.use-cases');
 const alumnosInscripcion = require('./alumnos-inscripcion.use-cases');
+const deleteAlumnoInscrito = require('./delete.alumno-inscrito.use-cases');
 const { findAlumnosInscritos } = require('./find-group.alumnos-inscritos.use-cases');
 const findAlumnosGrupoAsignatura = require('./find-group.alumnos-grupo.use-cases');
 const updateCalificaciones = require('./update.calificaciones.use-cases');
@@ -53,6 +54,13 @@ module.exports = {
     alumnos.createAlumnoGrupoQuery,
     alumnos.createCalificacionQuery,
     alumnos.deleteCalificacionQuery,
+  ),
+  deleteAlumnoInscripcion: deleteAlumnoInscrito(
+    alumnos.findOneAlumnoGrupoQuery,
+    alumnos.deleteAlumnoGrupoQuery,
+    alumnos.findAllCalificacionesQuery,
+    alumnos.deleteCalificacionQuery,
+    alumnos.findOneAlumnoQuery,
   ),
   findAlumnosInscritos: findAlumnosInscritos(
     alumnos.findAllAlumnoGrupoQuery,
