@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 const fs = require('fs');
 
 const { turnos } = require('./constants');
@@ -159,7 +158,6 @@ function crearFilaFecha({
 
   const tableOptions = {
     startY: currentPositionY,
-    // eslint-disable-next-line max-len
     margin: { left: pageWidth - tableWidth - rightMargin, right: rightMargin }, // Posicionar la tabla más a la derecha
     tableWidth, // Ajustar el ancho de la tabla
     theme: 'grid',

@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 const fs = require('fs');
 const path = require('path');
 const { jsPDF } = require('jspdf');
@@ -52,7 +51,6 @@ function addHeaderContent(doc) {
 }
 function redefineAddPage(doc) {
   const originalAddPage = doc.addPage;
-  // eslint-disable-next-line no-param-reassign
   doc.addPage = function (...args) {
     originalAddPage.apply(this, args);
     addHeaderContent(this);

@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 const fs = require('fs');
 const path = require('path');
 const { jsPDF } = require('jspdf');
@@ -49,7 +48,6 @@ function GenerarFDA01(solicitud) {
 
   configurarFuenteYAgregarTexto(doc, 'bold', 12, [69, 133, 244], 'OFICIO DE ENTREGA DE DOCUMENTACIÓN', 20, 50);
   currentPositionY += 40;
-  // Main content section
   let content = `
   JOSÉ ROSALIO MUÑOZ CASTRO
   SUBSECRETARIO DE EDUCACIÓN SUPERIOR
