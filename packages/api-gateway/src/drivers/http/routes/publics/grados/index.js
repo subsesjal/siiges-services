@@ -1,17 +1,14 @@
 const { gradosAdapter } = require('../../../adapters');
 
-const {
-  findGroupGradosSchema,
-} = require('./schema');
+const { findAllGradosSchema } = require('../../privates/grados');
 
 async function cicloEscolarRouter(fastify, opts, next) {
   await fastify.get(
-    '/programas/:programaId',
+    '/',
     {
-      schema: findGroupGradosSchema,
-      onRequest: [fastify.authenticate],
+      schema: findAllGradosSchema,
     },
-    gradosAdapter.findGroupGrados,
+    gradosAdapter.findAllGrados,
   );
 
   next();

@@ -7,9 +7,7 @@ const {
   findOneFormacionRectorSchema,
 } = require('./schema/formacionesRectores');
 const {
-  findAllInstitucionesSchema,
   findOneInstitucionSchema,
-  findPlantelesInstitucionSchema,
   findOnePlantelSchema,
   findOnePlantelDetallesSchema,
   createInstitucionSchema,
@@ -28,15 +26,6 @@ const {
 } = require('./schema');
 
 async function institucionRouter(fastify, opts, next) {
-  await fastify.get(
-    '/',
-    {
-      schema: findAllInstitucionesSchema,
-      onRequest: [fastify.authenticate],
-    },
-    institucionesAdapter.findAllInstituciones,
-  );
-
   await fastify.get(
     '/usuarios/:usuarioId',
     {
@@ -80,15 +69,6 @@ async function institucionRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     institucionesAdapter.deleteInstitucion,
-  );
-
-  await fastify.get(
-    '/:institucionId/planteles',
-    {
-      schema: findPlantelesInstitucionSchema,
-      onRequest: [fastify.authenticate],
-    },
-    institucionesAdapter.findPlantelesInstitucion,
   );
 
   await fastify.get(
