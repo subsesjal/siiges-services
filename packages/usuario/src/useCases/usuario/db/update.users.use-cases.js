@@ -23,7 +23,7 @@ const updateUser = (
     userUpdated.dataValues.persona = personaUpdated.dataValues;
   }
 
-  if (data.persona.domicilio) {
+  if (data?.persona?.domicilio) {
     const { domicilio } = data.persona;
 
     if (userFound.persona.domicilioId === 1) {
