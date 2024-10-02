@@ -9,6 +9,7 @@ const templateHelper = require('../helpers');
 const ADD_DETAILS_MAPPING = {
   observacionSolicitud: templateHelper.generateMapObservaciones,
   folioDocumentosAlumnos: templateHelper.generateMapFoliosAlumnos,
+  preRegistroUsuario: templateHelper.generateMapPreRegisterUser,
 };
 
 const sendEmail = async ({
