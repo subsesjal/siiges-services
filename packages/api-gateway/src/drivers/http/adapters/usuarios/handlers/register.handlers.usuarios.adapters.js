@@ -11,21 +11,26 @@ async function registerUser(fastify, req) {
   return usuario;
 }
 
-async function sendEmailNotification(notificacionServices, emailDestination, idUser) {
+async function sendEmailNotification(notificacionServices, emailDestination, idUser, userName) {
   Logger.info('[notification]: Sending notification');
   await notificacionServices.sendNotificationEmail({
     usuarioId: idUser,
     email: emailDestination,
     asunto: 'SIIGES: Confirmación de Recepción de Solicitud para Creación de Usuario RVOE',
     template: 'preRegistroUsuario',
-    params: {},
+    params: {
+      user: userName,
+    },
   });
 }
 
 async function register(req, reply) {
   try {
     const newUsuario = await registerUser(this, req);
-    sendEmailNotification(this.notificacionServices, req.body.correo, newUsuario.dataValues.id);
+    const idUser = newUsuario.dataValues.id;
+    const mail = req.body.correo;
+    const userName = req.body.usuario;
+    sendEmailNotification(this.notificacionServices, mail, idUser, userName);
     return reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
