@@ -27,6 +27,7 @@ const {
 
 const {
   findAllInstituciones,
+  findAllTipoInstituciones,
   findOneInstitucion,
   findOneInstitucionUsuario,
   findPlantelesInstitucion,
@@ -56,6 +57,7 @@ const {
 
 module.exports = {
   findAllInstituciones,
+  findAllTipoInstituciones,
   findOneInstitucion,
   findOneInstitucionUsuario,
   findPlantelesInstitucion,

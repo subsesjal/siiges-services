@@ -3,7 +3,9 @@ const { institucionesAdapter } = require('../../../adapters');
 const {
   findAllInstitucionesSchema,
   findPlantelesInstitucionSchema,
+
 } = require('../../privates/instituciones');
+const { findAllTipoInstitucionesSchema } = require('../../privates/instituciones/schema');
 
 async function institucionRouter(fastify, opts, next) {
   await fastify.get(
@@ -20,6 +22,14 @@ async function institucionRouter(fastify, opts, next) {
       schema: findPlantelesInstitucionSchema,
     },
     institucionesAdapter.findPlantelesInstitucion,
+  );
+
+  await fastify.get(
+    '/tipoInstituciones',
+    {
+      schema: findAllTipoInstitucionesSchema,
+    },
+    institucionesAdapter.findAllTipoInstituciones,
   );
 
   next();

@@ -3,6 +3,7 @@ const { drivers, queries } = require('@siiges-services/core');
 
 const {
   Institucion,
+  TipoInstitucion,
   Plantel,
   Domicilio,
   RatificacionNombre,
@@ -38,6 +39,7 @@ const {
 module.exports = {
   findOneInstitucionQuery: findOneQuery(Institucion),
   findAllInstitucionesQuery: findAllQuery(Institucion),
+  findAllTipoInstitucionesQuery: findAllQuery(TipoInstitucion),
   createInstitucionQuery: createQuery(Institucion),
   updateInstitucionQuery: updateAndFindQuery(Institucion),
   deleteInstitucionQuery: deleteAndFindQuery(Institucion),
