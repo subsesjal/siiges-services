@@ -24,7 +24,7 @@ const deleteAlumnoInscrito = (
   deleteCalificacionQuery,
   findOneAlumnoQuery,
 ) => async ({ alumnoId, grupoId }) => {
-  Logger.info(`[alumnos]: eliminando inscripción de alumno ${alumnoId} del grupo ${grupoId}`);
+  Logger.info(`[alumnos]: Eliminando inscripción de alumno ${alumnoId} del grupo ${grupoId}`);
 
   const alumnoGrupo = await validateAlumnoGrupo({
     findOneAlumnoGrupoQuery,
