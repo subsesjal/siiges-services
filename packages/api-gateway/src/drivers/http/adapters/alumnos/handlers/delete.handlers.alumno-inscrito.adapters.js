@@ -8,8 +8,7 @@ async function deleteAlumnoInscrito(req, reply) {
     Logger.info(`[Alumno]: Eliminar inscripción del alumno con ID ${alumnoId} del grupo ${grupoId}`);
 
     const result = await this.administracionAcademicaServices.deleteAlumnoInscripcion(
-      { grupoId },
-      { alumnoId },
+      { alumnoId, grupoId },
     );
 
     return reply
