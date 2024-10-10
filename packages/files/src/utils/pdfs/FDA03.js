@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 const fs = require('fs');
 const path = require('path');
 const { jsPDF } = require('jspdf');
@@ -56,7 +55,6 @@ function GenerarFDA03(solicitud) {
   };
 
   if (solicitud?.programa?.plantel?.institucion?.rector?.persona) {
-    // eslint-disable-next-line max-len
     TablaRepresentante.body = TABLA_REPRESENTANTE(solicitud.programa.plantel.institucion.rector.persona);
   }
 
