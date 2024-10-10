@@ -1,7 +1,6 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-// solicitudes services
 async function createSolicitudPrograma(req, reply) {
   try {
     const { ...data } = req.body;
@@ -25,7 +24,6 @@ async function createSolicitudPrograma(req, reply) {
       default:
         break;
     }
-
     return reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
