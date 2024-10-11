@@ -154,12 +154,20 @@ function GenerarFDA02(solicitud) {
   );
   doc.addPage();
   currentPositionY = 55;
-  const headersNumeroYCorreo = ['NÚMERO TELEFÓNICO', 'CORREO ELECTRÓNICO'];
-  const tableNumeroYCorreo = [
-    [solicitud.usuario.persona.celular, solicitud.usuario.persona.correo]];
-  generateTableWithStyles(headersNumeroYCorreo, tableNumeroYCorreo, doc, currentPositionY);
+  const rowsRedesSocialesSolicitante = [
+    [
+      `${solicitud?.usuario?.persona?.telefono}`,
+      solicitud?.usuario?.persona?.redesSociales,
+      `${solicitud?.usuario?.persona?.correoPrimario}}`,
+    ],
+  ];
+  generateTableWithStyles(
+    HEADER_TABLA_REDES_SOCIALES,
+    rowsRedesSocialesSolicitante,
+    doc,
+    currentPositionY,
+  );
   currentPositionY = updateCurrentPositionY(doc, 10);
-
   const rectorPersona = solicitud.programa.plantel.institucion?.rector?.persona;
   const tablaNombreYApellido = {
     headers: ['NOMBRE (S)', 'PRIMER APELLIDO', 'SEGUNDO APELLIDO'],
@@ -168,27 +176,19 @@ function GenerarFDA02(solicitud) {
 
   currentPositionY += generateTableAndSection('DATOS DEL RECTOR', tablaNombreYApellido, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
-
-  const { correo: correoRector, celular: celularRector } = solicitud
-    .programa.plantel.institucion.rector?.persona ?? {};
+  // eslint-disable-next-line max-len
+  const correoInstitucional = solicitud.programa.plantel.institucion.rector?.persona?.correoPrimario;
+  const correoRector = solicitud.programa.plantel.institucion.rector?.persona?.correoSecundario;
+  const celularRector = solicitud.programa.plantel.institucion.rector?.persona?.celular;
   const tableCorreoRector = [
-    ['', correoRector, celularRector],
+    [correoInstitucional, correoRector, celularRector],
   ];
+
   generateTableWithStyles(HEADER_TABLA_CORREO, tableCorreoRector, doc, currentPositionY);
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
-
-  const formacionRector = solicitud.programa.plantel
-    .institucion.rector?.formacionesRectores?.formacion ?? {};
-  const tablaGradoEducativo = {
-    headers: HEADER_GRADO_EDUCATIVO,
-    body: [[formacionRector.nombre, formacionRector.institucion]],
-  };
-
-  currentPositionY += generateTableAndSection('FORMACIÓN ACADÉMICA', tablaGradoEducativo, doc, currentPositionY);
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY = updateCurrentPositionY(doc, 10);
 
   const { directores } = solicitud.programa.plantel;
-
   const tablaDirectores = {
     headers: ['NOMBRE (S)', 'PRIMER APELLIDO', 'SEGUNDO APELLIDO'],
     body: directores?.map((director) => [
@@ -201,19 +201,26 @@ function GenerarFDA02(solicitud) {
   currentPositionY += generateTableAndSection('DATOS DEL DIRECTOR', tablaDirectores, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
 
-  const correoDirectorBody = [
-    ['', '', ''],
-  ];
+  const correoDirectorBody = solicitud.programa.plantel.directores.map((director) => [
+    director.persona.correoPrimario || 'No disponible',
+    director.persona.correoSecundario || 'No disponible',
+    director.persona.telefono || 'No disponible',
+  ]);
 
   generateTableWithStyles(HEADER_TABLA_CORREO, correoDirectorBody, doc, currentPositionY);
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
-
+  currentPositionY = doc.previousAutoTable.finalY;
+  const formacionesBody = [];
+  solicitud.programa.plantel.directores.forEach((director) => {
+    const formaciones = director.dataValues.formacionesDirectores;
+    formaciones.forEach((formacion) => {
+      formacionesBody.push([formacion.formacion.nivelId, formacion.formacion.nombre]);
+    });
+  });
   const formacionDirector = {
     headers: HEADER_GRADO_EDUCATIVO,
-    body: [
-      ['', ''],
-    ],
+    body: formacionesBody,
   };
+
   currentPositionY += generateTableAndSection('FORMACIÓN ACADÉMICA', formacionDirector, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
   const { diligencias } = solicitud;
@@ -229,17 +236,30 @@ function GenerarFDA02(solicitud) {
       currentPositionY += generateTableAndSection(`Diligente ${index + 1}`, tablaDataDiligencia, doc, currentPositionY);
     });
   }
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
-
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY = updateCurrentPositionY(doc, 10);
+  const { ratificacionesNombre } = solicitud.programa.plantel.institucion;
+  const nombresPropuestos = [];
+  if (Array.isArray(ratificacionesNombre)) {
+    ratificacionesNombre.forEach((ratificacion) => {
+      nombresPropuestos.push(ratificacion.dataValues.nombrePropuesto1);
+      nombresPropuestos.push(ratificacion.dataValues.nombrePropuesto2);
+      nombresPropuestos.push(ratificacion.dataValues.nombrePropuesto3);
+    });
+  } else if (ratificacionesNombre) {
+    nombresPropuestos.push(ratificacionesNombre.dataValues.nombrePropuesto1);
+    nombresPropuestos.push(ratificacionesNombre.dataValues.nombrePropuesto2);
+    nombresPropuestos.push(ratificacionesNombre.dataValues.nombrePropuesto3);
+  }
 
-  const nombresPropuestos = {
+  const nombresPropuestosTable = {
     headers: HEADER_NOMBRE_DATOS,
-    body: HEADER_NOMBRE_PUESTO,
+    body: HEADER_NOMBRE_PUESTO(nombresPropuestos),
     showHead: false,
     columnStyles,
   };
-  currentPositionY += generateTableAndSection('NOMBRES PROPUESTOS PARA LA INSTITUCIÓN EDUCATIVA', nombresPropuestos, doc, currentPositionY);
+
+  currentPositionY += generateTableAndSection('NOMBRES PROPUESTOS PARA LA INSTITUCIÓN EDUCATIVA', nombresPropuestosTable, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 10;
   currentPositionY += crearSeccion(
