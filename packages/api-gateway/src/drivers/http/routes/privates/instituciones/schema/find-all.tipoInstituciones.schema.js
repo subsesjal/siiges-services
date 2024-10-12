@@ -13,6 +13,7 @@ const findAllTipoInstitucionesSchema = {
           items: {
             type: 'object',
             properties: {
+              id: { type: 'integer' },
               ...tipoInstitucion,
               ...responseProperties,
             },
