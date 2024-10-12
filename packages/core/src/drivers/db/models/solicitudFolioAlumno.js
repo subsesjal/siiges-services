@@ -1,6 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { ALUMNO_TABLE } = require('./alumno');
 const { SOLICITUD_FOLIO_TABLE } = require('./solicitudFolio');
+const { MODALIDAD_TITULACION_TABLE } = require('./modalidadTitulacion');
+const { FUNDAMENTO_SERVICIO_SOCIAL_TABLE } = require('./fundamentoServicioSocial');
 
 const SOLICITUD_FOLIO_ALUMNO_TABLE = 'solicitudes_folios_alumnos';
 
@@ -29,15 +31,63 @@ const SolicitudFolioAlumnoSchema = {
       key: 'id',
     },
   },
-  fechaTermino: {
-    allowNull: false,
+  modalidadTitulacionId: {
+    allowNull: true,
+    type: DataTypes.INTEGER,
+    field: 'modalidad_titulacion_id',
+    references: {
+      model: MODALIDAD_TITULACION_TABLE,
+      key: 'id',
+    },
+  },
+  fundamentoServicioSocialId: {
+    allowNull: true,
+    type: DataTypes.INTEGER,
+    field: 'fundamento_servicio_social_id',
+    references: {
+      model: FUNDAMENTO_SERVICIO_SOCIAL_TABLE,
+      key: 'id',
+    },
+  },
+  cumplioServicioSocial: {
+    allowNull: true,
+    type: DataTypes.BOOLEAN,
+    field: 'cumplio_servicio_social',
+  },
+  fechaInicio: {
+    allowNull: true,
     type: DataTypes.DATE,
-    field: 'fecha_termino',
+    field: 'fecha_inicio',
+  },
+  fechaTerminacion: {
+    allowNull: true,
+    type: DataTypes.DATE,
+    field: 'fecha_terminacion',
   },
   fechaElaboracion: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.DATE,
     field: 'fecha_elaboracion',
+  },
+  folioActa: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'folio_acta',
+  },
+  fechaExpedicion: {
+    allowNull: true,
+    type: DataTypes.DATE,
+    field: 'fecha_expedicion',
+  },
+  fechaExamenProfesional: {
+    allowNull: true,
+    type: DataTypes.DATE,
+    field: 'fecha_examen_profesional',
+  },
+  fechaExencionExamenProfesional: {
+    allowNull: true,
+    type: DataTypes.DATE,
+    field: 'fecha_exencion_examen_profesional',
   },
   createdAt: {
     allowNull: false,
