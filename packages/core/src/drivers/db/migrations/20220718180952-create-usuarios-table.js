@@ -115,6 +115,9 @@ const { ESTATUS_SOLICITUD_REV_EQUIV_TABLE, EstatusSolicitudRevEquivSchema } = re
 const { SOLICITUD_REV_EQUIV_TABLE, SolicitudRevEquivSchema } = require('../models/solicitudRevEquiv');
 const { ASIGNATURA_ANTECEDENTE_TABLE, AsignaturaAntecedenteSchema } = require('../models/asignaturaAntecedente');
 const { ASIGNATURA_EQUIVALENTE_TABLE, AsignaturaEquivalenteSchema } = require('../models/asignaturaEquivalente');
+const { FUNDAMENTO_SERVICIO_SOCIAL_TABLE, FundamentoServicioSocialSchema } = require('../models/fundamentoServicioSocial');
+const { TIPO_MODALIDAD_TABLE, TipoModalidadSchema } = require('../models/tipoModalidad');
+const { MODALIDAD_TITULACION_TABLE, ModalidadTitulacionSchema } = require('../models/modalidadTitulacion');
 
 const { ACADEMIA_TABLE, AcademiaSchema } = require('../models/academias');
 const { ALUMNO_OBSERVACION_TABLE, AlumnoObservacionSchema } = require('../models/alumnoObservaciones');
@@ -268,6 +271,12 @@ module.exports = {
     await queryInterface.createTable(TIPO_RECURSO_PRESUPUESTO_TABLE, TipoRecursoPresupuestoSchema);
     await queryInterface.createTable(PRESUPUESTO_EGRESO_TABLE, PresupuestoEgresoSchema);
     await queryInterface.createTable(PRESUPUESTO_TABLE, PresupuestoSchema);
+    await queryInterface.createTable(
+      FUNDAMENTO_SERVICIO_SOCIAL_TABLE,
+      FundamentoServicioSocialSchema,
+    );
+    await queryInterface.createTable(TIPO_MODALIDAD_TABLE, TipoModalidadSchema);
+    await queryInterface.createTable(MODALIDAD_TITULACION_TABLE, ModalidadTitulacionSchema);
     await queryInterface.createTable(TIPO_SOLICITUD_FOLIO_TABLE, TipoSolicitudFolioSchema);
     await queryInterface.createTable(TIPO_DOCUMENTO_TABLE, TipoDocumentoSchema);
     await queryInterface.createTable(ESTATUS_SOLICITUD_FOLIO_TABLE, EstatusSolicitudFolioSchema);
@@ -438,6 +447,9 @@ module.exports = {
     await queryInterface.dropTable(TIPO_PRESUPUESTO_TABLE);
     await queryInterface.dropTable(TIPO_RECURSO_PRESUPUESTO_TABLE);
     await queryInterface.dropTable(TIPO_EGRESO_TABLE);
+    await queryInterface.dropTable(FUNDAMENTO_SERVICIO_SOCIAL_TABLE);
+    await queryInterface.dropTable(TIPO_MODALIDAD_TABLE);
+    await queryInterface.dropTable(MODALIDAD_TITULACION_TABLE);
     await queryInterface.dropTable(TIPO_SOLICITUD_FOLIO_TABLE);
     await queryInterface.dropTable(TIPO_DOCUMENTO_TABLE);
     await queryInterface.dropTable(ESTATUS_SOLICITUD_FOLIO_TABLE);

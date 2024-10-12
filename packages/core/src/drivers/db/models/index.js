@@ -115,6 +115,9 @@ const { EstatusSolicitudRevEquiv, EstatusSolicitudRevEquivSchema } = require('./
 const { SolicitudRevEquiv, SolicitudRevEquivSchema } = require('./solicitudRevEquiv');
 const { AsignaturaAntecedente, AsignaturaAntecedenteSchema } = require('./asignaturaAntecedente');
 const { AsignaturaEquivalente, AsignaturaEquivalenteSchema } = require('./asignaturaEquivalente');
+const { FundamentoServicioSocial, FundamentoServicioSocialSchema } = require('./fundamentoServicioSocial');
+const { TipoModalidad, TipoModalidadSchema } = require('./tipoModalidad');
+const { ModalidadTitulacion, ModalidadTitulacionSchema } = require('./modalidadTitulacion');
 // Siiges 1.0
 const { Academia, AcademiaSchema } = require('./academias');
 const { AlumnoObservacion, AlumnoObservacionSchema } = require('./alumnoObservaciones');
@@ -301,7 +304,11 @@ function setupModels(sequelize) {
   SolicitudRevEquiv.init(SolicitudRevEquivSchema, SolicitudRevEquiv.config(sequelize));
   AsignaturaAntecedente.init(AsignaturaAntecedenteSchema, AsignaturaAntecedente.config(sequelize));
   AsignaturaEquivalente.init(AsignaturaEquivalenteSchema, AsignaturaEquivalente.config(sequelize));
-  // Siiges 2.0
+  FundamentoServicioSocial.init(FundamentoServicioSocialSchema, FundamentoServicioSocial
+    .config(sequelize));
+  TipoModalidad.init(TipoModalidadSchema, TipoModalidad.config(sequelize));
+  ModalidadTitulacion.init(ModalidadTitulacionSchema, ModalidadTitulacion.config(sequelize));
+  // Siiges 1.0
   Academia.init(AcademiaSchema, Academia.config(sequelize));
   ProgramaEvaluacion.init(ProgramaEvaluacionSchema, ProgramaEvaluacion.config(sequelize));
   EvaluacionApartado.init(EvaluacionApartadoSchema, EvaluacionApartado.config(sequelize));
@@ -350,7 +357,7 @@ function setupModels(sequelize) {
   SolicitudUsuario.init(SolicitudUsuarioSchema, SolicitudUsuario.config(sequelize));
   Testigo.init(TestigoSchema, Testigo.config(sequelize));
   TituloElectronico.init(TituloElectronicoSchema, TituloElectronico.config(sequelize));
-  // Siiges 2.0 Fin
+  // Siiges 1.0 Fin
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -468,7 +475,10 @@ function setupModels(sequelize) {
   SolicitudRevEquiv.associate(sequelize.models);
   AsignaturaAntecedente.associate(sequelize.models);
   AsignaturaEquivalente.associate(sequelize.models);
-  // Siiges 2.0
+  FundamentoServicioSocial.associate(sequelize.models);
+  TipoModalidad.associate(sequelize.models);
+  ModalidadTitulacion.associate(sequelize.models);
+  // Siiges 1.0
   Academia.associate(sequelize.models);
   AlumnoObservacion.associate(sequelize.models);
   AsignaturaHemerobibliografica.associate(sequelize.models);
@@ -504,7 +514,7 @@ function setupModels(sequelize) {
   SolicitudUsuario.associate(sequelize.models);
   Testigo.associate(sequelize.models);
   TituloElectronico.associate(sequelize.models);
-  // Siiges 2.0 Fin
+  // Siiges 1.0 Fin
 }
 
 module.exports = setupModels;
