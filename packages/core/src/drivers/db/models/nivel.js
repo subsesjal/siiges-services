@@ -17,7 +17,7 @@ const NivelSchema = {
     type: DataTypes.STRING,
   },
   nivelDgp: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     field: 'nivel_dgp',
   },
   createdAt: {
