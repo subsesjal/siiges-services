@@ -15,6 +15,7 @@ const createRatificacionNombreSchema = require('./create.ratificacion-nombre.sch
 const updateRatificacionNombreSchema = require('./update.ratificacion-nombre.schema');
 const deleteRatificacionNombreSchema = require('./delete.ratificacion-nombre.schema');
 const findAllTipoInstitucionesSchema = require('./find-all.tipoInstituciones.schema');
+const createInstitucionDgpSchema = require('./create.institucionDgp.schema');
 
 module.exports = {
   findAllInstitucionesSchema,
@@ -34,4 +35,5 @@ module.exports = {
   updateRatificacionNombreSchema,
   deleteRatificacionNombreSchema,
   findAllTipoInstitucionesSchema,
+  createInstitucionDgpSchema,
 };
