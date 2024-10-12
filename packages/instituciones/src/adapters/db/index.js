@@ -25,6 +25,7 @@ const {
   Nivel,
   UsuarioUsuario,
   Usuario,
+  Estado,
 } = drivers.sequelize.models;
 
 const {
@@ -61,6 +62,7 @@ module.exports = {
   updateRectorQuery: updateAndFindQuery(Rector),
   updatePersonaQuery: updateAndFindQuery(Persona),
   findAllMunicipiosQuery: findAllQuery(Municipio),
+  findAllEstadosQuery: findAllQuery(Estado),
   findAllHigienesQuery: findAllQuery(Higiene),
   createPlantelHigieneQuery: createQuery(PlantelHigiene),
   updatePlantelHigieneQuery: updateAndFindQuery(PlantelHigiene),
