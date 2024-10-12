@@ -55,6 +55,24 @@ const findAllProgramasSchema = {
             properties: {
               id: { type: 'integer' },
               ...programa,
+              plantel: {
+                type: 'object',
+                properties: {
+                  ...plantel,
+                  institucion: {
+                    type: 'object',
+                    properties: {
+                      ...institucion,
+                    },
+                  },
+                  domicilio: {
+                    type: 'object',
+                    properties: {
+                      ...domicilio,
+                    },
+                  },
+                },
+              },
               ...responseProperties,
             },
           },
