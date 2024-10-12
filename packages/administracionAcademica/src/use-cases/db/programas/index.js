@@ -8,6 +8,7 @@ const findOnePrograma = require('./find-one.programa.use-cases');
 module.exports = {
   findAllProgramas: findAllProgramas(
     programas.findAllProgramasQuery,
+    programas.findOneProgramaQuery,
     programas.includeProgramasQuery,
     programas.whereProgramasQuery,
   ),
