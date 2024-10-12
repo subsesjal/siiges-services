@@ -1,14 +1,16 @@
+/* eslint-disable no-restricted-globals */
 const findAllInstituciones = (findAllInstitucionesQuery) => async ({ queryParams }) => {
-  const include = [
-    {
-      association: 'ratificacionesNombre',
-      limit: 1,
-      order: [['createdAt', 'DESC']],
-    },
-  ];
-
   const { esNombreAutorizado, tipoInstitucionId } = queryParams;
 
+  const includeValidate = esNombreAutorizado !== undefined ? [{
+    association: 'ratificacionesNombre', limit: 1, order: [['createdAt', 'DESC']], where: { esNombreAutorizado },
+  }] : [{
+    association: 'ratificacionesNombre',
+    limit: 1,
+    order: [['createdAt', 'DESC']],
+  }];
+
+  const include = includeValidate;
   let where = null;
 
   if (tipoInstitucionId) {
@@ -17,7 +19,7 @@ const findAllInstituciones = (findAllInstitucionesQuery) => async ({ queryParams
 
   let instituciones = await findAllInstitucionesQuery(where, {
     include,
-    strict: false,
+    strict: true,
   });
 
   if (esNombreAutorizado) {

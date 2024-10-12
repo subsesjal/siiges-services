@@ -8,7 +8,6 @@ const ratificacionNombre = {
   nombreSolicitado: { type: 'string' },
   nombreAutorizado: { type: 'string' },
   esNombreAutorizado: { type: 'boolean' },
-  fechaAutorizacion: { type: 'string', format: 'date-time' },
 };
 
 module.exports = { ratificacionNombre };
