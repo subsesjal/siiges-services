@@ -15,6 +15,7 @@ const findOneSolicitudSeccion = require('./find-one.solicitud-seccion.use-cases'
 const { createSendMailObservacion } = require('./create.send-mail-observaciones.use-cases');
 const { createDomicilioSolicitudPrograma } = require('./create.solicitud-domicilio-programa.use-cases');
 const { deleteSolicitud } = require('./delete.solicitud.use-cases');
+const createEquivalencia = require('./create.equivalencias.use-cases');
 
 module.exports = {
   createNuevaSolicitudPrograma: createNuevaSolicitudPrograma(
@@ -89,5 +90,8 @@ module.exports = {
   deleteSolicitud: deleteSolicitud(
     solicitudes.findOneSolicitudQuery,
     solicitudes.deleteSolicitudQuery,
+  ),
+  createEquivalencia: createEquivalencia(
+    solicitudes.createEquivalenciaQuery,
   ),
 };
