@@ -17,10 +17,9 @@ const createAlumnoFolioSchema = {
   body: {
     type: 'object',
     properties: {
-      fechaTermino: { type: 'string', format: 'date-time' },
-      fechaElaboracion: { type: 'string', format: 'date-time' },
+      ...solicitudFolioAlumno,
     },
-    required: ['fechaTermino', 'fechaElaboracion'],
+    required: ['fechaTerminacion', 'fechaElaboracion'],
   },
   response: {
     201: {
