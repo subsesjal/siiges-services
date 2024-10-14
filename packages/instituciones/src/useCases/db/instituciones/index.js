@@ -8,6 +8,7 @@ const createInstitucion = require('./create.instituciones.use-cases');
 const updateInstitucion = require('./update.instituciones.use-cases');
 const deleteInstitucion = require('./delete.instituciones.use-cases');
 const findAllTipoInstituciones = require('./find-all.tipoInstituciones.use-cases');
+const createOneInstitucionesDgp = require('./create-one.institucionesDgp.use-cases');
 const {
   createFormacionRector,
   findAllFormacionRector,
@@ -24,6 +25,10 @@ module.exports = {
   findAllInstituciones: findAllInstituciones(institucionAdapter.findAllInstitucionesQuery),
   findAllTipoInstituciones: findAllTipoInstituciones(
     institucionAdapter.findAllTipoInstitucionesQuery,
+  ),
+  createOneInstitucionesDgp: createOneInstitucionesDgp(
+    institucionAdapter.createInstitucionDgpQuery,
+    institucionAdapter.findOneInstitucionQuery,
   ),
   findOneInstitucion: findOneInstitucion(institucionAdapter.findOneInstitucionQuery),
   findOneInstitucionUsuario: findOneInstitucionUsuario(
