@@ -49,7 +49,7 @@ const InstitucionDgpSchema = {
 
 class InstitucionDgp extends Model {
   static associate(models) {
-    this.belongsTo(models.Institucion, { as: 'institucion', foreignKey: 'institucionId' });
+    this.belongsTo(models.Institucion, { as: 'institucion' });
   }
 
   static config(sequelize) {
