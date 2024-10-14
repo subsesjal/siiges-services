@@ -155,14 +155,6 @@ async function solicitudRouter(fastify, opts, next) {
     solicitudesAdapter.findSolicitudesUsuario,
   );
 
-  await fastify.post(
-    '/solicitudesRevEquiv',
-    {
-      schema: solicitudesSchema.createEquivalenciaSchema,
-      onRequest: [fastify.authenticate],
-    },
-    solicitudesAdapter.createEquivalencia,
-  );
   next();
 }
 
