@@ -29,6 +29,7 @@ const include = [
       { association: 'nivel' },
     ],
   },
+  { association: 'institucionDgp' },
   { association: 'estatusSolicitudFolio' },
   { association: 'tipoDocumento' },
   { association: 'tipoSolicitudFolio' },
@@ -39,7 +40,7 @@ const formatDate = (date) => {
   return new Date(date).toISOString().slice(0, 10);
 };
 
-const transformDataToTitulo = ({ folioAlumno, programa }) => ({
+const transformDataToTitulo = ({ folioAlumno, programa, institucionDgp }) => ({
   ies: programa.plantel.institucion.nombre,
   nombre: folioAlumno.folioDocumentoAlumno.alumno.persona.nombre,
   paterno: folioAlumno.folioDocumentoAlumno.alumno.persona.apellidoPaterno,
@@ -56,7 +57,7 @@ const transformDataToTitulo = ({ folioAlumno, programa }) => ({
   fecha_soc: formatDate(folioAlumno.fechaElaboracion),
   estado: 14,
   nivel_estudio: parseInt(programa.nivel.nivelDgp, 10),
-  institucion: programa.plantel.institucion.nombre,
+  institucion: institucionDgp.nombreInstitucionDgp,
   inicio_study: formatDate(
     folioAlumno.folioDocumentoAlumno.alumno.validacion.fechaInicioAntecedente,
   ),
@@ -106,7 +107,8 @@ const envioTitulacion = (
     throw boom.conflict('This request is only allowed for the TITULO document type.');
   }
 
-  const { programa } = solicitudJson;
+  const { programa, institucionDgp } = solicitudJson;
+  console.log(programa);
 
   // eslint-disable-next-line no-unused-vars
   const titulosEnviados = await Promise.all(
@@ -114,7 +116,7 @@ const envioTitulacion = (
       if (!shouldProcessFolioAlumno(folioAlumno)) {
         return folioAlumno;
       }
-      const dataTransformed = transformDataToTitulo({ folioAlumno, programa });
+      const dataTransformed = transformDataToTitulo({ folioAlumno, programa, institucionDgp });
       console.log(dataTransformed);
 
       const isValid = validateDataTransformed(dataTransformed);

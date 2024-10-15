@@ -3,6 +3,7 @@ const { TIPO_DOCUMENTO_TABLE } = require('./tipoDocumento');
 const { TIPO_SOLICITUD_FOLIO_TABLE } = require('./tipoSolicitudFolio');
 const { PROGRAMA_TABLE } = require('./programa');
 const { ESTATUS_SOLICITUD_FOLIO_TABLE } = require('./estatusSolicitudFolio');
+const { INSTITUCIONDGP_TABLE } = require('./institucionDgp');
 
 const SOLICITUD_FOLIO_TABLE = 'solicitudes_folios';
 
@@ -37,6 +38,15 @@ const SolicitudFolioSchema = {
     field: 'estatus_solicitud_folio_id',
     references: {
       model: ESTATUS_SOLICITUD_FOLIO_TABLE,
+      key: 'id',
+    },
+  },
+  institucionDgpId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'institucion_dgp_id',
+    references: {
+      model: INSTITUCIONDGP_TABLE,
       key: 'id',
     },
   },
@@ -93,6 +103,7 @@ class SolicitudFolio extends Model {
     this.belongsTo(models.TipoDocumento, { as: 'tipoDocumento' });
     this.belongsTo(models.EstatusSolicitudFolio, { as: 'estatusSolicitudFolio' });
     this.belongsTo(models.Programa, { as: 'programa' });
+    this.belongsTo(models.InstitucionDgp, { as: 'institucionDgp' });
     this.hasMany(models.SolicitudFolioAlumno, { as: 'solicitudFoliosAlumnos', foreignKey: 'solicitudFolioId' });
   }
 
