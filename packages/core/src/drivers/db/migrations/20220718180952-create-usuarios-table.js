@@ -6,6 +6,7 @@ const { ESTADO_TABLE, EstadoSchema } = require('../models/estado');
 const { FILE_TABLE, FileSchema } = require('../models/file');
 const { TIPO_INSTITUCION_TABLE, TipoInstitucionSchema } = require('../models/tipoInstitucion');
 const { INSTITUCION_TABLE, InstitucionSchema } = require('../models/institucion');
+const { INSTITUCIONDGP_TABLE, InstitucionDgpSchema } = require('../models/institucionDgp');
 const { MODALIDAD_TABLE, ModalidadSchema } = require('../models/modalidad');
 const { MUNICIPIO_TABLE, MunicipioSchema } = require('../models/municipio');
 const { NIVEL_TABLE, NivelSchema } = require('../models/nivel');
@@ -115,6 +116,9 @@ const { ESTATUS_SOLICITUD_REV_EQUIV_TABLE, EstatusSolicitudRevEquivSchema } = re
 const { SOLICITUD_REV_EQUIV_TABLE, SolicitudRevEquivSchema } = require('../models/solicitudRevEquiv');
 const { ASIGNATURA_ANTECEDENTE_TABLE, AsignaturaAntecedenteSchema } = require('../models/asignaturaAntecedente');
 const { ASIGNATURA_EQUIVALENTE_TABLE, AsignaturaEquivalenteSchema } = require('../models/asignaturaEquivalente');
+const { FUNDAMENTO_SERVICIO_SOCIAL_TABLE, FundamentoServicioSocialSchema } = require('../models/fundamentoServicioSocial');
+const { TIPO_MODALIDAD_TABLE, TipoModalidadSchema } = require('../models/tipoModalidad');
+const { MODALIDAD_TITULACION_TABLE, ModalidadTitulacionSchema } = require('../models/modalidadTitulacion');
 
 const { ACADEMIA_TABLE, AcademiaSchema } = require('../models/academias');
 const { ALUMNO_OBSERVACION_TABLE, AlumnoObservacionSchema } = require('../models/alumnoObservaciones');
@@ -164,6 +168,7 @@ module.exports = {
     await queryInterface.createTable(FILE_TABLE, FileSchema);
     await queryInterface.createTable(TIPO_INSTITUCION_TABLE, TipoInstitucionSchema);
     await queryInterface.createTable(INSTITUCION_TABLE, InstitucionSchema);
+    await queryInterface.createTable(INSTITUCIONDGP_TABLE, InstitucionDgpSchema);
     await queryInterface.createTable(TIPO_INMUEBLE_TABLE, TipoInmuebleSchema);
     await queryInterface.createTable(PLANTEL_TABLE, PlantelSchema);
     await queryInterface.createTable(RATIFICACION_NOMBRE_TABLE, RatificacionNombreSchema);
@@ -268,6 +273,12 @@ module.exports = {
     await queryInterface.createTable(TIPO_RECURSO_PRESUPUESTO_TABLE, TipoRecursoPresupuestoSchema);
     await queryInterface.createTable(PRESUPUESTO_EGRESO_TABLE, PresupuestoEgresoSchema);
     await queryInterface.createTable(PRESUPUESTO_TABLE, PresupuestoSchema);
+    await queryInterface.createTable(
+      FUNDAMENTO_SERVICIO_SOCIAL_TABLE,
+      FundamentoServicioSocialSchema,
+    );
+    await queryInterface.createTable(TIPO_MODALIDAD_TABLE, TipoModalidadSchema);
+    await queryInterface.createTable(MODALIDAD_TITULACION_TABLE, ModalidadTitulacionSchema);
     await queryInterface.createTable(TIPO_SOLICITUD_FOLIO_TABLE, TipoSolicitudFolioSchema);
     await queryInterface.createTable(TIPO_DOCUMENTO_TABLE, TipoDocumentoSchema);
     await queryInterface.createTable(ESTATUS_SOLICITUD_FOLIO_TABLE, EstatusSolicitudFolioSchema);
@@ -346,6 +357,7 @@ module.exports = {
     await queryInterface.dropTable(FILE_TABLE);
     await queryInterface.dropTable(TIPO_INSTITUCION_TABLE);
     await queryInterface.dropTable(INSTITUCION_TABLE);
+    await queryInterface.dropTable(INSTITUCIONDGP_TABLE);
     await queryInterface.dropTable(TIPO_INMUEBLE_TABLE);
     await queryInterface.dropTable(PLANTEL_TABLE);
     await queryInterface.dropTable(RATIFICACION_NOMBRE_TABLE);
@@ -438,6 +450,9 @@ module.exports = {
     await queryInterface.dropTable(TIPO_PRESUPUESTO_TABLE);
     await queryInterface.dropTable(TIPO_RECURSO_PRESUPUESTO_TABLE);
     await queryInterface.dropTable(TIPO_EGRESO_TABLE);
+    await queryInterface.dropTable(FUNDAMENTO_SERVICIO_SOCIAL_TABLE);
+    await queryInterface.dropTable(TIPO_MODALIDAD_TABLE);
+    await queryInterface.dropTable(MODALIDAD_TITULACION_TABLE);
     await queryInterface.dropTable(TIPO_SOLICITUD_FOLIO_TABLE);
     await queryInterface.dropTable(TIPO_DOCUMENTO_TABLE);
     await queryInterface.dropTable(ESTATUS_SOLICITUD_FOLIO_TABLE);

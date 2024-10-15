@@ -1,8 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const NIVEL_TABLE = 'niveles';
+const TIPO_MODALIDAD_TABLE = 'tipo_modalidades';
 
-const NivelSchema = {
+const TipoModalidadSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -10,15 +10,12 @@ const NivelSchema = {
     type: DataTypes.INTEGER,
   },
   nombre: {
-    allowNull: false,
     type: DataTypes.STRING,
+    allowNull: false,
   },
   descripcion: {
     type: DataTypes.STRING,
-  },
-  nivelDgp: {
-    type: DataTypes.STRING,
-    field: 'nivel_dgp',
+    allowNull: false,
   },
   createdAt: {
     allowNull: false,
@@ -40,17 +37,17 @@ const NivelSchema = {
   },
 };
 
-class Nivel extends Model {
-  static associate() {}
+class TipoModalidad extends Model {
+  static associate() {
+  }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: NIVEL_TABLE,
-      modelName: 'Nivel',
+      tableName: TIPO_MODALIDAD_TABLE,
+      modelName: 'TipoModalidad',
       timestamps: false,
     };
   }
 }
-
-module.exports = { NIVEL_TABLE, NivelSchema, Nivel };
+module.exports = { TIPO_MODALIDAD_TABLE, TipoModalidadSchema, TipoModalidad };

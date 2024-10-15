@@ -26,6 +26,7 @@ const {
   deleteRatificacionNombreSchema,
   findOneInstitucionUsuarioSchema,
   findAllTipoInstitucionesSchema,
+  createInstitucionDgpSchema,
 } = require('./schema');
 
 async function institucionRouter(fastify, opts, next) {
@@ -180,6 +181,15 @@ async function institucionRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     institucionesAdapter.deleteRatificacionNombre,
+  );
+
+  await fastify.post(
+    '/instituciones_dgp',
+    {
+      schema: createInstitucionDgpSchema,
+      onRequest: [fastify.authenticate],
+    },
+    institucionesAdapter.createInstitucionDgp,
   );
 
   await fastify.post(

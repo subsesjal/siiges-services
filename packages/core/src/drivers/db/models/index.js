@@ -6,6 +6,7 @@ const { EstatusSolicitud, EstatusSolicitudSchema } = require('./estatusSolicitud
 const { File, FileSchema } = require('./file');
 const { TipoInstitucion, TipoInstitucionSchema } = require('./tipoInstitucion');
 const { Institucion, InstitucionSchema } = require('./institucion');
+const { InstitucionDgp, InstitucionDgpSchema } = require('./institucionDgp');
 const { Modalidad, ModalidadSchema } = require('./modalidad');
 const { Municipio, MunicipioSchema } = require('./municipio');
 const { Nivel, NivelSchema } = require('./nivel');
@@ -115,6 +116,9 @@ const { EstatusSolicitudRevEquiv, EstatusSolicitudRevEquivSchema } = require('./
 const { SolicitudRevEquiv, SolicitudRevEquivSchema } = require('./solicitudRevEquiv');
 const { AsignaturaAntecedente, AsignaturaAntecedenteSchema } = require('./asignaturaAntecedente');
 const { AsignaturaEquivalente, AsignaturaEquivalenteSchema } = require('./asignaturaEquivalente');
+const { FundamentoServicioSocial, FundamentoServicioSocialSchema } = require('./fundamentoServicioSocial');
+const { TipoModalidad, TipoModalidadSchema } = require('./tipoModalidad');
+const { ModalidadTitulacion, ModalidadTitulacionSchema } = require('./modalidadTitulacion');
 // Siiges 1.0
 const { Academia, AcademiaSchema } = require('./academias');
 const { AlumnoObservacion, AlumnoObservacionSchema } = require('./alumnoObservaciones');
@@ -163,6 +167,7 @@ function setupModels(sequelize) {
   File.init(FileSchema, File.config(sequelize));
   TipoInstitucion.init(TipoInstitucionSchema, TipoInstitucion.config(sequelize));
   Institucion.init(InstitucionSchema, Institucion.config(sequelize));
+  InstitucionDgp.init(InstitucionDgpSchema, InstitucionDgp.config(sequelize));
   Modalidad.init(ModalidadSchema, Modalidad.config(sequelize));
   Municipio.init(MunicipioSchema, Municipio.config(sequelize));
   Nivel.init(NivelSchema, Nivel.config(sequelize));
@@ -301,7 +306,11 @@ function setupModels(sequelize) {
   SolicitudRevEquiv.init(SolicitudRevEquivSchema, SolicitudRevEquiv.config(sequelize));
   AsignaturaAntecedente.init(AsignaturaAntecedenteSchema, AsignaturaAntecedente.config(sequelize));
   AsignaturaEquivalente.init(AsignaturaEquivalenteSchema, AsignaturaEquivalente.config(sequelize));
-  // Siiges 2.0
+  FundamentoServicioSocial.init(FundamentoServicioSocialSchema, FundamentoServicioSocial
+    .config(sequelize));
+  TipoModalidad.init(TipoModalidadSchema, TipoModalidad.config(sequelize));
+  ModalidadTitulacion.init(ModalidadTitulacionSchema, ModalidadTitulacion.config(sequelize));
+  // Siiges 1.0
   Academia.init(AcademiaSchema, Academia.config(sequelize));
   ProgramaEvaluacion.init(ProgramaEvaluacionSchema, ProgramaEvaluacion.config(sequelize));
   EvaluacionApartado.init(EvaluacionApartadoSchema, EvaluacionApartado.config(sequelize));
@@ -350,7 +359,7 @@ function setupModels(sequelize) {
   SolicitudUsuario.init(SolicitudUsuarioSchema, SolicitudUsuario.config(sequelize));
   Testigo.init(TestigoSchema, Testigo.config(sequelize));
   TituloElectronico.init(TituloElectronicoSchema, TituloElectronico.config(sequelize));
-  // Siiges 2.0 Fin
+  // Siiges 1.0 Fin
 
   // Associations
   Ciclo.associate(sequelize.models);
@@ -361,6 +370,7 @@ function setupModels(sequelize) {
   File.associate(sequelize.models);
   TipoInstitucion.associate(sequelize.models);
   Institucion.associate(sequelize.models);
+  InstitucionDgp.associate(sequelize.models);
   Municipio.associate(sequelize.models);
   Modalidad.associate(sequelize.models);
   Nivel.associate(sequelize.models);
@@ -468,7 +478,10 @@ function setupModels(sequelize) {
   SolicitudRevEquiv.associate(sequelize.models);
   AsignaturaAntecedente.associate(sequelize.models);
   AsignaturaEquivalente.associate(sequelize.models);
-  // Siiges 2.0
+  FundamentoServicioSocial.associate(sequelize.models);
+  TipoModalidad.associate(sequelize.models);
+  ModalidadTitulacion.associate(sequelize.models);
+  // Siiges 1.0
   Academia.associate(sequelize.models);
   AlumnoObservacion.associate(sequelize.models);
   AsignaturaHemerobibliografica.associate(sequelize.models);
@@ -504,7 +517,7 @@ function setupModels(sequelize) {
   SolicitudUsuario.associate(sequelize.models);
   Testigo.associate(sequelize.models);
   TituloElectronico.associate(sequelize.models);
-  // Siiges 2.0 Fin
+  // Siiges 1.0 Fin
 }
 
 module.exports = setupModels;

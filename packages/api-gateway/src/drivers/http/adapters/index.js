@@ -27,6 +27,7 @@ const planesMaestrosAdapter = require('./planesMaestros/handlers');
 const presupuestosAdapter = require('./presupuestos/handlers');
 const solicitudesFoliosAdapter = require('./solicitudesFolios/handlers');
 const solicitudesRevEquiv = require('./solicitudesRevEquiv/handlers');
+const estadosAdapter = require('./estados/handlers');
 
 module.exports = {
   diligenciasAdapter,
@@ -57,4 +58,5 @@ module.exports = {
   presupuestosAdapter,
   solicitudesFoliosAdapter,
   solicitudesRevEquiv,
+  estadosAdapter,
 };

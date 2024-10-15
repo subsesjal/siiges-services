@@ -25,6 +25,8 @@ const {
   Nivel,
   UsuarioUsuario,
   Usuario,
+  Estado,
+  InstitucionDgp,
 } = drivers.sequelize.models;
 
 const {
@@ -39,6 +41,7 @@ const {
 module.exports = {
   findOneInstitucionQuery: findOneQuery(Institucion),
   findAllInstitucionesQuery: findAllQuery(Institucion),
+  createInstitucionDgpQuery: createQuery(InstitucionDgp),
   findAllTipoInstitucionesQuery: findAllQuery(TipoInstitucion),
   createInstitucionQuery: createQuery(Institucion),
   updateInstitucionQuery: updateAndFindQuery(Institucion),
@@ -61,6 +64,7 @@ module.exports = {
   updateRectorQuery: updateAndFindQuery(Rector),
   updatePersonaQuery: updateAndFindQuery(Persona),
   findAllMunicipiosQuery: findAllQuery(Municipio),
+  findAllEstadosQuery: findAllQuery(Estado),
   findAllHigienesQuery: findAllQuery(Higiene),
   createPlantelHigieneQuery: createQuery(PlantelHigiene),
   updatePlantelHigieneQuery: updateAndFindQuery(PlantelHigiene),

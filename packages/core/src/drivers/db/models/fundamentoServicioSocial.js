@@ -1,8 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const NIVEL_TABLE = 'niveles';
+const FUNDAMENTO_SERVICIO_SOCIAL_TABLE = 'fundamentos_servicio_social';
 
-const NivelSchema = {
+const FundamentoServicioSocialSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -10,15 +10,12 @@ const NivelSchema = {
     type: DataTypes.INTEGER,
   },
   nombre: {
-    allowNull: false,
     type: DataTypes.STRING,
+    allowNull: false,
   },
   descripcion: {
     type: DataTypes.STRING,
-  },
-  nivelDgp: {
-    type: DataTypes.STRING,
-    field: 'nivel_dgp',
+    allowNull: false,
   },
   createdAt: {
     allowNull: false,
@@ -40,17 +37,22 @@ const NivelSchema = {
   },
 };
 
-class Nivel extends Model {
-  static associate() {}
+class FundamentoServicioSocial extends Model {
+  static associate() {
+
+  }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: NIVEL_TABLE,
-      modelName: 'Nivel',
+      tableName: FUNDAMENTO_SERVICIO_SOCIAL_TABLE,
+      modelName: 'FundamentoServicioSocial',
       timestamps: false,
     };
   }
 }
-
-module.exports = { NIVEL_TABLE, NivelSchema, Nivel };
+module.exports = {
+  FUNDAMENTO_SERVICIO_SOCIAL_TABLE,
+  FundamentoServicioSocialSchema,
+  FundamentoServicioSocial,
+};

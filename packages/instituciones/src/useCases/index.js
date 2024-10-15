@@ -3,6 +3,10 @@ const {
 } = require('./db/municipios');
 
 const {
+  findAllEstados,
+} = require('./db/estados');
+
+const {
   createPlantel,
   findOnePlantel,
   findOnePlantelDetalles,
@@ -28,6 +32,7 @@ const {
 const {
   findAllInstituciones,
   findAllTipoInstituciones,
+  createOneInstitucionesDgp,
   findOneInstitucion,
   findOneInstitucionUsuario,
   findPlantelesInstitucion,
@@ -58,6 +63,8 @@ const {
 module.exports = {
   findAllInstituciones,
   findAllTipoInstituciones,
+  createOneInstitucionesDgp,
+  findAllEstados,
   findOneInstitucion,
   findOneInstitucionUsuario,
   findPlantelesInstitucion,
