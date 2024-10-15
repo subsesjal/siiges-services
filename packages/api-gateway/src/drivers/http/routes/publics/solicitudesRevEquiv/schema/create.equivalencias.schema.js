@@ -20,6 +20,4 @@ const createEquivalenciaSchema = {
   },
 };
 
-module.exports = {
-  createEquivalenciaSchema,
-};
+module.exports = createEquivalenciaSchema;

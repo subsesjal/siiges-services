@@ -1,15 +1,13 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-async function findOneEquivalencia(req, reply) {
+async function deleteEquivalencia(req, reply) {
   try {
     const { equivalenciaId } = req.params;
-
-    Logger.info('[solicitudes]: Getting solicitud - equivalencia');
-    const equivalencia = await this.solicitudServices.findOneEquivalencia(
-      { id: equivalenciaId },
-    );
-
+    Logger.info(`[Solicitud]: Deleting equivalencia with id: ${equivalenciaId}`);
+    const equivalencia = await this.solicitudServices.deleteEquivalencia({
+      id: equivalenciaId,
+    });
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
@@ -19,4 +17,4 @@ async function findOneEquivalencia(req, reply) {
   }
 }
 
-module.exports = findOneEquivalencia;
+module.exports = deleteEquivalencia;

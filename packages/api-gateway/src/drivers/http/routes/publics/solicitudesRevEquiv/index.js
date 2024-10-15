@@ -9,6 +9,27 @@ async function solicitudesRevEquivRouter(fastify, opts, next) {
     },
     solicitudesRevEquiv.createEquivalencia,
   );
+  fastify.get(
+    '/:equivalenciaId',
+    {
+      schema: solicitudesSchema.findOneEquivalenciaSchema,
+    },
+    solicitudesRevEquiv.findOneEquivalencia,
+  );
+  fastify.get(
+    '/equivalencias',
+    {
+      schema: solicitudesSchema.findAllEquivalenciasSchema,
+    },
+    solicitudesRevEquiv.findAllEquivalencias,
+  );
+  await fastify.delete(
+    '/:equivalenciaId',
+    {
+      schema: solicitudesSchema.deleteEquivalenciaSchema,
+    },
+    solicitudesRevEquiv.deleteEquivalencia,
+  );
   next();
 }
 
