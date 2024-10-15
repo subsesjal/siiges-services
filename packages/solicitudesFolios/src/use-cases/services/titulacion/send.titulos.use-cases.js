@@ -1,4 +1,5 @@
 const boom = require('@hapi/boom');
+const { Logger } = require('@siiges-services/shared');
 
 const include = [
   {
@@ -33,6 +34,11 @@ const include = [
   { association: 'tipoSolicitudFolio' },
 ];
 
+const formatDate = (date) => {
+  if (!date) return null;
+  return new Date(date).toISOString().slice(0, 10);
+};
+
 const transformDataToTitulo = ({ folioAlumno, programa }) => ({
   ies: programa.plantel.institucion.nombre,
   nombre: folioAlumno.folioDocumentoAlumno.alumno.persona.nombre,
@@ -41,21 +47,52 @@ const transformDataToTitulo = ({ folioAlumno, programa }) => ({
   curp: folioAlumno.folioDocumentoAlumno.alumno.persona.curp,
   email: folioAlumno.folioDocumentoAlumno.alumno.persona.correoPrimario,
   folio: folioAlumno.folioDocumentoAlumno.folioDocumento,
-  fecha: folioAlumno.fechaElaboracion,
-  inicio: folioAlumno.fechaInicio,
-  termino: folioAlumno.fechaTerminacion,
+  fecha: formatDate(folioAlumno.fechaElaboracion),
+  inicio: formatDate(folioAlumno.fechaInicio),
+  termino: formatDate(folioAlumno.fechaTerminacion),
   rvoe: programa.acuerdoRvoe,
   modalidad: folioAlumno.modalidadTitulacionId,
   servicio: folioAlumno.fundamentoServicioSocialId,
-  fecha_soc: folioAlumno.fechaElaboracion,
+  fecha_soc: formatDate(folioAlumno.fechaElaboracion),
   estado: 14,
-  nivel_estudio: programa.nivel.nivelDgp,
+  nivel_estudio: parseInt(programa.nivel.nivelDgp, 10),
   institucion: programa.plantel.institucion.nombre,
-  inicio_study: folioAlumno.folioDocumentoAlumno.alumno.validacion.fechaInicioAntecedente,
-  termino_study: folioAlumno.folioDocumentoAlumno.alumno.validacion.fechaFinAntecedente,
+  inicio_study: formatDate(
+    folioAlumno.folioDocumentoAlumno.alumno.validacion.fechaInicioAntecedente,
+  ),
+  termino_study: formatDate(folioAlumno.folioDocumentoAlumno.alumno.validacion.fechaFinAntecedente),
 });
 
-const validateDataTransformed = (data) => Object.values(data).every((value) => value !== null && value !== undefined && value !== '');
+const validateDataTransformed = (data) => Object.entries(data).every(([key, value]) => {
+  if (key === 'materno') {
+    return true;
+  }
+
+  return value !== null && value !== undefined && value !== '';
+});
+
+const isEnvioExitoso = (envioExitoso) => envioExitoso;
+
+const hasInvalidSituacionValidacion = (validacion) => {
+  const invalidSituations = [2, 4];
+  return !validacion || invalidSituations.includes(validacion.situacionValidacionId);
+};
+
+const shouldProcessFolioAlumno = (folioAlumno) => {
+  const { envioExitoso, alumno } = folioAlumno.folioDocumentoAlumno;
+
+  if (isEnvioExitoso(envioExitoso)) {
+    Logger.error('[titulacion] Sending already successful, do not process.');
+    return false;
+  }
+
+  if (hasInvalidSituacionValidacion(alumno.validacion)) {
+    Logger.error('[titulacion] Alumno validation is not valid');
+    return false;
+  }
+
+  return true;
+};
 
 const envioTitulacion = (
   service,
@@ -71,27 +108,29 @@ const envioTitulacion = (
 
   const { programa } = solicitudJson;
 
-  // Map over solicitudFoliosAlumnos and use Promises
   // eslint-disable-next-line no-unused-vars
   const titulosEnviados = await Promise.all(
     solicitudJson.solicitudFoliosAlumnos.map(async (folioAlumno) => {
-      // Skip if already sent or missing validation data
-      if (folioAlumno.folioDocumentoAlumno.envioExitoso
-        || !folioAlumno.folioDocumentoAlumno.alumno.validacion) {
+      if (!shouldProcessFolioAlumno(folioAlumno)) {
         return folioAlumno;
       }
-
       const dataTransformed = transformDataToTitulo({ folioAlumno, programa });
+      console.log(dataTransformed);
+
       const isValid = validateDataTransformed(dataTransformed);
 
       if (isValid) {
-        const response = await service.create(dataTransformed);
+        try {
+          const response = await service.create([dataTransformed]);
 
-        if (response.ok) {
-          await updateFolioDocumentoAlumnoQuery(
-            { id: folioAlumno.folioDocumentoAlumno.id },
-            { envioExitoso: true },
-          );
+          if (response.ok) {
+            await updateFolioDocumentoAlumnoQuery(
+              { id: folioAlumno.folioDocumentoAlumno.id },
+              { envioExitoso: true },
+            );
+          }
+        } catch (error) {
+          Logger.error(`Error processing folioAlumno ID: ${folioAlumno.folioDocumentoAlumno.id}`);
         }
       }
 
