@@ -6,14 +6,52 @@ const { responseProperties } = require('../../instituciones/schema/properties/re
 
 const findAllProgramasSchema = {
   tags: ['Programas'],
-  description: 'Return a list of programs.',
+  description: 'Return a list of programs or a specific program if acuerdoRvoe is provided.',
+  querystring: {
+    type: 'object',
+    properties: {
+      acuerdoRvoe: { type: 'string' },
+    },
+  },
   response: {
     200: {
       type: 'object',
       properties: {
         data: {
-          type: 'array',
-          items: {
+          if: {
+            type: 'array',
+          },
+          then: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...programa,
+                plantel: {
+                  type: 'object',
+                  properties: {
+                    ...plantel,
+                    institucion: {
+                      type: 'object',
+                      properties: {
+                        ...institucion,
+                      },
+                    },
+                    domicilio: {
+                      type: 'object',
+                      properties: {
+                        ...domicilio,
+                      },
+                    },
+                  },
+                },
+                ...responseProperties,
+              },
+            },
+          },
+          else: {
+            type: 'object',
             properties: {
               id: { type: 'integer' },
               ...programa,

@@ -3,8 +3,9 @@ const errorHandler = require('../../../../utils/errorHandler');
 
 async function findAllProgramas(req, reply) {
   try {
+    const { acuerdoRvoe } = req.query;
     Logger.info('[Programas]: Getting programs list');
-    const programs = await this.administracionAcademicaServices.findAllProgramas();
+    const programs = await this.administracionAcademicaServices.findAllProgramas({ acuerdoRvoe });
 
     return reply
       .code(200)

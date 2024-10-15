@@ -16,3 +16,4 @@ id,nombre,descripcion,created_at
 15,jefe_vigilante,Jefe de vigilantes,2021-01-22 14:27:58
 16,vigilante,Vigilante,2018-09-12 18:00:00
 17,capturista_opd,Capturista OPD,2018-09-12 18:00:00
+18,rev_equiv_sicyt,Rev Equivalencias SICYT,2018-09-12 18:00:00

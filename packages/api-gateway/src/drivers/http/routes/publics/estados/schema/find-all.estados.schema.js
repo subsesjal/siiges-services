@@ -1,9 +1,15 @@
+const { estado } = require('./properties/estado');
 const { responseProperties } = require('./properties/responseProperties');
-const { tipoInstitucion } = require('./properties/tipoInstitucion');
 
-const findAllTipoInstitucionesSchema = {
-  tags: ['TipoInstitucion'],
-  description: 'Return a list of tipo instituciones with name and description.',
+const findAllEstadosSchema = {
+  tags: ['Estado'],
+  description: 'Return a list of estados.',
+  querystring: {
+    type: 'object',
+    properties: {
+      estadoId: { type: 'integer' },
+    },
+  },
   response: {
     200: {
       type: 'object',
@@ -14,7 +20,7 @@ const findAllTipoInstitucionesSchema = {
             type: 'object',
             properties: {
               id: { type: 'integer' },
-              ...tipoInstitucion,
+              ...estado,
               ...responseProperties,
             },
           },
@@ -24,4 +30,4 @@ const findAllTipoInstitucionesSchema = {
   },
 };
 
-module.exports = findAllTipoInstitucionesSchema;
+module.exports = findAllEstadosSchema;

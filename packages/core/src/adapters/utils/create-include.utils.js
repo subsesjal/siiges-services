@@ -2,9 +2,12 @@ const { Op } = require('sequelize');
 const { checkers } = require('@siiges-services/shared');
 
 function addDeleteAt(include, strict) {
+  const whereCondition = include.where
+    ? { ...include.where, deletedAt: { [Op.is]: null } }
+    : { deletedAt: { [Op.is]: null } };
   return {
     ...include,
-    where: { deletedAt: { [Op.is]: null } },
+    where: whereCondition,
     required: strict,
   };
 }
