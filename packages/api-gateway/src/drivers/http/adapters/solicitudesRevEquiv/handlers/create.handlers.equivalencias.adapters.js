@@ -16,12 +16,9 @@ const FILE_KEYS_MAPPING = {
 
 async function createEquivalencia(req, reply) {
   try {
-    const fotografia = req.body.FIRMA_REPRESENTANTE;
     const dataField = req.body.DATA;
     const fileData = await req.saveRequestFiles();
     let data;
-
-    // Intentar parsear el campo DATA
     try {
       data = JSON.parse(dataField.value);
     } catch (error) {
@@ -31,8 +28,7 @@ async function createEquivalencia(req, reply) {
     }
 
     Logger.info('[equivalencia]: Creating equivalencia');
-
-    const newEquivalencia = await this.solicitudServices.createEquivalencia(data, fotografia);
+    const newEquivalencia = await this.solicitudServices.createEquivalencia({ data });
     const { id } = newEquivalencia.dataValues;
     const fileKeys = Object.keys(req.body)
       .filter((key) => Object.prototype.hasOwnProperty.call(FILE_KEYS_MAPPING, key) && key !== 'DATA');

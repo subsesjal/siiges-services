@@ -3,19 +3,27 @@ const { responseProperties } = require('./properties/responseProperties');
 
 const createEquivalenciaSchema = {
   type: 'object',
-  properties: {
-    ...equivalenciaProperties,
-    ...responseProperties,
+  description: 'Create a new equivalencia.',
+  body: {
+    type: 'object',
+    properties: {
+      ...equivalenciaProperties,
+    },
   },
-  required: [
-    'tipoTramiteId',
-    'estatusSolicitud',
-    'fecha',
-    'observaciones',
-    'interesado',
-  ],
+  response: {
+    200: {
+      type: 'object',
+      properties: {
+        data: {
+          type: 'object',
+          properties: {
+            ...equivalenciaProperties,
+            ...responseProperties,
+          },
+        },
+      },
+    },
+  },
 };
 
-module.exports = {
-  createEquivalenciaSchema,
-};
+module.exports = createEquivalenciaSchema;
