@@ -3,7 +3,13 @@ const { responseProperties } = require('./properties/responseProperties');
 
 const createEquivalenciaSchema = {
   type: 'object',
-  description: 'Return a equivalencia data.',
+  description: 'Create a new equivalencia.',
+  body: {
+    type: 'object',
+    properties: {
+      ...equivalenciaProperties,
+    },
+  },
   response: {
     200: {
       type: 'object',
