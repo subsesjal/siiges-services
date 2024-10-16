@@ -58,3 +58,4 @@ jobs:
           USER_EMAIL: mail@gmail.com
           PASSWORD_EMAIL: zqjcfggkbhobwert
           DATABASE: mysql
+          API_BASE_URL: https://developer:3312
