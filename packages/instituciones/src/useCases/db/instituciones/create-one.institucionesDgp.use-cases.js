@@ -15,21 +15,20 @@ const createOneInstitucionesDgp = (
           institucionId,
           claveDgp,
           nombreInstitucionDgp,
-        }
+        },
       );
       return updatedInstitucionDgp;
-    } else {
-      const institucionExists = await findInstitucionByIdQuery({ id: institucionId });
-
-      if (!institucionExists) return null;
-      const newInstitucionDgp = await createInstitucionesDgpQuery({
-        institucionId,
-        claveDgp,
-        nombreInstitucionDgp,
-      });
-
-      return newInstitucionDgp;
     }
+    const institucionExists = await findInstitucionByIdQuery({ id: institucionId });
+
+    if (!institucionExists) return null;
+    const newInstitucionDgp = await createInstitucionesDgpQuery({
+      institucionId,
+      claveDgp,
+      nombreInstitucionDgp,
+    });
+
+    return newInstitucionDgp;
   });
   const institucionesDgp = await Promise.all(institucionesDgpPromises);
 
