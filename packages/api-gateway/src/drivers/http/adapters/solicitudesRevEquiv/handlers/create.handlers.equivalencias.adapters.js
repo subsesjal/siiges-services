@@ -19,6 +19,7 @@ async function createEquivalencia(req, reply) {
     const dataField = req.body.DATA;
     const fileData = await req.saveRequestFiles();
     let data;
+
     try {
       data = JSON.parse(dataField.value);
     } catch (error) {
@@ -32,6 +33,7 @@ async function createEquivalencia(req, reply) {
     const { id } = newEquivalencia.dataValues;
     const fileKeys = Object.keys(req.body)
       .filter((key) => Object.prototype.hasOwnProperty.call(FILE_KEYS_MAPPING, key) && key !== 'DATA');
+
     await fileKeys.reduce(async (prevPromise, key) => {
       await prevPromise;
       const archivoAdjunto = fileData.find((files) => files.fieldname === key);
@@ -47,11 +49,31 @@ async function createEquivalencia(req, reply) {
 
       await this.filesServices.uploadFile(dataFile, archivoAdjunto);
     }, Promise.resolve());
-
+    const {
+      interesadoId,
+      tipoTramiteId,
+      estatusSolicitudRevEquivId,
+      fecha,
+      folioSolicitud,
+      createdAt,
+      updatedAt,
+      deletedAt,
+    } = newEquivalencia.dataValues;
+    const response = {
+      id,
+      interesadoId,
+      tipoTramiteId,
+      estatusSolicitudRevEquivId,
+      fecha,
+      folioSolicitud,
+      createdAt,
+      updatedAt,
+      deletedAt,
+    };
     return reply
-      .code(201)
+      .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: newEquivalencia });
+      .send({ data: response });
   } catch (error) {
     return errorHandler(error, reply);
   }
