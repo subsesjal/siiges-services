@@ -29,6 +29,8 @@ module.exports = {
   createOneInstitucionesDgp: createOneInstitucionesDgp(
     institucionAdapter.createInstitucionDgpQuery,
     institucionAdapter.findOneInstitucionQuery,
+    institucionAdapter.findOneInstitucionDgpQuery,
+    institucionAdapter.updateInstitucionDgpQuery,
   ),
   findOneInstitucion: findOneInstitucion(institucionAdapter.findOneInstitucionQuery),
   findOneInstitucionUsuario: findOneInstitucionUsuario(

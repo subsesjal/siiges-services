@@ -42,6 +42,8 @@ module.exports = {
   findOneInstitucionQuery: findOneQuery(Institucion),
   findAllInstitucionesQuery: findAllQuery(Institucion),
   createInstitucionDgpQuery: createQuery(InstitucionDgp),
+  findOneInstitucionDgpQuery: findOneQuery(InstitucionDgp),
+  updateInstitucionDgpQuery: updateQuery(InstitucionDgp),
   findAllTipoInstitucionesQuery: findAllQuery(TipoInstitucion),
   createInstitucionQuery: createQuery(Institucion),
   updateInstitucionQuery: updateAndFindQuery(Institucion),
