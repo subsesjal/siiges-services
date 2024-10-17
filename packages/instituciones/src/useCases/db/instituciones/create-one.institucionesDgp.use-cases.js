@@ -1,8 +1,8 @@
 const createOneInstitucionesDgp = (
   createInstitucionesDgpQuery,
   findInstitucionByIdQuery,
-  findOneInstitucionDgpQuery, // Buscar por claveDgp
-  updateInstitucionDgpQuery
+  findOneInstitucionDgpQuery,
+  updateInstitucionDgpQuery,
 ) => async (data) => {
   const institucionesDgpPromises = data.map(async (item) => {
     const { institucionId, claveDgp, nombreInstitucionDgp } = item;
