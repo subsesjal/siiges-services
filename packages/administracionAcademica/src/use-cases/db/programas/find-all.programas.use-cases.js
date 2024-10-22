@@ -1,4 +1,5 @@
 const { checkers } = require('@siiges-services/shared');
+const { Op } = require('sequelize');
 
 const findAllProgramas = (
   findAllProgramasQuery,
@@ -12,6 +13,7 @@ const findAllProgramas = (
     const programa = await findOneProgramaQuery(
       { acuerdoRvoe },
       {
+        query: { fechaSurteEfecto: { [Op.lte]: new Date() } },
         include,
       },
     );
