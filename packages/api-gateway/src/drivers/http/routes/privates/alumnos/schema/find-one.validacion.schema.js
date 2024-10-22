@@ -29,7 +29,7 @@ const findOneValidacionSchema = {
                 ...tipoValidaciones,
               },
             },
-            situaciones: {
+            situacionValidacion: {
               type: 'object',
               properties: {
                 id: { type: 'integer' },

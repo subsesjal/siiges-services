@@ -137,7 +137,7 @@ class Validacion extends Model {
     this.belongsTo(models.Estado, { as: 'estado' });
     this.belongsTo(models.Nivel, { as: 'nivel' });
     this.belongsTo(models.TipoValidacion, { as: 'tipo', foreignKey: 'tipo_validacion_id' });
-    this.belongsTo(models.SituacionValidacion, { as: 'situacion', foreignKey: 'situacion_validacion_id' });
+    this.belongsTo(models.SituacionValidacion, { as: 'situacionValidacion', foreignKey: 'situacion_validacion_id' });
   }
 
   static config(sequelize) {
