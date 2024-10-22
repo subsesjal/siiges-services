@@ -1,8 +1,10 @@
-const { checkers } = require('@siiges-services/shared');
-
-const findGroupCicloEscolar = (findGroupCicloEscolarQuery) => async (identifierObj) => {
-  const cicloEscolar = await findGroupCicloEscolarQuery(identifierObj);
-  checkers.throwErrorIfDataIsFalsy(!!cicloEscolar.length, 'Ciclo Escolar', identifierObj.programaId);
+const findGroupCicloEscolar = (
+  findGroupCicloEscolarQuery,
+  whereCicloEscolarQuery,
+) => async (identifierObj) => {
+  const cicloEscolar = await findGroupCicloEscolarQuery(identifierObj, {
+    query: whereCicloEscolarQuery,
+  });
 
   return cicloEscolar;
 };
