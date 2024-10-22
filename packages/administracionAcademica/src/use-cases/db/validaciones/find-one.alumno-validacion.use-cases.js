@@ -3,7 +3,7 @@ const { checkers } = require('@siiges-services/shared');
 const findOneAlumnoValidacion = (findOneValidacionesQuery) => async ({ alumnoId }) => {
   const include = [
     { association: 'tipo' },
-    { association: 'situacion' },
+    { association: 'situacionValidacion' },
   ];
   const alumnoValidation = await findOneValidacionesQuery({ alumnoId }, { include });
 
