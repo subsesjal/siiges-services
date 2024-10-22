@@ -96,6 +96,13 @@ module.exports = {
   ),
   createEquivalencia: createEquivalencia(
     solicitudes.createEquivalenciaQuery,
+    solicitudes.createAsignaturaAntecedenteQuery,
+    solicitudes.createAsignaturaEquivalenteQuery,
+    solicitudes.createInstitucionDestinoQuery,
+    solicitudes.createInstitucionProcedenciaQuery,
+    solicitudes.createDomicilioEquivalenteQuery,
+    solicitudes.createPersonaEquivalenteQuery,
+    solicitudes.createInteresadoQuery,
   ),
   findOneEquivalencia: findOneEquivalencia(
     solicitudes.findOneEquivalenciaQuery,

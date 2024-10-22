@@ -8,8 +8,10 @@ async function solicitudesRevEquivRouter(fastify, opts, next) {
       schema: solicitudesSchema.createEquivalenciaSchema,
       preValidation: async (request, reply) => {
         try {
-          if (request.body.DATA && typeof request.body.DATA.value === 'string') {
-            const parsedData = JSON.parse(request.body.DATA.value);
+          const dataField = request.body.DATA;
+
+          if (dataField && typeof dataField.value === 'string') {
+            const parsedData = JSON.parse(dataField.value);
             request.body = { ...request.body, ...parsedData };
           } else {
             return reply
@@ -20,7 +22,7 @@ async function solicitudesRevEquivRouter(fastify, opts, next) {
         } catch (error) {
           return reply
             .status(400)
-            .send({ message: 'Error al parsear los datos JSON en el campo DATA.' });
+            .send({ message: 'Error al parsear los datos JSON en el campo DATA route.' });
         }
       },
     },

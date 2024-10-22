@@ -27,10 +27,9 @@ async function createEquivalencia(req, reply) {
         .code(400)
         .send({ message: 'Error al parsear los datos JSON en el campo DATA.' });
     }
-
     Logger.info('[equivalencia]: Creating equivalencia');
     const newEquivalencia = await this.solicitudServices.createEquivalencia({ data });
-    const { id } = newEquivalencia.dataValues;
+    const { id } = newEquivalencia;
     const fileKeys = Object.keys(req.body)
       .filter((key) => Object.prototype.hasOwnProperty.call(FILE_KEYS_MAPPING, key) && key !== 'DATA');
 
@@ -49,31 +48,10 @@ async function createEquivalencia(req, reply) {
 
       await this.filesServices.uploadFile(dataFile, archivoAdjunto);
     }, Promise.resolve());
-    const {
-      interesadoId,
-      tipoTramiteId,
-      estatusSolicitudRevEquivId,
-      fecha,
-      folioSolicitud,
-      createdAt,
-      updatedAt,
-      deletedAt,
-    } = newEquivalencia.dataValues;
-    const response = {
-      id,
-      interesadoId,
-      tipoTramiteId,
-      estatusSolicitudRevEquivId,
-      fecha,
-      folioSolicitud,
-      createdAt,
-      updatedAt,
-      deletedAt,
-    };
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: response });
+      .send({ data: newEquivalencia });
   } catch (error) {
     return errorHandler(error, reply);
   }
