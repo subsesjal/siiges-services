@@ -12,6 +12,10 @@ const {
 } = models;
 
 const include = [{
+  association: 'solicitud',
+  where: { estatusSolicitudId: 11 },
+},
+{
   association: 'plantel',
   include: [
     { association: 'institucion' },
@@ -20,7 +24,7 @@ const include = [{
 }];
 
 const where = {
-  acuerdoRvoe: { [Op.not]: null },
+  acuerdoRvoe: { [Op.or]: { [Op.ne]: null, [Op.ne]: '' } },
   fechaSurteEfecto: { [Op.lte]: new Date() },
 };
 
