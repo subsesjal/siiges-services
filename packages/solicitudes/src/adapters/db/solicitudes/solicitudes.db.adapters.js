@@ -14,6 +14,13 @@ const {
   Plantel,
   Institucion,
   SolicitudRevEquiv,
+  InstitucionProcedencia,
+  InstitucionDestino,
+  AsignaturaAntecedente,
+  AsignaturaEquivalente,
+  Domicilio,
+  Persona,
+  Interesado,
 } = models;
 
 const {
@@ -53,6 +60,13 @@ module.exports = {
   findAllSolicitudSeccionQuery: findAllQuery(SolicitudSeccion),
   deleteSolicitudQuery: deleteQuery(Solicitud),
   createEquivalenciaQuery: createQuery(SolicitudRevEquiv),
+  createInstitucionProcedenciaQuery: createQuery(InstitucionProcedencia),
+  createInstitucionDestinoQuery: createQuery(InstitucionDestino),
+  createAsignaturaAntecedenteQuery: createQuery(AsignaturaAntecedente),
+  createAsignaturaEquivalenteQuery: createQuery(AsignaturaEquivalente),
+  createDomicilioEquivalenteQuery: createQuery(Domicilio),
+  createPersonaEquivalenteQuery: createQuery(Persona),
+  createInteresadoQuery: createQuery(Interesado),
   findOneEquivalenciaQuery: findOneQuery(SolicitudRevEquiv),
   findAllEquivalenciasQuery: findAllQuery(SolicitudRevEquiv),
   deleteEquivalenciaQuery: deleteQuery(SolicitudRevEquiv),
