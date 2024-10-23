@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 const fs = require('fs');
 const path = require('path');
 const { jsPDF } = require('jspdf');
@@ -50,8 +49,6 @@ function addHeaderContent(doc) {
 }
 function redefineAddPage(doc) {
   const originalAddPage = doc.addPage;
-
-  // eslint-disable-next-line no-param-reassign, func-names
   doc.addPage = function (...args) {
     originalAddPage.apply(this, args);
     addHeaderContent(this);
@@ -136,7 +133,7 @@ function GenerarFDA02(solicitud) {
     doc,
     currentPositionY,
   );
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
 
   generateTableWithStyles(
     HEADER_TABLA_DOMICILIO,
@@ -144,7 +141,7 @@ function GenerarFDA02(solicitud) {
     doc,
     currentPositionY,
   );
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
 
   generateTableWithStyles(
     HEADER_TABLA_DOMICILIO2,
@@ -183,7 +180,8 @@ function GenerarFDA02(solicitud) {
   const tableCorreoRector = [
     [correoInstitucional, correoRector, celularRector],
   ];
-
+  generateTableWithStyles(HEADER_TABLA_CORREO, tableCorreoRector, doc, currentPositionY);
+  currentPositionY = doc.previousAutoTable.finalY;
   generateTableWithStyles(HEADER_TABLA_CORREO, tableCorreoRector, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY = updateCurrentPositionY(doc, 10);
@@ -268,7 +266,7 @@ function GenerarFDA02(solicitud) {
     'BAJO PROTESTA DE DECIR VERDAD',
     'center',
   );
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 5;
   currentPositionY += crearSeccion(
     currentPositionY,
