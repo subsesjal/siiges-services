@@ -127,6 +127,7 @@ class Alumno extends Model {
     this.hasMany(models.AlumnoTipoTramite, { as: 'alumnoTipoTramites', foreignKey: 'alumnoId' });
     this.hasOne(models.Validacion, { as: 'validacion', foreignKey: 'alumnoId' });
     this.hasMany(models.Calificacion, { as: 'calificaciones', foreignKey: 'alumnoId' });
+    this.hasOne(models.Validacion, { as: 'validacion', foreignKey: 'alumnoId' });
   }
 
   static config(sequelize) {

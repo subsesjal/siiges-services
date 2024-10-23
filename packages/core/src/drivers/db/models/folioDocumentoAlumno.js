@@ -65,6 +65,12 @@ const FolioDocumentoAlumnoSchema = {
     type: DataTypes.STRING,
     field: 'folio_documento',
   },
+  envioExitoso: {
+    allowNull: false,
+    type: DataTypes.BOOLEAN,
+    field: 'envio_exitoso',
+    defaultValue: false,
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
