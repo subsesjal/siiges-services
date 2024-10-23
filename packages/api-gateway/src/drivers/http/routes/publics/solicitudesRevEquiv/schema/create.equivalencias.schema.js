@@ -56,18 +56,24 @@ const createEquivalenciaSchema = {
               },
             },
             asignaturaAntecedente: {
-              type: 'object',
-              properties: {
-                nombre: { type: 'string' },
-                calificacion: { type: 'string' },
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  nombre: { type: 'string' },
+                  calificacion: { type: 'string' },
+                },
               },
             },
             asignaturaEquivalente: {
-              type: 'object',
-              properties: {
-                asignaturaId: { type: 'integer' },
-                nombre: { type: 'string' },
-                calificacion: { type: 'string' },
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  asignaturaId: { type: 'integer' },
+                  nombre: { type: 'string' },
+                  calificacion: { type: 'string' },
+                },
               },
             },
           },

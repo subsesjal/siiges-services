@@ -43,17 +43,25 @@ const createEquivalencia = (
     institucionDestinoId: destinoId,
   });
   const interesadoId = newInteresado.dataValues.id;
-  await createAsignaturaAntecedenteQuery({
-    interesadoId,
-    nombre: data.asignaturaAntecedente.nombre,
-    calificacion: data.asignaturaAntecedente.calificacion,
-  });
-  await createAsignaturaEquivalenteQuery({
-    interesadoId,
-    asignaturaId: data.asignaturaEquivalente.asignaturaId,
-    nombre: data.asignaturaEquivalente.nombre,
-    calificacion: data.asignaturaEquivalente.calificacion,
-  });
+  const antecedentesProm = data.asignaturaAntecedente.reduce((promises, asignaturaAntecedente) => {
+    const promise = createAsignaturaAntecedenteQuery({
+      interesadoId,
+      nombre: asignaturaAntecedente.nombre,
+      calificacion: asignaturaAntecedente.calificacion,
+    });
+    return [...promises, promise];
+  }, []);
+  const equivalentesProm = data.asignaturaEquivalente.reduce((promises, asignaturaEquivalente) => {
+    const promise = createAsignaturaEquivalenteQuery({
+      interesadoId,
+      asignaturaId: asignaturaEquivalente.asignaturaId,
+      nombre: asignaturaEquivalente.nombre,
+      calificacion: asignaturaEquivalente.calificacion,
+    });
+    return [...promises, promise];
+  }, []);
+  await Promise.all([...antecedentesProm, ...equivalentesProm]);
+
   const newEquivalencia = await createEquivalenciaQuery({
     interesadoId,
     tipoTramiteId: data.tipoTramiteId,
@@ -63,6 +71,9 @@ const createEquivalencia = (
   });
   const finalData = {
     id: newEquivalencia.dataValues.id,
+    createdAt: newEquivalencia.dataValues.createdAt,
+    updatedAt: newEquivalencia.dataValues.updatedAt,
+    deletedAt: newEquivalencia.dataValues.deletedAt,
     ...data,
   };
   return finalData;
