@@ -1,7 +1,19 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-// solicitudes services
+async function sendEmailNotification(notificacionServices, emailDestination, idUser, userName) {
+  Logger.info('[notification]: Sending notification');
+  await notificacionServices.sendNotificationEmail({
+    usuarioId: idUser,
+    email: emailDestination,
+    asunto: 'SIIGES: Confirmación de Recepción de Solicitud para Creación de Solicitud',
+    template: 'createSolicitud',
+    params: {
+      user: userName,
+    },
+  });
+}
+
 async function updateSolicitudPrograma(req, reply) {
   try {
     const { ...data } = req.body;
@@ -13,7 +25,11 @@ async function updateSolicitudPrograma(req, reply) {
       { id: solicitudId },
       data,
     );
-
+    const usuario = await this.usuarioServices.findOneUser({ id: solicitud.dataValues.usuarioId });
+    const { correo } = usuario.dataValues;
+    const { id } = usuario.dataValues;
+    const nombreUsuario = usuario.dataValues.usuario;
+    sendEmailNotification(this.notificacionServices, correo, id, nombreUsuario);
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')

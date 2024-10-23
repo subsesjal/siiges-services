@@ -25,6 +25,8 @@ const {
   updateRatificacionNombreSchema,
   deleteRatificacionNombreSchema,
   findOneInstitucionUsuarioSchema,
+  findAllTipoInstitucionesSchema,
+  createInstitucionDgpSchema,
 } = require('./schema');
 
 async function institucionRouter(fastify, opts, next) {
@@ -80,6 +82,15 @@ async function institucionRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     institucionesAdapter.deleteInstitucion,
+  );
+
+  await fastify.get(
+    '/tipoInstituciones',
+    {
+      schema: findAllTipoInstitucionesSchema,
+      onRequest: [fastify.authenticate],
+    },
+    institucionesAdapter.findAllTipoInstituciones,
   );
 
   await fastify.get(
@@ -170,6 +181,15 @@ async function institucionRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     institucionesAdapter.deleteRatificacionNombre,
+  );
+
+  await fastify.post(
+    '/instituciones_dgp',
+    {
+      schema: createInstitucionDgpSchema,
+      onRequest: [fastify.authenticate],
+    },
+    institucionesAdapter.createInstitucionDgp,
   );
 
   await fastify.post(

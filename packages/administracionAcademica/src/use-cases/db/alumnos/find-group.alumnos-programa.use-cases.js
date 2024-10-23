@@ -12,6 +12,13 @@ const findGroupAlumnosPrograma = (
   const include = [
     { association: 'persona' },
     { association: 'situacion' },
+    {
+      association: 'validacion',
+      include: [
+        { association: 'situacionValidacion' },
+      ],
+
+    },
   ];
 
   const programa = await findOneProgramaQuery({ id: programaId });

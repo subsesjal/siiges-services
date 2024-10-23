@@ -1,10 +1,10 @@
 const HEADER_TABLA_ESTUDIANTIL = ['NIVEL DE ESTUDIO', 'TURNO', 'MODALIDAD', 'CICLO'];
 const HEADER_NOMBRE_DATOS = ['Nombre', 'datos'];
 const HEADER_GRADO_EDUCATIVO = ['GRADO EDUCATIVO', 'NOMBRE DE LOS ESTUDIOS'];
-const HEADER_NOMBRE_PUESTO = [
-  ['NOMBRE PROPUESTO No. 1', '                                                             '],
-  ['NOMBRE PROPUESTO No. 2', '                                                             '],
-  ['NOMBRE PROPUESTO No. 3', '                                                             '],
+const HEADER_NOMBRE_PUESTO = (nombres) => [
+  ['NOMBRE PROPUESTO No. 1', nombres[0] || ''],
+  ['NOMBRE PROPUESTO No. 2', nombres[1] || ''],
+  ['NOMBRE PROPUESTO No. 3', nombres[2] || ''],
 ];
 const HEADER_TABLA_DOMICILIO = ['CALLE Y NÚMERO', 'COLONIA'];
 const HEADER_TABLA_CORREO = [
@@ -49,7 +49,7 @@ const diligenteBody = (diligente) => {
   const nombreDiligente = `${diligente.persona.nombre} ${diligente.persona.apellidoPaterno} ${diligente.persona.apellidoMaterno}`;
   return [
     ['NOMBRE COMPLETO', nombreDiligente],
-    ['CARGO', ''],
+    ['CARGO', diligente.persona.tituloCargo],
     ['NÚMERO TELEFÓNICO', diligente.persona.celular || '4747466124, 3787900984'],
     ['CORREO ELECTRÓNICO', diligente.persona.correoPrimario || 'primer@gmail.com'],
     [

@@ -13,6 +13,7 @@ const {
   Seccion,
   Plantel,
   Institucion,
+  SolicitudRevEquiv,
 } = models;
 
 const {
@@ -51,6 +52,10 @@ module.exports = {
   updateTrayectoriaQuery: updateAndFindQuery(Trayectoria),
   findAllSolicitudSeccionQuery: findAllQuery(SolicitudSeccion),
   deleteSolicitudQuery: deleteQuery(Solicitud),
+  createEquivalenciaQuery: createQuery(SolicitudRevEquiv),
+  findOneEquivalenciaQuery: findOneQuery(SolicitudRevEquiv),
+  findAllEquivalenciasQuery: findAllQuery(SolicitudRevEquiv),
+  deleteEquivalenciaQuery: deleteQuery(SolicitudRevEquiv),
   findProgramasBySolicitudIdQuery: (solicitudId) => Programa.findOne({
     where: {
       solicitud_id: solicitudId,

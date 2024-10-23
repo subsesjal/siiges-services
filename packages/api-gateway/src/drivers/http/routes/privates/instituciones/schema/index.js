@@ -14,6 +14,8 @@ const findOneRatificacionNombreSchema = require('./find-one.ratificacion-nombre.
 const createRatificacionNombreSchema = require('./create.ratificacion-nombre.schema');
 const updateRatificacionNombreSchema = require('./update.ratificacion-nombre.schema');
 const deleteRatificacionNombreSchema = require('./delete.ratificacion-nombre.schema');
+const findAllTipoInstitucionesSchema = require('./find-all.tipoInstituciones.schema');
+const createInstitucionDgpSchema = require('./create.institucionDgp.schema');
 
 module.exports = {
   findAllInstitucionesSchema,
@@ -32,4 +34,6 @@ module.exports = {
   createRatificacionNombreSchema,
   updateRatificacionNombreSchema,
   deleteRatificacionNombreSchema,
+  findAllTipoInstitucionesSchema,
+  createInstitucionDgpSchema,
 };
