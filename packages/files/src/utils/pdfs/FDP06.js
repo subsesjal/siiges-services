@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 const fs = require('fs');
 const path = require('path');
 const { jsPDF } = require('jspdf');
@@ -31,18 +30,20 @@ function addHeaderContent(doc) {
   doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
   doc.setFillColor(6, 98, 211);
 }
-function redefineAddPage(doc) {
-  const originalAddPage = doc.addPage;
-  // eslint-disable-next-line no-param-reassign
-  doc.addPage = function (...args) {
-    originalAddPage.apply(this, args);
+function redefineAddPage(document) {
+  const originalAddPage = document.addPage.bind(document);
+  const newDocument = { ...document };
+  newDocument.addPage = function addPageWithHeader(...args) {
+    originalAddPage(...args);
     addHeaderContent(this);
     return this;
   };
+  return newDocument;
 }
 
 function GenerarFDP06(solicitud) {
-  const doc = new jsPDF();
+  const JsPDF = jsPDF;
+  const doc = new JsPDF();
   let currentPositionY = 67;
 
   redefineAddPage(doc);
@@ -90,8 +91,7 @@ function GenerarFDP06(solicitud) {
   );
   currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 15;
-  // eslint-disable-next-line no-unused-vars
-  currentPositionY += crearSeccion(
+  crearSeccion(
     currentPositionY,
     doc,
     `${solicitud.usuario.persona.nombre} ${solicitud.usuario.persona.apellidoPaterno} ${solicitud.usuario.persona.apellidoMaterno}`,

@@ -16,7 +16,6 @@ const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encodin
 function GenerarFDA06(solicitud) {
   const doc = new jsPDF();
   let currentPositionY = 20;
-  // Add header images
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
   doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
@@ -27,7 +26,6 @@ function GenerarFDA06(solicitud) {
 
   configurarFuenteYAgregarTexto(doc, 'bold', 12, [69, 133, 244], 'CARTA DECLARATORIA', 20, 60);
   currentPositionY += 20;
-  // Main content section
   let content = `
   “Bajo protesta de decir verdad” declaro que el contenido programático de los planes y 
   programas de ${solicitud.programa.plantel.institucion.nombre}, son propiedad intelectual de ${solicitud.programa.nombre} 
@@ -43,7 +41,6 @@ function GenerarFDA06(solicitud) {
   content = `${solicitud.usuario.persona.nombre} ${solicitud.usuario.persona.apellidoPaterno} ${solicitud.usuario.persona.apellidoMaterno}`;
   currentPositionY += 5;
   crearSeccion(currentPositionY, doc, content, 'center');
-  // Add footer image and page number
   agregarImagenYPaginaPie(doc, img3);
 
   const pdfDataUri = doc.output('arraybuffer');
