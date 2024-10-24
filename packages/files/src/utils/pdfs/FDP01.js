@@ -29,7 +29,8 @@ const img2 = fs.readFileSync(path.join(__dirname, '/images/img2.png'), { encodin
 const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encoding: 'base64' });
 
 function GenerarFDP01(solicitud) {
-  const doc = new jsPDF();
+  const JsPDF = jsPDF;
+  const doc = new JsPDF();
   let currentPositionY = 67;
 
   const fechaFormateada = formatearFecha(solicitud.createdAt);
@@ -61,10 +62,10 @@ function GenerarFDP01(solicitud) {
     columnStyles,
   };
 
-  currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
+  currentPositionY = updateCurrentPositionY(doc);
 
   currentPositionY += generateTableAndSection('1. ESTUDIO DE PERTINENCIA Y FACTIBILIDAD', nombresPropuestos, doc, currentPositionY);
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 5;
 
   const headerEstudio = ['2. ESTUDIO DE OFERTA Y DEMANDA'];
@@ -98,10 +99,10 @@ function GenerarFDP01(solicitud) {
     columnStyles,
   };
 
-  currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
+  currentPositionY = updateCurrentPositionY(doc);
 
   currentPositionY += generateTableAndSection('6. IDEARIO INSTITUCIONAL', nombresIdeario, doc, currentPositionY);
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 5;
 
   currentPositionY += crearSeccion(
@@ -110,7 +111,7 @@ function GenerarFDP01(solicitud) {
     'BAJO PROTESTA DE DECIR VERDAD',
     'center',
   );
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 10;
   currentPositionY += crearSeccion(
     currentPositionY,
