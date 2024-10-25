@@ -2,7 +2,7 @@ const { calificacion } = require('../../alumnos/schema/properties/calificacion')
 const { responseProperties } = require('../../alumnos/schema/properties/responseProperties');
 
 const alumnosInscripcionSchema = {
-  tags: ['Alumnos'],
+  tags: ['Calificaciones'],
   description: 'Given an object with alumnos and calificaciones required data, then update calificaciones in database.',
   params: {
     type: 'object',
