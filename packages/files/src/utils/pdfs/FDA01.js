@@ -18,7 +18,8 @@ const img2 = fs.readFileSync(path.join(__dirname, '/images/img2.png'), { encodin
 const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encoding: 'base64' });
 
 function GenerarFDA01(solicitud) {
-  const doc = new jsPDF();
+  const JsPDF = jsPDF;
+  const doc = new JsPDF();
   let currentPositionY = 20;
 
   const fechaRecepcion = new Date(solicitud.fechaRecepcion);
@@ -64,13 +65,13 @@ function GenerarFDA01(solicitud) {
   currentPositionY += 15;
   currentPositionY = crearSeccion(currentPositionY, doc, content, 'right');
   configurarFuenteYAgregarTexto(doc, 'normal', 12, [0, 0, 0], '', 100, 58);
-  content = 'Por este conducto manifiesto que estoy en condiciones para iniciar el ' + tipoSolicitud + ' del programa ' + nombreNivel + ' en ' + solicitud.programa.nombre + ', ' + modalidadTipo + ' en periodos ' + ciclosTipo + ', turno ' + turnoTipo + ' de la institución ' + solicitud.programa.plantel.institucion.nombre + '.';
+  content = `Por este conducto manifiesto que estoy en condiciones para iniciar el ${tipoSolicitud} del programa ${nombreNivel} en ${solicitud.programa.nombre}, ${modalidadTipo} en periodos ${ciclosTipo}, turno ${turnoTipo} de la institución ${solicitud.programa.plantel.institucion.nombre}.`;
   currentPositionY += 30;
   currentPositionY = crearSeccion(currentPositionY, doc, content);
   content = 'Así mismo declaro Bajo Protesta de Decir la Verdad que la información y los documentos anexos en la presente solicitud son verídicos y fueron elaborados siguiendo principios éticos profesionales, que son de mi conocimiento las penas en que incurren quienes se conducen con falsedad ante autoridad distinta de la judicial, y señaló como domicilio para recibir notificaciones:';
   currentPositionY += 14;
   currentPositionY = crearSeccion(currentPositionY, doc, content);
-  content = solicitud.programa.plantel.domicilio.calle + ', N° ' + solicitud.programa.plantel.domicilio.numeroExterior + ', ' + solicitud.programa.plantel.domicilio.colonia + ', ' + solicitud.programa.plantel.domicilio.municipio.nombre + '.';
+  content = `${solicitud.programa.plantel.domicilio.calle}, N° ${solicitud.programa.plantel.domicilio.numeroExterior}, ${solicitud.programa.plantel.domicilio.colonia}, ${solicitud.programa.plantel.domicilio.municipio.nombre}.`;
   currentPositionY += 17;
   currentPositionY = crearSeccion(currentPositionY, doc, content);
   content = solicitud.programa.plantel.telefono1;

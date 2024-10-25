@@ -29,15 +29,15 @@ function addHeaderContent(doc) {
   doc.setFillColor(6, 98, 211);
   crearCelda(doc, 150, 40, 45, 7, 'FDA05');
 }
-function redefineAddPage(doc) {
-  const originalAddPage = doc.addPage;
-
-  // eslint-disable-next-line no-param-reassign, func-names
-  doc.addPage = function (...args) {
-    originalAddPage.apply(this, args);
+function redefineAddPage(document) {
+  const originalAddPage = document.addPage.bind(document);
+  const newDocument = { ...document };
+  newDocument.addPage = function addPageWithHeader(...args) {
+    originalAddPage(...args);
     addHeaderContent(this);
     return this;
   };
+  return newDocument;
 }
 
 function GenerarFDA05(solicitud) {
@@ -65,10 +65,10 @@ function GenerarFDA05(solicitud) {
     columnStyles,
   };
 
-  currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
+  currentPositionY = updateCurrentPositionY(doc);
 
   currentPositionY += generateTableAndSection('3. ROLES DE USUARIOS DE LA PLATAFORMA TECNOLÓGICA EDUCATIVA', headersUsuarios, doc, currentPositionY);
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 5;
 
   const headersVinculos = {
@@ -78,13 +78,11 @@ function GenerarFDA05(solicitud) {
     columnStyles,
   };
   currentPositionY += generateTableAndSection('4. ENLACE O VÍNCULO DE ACCESO PARA LA PLATAFORMA TECNOLÓGICA EDUCATIVA', headersVinculos, doc, currentPositionY);
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 5;
 
   currentPositionY = updateCurrentPositionY(doc, 10);
   currentPositionY = updateCurrentPositionY(doc);
-
-  // New table section
   const newTableData = {
     headers: ['', '', '', '', ''],
     body: [
@@ -163,7 +161,7 @@ function GenerarFDA05(solicitud) {
     'BAJO PROTESTA DE DECIR VERDAD',
     'center',
   );
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 20;
   currentPositionY += crearSeccion(
     currentPositionY,
