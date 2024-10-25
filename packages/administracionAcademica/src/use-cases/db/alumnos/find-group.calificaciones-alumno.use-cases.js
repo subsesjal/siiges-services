@@ -1,7 +1,7 @@
 const { checkers } = require('@siiges-services/shared');
 const { Op } = require('sequelize');
 
-const findOneAlumnos = (
+const findCalificacionesAlumno = (
   findOneAlumnosQuery,
   findAllCalificacionesQuery,
 ) => async (identifierObj) => {
@@ -29,4 +29,4 @@ const findOneAlumnos = (
   return calificaciones;
 };
 
-module.exports = findOneAlumnos;
+module.exports = findCalificacionesAlumno;
