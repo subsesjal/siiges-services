@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 const fs = require('fs');
 
 const { turnos } = require('./constants');
@@ -11,9 +10,8 @@ function crearCelda(doc, x, y, width, height, texto) {
   doc.rect(x, y, width, height, 'S');
 
   doc.setFont(textFont, 'bold');
-  doc.setFontSize(10);
+  doc.setFontSize(8);
   let setFillColor = [0, 0, 0];
-  // eslint-disable-next-line max-len
 
   const textoWidth = (doc.getStringUnitWidth(texto) * doc.internal.getFontSize())
     / doc.internal.scaleFactor;
@@ -21,7 +19,6 @@ function crearCelda(doc, x, y, width, height, texto) {
 
   if (texto.includes('FDA') || texto.includes('FDP')) {
     setFillColor = [255, 255, 255];
-    // eslint-disable-next-line max-len
     textoX = x + width - (doc.getStringUnitWidth(texto) * doc.internal.getFontSize()) / doc.internal.scaleFactor - 2; // Right aligned position with no margin
   }
 
@@ -85,7 +82,7 @@ function generarSeccionyTabla({
   }
 
   // Título de la sección
-  doc.setFillColor(172, 178, 183);
+  doc.setFillColor(170, 178, 183);
   crearCelda(
     doc,
     14, // cellX
@@ -157,18 +154,17 @@ function crearFilaFecha({
 
   const pageWidth = doc.internal.pageSize.width;
   const rightMargin = 15; // Ajusta este valor para mover más a la derecha
-  const tableWidth = 70; // Ajusta este valor para hacer la tabla más estrecha
+  const tableWidth = 90; // Ajusta este valor para hacer la tabla más estrecha
 
   const tableOptions = {
     startY: currentPositionY,
-    // eslint-disable-next-line max-len
     margin: { left: pageWidth - tableWidth - rightMargin, right: rightMargin }, // Posicionar la tabla más a la derecha
     tableWidth, // Ajustar el ancho de la tabla
     theme: 'grid',
     styles: {
       lineColor: [0, 0, 0],
       lineWidth: 0.3,
-      fontSize: 10, // Ajustar el tamaño de fuente si es necesario
+      fontSize: 8, // Ajustar el tamaño de fuente si es necesario
       cellPadding: 1, // Ajustar el padding para reducir la altura de las celdas
     },
     headStyles: {
@@ -229,7 +225,7 @@ function seccionIntitucionTabla({
 
   const tableOptions = {
     startY: currentPositionY,
-    margin: { right: 15, left: 20 },
+    margin: { right: 14, left: 14 },
     theme: 'grid',
     styles: {
       lineColor: [0, 0, 0],

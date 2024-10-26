@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 const fs = require('fs');
 const path = require('path');
 const { jsPDF } = require('jspdf');
@@ -19,7 +18,8 @@ const img2 = fs.readFileSync(path.join(__dirname, '/images/img2.png'), { encodin
 const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encoding: 'base64' });
 
 function GenerarFDA01(solicitud) {
-  const doc = new jsPDF();
+  const JsPDF = jsPDF;
+  const doc = new JsPDF();
   let currentPositionY = 20;
 
   const fechaRecepcion = new Date(solicitud.fechaRecepcion);
@@ -49,7 +49,6 @@ function GenerarFDA01(solicitud) {
 
   configurarFuenteYAgregarTexto(doc, 'bold', 12, [69, 133, 244], 'OFICIO DE ENTREGA DE DOCUMENTACIÓN', 20, 50);
   currentPositionY += 40;
-  // Main content section
   let content = `
   JOSÉ ROSALIO MUÑOZ CASTRO
   SUBSECRETARIO DE EDUCACIÓN SUPERIOR
@@ -65,28 +64,31 @@ function GenerarFDA01(solicitud) {
   `;
   currentPositionY += 15;
   currentPositionY = crearSeccion(currentPositionY, doc, content, 'right');
-  content = `
-Por este conducto manifiesto que estoy en condiciones para iniciar el ${tipoSolicitud} del programa ${nombreNivel} en ${solicitud.programa.nombre}, ${modalidadTipo} en periodos ${ciclosTipo}, turno ${turnoTipo} de la institución ${solicitud.programa.plantel.institucion.nombre}.
-
-Así mismo declaro Bajo Protesta de Decir la Verdad que la información y los documentos anexos en la presente solicitud son verídicos y fueron elaborados siguiendo principios éticos profesionales, que son de mi conocimiento las penas en que incurren quienes se conducen con falsedad ante autoridad distinta de la judicial, y señaló como domicilio para recibir notificaciones:
-
-${solicitud.programa.plantel.domicilio.calle}, N° ${solicitud.programa.plantel.domicilio.numeroExterior}, ${solicitud.programa.plantel.domicilio.colonia}, ${solicitud.programa.plantel.domicilio.municipio.nombre}.
-${solicitud.programa.plantel.telefono1}
-${solicitud.programa.plantel.telefono2}
-
-Quedo enterado de todas las disposiciones establecidas en la Ley General de Educación, la Ley General de Educación Superior, la Ley de Educación del Estado Libre y Soberano de Jalisco, la Ley de Educación Superior del Estado de Jalisco, así como del Instructivo para la obtención de Reconocimiento de Validez Oficial de Estudios de Educación Superior del Estado de Jalisco.
-  `;
-  currentPositionY += 30;
   configurarFuenteYAgregarTexto(doc, 'normal', 12, [0, 0, 0], '', 100, 58);
-  currentPositionY = crearSeccion(currentPositionY, doc, content, 'left');
+  content = `Por este conducto manifiesto que estoy en condiciones para iniciar el ${tipoSolicitud} del programa ${nombreNivel} en ${solicitud.programa.nombre}, ${modalidadTipo} en periodos ${ciclosTipo}, turno ${turnoTipo} de la institución ${solicitud.programa.plantel.institucion.nombre}.`;
+  currentPositionY += 30;
+  currentPositionY = crearSeccion(currentPositionY, doc, content);
+  content = 'Así mismo declaro Bajo Protesta de Decir la Verdad que la información y los documentos anexos en la presente solicitud son verídicos y fueron elaborados siguiendo principios éticos profesionales, que son de mi conocimiento las penas en que incurren quienes se conducen con falsedad ante autoridad distinta de la judicial, y señaló como domicilio para recibir notificaciones:';
+  currentPositionY += 14;
+  currentPositionY = crearSeccion(currentPositionY, doc, content);
+  content = `${solicitud.programa.plantel.domicilio.calle}, N° ${solicitud.programa.plantel.domicilio.numeroExterior}, ${solicitud.programa.plantel.domicilio.colonia}, ${solicitud.programa.plantel.domicilio.municipio.nombre}.`;
+  currentPositionY += 17;
+  currentPositionY = crearSeccion(currentPositionY, doc, content);
+  content = solicitud.programa.plantel.telefono1;
+  currentPositionY += 6;
+  currentPositionY = crearSeccion(currentPositionY, doc, content);
+  content = solicitud.programa.plantel.telefono2;
+  currentPositionY += 6;
+  currentPositionY = crearSeccion(currentPositionY, doc, content);
+  content = 'Quedo enterado de todas las disposiciones establecidas en la Ley General de Educación, la Ley General de Educación Superior, la Ley de Educación del Estado Libre y Soberano de Jalisco, la Ley de Educación Superior del Estado de Jalisco, así como del Instructivo para la obtención de Reconocimiento de Validez Oficial de Estudios de Educación Superior del Estado de Jalisco.';
+  currentPositionY += 6;
+  currentPositionY = crearSeccion(currentPositionY, doc, content);
   content = 'BAJO PROTESTA DE DECIR VERDAD';
   currentPositionY += 100;
   currentPositionY = crearSeccion(currentPositionY, doc, content, 'center');
   content = `${solicitud.usuario.persona.nombre} ${solicitud.usuario.persona.apellidoPaterno} ${solicitud.usuario.persona.apellidoMaterno}`;
   currentPositionY += 5;
   crearSeccion(currentPositionY, doc, content, 'center');
-
-  // Add footer image and page number
   agregarImagenYPaginaPie(doc, img3);
 
   const pdfDataUri = doc.output('arraybuffer');

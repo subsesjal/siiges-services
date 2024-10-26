@@ -15,6 +15,7 @@ module.exports = {
   ),
   findGroupCicloEscolar: findGroupCicloEscolar(
     ciclosEscolares.findGroupCicloEscolarQuery,
+    ciclosEscolares.whereCicloEscolarQuery,
   ),
   findOneCicloEscolar: findCicloEscolar,
   updateCicloEscolar: updateCicloEscolar(

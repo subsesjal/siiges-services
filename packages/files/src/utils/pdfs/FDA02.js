@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 const fs = require('fs');
 const path = require('path');
 const { jsPDF } = require('jspdf');
@@ -48,19 +47,20 @@ function addHeaderContent(doc) {
   doc.setFillColor(6, 98, 211);
   crearCelda(doc, 150, 40, 45, 7, 'FDA02');
 }
-function redefineAddPage(doc) {
-  const originalAddPage = doc.addPage;
-
-  // eslint-disable-next-line no-param-reassign, func-names
-  doc.addPage = function (...args) {
-    originalAddPage.apply(this, args);
+function redefineAddPage(document) {
+  const originalAddPage = document.addPage.bind(document);
+  const newDocument = { ...document };
+  newDocument.addPage = function addPageWithHeader(...args) {
+    originalAddPage(...args);
     addHeaderContent(this);
     return this;
   };
+  return newDocument;
 }
 
 function GenerarFDA02(solicitud) {
-  const doc = new jsPDF();
+  const JsPDF = jsPDF;
+  const doc = new JsPDF();
   let currentPositionY = 67;
 
   const fechaFormateada = formatearFecha(solicitud.createdAt);
@@ -136,7 +136,7 @@ function GenerarFDA02(solicitud) {
     doc,
     currentPositionY,
   );
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
 
   generateTableWithStyles(
     HEADER_TABLA_DOMICILIO,
@@ -144,7 +144,7 @@ function GenerarFDA02(solicitud) {
     doc,
     currentPositionY,
   );
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
 
   generateTableWithStyles(
     HEADER_TABLA_DOMICILIO2,
@@ -176,14 +176,14 @@ function GenerarFDA02(solicitud) {
 
   currentPositionY += generateTableAndSection('DATOS DEL RECTOR', tablaNombreYApellido, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
-  // eslint-disable-next-line max-len
-  const correoInstitucional = solicitud.programa.plantel.institucion.rector?.persona?.correoPrimario;
+  const correoInst = solicitud.programa.plantel.institucion.rector?.persona?.correoPrimario;
   const correoRector = solicitud.programa.plantel.institucion.rector?.persona?.correoSecundario;
   const celularRector = solicitud.programa.plantel.institucion.rector?.persona?.celular;
   const tableCorreoRector = [
-    [correoInstitucional, correoRector, celularRector],
+    [correoInst, correoRector, celularRector],
   ];
-
+  generateTableWithStyles(HEADER_TABLA_CORREO, tableCorreoRector, doc, currentPositionY);
+  currentPositionY = doc.previousAutoTable.finalY;
   generateTableWithStyles(HEADER_TABLA_CORREO, tableCorreoRector, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY = updateCurrentPositionY(doc, 10);
@@ -223,6 +223,8 @@ function GenerarFDA02(solicitud) {
 
   currentPositionY += generateTableAndSection('FORMACIÓN ACADÉMICA', formacionDirector, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
+  doc.addPage();
+  currentPositionY = 55;
   const { diligencias } = solicitud;
 
   if (diligencias && diligencias.length) {
@@ -233,7 +235,8 @@ function GenerarFDA02(solicitud) {
         showHead: false,
         columnStyles,
       };
-      currentPositionY += generateTableAndSection(`Diligente ${index + 1}`, tablaDataDiligencia, doc, currentPositionY);
+      generateTableAndSection(`Diligente ${index + 1}`, tablaDataDiligencia, doc, currentPositionY);
+      currentPositionY += 50;
     });
   }
   currentPositionY = doc.previousAutoTable.finalY;
@@ -268,7 +271,7 @@ function GenerarFDA02(solicitud) {
     'BAJO PROTESTA DE DECIR VERDAD',
     'center',
   );
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 5;
   currentPositionY += crearSeccion(
     currentPositionY,

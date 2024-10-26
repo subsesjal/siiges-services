@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 const fs = require('fs');
 const path = require('path');
 const { jsPDF } = require('jspdf');
@@ -27,10 +26,10 @@ const img2 = fs.readFileSync(path.join(__dirname, '/images/img2.png'), { encodin
 const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encoding: 'base64' });
 
 function GenerarFDA03(solicitud) {
-  const doc = new jsPDF();
+  const JsPDF = jsPDF;
+  const doc = new JsPDF();
   let currentPositionY = 20;
   const fechaFormateada = formatearFecha(solicitud.createdAt);
-  // Add header images
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
   doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
@@ -56,11 +55,11 @@ function GenerarFDA03(solicitud) {
   };
 
   if (solicitud?.programa?.plantel?.institucion?.rector?.persona) {
-    // eslint-disable-next-line max-len
-    TablaRepresentante.body = TABLA_REPRESENTANTE(solicitud.programa.plantel.institucion.rector.persona);
+    const rectorPersona = solicitud.programa.plantel.institucion.rector.persona;
+    TablaRepresentante.body = TABLA_REPRESENTANTE(rectorPersona);
   }
 
-  currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
+  currentPositionY = updateCurrentPositionY(doc);
 
   currentPositionY += generateTableAndSection('1. DATOS DEL PROPIETARIO O REPRESENTANTE LEGAL', TablaRepresentante, doc, currentPositionY);
 
@@ -70,8 +69,7 @@ function GenerarFDA03(solicitud) {
     showHead: false,
     columnStyles: columnStylesFirstAndSecondTable,
   };
-  currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
-
+  currentPositionY = updateCurrentPositionY(doc);
   currentPositionY += generateTableAndSection('3. PROPUESTAS DE NOMBRE', TablaPropuestaNombres, doc, currentPositionY);
 
   const nombresPropuestos = {
@@ -81,7 +79,7 @@ function GenerarFDA03(solicitud) {
     columnStyles,
   };
 
-  currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
+  currentPositionY = updateCurrentPositionY(doc);
 
   currentPositionY += generateTableAndSection('4. EN CASO DE TENER NOMBRE AUTORIZADO', nombresPropuestos, doc, currentPositionY);
 
@@ -93,7 +91,6 @@ function GenerarFDA03(solicitud) {
   currentPositionY += 5;
   crearSeccion(currentPositionY, doc, content, 'center');
 
-  // Add footer image and page number
   agregarImagenYPaginaPie(doc, img3);
   const pdfDataUri = doc.output('arraybuffer');
   return pdfDataUri;

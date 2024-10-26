@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 const fs = require('fs');
 const path = require('path');
 const { jsPDF } = require('jspdf');
@@ -28,18 +27,20 @@ function addHeaderContent(doc) {
   doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
   doc.setFillColor(6, 98, 211);
 }
-function redefineAddPage(doc) {
-  const originalAddPage = doc.addPage;
-  // eslint-disable-next-line no-param-reassign
-  doc.addPage = function (...args) {
-    originalAddPage.apply(this, args);
+function redefineAddPage(document) {
+  const originalAddPage = document.addPage.bind(document);
+  const newDocument = { ...document };
+  newDocument.addPage = function addPageWithHeader(...args) {
+    originalAddPage(...args);
     addHeaderContent(this);
     return this;
   };
+  return newDocument;
 }
 
 function GenerarFDP05(solicitud) {
-  const doc = new jsPDF();
+  const JsPDF = jsPDF;
+  const doc = new JsPDF();
   let currentPositionY = 67;
 
   redefineAddPage(doc);
@@ -79,7 +80,7 @@ function GenerarFDP05(solicitud) {
     'BAJO PROTESTA DE DECIR VERDAD',
     'center',
   );
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 25;
   currentPositionY += crearSeccion(
     currentPositionY,

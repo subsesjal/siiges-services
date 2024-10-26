@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 const fs = require('fs');
 const path = require('path');
 const { jsPDF } = require('jspdf');
@@ -38,6 +37,7 @@ const {
   agregarImagenYPaginaPie,
   buscarDescripcionPorId,
   generateTotalsTable,
+  crearFilaFecha,
 } = require('./pdfHandler02');
 
 const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
@@ -49,18 +49,20 @@ function addHeaderContent(doc) {
   doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
   doc.setFillColor(6, 98, 211);
 }
-function redefineAddPage(doc) {
-  const originalAddPage = doc.addPage;
-  // eslint-disable-next-line no-param-reassign
-  doc.addPage = function (...args) {
-    originalAddPage.apply(this, args);
+function redefineAddPage(document) {
+  const originalAddPage = document.addPage.bind(document);
+  const newDocument = { ...document };
+  newDocument.addPage = function addPageWithHeader(...args) {
+    originalAddPage(...args);
     addHeaderContent(this);
     return this;
   };
+  return newDocument;
 }
 
 function GenerarFDP02(solicitud) {
-  const doc = new jsPDF();
+  const JsPDF = jsPDF;
+  const doc = new JsPDF();
   let currentPositionY = 67;
 
   redefineAddPage(doc);
@@ -80,12 +82,16 @@ function GenerarFDP02(solicitud) {
   const nombreNivel = niveles
     .find(({ id }) => +id === solicitud?.programa.nivelId).descripcion;
 
-  configurarFuenteYAgregarTexto(doc, 'bold', 11, [69, 133, 244], 'PLAN DE ESTUDIOS', 20, 50);
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [0, 0, 0], fechaFormateada, 152, 58);
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], solicitud.programa.plantel.institucion.nombre, 50, 60);
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], `${nombreNivel} en ${solicitud.programa.nombre}`, 50, 70);
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], fechaVigencia || '', 50, 80);
-  currentPositionY += 20;
+  configurarFuenteYAgregarTexto(doc, 'bold', 11, [69, 133, 244], 'PLAN DE ESTUDIOS', 14, 50);
+  currentPositionY = crearFilaFecha({
+    currentPositionY,
+    fecha: fechaFormateada,
+    doc,
+  });
+  configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], solicitud.programa.plantel.institucion.nombre, 14, 60);
+  configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], `${nombreNivel} en ${solicitud.programa.nombre}`, 14, 65);
+  configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], fechaVigencia || '', 14, 70);
+  currentPositionY += 2;
 
   currentPositionY += seccionIntitucionTabla({
     doc, solicitud, niveles, modalidadTipo, ciclosTipo, currentPositionY,

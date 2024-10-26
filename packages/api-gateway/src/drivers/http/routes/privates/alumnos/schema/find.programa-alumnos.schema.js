@@ -1,6 +1,8 @@
 const { alumno } = require('./properties/alumno');
 const { persona } = require('../../usuarios/schema/properties/persona');
 const { situacion } = require('./properties/situacion');
+const { validacion } = require('./properties/validacion');
+const { situacionesValidacion } = require('./properties/situacionValidacion');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findProgramaAlumnosSchema = {
@@ -49,6 +51,22 @@ const findProgramaAlumnosSchema = {
                     id: { type: 'integer' },
                     ...situacion,
                     ...responseProperties,
+                  },
+                },
+                validacion: {
+                  type: ['object', 'null'],
+                  properties: {
+                    id: { type: 'integer' },
+                    ...validacion,
+                    ...responseProperties,
+                    situacionValidacion: {
+                      type: 'object',
+                      properties: {
+                        id: { type: 'integer' },
+                        ...situacionesValidacion,
+                        ...responseProperties,
+                      },
+                    },
                   },
                 },
               },

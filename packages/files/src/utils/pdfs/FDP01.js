@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 const fs = require('fs');
 const path = require('path');
 const { jsPDF } = require('jspdf');
@@ -22,6 +21,7 @@ const {
   updateCurrentPositionY,
   generateTableAndSection,
   agregarImagenYPaginaPie,
+  crearFilaFecha,
 } = require('./pdfHandler');
 
 const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
@@ -29,7 +29,8 @@ const img2 = fs.readFileSync(path.join(__dirname, '/images/img2.png'), { encodin
 const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encoding: 'base64' });
 
 function GenerarFDP01(solicitud) {
-  const doc = new jsPDF();
+  const JsPDF = jsPDF;
+  const doc = new JsPDF();
   let currentPositionY = 67;
 
   const fechaFormateada = formatearFecha(solicitud.createdAt);
@@ -41,7 +42,11 @@ function GenerarFDP01(solicitud) {
   crearCelda(doc, 150, 40, 45, 7, 'FDP01');
 
   configurarFuenteYAgregarTexto(doc, 'bold', 12, [69, 133, 244], 'DEL PLAN DE ESTUDIOS', 20, 50);
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [0, 0, 0], fechaFormateada, 152, 58);
+  currentPositionY = crearFilaFecha({
+    currentPositionY,
+    fecha: fechaFormateada,
+    doc,
+  });
 
   currentPositionY += seccionIntitucionTabla({
     doc, solicitud, niveles, currentPositionY,
@@ -57,10 +62,10 @@ function GenerarFDP01(solicitud) {
     columnStyles,
   };
 
-  currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
+  currentPositionY = updateCurrentPositionY(doc);
 
   currentPositionY += generateTableAndSection('1. ESTUDIO DE PERTINENCIA Y FACTIBILIDAD', nombresPropuestos, doc, currentPositionY);
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 5;
 
   const headerEstudio = ['2. ESTUDIO DE OFERTA Y DEMANDA'];
@@ -94,10 +99,10 @@ function GenerarFDP01(solicitud) {
     columnStyles,
   };
 
-  currentPositionY = updateCurrentPositionY(doc); // Espacio después de la celda
+  currentPositionY = updateCurrentPositionY(doc);
 
   currentPositionY += generateTableAndSection('6. IDEARIO INSTITUCIONAL', nombresIdeario, doc, currentPositionY);
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 5;
 
   currentPositionY += crearSeccion(
@@ -106,7 +111,7 @@ function GenerarFDP01(solicitud) {
     'BAJO PROTESTA DE DECIR VERDAD',
     'center',
   );
-  currentPositionY = doc.previousAutoTable.finalY; // Espacio después de la celda
+  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY += 10;
   currentPositionY += crearSeccion(
     currentPositionY,
