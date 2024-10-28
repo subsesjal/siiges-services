@@ -5,16 +5,12 @@ const include = [
   {
     association: 'solicitudFoliosAlumnos',
     include: [
+      { association: 'folioDocumentoAlumno' },
       {
-        association: 'folioDocumentoAlumno',
+        association: 'alumno',
         include: [
-          {
-            association: 'alumno',
-            include: [
-              { association: 'persona' },
-              { association: 'validacion' },
-            ],
-          },
+          { association: 'persona' },
+          { association: 'validacion' },
         ],
       },
     ],
@@ -29,7 +25,6 @@ const include = [
       { association: 'nivel' },
     ],
   },
-  { association: 'institucionDgp' },
   { association: 'estatusSolicitudFolio' },
   { association: 'tipoDocumento' },
   { association: 'tipoSolicitudFolio' },
@@ -40,28 +35,26 @@ const formatDate = (date) => {
   return new Date(date).toISOString().slice(0, 10);
 };
 
-const transformDataToTitulo = ({ folioAlumno, programa, institucionDgp }) => ({
+const transformDataToTitulo = ({ folioAlumno, programa }) => ({
   ies: programa.plantel.institucion.nombre,
-  nombre: folioAlumno.folioDocumentoAlumno.alumno.persona.nombre,
-  paterno: folioAlumno.folioDocumentoAlumno.alumno.persona.apellidoPaterno,
-  materno: folioAlumno.folioDocumentoAlumno.alumno.persona.apellidoMaterno,
-  curp: folioAlumno.folioDocumentoAlumno.alumno.persona.curp,
-  email: folioAlumno.folioDocumentoAlumno.alumno.persona.correoPrimario,
+  nombre: folioAlumno.alumno.persona.nombre,
+  paterno: folioAlumno.alumno.persona.apellidoPaterno,
+  materno: folioAlumno.alumno.persona.apellidoMaterno,
+  curp: folioAlumno.alumno.persona.curp,
+  email: folioAlumno.alumno.persona.correoPrimario,
   folio: folioAlumno.folioDocumentoAlumno.folioDocumento,
-  fecha: formatDate(folioAlumno.fechaElaboracion),
+  fecha: formatDate(folioAlumno.fechaExpedicion),
   inicio: formatDate(folioAlumno.fechaInicio),
   termino: formatDate(folioAlumno.fechaTerminacion),
   rvoe: programa.acuerdoRvoe,
   modalidad: folioAlumno.modalidadTitulacionId,
   servicio: folioAlumno.fundamentoServicioSocialId,
-  fecha_soc: formatDate(folioAlumno.fechaElaboracion),
+  fecha_soc: formatDate(folioAlumno.fechaExamenProfesional),
   estado: 14,
   nivel_estudio: parseInt(programa.nivel.nivelDgp, 10),
-  institucion: institucionDgp.nombreInstitucionDgp,
-  inicio_study: formatDate(
-    folioAlumno.folioDocumentoAlumno.alumno.validacion.fechaInicioAntecedente,
-  ),
-  termino_study: formatDate(folioAlumno.folioDocumentoAlumno.alumno.validacion.fechaFinAntecedente),
+  institucion: programa.plantel.institucion.claveIes,
+  inicio_study: formatDate(folioAlumno.alumno.validacion.fechaInicioAntecedente),
+  termino_study: formatDate(folioAlumno.alumno.validacion.fechaFinAntecedente),
 });
 
 const validateDataTransformed = (data) => Object.entries(data).every(([key, value]) => {
@@ -80,7 +73,8 @@ const hasInvalidSituacionValidacion = (validacion) => {
 };
 
 const shouldProcessFolioAlumno = (folioAlumno) => {
-  const { envioExitoso, alumno } = folioAlumno.folioDocumentoAlumno;
+  const { alumno } = folioAlumno;
+  const { envioExitoso } = folioAlumno.folioDocumentoAlumno;
 
   if (isEnvioExitoso(envioExitoso)) {
     Logger.error('[titulacion] Sending already successful, do not process.');
@@ -107,8 +101,10 @@ const envioTitulacion = (
     throw boom.conflict('This request is only allowed for the TITULO document type.');
   }
 
-  const { programa, institucionDgp } = solicitudJson;
-  console.log(programa);
+  if (solicitudJson.estatusSolicitudFolioId !== 3) {
+    throw boom.conflict('This request is only allowed for the estatus FOLIOS ASIGNADOS.');
+  }
+  const { programa } = solicitudJson;
 
   // eslint-disable-next-line no-unused-vars
   const titulosEnviados = await Promise.all(
@@ -116,14 +112,12 @@ const envioTitulacion = (
       if (!shouldProcessFolioAlumno(folioAlumno)) {
         return folioAlumno;
       }
-      const dataTransformed = transformDataToTitulo({ folioAlumno, programa, institucionDgp });
-      console.log(dataTransformed);
-
+      const dataTransformed = transformDataToTitulo({ folioAlumno, programa });
       const isValid = validateDataTransformed(dataTransformed);
 
       if (isValid) {
         try {
-          const response = await service.create([dataTransformed]);
+          const response = await service.create(dataTransformed);
 
           if (response.ok) {
             await updateFolioDocumentoAlumnoQuery(
@@ -134,6 +128,8 @@ const envioTitulacion = (
         } catch (error) {
           Logger.error(`Error processing folioAlumno ID: ${folioAlumno.folioDocumentoAlumno.id}`);
         }
+      } else {
+        throw new Error('HTTP error! Invalid');
       }
 
       return dataTransformed;

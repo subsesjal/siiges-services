@@ -14,7 +14,6 @@ const createSolicitudFolioSchema = {
       'tipoDocumentoId',
       'tipoSolicitudFolioId',
       'estatusSolicitudFolioId',
-      'institucionDgpId',
       'programaId',
       'fecha',
       'folioPago',
