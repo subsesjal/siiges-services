@@ -57,7 +57,6 @@ const AsignaturaEquivalenteSchema = {
 
 class AsignaturaEquivalente extends Model {
   static associate(models) {
-    this.belongsTo(models.SolicitudRevEquiv, { as: 'solicitudRevEquiv' });
     this.belongsTo(models.Asignatura, { as: 'asignatura' });
   }
 

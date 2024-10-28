@@ -106,6 +106,13 @@ module.exports = {
   ),
   findOneEquivalencia: findOneEquivalencia(
     solicitudes.findOneEquivalenciaQuery,
+    solicitudes.findOneInteresadoQuery,
+    solicitudes.findOnePersonaEquivalenteQuery,
+    solicitudes.findOneInstitucionProcedenciaQuery,
+    solicitudes.findOneInstitucionDestinoQuery,
+    solicitudes.findAllAntecedenteQuery,
+    solicitudes.findAllEquivalenteQuery,
+    solicitudes.findOneDomicilioEquivalenteQuery,
   ),
   findAllEquivalencias: findAllEquivalencias(
     solicitudes.findAllEquivalenciasQuery,

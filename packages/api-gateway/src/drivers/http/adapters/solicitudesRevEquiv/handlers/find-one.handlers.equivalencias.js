@@ -9,7 +9,6 @@ async function findOneEquivalencia(req, reply) {
     const equivalencia = await this.solicitudServices.findOneEquivalencia(
       { id: equivalenciaId },
     );
-
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
