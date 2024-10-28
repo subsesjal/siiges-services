@@ -10,6 +10,7 @@ const { GenerarFDP05 } = require('./FDP05');
 const { GenerarFDP06 } = require('./FDP06');
 const { GenerarOFAD } = require('./OFAD');
 const { GenerarRVOE } = require('./RVOE');
+const { GenerarHistorial } = require('./HISTORIAL');
 
 module.exports = {
   GenerarFDA01,
@@ -24,4 +25,5 @@ module.exports = {
   GenerarFDP06,
   GenerarOFAD,
   GenerarRVOE,
+  GenerarHistorial,
 };
