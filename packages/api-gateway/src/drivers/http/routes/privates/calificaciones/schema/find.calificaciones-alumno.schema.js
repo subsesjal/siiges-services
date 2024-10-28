@@ -23,6 +23,7 @@ const findCalificacionesAlumnoSchema = {
           type: 'array',
           items: {
             properties: {
+              id: { type: 'integer' },
               ...calificacion,
               ...responseProperties,
               asignatura: {
