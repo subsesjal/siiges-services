@@ -6,14 +6,12 @@ const makeRequest = async (url, method = 'GET', data = null) => {
 
   const options = {
     method,
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
     url: apiUrl,
   };
 
   if (data && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
-    options.body = JSON.stringify(data);
+    options.data = data;
   }
 
   try {
@@ -24,7 +22,10 @@ const makeRequest = async (url, method = 'GET', data = null) => {
     return await response.json();
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Request failed:', error);
+    console.error('Request failed:', {
+      status: error.response.status,
+      msg: error.response.data.message,
+    });
     throw error;
   }
 };

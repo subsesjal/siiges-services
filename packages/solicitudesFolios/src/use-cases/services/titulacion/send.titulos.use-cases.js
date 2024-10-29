@@ -36,7 +36,6 @@ const formatDate = (date) => {
 };
 
 const transformDataToTitulo = ({ folioAlumno, programa }) => ({
-  ies: programa.plantel.institucion.nombre,
   nombre: folioAlumno.alumno.persona.nombre,
   paterno: folioAlumno.alumno.persona.apellidoPaterno,
   materno: folioAlumno.alumno.persona.apellidoMaterno,
@@ -49,12 +48,13 @@ const transformDataToTitulo = ({ folioAlumno, programa }) => ({
   rvoe: programa.acuerdoRvoe,
   modalidad: folioAlumno.modalidadTitulacionId,
   servicio: folioAlumno.fundamentoServicioSocialId,
-  fecha_soc: formatDate(folioAlumno.fechaExamenProfesional),
+  fecha_proto: formatDate(folioAlumno.fechaExamenProfesional),
   estado: 14,
   nivel_estudio: parseInt(programa.nivel.nivelDgp, 10),
-  institucion: programa.plantel.institucion.claveIes,
+  institucion: folioAlumno.alumno.validacion.nombreInstitucionEmisora,
   inicio_study: formatDate(folioAlumno.alumno.validacion.fechaInicioAntecedente),
   termino_study: formatDate(folioAlumno.alumno.validacion.fechaFinAntecedente),
+  cedula_procedencia: parseInt(folioAlumno.alumno.validacion.cedulaProfesional, 10),
 });
 
 const validateDataTransformed = (data) => Object.entries(data).every(([key, value]) => {
@@ -116,22 +116,14 @@ const envioTitulacion = (
       const isValid = validateDataTransformed(dataTransformed);
 
       if (isValid) {
-        try {
-          const response = await service.create(dataTransformed);
+        // eslint-disable-next-line no-unused-vars
+        const response = await service.create(dataTransformed);
 
-          if (response.ok) {
-            await updateFolioDocumentoAlumnoQuery(
-              { id: folioAlumno.folioDocumentoAlumno.id },
-              { envioExitoso: true },
-            );
-          }
-        } catch (error) {
-          Logger.error(`Error processing folioAlumno ID: ${folioAlumno.folioDocumentoAlumno.id}`);
-        }
-      } else {
-        throw new Error('HTTP error! Invalid');
+        await updateFolioDocumentoAlumnoQuery(
+          { id: folioAlumno.folioDocumentoAlumno.id },
+          { envioExitoso: true },
+        );
       }
-
       return dataTransformed;
     }),
   );
