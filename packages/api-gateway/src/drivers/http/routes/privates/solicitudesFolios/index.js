@@ -104,6 +104,15 @@ async function trayectoriaRouter(fastify, opts, next) {
     solicitudesFoliosAdapter.asignacionFolioAlumno,
   );
 
+  await fastify.post(
+    '/:solicitudFolioId/envioTitulacion',
+    {
+      // schema: solicitudSchemas.assignFoliosAlumnosSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesFoliosAdapter.envioTitulacion,
+  );
+
   next();
 }
 

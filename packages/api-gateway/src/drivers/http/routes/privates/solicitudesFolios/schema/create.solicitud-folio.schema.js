@@ -10,7 +10,14 @@ const createSolicitudFolioSchema = {
     properties: {
       ...solicitudFolio,
     },
-    required: ['tipoDocumentoId', 'tipoSolicitudFolioId', 'estatusSolicitudFolioId', 'programaId', 'fecha', 'folioPago'],
+    required: [
+      'tipoDocumentoId',
+      'tipoSolicitudFolioId',
+      'estatusSolicitudFolioId',
+      'programaId',
+      'fecha',
+      'folioPago',
+    ],
   },
   response: {
     201: {

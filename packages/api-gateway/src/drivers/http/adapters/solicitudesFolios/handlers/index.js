@@ -11,6 +11,7 @@ const { updateSolicitudFolioAlumno } = require('./update.handlers.solicitud-foli
 const { findAllSolicitudFolioAlumnos } = require('./find-all.handlers.solicitudes-folios-alumnos.adapters');
 const { deleteSolicitudFolioAlumno } = require('./delete.handlers.solicitud-folio-alumno.adapters');
 const { asignacionFolioAlumno } = require('./assign.handlers.folios-alumnos.adapters');
+const { envioTitulacion } = require('./send.handlers.titulacion-folios.adapters');
 
 module.exports = {
   createSolicitudFolio,
@@ -24,4 +25,5 @@ module.exports = {
   updateObservaciones,
   deleteSolicitudFolioAlumno,
   asignacionFolioAlumno,
+  envioTitulacion,
 };

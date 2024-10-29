@@ -93,6 +93,7 @@ class SolicitudFolio extends Model {
     this.belongsTo(models.TipoDocumento, { as: 'tipoDocumento' });
     this.belongsTo(models.EstatusSolicitudFolio, { as: 'estatusSolicitudFolio' });
     this.belongsTo(models.Programa, { as: 'programa' });
+    this.hasMany(models.SolicitudFolioAlumno, { as: 'solicitudFoliosAlumnos', foreignKey: 'solicitudFolioId' });
   }
 
   static config(sequelize) {
