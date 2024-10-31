@@ -39,59 +39,59 @@ const findOneEquivalenciaSchema = {
                 institucionProcedenciaId: { type: 'integer' },
                 institucionDestinoId: { type: 'integer' },
                 ...responseProperties,
-              },
-            },
-            persona: {
-              type: 'object',
-              properties: {
-                id: { type: 'integer' },
-                ...persona,
-                ...responseProperties,
-              },
-            },
-            domicilio: {
-              type: 'object',
-              properties: {
-                id: { type: 'integer' },
-                ...domicilio,
-                ...responseProperties,
-              },
-            },
-            institucionProcedencia: {
-              type: 'object',
-              properties: {
-                id: { type: 'integer' },
-                ...institucionProcedencia,
-                ...responseProperties,
-              },
-            },
-            institucionDestino: {
-              type: 'object',
-              properties: {
-                id: { type: 'integer' },
-                ...institucionDestino,
-                ...responseProperties,
-              },
-            },
-            asignaturasAntecedentes: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  id: { type: 'integer' },
-                  ...asignaturaAntecedente,
-                  ...responseProperties,
+                persona: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'integer' },
+                    ...persona,
+                    ...responseProperties,
+                  },
                 },
-              },
-            },
-            asignaturasEquivalentes: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  id: { type: 'integer' },
-                  ...asignaturaEquivalente,
-                  ...responseProperties,
+                domicilio: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'integer' },
+                    ...domicilio,
+                    ...responseProperties,
+                  },
+                },
+                institucionProcedencia: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'integer' },
+                    ...institucionProcedencia,
+                    ...responseProperties,
+                  },
+                },
+                institucionDestino: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'integer' },
+                    ...institucionDestino,
+                    ...responseProperties,
+                  },
+                },
+                asignaturasAntecedentes: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...asignaturaAntecedente,
+                      ...responseProperties,
+                    },
+                  },
+                },
+                asignaturasEquivalentes: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...asignaturaEquivalente,
+                      ...responseProperties,
+                    },
+                  },
                 },
               },
             },
