@@ -14,20 +14,7 @@ const makeRequest = async (url, method = 'GET', data = null) => {
     options.data = data;
   }
 
-  try {
-    const response = await axios(options);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    return await response.json();
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Request failed:', {
-      status: error.response.status,
-      msg: error.response.data.message,
-    });
-    throw error;
-  }
+  return axios(options);
 };
 
 makeRequest.create = async (data) => {

@@ -7,6 +7,8 @@ module.exports = {
   envioTitulacion: envioTitulacion(
     titulacionService,
     solicitudesFolios.findOneSolicitudFolioQuery,
+    solicitudesFolios.updateSolicitudFolioQuery,
     solicitudesFoliosAlumnos.updateFolioDocumentoAlumnoQuery,
+    solicitudesFoliosAlumnos.findAllSolicitudFolioAlumnosQuery,
   ),
 };

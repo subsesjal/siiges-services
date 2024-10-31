@@ -1,4 +1,10 @@
-const { checkers } = require('@siiges-services/shared');
+const { checkers, Logger } = require('@siiges-services/shared');
+const boom = require('@hapi/boom');
+
+const hasInvalidSituacionValidacion = (validacion) => {
+  const invalidSituations = [2, 4];
+  return !validacion || invalidSituations.includes(validacion.situacionValidacionId);
+};
 
 const createSolicitudFolioAlumno = (
   findOneAlumnoQuery,
@@ -9,8 +15,24 @@ const createSolicitudFolioAlumno = (
   const solicitudFolio = await findOneSolicitudFolioQuery({ id: data.solicitudFolioId });
   checkers.throwErrorIfDataIsFalsy(solicitudFolio, 'solicitudes-folios', data.solicitudFolioId);
 
-  const alumno = await findOneAlumnoQuery({ id: data.alumnoId });
+  const alumnoInclude = [
+    { association: 'persona' },
+    { association: 'validacion' },
+  ];
+
+  const alumno = await findOneAlumnoQuery(
+    { id: data.alumnoId },
+    {
+      include: alumnoInclude,
+      strict: false,
+    },
+  );
   checkers.throwErrorIfDataIsFalsy(alumno, 'alumno', data.alumnoId);
+
+  if (hasInvalidSituacionValidacion(alumno.validacion)) {
+    Logger.error('[titulacion] Alumno validation status is not valid');
+    throw boom.conflict('Alumno validation status is not valid');
+  }
 
   const result = await createAlumnoFolioQuery(data);
 
