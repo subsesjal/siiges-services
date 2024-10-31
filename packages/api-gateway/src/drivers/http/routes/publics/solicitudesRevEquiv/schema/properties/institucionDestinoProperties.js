@@ -1,5 +1,4 @@
-const institucionDestinoProperties = {
-  id: { type: 'integer' },
+const institucionDestino = {
   tipoInstitucionId: { type: 'integer' },
   programaId: { type: 'integer' },
   nombre: { type: 'string' },
@@ -7,4 +6,4 @@ const institucionDestinoProperties = {
   nombreCarrera: { type: 'string' },
 };
 
-module.exports = institucionDestinoProperties;
+module.exports = { institucionDestino };

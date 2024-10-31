@@ -1,6 +1,6 @@
-const equivalenciaProperties = require('./properties/equivalenciaProperties');
+const { equivalencia } = require('./properties/equivalenciaProperties');
 const { responseProperties } = require('./properties/responseProperties');
-const { domicilioResponse } = require('../../../privates/solicitudes/representantes/schemas/properties/domicilio.properties');
+const { domicilio } = require('../../../privates/solicitudes/representantes/schemas/properties/domicilio.properties');
 const { persona } = require('../../../privates/usuarios/schema/properties/persona');
 
 const createEquivalenciaSchema = {
@@ -9,7 +9,7 @@ const createEquivalenciaSchema = {
   body: {
     type: 'object',
     properties: {
-      ...equivalenciaProperties,
+      ...equivalencia,
     },
   },
   response: {
@@ -20,7 +20,7 @@ const createEquivalenciaSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...equivalenciaProperties,
+            ...equivalencia,
             ...responseProperties,
             interesado: {
               type: 'object',
@@ -28,10 +28,12 @@ const createEquivalenciaSchema = {
                 persona: {
                   type: 'object',
                   properties: {
-                    domicilio: {
-                      ...domicilioResponse,
-                    },
                     ...persona,
+                    ...responseProperties,
+                    domicilio: {
+                      ...domicilio,
+                      ...responseProperties,
+                    },
                   },
                 },
                 institucionProcedencia: {
@@ -41,6 +43,7 @@ const createEquivalenciaSchema = {
                     nombre: { type: 'string' },
                     estadoId: { type: 'string' },
                     nombreCarrera: { type: 'string' },
+                    ...responseProperties,
                   },
                 },
                 institucionDestino: {
@@ -51,6 +54,7 @@ const createEquivalenciaSchema = {
                     nombre: { type: 'string' },
                     acuerdoRvoe: { type: 'string' },
                     nombreCarrera: { type: 'string' },
+                    ...responseProperties,
                   },
                 },
               },
@@ -62,6 +66,7 @@ const createEquivalenciaSchema = {
                 properties: {
                   nombre: { type: 'string' },
                   calificacion: { type: 'string' },
+                  ...responseProperties,
                 },
               },
             },
@@ -73,6 +78,7 @@ const createEquivalenciaSchema = {
                   asignaturaId: { type: 'integer' },
                   nombre: { type: 'string' },
                   calificacion: { type: 'string' },
+                  ...responseProperties,
                 },
               },
             },

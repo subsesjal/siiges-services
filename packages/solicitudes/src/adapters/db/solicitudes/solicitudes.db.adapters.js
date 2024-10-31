@@ -68,16 +68,7 @@ module.exports = {
   createDomicilioEquivalenteQuery: createQuery(Domicilio),
   createPersonaEquivalenteQuery: createQuery(Persona),
   createInteresadoQuery: createQuery(Interesado),
-  // Find one
   findOneEquivalenciaQuery: findOneQuery(SolicitudRevEquiv),
-  findOneInteresadoQuery: findOneQuery(Interesado),
-  findOnePersonaEquivalenteQuery: findOneQuery(Persona),
-  findOneInstitucionProcedenciaQuery: findOneQuery(InstitucionProcedencia),
-  findOneInstitucionDestinoQuery: findOneQuery(InstitucionDestino),
-  findAllAntecedenteQuery: findAllQuery(AsignaturaAntecedente),
-  findAllEquivalenteQuery: findAllQuery(AsignaturaEquivalente),
-  findOneDomicilioEquivalenteQuery: findOneQuery(Domicilio),
-  // Find all
   findAllEquivalenciasQuery: findAllQuery(SolicitudRevEquiv),
   deleteEquivalenciaQuery: deleteQuery(SolicitudRevEquiv),
   findProgramasBySolicitudIdQuery: (solicitudId) => Programa.findOne({

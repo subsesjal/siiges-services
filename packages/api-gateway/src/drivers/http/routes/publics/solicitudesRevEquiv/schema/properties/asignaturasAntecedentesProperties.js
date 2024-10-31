@@ -1,8 +1,7 @@
-const asignaturasAntecedentesProperties = {
-  id: { type: 'integer' },
+const asignaturaAntecedente = {
   interesadoId: { type: 'integer' },
   nombre: { type: 'string' },
   calificacion: { type: 'string' },
 };
 
-module.exports = asignaturasAntecedentesProperties;
+module.exports = { asignaturaAntecedente };

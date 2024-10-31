@@ -1,11 +1,11 @@
 const { responseProperties } = require('./properties/responseProperties');
-const equivalenciaProperties = require('./properties/equivalenciaProperties');
-const { domicilioResponse } = require('../../../privates/solicitudes/representantes/schemas/properties/domicilio.properties');
+const { equivalencia } = require('./properties/equivalenciaProperties');
+const { domicilio } = require('../../../privates/solicitudes/representantes/schemas/properties/domicilio.properties');
 const { persona } = require('../../../privates/usuarios/schema/properties/persona');
-const institucionProcedenciaProperties = require('./properties/institucionProcedenciaProperties');
-const institucionDestinoProperties = require('./properties/institucionDestinoProperties');
-const asignaturasAntecedentesProperties = require('./properties/asignaturasAntecedentesProperties');
-const asignaturasEquivalentesProperties = require('./properties/asignaturasEquivalentesProperties');
+const { institucionProcedencia } = require('./properties/institucionProcedenciaProperties');
+const { institucionDestino } = require('./properties/institucionDestinoProperties');
+const { asignaturaAntecedente } = require('./properties/asignaturasAntecedentesProperties');
+const { asignaturaEquivalente } = require('./properties/asignaturasEquivalentesProperties');
 
 const findOneEquivalenciaSchema = {
   tags: ['equivalencia'],
@@ -25,17 +25,12 @@ const findOneEquivalenciaSchema = {
         data: {
           type: 'object',
           properties: {
-            SolicitudEquivalencia: {
-              type: 'object',
-              properties: {
-                id: { type: 'integer' },
-                ...equivalenciaProperties,
-                interesadoId: { type: 'integer' },
-                folioSolicitud: { type: 'string' },
-                observaciones: { type: 'string', nullable: true },
-                ...responseProperties,
-              },
-            },
+            id: { type: 'integer' },
+            ...equivalencia,
+            interesadoId: { type: 'integer' },
+            folioSolicitud: { type: 'string' },
+            observaciones: { type: 'string', nullable: true },
+            ...responseProperties,
             interesado: {
               type: 'object',
               properties: {
@@ -49,24 +44,32 @@ const findOneEquivalenciaSchema = {
             persona: {
               type: 'object',
               properties: {
+                id: { type: 'integer' },
                 ...persona,
                 ...responseProperties,
               },
             },
             domicilio: {
-              ...domicilioResponse,
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...domicilio,
+                ...responseProperties,
+              },
             },
             institucionProcedencia: {
               type: 'object',
               properties: {
-                ...institucionProcedenciaProperties,
+                id: { type: 'integer' },
+                ...institucionProcedencia,
                 ...responseProperties,
               },
             },
             institucionDestino: {
               type: 'object',
               properties: {
-                ...institucionDestinoProperties,
+                id: { type: 'integer' },
+                ...institucionDestino,
                 ...responseProperties,
               },
             },
@@ -75,7 +78,8 @@ const findOneEquivalenciaSchema = {
               items: {
                 type: 'object',
                 properties: {
-                  ...asignaturasAntecedentesProperties,
+                  id: { type: 'integer' },
+                  ...asignaturaAntecedente,
                   ...responseProperties,
                 },
               },
@@ -85,29 +89,14 @@ const findOneEquivalenciaSchema = {
               items: {
                 type: 'object',
                 properties: {
-                  ...asignaturasEquivalentesProperties,
+                  id: { type: 'integer' },
+                  ...asignaturaEquivalente,
                   ...responseProperties,
                 },
               },
             },
           },
         },
-      },
-    },
-    404: {
-      description: 'Equivalencia not found',
-      type: 'object',
-      properties: {
-        error: { type: 'string' },
-        message: { type: 'string' },
-      },
-    },
-    400: {
-      description: 'Bad request',
-      type: 'object',
-      properties: {
-        error: { type: 'string' },
-        message: { type: 'string' },
       },
     },
   },
