@@ -24,7 +24,10 @@ const include = [{
 }];
 
 const where = {
-  acuerdoRvoe: { [Op.ne]: null },
+  [Op.or]: [
+    { acuerdoRvoe: { [Op.ne]: null } },
+    { acuerdoRvoe: { [Op.ne]: '' } },
+  ],
   fechaSurteEfecto: { [Op.lte]: new Date() },
 };
 
