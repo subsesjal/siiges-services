@@ -1,6 +1,25 @@
 const boom = require('@hapi/boom');
 const { Logger } = require('@siiges-services/shared');
 
+const ESTATUS_SOLCIITUD_FOLIOS_MAP = {
+  ENVIO_TITULACION: 6,
+  ENVIO_PARCIAL: 7,
+};
+
+const includeFolios = [
+  {
+    association: 'alumno',
+    include: [{ association: 'persona' }],
+  },
+  {
+    association: 'folioDocumentoAlumno',
+    include: [
+      { association: 'foja' },
+      { association: 'libro' },
+    ],
+  },
+];
+
 const include = [
   {
     association: 'solicitudFoliosAlumnos',
@@ -35,10 +54,15 @@ const formatDate = (date) => {
   return new Date(date).toISOString().slice(0, 10);
 };
 
+const normalizeText = (text) => (text ? text
+  .normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '')
+  .toUpperCase() : '');
+
 const transformDataToTitulo = ({ folioAlumno, programa }) => ({
-  nombre: folioAlumno.alumno.persona.nombre,
-  paterno: folioAlumno.alumno.persona.apellidoPaterno,
-  materno: folioAlumno.alumno.persona.apellidoMaterno,
+  nombre: normalizeText(folioAlumno.alumno.persona.nombre),
+  paterno: normalizeText(folioAlumno.alumno.persona.apellidoPaterno),
+  materno: normalizeText(folioAlumno.alumno.persona.apellidoMaterno),
   curp: folioAlumno.alumno.persona.curp,
   email: folioAlumno.alumno.persona.correoPrimario,
   folio: folioAlumno.folioDocumentoAlumno.folioDocumento,
@@ -51,10 +75,10 @@ const transformDataToTitulo = ({ folioAlumno, programa }) => ({
   fecha_proto: formatDate(folioAlumno.fechaExamenProfesional),
   estado: 14,
   nivel_estudio: parseInt(programa.nivel.nivelDgp, 10),
-  institucion: folioAlumno.alumno.validacion.nombreInstitucionEmisora,
+  institucion: normalizeText(folioAlumno.alumno.validacion.nombreInstitucionEmisora),
   inicio_study: formatDate(folioAlumno.alumno.validacion.fechaInicioAntecedente),
   termino_study: formatDate(folioAlumno.alumno.validacion.fechaFinAntecedente),
-  cedula_procedencia: parseInt(folioAlumno.alumno.validacion.cedulaProfesional, 10),
+  cedula_procedencia: parseInt(folioAlumno.alumno.validacion.cedulaProfesional, 10) || null,
 });
 
 const validateDataTransformed = (data) => Object.entries(data).every(([key, value]) => {
@@ -82,7 +106,7 @@ const shouldProcessFolioAlumno = (folioAlumno) => {
   }
 
   if (hasInvalidSituacionValidacion(alumno.validacion)) {
-    Logger.error('[titulacion] Alumno validation is not valid');
+    Logger.error('[titulacion] Alumno validation status is not valid');
     return false;
   }
 
@@ -92,7 +116,9 @@ const shouldProcessFolioAlumno = (folioAlumno) => {
 const envioTitulacion = (
   service,
   findOneSolicitudesFoliosQuery,
+  updateSolicitudesFoliosQuery,
   updateFolioDocumentoAlumnoQuery,
+  findAllSolicitudFolioAlumnosQuery,
 ) => async ({ id }) => {
   const solicitudFolio = await findOneSolicitudesFoliosQuery({ id }, { include, strict: false });
   const solicitudJson = solicitudFolio.toJSON();
@@ -116,19 +142,46 @@ const envioTitulacion = (
       const isValid = validateDataTransformed(dataTransformed);
 
       if (isValid) {
-        // eslint-disable-next-line no-unused-vars
-        const response = await service.create(dataTransformed);
+        try {
+          await service.create(dataTransformed);
+        } catch (error) {
+          Logger.error('Request failed:', {
+            error: error.response.data,
+            statusCode: error.status,
+          });
+          return { dataTransformed, success: false };
+        }
 
         await updateFolioDocumentoAlumnoQuery(
           { id: folioAlumno.folioDocumentoAlumno.id },
           { envioExitoso: true },
         );
+        return { dataTransformed, success: true };
       }
-      return dataTransformed;
+      return { dataTransformed, success: false };
     }),
   );
 
-  return solicitudFolio;
+  const allSuccess = titulosEnviados.every((result) => result.success);
+
+  if (allSuccess) {
+    await updateSolicitudesFoliosQuery(
+      { id },
+      { estatusSolicitudFolioId: ESTATUS_SOLCIITUD_FOLIOS_MAP.ENVIO_TITULACION },
+    );
+  } else {
+    await updateSolicitudesFoliosQuery(
+      { id },
+      { estatusSolicitudFolioId: ESTATUS_SOLCIITUD_FOLIOS_MAP.ENVIO_PARCIAL },
+    );
+  }
+
+  const solicitudesFoliosAlumnosUpdated = await findAllSolicitudFolioAlumnosQuery(
+    { solicitudFolioId: solicitudFolio.id },
+    { include: includeFolios, strict: false },
+  );
+
+  return solicitudesFoliosAlumnosUpdated;
 };
 
 module.exports = envioTitulacion;

@@ -6,6 +6,7 @@ const folioDocumentoAlumno = {
   fojaId: { type: 'integer' },
   libroId: { type: 'integer' },
   folioDocumento: { type: 'string' },
+  envioExitoso: { type: 'boolean' },
 };
 
 module.exports = { folioDocumentoAlumno };

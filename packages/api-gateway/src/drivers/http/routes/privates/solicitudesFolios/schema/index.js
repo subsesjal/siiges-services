@@ -8,6 +8,7 @@ const udpateSolicitudFolioSchema = require('./update.solicitud-folio.schema');
 const findAllSolicitudFolioAlumnoSchema = require('./find-all.solicitudes-folio-alumno.schema');
 const deleteSolicitudFolioAlumnoSchema = require('./delete.solicitud-folio-alumno.schema');
 const assignFoliosAlumnosSchema = require('./assign.folios-documentos.schema');
+const sendAppTitulacion = require('./send.app-titulacion.schema');
 
 module.exports = {
   createSolicitudFolioSchema,
@@ -20,4 +21,5 @@ module.exports = {
   findAllSolicitudFolioAlumnoSchema,
   deleteSolicitudFolioAlumnoSchema,
   assignFoliosAlumnosSchema,
+  sendAppTitulacion,
 };

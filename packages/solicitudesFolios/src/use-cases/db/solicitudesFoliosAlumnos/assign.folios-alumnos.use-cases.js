@@ -169,7 +169,7 @@ const assignFoliosAlumnos = (
 
   await updateSolicitudFolioQuery(
     identifierObj,
-    { estatusSolicitudFolio: ESTATUS_FOLIOS_ASIGNADOS },
+    { estatusSolicitudFolioId: ESTATUS_FOLIOS_ASIGNADOS },
   );
 
   const solicitudesFoliosAlumnosUpdated = await findAllSolicitudFolioAlumnosQuery(
