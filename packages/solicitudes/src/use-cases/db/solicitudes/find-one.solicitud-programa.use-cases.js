@@ -1,6 +1,9 @@
 const { checkers } = require('@siiges-services/shared');
 
-const findOneSolicitudPrograma = (findOneSolicitudProgramaQuery) => async (identifierObj) => {
+const findOneSolicitudPrograma = (
+  findOneSolicitudProgramaQuery,
+  findOneProgramaQuery,
+) => async (identifierObj) => {
   const include = [{
     association: 'programa',
     include: [
@@ -24,7 +27,8 @@ const findOneSolicitudPrograma = (findOneSolicitudProgramaQuery) => async (ident
     association: 'estatusSolicitud',
   }];
 
-  const solicitud = await findOneSolicitudProgramaQuery(identifierObj, {
+  const { solicitudId: id } = await findOneProgramaQuery(identifierObj);
+  const solicitud = await findOneSolicitudProgramaQuery({ id }, {
     undefined,
     include,
     strict: false,
