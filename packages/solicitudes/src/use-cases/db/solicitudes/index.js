@@ -41,6 +41,7 @@ module.exports = {
   ),
   findOneSolicitudPrograma: findOneSolicitudPrograma(
     solicitudes.findOneSolicitudProgramaQuery,
+    solicitudes.findOneProgramaQuery,
   ),
   findSolicitudesUsuario: findSolicitudesUsuario(
     solicitudes.findAllSolicitudesProgramasQuery,
