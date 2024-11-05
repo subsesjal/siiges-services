@@ -15,7 +15,7 @@ const { findFileFDP05 } = require('../FDP');
 const { findFileFDP06 } = require('../FDP');
 const { findFileOFAD } = require('../OFAD');
 const { findFileRVOE } = require('../RVOE');
-const { findFileHISTORIAL } = require('../FSE');
+const { findFileHistorial } = require('../FSE');
 
 const getFileIdentifierObj = async (fileData) => {
   const { tipoEntidad, entidadId, tipoDocumento } = fileData;
@@ -113,7 +113,7 @@ tipoDocumento ${tipoDocumento}`);
       tipoDocumento: tipoDocumentoItem.name,
       tipoEntidad: tipoEntidadItem.name,
     }),
-    HISTORIAL_ACADEMICO: () => findFileHISTORIAL(entidadId, fileMetdata, {
+    HISTORIAL_ACADEMICO: () => findFileHistorial(entidadId, fileMetdata, {
       tipoDocumento: tipoDocumentoItem.name,
       tipoEntidad: tipoEntidadItem.name,
     }),
