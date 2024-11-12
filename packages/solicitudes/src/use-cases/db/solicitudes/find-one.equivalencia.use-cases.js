@@ -1,13 +1,18 @@
-const { checkers } = require('@siiges-services/shared');
-
 const findOneEquivalencia = (findOneEquivalenciaQuery) => async (identifierObj) => {
   const equivalencia = await findOneEquivalenciaQuery(identifierObj, {
-    undefined,
-    strict: false,
+    include: [
+      {
+        association: 'interesado',
+        include: [
+          { association: 'persona', include: [{ association: 'domicilio' }] },
+          { association: 'institucionProcedencia' },
+          { association: 'institucionDestino' },
+          { association: 'asignaturasAntecedentes' },
+          { association: 'asignaturasEquivalentes' },
+        ],
+      },
+    ],
   });
-
-  checkers.throwErrorIfDataIsFalsy(equivalencia, 'solicitudes', identifierObj.equivalenciaId);
-
   return equivalencia;
 };
 

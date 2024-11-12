@@ -47,7 +47,7 @@ const AsignaturaAntecedenteSchema = {
 
 class AsignaturaAntecedente extends Model {
   static associate(models) {
-    this.belongsTo(models.SolicitudRevEquiv, { as: 'solicitudRevEquiv' });
+    this.belongsTo(models.Interesado, { as: 'interesado' });
   }
 
   static config(sequelize) {

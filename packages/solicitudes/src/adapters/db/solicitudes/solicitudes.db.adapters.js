@@ -59,6 +59,7 @@ module.exports = {
   updateTrayectoriaQuery: updateAndFindQuery(Trayectoria),
   findAllSolicitudSeccionQuery: findAllQuery(SolicitudSeccion),
   deleteSolicitudQuery: deleteQuery(Solicitud),
+  // Create
   createEquivalenciaQuery: createQuery(SolicitudRevEquiv),
   createInstitucionProcedenciaQuery: createQuery(InstitucionProcedencia),
   createInstitucionDestinoQuery: createQuery(InstitucionDestino),
