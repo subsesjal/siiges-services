@@ -77,7 +77,155 @@ const columnStyles = {
   },
 };
 
+function getFullName(persona) {
+  const { nombre, apellidoPaterno, apellidoMaterno } = persona.dataValues;
+  return `${nombre} ${apellidoPaterno} ${apellidoMaterno}`;
+}
+const promedioTable = (promedio, totalCreditos, creditos) => [
+  {
+    tipo: 'fila',
+    contenido: [
+      {
+        texto: 'CRÉDITOS OBTENIDOS', medida: 60.66, color: 'gris', bold: true,
+      },
+      {
+        texto: 'PROMEDIO', medida: 60.66, color: 'gris', bold: true,
+      },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: `${totalCreditos} de ${creditos}`, medida: 60.66, color: 'blanco' },
+      { texto: `${promedio}`, medida: 60.66, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+];
+const institutionTable = (firstTableData) => [
+  {
+    tipo: 'fila',
+    contenido: [
+      {
+        texto: 'Nombre de la Institución', medida: 80.66, color: 'gris', bold: true,
+      },
+      { texto: firstTableData.nombreInstitucion, medida: 101, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      {
+        texto: 'CLAVE DE CENTRO DE TRABAJO', medida: 80.66, color: 'gris', bold: true,
+      },
+      { texto: firstTableData.claveCentroTrabajo, medida: 101, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      {
+        texto: 'NUMERO DE ACUERDO', medida: 80.66, color: 'gris', bold: true,
+      },
+      { texto: firstTableData.acuerdo, medida: 101, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      {
+        texto: 'NIVEL Y NOMBRE DEL PLAN DE ESTUDIOS', medida: 80.66, color: 'gris', bold: true,
+      },
+      { texto: firstTableData.nivelNombre, medida: 101, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+];
+const studentDataTable = (studentData, statusStudent) => [
+  { tipo: 'titulo', contenido: 'Datos del alumno' },
+  {
+    tipo: 'fila',
+    contenido: [
+      {
+        texto: 'MATRÍCULA', medida: 60.66, color: 'gris', bold: true,
+      },
+      {
+        texto: 'NOMBRE DEL ALUMNO', medida: 60.66, color: 'gris', bold: true,
+      },
+      {
+        texto: 'ESTATUS', medida: 60.66, color: 'gris', bold: true,
+      },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: studentData.matricula, medida: 60.66, color: 'blanco' },
+      { texto: getFullName(studentData.persona), medida: 60.66, color: 'blanco' },
+      { texto: statusStudent, medida: 60.66, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+];
+
+const scholarCicleTable = (cicleData) => {
+  const table = [
+    { tipo: 'titulo', contenido: cicleData.nombreCicloEscolar, tamano: 15 },
+    {
+      tipo: 'fila',
+      contenido: [
+        {
+          texto: 'CLAVE', medida: 17, color: 'gris', bold: true,
+        },
+        {
+          texto: 'SERIACIÓN', medida: 23, color: 'gris', bold: true,
+        },
+        {
+          texto: 'UNIDAD DE APRENDIZAJE', medida: 66, color: 'gris', bold: true,
+        },
+        {
+          texto: 'TIPO', medida: 20, color: 'gris', bold: true,
+        },
+        {
+          texto: 'CALI.', medida: 10, color: 'gris', tamano: 7, bold: true,
+        },
+        {
+          texto: 'CRED.', medida: 10, color: 'gris', tamano: 7, bold: true,
+        },
+        {
+          texto: 'FECHA DE ACREDITACIÓN.', medida: 36, color: 'gris', tamano: 7, bold: true,
+        },
+      ],
+      repetirVeces: 1,
+    },
+  ];
+  cicleData.asignatura.forEach((asignatura, index) => {
+    const calificacion = cicleData.calificaciones[index] || {};
+    table.push({
+      tipo: 'fila',
+      contenido: [
+        { texto: asignatura.clave || '', medida: 17, color: 'blanco' },
+        { texto: asignatura.seriacion || '', medida: 23, color: 'blanco' },
+        { texto: asignatura.nombre || '', medida: 66, color: 'blanco' },
+        { texto: calificacion.tipo === 1 ? 'Ordinario' : 'Extraordinario', medida: 20, color: 'blanco' },
+        { texto: calificacion.calificacion || '', medida: 10, color: 'blanco' },
+        { texto: asignatura.creditos || '', medida: 10, color: 'blanco' },
+        { texto: calificacion.fechaExamen || '', medida: 36, color: 'blanco' },
+      ],
+      repetirVeces: 1,
+    });
+  });
+
+  return table;
+};
+
 module.exports = {
+  promedioTable,
   HEADER_MAIN_TITTLE,
   columnStyles,
   diligenteBody,
@@ -94,4 +242,7 @@ module.exports = {
   HEADER_TABLA_CORREO,
   HEADER_NOMBRE_PUESTO,
   HEADER_GRADO_EDUCATIVO,
+  studentDataTable,
+  scholarCicleTable,
+  institutionTable,
 };

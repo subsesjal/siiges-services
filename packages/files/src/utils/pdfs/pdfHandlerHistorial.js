@@ -1,16 +1,10 @@
 const fs = require('fs');
 
 const { turnos } = require('./constants');
-const { HEADER_MAIN_TITTLE } = require('./constants/historial-constants');
-
-const textFont = 'Nutmegb';
 
 function crearCelda(doc, x, y, width, height, texto) {
   doc.rect(x, y, width, height, 'F');
   doc.rect(x, y, width, height, 'S');
-
-  doc.setFont(textFont, 'bold');
-  doc.setFontSize(8);
   let setFillColor = [0, 0, 0];
 
   const textoWidth = (doc.getStringUnitWidth(texto) * doc.internal.getFontSize())
@@ -23,15 +17,15 @@ function crearCelda(doc, x, y, width, height, texto) {
   }
 
   doc.setTextColor(setFillColor[0], setFillColor[1], setFillColor[2]);
-  doc.text(texto, textoX, y + 5); // Adjust Y position as needed
+  doc.text(texto, textoX, y + 5);
+  doc.setTextColor(0, 0, 0);
+  doc.text(texto, textoX + 0.15, y + 5);
 }
 
 function crearSeccion(currentPosition, doc, contenido, alineacion = 'justify') {
   const margenIzquierdo = 20;
   let currentPositionY = currentPosition;
 
-  // Contenido de la sección
-  doc.setFont(textFont); // Set the font family (assuming textFont is defined)
   doc.setFontSize(10); // Set the font size
   doc.setTextColor(0, 0, 0); // Set text color
 
@@ -136,7 +130,7 @@ function generateTable({
     styles: {
       lineColor: [0, 0, 0],
       lineWidth: 0.3,
-      font: 'Nutmegb',
+      font: 'Nutmeg',
     },
     headStyles,
     showHead,
@@ -206,19 +200,25 @@ function crearFilaFecha({
 }
 
 function seccionIntitucionTabla({
-  currentPositionY: currentPosition, solicitud, doc, niveles,
+  currentPositionY: currentPosition, doc, firstTableData,
 }) {
   let currentPositionY = currentPosition;
-  const nombreNivel = niveles
-    .find(({ id }) => +id === solicitud?.programa.nivelId).descripcion;
+
   const dataColumn1 = [
-    solicitud.programa.plantel.institucion.nombre,
-    solicitud.programa.plantel.claveCentroTrabajo,
-    solicitud.programa.acuerdoRvoe,
-    `${nombreNivel} en ${solicitud.programa.nombre}`,
+    firstTableData.nombreInstitucion,
+    firstTableData.nivelNombre,
+    firstTableData.acuerdo,
+    firstTableData.claveCentroTrabajo,
   ];
 
-  const tableData = HEADER_MAIN_TITTLE.map((header, index) => [
+  const tableHeaders = [
+    'Nombre de la Institución',
+    'Nivel y Programa',
+    'Acuerdo RVOE',
+    'Clave de Centro de Trabajo',
+  ];
+
+  const tableData = tableHeaders.map((header, index) => [
     header,
     dataColumn1[index],
   ]);
@@ -230,30 +230,26 @@ function seccionIntitucionTabla({
     styles: {
       lineColor: [0, 0, 0],
       lineWidth: 0.3,
-      font: 'Nutmegb',
+      textColor: [0, 0, 0],
     },
     headStyles: {
       fontSize: 15,
+      font: 'Nutmeg',
     },
     showHead: false,
     columnStyles: {
       0: {
         fillColor: [172, 178, 183],
-      },
-      1: {
         fontStyle: 'bold',
       },
     },
   };
 
-  const textHeight = doc.getTextDimensions(
-    tableData.join('\n'),
-    tableOptions,
-  ).h;
+  const textHeight = doc.getTextDimensions(tableData.join('\n')).h;
 
   if (currentPositionY + textHeight > doc.internal.pageSize.height - 20) {
     doc.addPage();
-    currentPositionY = 20; // Reiniciar la posición vertical en la nueva página
+    currentPositionY = 20;
   }
 
   doc.autoTable({
@@ -261,7 +257,7 @@ function seccionIntitucionTabla({
     ...tableOptions,
   });
 
-  currentPositionY = doc.previousAutoTable.finalY + 10; // Espacio después de la tabla
+  currentPositionY = doc.previousAutoTable.finalY + 10;
   return currentPositionY;
 }
 
@@ -316,7 +312,6 @@ function agregarTextoJustificado(doc, texto, x, y, width, fontSize) {
       y = 55; // Reinicia la posición y en la nueva página (margen superior)
       doc.setFont('Nutmegb', 'normal');
       doc.setFontSize(12);
-      doc.setFont(textFont);
     }
 
     const wordsInLine = line.split(' ');
@@ -342,7 +337,6 @@ function agregarTextoJustificado(doc, texto, x, y, width, fontSize) {
 }
 
 function configurarFuenteYAgregarTexto(doc, fuente, tamaño, color, texto, x, y) {
-  doc.setFont(textFont, fuente);
   doc.setFontSize(tamaño);
   doc.setTextColor(...color);
   doc.text(texto, x, y);
@@ -357,7 +351,7 @@ function generateTableWithStyles(headers, tableData, doc, currentPositionY) {
       fillColor: [172, 178, 183],
       fontSize: 12,
       textColor: [20, 20, 20],
-      font: 'Nutmegb',
+      font: 'Nutmeg',
       halign: 'center',
       valign: 'middle',
     },
@@ -406,7 +400,6 @@ function agregarImagenYPaginaPie(doc, img) {
   const totalPages = doc.internal.getNumberOfPages();
   for (let i = 1; i <= totalPages; i += 1) {
     doc.setPage(i);
-    doc.setFont(textFont, 'normal');
     doc.setFontSize(10);
     doc.setTextColor(0, 0, 0);
 

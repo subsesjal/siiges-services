@@ -90,6 +90,7 @@ function GenerarFDA02(solicitud) {
     HEADER_TABLA_DOMICILIO,
     rowsDomicilio(solicitud.programa.plantel.domicilio),
   );
+
   currentPositionY += generateTableAndSection(
     TITLE_DOMICILIO,
     domicilioData,

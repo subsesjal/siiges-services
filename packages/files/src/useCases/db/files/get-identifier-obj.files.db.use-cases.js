@@ -119,7 +119,9 @@ tipoDocumento ${tipoDocumento}`);
     }),
   };
 
-  if (tipoDocumentoItem.name.startsWith('FD') || tipoDocumentoItem.name.startsWith('OFICIO_ADMISORIO') || tipoDocumentoItem.name.startsWith('ACUERDO_RVOE') || tipoDocumentoItem.name.startsWith('HISTORIAL_ACADEMICO')) {
+  const validNames = ['FD', 'OFICIO_ADMISORIO', 'ACUERDO_RVOE', 'HISTORIAL_ACADEMICO'];
+
+  if (validNames.some((prefix) => tipoDocumentoItem.name.startsWith(prefix))) {
     await filesFDA[tipoDocumentoItem.name]();
   }
 

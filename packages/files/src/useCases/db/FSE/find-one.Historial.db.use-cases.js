@@ -1,9 +1,7 @@
-/* eslint-disable new-cap */
-/* eslint-disable no-undef */
-/* eslint-disable global-require */
 const fs = require('fs');
 const path = require('path');
-const { checkers } = require('@siiges-services/shared');
+const boom = require('@hapi/boom');
+const Logger = require('../../../../../shared/src/utils/logger/index');
 
 function createData({ tipoDocumentoId, tipoEntidadId, entidadId }, nombre, ubicacion) {
   return {
@@ -20,6 +18,7 @@ function getUbication({ tipoEntidad, tipoDocumento }, fileName) {
 }
 
 async function uploadFile(fileMetdata, identifierObj, fileUploaded, alumnoId) {
+  // eslint-disable-next-line no-shadow, global-require
   const { findOneFile, createFile, updateFile } = require('../files');
   const previousFile = await findOneFile(identifierObj);
   const rutaArchivo = `HISTORIAL_alumnoId_${alumnoId}.pdf`;
@@ -59,34 +58,39 @@ const findFileHistorial = (
   findAllCalificacionesQuery,
   GenerarHISTORIAL,
 ) => async (alumnoId, fileMetdata, data) => {
-  const alumno = await findOneAlumnoQuery(alumnoId);
-
-  const include = [{
-    association: 'programa',
-    include: [
-      { association: 'plantel' },
-      { association: 'institucion' },
-    ],
-  },
-  {
-    association: 'asignatura',
-  },
-  {
-    association: 'grupo',
-    include: [
-      { association: 'cicloEscolar' },
-      { association: 'grado' },
-    ],
-  }];
-
-  const calificaciones = await findAllCalificacionesQuery({ id: alumno }, {
-    undefined,
+  let include = [
+    { association: 'persona' },
+    { association: 'alumnoTipoTramites' },
+    {
+      association: 'programa',
+      include: [{
+        association: 'plantel',
+        include: [
+          { association: 'institucion' },
+          { association: 'domicilio' },
+        ],
+      }],
+    },
+  ];
+  const alumno = await findOneAlumnoQuery({ id: alumnoId }, {
     include,
     strict: false,
   });
-
-  checkers.throwErrorIfDataIsFalsy(alumno, 'alumnos', alumnoId);
-
+  include = [
+    { association: 'alumno' },
+    { association: 'asignatura' },
+    {
+      association: 'grupo',
+      include: [
+        { association: 'cicloEscolar' },
+        { association: 'grado' },
+      ],
+    },
+  ];
+  const calificaciones = await findAllCalificacionesQuery({ alumnoId }, {
+    include,
+    strict: false,
+  });
   const file = await GenerarHISTORIAL(alumno, calificaciones);
   await uploadFile(data, fileMetdata, file, alumnoId);
 };
