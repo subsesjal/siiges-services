@@ -13,8 +13,8 @@ const HEADER_DATOS_AUTORIZACION = (autorizados) => [
 
 const TABLA_REPRESENTANTE = (representante) => [
   ['NOMBRE (S)', representante.nombre],
-  ['APELLIDO PATERNO', representante.apellidoPaterno],
-  ['APELLIDO MATERNO', representante.apellidoMaterno],
+  ['PRIMER APELLIDO', representante.apellidoPaterno],
+  ['SEGUNDO APELLIDO', representante.apellidoMaterno],
 ];
 
 const columnStyles = {

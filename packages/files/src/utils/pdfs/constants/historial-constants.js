@@ -26,8 +26,8 @@ const TITLE_ALUMNO = 'DATOS DEL ALUMNO';
 const tituloRepresentante = 'DATOS DEL SOLICITANTE (PERSONA FÍSICA O REPRESENTANTE LEGAL DE LA PERSONA JURÍDICA';
 const TABLA_REPRESENTANTE = (representante) => [
   ['NOMBRE (S)', representante.nombre],
-  ['APELLIDO PATERNO', representante.apellidoPaterno],
-  ['APELLIDO MATERNO', representante.apellidoMaterno],
+  ['PRIMER APELLIDO', representante.apellidoPaterno],
+  ['SEGUNDO APELLIDO', representante.apellidoMaterno],
   ['NACIONALIDAD', representante.nacionalidad],
 ];
 const rowsDomicilio2 = (domicilio) => [
@@ -128,7 +128,7 @@ const institutionTable = (firstTableData) => [
     tipo: 'fila',
     contenido: [
       {
-        texto: 'NUMERO DE ACUERDO', medida: 80.66, color: 'gris', bold: true,
+        texto: 'NÚMERO DE ACUERDO', medida: 80.66, color: 'gris', bold: true,
       },
       { texto: firstTableData.acuerdo, medida: 101, color: 'blanco' },
     ],
