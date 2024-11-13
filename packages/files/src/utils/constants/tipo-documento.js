@@ -243,6 +243,10 @@ const tipoDocumentoObj = [
     id: 61,
     name: 'ACUERDO_RVOE',
   },
+  {
+    id: 62,
+    name: 'HISTORIAL_ACADEMICO',
+  },
 ];
 
 module.exports = tipoDocumentoObj;

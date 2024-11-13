@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 const fs = require('fs');
 const path = require('path');
 const { jsPDF } = require('jspdf');
@@ -122,7 +121,8 @@ function redefineAddPage(document) {
   return newDocument;
 }
 function GenerarFDA04(solicitud) {
-  const doc = new jsPDF();
+  const JsPDF = jsPDF;
+  const doc = new JsPDF();
   redefineAddPage(doc);
   addHeaderContent(doc);
   const modalidadTipo = buscarDescripcionPorId(modalidades, solicitud.programa.modalidadId);
@@ -144,6 +144,7 @@ function GenerarFDA04(solicitud) {
   tablaDomicilio(solicitud).forEach((item) => {
     switchTablas(item, doc, tituloTabla);
   });
+
   const tablaDescrPlantel = [
     { tipo: 'titulo', contenido: '3. DESCRIPCIÓN DEL PLANTEL' },
     {
