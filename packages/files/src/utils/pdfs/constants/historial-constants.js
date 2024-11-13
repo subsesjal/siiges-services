@@ -128,7 +128,7 @@ const institutionTable = (firstTableData) => [
     tipo: 'fila',
     contenido: [
       {
-        texto: 'NUMERO DE ACUERDO', medida: 80.66, color: 'gris', bold: true,
+        texto: 'NÚMERO DE ACUERDO', medida: 80.66, color: 'gris', bold: true,
       },
       { texto: firstTableData.acuerdo, medida: 101, color: 'blanco' },
     ],
