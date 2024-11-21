@@ -1,10 +1,23 @@
 /* eslint-disable new-cap */
 const fs = require('fs');
 
+const path = require('path');
+
+const NutmegFont = fs.readFileSync(path.resolve(__dirname, '../../../../../fonts/nutmeg-regular.ttf')).toString('base64');
+const NutmegFontBold = fs.readFileSync(path.resolve(__dirname, '../../../../../fonts/nutmeg-bold.ttf')).toString('base64');
+
 const { turnos } = require('./constants');
 const { HEADER_MAIN_TITTLE } = require('./constants/fdp02-constants');
 
-const textFont = 'Nutmegb';
+const textFont = 'Nutmeg';
+
+function addNutmeg(doc) {
+  doc.addFileToVFS('nutmeg-bold.ttf', NutmegFontBold);
+  doc.addFont('nutmeg-bold.ttf', 'Nutmeg', 'bold');
+  doc.addFileToVFS('nutmeg-regular.ttf', NutmegFont);
+  doc.addFont('nutmeg-regular.ttf', 'Nutmeg', 'normal');
+  doc.setFont('Nutmeg', 'normal');
+}
 
 function crearCelda(doc, x, y, width, height, texto) {
   doc.rect(x, y, width, height, 'F');
@@ -105,7 +118,7 @@ function generateTable({
     styles: {
       lineColor: [0, 0, 0],
       lineWidth: 0.3,
-      font: 'Nutmegb',
+      font: 'Nutmeg',
     },
     headStyles,
     columnStyles,
@@ -197,7 +210,7 @@ function generarSeccionyTabla({
       fillColor: [172, 178, 183],
       fontSize: 12,
       textColor: [20, 20, 20],
-      font: 'Nutmegb',
+      font: 'Nutmeg',
       halign: 'center',
       valign: 'middle',
     },
@@ -236,7 +249,7 @@ function seccionIntitucionTabla({
     styles: {
       lineColor: [0, 0, 0],
       lineWidth: 0.3,
-      font: 'Nutmegb',
+      font: 'Nutmeg',
     },
     headStyles: {
       fontSize: 15,
@@ -322,13 +335,13 @@ function generateTableWithStyles(headers, tableData, doc, currentPositionY, show
       styles: {
         lineColor: [0, 0, 0],
         lineWidth: 0.3,
-        font: 'Nutmegb',
+        font: 'Nutmeg',
       },
       headStyles: {
         fillColor: [172, 178, 183],
         fontSize: 12,
         textColor: [20, 20, 20],
-        font: 'Nutmegb',
+        font: 'Nutmeg',
         halign: 'center',
         valign: 'middle',
       },
@@ -355,7 +368,7 @@ function generateTableWithStyles(headers, tableData, doc, currentPositionY, show
           fillColor: [172, 178, 183],
           fontSize: 12,
           textColor: [20, 20, 20],
-          font: 'Nutmegb',
+          font: 'Nutmeg',
           halign: 'center',
           valign: 'middle',
         },
@@ -477,13 +490,13 @@ function generateTotalsTable(headers, doc, currentPositionY) {
     styles: {
       lineColor: [0, 0, 0],
       lineWidth: 0.3,
-      font: 'Nutmegb',
+      font: 'Nutmeg',
     },
     headStyles: {
       fillColor: [172, 178, 183],
       fontSize: 12,
       textColor: [20, 20, 20],
-      font: 'Nutmegb',
+      font: 'Nutmeg',
       halign: 'center',
       valign: 'middle',
     },
@@ -513,4 +526,5 @@ module.exports = {
   buscarNombrePorId,
   generateTotalsTable,
   crearFilaFecha,
+  addNutmeg,
 };

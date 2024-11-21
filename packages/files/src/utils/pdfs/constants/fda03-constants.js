@@ -1,20 +1,115 @@
 const HEADER_NOMBRE_DATOS = ['Nombre', 'datos'];
 const HEADER_TITULOS_NOMBRES = ['Titulo1', 'Titulo2', 'Contenido'];
-const PROPUESTAS_NOMBRE = (nombresPropuestos) => [
-  ['1', nombresPropuestos.nombrePropuesto1],
-  ['2', nombresPropuestos.nombrePropuesto2],
-  ['3', nombresPropuestos.nombrePropuesto3],
+
+const tableAuthorizedData = (authorizedData) => [
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '3. EN CASO DE TENER NOMBRE AUTORIZADO', medida: 182, color: 'gris' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '1', medida: 91, color: 'gris' },
+      { texto: authorizedData?.nombreAutorizado, medida: 91, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '2', medida: 91, color: 'gris' },
+      { texto: '', medida: 91, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '3', medida: 91, color: 'gris' },
+      {
+        texto: authorizedData?.fechaAutorizacion
+          ? new Date(authorizedData.fechaAutorizacion).toLocaleDateString('en-US')
+          : 'N/A',
+        medida: 91,
+        color: 'blanco',
+      },
+    ],
+    repetirVeces: 1,
+  },
+];
+const tableProposedNames = (proposedNames) => [
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '2. PROPUESTAS DE NOMBRE', medida: 182, color: 'gris' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '1', medida: 91, color: 'gris' },
+      { texto: proposedNames?.nombrePropuesto1, medida: 91, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '2', medida: 91, color: 'gris' },
+      { texto: proposedNames?.nombrePropuesto2, medida: 91, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '3', medida: 91, color: 'gris' },
+      { texto: proposedNames?.nombrePropuesto3, medida: 91, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
 ];
 const HEADER_DATOS_AUTORIZACION = (autorizados) => [
   ['1', 'NOMBRE AUTORIZADO', autorizados.nombreAutorizado],
   ['2', 'RVOE    ', ''],
   ['3', 'FECHA DE AUTORIZACIÓN DE NOMBRE', autorizados.fechaAutorizacion],
 ];
-
-const TABLA_REPRESENTANTE = (representante) => [
-  ['NOMBRE (S)', representante.nombre],
-  ['PRIMER APELLIDO', representante.apellidoPaterno],
-  ['SEGUNDO APELLIDO', representante.apellidoMaterno],
+const tableRepresentativeLegal = (representative) => [
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '1. DATOS DEL PROPIETARIO O REPRESENTANTE LEGAL', medida: 182, color: 'gris' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: 'NOMBRE (S)', medida: 91, color: 'gris' },
+      { texto: representative?.nombre, medida: 91, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: 'APELLIDO PATERNO', medida: 91, color: 'gris' },
+      { texto: representative?.apellidoPaterno, medida: 91, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: 'APELLIDO MATERNO', medida: 91, color: 'gris' },
+      { texto: representative?.apellidoMaterno, medida: 91, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
 ];
 
 const columnStyles = {
@@ -38,7 +133,8 @@ module.exports = {
   columnStyles,
   HEADER_TITULOS_NOMBRES,
   columnStylesFirstAndSecondTable,
-  TABLA_REPRESENTANTE,
-  PROPUESTAS_NOMBRE,
   HEADER_DATOS_AUTORIZACION,
+  tableRepresentativeLegal,
+  tableProposedNames,
+  tableAuthorizedData,
 };

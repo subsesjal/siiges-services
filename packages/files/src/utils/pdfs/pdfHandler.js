@@ -1,21 +1,33 @@
 const fs = require('fs');
+const path = require('path');
+
+const NutmegFont = fs.readFileSync(path.resolve(__dirname, '../../../../../fonts/nutmeg-regular.ttf')).toString('base64');
+const NutmegFontBold = fs.readFileSync(path.resolve(__dirname, '../../../../../fonts/nutmeg-bold.ttf')).toString('base64');
 
 const { turnos } = require('./constants');
 const { HEADER_MAIN_TITTLE } = require('./constants/fd02-constants');
 
-const textFont = 'Nutmegb';
+const textFont = 'Nutmeg';
 
-function crearCelda(doc, x, y, width, height, texto) {
+function addNutmeg(doc) {
+  doc.addFileToVFS('nutmeg-bold.ttf', NutmegFontBold);
+  doc.addFont('nutmeg-bold.ttf', 'Nutmeg', 'bold');
+  doc.addFileToVFS('nutmeg-regular.ttf', NutmegFont);
+  doc.addFont('nutmeg-regular.ttf', 'Nutmeg', 'normal');
+  doc.setFont('Nutmeg', 'normal');
+}
+
+function crearCelda(doc, x, y, width, height, texto, fontSize = 8) {
   doc.rect(x, y, width, height, 'F');
   doc.rect(x, y, width, height, 'S');
 
   doc.setFont(textFont, 'bold');
-  doc.setFontSize(8);
+  doc.setFontSize(fontSize);
   let setFillColor = [0, 0, 0];
 
   const textoWidth = (doc.getStringUnitWidth(texto) * doc.internal.getFontSize())
     / doc.internal.scaleFactor;
-  let textoX = x + (width - textoWidth) / 2 + 10; // Calcula la posición X centrada
+  let textoX = x + (width - textoWidth) / 2 + 10;
 
   if (texto.includes('FDA') || texto.includes('FDP')) {
     setFillColor = [255, 255, 255];
@@ -23,7 +35,7 @@ function crearCelda(doc, x, y, width, height, texto) {
   }
 
   doc.setTextColor(setFillColor[0], setFillColor[1], setFillColor[2]);
-  doc.text(texto, textoX, y + 5); // Adjust Y position as needed
+  doc.text(texto, textoX, y + 5);
 }
 
 function crearSeccion(currentPosition, doc, contenido, alineacion = 'justify') {
@@ -136,7 +148,7 @@ function generateTable({
     styles: {
       lineColor: [0, 0, 0],
       lineWidth: 0.3,
-      font: 'Nutmegb',
+      font: 'Nutmeg',
     },
     headStyles,
     showHead,
@@ -230,7 +242,7 @@ function seccionIntitucionTabla({
     styles: {
       lineColor: [0, 0, 0],
       lineWidth: 0.3,
-      font: 'Nutmegb',
+      font: 'Nutmeg',
     },
     headStyles: {
       fontSize: 15,
@@ -314,7 +326,7 @@ function agregarTextoJustificado(doc, texto, x, y, width, fontSize) {
     if (y + lineHeight > maxY) {
       doc.addPage(); // Añade una nueva página
       y = 55; // Reinicia la posición y en la nueva página (margen superior)
-      doc.setFont('Nutmegb', 'normal');
+      doc.setFont('Nutmeg', 'normal');
       doc.setFontSize(12);
       doc.setFont(textFont);
     }
@@ -357,7 +369,7 @@ function generateTableWithStyles(headers, tableData, doc, currentPositionY) {
       fillColor: [172, 178, 183],
       fontSize: 12,
       textColor: [20, 20, 20],
-      font: 'Nutmegb',
+      font: 'Nutmeg',
       halign: 'center',
       valign: 'middle',
     },
@@ -443,7 +455,135 @@ function generarPDF(doc, rutaArchivo) {
   fs.writeFileSync(rutaArchivo, new Buffer.from(pdfDataUri));
 }
 
+function createCell(doc, x, y, width, initialHeight, text, bold = true, fontSize = 10, alignment = 'center') {
+  if (bold) {
+    doc.setFont('Nutmeg', 'bold');
+  } else {
+    doc.setFont('Nutmeg', 'normal');
+  }
+  doc.setFontSize(fontSize);
+
+  // Split the text into lines that fit within the cell width
+  const lineHeight = 3;
+  const lines = doc.splitTextToSize(text || '', width - 2); // Leave some padding
+  const totalTextHeight = lines.length * lineHeight;
+
+  // Adjust cell height if the text overflows
+  const newHeight = Math.max(initialHeight, totalTextHeight + 4); // Add some padding
+
+  // Draw the cell
+  doc.rect(x, y, width, newHeight, 'F'); // Draw the background
+  doc.rect(x, y, width, newHeight, 'S'); // Draw the border
+
+  // Adjust vertical alignment
+  let textoY = y + 5;
+  if (totalTextHeight < newHeight) {
+    if (alignment === 'center') {
+      textoY = y + (newHeight - totalTextHeight) / 2 + lineHeight / 2;
+    } else if (alignment === 'bottom') {
+      textoY = y + newHeight - totalTextHeight;
+    }
+  }
+
+  // Set text color
+  const setFillColor = [0, 0, 0];
+  doc.setTextColor(setFillColor[0], setFillColor[1], setFillColor[2]);
+
+  // Draw each line of text
+  lines.forEach((line) => {
+    const textoX = alignment === 'center'
+      ? x + (width - (doc.getStringUnitWidth(line) * fontSize) / doc.internal.scaleFactor) / 2
+      : x + 2;
+    doc.text(line, textoX, textoY);
+    textoY += lineHeight;
+  });
+
+  // Return the new cell height
+  return newHeight;
+}
+
+function createTable(doc, item, currentPositionY, xInitial = 15) {
+  let x = xInitial;
+  let maxRowHeight = 0;
+
+  item.contenido.forEach((cell) => {
+    const ancho = cell.medida || 111;
+    const lineHeight = 3;
+    const lines = doc.splitTextToSize(cell.texto || '', ancho - 2);
+    const totalTextHeight = lines.length * lineHeight;
+    maxRowHeight = Math.max(maxRowHeight, totalTextHeight + 4);
+  });
+
+  x = xInitial;
+
+  item.contenido.forEach((cell) => {
+    const ancho = cell.medida || 111;
+    const colorFondo = cell.color === 'blanco'
+      ? [255, 255, 255]
+      : [172, 178, 183];
+
+    doc.setFillColor(...colorFondo);
+    createCell(
+      doc,
+      x,
+      currentPositionY,
+      ancho,
+      maxRowHeight,
+      cell.texto,
+      cell.bold,
+      cell.tamano,
+      cell.acomodoLetra,
+    );
+    x += ancho;
+  });
+  return maxRowHeight;
+}
+
+function switchTablas(item, doc, titulo, currentPositionY, x) {
+  let i = 0;
+  let high = 0;
+  switch (item.tipo) {
+    case 'titulo':
+      currentPositionY = generateTableAndSection(
+        item.contenido,
+        titulo,
+        doc,
+        currentPositionY,
+      );
+      currentPositionY = updateCurrentPositionY(doc, 0);
+      break;
+    case 'fila':
+      do {
+        high = createTable(doc, item, currentPositionY, x);
+        i += 1;
+      } while (i < item.repetirVeces);
+      break;
+    default:
+      break;
+  }
+  return high;
+}
+
+function tableDate(doc, currentPositionY, date, sizeText = 30, sizeDateField = 45) {
+  const xDateTable = 122;
+  const dateTable = [
+    {
+      tipo: 'fila',
+      contenido: [
+        { texto: 'Fecha', medida: sizeText, color: 'gris' },
+        { texto: date, medida: sizeDateField, color: 'blanco' },
+      ],
+      repetirVeces: 1,
+    },
+  ];
+  dateTable.forEach((item) => {
+    switchTablas(item, doc, '', currentPositionY, xDateTable);
+  });
+}
+
 module.exports = {
+  tableDate,
+  addNutmeg,
   crearCelda,
   crearSeccion,
   generarSeccionyTabla,
@@ -462,4 +602,7 @@ module.exports = {
   generarTablaData,
   crearFilaFecha,
   agregarTextoJustificado,
+  switchTablas,
+  createTable,
+  createCell,
 };

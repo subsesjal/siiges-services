@@ -79,7 +79,170 @@ const columnStyles = {
     fontStyle: 'bold',
   },
 };
-
+const tableInstitution = (solicitud, nombreNivel) => [
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: 'NOMBRE DE LA INSTITUCIÓN', medida: 91, color: 'gris' },
+      { texto: solicitud?.programa?.plantel?.institucion?.nombre, medida: 91, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: 'NIVEL Y NOMBRE DEL PLAN DE ESTUDIOS', medida: 91, color: 'gris' },
+      { texto: `${nombreNivel} en ${solicitud?.programa?.nombre}`, medida: 91, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: 'DURACIÓN DEL PROGRAMA', medida: 91, color: 'gris' },
+      { texto: solicitud?.programa?.duracionPeriodos, medida: 91, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: 'NOMBRE COMPLETO DE LA RAZÓN SOCIAL', medida: 91, color: 'gris' },
+      { texto: solicitud?.programa?.plantel?.institucion?.razonSocial, medida: 91, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+];
+const tableStudy = () => [
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '1. ESTUDIO DE PERTINENCIA Y FACTIBILIDAD', medida: 182, color: 'gris' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: 'CON REFERENCIA GENERAL', medida: 91, color: 'gris' },
+      { texto: '', medida: 91, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: 'CON REFERENCIA AL PERFIL DE NUEVO INGRESO', medida: 91, color: 'gris' },
+      { texto: '', medida: 91, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: 'CON REFERENCIA AL PERFIL DE EGRESO', medida: 91, color: 'gris' },
+      { texto: '', medida: 91, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+];
+const tableSupplyDemandStudy = [
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '2. ESTUDIO DE OFERTA Y DEMANDA', medida: 182, color: 'gris' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '', medida: 182, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+];
+const tableSourcesInformation = [
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '3. FUENTES DE INFORMACIÓN', medida: 182, color: 'gris' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '', medida: 182, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+];
+const tableModelEducation = [
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '4. MODELO EDUCATIVO', medida: 182, color: 'gris' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '', medida: 182, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+];
+const tablePolitics = [
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '5. POLÍTICAS DE FUNCIONAMIENTO', medida: 182, color: 'gris' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '', medida: 182, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+];
+const tableIdeasInstitutional = [
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '6. IDEARIO INSTITUCIONAL', medida: 182, color: 'gris' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: 'MISIÓN', medida: 40, color: 'blanco' },
+      { texto: '', medida: 142, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: 'VISIÓN', medida: 40, color: 'blanco' },
+      { texto: '', medida: 142, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: 'VALORES', medida: 40, color: 'blanco' },
+      { texto: '', medida: 142, color: 'blanco' },
+    ],
+    repetirVeces: 1,
+  },
+];
 module.exports = {
   HEADER_MAIN_TITTLE,
   columnStyles,
@@ -98,4 +261,11 @@ module.exports = {
   HEADER_NOMBRE_PUESTO,
   HEADER_GRADO_EDUCATIVO,
   HEADER_IDEARIO,
+  tableInstitution,
+  tableStudy,
+  tableSupplyDemandStudy,
+  tableSourcesInformation,
+  tableModelEducation,
+  tablePolitics,
+  tableIdeasInstitutional,
 };

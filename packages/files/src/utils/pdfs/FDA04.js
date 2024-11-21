@@ -16,11 +16,12 @@ const {
 
 const {
   configurarFuenteYAgregarTexto,
-  updateCurrentPositionY,
-  generateTableAndSection,
   agregarImagenYPaginaPie,
   buscarDescripcionPorId,
   crearSeccion,
+  addNutmeg,
+  crearCelda,
+  switchTablas,
 } = require('./pdfHandler');
 
 const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
@@ -28,87 +29,11 @@ const img2 = fs.readFileSync(path.join(__dirname, '/images/img2.png'), { encodin
 const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encoding: 'base64' });
 let currentPositionY = 0;
 
-function crearCelda(doc, x, y, width, height, text, bold = true, fontSize = 10, alignment = 'center') {
-  doc.rect(x, y, width, height, 'F');
-  doc.rect(x, y, width, height, 'S');
-
-  if (bold) {
-    doc.setFont('Nutmegb', 'bold');
-  } else {
-    doc.setFont('Nutmegb', 'normal');
-  }
-
-  doc.setFontSize(fontSize);
-
-  let textoX = x;
-  if (alignment === 'center') {
-    textoX = x + (width - (doc.getStringUnitWidth(text) * fontSize) / doc.internal.scaleFactor) / 2;
-  }
-
-  let setFillColor = [0, 0, 0];
-  if (text.includes('FDA') || text.includes('FDP')) {
-    setFillColor = [255, 255, 255];
-  }
-
-  doc.setTextColor(setFillColor[0], setFillColor[1], setFillColor[2]);
-  doc.text(text, textoX, y + 5);
-}
-
-function crearTablaEspecifica(doc, item) {
-  let x = 14;
-  const altura = item.altura || 7;
-  item.contenido.forEach((cell) => {
-    const ancho = cell.medida || 111;
-    const colorFondo = cell.color === 'blanco'
-      ? [255, 255, 255]
-      : [172, 178, 183];
-
-    doc.setFillColor(...colorFondo);
-    crearCelda(
-      doc,
-      x,
-      currentPositionY,
-      ancho,
-      altura,
-      cell.texto,
-      cell.bold,
-      cell.tamano,
-      cell.acomodoLetra,
-    );
-    x += ancho;
-  });
-
-  currentPositionY += altura;
-}
-
-function switchTablas(item, doc, titulo) {
-  let i = 0;
-  switch (item.tipo) {
-    case 'titulo':
-      currentPositionY = generateTableAndSection(
-        item.contenido,
-        titulo,
-        doc,
-        currentPositionY,
-      );
-      currentPositionY = updateCurrentPositionY(doc, 0);
-      break;
-    case 'fila':
-      do {
-        crearTablaEspecifica(doc, item);
-        i += 1;
-      } while (i < item.repetirVeces);
-      break;
-    default:
-      break;
-  }
-}
-
 function addHeaderContent(doc) {
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
   doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
   doc.setFillColor(6, 98, 211);
-  crearCelda(doc, 150, 40, 45, 7, 'FDA04');
+  crearCelda(doc, 166, 40, 30, 7, 'FDA04', 10);
 }
 function redefineAddPage(document) {
   const originalAddPage = document.addPage.bind(document);
@@ -123,30 +48,34 @@ function redefineAddPage(document) {
 function GenerarFDA04(solicitud) {
   const JsPDF = jsPDF;
   const doc = new JsPDF();
+  addNutmeg(doc);
   redefineAddPage(doc);
   addHeaderContent(doc);
   const modalidadTipo = buscarDescripcionPorId(modalidades, solicitud.programa.modalidadId);
   const ciclosTipo = buscarDescripcionPorId(ciclos, solicitud.programa.cicloId);
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [69, 133, 244], 'DESCRIPCIÓN DE LAS INSTALACIONES', 20, 50);
-  const tituloTabla = {
-    headers: ['1', '1'],
-    body: [],
-    showHead: false,
-  };
-  currentPositionY = 60;
+
+  configurarFuenteYAgregarTexto(doc, 'bold', 12, [69, 133, 244], 'DESCRIPCIÓN DE LAS INSTALACIONES', 14, 45);
   const textoCiclos = ciclosTipo === 'Semestral' ? 'Semestres' : 'Cuatrimestres';
+
+  currentPositionY = 60;
   tablaDatosPlan(solicitud, textoCiclos, modalidadTipo).forEach((item) => {
-    switchTablas(item, doc, tituloTabla);
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
   });
 
-  currentPositionY = updateCurrentPositionY(doc, 40);
+  currentPositionY += 10;
 
   tablaDomicilio(solicitud).forEach((item) => {
-    switchTablas(item, doc, tituloTabla);
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
   });
 
   const tablaDescrPlantel = [
-    { tipo: 'titulo', contenido: '3. DESCRIPCIÓN DEL PLANTEL' },
+    {
+      tipo: 'fila',
+      contenido: [
+        { texto: '3. DESCRIPCIÓN DEL PLANTEL', medida: 182, color: 'gris' },
+      ],
+      repetirVeces: 1,
+    },
     {
       tipo: 'fila',
       contenido: [
@@ -227,7 +156,6 @@ function GenerarFDA04(solicitud) {
           medida: 81,
           color: 'blanco',
           bold: true,
-          tamano: 8.7,
         },
         {
           texto: '',
@@ -322,7 +250,6 @@ function GenerarFDA04(solicitud) {
     },
   ];
 
-  currentPositionY = updateCurrentPositionY(doc, 47);
   solicitud.programa.plantel.plantelSeguridadSistemas.forEach((seguridad) => {
     const descr = seguridad && seguridad.seguridadSistema && seguridad.seguridadSistema.descripcion
       ? seguridad.seguridadSistema.descripcion.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim()
@@ -370,9 +297,11 @@ function GenerarFDA04(solicitud) {
     }
   });
 
+  currentPositionY += 10;
   tablaDescrPlantel.forEach((item) => {
-    switchTablas(item, doc, tituloTabla);
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
   });
+  currentPositionY += 10;
   let descripcionesHigiene = '';
   solicitud.programa.plantel.plantelHigienes.forEach((higiene, index) => {
     descripcionesHigiene += `${higiene && higiene.descripcion ? higiene.descripcion : ''}`;
@@ -387,9 +316,10 @@ function GenerarFDA04(solicitud) {
   tablaHigiene[5].contenido[1].texto = solicitud.programa.plantel.plantelHigienes[4] && solicitud.programa.plantel.plantelHigienes[4].higiene ? solicitud.programa.plantel.plantelHigienes[4].higiene.descripcion || '' : '';
 
   doc.addPage();
+  addHeaderContent(doc);
   currentPositionY = 55;
   tablaHigiene.forEach((item) => {
-    switchTablas(item, doc, tituloTabla);
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
   });
   let asignaturasGrupo1 = [];
   let asignaturasGrupo2 = [];
@@ -417,16 +347,17 @@ function GenerarFDA04(solicitud) {
     tabla[5].contenido[5].texto = asignaturasGrupo2Str ?? '';
   }
   doc.addPage();
+  addHeaderContent(doc);
   currentPositionY = 55;
 
   tablaInfraestructuraPrograma(solicitud).forEach((item) => {
-    switchTablas(item, doc, tituloTabla);
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
   });
 
   currentPositionY += 10;
 
   tablaRelacionInstituciones(solicitud).forEach((item) => {
-    switchTablas(item, doc, tituloTabla);
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
   });
   currentPositionY += 10;
   crearSeccion(

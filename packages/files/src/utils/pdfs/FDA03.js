@@ -3,22 +3,18 @@ const path = require('path');
 const { jsPDF } = require('jspdf');
 require('jspdf-autotable');
 const {
-  HEADER_NOMBRE_DATOS,
-  columnStyles,
-  HEADER_TITULOS_NOMBRES,
-  columnStylesFirstAndSecondTable,
-  TABLA_REPRESENTANTE,
-  PROPUESTAS_NOMBRE,
-  HEADER_DATOS_AUTORIZACION,
+  tableRepresentativeLegal,
+  tableProposedNames,
+  tableAuthorizedData,
 } = require('./constants/fda03-constants');
 const {
   crearCelda, crearSeccion,
   agregarImagenYPaginaPie,
-  updateCurrentPositionY,
   configurarFuenteYAgregarTexto,
   formatearFecha,
-  crearFilaFecha,
-  generateTableAndSection,
+  switchTablas,
+  addNutmeg,
+  tableDate,
 } = require('./pdfHandler');
 
 const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
@@ -28,63 +24,41 @@ const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encodin
 function GenerarFDA03(solicitud) {
   const JsPDF = jsPDF;
   const doc = new JsPDF();
+  addNutmeg(doc);
   let currentPositionY = 20;
-  const fechaFormateada = formatearFecha(solicitud.createdAt);
+  const dateFormatted = formatearFecha(solicitud.createdAt);
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
   doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
   doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
 
   doc.setFillColor(6, 98, 211);
-  crearCelda(doc, 165, 40, 30, 7, 'FDA03');
+  crearCelda(doc, 166, 40, 30, 7, 'FDA03', 10);
 
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [69, 133, 244], 'SOLICITUD PARA LA AUTORIZACIÓN DE NOMBRE DE LA INSTITUCIÓN', 20, 55);
+  configurarFuenteYAgregarTexto(doc, 'bold', 12, [69, 133, 244], 'SOLICITUD PARA LA AUTORIZACIÓN DE NOMBRE DE LA INSTITUCIÓN', 14, 55);
   currentPositionY += 40;
 
-  currentPositionY = crearFilaFecha({
-    currentPositionY,
-    fecha: fechaFormateada,
-    doc,
+  tableDate(doc, currentPositionY, dateFormatted);
+  currentPositionY += 20;
+
+  const rectorPerson = solicitud?.programa?.plantel?.institucion?.rector?.persona;
+  tableRepresentativeLegal(rectorPerson).forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
   });
+  currentPositionY += 10;
 
-  const TablaRepresentante = {
-    headers: HEADER_NOMBRE_DATOS,
-    body: [],
-    showHead: false,
-    columnStyles: columnStylesFirstAndSecondTable,
-  };
+  const proposedNames = solicitud?.programa?.plantel?.institucion?.ratificacionesNombre[0];
+  tableProposedNames(proposedNames).forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
+  });
+  currentPositionY += 10;
 
-  if (solicitud?.programa?.plantel?.institucion?.rector?.persona) {
-    const rectorPersona = solicitud.programa.plantel.institucion.rector.persona;
-    TablaRepresentante.body = TABLA_REPRESENTANTE(rectorPersona);
-  }
-
-  currentPositionY = updateCurrentPositionY(doc);
-
-  currentPositionY += generateTableAndSection('1. DATOS DEL PROPIETARIO O REPRESENTANTE LEGAL', TablaRepresentante, doc, currentPositionY);
-
-  const TablaPropuestaNombres = {
-    headers: HEADER_NOMBRE_DATOS,
-    body: PROPUESTAS_NOMBRE(solicitud.programa.plantel.institucion.ratificacionesNombre[0]),
-    showHead: false,
-    columnStyles: columnStylesFirstAndSecondTable,
-  };
-  currentPositionY = updateCurrentPositionY(doc);
-  currentPositionY += generateTableAndSection('3. PROPUESTAS DE NOMBRE', TablaPropuestaNombres, doc, currentPositionY);
-
-  const nombresPropuestos = {
-    headers: HEADER_TITULOS_NOMBRES,
-    body: HEADER_DATOS_AUTORIZACION(solicitud.programa.plantel.institucion.ratificacionesNombre[0]),
-    showHead: false,
-    columnStyles,
-  };
-
-  currentPositionY = updateCurrentPositionY(doc);
-
-  currentPositionY += generateTableAndSection('4. EN CASO DE TENER NOMBRE AUTORIZADO', nombresPropuestos, doc, currentPositionY);
-
+  tableAuthorizedData(proposedNames).forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
+  });
+  currentPositionY += 10;
   let content = 'BAJO PROTESTA DE DECIR VERDAD';
-  currentPositionY = updateCurrentPositionY(doc);
+  currentPositionY += 30;
   currentPositionY += 10;
   currentPositionY = crearSeccion(currentPositionY, doc, content, 'center');
   content = `${solicitud.usuario.persona.nombre} ${solicitud.usuario.persona.apellidoPaterno} ${solicitud.usuario.persona.apellidoMaterno}`;

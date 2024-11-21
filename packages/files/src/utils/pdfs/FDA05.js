@@ -1,22 +1,31 @@
-/* eslint-disable new-cap */
 const fs = require('fs');
 const path = require('path');
 const { jsPDF } = require('jspdf');
 require('jspdf-autotable');
 
 const {
-  HEADER_NOMBRE_DATOS,
-  columnStyles,
-  HEADER_ROLES,
-  HEADER_ENLACE,
+  tableModel,
+  tableInfrastructure,
+  tableHeadersUsuarios,
+  tableHeadersVinculos,
+  tableLinkType,
+  tableWidthBand,
+  tableHeaderAdministration,
+  tableheaderCharacteristics,
+  tableSoftwareCharacteristics,
+  tableSupport,
+  tableSecurity,
+  tableAdvantages,
+  tablePlan,
+  tablePermissions,
 } = require('./constants/fda05-constants');
 const {
-  crearCelda, crearSeccion,
+  crearCelda,
+  crearSeccion,
   configurarFuenteYAgregarTexto,
-  generateTableWithStyles,
-  updateCurrentPositionY,
-  generateTableAndSection,
   agregarImagenYPaginaPie,
+  addNutmeg,
+  switchTablas,
 } = require('./pdfHandler');
 
 const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
@@ -27,7 +36,7 @@ function addHeaderContent(doc) {
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
   doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
   doc.setFillColor(6, 98, 211);
-  crearCelda(doc, 150, 40, 45, 7, 'FDA05');
+  crearCelda(doc, 166, 40, 30, 7, 'FDA05', 10);
 }
 function redefineAddPage(document) {
   const originalAddPage = document.addPage.bind(document);
@@ -41,128 +50,80 @@ function redefineAddPage(document) {
 }
 
 function GenerarFDA05(solicitud) {
-  const doc = new jsPDF();
+  const JsPDF = jsPDF;
+  const doc = new JsPDF();
+  addNutmeg(doc);
   let currentPositionY = 67;
   redefineAddPage(doc);
   addHeaderContent(doc);
 
   configurarFuenteYAgregarTexto(doc, 'bold', 12, [69, 133, 244], 'PLATAFORMA EDUCATIVA TECNOLÓGICA', 20, 50);
-  const headerModelo = ['1. DESCRIPCIÓN DEL MODELO TEÓRICO-PEDAGÓGICO'];
-  const tablaModelo = [
-    ['', '']];
-  generateTableWithStyles(headerModelo, tablaModelo, doc, currentPositionY, 'center');
-  currentPositionY = updateCurrentPositionY(doc, 5);
-
-  const headerInfraestructura = ['2. DESCRIPCIÓN DE LA INFRAESTRUCTURA TECNOLÓGICA DE LA PLATAFORMA TECNOLÓGICA EDUCATIVA.'];
-  const tablaInfraestructura = [
-    ['', '']];
-  generateTableWithStyles(headerInfraestructura, tablaInfraestructura, doc, currentPositionY, 'center');
-
-  const headersUsuarios = {
-    headers: HEADER_NOMBRE_DATOS,
-    body: HEADER_ROLES,
-    showHead: false,
-    columnStyles,
-  };
-
-  currentPositionY = updateCurrentPositionY(doc);
-
-  currentPositionY += generateTableAndSection('3. ROLES DE USUARIOS DE LA PLATAFORMA TECNOLÓGICA EDUCATIVA', headersUsuarios, doc, currentPositionY);
-  currentPositionY = doc.previousAutoTable.finalY;
-  currentPositionY += 5;
-
-  const headersVinculos = {
-    headers: HEADER_NOMBRE_DATOS,
-    body: HEADER_ENLACE,
-    showHead: false,
-    columnStyles,
-  };
-  currentPositionY += generateTableAndSection('4. ENLACE O VÍNCULO DE ACCESO PARA LA PLATAFORMA TECNOLÓGICA EDUCATIVA', headersVinculos, doc, currentPositionY);
-  currentPositionY = doc.previousAutoTable.finalY;
-  currentPositionY += 5;
-
-  currentPositionY = updateCurrentPositionY(doc, 10);
-  currentPositionY = updateCurrentPositionY(doc);
-  const newTableData = {
-    headers: ['', '', '', '', ''],
-    body: [
-      ['', 'ENLACE DEDICADO', 'ADSL', 'FIBRA ÓPTICA', 'OTRO (ESPECIFIQUE)'], ['TIPO DE ENLACE DE LA PLATAFORMA TECNOLÓGICA EDUCATIVA\nLA PLATAFORMA\nTECNOLÓGICA\nEDUCATIVA', '', '', '', ''],
-    ],
-    showHead: false,
-  };
-
-  currentPositionY = updateCurrentPositionY(doc);
-  currentPositionY += generateTableAndSection('5. TIPO DE ENLACE DE LA PLATAFORMA TECNOLÓGICA EDUCATIVA.', newTableData, doc, currentPositionY);
-
-  currentPositionY = updateCurrentPositionY(doc);
-  const headerAnchoDeBanda = ['6. ANCHO DE BANDA DISPONIBLE PARA EL USO DE LA PLATAFORMA TECNOLÓGICA EDUCATIVA.'];
-  const tablaAnchoDeBanda = [
-    ['', '']];
-  generateTableWithStyles(headerAnchoDeBanda, tablaAnchoDeBanda, doc, currentPositionY, 'center');
-
+  tableModel.forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
+  });
+  currentPositionY += 10;
+  tableInfrastructure.forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
+  });
+  currentPositionY += 10;
+  tableHeadersUsuarios.forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
+  });
+  currentPositionY += 10;
+  tableHeadersVinculos.forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
+  });
+  currentPositionY += 10;
+  tableLinkType.forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
+  });
+  currentPositionY += 10;
+  tableWidthBand.forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
+  });
+  currentPositionY += 10;
   doc.addPage();
+  addHeaderContent(doc);
   currentPositionY = 55;
-  const headerAdministracion = ['7. ADMINISTRACIÓN Y PLANES DE CRECIMIENTO.'];
-  const tablaAdministracion = [
-    ['', '']];
-  generateTableWithStyles(headerAdministracion, tablaAdministracion, doc, currentPositionY, 'center');
-
-  currentPositionY = updateCurrentPositionY(doc);
-  const headerCaracteristicas = ['8. CARACTERÍSTICAS DEL HARDWARE, LAS DEL CÓMPUTO CENTRAL Y DISTRIBUIDO, ASÍ COMO LA BASE DE DATOS.'];
-  const tablaCaracteristicas = [
-    ['', '']];
-  generateTableWithStyles(headerCaracteristicas, tablaCaracteristicas, doc, currentPositionY, 'center');
-
-  currentPositionY = updateCurrentPositionY(doc);
-  const headerCaracteristicasSoftware = ['9. CARACTERÍSTICAS DEL SOFTWARE, LAS DEL CÓMPUTO CENTRAL Y DISTRIBUIDO, ASÍ COMO LA BASE DE DATOS.'];
-  const tablaCaracteristicasSoftware = [
-    ['', '']];
-  generateTableWithStyles(headerCaracteristicasSoftware, tablaCaracteristicasSoftware, doc, currentPositionY, 'center');
-
-  const newTableData2 = {
-    headers: ['', '', ''],
-    body: [
-      ['RESOLUCIÓN DE PROBLEMAS BÁSICOS', 'RESOLUCIÓN DE PROBLEMAS POR PERSONAL ESPECIALIZADO', 'RESOLUCIÓN DE PROBLEMAS A NIVEL DE EXPERTO'], ['', '', ''],
-    ],
-    showHead: false,
-  };
-
-  currentPositionY = updateCurrentPositionY(doc);
-  currentPositionY += generateTableAndSection('10. SOPORTE TÉCNICO.', newTableData2, doc, currentPositionY);
-
-  currentPositionY = updateCurrentPositionY(doc);
-  const headerSeguridad = ['11. SEGURIDAD DE LA INFORMACIÓN.'];
-  const tablaSeguridad = [
-    ['', '']];
-  generateTableWithStyles(headerSeguridad, tablaSeguridad, doc, currentPositionY, 'center');
-
-  currentPositionY = updateCurrentPositionY(doc);
-  const headerVentajas = ['12. VENTAJAS.'];
-  const tablaVentajas = [
-    ['', '']];
-  generateTableWithStyles(headerVentajas, tablaVentajas, doc, currentPositionY, 'center');
-
-  currentPositionY = updateCurrentPositionY(doc);
-  const headerPlan = ['13. PLAN DE CONTINGENCIAS.'];
-  const tablaPlan = [
-    ['', '']];
-  generateTableWithStyles(headerPlan, tablaPlan, doc, currentPositionY, 'center');
-
-  currentPositionY = updateCurrentPositionY(doc);
-  const headerPermisos = ['14. PERMISOS, LICENCIAS E INSTRUMENTOS. '];
-  const tablaPermisos = [
-    ['', '']];
-  generateTableWithStyles(headerPermisos, tablaPermisos, doc, currentPositionY, 'center');
-
-  currentPositionY += 30;
+  tableHeaderAdministration.forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
+  });
+  currentPositionY += 10;
+  tableheaderCharacteristics.forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
+  });
+  currentPositionY += 10;
+  tableSoftwareCharacteristics.forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
+  });
+  currentPositionY += 10;
+  tableSupport.forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
+  });
+  currentPositionY += 10;
+  tableSecurity.forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
+  });
+  currentPositionY += 10;
+  tableAdvantages.forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
+  });
+  currentPositionY += 10;
+  tablePlan.forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
+  });
+  currentPositionY += 10;
+  tablePermissions.forEach((item) => {
+    currentPositionY += switchTablas(item, doc, '', currentPositionY);
+  });
+  currentPositionY += 5;
   currentPositionY += crearSeccion(
     currentPositionY,
     doc,
     'BAJO PROTESTA DE DECIR VERDAD',
     'center',
   );
-  currentPositionY = doc.previousAutoTable.finalY;
-  currentPositionY += 20;
+  currentPositionY += 5;
   currentPositionY += crearSeccion(
     currentPositionY,
     doc,
