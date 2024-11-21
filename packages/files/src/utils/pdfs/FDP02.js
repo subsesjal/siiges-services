@@ -38,6 +38,7 @@ const {
   buscarDescripcionPorId,
   generateTotalsTable,
   crearFilaFecha,
+  addNutmeg,
 } = require('./pdfHandler02');
 
 const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
@@ -63,6 +64,7 @@ function redefineAddPage(document) {
 function GenerarFDP02(solicitud) {
   const JsPDF = jsPDF;
   const doc = new JsPDF();
+  addNutmeg(doc);
   let currentPositionY = 67;
 
   redefineAddPage(doc);

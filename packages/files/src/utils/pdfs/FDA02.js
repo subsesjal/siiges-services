@@ -35,6 +35,8 @@ const {
   generateTableAndSection,
   generarTablaData,
   agregarImagenYPaginaPie,
+  addNutmeg,
+  tableDate,
 } = require('./pdfHandler');
 
 const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
@@ -45,8 +47,9 @@ function addHeaderContent(doc) {
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
   doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
   doc.setFillColor(6, 98, 211);
-  crearCelda(doc, 150, 40, 45, 7, 'FDA02');
+  crearCelda(doc, 166, 40, 30, 7, 'FDA02', 10);
 }
+
 function redefineAddPage(document) {
   const originalAddPage = document.addPage.bind(document);
   const newDocument = { ...document };
@@ -61,9 +64,10 @@ function redefineAddPage(document) {
 function GenerarFDA02(solicitud) {
   const JsPDF = jsPDF;
   const doc = new JsPDF();
-  let currentPositionY = 67;
+  addNutmeg(doc);
+  let currentPositionY = 45;
 
-  const fechaFormateada = formatearFecha(solicitud.createdAt);
+  const dateFormatted = formatearFecha(solicitud.createdAt);
   const nombreNivel = buscarDescripcionPorId(niveles, solicitud.programa.nivelId);
   const modalidadTipo = buscarDescripcionPorId(modalidades, solicitud.programa.modalidadId);
   const ciclosTipo = buscarDescripcionPorId(ciclos, solicitud.programa.cicloId);
@@ -71,10 +75,10 @@ function GenerarFDA02(solicitud) {
 
   redefineAddPage(doc);
   addHeaderContent(doc);
-
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [69, 133, 244], 'OFICIO DE ENTREGA DE DOCUMENTACIÓN', 20, 50);
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [0, 0, 0], fechaFormateada, 152, 58);
-
+  configurarFuenteYAgregarTexto(doc, 'bold', 12, [69, 133, 244], 'OFICIO DE ENTREGA DE DOCUMENTACIÓN', 14, currentPositionY);
+  currentPositionY += 5;
+  tableDate(doc, currentPositionY, dateFormatted);
+  currentPositionY += 10;
   currentPositionY += seccionIntitucionTabla({
     doc, solicitud, niveles, currentPositionY,
   });
@@ -154,6 +158,7 @@ function GenerarFDA02(solicitud) {
     currentPositionY,
   );
   doc.addPage();
+  addHeaderContent(doc);
   currentPositionY = 55;
   const rowsRedesSocialesSolicitante = [
     [
@@ -225,6 +230,7 @@ function GenerarFDA02(solicitud) {
   currentPositionY += generateTableAndSection('FORMACIÓN ACADÉMICA', formacionDirector, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
   doc.addPage();
+  addHeaderContent(doc);
   currentPositionY = 55;
   const { diligencias } = solicitud;
 
@@ -265,7 +271,7 @@ function GenerarFDA02(solicitud) {
 
   currentPositionY += generateTableAndSection('NOMBRES PROPUESTOS PARA LA INSTITUCIÓN EDUCATIVA', nombresPropuestosTable, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
-  currentPositionY += 10;
+  currentPositionY += 15;
   currentPositionY += crearSeccion(
     currentPositionY,
     doc,

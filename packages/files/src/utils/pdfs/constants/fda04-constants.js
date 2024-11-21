@@ -1,5 +1,11 @@
 const tablaDomicilio = (solicitud) => [
-  { tipo: 'titulo', contenido: '2. DOMICILIO DE LA INSTITUCIÓN' },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '2. DOMICILIO DE LA INSTITUCIÓN', medida: 182, color: 'gris' },
+    ],
+    repetirVeces: 1,
+  },
   {
     tipo: 'fila',
     contenido: [
@@ -54,7 +60,13 @@ const tablaDomicilio = (solicitud) => [
   },
 ];
 const tablaDatosPlan = (solicitud, textoCiclos, modalidadTipo) => [
-  { tipo: 'titulo', contenido: '1. DATOS DEL PLAN DE ESTUDIOS' },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '1. DATOS DEL PLAN DE ESTUDIOS', medida: 182, color: 'gris' },
+    ],
+    repetirVeces: 1,
+  },
   {
     tipo: 'fila',
     contenido: [
@@ -95,17 +107,22 @@ const tablaDatosPlan = (solicitud, textoCiclos, modalidadTipo) => [
         medida: 91,
         color: 'blanco',
         bold: true,
-        tamano: 8.7,
         acomodoLetra: 'center',
       },
-      { texto: '', medida: 91, color: 'blanco' }, // Debes llenar este valor dinamicamente
+      { texto: '', medida: 91, color: 'blanco' },
     ],
     repetirVeces: 1,
   },
 ];
 
 const tablaHigiene = [
-  { tipo: 'titulo', contenido: '4. HIGIENE DEL PLANTEL' },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '4. HIGIENE DEL PLANTEL', medida: 182, color: 'gris' },
+    ],
+    repetirVeces: 1,
+  },
   {
     tipo: 'fila',
     contenido: [
@@ -118,11 +135,10 @@ const tablaHigiene = [
     tipo: 'fila',
     contenido: [
       {
-        texto: '               Sanitarios',
+        texto: 'Sanitarios',
         medida: 91,
         color: 'blanco',
         bold: true,
-        tamano: 10,
         acomodoLetra: 'left',
       },
       {
@@ -190,20 +206,20 @@ const generateInfraestructuraRows = (infraestructuras, typeToAdd) => {
     }));
   } else if (typeToAdd === 'labs') {
     additionalRows = [
-      { nombre: 'LABORATORIO FÍSICO', tamano: 7.5 },
-      { nombre: 'LABORATORIO VIRTUAL', tamano: 7.1 },
+      { nombre: 'LABORATORIO FÍSICO', tamano: 8 },
+      { nombre: 'LABORATORIO VIRTUAL', tamano: 8 },
       { nombre: 'TALLER FÍSICO' },
-      { nombre: 'TALLER VIRTUAL', tamano: 9.8 },
+      { nombre: 'TALLER VIRTUAL' },
     ];
   } else if (typeToAdd === 'computo') {
     additionalRows = [
-      { nombre: 'LABORATORIO 1' },
-      { nombre: 'LABORATORIO 2' },
+      { nombre: 'LABORATORIO 1', tamano: 8 },
+      { nombre: 'LABORATORIO 2', tamano: 8 },
     ];
   } else if (typeToAdd === 'biblioteca') {
     additionalRows = [
-      { nombre: 'BIBLIOTECA FÍSICA', tamano: 7.7 },
-      { nombre: 'BIBLIOTECA VIRTUAL', tamano: 7.5 },
+      { nombre: 'BIBLIOTECA FÍSICA' },
+      { nombre: 'BIBLIOTECA VIRTUAL' },
     ];
   }
 
@@ -277,7 +293,13 @@ const generateInfraestructuraRows = (infraestructuras, typeToAdd) => {
 };
 
 const tablaInfraestructuraPrograma = (solicitud) => [
-  { tipo: 'titulo', contenido: '5. INFRAESTRUCTURA PARA EL PROGRAMA' },
+  {
+    tipo: 'fila',
+    contenido: [
+      { texto: '5. INFRAESTRUCTURA PARA EL PROGRAMA', medida: 182, color: 'gris' },
+    ],
+    repetirVeces: 1,
+  },
   {
     tipo: 'fila',
     contenido: [
@@ -294,33 +316,31 @@ const tablaInfraestructuraPrograma = (solicitud) => [
         medida: 30.33,
         color: 'gris',
         bold: true,
-        tamano: 8.7,
+        tamano: 8,
         acomodoLetra: 'center',
       },
       {
-        texto: ' CAPACIDAD PROMEDIO \n (No. DE ALUMNOS)',
+        texto: ' CAPACIDAD PROMEDIO  (No. DE ALUMNOS)',
         medida: 30.33,
         color: 'gris',
         bold: true,
-        tamano: 7,
         acomodoLetra: 'left',
       },
       { texto: 'METROS', medida: 30.33, color: 'gris' },
       {
-        texto: '        RECURSOS \n      MATERIALES',
+        texto: 'RECURSOS MATERIALES',
         medida: 30.33,
         color: 'gris',
         bold: true,
-        tamano: 8.7,
         acomodoLetra: 'left',
       },
       { texto: 'UBICACIÓN', medida: 30.33, color: 'gris' },
       {
-        texto: 'ASIGNATURAS QUE \n ATIENDE',
+        texto: 'ASIGNATURAS QUE  ATIENDE',
         medida: 30.33,
         color: 'gris',
         bold: true,
-        tamano: 8.7,
+        tamano: 9,
         acomodoLetra: 'left',
       },
     ],
@@ -334,7 +354,6 @@ const tablaInfraestructuraPrograma = (solicitud) => [
         medida: 182,
         color: 'gris',
         bold: true,
-        tamano: 10,
         acomodoLetra: 'left',
       },
     ],
@@ -349,7 +368,6 @@ const tablaInfraestructuraPrograma = (solicitud) => [
         medida: 182,
         color: 'gris',
         bold: true,
-        tamano: 10,
         acomodoLetra: 'left',
       },
     ],
@@ -364,7 +382,6 @@ const tablaInfraestructuraPrograma = (solicitud) => [
         medida: 182,
         color: 'gris',
         bold: true,
-        tamano: 10,
         acomodoLetra: 'left',
       },
     ],
@@ -379,7 +396,6 @@ const tablaInfraestructuraPrograma = (solicitud) => [
         medida: 182,
         color: 'gris',
         bold: true,
-        tamano: 10,
         acomodoLetra: 'left',
       },
     ],
@@ -393,8 +409,7 @@ const tablaRelacionInstituciones = (solicitud) => [
     tipo: 'fila',
     contenido: [
       {
-        texto: '6. RELACIÓN DE INSTITUCIONES DE SALUD ALEDAÑAS, SERVICIOS DE AMBULANCIA U OTROS SERVICIOS DE EMERGENCIA A \n LOS CUALES RECURRIRÁ LA INSTITUCIÓN EN CASO DE ALGUNA CONTINGENCIA',
-        tamano: 8,
+        texto: '6. RELACIÓN DE INSTITUCIONES DE SALUD ALEDAÑAS, SERVICIOS DE AMBULANCIA U OTROS SERVICIOS DE EMERGENCIA A  LOS CUALES RECURRIRÁ LA INSTITUCIÓN EN CASO DE ALGUNA CONTINGENCIA',
         acomodoLetra: 'left',
         medida: 182,
       },
@@ -406,10 +421,9 @@ const tablaRelacionInstituciones = (solicitud) => [
     contenido: [
       { texto: 'NOMBRE DE LA INSTITUCIÓN', medida: 91, color: 'gris' },
       {
-        texto: 'TIEMPO APROXIMADO REQUERIDO PARA LLEGAR A LA ESCUELA \n (EN MINUTOS)',
+        texto: 'TIEMPO APROXIMADO REQUERIDO PARA LLEGAR A LA ESCUELA  (EN MINUTOS)',
         medida: 91,
         color: 'gris',
-        tamano: 7.8,
         acomodoLetra: 'left',
       },
     ],

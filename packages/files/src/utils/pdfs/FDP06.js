@@ -19,6 +19,7 @@ const {
   agregarImagenYPaginaPie,
   buscarDescripcionPorId,
   buscarNombrePorId,
+  addNutmeg,
 } = require('./pdfHandler06');
 
 const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
@@ -44,6 +45,7 @@ function redefineAddPage(document) {
 function GenerarFDP06(solicitud) {
   const JsPDF = jsPDF;
   const doc = new JsPDF();
+  addNutmeg(doc);
   let currentPositionY = 67;
 
   redefineAddPage(doc);

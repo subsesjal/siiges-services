@@ -16,6 +16,7 @@ const {
   generateTableWithStyles,
   updateCurrentPositionY,
   agregarImagenYPaginaPie,
+  addNutmeg,
 } = require('./pdfHandler');
 
 const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
@@ -42,7 +43,7 @@ function GenerarFDP05(solicitud) {
   const JsPDF = jsPDF;
   const doc = new JsPDF();
   let currentPositionY = 67;
-
+  addNutmeg(doc);
   redefineAddPage(doc);
   addHeaderContent(doc);
 
@@ -52,24 +53,24 @@ function GenerarFDP05(solicitud) {
   doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
 
   doc.setFillColor(0, 127, 204);
-  crearCelda(doc, 150, 40, 45, 7, 'FDP05');
+  crearCelda(doc, 166, 40, 30, 7, 'FDP05', 10);
 
   configurarFuenteYAgregarTexto(doc, 'bold', 11, [69, 133, 244], 'TRAYECTORIA EDUCATIVA Y TUTORÍA DE LOS ESTUDIANTES', 20, 50);
   configurarFuenteYAgregarTexto(doc, 'bold', 12, [0, 0, 0], fechaFormateada, 152, 58);
 
-  const tablaSeguimiento = [[solicitud.programa.trayectoria.programaSeguimiento]];
+  const tablaSeguimiento = [[solicitud?.programa?.trayectoria?.programaSeguimiento]];
   generateTableWithStyles(HEADER_PROGRAMA_SEGUIMIENTO, tablaSeguimiento, doc, currentPositionY, 'center');
   currentPositionY = updateCurrentPositionY(doc, 5);
 
-  const tablaFuncTuto = [[solicitud.programa.trayectoria.funcionTutorial]];
+  const tablaFuncTuto = [[solicitud?.programa?.trayectoria?.funcionTutorial]];
   generateTableWithStyles(HEADER_FUNC_TUTO, tablaFuncTuto, doc, currentPositionY, 'center');
   currentPositionY = updateCurrentPositionY(doc, 5);
 
-  const tablaEstudio = [[solicitud.programa.trayectoria.tipoTutoria]];
+  const tablaEstudio = [[solicitud?.programa?.trayectoria?.tipoTutoria]];
   generateTableWithStyles(HEADER_TIPO_TUTORIA, tablaEstudio, doc, currentPositionY, 'center');
   currentPositionY = updateCurrentPositionY(doc, 5);
 
-  const tablaModelo = [[solicitud.programa.trayectoria.tasaEgreso]];
+  const tablaModelo = [[solicitud?.programa?.trayectoria?.tasaEgreso]];
   generateTableWithStyles(HEADER_TASA_EGRESOS, tablaModelo, doc, currentPositionY, 'center');
   currentPositionY = updateCurrentPositionY(doc, 15);
   currentPositionY += 5;
@@ -85,7 +86,7 @@ function GenerarFDP05(solicitud) {
   currentPositionY += crearSeccion(
     currentPositionY,
     doc,
-    `${solicitud.usuario.persona.nombre} ${solicitud.usuario.persona.apellidoPaterno} ${solicitud.usuario.persona.apellidoMaterno}`,
+    `${solicitud?.usuario?.persona?.nombre} ${solicitud?.usuario?.persona?.apellidoPaterno} ${solicitud?.usuario?.persona?.apellidoMaterno}`,
     'center',
   );
 

@@ -2,49 +2,49 @@ const HEADER_SEMESTRE = [
   {
     content: 'No.',
     styles: {
-      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmeg',
     },
   },
   {
     content: 'NOMBRE DEL DOCENTE',
     styles: {
-      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmeg',
     },
   },
   {
     content: 'FORMACIÓN PROFESIONAL',
     styles: {
-      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmeg',
     },
   },
   {
     content: 'ASIGNATURA PARA LA QUE SE PROPONE',
     styles: {
-      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmeg',
     },
   },
   {
     content: 'EXPERIENCIA LABORAL',
     styles: {
-      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmeg',
     },
   },
   {
     content: 'DOCENTE DE ASIGNATURA Ó TIEMPO COMPLETO',
     styles: {
-      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmeg',
     },
   },
   {
     content: 'SE ACEPTA',
     styles: {
-      halign: 'center', valign: 'middle', fontSize: 6, font: 'Nutmegb',
+      halign: 'center', valign: 'middle', fontSize: 6, font: 'Nutmeg',
     },
   },
   {
     content: 'OBSERVACIONES',
     styles: {
-      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmegb',
+      halign: 'center', valign: 'middle', fontSize: 7, font: 'Nutmeg',
     },
   },
 ];
@@ -135,7 +135,7 @@ const columnStyles = {
   },
   1: {
     fontStyle: 'bold',
-    font: 'Nutmegb',
+    font: 'Nutmeg',
   },
 };
 
