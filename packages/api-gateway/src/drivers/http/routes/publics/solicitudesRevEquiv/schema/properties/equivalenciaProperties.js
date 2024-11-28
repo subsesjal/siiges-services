@@ -1,6 +1,6 @@
-const equivalencia = {
+const equivalenciaProperties = {
   tipoTramiteId: { type: 'integer' },
   estatusSolicitudRevEquivId: { type: 'integer' },
   fecha: { type: 'string', format: 'date' },
 };
-module.exports = { equivalencia };
+module.exports = { equivalenciaProperties };
