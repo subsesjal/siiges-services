@@ -58,7 +58,7 @@ const findFileSolicitudEquivalencia = (
   findOneAlumnoQuery,
   findAllCalificacionesQuery,
   GenerarSolicitudEquivalencia,
-) => async (fileMetdata, data) => {
+) => async (alumnoId, fileMetdata, data) => {
   let include = [
     { association: 'persona' },
     { association: 'alumnoTipoTramites' },
@@ -92,9 +92,8 @@ const findFileSolicitudEquivalencia = (
     include,
     strict: false,
   });
-  checkers.throwErrorIfDataIsFalsy(solicitud, 'solicitud', solicitudId);
-  const file = await GenerarSolicitudEquivalencia(alumno, calificaciones);
-  await uploadFile(data, fileMetdata, file, solicitudId);
+  const file = await GenerarSolicitudEquivalencia();
+  await uploadFile(data, fileMetdata, file, alumnoId);
 };
 
 module.exports = { findFileSolicitudEquivalencia };
