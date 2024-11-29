@@ -1,7 +1,7 @@
 const boom = require('@hapi/boom');
 const { Logger } = require('@siiges-services/shared');
 
-const ESTATUS_SOLCIITUD_FOLIOS_MAP = {
+const ESTATUS_SOLCITUD_FOLIOS_MAP = {
   ENVIO_TITULACION: 6,
   ENVIO_PARCIAL: 7,
 };
@@ -78,7 +78,7 @@ const transformDataToTitulo = ({ folioAlumno, programa }) => ({
   institucion: normalizeText(folioAlumno.alumno.validacion.nombreInstitucionEmisora),
   inicio_study: formatDate(folioAlumno.alumno.validacion.fechaInicioAntecedente),
   termino_study: formatDate(folioAlumno.alumno.validacion.fechaFinAntecedente),
-  cedula_procedencia: parseInt(folioAlumno.alumno.validacion.cedulaProfesional, 10) || null,
+  cedula_procedencia: parseInt(folioAlumno.alumno.validacion.folio, 10) || null,
 });
 
 const validateDataTransformed = (data) => Object.entries(data).every(([key, value]) => {
@@ -167,12 +167,12 @@ const envioTitulacion = (
   if (allSuccess) {
     await updateSolicitudesFoliosQuery(
       { id },
-      { estatusSolicitudFolioId: ESTATUS_SOLCIITUD_FOLIOS_MAP.ENVIO_TITULACION },
+      { estatusSolicitudFolioId: ESTATUS_SOLCITUD_FOLIOS_MAP.ENVIO_TITULACION },
     );
   } else {
     await updateSolicitudesFoliosQuery(
       { id },
-      { estatusSolicitudFolioId: ESTATUS_SOLCIITUD_FOLIOS_MAP.ENVIO_PARCIAL },
+      { estatusSolicitudFolioId: ESTATUS_SOLCITUD_FOLIOS_MAP.ENVIO_PARCIAL },
     );
   }
 
