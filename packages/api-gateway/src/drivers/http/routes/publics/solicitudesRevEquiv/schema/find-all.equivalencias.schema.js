@@ -1,5 +1,7 @@
 const { equivalenciaProperties } = require('./properties/equivalenciaProperties');
 const { responseProperties } = require('./properties/responseProperties');
+const { institucionProcedencia } = require('./properties/institucionProcedenciaProperties');
+const { institucionDestino } = require('./properties/institucionDestinoProperties');
 
 const findAllEquivalenciasSchema = {
   tags: ['Equivalencias'],
@@ -20,11 +22,19 @@ const findAllEquivalenciasSchema = {
                 type: 'object',
                 properties: {
                   id: { type: 'integer' },
+                  institucionProcedencia: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...institucionProcedencia,
+                      ...responseProperties,
+                    },
+                  },
                   institucionDestino: {
                     type: 'object',
                     properties: {
                       id: { type: 'integer' },
-                      acuerdoRvoe: { type: 'string' },
+                      ...institucionDestino,
                       ...responseProperties,
                     },
                   },
