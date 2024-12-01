@@ -1,16 +1,14 @@
-const { equivalencia } = require('./properties/equivalenciaProperties');
+const { solicitudRevEquiv } = require('./properties/solicitudRevEquiv');
 const { responseProperties } = require('./properties/responseProperties');
-const { domicilio } = require('../../../privates/solicitudes/representantes/schemas/properties/domicilio.properties');
-const { persona } = require('../../../privates/usuarios/schema/properties/persona');
+const { domicilio } = require('../../solicitudes/representantes/schemas/properties/domicilio.properties');
+const { persona } = require('../../usuarios/schema/properties/persona');
 
-const createEquivalenciaSchema = {
-  type: 'object',
-  description: 'Create a new equivalencia.',
+const updateEquivalenciaSchema = {
+  tags: ['Solicitudes Rev Equiv'],
+  description: 'Returns an Equivalencia by providing an equivalencia ID.',
   body: {
     type: 'object',
-    properties: {
-      ...equivalencia,
-    },
+    properties: { ...solicitudRevEquiv },
   },
   response: {
     200: {
@@ -20,7 +18,7 @@ const createEquivalenciaSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...equivalencia,
+            ...solicitudRevEquiv,
             ...responseProperties,
             interesado: {
               type: 'object',
@@ -59,29 +57,6 @@ const createEquivalenciaSchema = {
                 },
               },
             },
-            asignaturaAntecedente: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  nombre: { type: 'string' },
-                  calificacion: { type: 'string' },
-                  ...responseProperties,
-                },
-              },
-            },
-            asignaturaEquivalente: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  asignaturaId: { type: 'integer' },
-                  nombre: { type: 'string' },
-                  calificacion: { type: 'string' },
-                  ...responseProperties,
-                },
-              },
-            },
           },
         },
       },
@@ -89,4 +64,4 @@ const createEquivalenciaSchema = {
   },
 };
 
-module.exports = createEquivalenciaSchema;
+module.exports = updateEquivalenciaSchema;

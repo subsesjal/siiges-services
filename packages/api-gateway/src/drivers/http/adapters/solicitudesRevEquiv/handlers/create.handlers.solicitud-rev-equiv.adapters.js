@@ -28,7 +28,7 @@ async function createEquivalencia(req, reply) {
         .send({ message: 'Error al parsear los datos JSON en el campo DATA.' });
     }
     Logger.info('[equivalencia]: Creating equivalencia');
-    const newEquivalencia = await this.solicitudServices.createEquivalencia({ data });
+    const newEquivalencia = await this.solicitudRevEquivServices.createEquivalencia({ data });
     const { id } = newEquivalencia;
     const fileKeys = Object.keys(req.body)
       .filter((key) => Object.prototype.hasOwnProperty.call(FILE_KEYS_MAPPING, key) && key !== 'DATA');

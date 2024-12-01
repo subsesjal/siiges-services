@@ -3,16 +3,16 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function findOneEquivalencia(req, reply) {
   try {
-    const { equivalenciaId } = req.params;
-
+    const { solicitudRevEquivId } = req.params;
     Logger.info('[solicitudes]: Getting solicitud - equivalencia');
-    const equivalencia = await this.solicitudServices.findOneEquivalencia(
-      { id: equivalenciaId },
+
+    const solicitudRevEquiv = await this.solicitudRevEquivServices.findOneEquivalencia(
+      { id: solicitudRevEquivId },
     );
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: equivalencia });
+      .send({ data: solicitudRevEquiv });
   } catch (error) {
     return errorHandler(error, reply);
   }

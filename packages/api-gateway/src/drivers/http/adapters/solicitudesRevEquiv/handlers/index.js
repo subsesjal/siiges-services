@@ -1,8 +1,8 @@
-const createEquivalencia = require('./create.handlers.equivalencias.adapters');
-const findOneEquivalencia = require('./find-one.handlers.equivalencias');
-const findAllEquivalencias = require('./find-all.handlers.equivalencias.adapters');
-const deleteEquivalencia = require('./delete.handlers.equivalencias.adapters');
-const updateEquivalencia = require('./update.handlers.equivalencias.adapters');
+const createEquivalencia = require('./create.handlers.solicitud-rev-equiv.adapters');
+const findOneEquivalencia = require('./find-one.handlers.solicitud-rev-equiv.adapters');
+const findAllEquivalencias = require('./find-all.handlers.solicitudes-rev-equiv.adapters');
+const deleteEquivalencia = require('./delete.handlers.solicitud-rev-equiv.adapters');
+const updateEquivalencia = require('./update.handlers.solicitud-rev-equiv.adapters');
 
 module.exports = {
   createEquivalencia,

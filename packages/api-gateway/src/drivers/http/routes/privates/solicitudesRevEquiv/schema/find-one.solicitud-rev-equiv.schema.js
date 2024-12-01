@@ -1,14 +1,14 @@
 const { responseProperties } = require('./properties/responseProperties');
-const { equivalencia } = require('./properties/equivalenciaProperties');
-const { domicilio } = require('../../../privates/solicitudes/representantes/schemas/properties/domicilio.properties');
-const { persona } = require('../../../privates/usuarios/schema/properties/persona');
-const { institucionProcedencia } = require('./properties/institucionProcedenciaProperties');
-const { institucionDestino } = require('./properties/institucionDestinoProperties');
-const { asignaturaAntecedente } = require('./properties/asignaturasAntecedentesProperties');
-const { asignaturaEquivalente } = require('./properties/asignaturasEquivalentesProperties');
+const { solicitudRevEquiv } = require('./properties/solicitudRevEquiv');
+const { domicilio } = require('../../usuarios/schema/properties/domicilio');
+const { persona } = require('../../usuarios/schema/properties/persona');
+const { institucionProcedencia } = require('./properties/institucionProcedencia');
+const { institucionDestino } = require('./properties/institucionDestino');
+const { asignaturaAntecedente } = require('./properties/asignaturaAntecedente');
+const { asignaturaEquivalente } = require('./properties/asignaturaEquivalente');
 
 const findOneEquivalenciaSchema = {
-  tags: ['equivalencia'],
+  tags: ['Solicitudes Rev Equiv'],
   description: 'Returns an Equivalencia by providing an equivalencia ID.',
   params: {
     title: 'findOneEquivalenciaSchema',
@@ -26,10 +26,7 @@ const findOneEquivalenciaSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...equivalencia,
-            interesadoId: { type: 'integer' },
-            folioSolicitud: { type: 'string' },
-            observaciones: { type: 'string', nullable: true },
+            ...solicitudRevEquiv,
             ...responseProperties,
             interesado: {
               type: 'object',

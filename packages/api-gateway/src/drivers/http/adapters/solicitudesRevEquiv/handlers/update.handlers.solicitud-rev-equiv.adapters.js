@@ -2,9 +2,12 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function updateEquivalencia(req, reply) {
   try {
-    const equiv = req.body;
-    const solicitudId = req.params.solicitudRevEquivId;
-    const updatedEquiv = await this.solicitudServices.updateEquivalencia(equiv, solicitudId);
+    const data = req.body;
+    const { solicitudRevEquivId } = req.params;
+
+    const updatedEquiv = await this.solicitudRevEquivServices
+      .updateEquivalencia(data, { id: solicitudRevEquivId });
+
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
