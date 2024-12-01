@@ -71,6 +71,7 @@ module.exports = {
   findOneEquivalenciaQuery: findOneQuery(SolicitudRevEquiv),
   findAllEquivalenciasQuery: findAllQuery(SolicitudRevEquiv),
   deleteEquivalenciaQuery: deleteQuery(SolicitudRevEquiv),
+  updateEquivalenciaQuery: updateAndFindQuery(SolicitudRevEquiv),
   findProgramasBySolicitudIdQuery: (solicitudId) => Programa.findOne({
     where: {
       solicitud_id: solicitudId,

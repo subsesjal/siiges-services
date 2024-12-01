@@ -19,6 +19,7 @@ const createEquivalencia = require('./create.equivalencias.use-cases');
 const findOneEquivalencia = require('./find-one.equivalencia.use-cases');
 const findAllEquivalencias = require('./find-all.equivalencias.use-cases');
 const deleteEquivalencia = require('./delete.equivalencia.use-cases');
+const updateEquivalencia = require('./update.equivalencia.use-cases');
 
 module.exports = {
   createNuevaSolicitudPrograma: createNuevaSolicitudPrograma(
@@ -113,5 +114,8 @@ module.exports = {
   ),
   deleteEquivalencia: deleteEquivalencia(
     solicitudes.deleteEquivalenciaQuery,
+  ),
+  updateEquivalencia: updateEquivalencia(
+    solicitudes.updateEquivalenciaQuery,
   ),
 };

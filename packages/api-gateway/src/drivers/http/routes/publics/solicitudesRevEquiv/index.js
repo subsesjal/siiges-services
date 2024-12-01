@@ -26,6 +26,13 @@ async function solicitudesRevEquivRouter(fastify, opts, next) {
     },
     solicitudesRevEquiv.findAllEquivalencias,
   );
+  fastify.patch(
+    '/:solicitudRevEquivId',
+    {
+      schema: solicitudesSchema.updateEquivalenciaSchema,
+    },
+    solicitudesRevEquiv.updateEquivalencia,
+  );
   await fastify.delete(
     '/:equivalenciaId',
     {
