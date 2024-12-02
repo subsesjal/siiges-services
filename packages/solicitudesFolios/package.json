@@ -1,7 +1,7 @@
 {
   "name": "@siiges-services/solicitudesfolios",
   "version": "1.0.0",
-  "description": "This package handle all about inspecicones enpoints",
+  "description": "This package handle all about folios enpoints",
   "author": "cetherdev <robert.hct@gmail.com>",
   "homepage": "https://github.com/robertotorres-dev/siiges-services#readme",
   "license": "MIT",

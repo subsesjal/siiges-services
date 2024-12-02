@@ -3,43 +3,15 @@ const { solicitudesRevEquiv } = require('../../../adapters');
 const { parseDataField } = require('./dataParser');
 
 async function solicitudesRevEquivRouter(fastify, opts, next) {
-  fastify.post(
+  await fastify.post(
     '/',
     {
-      schema: solicitudesSchema.createEquivalenciaSchema,
+      schema: solicitudesSchema.createSolicitudRevEquivSchema,
       preValidation: parseDataField,
     },
-    solicitudesRevEquiv.createEquivalencia,
+    solicitudesRevEquiv.createSolicitudRevEquiv,
   );
 
-  fastify.get(
-    '/:equivalenciaId',
-    {
-      schema: solicitudesSchema.findOneEquivalenciaSchema,
-    },
-    solicitudesRevEquiv.findOneEquivalencia,
-  );
-  fastify.get(
-    '/equivalencias',
-    {
-      schema: solicitudesSchema.findAllEquivalenciasSchema,
-    },
-    solicitudesRevEquiv.findAllEquivalencias,
-  );
-  fastify.patch(
-    '/:solicitudRevEquivId',
-    {
-      schema: solicitudesSchema.updateEquivalenciaSchema,
-    },
-    solicitudesRevEquiv.updateEquivalencia,
-  );
-  await fastify.delete(
-    '/:equivalenciaId',
-    {
-      schema: solicitudesSchema.deleteEquivalenciaSchema,
-    },
-    solicitudesRevEquiv.deleteEquivalencia,
-  );
   next();
 }
 

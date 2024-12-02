@@ -1,7 +1,7 @@
 {
-  "name": "@siiges-services/inspecciones",
+  "name": "@siiges-services/solicitudesrevequiv",
   "version": "1.0.0",
-  "description": "This package handle all about inspecciones enpoints",
+  "description": "This package handle all about revalidaciones/equivalencias enpoints",
   "author": "cetherdev <robert.hct@gmail.com>",
   "homepage": "https://github.com/robertotorres-dev/siiges-services#readme",
   "license": "MIT",
@@ -22,11 +22,7 @@
     "url": "git+https://github.com/robertotorres-dev/siiges-services.git"
   },
   "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "precommit": "yarn lint && yarn test"
+    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/robertotorres-dev/siiges-services/issues"

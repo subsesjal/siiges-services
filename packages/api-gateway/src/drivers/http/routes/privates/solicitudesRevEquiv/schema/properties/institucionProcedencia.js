@@ -1,7 +1,7 @@
 const institucionProcedencia = {
   tipoInstitucionId: { type: 'integer' },
-  nombre: { type: 'string' },
   estadoId: { type: 'integer' },
+  nombre: { type: 'string' },
   nombreCarrera: { type: 'string' },
 };
 

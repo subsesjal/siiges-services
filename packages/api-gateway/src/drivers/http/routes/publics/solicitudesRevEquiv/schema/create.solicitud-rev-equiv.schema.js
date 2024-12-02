@@ -1,7 +1,7 @@
-const { equivalencia } = require('./properties/equivalenciaProperties');
-const { responseProperties } = require('./properties/responseProperties');
 const { domicilio } = require('../../../privates/solicitudes/representantes/schemas/properties/domicilio.properties');
 const { persona } = require('../../../privates/usuarios/schema/properties/persona');
+const { solicitudRevEquiv } = require('../../../privates/solicitudesRevEquiv/schema/properties/solicitudRevEquiv');
+const { responseProperties } = require('../../../privates/solicitudesRevEquiv/schema/properties/responseProperties');
 
 const createEquivalenciaSchema = {
   type: 'object',
@@ -9,7 +9,7 @@ const createEquivalenciaSchema = {
   body: {
     type: 'object',
     properties: {
-      ...equivalencia,
+      ...solicitudRevEquiv,
     },
   },
   response: {
@@ -20,7 +20,7 @@ const createEquivalenciaSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...equivalencia,
+            ...solicitudRevEquiv,
             ...responseProperties,
             interesado: {
               type: 'object',

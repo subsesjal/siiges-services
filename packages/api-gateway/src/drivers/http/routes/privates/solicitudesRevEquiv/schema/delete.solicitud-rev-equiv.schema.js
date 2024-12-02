@@ -1,8 +1,8 @@
-const equivalenciaProperties = require('./properties/equivalenciaProperties');
+const { solicitudRevEquiv } = require('./properties/solicitudRevEquiv');
 const { responseProperties } = require('./properties/responseProperties');
 
-const deleteEquivalenciaSchema = {
-  tags: ['Equivalencia'],
+const deleteSolicitudRevEquivSchema = {
+  tags: ['Solicitudes Rev Equiv'],
   description: 'Given an equivalenciaId, delete the equivalencia record from the database.',
   params: {
     title: 'deleteEquivalenciaSchema',
@@ -20,7 +20,7 @@ const deleteEquivalenciaSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            ...equivalenciaProperties,
+            ...solicitudRevEquiv,
             ...responseProperties,
           },
         },
@@ -37,4 +37,4 @@ const deleteEquivalenciaSchema = {
   },
 };
 
-module.exports = deleteEquivalenciaSchema;
+module.exports = deleteSolicitudRevEquivSchema;
