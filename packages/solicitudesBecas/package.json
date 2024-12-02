@@ -1,0 +1,30 @@
+{
+  "name": "@siiges-services/solicitudesbecas",
+  "version": "1.0.0",
+  "description": "This package handle all about becas enpoints",
+  "author": "cetherdev <robert.hct@gmail.com>",
+  "homepage": "https://github.com/robertotorres-dev/siiges-services#readme",
+  "license": "MIT",
+  "main": "src/index.js",
+  "directories": {
+    "lib": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "src",
+    "__tests__"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robertotorres-dev/siiges-services.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/robertotorres-dev/siiges-services/issues"
+  }
+}

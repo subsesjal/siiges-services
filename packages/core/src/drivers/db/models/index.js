@@ -118,6 +118,9 @@ const { AsignaturaEquivalente, AsignaturaEquivalenteSchema } = require('./asigna
 const { FundamentoServicioSocial, FundamentoServicioSocialSchema } = require('./fundamentoServicioSocial');
 const { TipoModalidad, TipoModalidadSchema } = require('./tipoModalidad');
 const { ModalidadTitulacion, ModalidadTitulacionSchema } = require('./modalidadTitulacion');
+const { EstatusSolicitudBeca, EstatusSolicitudBecaSchema } = require('./estatusSolicitudBeca');
+const { SolicitudBeca, SolicitudBecaSchema } = require('./solicitudBeca');
+const { SolicitudBecaAlumno, SolicitudBecaAlumnoSchema } = require('./solicitudBecaAlumno');
 // Siiges 1.0
 const { Academia, AcademiaSchema } = require('./academias');
 const { AlumnoObservacion, AlumnoObservacionSchema } = require('./alumnoObservaciones');
@@ -308,6 +311,9 @@ function setupModels(sequelize) {
     .config(sequelize));
   TipoModalidad.init(TipoModalidadSchema, TipoModalidad.config(sequelize));
   ModalidadTitulacion.init(ModalidadTitulacionSchema, ModalidadTitulacion.config(sequelize));
+  EstatusSolicitudBeca.init(EstatusSolicitudBecaSchema, EstatusSolicitudBeca.config(sequelize));
+  SolicitudBeca.init(SolicitudBecaSchema, SolicitudBeca.config(sequelize));
+  SolicitudBecaAlumno.init(SolicitudBecaAlumnoSchema, SolicitudBecaAlumno.config(sequelize));
   // Siiges 1.0
   Academia.init(AcademiaSchema, Academia.config(sequelize));
   ProgramaEvaluacion.init(ProgramaEvaluacionSchema, ProgramaEvaluacion.config(sequelize));
@@ -478,6 +484,9 @@ function setupModels(sequelize) {
   FundamentoServicioSocial.associate(sequelize.models);
   TipoModalidad.associate(sequelize.models);
   ModalidadTitulacion.associate(sequelize.models);
+  EstatusSolicitudBeca.associate(sequelize.models);
+  SolicitudBeca.associate(sequelize.models);
+  SolicitudBecaAlumno.associate(sequelize.models);
   // Siiges 1.0
   Academia.associate(sequelize.models);
   AlumnoObservacion.associate(sequelize.models);

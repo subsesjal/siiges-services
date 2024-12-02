@@ -118,6 +118,9 @@ const { ASIGNATURA_EQUIVALENTE_TABLE, AsignaturaEquivalenteSchema } = require('.
 const { FUNDAMENTO_SERVICIO_SOCIAL_TABLE, FundamentoServicioSocialSchema } = require('../models/fundamentoServicioSocial');
 const { TIPO_MODALIDAD_TABLE, TipoModalidadSchema } = require('../models/tipoModalidad');
 const { MODALIDAD_TITULACION_TABLE, ModalidadTitulacionSchema } = require('../models/modalidadTitulacion');
+const { ESTATUS_SOLICITUD_BECA_TABLE, EstatusSolicitudBecaSchema } = require('../models/estatusSolicitudBeca');
+const { SOLICITUD_BECA_TABLE, SolicitudBecaSchema } = require('../models/solicitudBeca');
+const { SOLICITUD_BECA_ALUMNO_TABLE, SolicitudBecaAlumnoSchema } = require('../models/solicitudBecaAlumno');
 
 const { ACADEMIA_TABLE, AcademiaSchema } = require('../models/academias');
 const { ALUMNO_OBSERVACION_TABLE, AlumnoObservacionSchema } = require('../models/alumnoObservaciones');
@@ -293,6 +296,9 @@ module.exports = {
     await queryInterface.createTable(SOLICITUD_REV_EQUIV_TABLE, SolicitudRevEquivSchema);
     await queryInterface.createTable(ASIGNATURA_ANTECEDENTE_TABLE, AsignaturaAntecedenteSchema);
     await queryInterface.createTable(ASIGNATURA_EQUIVALENTE_TABLE, AsignaturaEquivalenteSchema);
+    await queryInterface.createTable(ESTATUS_SOLICITUD_BECA_TABLE, EstatusSolicitudBecaSchema);
+    await queryInterface.createTable(SOLICITUD_BECA_TABLE, SolicitudBecaSchema);
+    await queryInterface.createTable(SOLICITUD_BECA_ALUMNO_TABLE, SolicitudBecaAlumnoSchema);
 
     await queryInterface.createTable(ACADEMIA_TABLE, AcademiaSchema);
     await queryInterface.createTable(PROGRAMA_EVALUACION_TABLE, ProgramaEvaluacionSchema);
@@ -465,6 +471,9 @@ module.exports = {
     await queryInterface.dropTable(SOLICITUD_REV_EQUIV_TABLE);
     await queryInterface.dropTable(ASIGNATURA_ANTECEDENTE_TABLE);
     await queryInterface.dropTable(ASIGNATURA_EQUIVALENTE_TABLE);
+    await queryInterface.dropTable(ESTATUS_SOLICITUD_BECA_TABLE);
+    await queryInterface.dropTable(SOLICITUD_BECA_TABLE);
+    await queryInterface.dropTable(SOLICITUD_BECA_ALUMNO_TABLE);
 
     await queryInterface.dropTable(ACADEMIA_TABLE);
     await queryInterface.dropTable(PROGRAMA_EVALUACION_TABLE);
