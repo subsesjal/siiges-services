@@ -10,7 +10,7 @@ const AdministracionAcademicaServices = require('@siiges-services/administracion
 const OpdServices = require('@siiges-services/opd');
 const VigilanciaServices = require('@siiges-services/vigilancias');
 const SolicitudFolioServices = require('@siiges-services/solicitudesfolios');
-const SolicitudRevEquivServices = require('@siiges-services/solicitudesrevequiv');
+const SolicitudBecaServices = require('@siiges-services/solicitudesbecas');
 
 async function services(fastify) {
   await Promise.all([fastify.decorate('usuarioServices', UsuarioServices)]);
@@ -24,7 +24,7 @@ async function services(fastify) {
   await Promise.all([fastify.decorate('opdServices', OpdServices)]);
   await Promise.all([fastify.decorate('vigilanciaServices', VigilanciaServices)]);
   await Promise.all([fastify.decorate('solicitudFolioServices', SolicitudFolioServices)]);
-  await Promise.all([fastify.decorate('solicitudRevEquivServices', SolicitudRevEquivServices)]);
+  await Promise.all([fastify.decorate('solicitudBecaServices', SolicitudBecaServices)]);
 }
 
 module.exports = PluginLoader(services);

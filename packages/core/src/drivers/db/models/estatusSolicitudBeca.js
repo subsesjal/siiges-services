@@ -45,7 +45,7 @@ class EstatusSolicitudBeca extends Model {
     return {
       sequelize,
       tableName: ESTATUS_SOLICITUD_BECA_TABLE,
-      modelName: 'EstatusSolicitudBecas',
+      modelName: 'EstatusSolicitudBeca',
       timestamps: false,
     };
   }

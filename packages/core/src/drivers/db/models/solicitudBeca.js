@@ -32,6 +32,7 @@ const SolicitudBecaSchema = {
   fecha: {
     allowNull: false,
     type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
   },
   folioSolicitud: {
     allowNull: false,
