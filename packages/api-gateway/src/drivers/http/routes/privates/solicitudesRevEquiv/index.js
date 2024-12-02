@@ -5,37 +5,37 @@ async function solicitudesRevEquivRouter(fastify, opts, next) {
   await fastify.patch(
     '/:solicitudRevEquivId',
     {
-      schema: solicitudesSchema.updateEquivalenciaSchema,
+      schema: solicitudesSchema.updateSolicitudRevEquivSchema,
       onRequest: [fastify.authenticate],
     },
-    solicitudesRevEquiv.findOneEquivalencia,
+    solicitudesRevEquiv.updateSolicitudRevEquiv,
   );
 
   await fastify.get(
     '/',
     {
-      schema: solicitudesSchema.findAllEquivalenciasSchema,
+      schema: solicitudesSchema.findAllSolicitudesRevEquivSchema,
       onRequest: [fastify.authenticate],
     },
-    solicitudesRevEquiv.findAllEquivalencias,
+    solicitudesRevEquiv.findAllSolicitudesRevEquiv,
   );
 
   await fastify.get(
     '/:solicitudRevEquivId',
     {
-      schema: solicitudesSchema.findOneEquivalenciaSchema,
+      schema: solicitudesSchema.findOneSolicitudRevEquivSchema,
       onRequest: [fastify.authenticate],
     },
-    solicitudesRevEquiv.findOneEquivalencia,
+    solicitudesRevEquiv.findOneSolicitudRevEquiv,
   );
 
   await fastify.delete(
     '/:solicitudRevEquivId',
     {
-      schema: solicitudesSchema.deleteEquivalenciaSchema,
+      schema: solicitudesSchema.deleteSolicitudRevEquivSchema,
       onRequest: [fastify.authenticate],
     },
-    solicitudesRevEquiv.deleteEquivalencia,
+    solicitudesRevEquiv.deleteSolicitudRevEquiv,
   );
 
   next();

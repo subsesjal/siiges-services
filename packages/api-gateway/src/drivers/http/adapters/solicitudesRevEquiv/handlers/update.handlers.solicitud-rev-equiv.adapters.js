@@ -1,12 +1,12 @@
 const errorHandler = require('../../../utils/errorHandler');
 
-async function updateEquivalencia(req, reply) {
+async function updateSolicitudRevEquiv(req, reply) {
   try {
     const data = req.body;
     const { solicitudRevEquivId } = req.params;
 
     const updatedEquiv = await this.solicitudRevEquivServices
-      .updateEquivalencia(data, { id: solicitudRevEquivId });
+      .updateSolicitudRevEquiv(data, { id: solicitudRevEquivId });
 
     return reply
       .code(200)
@@ -17,4 +17,4 @@ async function updateEquivalencia(req, reply) {
   }
 }
 
-module.exports = updateEquivalencia;
+module.exports = updateSolicitudRevEquiv;

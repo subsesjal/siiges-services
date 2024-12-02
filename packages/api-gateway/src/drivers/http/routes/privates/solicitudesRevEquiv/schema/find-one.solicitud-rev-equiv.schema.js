@@ -1,22 +1,26 @@
-const { responseProperties } = require('./properties/responseProperties');
 const { solicitudRevEquiv } = require('./properties/solicitudRevEquiv');
-const { domicilio } = require('../../usuarios/schema/properties/domicilio');
+const { interesado } = require('./properties/interesado');
 const { persona } = require('../../usuarios/schema/properties/persona');
+const { domicilio } = require('../../usuarios/schema/properties/domicilio');
 const { institucionProcedencia } = require('./properties/institucionProcedencia');
 const { institucionDestino } = require('./properties/institucionDestino');
+const { programa } = require('../../solicitudes/schema/properties/programa');
+const { plantel } = require('../../instituciones/schema/properties/plantel');
+const { institucion } = require('../../instituciones/schema/properties/institucion');
 const { asignaturaAntecedente } = require('./properties/asignaturaAntecedente');
 const { asignaturaEquivalente } = require('./properties/asignaturaEquivalente');
+const { responseProperties } = require('./properties/responseProperties');
 
-const findOneEquivalenciaSchema = {
+const findOneSolicitudRevEquivSchema = {
   tags: ['Solicitudes Rev Equiv'],
   description: 'Returns an Equivalencia by providing an equivalencia ID.',
   params: {
     title: 'findOneEquivalenciaSchema',
     type: 'object',
     properties: {
-      equivalenciaId: { type: 'integer' },
+      solicitudRevEquivId: { type: 'integer' },
     },
-    required: ['equivalenciaId'],
+    required: ['solicitudRevEquivId'],
   },
   response: {
     200: {
@@ -32,9 +36,7 @@ const findOneEquivalenciaSchema = {
               type: 'object',
               properties: {
                 id: { type: 'integer' },
-                personaId: { type: 'integer' },
-                institucionProcedenciaId: { type: 'integer' },
-                institucionDestinoId: { type: 'integer' },
+                ...interesado,
                 ...responseProperties,
                 persona: {
                   type: 'object',
@@ -42,14 +44,14 @@ const findOneEquivalenciaSchema = {
                     id: { type: 'integer' },
                     ...persona,
                     ...responseProperties,
-                  },
-                },
-                domicilio: {
-                  type: 'object',
-                  properties: {
-                    id: { type: 'integer' },
-                    ...domicilio,
-                    ...responseProperties,
+                    domicilio: {
+                      type: 'object',
+                      properties: {
+                        id: { type: 'integer' },
+                        ...domicilio,
+                        ...responseProperties,
+                      },
+                    },
                   },
                 },
                 institucionProcedencia: {
@@ -66,6 +68,38 @@ const findOneEquivalenciaSchema = {
                     id: { type: 'integer' },
                     ...institucionDestino,
                     ...responseProperties,
+                    programa: {
+                      type: 'object',
+                      properties: {
+                        id: { type: 'integer' },
+                        ...programa,
+                        ...responseProperties,
+                        plantel: {
+                          type: 'object',
+                          properties: {
+                            id: { type: 'integer' },
+                            ...plantel,
+                            ...responseProperties,
+                            institucion: {
+                              type: 'object',
+                              properties: {
+                                id: { type: 'integer' },
+                                ...institucion,
+                                ...responseProperties,
+                              },
+                            },
+                            domicilio: {
+                              type: 'object',
+                              properties: {
+                                id: { type: 'integer' },
+                                ...domicilio,
+                                ...responseProperties,
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
                   },
                 },
                 asignaturasAntecedentes: {
@@ -99,4 +133,4 @@ const findOneEquivalenciaSchema = {
   },
 };
 
-module.exports = findOneEquivalenciaSchema;
+module.exports = findOneSolicitudRevEquivSchema;

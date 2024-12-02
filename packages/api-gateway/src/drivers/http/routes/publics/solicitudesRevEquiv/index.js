@@ -6,10 +6,10 @@ async function solicitudesRevEquivRouter(fastify, opts, next) {
   await fastify.post(
     '/',
     {
-      schema: solicitudesSchema.createEquivalenciaSchema,
+      schema: solicitudesSchema.createSolicitudRevEquivSchema,
       preValidation: parseDataField,
     },
-    solicitudesRevEquiv.createEquivalencia,
+    solicitudesRevEquiv.createSolicitudRevEquiv,
   );
 
   next();

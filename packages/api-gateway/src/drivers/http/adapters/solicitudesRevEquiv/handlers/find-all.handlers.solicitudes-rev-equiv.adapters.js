@@ -3,12 +3,13 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function findAllEquivalencias(req, reply) {
   try {
-    const { solicitudRevEquivId } = req.query;
-    Logger.info('[solicitudes]: Getting solicitudes list');
+    const reqQuery = req.query;
 
-    const solicitudesRevEquiv = await this.solicitudRevEquivServices.findAllEquivalencias({
-      solicitudRevEquivId,
-    });
+    Logger.info('[SolicitudRevEquiv]: Getting solicitudes list');
+
+    const solicitudesRevEquiv = await this.solicitudRevEquivServices
+      .findAllSolicitudesRevEquiv(reqQuery);
+
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
