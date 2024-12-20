@@ -10,7 +10,7 @@ const createGrupoSchema = {
     properties: {
       ...grupo,
     },
-    required: Object.keys(grupo),
+    required: ['cicloEscolarId', 'turnoId', 'gradoId', 'descripcion', 'generacion', 'generacionFechaInicio'],
   },
   response: {
     201: {
