@@ -113,8 +113,7 @@ const { InstitucionProcedencia, InstitucionProcedenciaSchema } = require('./inst
 const { Interesado, InteresadoSchema } = require('./interesado');
 const { EstatusSolicitudRevEquiv, EstatusSolicitudRevEquivSchema } = require('./estatusSolicitudRevEquiv');
 const { SolicitudRevEquiv, SolicitudRevEquivSchema } = require('./solicitudRevEquiv');
-const { AsignaturaAntecedente, AsignaturaAntecedenteSchema } = require('./asignaturaAntecedente');
-const { AsignaturaEquivalente, AsignaturaEquivalenteSchema } = require('./asignaturaEquivalente');
+const { AsignaturaAntecedenteEquivalente, AsignaturaAntecedenteEquivalenteSchema } = require('./asignaturaAntecedenteEquivalente');
 const { FundamentoServicioSocial, FundamentoServicioSocialSchema } = require('./fundamentoServicioSocial');
 const { TipoModalidad, TipoModalidadSchema } = require('./tipoModalidad');
 const { ModalidadTitulacion, ModalidadTitulacionSchema } = require('./modalidadTitulacion');
@@ -302,8 +301,9 @@ function setupModels(sequelize) {
   EstatusSolicitudRevEquiv.init(EstatusSolicitudRevEquivSchema, EstatusSolicitudRevEquiv
     .config(sequelize));
   SolicitudRevEquiv.init(SolicitudRevEquivSchema, SolicitudRevEquiv.config(sequelize));
-  AsignaturaAntecedente.init(AsignaturaAntecedenteSchema, AsignaturaAntecedente.config(sequelize));
-  AsignaturaEquivalente.init(AsignaturaEquivalenteSchema, AsignaturaEquivalente.config(sequelize));
+  AsignaturaAntecedenteEquivalente
+    .init(AsignaturaAntecedenteEquivalenteSchema, AsignaturaAntecedenteEquivalente
+      .config(sequelize));
   FundamentoServicioSocial.init(FundamentoServicioSocialSchema, FundamentoServicioSocial
     .config(sequelize));
   TipoModalidad.init(TipoModalidadSchema, TipoModalidad.config(sequelize));
@@ -473,8 +473,7 @@ function setupModels(sequelize) {
   Interesado.associate(sequelize.models);
   EstatusSolicitudRevEquiv.associate(sequelize.models);
   SolicitudRevEquiv.associate(sequelize.models);
-  AsignaturaAntecedente.associate(sequelize.models);
-  AsignaturaEquivalente.associate(sequelize.models);
+  AsignaturaAntecedenteEquivalente.associate(sequelize.models);
   FundamentoServicioSocial.associate(sequelize.models);
   TipoModalidad.associate(sequelize.models);
   ModalidadTitulacion.associate(sequelize.models);

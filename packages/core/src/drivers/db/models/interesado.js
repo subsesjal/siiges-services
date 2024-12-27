@@ -63,14 +63,10 @@ const InteresadoSchema = {
 class Interesado extends Model {
   static associate(models) {
     this.belongsTo(models.Persona, { as: 'persona' });
-    this.belongsTo(models.InstitucionProcedencia, { as: 'institucionProcedencia', foreignKey: 'institucionProcedenciaId' });
-    this.belongsTo(models.InstitucionDestino, { as: 'institucionDestino', foreignKey: 'institucionDestinoId' });
-    this.hasMany(models.AsignaturaAntecedente, {
-      as: 'asignaturasAntecedentes',
-      foreignKey: 'interesadoId',
-    });
-    this.hasMany(models.AsignaturaEquivalente, {
-      as: 'asignaturasEquivalentes',
+    this.belongsTo(models.InstitucionProcedencia, { as: 'institucionProcedencia' });
+    this.belongsTo(models.InstitucionDestino, { as: 'institucionDestino' });
+    this.hasMany(models.AsignaturaAntecedenteEquivalente, {
+      as: 'asignaturasAntecedenteEquivalente',
       foreignKey: 'interesadoId',
     });
   }

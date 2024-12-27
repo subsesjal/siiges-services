@@ -19,8 +19,7 @@ const findOneSolicitudRevEquiv = (findOneSolicitudRevEquivQuery) => async (ident
             }],
           }],
         },
-        { association: 'asignaturasAntecedentes' },
-        { association: 'asignaturasEquivalentes' },
+        { association: 'asignaturasAntecedenteEquivalente' },
       ],
     },
   ];

@@ -113,8 +113,7 @@ const { INSTITUCION_PROCEDENCIA_TABLE, InstitucionProcedenciaSchema } = require(
 const { INTERESADO_TABLE, InteresadoSchema } = require('../models/interesado');
 const { ESTATUS_SOLICITUD_REV_EQUIV_TABLE, EstatusSolicitudRevEquivSchema } = require('../models/estatusSolicitudRevEquiv');
 const { SOLICITUD_REV_EQUIV_TABLE, SolicitudRevEquivSchema } = require('../models/solicitudRevEquiv');
-const { ASIGNATURA_ANTECEDENTE_TABLE, AsignaturaAntecedenteSchema } = require('../models/asignaturaAntecedente');
-const { ASIGNATURA_EQUIVALENTE_TABLE, AsignaturaEquivalenteSchema } = require('../models/asignaturaEquivalente');
+const { ASIGNATURA_ANTECEDENTE_EQUIVALENTE_TABLE, AsignaturaAntecedenteEquivalenteSchema } = require('../models/asignaturaAntecedenteEquivalente');
 const { FUNDAMENTO_SERVICIO_SOCIAL_TABLE, FundamentoServicioSocialSchema } = require('../models/fundamentoServicioSocial');
 const { TIPO_MODALIDAD_TABLE, TipoModalidadSchema } = require('../models/tipoModalidad');
 const { MODALIDAD_TITULACION_TABLE, ModalidadTitulacionSchema } = require('../models/modalidadTitulacion');
@@ -291,8 +290,10 @@ module.exports = {
     await queryInterface
       .createTable(ESTATUS_SOLICITUD_REV_EQUIV_TABLE, EstatusSolicitudRevEquivSchema);
     await queryInterface.createTable(SOLICITUD_REV_EQUIV_TABLE, SolicitudRevEquivSchema);
-    await queryInterface.createTable(ASIGNATURA_ANTECEDENTE_TABLE, AsignaturaAntecedenteSchema);
-    await queryInterface.createTable(ASIGNATURA_EQUIVALENTE_TABLE, AsignaturaEquivalenteSchema);
+    await queryInterface.createTable(
+      ASIGNATURA_ANTECEDENTE_EQUIVALENTE_TABLE,
+      AsignaturaAntecedenteEquivalenteSchema,
+    );
 
     await queryInterface.createTable(ACADEMIA_TABLE, AcademiaSchema);
     await queryInterface.createTable(PROGRAMA_EVALUACION_TABLE, ProgramaEvaluacionSchema);
@@ -463,8 +464,7 @@ module.exports = {
     await queryInterface.dropTable(INTERESADO_TABLE);
     await queryInterface.dropTable(ESTATUS_SOLICITUD_REV_EQUIV_TABLE);
     await queryInterface.dropTable(SOLICITUD_REV_EQUIV_TABLE);
-    await queryInterface.dropTable(ASIGNATURA_ANTECEDENTE_TABLE);
-    await queryInterface.dropTable(ASIGNATURA_EQUIVALENTE_TABLE);
+    await queryInterface.dropTable(ASIGNATURA_ANTECEDENTE_EQUIVALENTE_TABLE);
 
     await queryInterface.dropTable(ACADEMIA_TABLE);
     await queryInterface.dropTable(PROGRAMA_EVALUACION_TABLE);

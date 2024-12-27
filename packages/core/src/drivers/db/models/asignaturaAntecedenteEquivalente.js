@@ -1,9 +1,10 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { INTERESADO_TABLE } = require('./interesado');
+const { ASIGNATURA_TABLE } = require('./asignatura');
 
-const ASIGNATURA_ANTECEDENTE_TABLE = 'asignaturas_antecedentes';
+const ASIGNATURA_ANTECEDENTE_EQUIVALENTE_TABLE = 'asignaturas_antecedentes_equivalentes';
 
-const AsignaturaAntecedenteSchema = {
+const AsignaturaAntecedenteEquivalenteSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -19,11 +20,28 @@ const AsignaturaAntecedenteSchema = {
       key: 'id',
     },
   },
-  nombre: {
+  asignaturaId: {
+    allowNull: true,
+    type: DataTypes.INTEGER,
+    field: 'asignatura_id',
+    references: {
+      model: ASIGNATURA_TABLE,
+      key: 'id',
+    },
+  },
+  nombreCalificacionEquivalente: {
+    allowNull: true,
+    type: DataTypes.STRING,
+  },
+  calificacionEquivalente: {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  calificacion: {
+  nombreCalificacionAntecedente: {
+    allowNull: false,
+    type: DataTypes.STRING,
+  },
+  calificacionAntecedente: {
     allowNull: false,
     type: DataTypes.STRING,
   },
@@ -45,7 +63,7 @@ const AsignaturaAntecedenteSchema = {
   },
 };
 
-class AsignaturaAntecedente extends Model {
+class AsignaturaAntecedenteEquivalente extends Model {
   static associate(models) {
     this.belongsTo(models.Interesado, { as: 'interesado' });
   }
@@ -53,15 +71,15 @@ class AsignaturaAntecedente extends Model {
   static config(sequelize) {
     return {
       sequelize,
-      tableName: ASIGNATURA_ANTECEDENTE_TABLE,
-      modelName: 'AsignaturaAntecedente',
+      tableName: ASIGNATURA_ANTECEDENTE_EQUIVALENTE_TABLE,
+      modelName: 'AsignaturaAntecedenteEquivalente',
       timestamps: false,
     };
   }
 }
 
 module.exports = {
-  ASIGNATURA_ANTECEDENTE_TABLE,
-  AsignaturaAntecedenteSchema,
-  AsignaturaAntecedente,
+  ASIGNATURA_ANTECEDENTE_EQUIVALENTE_TABLE,
+  AsignaturaAntecedenteEquivalenteSchema,
+  AsignaturaAntecedenteEquivalente,
 };

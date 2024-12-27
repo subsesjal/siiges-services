@@ -7,8 +7,6 @@ const { institucionDestino } = require('./properties/institucionDestino');
 const { programa } = require('../../solicitudes/schema/properties/programa');
 const { plantel } = require('../../instituciones/schema/properties/plantel');
 const { institucion } = require('../../instituciones/schema/properties/institucion');
-const { asignaturaAntecedente } = require('./properties/asignaturaAntecedente');
-const { asignaturaEquivalente } = require('./properties/asignaturaEquivalente');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findOneSolicitudRevEquivSchema = {
@@ -99,28 +97,6 @@ const findOneSolicitudRevEquivSchema = {
                           },
                         },
                       },
-                    },
-                  },
-                },
-                asignaturasAntecedentes: {
-                  type: 'array',
-                  items: {
-                    type: 'object',
-                    properties: {
-                      id: { type: 'integer' },
-                      ...asignaturaAntecedente,
-                      ...responseProperties,
-                    },
-                  },
-                },
-                asignaturasEquivalentes: {
-                  type: 'array',
-                  items: {
-                    type: 'object',
-                    properties: {
-                      id: { type: 'integer' },
-                      ...asignaturaEquivalente,
-                      ...responseProperties,
                     },
                   },
                 },
