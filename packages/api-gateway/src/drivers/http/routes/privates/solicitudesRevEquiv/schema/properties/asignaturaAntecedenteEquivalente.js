@@ -2,9 +2,9 @@
 const asignaturaAntecedenteEquivalente = {
   interesadoId: { type: 'integer' },
   asignaturaId: { type: 'integer' },
-  nombreCalificacionEquivalente: { type: 'string' },
+  nombreAsignaturaEquivalente: { type: 'string' },
   calificacionEquivalente: { type: 'string' },
-  nombreCalificacionAntecedente: { type: 'string' },
+  nombreAsignaturaAntecedente: { type: 'string' },
   calificacionAntecedente: { type: 'string' },
 };
 

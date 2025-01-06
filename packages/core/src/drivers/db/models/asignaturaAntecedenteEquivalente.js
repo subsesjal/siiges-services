@@ -29,7 +29,7 @@ const AsignaturaAntecedenteEquivalenteSchema = {
       key: 'id',
     },
   },
-  nombreCalificacionEquivalente: {
+  nombreAsignaturaEquivalente: {
     allowNull: true,
     type: DataTypes.STRING,
   },
@@ -37,7 +37,7 @@ const AsignaturaAntecedenteEquivalenteSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  nombreCalificacionAntecedente: {
+  nombreAsignaturaAntecedente: {
     allowNull: false,
     type: DataTypes.STRING,
   },

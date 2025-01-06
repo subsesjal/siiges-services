@@ -90,9 +90,9 @@ const createEquivalenciaSchema = {
               },
               required: [
                 'asignaturaId',
-                'nombreCalificacionEquivalente',
+                'nombreAsignaturaEquivalente',
                 'calificacionEquivalente',
-                'nombreCalificacionAntecedente',
+                'nombreAsignaturaAntecedente',
                 'calificacionAntecedente',
               ],
             },
