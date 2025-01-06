@@ -159,7 +159,7 @@ const createEquivalenciaSchema = {
                     ...responseProperties,
                   },
                 },
-                asignaturasAntecedentesEquivalentes: {
+                asignaturasAntecedenteEquivalente: {
                   type: 'array',
                   items: {
                     type: 'object',
