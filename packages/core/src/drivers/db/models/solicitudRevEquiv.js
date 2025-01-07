@@ -75,7 +75,7 @@ class SolicitudRevEquiv extends Model {
   static associate(models) {
     this.belongsTo(models.TipoTramite, { as: 'tipoTramite' });
     this.belongsTo(models.EstatusSolicitudRevEquiv, { as: 'estatusSolicitudRevEquiv' });
-    this.belongsTo(models.Interesado, { as: 'interesado', foreignKey: 'interesadoId' });
+    this.belongsTo(models.Interesado, { as: 'interesado' });
   }
 
   static config(sequelize) {

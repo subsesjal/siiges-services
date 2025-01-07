@@ -2,6 +2,10 @@ const { domicilio } = require('../../../privates/solicitudes/representantes/sche
 const { persona } = require('../../../privates/usuarios/schema/properties/persona');
 const { solicitudRevEquiv } = require('../../../privates/solicitudesRevEquiv/schema/properties/solicitudRevEquiv');
 const { responseProperties } = require('../../../privates/solicitudesRevEquiv/schema/properties/responseProperties');
+const { interesado } = require('../../../privates/solicitudesRevEquiv/schema/properties/interesado');
+const { institucionProcedencia } = require('../../../privates/solicitudesRevEquiv/schema/properties/institucionProcedencia');
+const { institucionDestino } = require('../../../privates/solicitudesRevEquiv/schema/properties/institucionDestino');
+const { asignaturaAntecedenteEquivalente } = require('../../../privates/solicitudesRevEquiv/schema/properties/asignaturaAntecedenteEquivalente');
 
 const createEquivalenciaSchema = {
   type: 'object',
@@ -10,7 +14,109 @@ const createEquivalenciaSchema = {
     type: 'object',
     properties: {
       ...solicitudRevEquiv,
+      interesado: {
+        type: 'object',
+        properties: {
+          ...interesado,
+          persona: {
+            type: 'object',
+            properties: {
+              ...persona,
+              domicilio: {
+                type: 'object',
+                properties: {
+                  ...domicilio,
+                },
+                required: [
+                  'municipioId',
+                  'estadoId',
+                  'calle',
+                  'numeroExterior',
+                  'colonia',
+                  'codigoPostal',
+                ],
+              },
+            },
+            required: [
+              'nombre',
+              'apellidoPaterno',
+              'sexo',
+              'nacionalidad',
+              'telefono',
+              'celular',
+              'curp',
+              'correoPrimario',
+              'domicilio',
+            ],
+          },
+          institucionProcedencia: {
+            type: 'object',
+            properties: {
+              ...institucionProcedencia,
+              ...responseProperties,
+            },
+            required: [
+              'tipoInstitucionId',
+              'estadoId',
+              'nombre',
+              'nombreCarrera',
+            ],
+          },
+          institucionDestino: {
+            type: 'object',
+            properties: {
+              ...institucionDestino,
+              ...responseProperties,
+            },
+            required: ['tipoInstitucionId', 'nombre'],
+            if: {
+              properties: { programaId: { type: 'integer' } },
+              required: ['programaId'],
+            },
+            then: {
+              required: ['tipoInstitucionId', 'nombre'],
+            },
+            else: {
+              required: ['tipoInstitucionId', 'nombreCarrera', 'acuerdoRvoe', 'nombre'],
+            },
+          },
+          asignaturasAntecedentesEquivalentes: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                ...asignaturaAntecedenteEquivalente,
+                ...responseProperties,
+              },
+              required: [
+                'asignaturaId',
+                'nombreAsignaturaEquivalente',
+                'calificacionEquivalente',
+                'nombreAsignaturaAntecedente',
+                'calificacionAntecedente',
+              ],
+            },
+            minItems: 1,
+          },
+        },
+        required: ['persona', 'institucionProcedencia', 'institucionDestino'],
+        if: {
+          properties: {
+            asignaturasAntecedentesEquivalentes: {
+              type: 'array',
+            },
+          },
+        },
+        then: {
+          required: ['asignaturasAntecedentesEquivalentes'],
+        },
+      },
     },
+    required: [
+      'tipoTramiteId',
+      'estatusSolicitudRevEquivId',
+      'interesado',
+    ],
   },
   response: {
     200: {
@@ -31,54 +137,37 @@ const createEquivalenciaSchema = {
                     ...persona,
                     ...responseProperties,
                     domicilio: {
-                      ...domicilio,
-                      ...responseProperties,
+                      type: 'object',
+                      properties: {
+                        ...domicilio,
+                        ...responseProperties,
+                      },
                     },
                   },
                 },
                 institucionProcedencia: {
                   type: 'object',
                   properties: {
-                    tipoInstitucionId: { type: 'integer' },
-                    nombre: { type: 'string' },
-                    estadoId: { type: 'string' },
-                    nombreCarrera: { type: 'string' },
+                    ...institucionProcedencia,
                     ...responseProperties,
                   },
                 },
                 institucionDestino: {
                   type: 'object',
                   properties: {
-                    tipoInstitucionId: { type: 'integer' },
-                    programaId: { type: 'integer' },
-                    nombre: { type: 'string' },
-                    acuerdoRvoe: { type: 'string' },
-                    nombreCarrera: { type: 'string' },
+                    ...institucionDestino,
                     ...responseProperties,
                   },
                 },
-              },
-            },
-            asignaturaAntecedente: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  nombre: { type: 'string' },
-                  calificacion: { type: 'string' },
-                  ...responseProperties,
-                },
-              },
-            },
-            asignaturaEquivalente: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  asignaturaId: { type: 'integer' },
-                  nombre: { type: 'string' },
-                  calificacion: { type: 'string' },
-                  ...responseProperties,
+                asignaturasAntecedenteEquivalente: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      ...asignaturaAntecedenteEquivalente,
+                      ...responseProperties,
+                    },
+                  },
                 },
               },
             },

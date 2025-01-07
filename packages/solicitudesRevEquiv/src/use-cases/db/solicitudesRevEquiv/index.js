@@ -8,14 +8,9 @@ const updateSolicitudRevEquiv = require('./update.solicitud-rev-equiv.use-cases'
 
 module.exports = {
   createSolicitudRevEquiv: createSolicitudRevEquiv(
-    solicitudesRevEquiv.createEquivalenciaQuery,
-    solicitudesRevEquiv.createAsignaturaAntecedenteQuery,
-    solicitudesRevEquiv.createAsignaturaEquivalenteQuery,
-    solicitudesRevEquiv.createInstitucionDestinoQuery,
-    solicitudesRevEquiv.createInstitucionProcedenciaQuery,
-    solicitudesRevEquiv.createDomicilioEquivalenteQuery,
-    solicitudesRevEquiv.createPersonaEquivalenteQuery,
-    solicitudesRevEquiv.createInteresadoQuery,
+    solicitudesRevEquiv.createSolicitudRevEquivQuery,
+    solicitudesRevEquiv.createAsignaturaAntecedenteEquivalente,
+    solicitudesRevEquiv.findOneSolicitudRevEquivQuery,
   ),
   findOneSolicitudRevEquiv: findOneSolicitudRevEquiv(
     solicitudesRevEquiv.findOneSolicitudRevEquivQuery,
