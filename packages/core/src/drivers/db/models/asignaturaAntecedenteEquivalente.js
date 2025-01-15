@@ -1,6 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { INTERESADO_TABLE } = require('./interesado');
-const { ASIGNATURA_TABLE } = require('./asignatura');
 
 const ASIGNATURA_ANTECEDENTE_EQUIVALENTE_TABLE = 'asignaturas_antecedentes_equivalentes';
 
@@ -17,15 +16,6 @@ const AsignaturaAntecedenteEquivalenteSchema = {
     field: 'interesado_id',
     references: {
       model: INTERESADO_TABLE,
-      key: 'id',
-    },
-  },
-  asignaturaId: {
-    allowNull: true,
-    type: DataTypes.INTEGER,
-    field: 'asignatura_id',
-    references: {
-      model: ASIGNATURA_TABLE,
       key: 'id',
     },
   },
@@ -66,6 +56,7 @@ const AsignaturaAntecedenteEquivalenteSchema = {
 class AsignaturaAntecedenteEquivalente extends Model {
   static associate(models) {
     this.belongsTo(models.Interesado, { as: 'interesado' });
+    this.hasOne(models.AsignaturaEquivalentePrograma, { as: 'asignaturaEquivalentePrograma', foreignKey: 'asignaturaAntecedenteEquivalenteId' });
   }
 
   static config(sequelize) {

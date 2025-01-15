@@ -1,6 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { TIPO_INSTITUCION_TABLE } = require('./tipoInstitucion');
-const { PROGRAMA_TABLE } = require('./programa');
 
 const INSTITUCION_DESTINO_TABLE = 'instituciones_destino';
 
@@ -17,15 +16,6 @@ const InstitucionDestinoSchema = {
     field: 'tipo_institucion_id',
     references: {
       model: TIPO_INSTITUCION_TABLE,
-      key: 'id',
-    },
-  },
-  programaId: {
-    allowNull: true,
-    type: DataTypes.INTEGER,
-    field: 'programa_id',
-    references: {
-      model: PROGRAMA_TABLE,
       key: 'id',
     },
   },
@@ -64,7 +54,7 @@ const InstitucionDestinoSchema = {
 class InstitucionDestino extends Model {
   static associate(models) {
     this.belongsTo(models.TipoInstitucion, { as: 'tipoInstitucion' });
-    this.belongsTo(models.Programa, { as: 'programa' });
+    this.hasOne(models.InstitucionDestinoPrograma, { as: 'institucionDestinoPrograma', foreignKey: 'institucionDestinoId' });
   }
 
   static config(sequelize) {
