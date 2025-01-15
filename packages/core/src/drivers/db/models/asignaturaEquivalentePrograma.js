@@ -64,7 +64,7 @@ class AsignaturaEquivalentePrograma extends Model {
 }
 
 module.exports = {
-  ASIGNATURA_ANTECEDENTE_EQUIVALENTE_TABLE,
+  ASIGNATURA_EQUIVALENTE_PROGRAMA_TABLE,
   AsignaturaEquivalenteProgramaSchema,
   AsignaturaEquivalentePrograma,
 };
