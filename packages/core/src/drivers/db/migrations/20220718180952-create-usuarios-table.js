@@ -109,11 +109,13 @@ const { LIBRO_TABLE, LibroSchema } = require('../models/libro');
 const { FOJA_TABLE, FojaSchema } = require('../models/foja');
 const { FOLIO_DOCUMENTO_ALUMNO_TABLE, FolioDocumentoAlumnoSchema } = require('../models/folioDocumentoAlumno');
 const { INSTITUCION_DESTINO_TABLE, InstitucionDestinoSchema } = require('../models/institucionDestino');
+const { INSTITUCION_DESTINO_PROGRAMA_TABLE, InstitucionDestinoProgramaSchema } = require('../models/institucionDestinoPrograma');
 const { INSTITUCION_PROCEDENCIA_TABLE, InstitucionProcedenciaSchema } = require('../models/institucionProcedencia');
 const { INTERESADO_TABLE, InteresadoSchema } = require('../models/interesado');
 const { ESTATUS_SOLICITUD_REV_EQUIV_TABLE, EstatusSolicitudRevEquivSchema } = require('../models/estatusSolicitudRevEquiv');
 const { SOLICITUD_REV_EQUIV_TABLE, SolicitudRevEquivSchema } = require('../models/solicitudRevEquiv');
 const { ASIGNATURA_ANTECEDENTE_EQUIVALENTE_TABLE, AsignaturaAntecedenteEquivalenteSchema } = require('../models/asignaturaAntecedenteEquivalente');
+const { ASIGNATURA_EQUIVALENTE_PROGRAMA_TABLE, AsignaturaEquivalenteProgramaSchema } = require('../models/asignaturaEquivalentePrograma');
 const { FUNDAMENTO_SERVICIO_SOCIAL_TABLE, FundamentoServicioSocialSchema } = require('../models/fundamentoServicioSocial');
 const { TIPO_MODALIDAD_TABLE, TipoModalidadSchema } = require('../models/tipoModalidad');
 const { MODALIDAD_TITULACION_TABLE, ModalidadTitulacionSchema } = require('../models/modalidadTitulacion');
@@ -285,6 +287,8 @@ module.exports = {
     await queryInterface.createTable(FOJA_TABLE, FojaSchema);
     await queryInterface.createTable(FOLIO_DOCUMENTO_ALUMNO_TABLE, FolioDocumentoAlumnoSchema);
     await queryInterface.createTable(INSTITUCION_DESTINO_TABLE, InstitucionDestinoSchema);
+    await queryInterface
+      .createTable(INSTITUCION_DESTINO_PROGRAMA_TABLE, InstitucionDestinoProgramaSchema);
     await queryInterface.createTable(INSTITUCION_PROCEDENCIA_TABLE, InstitucionProcedenciaSchema);
     await queryInterface.createTable(INTERESADO_TABLE, InteresadoSchema);
     await queryInterface
@@ -293,6 +297,10 @@ module.exports = {
     await queryInterface.createTable(
       ASIGNATURA_ANTECEDENTE_EQUIVALENTE_TABLE,
       AsignaturaAntecedenteEquivalenteSchema,
+    );
+    await queryInterface.createTable(
+      ASIGNATURA_EQUIVALENTE_PROGRAMA_TABLE,
+      AsignaturaEquivalenteProgramaSchema,
     );
 
     await queryInterface.createTable(ACADEMIA_TABLE, AcademiaSchema);
@@ -460,11 +468,13 @@ module.exports = {
     await queryInterface.dropTable(FOJA_TABLE);
     await queryInterface.dropTable(FOLIO_DOCUMENTO_ALUMNO_TABLE);
     await queryInterface.dropTable(INSTITUCION_DESTINO_TABLE);
+    await queryInterface.dropTable(INSTITUCION_DESTINO_PROGRAMA_TABLE);
     await queryInterface.dropTable(INSTITUCION_PROCEDENCIA_TABLE);
     await queryInterface.dropTable(INTERESADO_TABLE);
     await queryInterface.dropTable(ESTATUS_SOLICITUD_REV_EQUIV_TABLE);
     await queryInterface.dropTable(SOLICITUD_REV_EQUIV_TABLE);
     await queryInterface.dropTable(ASIGNATURA_ANTECEDENTE_EQUIVALENTE_TABLE);
+    await queryInterface.dropTable(ASIGNATURA_EQUIVALENTE_PROGRAMA_TABLE);
 
     await queryInterface.dropTable(ACADEMIA_TABLE);
     await queryInterface.dropTable(PROGRAMA_EVALUACION_TABLE);
