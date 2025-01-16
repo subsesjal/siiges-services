@@ -6,6 +6,7 @@ const { interesado } = require('../../../privates/solicitudesRevEquiv/schema/pro
 const { institucionProcedencia } = require('../../../privates/solicitudesRevEquiv/schema/properties/institucionProcedencia');
 const { institucionDestino } = require('../../../privates/solicitudesRevEquiv/schema/properties/institucionDestino');
 const { asignaturaAntecedenteEquivalente } = require('../../../privates/solicitudesRevEquiv/schema/properties/asignaturaAntecedenteEquivalente');
+const { institucionDestinoPrograma } = require('../../../privates/solicitudesRevEquiv/schema/properties/institucionDestinoPrograma');
 
 const createEquivalenciaSchema = {
   type: 'object',
@@ -68,7 +69,6 @@ const createEquivalenciaSchema = {
               ...institucionDestino,
               ...responseProperties,
             },
-            required: ['tipoInstitucionId', 'nombre'],
             if: {
               properties: { programaId: { type: 'integer' } },
               required: ['programaId'],
@@ -89,7 +89,6 @@ const createEquivalenciaSchema = {
                 ...responseProperties,
               },
               required: [
-                'asignaturaId',
                 'nombreAsignaturaEquivalente',
                 'calificacionEquivalente',
                 'nombreAsignaturaAntecedente',
@@ -157,6 +156,13 @@ const createEquivalenciaSchema = {
                   properties: {
                     ...institucionDestino,
                     ...responseProperties,
+                    institucionDestinoPrograma: {
+                      type: ['object', 'null'],
+                      properties: {
+                        ...institucionDestinoPrograma,
+                        ...responseProperties,
+                      },
+                    },
                   },
                 },
                 asignaturasAntecedenteEquivalente: {

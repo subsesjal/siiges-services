@@ -2,6 +2,8 @@ const createEquivalencia = (
   createSolicitudRevEquivQuery,
   createAsignaturaAntEquivQuery,
   findOneSolicitudRevEquivQuery,
+  createAsignaturaEquivProgrQuery,
+  createInstitucionDestinoProgramaQuery,
 ) => async ({ data }) => {
   const createInclude = [
     {
@@ -17,12 +19,30 @@ const createEquivalencia = (
   let newSolicitudRevEquiv = await createSolicitudRevEquivQuery(data, createInclude);
   newSolicitudRevEquiv = newSolicitudRevEquiv.toJSON();
 
+  if (data.interesado.institucionDestino.programaId) {
+    createInstitucionDestinoProgramaQuery({
+      institucionDestinoId: newSolicitudRevEquiv.interesado.institucionDestino.id,
+      programaId: data.interesado.institucionDestino.programaId,
+    });
+  }
+
   // Create promises for asignaturasAntecedentesEquivalentes
   const asignaturasPromises = data.interesado.asignaturasAntecedentesEquivalentes
-    .map((asignatura) => createAsignaturaAntEquivQuery({
-      interesadoId: newSolicitudRevEquiv.interesadoId,
-      ...asignatura,
-    }));
+    .map(async (asignatura) => {
+      const asignaturaAntEquiv = await createAsignaturaAntEquivQuery({
+        interesadoId: newSolicitudRevEquiv.interesadoId,
+        ...asignatura,
+      });
+
+      // Skip if asignaturaId is not present
+      if (!asignatura.asignaturaId) return asignaturaAntEquiv;
+
+      // Create the promise for createAsignaturaEquivProgrQuery
+      return createAsignaturaEquivProgrQuery({
+        asignaturaAntecedenteEquivalenteId: asignaturaAntEquiv.id,
+        asignaturaId: asignatura.asignaturaId,
+      });
+    });
 
   // Await all promises
   await Promise.all(asignaturasPromises);
@@ -36,16 +56,24 @@ const createEquivalencia = (
         {
           association: 'institucionDestino',
           include: [{
-            association: 'programa',
+            association: 'institucionDestinoPrograma',
             include: [{
-              association: 'plantel',
+              association: 'programa',
               include: [{
-                association: 'institucion',
+                association: 'plantel',
+                include: [{
+                  association: 'institucion',
+                }],
               }],
             }],
           }],
         },
-        { association: 'asignaturasAntecedenteEquivalente' },
+        {
+          association: 'asignaturasAntecedenteEquivalente',
+          include: [
+            { association: 'asignaturaEquivalentePrograma' },
+          ],
+        },
       ],
     },
   ];
