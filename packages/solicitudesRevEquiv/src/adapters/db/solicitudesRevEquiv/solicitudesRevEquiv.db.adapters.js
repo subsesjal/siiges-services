@@ -4,6 +4,8 @@ const { models, queries } = require('@siiges-services/core');
 const {
   SolicitudRevEquiv,
   AsignaturaAntecedenteEquivalente,
+  AsignaturaEquivalentePrograma,
+  InstitucionDestinoPrograma,
 } = models;
 
 const {
@@ -18,6 +20,8 @@ module.exports = {
   // Create
   createSolicitudRevEquivQuery: createQuery(SolicitudRevEquiv),
   createAsignaturaAntecedenteEquivalente: createQuery(AsignaturaAntecedenteEquivalente),
+  createAsignaturaEquivalenteProgramaQuery: createQuery(AsignaturaEquivalentePrograma),
+  createInstitucionDestinoProgramaQuery: createQuery(InstitucionDestinoPrograma),
   findOneSolicitudRevEquivQuery: findOneQuery(SolicitudRevEquiv),
   findAllSolicitudesRevEquivQuery: findAllQuery(SolicitudRevEquiv),
   deleteSolicitudRevEquivQuery: deleteQuery(SolicitudRevEquiv),

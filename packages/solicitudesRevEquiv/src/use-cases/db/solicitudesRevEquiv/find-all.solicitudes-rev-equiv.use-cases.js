@@ -6,28 +6,33 @@ const findAllSolicitudesRevEquiv = (
     Object.entries(query).filter(([_, value]) => value !== undefined),
   );
 
-  const include = [
-    {
-      association: 'interesado',
-      include: [
-        { association: 'persona', include: [{ association: 'domicilio' }] },
-        { association: 'institucionProcedencia' },
-        {
-          association: 'institucionDestino',
+  const include = [{
+    association: 'interesado',
+    include: [
+      { association: 'persona', include: [{ association: 'domicilio' }] },
+      { association: 'institucionProcedencia' },
+      {
+        association: 'institucionDestino',
+        include: [{
+          association: 'institucionDestinoPrograma',
           include: [{
             association: 'programa',
             include: [{
               association: 'plantel',
-              include: [{
-                association: 'institucion',
-              }],
+              include: [{ association: 'institucion' }],
             }],
           }],
-        },
-        { association: 'asignaturasAntecedenteEquivalente' },
-      ],
-    },
-  ];
+        }],
+      },
+      {
+        association: 'asignaturasAntecedenteEquivalente',
+        include: [{
+          association: 'asignaturaEquivalentePrograma',
+          include: [{ association: 'asignatura' }],
+        }],
+      },
+    ],
+  }];
 
   return findAllSolicitudesRevEquivQuery(
     filteredQuery,

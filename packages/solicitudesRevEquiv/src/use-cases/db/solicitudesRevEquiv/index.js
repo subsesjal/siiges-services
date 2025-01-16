@@ -11,6 +11,8 @@ module.exports = {
     solicitudesRevEquiv.createSolicitudRevEquivQuery,
     solicitudesRevEquiv.createAsignaturaAntecedenteEquivalente,
     solicitudesRevEquiv.findOneSolicitudRevEquivQuery,
+    solicitudesRevEquiv.createAsignaturaEquivalenteProgramaQuery,
+    solicitudesRevEquiv.createInstitucionDestinoProgramaQuery,
   ),
   findOneSolicitudRevEquiv: findOneSolicitudRevEquiv(
     solicitudesRevEquiv.findOneSolicitudRevEquivQuery,
