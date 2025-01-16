@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { ASIGNATURA_ANTECEDENTE_EQUIVALENTE_TABLE } = require('./asignaturaAntecedenteEquivalente');
 const { ASIGNATURA_TABLE } = require('./asignatura');
 
-const ASIGNATURA_EQUIVALENTE_PROGRAMA_TABLE = 'asignaturas_equivalentes_programa';
+const ASIGNATURA_EQUIVALENTE_PROGRAMA_TABLE = 'asignaturas_equivalentes_programas';
 
 const AsignaturaEquivalenteProgramaSchema = {
   id: {

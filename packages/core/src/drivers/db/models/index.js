@@ -109,11 +109,13 @@ const { Libro, LibroSchema } = require('./libro');
 const { Foja, FojaSchema } = require('./foja');
 const { FolioDocumentoAlumno, FolioDocumentoAlumnoSchema } = require('./folioDocumentoAlumno');
 const { InstitucionDestino, InstitucionDestinoSchema } = require('./institucionDestino');
+const { InstitucionDestinoPrograma, InstitucionDestinoProgramaSchema } = require('./institucionDestinoPrograma');
 const { InstitucionProcedencia, InstitucionProcedenciaSchema } = require('./institucionProcedencia');
 const { Interesado, InteresadoSchema } = require('./interesado');
 const { EstatusSolicitudRevEquiv, EstatusSolicitudRevEquivSchema } = require('./estatusSolicitudRevEquiv');
 const { SolicitudRevEquiv, SolicitudRevEquivSchema } = require('./solicitudRevEquiv');
 const { AsignaturaAntecedenteEquivalente, AsignaturaAntecedenteEquivalenteSchema } = require('./asignaturaAntecedenteEquivalente');
+const { AsignaturaEquivalentePrograma, AsignaturaEquivalenteProgramaSchema } = require('./asignaturaEquivalentePrograma');
 const { FundamentoServicioSocial, FundamentoServicioSocialSchema } = require('./fundamentoServicioSocial');
 const { TipoModalidad, TipoModalidadSchema } = require('./tipoModalidad');
 const { ModalidadTitulacion, ModalidadTitulacionSchema } = require('./modalidadTitulacion');
@@ -295,6 +297,8 @@ function setupModels(sequelize) {
   Foja.init(FojaSchema, Foja.config(sequelize));
   FolioDocumentoAlumno.init(FolioDocumentoAlumnoSchema, FolioDocumentoAlumno.config(sequelize));
   InstitucionDestino.init(InstitucionDestinoSchema, InstitucionDestino.config(sequelize));
+  InstitucionDestinoPrograma.init(InstitucionDestinoProgramaSchema, InstitucionDestinoPrograma
+    .config(sequelize));
   InstitucionProcedencia.init(InstitucionProcedenciaSchema, InstitucionProcedencia
     .config(sequelize));
   Interesado.init(InteresadoSchema, Interesado.config(sequelize));
@@ -303,6 +307,9 @@ function setupModels(sequelize) {
   SolicitudRevEquiv.init(SolicitudRevEquivSchema, SolicitudRevEquiv.config(sequelize));
   AsignaturaAntecedenteEquivalente
     .init(AsignaturaAntecedenteEquivalenteSchema, AsignaturaAntecedenteEquivalente
+      .config(sequelize));
+  AsignaturaEquivalentePrograma
+    .init(AsignaturaEquivalenteProgramaSchema, AsignaturaEquivalentePrograma
       .config(sequelize));
   FundamentoServicioSocial.init(FundamentoServicioSocialSchema, FundamentoServicioSocial
     .config(sequelize));
@@ -469,11 +476,13 @@ function setupModels(sequelize) {
   Foja.associate(sequelize.models);
   FolioDocumentoAlumno.associate(sequelize.models);
   InstitucionDestino.associate(sequelize.models);
+  InstitucionDestinoPrograma.associate(sequelize.models);
   InstitucionProcedencia.associate(sequelize.models);
   Interesado.associate(sequelize.models);
   EstatusSolicitudRevEquiv.associate(sequelize.models);
   SolicitudRevEquiv.associate(sequelize.models);
   AsignaturaAntecedenteEquivalente.associate(sequelize.models);
+  AsignaturaEquivalentePrograma.associate(sequelize.models);
   FundamentoServicioSocial.associate(sequelize.models);
   TipoModalidad.associate(sequelize.models);
   ModalidadTitulacion.associate(sequelize.models);
