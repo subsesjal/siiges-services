@@ -3,11 +3,11 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function createAsignaturaAntecedenteEquivalente(req, reply) {
   try {
-    const { ...data } = req.body;
+    const data = req.body;
 
     Logger.info('[solicitudes]: Creating solicitud de antecedentes de asignaturas');
 
-    const asignaturaAntecedenteEquivalente = await this.solicitudAntecedenteServices
+    const asignaturaAntecedenteEquivalente = await this.solicitudRevEquivServices
       .createAsignaturaAntecedenteEquivalente(data);
 
     return reply

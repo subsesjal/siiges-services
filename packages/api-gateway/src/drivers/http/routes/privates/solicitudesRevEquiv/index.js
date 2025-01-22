@@ -39,7 +39,7 @@ async function solicitudesRevEquivRouter(fastify, opts, next) {
   );
 
   await fastify.post(
-    '/solicitudesRevEquiv/asignaturaAntecedenteEquivalente',
+    '/asignaturaAntecedenteEquivalente',
     {
       schema: solicitudesSchema.createAsignaturaAntecedenteEquivalenteSchema,
       onRequest: [fastify.authenticate],
