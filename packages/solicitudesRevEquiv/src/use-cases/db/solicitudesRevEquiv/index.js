@@ -31,5 +31,6 @@ module.exports = {
   createAsignaturaAntecedenteEquivalente: createAsignaturaAntecedenteEquivalente(
     solicitudesRevEquiv.createAsignaturaAntecedenteEquivalente,
     solicitudesRevEquiv.createAsignaturaEquivalenteProgramaQuery,
+    solicitudesRevEquiv.findOneAsignaturaQuery,
   ),
 };
