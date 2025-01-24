@@ -6,6 +6,7 @@ const {
   AsignaturaAntecedenteEquivalente,
   AsignaturaEquivalentePrograma,
   InstitucionDestinoPrograma,
+  Asignatura,
 } = models;
 
 const {
@@ -26,4 +27,5 @@ module.exports = {
   findAllSolicitudesRevEquivQuery: findAllQuery(SolicitudRevEquiv),
   deleteSolicitudRevEquivQuery: deleteQuery(SolicitudRevEquiv),
   updateSolicitudRevEquivQuery: updateAndFindQuery(SolicitudRevEquiv),
+  findOneAsignaturaQuery: findOneQuery(Asignatura),
 };
