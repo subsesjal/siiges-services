@@ -5,7 +5,7 @@ const { responseProperties } = require('./properties/responseProperties');
 
 const createAsignaturaAntecedenteEquivalenteSquema = {
   tags: ['Solicitudes Antecedente Asignaturas'],
-  description: 'This endpoint allows the creation of a new record for an equivalent antecedent subject in the system.',
+  description: 'Crear una Asignatura para el antecddente academico, on asignatura id o sin asignatura id',
   body: {
     type: 'object',
     properties: {
