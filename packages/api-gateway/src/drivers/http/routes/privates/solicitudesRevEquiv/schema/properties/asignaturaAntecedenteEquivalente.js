@@ -1,4 +1,3 @@
-// Asignatura Antecedente Equivalente
 const asignaturaAntecedenteEquivalente = {
   interesadoId: { type: 'integer' },
   asignaturaId: { type: 'integer' },
