@@ -6,6 +6,7 @@ const findAllSolicitudesRevEquiv = require('./find-all.solicitudes-rev-equiv.use
 const deleteSolicitudRevEquiv = require('./delete.solicitud-rev-equiv.use-cases');
 const updateSolicitudRevEquiv = require('./update.solicitud-rev-equiv.use-cases');
 const createAsignaturaAntecedenteEquivalente = require('./create.asignatura-antecedente-equivalente.use-cases');
+const findOneAsignaturaAntecedenteEquivalente = require('./find-one.asignatura-antecedente-equivalente.use-cases');
 
 module.exports = {
   createSolicitudRevEquiv: createSolicitudRevEquiv(
@@ -29,8 +30,11 @@ module.exports = {
     solicitudesRevEquiv.updateSolicitudRevEquivQuery,
   ),
   createAsignaturaAntecedenteEquivalente: createAsignaturaAntecedenteEquivalente(
-    solicitudesRevEquiv.createAsignaturaAntecedenteEquivalente,
+    solicitudesRevEquiv.createAsignaturaAntecedenteEquivalenteQuery,
     solicitudesRevEquiv.createAsignaturaEquivalenteProgramaQuery,
     solicitudesRevEquiv.findOneAsignaturaQuery,
+  ),
+  findOneAsignaturaAntecedenteEquivalente: findOneAsignaturaAntecedenteEquivalente(
+    solicitudesRevEquiv.findOneAsignaturaAntecedenteEquivalenteQuery,
   ),
 };

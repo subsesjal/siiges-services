@@ -20,7 +20,7 @@ const {
 module.exports = {
   // Create
   createSolicitudRevEquivQuery: createQuery(SolicitudRevEquiv),
-  createAsignaturaAntecedenteEquivalente: createQuery(AsignaturaAntecedenteEquivalente),
+  createAsignaturaAntecedenteEquivalenteQuery: createQuery(AsignaturaAntecedenteEquivalente),
   createAsignaturaEquivalenteProgramaQuery: createQuery(AsignaturaEquivalentePrograma),
   createInstitucionDestinoProgramaQuery: createQuery(InstitucionDestinoPrograma),
   findOneSolicitudRevEquivQuery: findOneQuery(SolicitudRevEquiv),
@@ -28,4 +28,5 @@ module.exports = {
   deleteSolicitudRevEquivQuery: deleteQuery(SolicitudRevEquiv),
   updateSolicitudRevEquivQuery: updateAndFindQuery(SolicitudRevEquiv),
   findOneAsignaturaQuery: findOneQuery(Asignatura),
+  findOneAsignaturaAntecedenteEquivalenteQuery: findOneQuery(AsignaturaAntecedenteEquivalente),
 };
