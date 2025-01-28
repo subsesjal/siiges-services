@@ -5,7 +5,7 @@ async function createAsignaturaAntecedenteEquivalente(req, reply) {
   try {
     const data = req.body;
 
-    Logger.info('[solicitudes]: Creating solicitud de antecedentes de asignaturas');
+    Logger.info('[solicitudes-rev-equiv]: Create asignatura antecedente equivalente');
 
     const asignaturaAntecedenteEquivalente = await this.solicitudRevEquivServices
       .createAsignaturaAntecedenteEquivalente(data);
