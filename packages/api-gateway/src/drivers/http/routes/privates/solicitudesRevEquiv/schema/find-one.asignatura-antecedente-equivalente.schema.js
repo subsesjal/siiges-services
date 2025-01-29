@@ -5,12 +5,12 @@ const { responseProperties } = require('./properties/responseProperties');
 
 const findOneAsignaturaAntecedenteEquivalenteSchema = {
   tags: ['Solicitudes Rev Equiv'],
-  description: 'Returns an Equivalencia by providing an equivalencia ID.',
+  description: 'Returns an Asignatura Antecedente Equivalente by providing its ID.',
   params: {
     title: 'findOneEquivalenciaSchema',
     type: 'object',
     properties: {
-      solicitudRevEquivId: { type: 'integer' },
+      asignaturaAntecedenteEquivalenteId: { type: 'integer' },
     },
     required: ['asignaturaAntecedenteEquivalenteId'],
   },

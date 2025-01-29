@@ -30,7 +30,7 @@ module.exports = {
     solicitudesRevEquiv.updateSolicitudRevEquivQuery,
   ),
   createAsignaturaAntecedenteEquivalente: createAsignaturaAntecedenteEquivalente(
-    solicitudesRevEquiv.createAsignaturaAntecedenteEquivalenteQuery,
+    solicitudesRevEquiv.createAsignaturaAntecedenteEquivalente,
     solicitudesRevEquiv.createAsignaturaEquivalenteProgramaQuery,
     solicitudesRevEquiv.findOneAsignaturaQuery,
   ),

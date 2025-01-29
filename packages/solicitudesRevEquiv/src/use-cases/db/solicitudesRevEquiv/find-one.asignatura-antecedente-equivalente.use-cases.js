@@ -25,9 +25,7 @@ const findOneAsignaturaAntecedenteEquivalente = (
     identifierObj.id,
   );
 
-  const { id, ...respuestaSinId } = asignaturaAntecedenteEquivalente.dataValues;
-
-  return respuestaSinId;
+  return asignaturaAntecedenteEquivalente;
 };
 
 module.exports = findOneAsignaturaAntecedenteEquivalente;
