@@ -28,4 +28,5 @@ module.exports = {
   deleteSolicitudRevEquivQuery: deleteQuery(SolicitudRevEquiv),
   updateSolicitudRevEquivQuery: updateAndFindQuery(SolicitudRevEquiv),
   findOneAsignaturaQuery: findOneQuery(Asignatura),
+  findOneAsignaturaAntecedenteEquivalenteQuery: findOneQuery(AsignaturaAntecedenteEquivalente),
 };
