@@ -1,0 +1,6 @@
+id,nombre,descripcion,created_at
+1,VIGENTE,Alumno vigente,2025-08-08 0:00:00
+2,BAJA DEFINITIVA,Alumno con baja definitiva,2025-08-08 0:00:00
+3,BAJA TEMPORAL (PERMISO),Alumno con baja temporal,2025-08-08 0:00:00
+4,PERDIÓ BECA,Alumno con beca perdida, 2025-08-08 0:00:00
+5,CONCLUYÓ BECA (POR TIEMPO DE ESTUDIOS),Alumno con beca Concluida, 2025-08-08 0:00:00

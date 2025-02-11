@@ -1,0 +1,6 @@
+id,nombre,descripcion,created_at
+1,EN CAPTURA,En captura,2025-08-08 0:00:00
+2,EN REVISIÓN,En Revisión,2025-08-08 0:00:00
+3,LISTA PARA ENTREGA,En entrega,2025-08-08 0:00:00
+4,ATENDER OBSERVACIONES,Atender Observaciones,2025-08-08 0:00:00
+5,CANCELADA,Cancelada,2025-08-08 0:00:00

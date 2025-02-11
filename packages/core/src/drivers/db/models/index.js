@@ -157,8 +157,21 @@ const { Testigo, TestigoSchema } = require('./testigos');
 const { TituloElectronico, TituloElectronicoSchema } = require('./titulosElectronicos');
 // Siiges 1.0 Fin
 
+const { SolicitudesBecas, SolicitudesBecasSchema} = require('./solicitudesBecas')
+const { SolicitudesBecasAlumnos, SolicitudBecaAlumnoSchema} = require('./solicitudesBecasAlumnos')
+const { TipoSolicitudesBecas, TipoSolicitudesBecasSchema} = require('./tipoSolicitudesBecas')
+const { EstatusAlumnosBecas, EstatusAlumnoBecaSchema} = require('./estatusAlumnosBecas')
+const { EstatusSolicitudesBecas,  EstatusSolicitudBecaSchema} = require('./estatusSolicitudesBecas')
+
 function setupModels(sequelize) {
   // Initialize models
+  SolicitudesBecas.init( SolicitudesBecasSchema, SolicitudesBecas.config(sequelize));
+  SolicitudesBecasAlumnos.init(SolicitudBecaAlumnoSchema, SolicitudesBecasAlumnos.config(sequelize));
+  TipoSolicitudesBecas.init( TipoSolicitudesBecasSchema,TipoSolicitudesBecas.config(sequelize));
+  EstatusAlumnosBecas.init( EstatusAlumnoBecaSchema,EstatusAlumnosBecas.config(sequelize));
+  EstatusSolicitudesBecas.init( EstatusSolicitudBecaSchema,EstatusSolicitudesBecas.config(sequelize));
+
+
   Ciclo.init(CicloSchema, Ciclo.config(sequelize));
   Domicilio.init(DomicilioSchema, Domicilio.config(sequelize));
   Diligencia.init(DiligenciaSchema, Diligencia.config(sequelize));
