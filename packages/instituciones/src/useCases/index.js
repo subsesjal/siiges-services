@@ -7,6 +7,10 @@ const {
 } = require('./db/estados');
 
 const {
+  findAllPaises,
+} = require('./db/paises');
+
+const {
   createPlantel,
   findOnePlantel,
   findOnePlantelDetalles,
@@ -65,6 +69,7 @@ module.exports = {
   findAllTipoInstituciones,
   createOneInstitucionesDgp,
   findAllEstados,
+  findAllPaises,
   findOneInstitucion,
   findOneInstitucionUsuario,
   findPlantelesInstitucion,
