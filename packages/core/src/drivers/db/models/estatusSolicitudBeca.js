@@ -1,8 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const TIPO_SOLICITUD_BECA_TABLE = 'tipo_solicitud_beca';
 
+const ESTATUS_SOLICITUD_BECA_TABLE = 'estatus_solicitud_beca';
 
-const TipoSolicitudBecaSchema = {
+const EstatusSolicitudBecaSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -12,19 +12,17 @@ const TipoSolicitudBecaSchema = {
   nombre: {
     allowNull: false,
     type: DataTypes.STRING,
-    field: 'nombre',
   },
-  descripcion: { 
-    allowNull: true,
-    type: DataTypes.TEXT,
-    field: 'descripcion',
+  descripcion: {
+    allowNull: false,
+    type: DataTypes.STRING,
   },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'created_at',
     defaultValue: Sequelize.NOW,
-    },
+  },
   updatedAt: {
     allowNull: true,
     type: DataTypes.DATE,
@@ -39,17 +37,18 @@ const TipoSolicitudBecaSchema = {
   },
 };
 
-class TipoSolicitudBeca extends Model {
+class EstatusSolicitudBeca extends Model {
   static associate() {
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: TIPO_SOLICITUD_BECA_TABLE,
-      modelName: 'TipoSolicitudeBeca',
+      tableName: ESTATUS_SOLICITUD_BECA_TABLE,
+      modelName: 'EstatusSolicitudBeca',
       timestamps: false,
     };
-  };
-};
-module.exports = { TIPO_SOLICITUD_BECA_TABLE, TipoSolicitudBecaSchema, TipoSolicitudBeca }
+  }
+}
+
+module.exports = { ESTATUS_SOLICITUD_BECA_TABLE, EstatusSolicitudBecaSchema, EstatusSolicitudBeca };

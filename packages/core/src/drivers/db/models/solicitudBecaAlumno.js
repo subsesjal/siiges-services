@@ -1,9 +1,9 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { SOLICITUD_BECA_TABLE } = require('./solicitudesBecas');
+const { SOLICITUD_BECA_TABLE } = require('./solicitudBeca');
 const { ALUMNO_TABLE } = require('./alumno');
 const { GRADO_TABLE } = require('./grado');
 
-const SOLICITUD_BECA_ALUMNO_TABLE = 'solicitud_beca_alumno';
+const SOLICITUD_BECA_ALUMNO_TABLE = 'solicitudes_becas_alumnos';
 
 const SolicitudBecaAlumnoSchema = {
   id: {
@@ -17,8 +17,8 @@ const SolicitudBecaAlumnoSchema = {
     type: DataTypes.INTEGER,
     field: 'solicitud_beca_id',
     references: {
-    model: SOLICITUD_BECA_TABLE,
-    key: 'id',
+      model: SOLICITUD_BECA_TABLE,
+      key: 'id',
     },
   },
   alumnoId: {
@@ -26,8 +26,8 @@ const SolicitudBecaAlumnoSchema = {
     type: DataTypes.INTEGER,
     field: 'alumno_id',
     references: {
-    model: ALUMNO_TABLE,
-    key: 'id',
+      model: ALUMNO_TABLE,
+      key: 'id',
     },
   },
   gradoId: {
@@ -35,14 +35,13 @@ const SolicitudBecaAlumnoSchema = {
     type: DataTypes.INTEGER,
     field: 'grado_id',
     references: {
-    model: GRADO_TABLE ,
-    key: 'id',
+      model: GRADO_TABLE,
+      key: 'id',
     },
   },
   promedio: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'promedio',
   },
   porcentajeBeca: {
     allowNull: false,
@@ -69,7 +68,7 @@ const SolicitudBecaAlumnoSchema = {
 };
 
 class SolicitudBecaAlumno extends Model {
-  static associate(models){
+  static associate(models) {
     this.belongsTo(models.SolicitudBeca, { as: 'solicitudBeca' });
     this.belongsTo(models.Alumno, { as: 'alumno' });
     this.belongsTo(models.Grado, { as: 'grado' });
@@ -82,6 +81,7 @@ class SolicitudBecaAlumno extends Model {
       modelName: 'SolicitudBecaAlumno',
       timestamps: false,
     };
-  };
-};
-module.exports = { SOLICITUD_BECA_ALUMNO_TABLE, SolicitudBecaAlumnoSchema, SolicitudBecaAlumno }
+  }
+}
+
+module.exports = { SOLICITUD_BECA_ALUMNO_TABLE, SolicitudBecaAlumnoSchema, SolicitudBecaAlumno };

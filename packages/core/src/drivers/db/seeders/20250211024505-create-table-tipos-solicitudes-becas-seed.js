@@ -1,7 +1,7 @@
 const path = require('path');
 const csvToJson = require('convert-csv-to-json');
 
-const { TIPO_SOLICITUD_BECA_TABLE  } = require('../models/tipoSolicitudesBecas');
+const { TIPO_SOLICITUD_BECA_TABLE } = require('../models/tipoSolicitudBeca');
 
 const tipoSolicitudBecaCSV = path.join(__dirname, '../CSVFiles/tipo_solicitudes_becas.csv');
 

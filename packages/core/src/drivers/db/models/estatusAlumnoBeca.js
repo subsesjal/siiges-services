@@ -1,6 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const ESTATUS_ALUMNO_BECA_TABLE = 'estatus_alumno_beca'; 
+const ESTATUS_ALUMNO_BECA_TABLE = 'estatus_alumno_beca';
 
 const EstatusAlumnoBecaSchema = {
   id: {
@@ -42,14 +42,15 @@ const EstatusAlumnoBecaSchema = {
 class EstatusAlumnoBeca extends Model {
   static associate() {
   }
-    
-static config(sequelize) {
-  return {
-    sequelize,
-    tableName: ESTATUS_ALUMNO_BECA_TABLE,
-    modelName: 'EstatusAlumnoBeca',
-    timestamps: false,
+
+  static config(sequelize) {
+    return {
+      sequelize,
+      tableName: ESTATUS_ALUMNO_BECA_TABLE,
+      modelName: 'EstatusAlumnoBeca',
+      timestamps: false,
     };
-  };
-};
-module.exports = {ESTATUS_ALUMNO_BECA_TABLE, EstatusAlumnoBecaSchema, EstatusAlumnoBeca};
+  }
+}
+
+module.exports = { ESTATUS_ALUMNO_BECA_TABLE, EstatusAlumnoBecaSchema, EstatusAlumnoBeca };

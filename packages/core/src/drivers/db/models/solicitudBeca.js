@@ -4,7 +4,7 @@ const { CICLO_ESCOLAR_TABLE } = require('./cicloEscolar');
 const { PROGRAMA_TABLE } = require('./programa');
 const { USUARIO_TABLE } = require('./usuario');
 
-const SOLICITUD_BECA_TABLE = 'solicitud_beca';
+const SOLICITUD_BECA_TABLE = 'solicitudes_becas';
 
 const SolicitudBecaSchema = {
   id: {
@@ -18,8 +18,8 @@ const SolicitudBecaSchema = {
     type: DataTypes.INTEGER,
     field: 'estatus_solicitud_id',
     references: {
-    model: ESTATUS_SOLICITUD_TABLE,
-    key: 'id', 
+      model: ESTATUS_SOLICITUD_TABLE,
+      key: 'id',
     },
   },
   cicloEscolarId: {
@@ -27,8 +27,8 @@ const SolicitudBecaSchema = {
     type: DataTypes.INTEGER,
     field: 'ciclo_escolar_id',
     references: {
-    model: CICLO_ESCOLAR_TABLE,
-    key: 'id',
+      model: CICLO_ESCOLAR_TABLE,
+      key: 'id',
     },
   },
   programaId: {
@@ -36,8 +36,8 @@ const SolicitudBecaSchema = {
     type: DataTypes.INTEGER,
     field: 'programa_id',
     references: {
-    model: PROGRAMA_TABLE,
-    key: 'id',
+      model: PROGRAMA_TABLE,
+      key: 'id',
     },
   },
   usuarioId: {
@@ -45,14 +45,13 @@ const SolicitudBecaSchema = {
     type: DataTypes.INTEGER,
     field: 'usuario_id',
     references: {
-    model: USUARIO_TABLE,
-    key: 'id',
+      model: USUARIO_TABLE,
+      key: 'id',
     },
   },
   folio: {
     allowNull: false,
     type: DataTypes.STRING,
-    field: 'folio',
   },
   createdAt: {
     allowNull: false,
@@ -74,12 +73,13 @@ const SolicitudBecaSchema = {
   },
 };
 
-class SolicitudBeca extends Model{
+class SolicitudBeca extends Model {
   static associate(models) {
     this.belongsTo(models.EstatusSolicitud, { as: 'estatusSolicitud' });
     this.belongsTo(models.CicloEscolar, { as: 'cicloEscolar' });
     this.belongsTo(models.Programa, { as: 'programa' });
     this.belongsTo(models.Usuario, { as: 'usuario' });
+    this.hasMany(models.SolicitudBecaAlumno, { as: 'solicitudBecaAlumnos', foreignKey: 'solicitud_beca_id' });
   }
 
   static config(sequelize) {
@@ -89,6 +89,7 @@ class SolicitudBeca extends Model{
       modelName: 'SolicitudBeca',
       timestamps: false,
     };
-  };
-};
+  }
+}
+
 module.exports = { SOLICITUD_BECA_TABLE, SolicitudBecaSchema, SolicitudBeca };
