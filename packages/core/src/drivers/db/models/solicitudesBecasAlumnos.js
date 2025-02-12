@@ -15,7 +15,7 @@ const SolicitudBecaAlumnoSchema = {
   solicitudBecaId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'solicitud_becas_id',
+    field: 'solicitud_beca_id',
     references: {
     model: SOLICITUD_BECA_TABLE,
     key: 'id',
