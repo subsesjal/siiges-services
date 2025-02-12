@@ -155,10 +155,11 @@ const { SOLICITUD_ESTADO_SOLICITUD_TABLE, SolicitudEstatusSolicitudSchema } = re
 const { SOLICITUD_USUARIO_TABLE, SolicitudUsuarioSchema } = require('../models/solicitudes_usuarios');
 const { TESTIGO_TABLE, TestigoSchema } = require('../models/testigos');
 const { TITULO_ELECTRONICO_TABLE, TituloElectronicoSchema } = require('../models/titulosElectronicos');
-const {  SOLICITUD_BECA_TABLE, SolicitudesBecasSchema } = require('../models/solicitudesBecas');
+
+const {  SOLICITUD_BECA_TABLE, SolicitudBecaSchema } = require('../models/solicitudesBecas');
 const {  SOLICITUD_BECA_ALUMNO_TABLE, SolicitudBecaAlumnoSchema } = require('../models/solicitudesBecasAlumnos');
 const {  ESTATUS_ALUMNO_BECA_TABLE, EstatusAlumnoBecaSchema } = require('../models/estatusAlumnosBecas');
-const {  TIPO_SOLICITUD_BECA_TABLE, TipoSolicitudesBecasSchema } = require('../models/tipoSolicitudesBecas');
+const {  TIPO_SOLICITUD_BECA_TABLE, TipoSolicitudBecaSchema } = require('../models/tipoSolicitudesBecas');
 const {  ESTATUS_SOLICITUD_BECA_TABLE, EstatusSolicitudBecaSchema} = require('../models/estatusSolicitudesBecas');
 module.exports = {
   async up(queryInterface) {
@@ -354,10 +355,10 @@ module.exports = {
     await queryInterface.createTable(SOLICITUD_USUARIO_TABLE, SolicitudUsuarioSchema);
     await queryInterface.createTable(TESTIGO_TABLE, TestigoSchema);
     await queryInterface.createTable(TITULO_ELECTRONICO_TABLE, TituloElectronicoSchema);
-    await queryInterface.createTable(SOLICITUD_BECA_TABLE, SolicitudesBecasSchema);
+    await queryInterface.createTable(SOLICITUD_BECA_TABLE, SolicitudBecaAlumnoSchema);
     await queryInterface.createTable(SOLICITUD_BECA_ALUMNO_TABLE, SolicitudBecaAlumnoSchema);
     await queryInterface.createTable(ESTATUS_ALUMNO_BECA_TABLE, EstatusAlumnoBecaSchema);
-    await queryInterface.createTable(TIPO_SOLICITUD_BECA_TABLE, TipoSolicitudesBecasSchema);
+    await queryInterface.createTable(TIPO_SOLICITUD_BECA_TABLE, TipoSolicitudBecaSchema);
     await queryInterface.createTable(ESTATUS_SOLICITUD_BECA_TABLE, EstatusSolicitudBecaSchema);
   },
 

@@ -157,21 +157,14 @@ const { Testigo, TestigoSchema } = require('./testigos');
 const { TituloElectronico, TituloElectronicoSchema } = require('./titulosElectronicos');
 // Siiges 1.0 Fin
 
-const { SolicitudesBecas, SolicitudesBecasSchema} = require('./solicitudesBecas')
-const { SolicitudesBecasAlumnos, SolicitudBecaAlumnoSchema} = require('./solicitudesBecasAlumnos')
-const { TipoSolicitudesBecas, TipoSolicitudesBecasSchema} = require('./tipoSolicitudesBecas')
-const { EstatusAlumnosBecas, EstatusAlumnoBecaSchema} = require('./estatusAlumnosBecas')
-const { EstatusSolicitudesBecas,  EstatusSolicitudBecaSchema} = require('./estatusSolicitudesBecas')
+const { SolicitudBeca,SolicitudBecaSchema} = require('./solicitudesBecas')
+const { SolicitudBecaAlumno, SolicitudBecaAlumnoSchema} = require('./solicitudesBecasAlumnos')
+const { TipoSolicitudBeca, TipoSolicitudBecaSchema} = require('./tipoSolicitudesBecas')
+const { EstatusAlumnoBeca, EstatusAlumnoBecaSchema} = require('./estatusAlumnosBecas')
+const { EstatusSolicitudBeca,  EstatusSolicitudBecaSchema} = require('./estatusSolicitudesBecas')
 
 function setupModels(sequelize) {
   // Initialize models
-  SolicitudesBecas.init( SolicitudesBecasSchema, SolicitudesBecas.config(sequelize));
-  SolicitudesBecasAlumnos.init(SolicitudBecaAlumnoSchema, SolicitudesBecasAlumnos.config(sequelize));
-  TipoSolicitudesBecas.init( TipoSolicitudesBecasSchema,TipoSolicitudesBecas.config(sequelize));
-  EstatusAlumnosBecas.init( EstatusAlumnoBecaSchema,EstatusAlumnosBecas.config(sequelize));
-  EstatusSolicitudesBecas.init( EstatusSolicitudBecaSchema,EstatusSolicitudesBecas.config(sequelize));
-
-
   Ciclo.init(CicloSchema, Ciclo.config(sequelize));
   Domicilio.init(DomicilioSchema, Domicilio.config(sequelize));
   Diligencia.init(DiligenciaSchema, Diligencia.config(sequelize));
@@ -536,6 +529,12 @@ function setupModels(sequelize) {
   Testigo.associate(sequelize.models);
   TituloElectronico.associate(sequelize.models);
   // Siiges 1.0 Fin
+
+  SolicitudBeca.init( SolicitudBecaSchema, SolicitudBeca.config(sequelize));
+  SolicitudBecaAlumno.init(SolicitudBecaAlumnoSchema, SolicitudBecaAlumno.config(sequelize));
+  TipoSolicitudBeca.init( TipoSolicitudBecaSchema,TipoSolicitudBeca.config(sequelize));
+  EstatusAlumnoBeca.init( EstatusAlumnoBecaSchema,EstatusAlumnoBeca.config(sequelize));
+  EstatusSolicitudBeca.init( EstatusSolicitudBecaSchema,EstatusSolicitudBeca.config(sequelize));
 }
 
 module.exports = setupModels;

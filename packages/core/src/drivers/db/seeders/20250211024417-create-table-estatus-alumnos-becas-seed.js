@@ -3,7 +3,7 @@ const csvToJson = require('convert-csv-to-json');
 
 const { ESTATUS_ALUMNO_BECA_TABLE } = require('../models/estatusAlumnosBecas');
 
-const estatusAlumnosBecasCSV = path.join(__dirname, '../CSVFiles/estatus_alumnos_becas.csv');
+const estatusAlumnoBecaCSV = path.join(__dirname, '../CSVFiles/estatus_alumnos_becas.csv');
 
 module.exports = {
   async up(queryInterface) {
@@ -11,12 +11,12 @@ module.exports = {
       // eslint-disable-next-line no-param-reassign
       queryInterface = queryInterface.context;
     }
-    const estatusAlumnosBecasJson = await csvToJson
+    const estatusAlumnoBecaJson = await csvToJson
       .fieldDelimiter(',')
-      .getJsonFromCsv(estatusAlumnosBecasCSV);
+      .getJsonFromCsv(estatusAlumnoBecaCSV);
 
     return queryInterface
-      .bulkInsert(ESTATUS_ALUMNO_BECA_TABLE, estatusAlumnosBecasJson, {});
+      .bulkInsert(ESTATUS_ALUMNO_BECA_TABLE, estatusAlumnoBecaJson, {});
   },
 
   async down(queryInterface) {
