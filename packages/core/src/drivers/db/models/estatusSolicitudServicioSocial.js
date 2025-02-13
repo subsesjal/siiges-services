@@ -43,7 +43,7 @@ class EstatusSolicitudServicioSocial extends Model {
     return {
       sequelize,
       tableName: ESTATUS_SOLICITUD_SERVICIO_SOCIAL_TABLE,
-      modelName: 'EstatusSolicitudesServicioSocial',
+      modelName: 'EstatusSolicitudServicioSocial',
       timestamps: false,
     };
   }
