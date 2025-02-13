@@ -1,6 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const ESTATUS_SOLICITUD_BECA_TABLE = 'estatus_solicitud_beca';
+const ESTATUS_SOLICITUD_BECA_TABLE = 'estatus_solicitudes_becas';
 
 const EstatusSolicitudBecaSchema = {
   id: {
