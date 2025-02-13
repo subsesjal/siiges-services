@@ -1,3 +1,4 @@
+// SIIGES 2.0
 const { Ciclo, CicloSchema } = require('./ciclo');
 const { Domicilio, DomicilioSchema } = require('./domicilio');
 const { Diligencia, DiligenciaSchema } = require('./diligencia');
@@ -119,6 +120,12 @@ const { AsignaturaEquivalentePrograma, AsignaturaEquivalenteProgramaSchema } = r
 const { FundamentoServicioSocial, FundamentoServicioSocialSchema } = require('./fundamentoServicioSocial');
 const { TipoModalidad, TipoModalidadSchema } = require('./tipoModalidad');
 const { ModalidadTitulacion, ModalidadTitulacionSchema } = require('./modalidadTitulacion');
+const { SolicitudBeca, SolicitudBecaSchema } = require('./solicitudBeca');
+const { SolicitudBecaAlumno, SolicitudBecaAlumnoSchema } = require('./solicitudBecaAlumno');
+const { TipoSolicitudBeca, TipoSolicitudBecaSchema } = require('./tipoSolicitudBeca');
+const { EstatusAlumnoBeca, EstatusAlumnoBecaSchema } = require('./estatusAlumnoBeca');
+const { EstatusSolicitudBeca, EstatusSolicitudBecaSchema } = require('./estatusSolicitudBeca');
+
 // Siiges 1.0
 const { Academia, AcademiaSchema } = require('./academias');
 const { AlumnoObservacion, AlumnoObservacionSchema } = require('./alumnoObservaciones');
@@ -523,6 +530,12 @@ function setupModels(sequelize) {
   Testigo.associate(sequelize.models);
   TituloElectronico.associate(sequelize.models);
   // Siiges 1.0 Fin
+
+  SolicitudBeca.init(SolicitudBecaSchema, SolicitudBeca.config(sequelize));
+  SolicitudBecaAlumno.init(SolicitudBecaAlumnoSchema, SolicitudBecaAlumno.config(sequelize));
+  TipoSolicitudBeca.init(TipoSolicitudBecaSchema, TipoSolicitudBeca.config(sequelize));
+  EstatusAlumnoBeca.init(EstatusAlumnoBecaSchema, EstatusAlumnoBeca.config(sequelize));
+  EstatusSolicitudBeca.init(EstatusSolicitudBecaSchema, EstatusSolicitudBeca.config(sequelize));
 }
 
 module.exports = setupModels;

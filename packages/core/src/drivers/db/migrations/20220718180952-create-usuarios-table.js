@@ -1,3 +1,4 @@
+// SIIGES 2.0
 const { CICLO_TABLE, CicloSchema } = require('../models/ciclo');
 const { DOMICILIO_TABLE, DomicilioSchema } = require('../models/domicilio');
 const { DILIGENCIA_TABLE, DiligenciaSchema } = require('../models/diligencia');
@@ -119,7 +120,13 @@ const { ASIGNATURA_EQUIVALENTE_PROGRAMA_TABLE, AsignaturaEquivalenteProgramaSche
 const { FUNDAMENTO_SERVICIO_SOCIAL_TABLE, FundamentoServicioSocialSchema } = require('../models/fundamentoServicioSocial');
 const { TIPO_MODALIDAD_TABLE, TipoModalidadSchema } = require('../models/tipoModalidad');
 const { MODALIDAD_TITULACION_TABLE, ModalidadTitulacionSchema } = require('../models/modalidadTitulacion');
+const { SOLICITUD_BECA_TABLE, SolicitudBecaSchema } = require('../models/solicitudBeca');
+const { SOLICITUD_BECA_ALUMNO_TABLE, SolicitudBecaAlumnoSchema } = require('../models/solicitudBecaAlumno');
+const { ESTATUS_ALUMNO_BECA_TABLE, EstatusAlumnoBecaSchema } = require('../models/estatusAlumnoBeca');
+const { TIPO_SOLICITUD_BECA_TABLE, TipoSolicitudBecaSchema } = require('../models/tipoSolicitudBeca');
+const { ESTATUS_SOLICITUD_BECA_TABLE, EstatusSolicitudBecaSchema } = require('../models/estatusSolicitudBeca');
 
+// SIIGES 1.0
 const { ACADEMIA_TABLE, AcademiaSchema } = require('../models/academias');
 const { ALUMNO_OBSERVACION_TABLE, AlumnoObservacionSchema } = require('../models/alumnoObservaciones');
 const { ASIGNATURA_HEMEROBIBLIOGRAFICA_TABLE, AsignaturaHemerobibliograficaSchema } = require('../models/asignaturasHemerobibliograficas');
@@ -158,6 +165,7 @@ const { TITULO_ELECTRONICO_TABLE, TituloElectronicoSchema } = require('../models
 
 module.exports = {
   async up(queryInterface) {
+    // SIIGES 2.0
     await queryInterface.createTable(ROL_TABLE, RolSchema);
     await queryInterface.createTable(PAIS_TABLE, PaisSchema);
     await queryInterface.createTable(ESTADO_TABLE, EstadoSchema);
@@ -302,7 +310,13 @@ module.exports = {
       ASIGNATURA_EQUIVALENTE_PROGRAMA_TABLE,
       AsignaturaEquivalenteProgramaSchema,
     );
+    await queryInterface.createTable(SOLICITUD_BECA_TABLE, SolicitudBecaSchema);
+    await queryInterface.createTable(SOLICITUD_BECA_ALUMNO_TABLE, SolicitudBecaAlumnoSchema);
+    await queryInterface.createTable(ESTATUS_ALUMNO_BECA_TABLE, EstatusAlumnoBecaSchema);
+    await queryInterface.createTable(TIPO_SOLICITUD_BECA_TABLE, TipoSolicitudBecaSchema);
+    await queryInterface.createTable(ESTATUS_SOLICITUD_BECA_TABLE, EstatusSolicitudBecaSchema);
 
+    // SIIGES 1.0
     await queryInterface.createTable(ACADEMIA_TABLE, AcademiaSchema);
     await queryInterface.createTable(PROGRAMA_EVALUACION_TABLE, ProgramaEvaluacionSchema);
     await queryInterface.createTable(EVALUACION_APARTADO_TABLE, EvaluacionApartadoSchema);
@@ -353,6 +367,7 @@ module.exports = {
   },
 
   async down(queryInterface) {
+    // SIIGES 2.0
     await queryInterface.dropTable(ROL_TABLE);
     await queryInterface.dropTable(PAIS_TABLE);
     await queryInterface.dropTable(ESTADO_TABLE);
@@ -475,7 +490,13 @@ module.exports = {
     await queryInterface.dropTable(SOLICITUD_REV_EQUIV_TABLE);
     await queryInterface.dropTable(ASIGNATURA_ANTECEDENTE_EQUIVALENTE_TABLE);
     await queryInterface.dropTable(ASIGNATURA_EQUIVALENTE_PROGRAMA_TABLE);
+    await queryInterface.dropTable(SOLICITUD_BECA_TABLE);
+    await queryInterface.dropTable(SOLICITUD_BECA_ALUMNO_TABLE);
+    await queryInterface.dropTable(ESTATUS_ALUMNO_BECA_TABLE);
+    await queryInterface.dropTable(TIPO_SOLICITUD_BECA_TABLE);
+    await queryInterface.dropTable(ESTATUS_SOLICITUD_BECA_TABLE);
 
+    // SIIGES 1.0
     await queryInterface.dropTable(ACADEMIA_TABLE);
     await queryInterface.dropTable(PROGRAMA_EVALUACION_TABLE);
     await queryInterface.dropTable(EVALUACION_APARTADO_TABLE);
