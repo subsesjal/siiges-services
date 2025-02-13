@@ -29,6 +29,7 @@ const solicitudesFoliosAdapter = require('./solicitudesFolios/handlers');
 const solicitudesRevEquiv = require('./solicitudesRevEquiv/handlers');
 const solicitudesBecasAdapter = require('./solicitudesBecas/handlers');
 const estadosAdapter = require('./estados/handlers');
+const paisesAdapter = require('./paises/handlers');
 
 module.exports = {
   diligenciasAdapter,
@@ -61,4 +62,5 @@ module.exports = {
   solicitudesRevEquiv,
   solicitudesBecasAdapter,
   estadosAdapter,
+  paisesAdapter,
 };
