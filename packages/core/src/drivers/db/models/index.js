@@ -122,7 +122,7 @@ const { TipoModalidad, TipoModalidadSchema } = require('./tipoModalidad');
 const { ModalidadTitulacion, ModalidadTitulacionSchema } = require('./modalidadTitulacion');
 const { SolicitudBeca, SolicitudBecaSchema } = require('./solicitudBeca');
 const { SolicitudBecaAlumno, SolicitudBecaAlumnoSchema } = require('./solicitudBecaAlumno');
-const { TipoSolicitudBeca, TipoSolicitudBecaSchema } = require('./tipoSolicitudBeca');
+const { TipoAlumnoBeca, TipoAlumnoBecaSchema } = require('./tipoAlumnoBeca');
 const { EstatusAlumnoBeca, EstatusAlumnoBecaSchema } = require('./estatusAlumnoBeca');
 const { EstatusSolicitudBeca, EstatusSolicitudBecaSchema } = require('./estatusSolicitudBeca');
 const { SolicitudServicioSocial, SolicitudServicioSocialSchema } = require('./solicitudServicioSocial');
@@ -173,6 +173,7 @@ const { TituloElectronico, TituloElectronicoSchema } = require('./titulosElectro
 
 function setupModels(sequelize) {
   // Initialize models
+  // SIIGES 2.0
   Ciclo.init(CicloSchema, Ciclo.config(sequelize));
   Domicilio.init(DomicilioSchema, Domicilio.config(sequelize));
   Diligencia.init(DiligenciaSchema, Diligencia.config(sequelize));
@@ -353,6 +354,11 @@ function setupModels(sequelize) {
     SolicitudServicioSocialAlumnoSchema,
     SolicitudServicioSocialAlumno.config(sequelize),
   );
+  SolicitudBeca.init(SolicitudBecaSchema, SolicitudBeca.config(sequelize));
+  SolicitudBecaAlumno.init(SolicitudBecaAlumnoSchema, SolicitudBecaAlumno.config(sequelize));
+  TipoAlumnoBeca.init(TipoAlumnoBecaSchema, TipoAlumnoBeca.config(sequelize));
+  EstatusAlumnoBeca.init(EstatusAlumnoBecaSchema, EstatusAlumnoBeca.config(sequelize));
+  EstatusSolicitudBeca.init(EstatusSolicitudBecaSchema, EstatusSolicitudBeca.config(sequelize));
 
   // Siiges 1.0
   Academia.init(AcademiaSchema, Academia.config(sequelize));
@@ -410,6 +416,7 @@ function setupModels(sequelize) {
   // Siiges 1.0 Fin
 
   // Associations
+  // SIIGES 2.0
   Ciclo.associate(sequelize.models);
   Domicilio.associate(sequelize.models);
   Diligencia.associate(sequelize.models);
@@ -536,6 +543,11 @@ function setupModels(sequelize) {
   SectorServicioSocial.associate(sequelize.models);
   ModalidadServicioSocial.associate(sequelize.models);
   EstatusSolicitudServicioSocial.associate(sequelize.models);
+  SolicitudBeca.associate(sequelize.models);
+  SolicitudBecaAlumno.associate(sequelize.models);
+  TipoAlumnoBeca.associate(sequelize.models);
+  EstatusAlumnoBeca.associate(sequelize.models);
+  EstatusSolicitudBeca.associate(sequelize.models);
 
   // Siiges 1.0
   Academia.associate(sequelize.models);
@@ -574,12 +586,6 @@ function setupModels(sequelize) {
   Testigo.associate(sequelize.models);
   TituloElectronico.associate(sequelize.models);
   // Siiges 1.0 Fin
-
-  SolicitudBeca.init(SolicitudBecaSchema, SolicitudBeca.config(sequelize));
-  SolicitudBecaAlumno.init(SolicitudBecaAlumnoSchema, SolicitudBecaAlumno.config(sequelize));
-  TipoSolicitudBeca.init(TipoSolicitudBecaSchema, TipoSolicitudBeca.config(sequelize));
-  EstatusAlumnoBeca.init(EstatusAlumnoBecaSchema, EstatusAlumnoBeca.config(sequelize));
-  EstatusSolicitudBeca.init(EstatusSolicitudBecaSchema, EstatusSolicitudBeca.config(sequelize));
 }
 
 module.exports = setupModels;

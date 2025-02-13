@@ -120,11 +120,11 @@ const { ASIGNATURA_EQUIVALENTE_PROGRAMA_TABLE, AsignaturaEquivalenteProgramaSche
 const { FUNDAMENTO_SERVICIO_SOCIAL_TABLE, FundamentoServicioSocialSchema } = require('../models/fundamentoServicioSocial');
 const { TIPO_MODALIDAD_TABLE, TipoModalidadSchema } = require('../models/tipoModalidad');
 const { MODALIDAD_TITULACION_TABLE, ModalidadTitulacionSchema } = require('../models/modalidadTitulacion');
+const { ESTATUS_ALUMNO_BECA_TABLE, EstatusAlumnoBecaSchema } = require('../models/estatusAlumnoBeca');
+const { TIPO_ALUMNO_BECA_TABLE, TipoAlumnoBecaSchema } = require('../models/tipoAlumnoBeca');
+const { ESTATUS_SOLICITUD_BECA_TABLE, EstatusSolicitudBecaSchema } = require('../models/estatusSolicitudBeca');
 const { SOLICITUD_BECA_TABLE, SolicitudBecaSchema } = require('../models/solicitudBeca');
 const { SOLICITUD_BECA_ALUMNO_TABLE, SolicitudBecaAlumnoSchema } = require('../models/solicitudBecaAlumno');
-const { ESTATUS_ALUMNO_BECA_TABLE, EstatusAlumnoBecaSchema } = require('../models/estatusAlumnoBeca');
-const { TIPO_SOLICITUD_BECA_TABLE, TipoSolicitudBecaSchema } = require('../models/tipoSolicitudBeca');
-const { ESTATUS_SOLICITUD_BECA_TABLE, EstatusSolicitudBecaSchema } = require('../models/estatusSolicitudBeca');
 const { SOLICITUD_SERVICIO_SOCIAL_TABLE, SolicitudServicioSocialSchema } = require('../models/solicitudServicioSocial');
 const { SOLICITUD_SERVICIO_SOCIAL_ALUMNO_TABLE, SolicitudServicioSocialAlumnoSchema } = require('../models/solicitudServicioSocialAlumno');
 const { EJE_SERVICIO_SOCIAL_TABLE, EjeServicioSocialSchema } = require('../models/ejeServicioSocial');
@@ -317,11 +317,11 @@ module.exports = {
       ASIGNATURA_EQUIVALENTE_PROGRAMA_TABLE,
       AsignaturaEquivalenteProgramaSchema,
     );
+    await queryInterface.createTable(ESTATUS_ALUMNO_BECA_TABLE, EstatusAlumnoBecaSchema);
+    await queryInterface.createTable(TIPO_ALUMNO_BECA_TABLE, TipoAlumnoBecaSchema);
+    await queryInterface.createTable(ESTATUS_SOLICITUD_BECA_TABLE, EstatusSolicitudBecaSchema);
     await queryInterface.createTable(SOLICITUD_BECA_TABLE, SolicitudBecaSchema);
     await queryInterface.createTable(SOLICITUD_BECA_ALUMNO_TABLE, SolicitudBecaAlumnoSchema);
-    await queryInterface.createTable(ESTATUS_ALUMNO_BECA_TABLE, EstatusAlumnoBecaSchema);
-    await queryInterface.createTable(TIPO_SOLICITUD_BECA_TABLE, TipoSolicitudBecaSchema);
-    await queryInterface.createTable(ESTATUS_SOLICITUD_BECA_TABLE, EstatusSolicitudBecaSchema);
     await queryInterface.createTable(
       MODALIDAD_SERVICIO_SOCIAL_TABLE,
       ModalidadServicioSocialSchema,
@@ -528,7 +528,7 @@ module.exports = {
     await queryInterface.dropTable(SOLICITUD_BECA_TABLE);
     await queryInterface.dropTable(SOLICITUD_BECA_ALUMNO_TABLE);
     await queryInterface.dropTable(ESTATUS_ALUMNO_BECA_TABLE);
-    await queryInterface.dropTable(TIPO_SOLICITUD_BECA_TABLE);
+    await queryInterface.dropTable(TIPO_ALUMNO_BECA_TABLE);
     await queryInterface.dropTable(ESTATUS_SOLICITUD_BECA_TABLE);
     await queryInterface.dropTable(MODALIDAD_SERVICIO_SOCIAL_TABLE);
     await queryInterface.dropTable(SECTOR_SERVICIO_SOCIAL_TABLE);

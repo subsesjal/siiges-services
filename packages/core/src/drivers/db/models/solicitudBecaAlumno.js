@@ -1,5 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { SOLICITUD_BECA_TABLE } = require('./solicitudBeca');
+const { ESTATUS_ALUMNO_BECA_TABLE } = require('./estatusAlumnoBeca');
+const { TIPO_ALUMNO_BECA_TABLE } = require('./tipoAlumnoBeca');
 const { ALUMNO_TABLE } = require('./alumno');
 const { GRADO_TABLE } = require('./grado');
 
@@ -18,6 +20,24 @@ const SolicitudBecaAlumnoSchema = {
     field: 'solicitud_beca_id',
     references: {
       model: SOLICITUD_BECA_TABLE,
+      key: 'id',
+    },
+  },
+  estatusAlumnoBecaId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'estatus_alumno_beca_id',
+    references: {
+      model: ESTATUS_ALUMNO_BECA_TABLE,
+      key: 'id',
+    },
+  },
+  tipoAlumnoBecaId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'tipo_alumno_beca_id',
+    references: {
+      model: TIPO_ALUMNO_BECA_TABLE,
       key: 'id',
     },
   },
