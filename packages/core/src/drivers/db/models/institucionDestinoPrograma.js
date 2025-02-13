@@ -1,40 +1,27 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { PERSONA_TABLE } = require('./persona');
-const { INSTITUCION_PROCEDENCIA_TABLE } = require('./institucionProcedencia');
 const { INSTITUCION_DESTINO_TABLE } = require('./institucionDestino');
+const { PROGRAMA_TABLE } = require('./programa');
 
-const INTERESADO_TABLE = 'interesados';
+const INSTITUCION_DESTINO_PROGRAMA_TABLE = 'instituciones_destino_programas';
 
-const InteresadoSchema = {
+const InstitucionDestinoProgramaSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  personaId: {
+  programaId: {
     allowNull: false,
-    unique: true,
     type: DataTypes.INTEGER,
-    field: 'persona_id',
+    field: 'programa_id',
     references: {
-      model: PERSONA_TABLE,
-      key: 'id',
-    },
-  },
-  institucionProcedenciaId: {
-    allowNull: false,
-    unique: true,
-    type: DataTypes.INTEGER,
-    field: 'institucion_procedencia_id',
-    references: {
-      model: INSTITUCION_PROCEDENCIA_TABLE,
+      model: PROGRAMA_TABLE,
       key: 'id',
     },
   },
   institucionDestinoId: {
     allowNull: false,
-    unique: true,
     type: DataTypes.INTEGER,
     field: 'institucion_destino_id',
     references: {
@@ -60,25 +47,24 @@ const InteresadoSchema = {
   },
 };
 
-class Interesado extends Model {
+class InstitucionDestinoPrograma extends Model {
   static associate(models) {
-    this.belongsTo(models.Persona, { as: 'persona' });
-    this.belongsTo(models.InstitucionProcedencia, { as: 'institucionProcedencia' });
+    this.belongsTo(models.Programa, { as: 'programa' });
     this.belongsTo(models.InstitucionDestino, { as: 'institucionDestino' });
-    this.hasMany(models.AsignaturaAntecedenteEquivalente, {
-      as: 'asignaturasAntecedenteEquivalente',
-      foreignKey: 'interesadoId',
-    });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: INTERESADO_TABLE,
-      modelName: 'Interesado',
+      tableName: INSTITUCION_DESTINO_PROGRAMA_TABLE,
+      modelName: 'InstitucionDestinoPrograma',
       timestamps: false,
     };
   }
 }
 
-module.exports = { INTERESADO_TABLE, InteresadoSchema, Interesado };
+module.exports = {
+  INSTITUCION_DESTINO_PROGRAMA_TABLE,
+  InstitucionDestinoProgramaSchema,
+  InstitucionDestinoPrograma,
+};

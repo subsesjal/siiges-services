@@ -4,6 +4,13 @@ const { domicilio } = require('../../usuarios/schema/properties/domicilio');
 const { persona } = require('../../usuarios/schema/properties/persona');
 const { institucionProcedencia } = require('./properties/institucionProcedencia');
 const { institucionDestino } = require('./properties/institucionDestino');
+const { institucionDestinoPrograma } = require('./properties/institucionDestinoPrograma');
+const { programa } = require('../../solicitudes/schema/properties/programa');
+const { plantel } = require('../../instituciones/schema/properties/plantel');
+const { institucion } = require('../../instituciones/schema/properties/institucion');
+const { asignaturaAntecedenteEquivalente } = require('./properties/asignaturaAntecedenteEquivalente');
+const { asignaturaEquivalentePrograma } = require('./properties/asignaturaEquivalentePrograma');
+const { asignatura } = require('../../asignaturas/schema/properties/asignatura');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findAllSolicitudesRevEquivSchema = {
@@ -57,6 +64,70 @@ const findAllSolicitudesRevEquivSchema = {
                       id: { type: 'integer' },
                       ...institucionDestino,
                       ...responseProperties,
+                      institucionDestinoPrograma: {
+                        type: ['object', 'null'],
+                        properties: {
+                          id: { type: 'integer' },
+                          ...institucionDestinoPrograma,
+                          ...responseProperties,
+                          programa: {
+                            type: 'object',
+                            properties: {
+                              id: { type: 'integer' },
+                              ...programa,
+                              ...responseProperties,
+                              plantel: {
+                                type: 'object',
+                                properties: {
+                                  id: { type: 'integer' },
+                                  ...plantel,
+                                  ...responseProperties,
+                                  institucion: {
+                                    type: 'object',
+                                    properties: {
+                                      id: { type: 'integer' },
+                                      ...institucion,
+                                      ...responseProperties,
+                                    },
+                                  },
+                                  domicilio: {
+                                    type: 'object',
+                                    properties: {
+                                      id: { type: 'integer' },
+                                      ...domicilio,
+                                      ...responseProperties,
+                                    },
+                                  },
+                                },
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                  asignaturasAntecedenteEquivalente: {
+                    type: 'array',
+                    items: {
+                      type: 'object',
+                      properties: {
+                        ...asignaturaAntecedenteEquivalente,
+                        ...responseProperties,
+                        asignaturaEquivalentePrograma: {
+                          type: ['object', 'null'],
+                          properties: {
+                            ...asignaturaEquivalentePrograma,
+                            ...responseProperties,
+                            asignatura: {
+                              type: 'object',
+                              properties: {
+                                ...asignatura,
+                                ...responseProperties,
+                              },
+                            },
+                          },
+                        },
+                      },
                     },
                   },
                 },
@@ -64,14 +135,6 @@ const findAllSolicitudesRevEquivSchema = {
             },
           },
         },
-      },
-    },
-    404: {
-      description: 'No equivalencias found',
-      type: 'object',
-      properties: {
-        error: { type: 'string' },
-        message: { type: 'string' },
       },
     },
   },

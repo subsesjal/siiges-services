@@ -1,41 +1,33 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
+const { ASIGNATURA_ANTECEDENTE_EQUIVALENTE_TABLE } = require('./asignaturaAntecedenteEquivalente');
 const { ASIGNATURA_TABLE } = require('./asignatura');
-const { INTERESADO_TABLE } = require('./interesado');
 
-const ASIGNATURA_EQUIVALENTE_TABLE = 'asignaturas_equivalentes';
+const ASIGNATURA_EQUIVALENTE_PROGRAMA_TABLE = 'asignaturas_equivalentes_programas';
 
-const AsignaturaEquivalenteSchema = {
+const AsignaturaEquivalenteProgramaSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  interesadoId: {
+  asignaturaAntecedenteEquivalenteId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'interesado_id',
+    field: 'asignatura_antecedente_equivalente_id',
     references: {
-      model: INTERESADO_TABLE,
+      model: ASIGNATURA_ANTECEDENTE_EQUIVALENTE_TABLE,
       key: 'id',
     },
   },
   asignaturaId: {
-    allowNull: true,
+    allowNull: false,
     type: DataTypes.INTEGER,
     field: 'asignatura_id',
     references: {
       model: ASIGNATURA_TABLE,
       key: 'id',
     },
-  },
-  nombre: {
-    allowNull: true,
-    type: DataTypes.STRING,
-  },
-  calificacion: {
-    allowNull: false,
-    type: DataTypes.STRING,
   },
   createdAt: {
     allowNull: false,
@@ -55,23 +47,24 @@ const AsignaturaEquivalenteSchema = {
   },
 };
 
-class AsignaturaEquivalente extends Model {
+class AsignaturaEquivalentePrograma extends Model {
   static associate(models) {
+    this.belongsTo(models.AsignaturaAntecedenteEquivalente, { as: 'asignaturaAntecedenteEquivalente' });
     this.belongsTo(models.Asignatura, { as: 'asignatura' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: ASIGNATURA_EQUIVALENTE_TABLE,
-      modelName: 'AsignaturaEquivalente',
+      tableName: ASIGNATURA_EQUIVALENTE_PROGRAMA_TABLE,
+      modelName: 'AsignaturaEquivalentePrograma',
       timestamps: false,
     };
   }
 }
 
 module.exports = {
-  ASIGNATURA_EQUIVALENTE_TABLE,
-  AsignaturaEquivalenteSchema,
-  AsignaturaEquivalente,
+  ASIGNATURA_EQUIVALENTE_PROGRAMA_TABLE,
+  AsignaturaEquivalenteProgramaSchema,
+  AsignaturaEquivalentePrograma,
 };

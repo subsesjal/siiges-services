@@ -38,6 +38,24 @@ async function solicitudesRevEquivRouter(fastify, opts, next) {
     solicitudesRevEquiv.deleteSolicitudRevEquiv,
   );
 
+  await fastify.post(
+    '/asignaturaAntecedenteEquivalente',
+    {
+      schema: solicitudesSchema.createAsignaturaAntecedenteEquivalenteSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesRevEquiv.createAsignaturaAntecedenteEquivalente,
+  );
+
+  await fastify.get(
+    '/asignaturaAntecedenteEquivalente/:asignaturaAntecedenteEquivalenteId',
+    {
+      schema: solicitudesSchema.findOneAsignaturaAntecedenteEquivalenteSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesRevEquiv.findOneAsignaturaAntecedenteEquivalente,
+  );
+
   next();
 }
 

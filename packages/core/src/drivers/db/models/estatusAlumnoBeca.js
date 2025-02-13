@@ -1,8 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const ESTATUS_SOLICITUD_BECA_TABLE = 'estatus_solicitudes_becas';
+const ESTATUS_ALUMNO_BECA_TABLE = 'estatus_alumno_beca';
 
-const EstatusSolicitudBecaSchema = {
+const EstatusAlumnoBecaSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -12,10 +12,12 @@ const EstatusSolicitudBecaSchema = {
   nombre: {
     allowNull: false,
     type: DataTypes.STRING,
+    field: 'nombre',
   },
   descripcion: {
-    allowNull: false,
-    type: DataTypes.STRING,
+    allowNull: true,
+    type: DataTypes.TEXT,
+    field: 'descripcion',
   },
   createdAt: {
     allowNull: false,
@@ -37,18 +39,18 @@ const EstatusSolicitudBecaSchema = {
   },
 };
 
-class EstatusSolicitudBeca extends Model {
+class EstatusAlumnoBeca extends Model {
   static associate() {
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: ESTATUS_SOLICITUD_BECA_TABLE,
-      modelName: 'EstatusSolicitudBeca',
+      tableName: ESTATUS_ALUMNO_BECA_TABLE,
+      modelName: 'EstatusAlumnoBeca',
       timestamps: false,
     };
   }
 }
 
-module.exports = { ESTATUS_SOLICITUD_BECA_TABLE, EstatusSolicitudBecaSchema, EstatusSolicitudBeca };
+module.exports = { ESTATUS_ALUMNO_BECA_TABLE, EstatusAlumnoBecaSchema, EstatusAlumnoBeca };

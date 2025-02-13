@@ -1,29 +1,34 @@
 const { checkers } = require('@siiges-services/shared');
 
 const findOneSolicitudRevEquiv = (findOneSolicitudRevEquivQuery) => async (identifierObj) => {
-  const include = [
-    {
-      association: 'interesado',
-      include: [
-        { association: 'persona', include: [{ association: 'domicilio' }] },
-        { association: 'institucionProcedencia' },
-        {
-          association: 'institucionDestino',
+  const include = [{
+    association: 'interesado',
+    include: [
+      { association: 'persona', include: [{ association: 'domicilio' }] },
+      { association: 'institucionProcedencia' },
+      {
+        association: 'institucionDestino',
+        include: [{
+          association: 'institucionDestinoPrograma',
           include: [{
             association: 'programa',
             include: [{
               association: 'plantel',
-              include: [{
-                association: 'institucion',
-              }],
+              include: [{ association: 'institucion' }],
             }],
           }],
-        },
-        { association: 'asignaturasAntecedentes' },
-        { association: 'asignaturasEquivalentes' },
-      ],
-    },
-  ];
+        }],
+      },
+      {
+        association: 'asignaturasAntecedenteEquivalente',
+        include: [{
+          association: 'asignaturaEquivalentePrograma',
+          include: [{ association: 'asignatura' }],
+        }],
+      },
+    ],
+  }];
+
   const solicitudRevEquiv = await findOneSolicitudRevEquivQuery(
     identifierObj,
     { include, strict: false },

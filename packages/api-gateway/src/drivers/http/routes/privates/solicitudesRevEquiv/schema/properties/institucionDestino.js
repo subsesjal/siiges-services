@@ -1,3 +1,4 @@
+// Institucion Destino
 const institucionDestino = {
   tipoInstitucionId: { type: 'integer' },
   programaId: { type: 'integer' },
