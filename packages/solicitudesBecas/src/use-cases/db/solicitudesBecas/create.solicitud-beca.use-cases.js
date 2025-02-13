@@ -3,6 +3,7 @@
 const createSolicitudBeca = (
   createSolicitudBecaQuery,
   countSolicitudesBecasQuery,
+  findOneSolicitudBecaQuery,
 ) => async (data) => {
   const currentYear = new Date().getFullYear();
 
@@ -16,11 +17,16 @@ const createSolicitudBeca = (
 
   const newData = { folioSolicitud: `FBE${totalSolicitudes}`, ...data };
 
-  const newSolicitudFolio = await createSolicitudBecaQuery({
-    ...newData,
-  });
+  const include = [
+    { association: 'estatusSolicitudBeca' },
+    { association: 'cicloEscolar' },
+    { association: 'programa' },
+    { association: 'usuario' },
+  ];
 
-  return newSolicitudFolio;
+  const { id } = await createSolicitudBecaQuery({ ...newData });
+
+  return findOneSolicitudBecaQuery({ id }, { include });
 };
 
 module.exports = createSolicitudBeca;

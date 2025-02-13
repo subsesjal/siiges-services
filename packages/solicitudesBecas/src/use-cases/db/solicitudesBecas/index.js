@@ -6,5 +6,6 @@ module.exports = {
   createSolicitudBeca: createSolicitudBeca(
     solicitudesBecas.createSolicitudBecaQuery,
     solicitudesBecas.countSolicitudesBecasQuery,
+    solicitudesBecas.findOneSolicitudBecaQuery,
   ),
 };

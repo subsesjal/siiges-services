@@ -79,7 +79,7 @@ const SolicitudBecaSchema = {
 
 class SolicitudBeca extends Model {
   static associate(models) {
-    this.belongsTo(models.EstatusSolicitud, { as: 'estatusSolicitud' });
+    this.belongsTo(models.EstatusSolicitudBeca, { as: 'estatusSolicitudBeca' });
     this.belongsTo(models.CicloEscolar, { as: 'cicloEscolar' });
     this.belongsTo(models.Programa, { as: 'programa' });
     this.belongsTo(models.Usuario, { as: 'usuario' });
