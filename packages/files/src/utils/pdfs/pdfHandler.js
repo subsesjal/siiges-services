@@ -434,10 +434,10 @@ function agregarImagenYPaginaPie(doc, img) {
 
     doc.text(pageNumberText, pageNumberTextX, pageNumberTextY);
 
-    const imgBottomLeftX = 10;
+    const imgBottomLeftX = 60;
     const imgBottomLeftY = pageHeight - 10;
-    const imgBottomLeftWidth = 18;
-    const imgBottomLeftHeight = 18;
+    const imgBottomLeftWidth = 100;
+    const imgBottomLeftHeight = 23;
 
     doc.addImage(
       img,
