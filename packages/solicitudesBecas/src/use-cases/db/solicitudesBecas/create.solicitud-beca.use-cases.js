@@ -8,7 +8,7 @@ const createSolicitudBeca = (
 
   const totalSolicitudes = await countSolicitudesBecasQuery(null, {
     isDeleting: false,
-    searchColumn: 'fecha',
+    searchColumn: 'created_at',
     searchText: currentYear.toString(),
     searchType: 'date',
   });
