@@ -155,6 +155,13 @@ const { SOLICITUD_ESTADO_SOLICITUD_TABLE, SolicitudEstatusSolicitudSchema } = re
 const { SOLICITUD_USUARIO_TABLE, SolicitudUsuarioSchema } = require('../models/solicitudes_usuarios');
 const { TESTIGO_TABLE, TestigoSchema } = require('../models/testigos');
 const { TITULO_ELECTRONICO_TABLE, TituloElectronicoSchema } = require('../models/titulosElectronicos');
+const { SOLICITUDES_SERVICIO_SOCIAL_TABLE, SolicitudesServicioSocialSchema } = require('../models/solicitudesServicioSocial');
+const { SOLICITUDES_SERVICIO_SOCIAL_ALUMNOS_TABLE, SolicitudesServicioSocialAlumnosSchema } = require('../models/solicitudesServicioSocialAlumnos');
+const { EJES_SERVICIO_SOCIAL_TABLE, EjesServicioSocialSchema } = require('../models/ejesServicioSocial');
+const { DIMENSIONES_SERVICIO_SOCIAL_TABLE, DimensionesServicioSocialSchema } = require('../models/dimensionesServicioSocial');
+const { SECTORES_SERVICIO_SOCIAL_TABLE, SectoresServicioSocialSchema } = require('../models/sectoresServicioSocial');
+const { MODALIDAD_SERVICIO_SOCIAL_TABLE, ModalidadServicioSocialSchema } = require('../models/modalidadServicioSocial');
+const { ESTATUS_SOLICITUDES_SERVICIO_SOCIAL_TABLE, EstatusSolicitudesServicioSocialSchema } = require('../models/estatusSolicitudesServicioSocial');
 
 module.exports = {
   async up(queryInterface) {
@@ -350,6 +357,34 @@ module.exports = {
     await queryInterface.createTable(SOLICITUD_USUARIO_TABLE, SolicitudUsuarioSchema);
     await queryInterface.createTable(TESTIGO_TABLE, TestigoSchema);
     await queryInterface.createTable(TITULO_ELECTRONICO_TABLE, TituloElectronicoSchema);
+    await queryInterface.createTable(
+      MODALIDAD_SERVICIO_SOCIAL_TABLE,
+      ModalidadServicioSocialSchema,
+    );
+    await queryInterface.createTable(
+      SECTORES_SERVICIO_SOCIAL_TABLE,
+      SectoresServicioSocialSchema,
+    );
+    await queryInterface.createTable(
+      DIMENSIONES_SERVICIO_SOCIAL_TABLE,
+      DimensionesServicioSocialSchema,
+    );
+    await queryInterface.createTable(
+      ESTATUS_SOLICITUDES_SERVICIO_SOCIAL_TABLE,
+      EstatusSolicitudesServicioSocialSchema,
+    );
+    await queryInterface.createTable(
+      EJES_SERVICIO_SOCIAL_TABLE,
+      EjesServicioSocialSchema,
+    );
+    await queryInterface.createTable(
+      SOLICITUDES_SERVICIO_SOCIAL_TABLE,
+      SolicitudesServicioSocialSchema,
+    );
+    await queryInterface.createTable(
+      SOLICITUDES_SERVICIO_SOCIAL_ALUMNOS_TABLE,
+      SolicitudesServicioSocialAlumnosSchema,
+    );
   },
 
   async down(queryInterface) {
@@ -511,5 +546,12 @@ module.exports = {
     await queryInterface.dropTable(SOLICITUD_USUARIO_TABLE);
     await queryInterface.dropTable(TESTIGO_TABLE);
     await queryInterface.dropTable(TITULO_ELECTRONICO_TABLE);
+    await queryInterface.dropTable(MODALIDAD_SERVICIO_SOCIAL_TABLE);
+    await queryInterface.dropTable(SECTORES_SERVICIO_SOCIAL_TABLE);
+    await queryInterface.dropTable(DIMENSIONES_SERVICIO_SOCIAL_TABLE);
+    await queryInterface.dropTable(ESTATUS_SOLICITUDES_SERVICIO_SOCIAL_TABLE);
+    await queryInterface.dropTable(EJES_SERVICIO_SOCIAL_TABLE);
+    await queryInterface.dropTable(SOLICITUDES_SERVICIO_SOCIAL_TABLE);
+    await queryInterface.dropTable(SOLICITUDES_SERVICIO_SOCIAL_ALUMNOS_TABLE);
   },
 };
