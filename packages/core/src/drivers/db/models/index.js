@@ -122,7 +122,7 @@ const { TipoModalidad, TipoModalidadSchema } = require('./tipoModalidad');
 const { ModalidadTitulacion, ModalidadTitulacionSchema } = require('./modalidadTitulacion');
 const { SolicitudBeca, SolicitudBecaSchema } = require('./solicitudBeca');
 const { SolicitudBecaAlumno, SolicitudBecaAlumnoSchema } = require('./solicitudBecaAlumno');
-const { TipoSolicitudBeca, TipoSolicitudBecaSchema } = require('./tipoSolicitudBeca');
+const { TipoAlumnoBeca, TipoAlumnoBecaSchema } = require('./tipoAlumnoBeca');
 const { EstatusAlumnoBeca, EstatusAlumnoBecaSchema } = require('./estatusAlumnoBeca');
 const { EstatusSolicitudBeca, EstatusSolicitudBecaSchema } = require('./estatusSolicitudBeca');
 
@@ -325,7 +325,7 @@ function setupModels(sequelize) {
   ModalidadTitulacion.init(ModalidadTitulacionSchema, ModalidadTitulacion.config(sequelize));
   SolicitudBeca.init(SolicitudBecaSchema, SolicitudBeca.config(sequelize));
   SolicitudBecaAlumno.init(SolicitudBecaAlumnoSchema, SolicitudBecaAlumno.config(sequelize));
-  TipoSolicitudBeca.init(TipoSolicitudBecaSchema, TipoSolicitudBeca.config(sequelize));
+  TipoAlumnoBeca.init(TipoAlumnoBecaSchema, TipoAlumnoBeca.config(sequelize));
   EstatusAlumnoBeca.init(EstatusAlumnoBecaSchema, EstatusAlumnoBeca.config(sequelize));
   EstatusSolicitudBeca.init(EstatusSolicitudBecaSchema, EstatusSolicitudBeca.config(sequelize));
 
@@ -503,7 +503,7 @@ function setupModels(sequelize) {
   ModalidadTitulacion.associate(sequelize.models);
   SolicitudBeca.associate(sequelize.models);
   SolicitudBecaAlumno.associate(sequelize.models);
-  TipoSolicitudBeca.associate(sequelize.models);
+  TipoAlumnoBeca.associate(sequelize.models);
   EstatusAlumnoBeca.associate(sequelize.models);
   EstatusSolicitudBeca.associate(sequelize.models);
 

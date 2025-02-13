@@ -1,8 +1,9 @@
 // Solicitud Beca
 const solicitudBeca = {
   estatusSolicitudBecaId: { type: 'integer' },
+  cicloEscolarId: { type: 'integer' },
   programaId: { type: 'integer' },
-  fecha: { type: 'string', format: 'date-time' },
+  usuarioId: { type: 'integer' },
   folioSolicitud: { type: 'string' },
   observaciones: { type: 'string' },
 };

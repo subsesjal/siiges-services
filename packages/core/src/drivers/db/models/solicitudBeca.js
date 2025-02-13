@@ -1,5 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { ESTATUS_SOLICITUD_TABLE } = require('./estatusSolicitud');
+const { ESTATUS_SOLICITUD_BECA_TABLE } = require('./estatusSolicitudBeca');
 const { CICLO_ESCOLAR_TABLE } = require('./cicloEscolar');
 const { PROGRAMA_TABLE } = require('./programa');
 const { USUARIO_TABLE } = require('./usuario');
@@ -13,12 +13,12 @@ const SolicitudBecaSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  estatusSolicitudId: {
+  estatusSolicitudBecaId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'estatus_solicitud_id',
+    field: 'estatus_solicitud_beca_id',
     references: {
-      model: ESTATUS_SOLICITUD_TABLE,
+      model: ESTATUS_SOLICITUD_BECA_TABLE,
       key: 'id',
     },
   },
@@ -49,9 +49,13 @@ const SolicitudBecaSchema = {
       key: 'id',
     },
   },
-  folio: {
+  folioSolicitud: {
     allowNull: false,
     type: DataTypes.STRING,
+    field: 'folio_solicitud',
+  },
+  observaciones: {
+    type: DataTypes.TEXT,
   },
   createdAt: {
     allowNull: false,

@@ -1,12 +1,12 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-// solicitudes services
+// solicitudes becas services
 async function createSolicitudBeca(req, reply) {
   try {
     const { ...data } = req.body;
 
-    Logger.info('[solicitudes Becas]: Creating solicitud');
+    Logger.info('[solicitudes Becas]: Creating solicitud beca');
 
     const solicitudBeca = await this.solicitudBecaServices.createSolicitudBeca(data);
 
