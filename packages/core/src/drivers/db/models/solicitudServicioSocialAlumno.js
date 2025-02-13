@@ -1,16 +1,15 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const { SOLICITUDES_SERVICIO_SOCIAL } = require('./solicitudesServicioSocial');
+const { SOLICITUD_SERVICIO_SOCIAL_TABLE } = require('./solicitudServicioSocial');
 const { ALUMNO_TABLE } = require('./alumno');
 const { GRADO_TABLE } = require('./grado');
 const { MODALIDAD_SERVICIO_SOCIAL_TABLE } = require('./modalidadServicioSocial');
-const { SECTORES_SERVICIO_SOCIAL_TABLE } = require('./sectoresServicioSocial');
-const { DIMENSIONES_SERVICIO_SOCIAL_TABLE } = require('./dimensionesServicioSocial');
-const { EJES_SERVICIO_SOCIAL_TABLE } = require('./ejesServicioSocial');
+const { SECTOR_SERVICIO_SOCIAL_TABLE } = require('./sectorServicioSocial');
+const { EJE_SERVICIO_SOCIAL_TABLE } = require('./ejeServicioSocial');
 
-const SOLICITUDES_SERVICIO_SOCIAL_ALUMNOS_TABLE = 'solicitudes_servicio_social_alumnos';
+const SOLICITUD_SERVICIO_SOCIAL_ALUMNO_TABLE = 'solicitudes_servicio_social_alumnos';
 
-const SolicitudesServicioSocialAlumnosSchema = {
+const SolicitudServicioSocialAlumnoSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -22,7 +21,7 @@ const SolicitudesServicioSocialAlumnosSchema = {
     type: DataTypes.INTEGER,
     field: 'solicitud_servicio_social_id',
     references: {
-      model: SOLICITUDES_SERVICIO_SOCIAL,
+      model: SOLICITUD_SERVICIO_SOCIAL_TABLE,
       key: 'id',
     },
   },
@@ -58,16 +57,7 @@ const SolicitudesServicioSocialAlumnosSchema = {
     type: DataTypes.INTEGER,
     field: 'sector_servicio_social_id',
     references: {
-      model: SECTORES_SERVICIO_SOCIAL_TABLE,
-      key: 'id',
-    },
-  },
-  dimensionesServicioSocialId: {
-    allowNull: false,
-    type: DataTypes.INTEGER,
-    field: 'dimensiones_servicio_social_id',
-    references: {
-      model: DIMENSIONES_SERVICIO_SOCIAL_TABLE,
+      model: SECTOR_SERVICIO_SOCIAL_TABLE,
       key: 'id',
     },
   },
@@ -76,7 +66,7 @@ const SolicitudesServicioSocialAlumnosSchema = {
     type: DataTypes.INTEGER,
     field: 'ejes_servicio_social_id',
     references: {
-      model: EJES_SERVICIO_SOCIAL_TABLE,
+      model: EJE_SERVICIO_SOCIAL_TABLE,
       key: 'id',
     },
   },
@@ -113,29 +103,29 @@ const SolicitudesServicioSocialAlumnosSchema = {
   },
 };
 
-class SolicitudesServicioSocialAlumnos extends Model {
+class SolicitudServicioSocialAlumno extends Model {
   static associate(models) {
-    this.belongsTo(models.SolicitudesServicioSocial, { foreignKey: 'solicitud_servicio_social_id' });
-    this.belongsTo(models.Alumno, { foreignKey: 'alumno_id' });
-    this.belongsTo(models.Grado, { foreignKey: 'grado_id' });
-    this.belongsTo(models.ModalidadServicioSocial, { foreignKey: 'modalidad_servicio_social_id' });
-    this.belongsTo(models.SectoresServicioSocial, { foreignKey: 'sector_servicio_social_id' });
-    this.belongsTo(models.DimensionesServicioSocial, { foreignKey: 'dimensiones_servicio_social_id' });
-    this.belongsTo(models.EjesServicioSocial, { foreignKey: 'ejes_servicio_social_id' });
+    this.belongsTo(models.SolicitudServicioSocial, { as: 'solicitudServicioSocial' });
+    this.belongsTo(models.Alumno, { as: 'alumno' });
+    this.belongsTo(models.Grado, { as: 'grado' });
+    this.belongsTo(models.ModalidadServicioSocial, { as: 'modalidadServicioSocial' });
+    this.belongsTo(models.SectorServicioSocial, { as: 'sectorServicioSocial' });
+    this.belongsTo(models.DimensionServicioSocial, { as: 'dimensionServicioSocial' });
+    this.belongsTo(models.EjeServicioSocial, { as: 'ejeServicioSocial' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: SOLICITUDES_SERVICIO_SOCIAL_ALUMNOS_TABLE,
-      modelName: 'SolicitudesServicioSocialAlumnos',
+      tableName: SOLICITUD_SERVICIO_SOCIAL_ALUMNO_TABLE,
+      modelName: 'SolicitudServicioSocialAlumno',
       timestamps: false,
     };
   }
 }
 
 module.exports = {
-  SOLICITUDES_SERVICIO_SOCIAL_ALUMNOS_TABLE,
-  SolicitudesServicioSocialAlumnosSchema,
-  SolicitudesServicioSocialAlumnos,
+  SOLICITUD_SERVICIO_SOCIAL_ALUMNO_TABLE,
+  SolicitudServicioSocialAlumnoSchema,
+  SolicitudServicioSocialAlumno,
 };

@@ -1,9 +1,9 @@
 const path = require('path');
 const csvToJson = require('convert-csv-to-json');
 
-const { SECTORES_SERVICIO_SOCIAL_TABLE } = require('../models/sectoresServicioSocial');
+const { SECTOR_SERVICIO_SOCIAL_TABLE } = require('../models/sectorServicioSocial');
 
-const sectoresServicioSocialCSV = path.join(__dirname, '../CSVFiles/sectores_servicio_social.csv');
+const sectorServicioSocialCSV = path.join(__dirname, '../CSVFiles/sectores_servicio_social.csv');
 
 module.exports = {
   async up(queryInterface) {
@@ -11,15 +11,15 @@ module.exports = {
       // eslint-disable-next-line no-param-reassign
       queryInterface = queryInterface.context;
     }
-    const sectoresServicioSocialJson = await csvToJson
+    const sectorServicioSocialJson = await csvToJson
       .fieldDelimiter(',')
-      .getJsonFromCsv(sectoresServicioSocialCSV);
+      .getJsonFromCsv(sectorServicioSocialCSV);
 
     return queryInterface
-      .bulkInsert(SECTORES_SERVICIO_SOCIAL_TABLE, sectoresServicioSocialJson, {});
+      .bulkInsert(SECTOR_SERVICIO_SOCIAL_TABLE, sectorServicioSocialJson, {});
   },
 
   async down(queryInterface) {
-    await queryInterface.bulkDelete(SECTORES_SERVICIO_SOCIAL_TABLE, null, {});
+    await queryInterface.bulkDelete(SECTOR_SERVICIO_SOCIAL_TABLE, null, {});
   },
 };

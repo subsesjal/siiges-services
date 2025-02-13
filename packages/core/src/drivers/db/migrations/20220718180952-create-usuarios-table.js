@@ -125,6 +125,13 @@ const { SOLICITUD_BECA_ALUMNO_TABLE, SolicitudBecaAlumnoSchema } = require('../m
 const { ESTATUS_ALUMNO_BECA_TABLE, EstatusAlumnoBecaSchema } = require('../models/estatusAlumnoBeca');
 const { TIPO_SOLICITUD_BECA_TABLE, TipoSolicitudBecaSchema } = require('../models/tipoSolicitudBeca');
 const { ESTATUS_SOLICITUD_BECA_TABLE, EstatusSolicitudBecaSchema } = require('../models/estatusSolicitudBeca');
+const { SOLICITUD_SERVICIO_SOCIAL_TABLE, SolicitudServicioSocialSchema } = require('../models/solicitudServicioSocial');
+const { SOLICITUD_SERVICIO_SOCIAL_ALUMNO_TABLE, SolicitudServicioSocialAlumnoSchema } = require('../models/solicitudServicioSocialAlumno');
+const { EJE_SERVICIO_SOCIAL_TABLE, EjeServicioSocialSchema } = require('../models/ejeServicioSocial');
+const { DIMENSION_SERVICIO_SOCIAL_TABLE, DimensionServicioSocialSchema } = require('../models/dimensionServicioSocial');
+const { SECTOR_SERVICIO_SOCIAL_TABLE, SectorServicioSocialSchema } = require('../models/sectorServicioSocial');
+const { MODALIDAD_SERVICIO_SOCIAL_TABLE, ModalidadServicioSocialSchema } = require('../models/modalidadServicioSocial');
+const { ESTATUS_SOLICITUD_SERVICIO_SOCIAL_TABLE, EstatusSolicitudServicioSocialSchema } = require('../models/estatusSolicitudServicioSocial');
 
 // SIIGES 1.0
 const { ACADEMIA_TABLE, AcademiaSchema } = require('../models/academias');
@@ -162,13 +169,6 @@ const { SOLICITUD_ESTADO_SOLICITUD_TABLE, SolicitudEstatusSolicitudSchema } = re
 const { SOLICITUD_USUARIO_TABLE, SolicitudUsuarioSchema } = require('../models/solicitudes_usuarios');
 const { TESTIGO_TABLE, TestigoSchema } = require('../models/testigos');
 const { TITULO_ELECTRONICO_TABLE, TituloElectronicoSchema } = require('../models/titulosElectronicos');
-const { SOLICITUDES_SERVICIO_SOCIAL_TABLE, SolicitudesServicioSocialSchema } = require('../models/solicitudesServicioSocial');
-const { SOLICITUDES_SERVICIO_SOCIAL_ALUMNOS_TABLE, SolicitudesServicioSocialAlumnosSchema } = require('../models/solicitudesServicioSocialAlumnos');
-const { EJES_SERVICIO_SOCIAL_TABLE, EjesServicioSocialSchema } = require('../models/ejesServicioSocial');
-const { DIMENSIONES_SERVICIO_SOCIAL_TABLE, DimensionesServicioSocialSchema } = require('../models/dimensionesServicioSocial');
-const { SECTORES_SERVICIO_SOCIAL_TABLE, SectoresServicioSocialSchema } = require('../models/sectoresServicioSocial');
-const { MODALIDAD_SERVICIO_SOCIAL_TABLE, ModalidadServicioSocialSchema } = require('../models/modalidadServicioSocial');
-const { ESTATUS_SOLICITUDES_SERVICIO_SOCIAL_TABLE, EstatusSolicitudesServicioSocialSchema } = require('../models/estatusSolicitudesServicioSocial');
 
 module.exports = {
   async up(queryInterface) {
@@ -322,6 +322,34 @@ module.exports = {
     await queryInterface.createTable(ESTATUS_ALUMNO_BECA_TABLE, EstatusAlumnoBecaSchema);
     await queryInterface.createTable(TIPO_SOLICITUD_BECA_TABLE, TipoSolicitudBecaSchema);
     await queryInterface.createTable(ESTATUS_SOLICITUD_BECA_TABLE, EstatusSolicitudBecaSchema);
+    await queryInterface.createTable(
+      MODALIDAD_SERVICIO_SOCIAL_TABLE,
+      ModalidadServicioSocialSchema,
+    );
+    await queryInterface.createTable(
+      SECTOR_SERVICIO_SOCIAL_TABLE,
+      SectorServicioSocialSchema,
+    );
+    await queryInterface.createTable(
+      DIMENSION_SERVICIO_SOCIAL_TABLE,
+      DimensionServicioSocialSchema,
+    );
+    await queryInterface.createTable(
+      ESTATUS_SOLICITUD_SERVICIO_SOCIAL_TABLE,
+      EstatusSolicitudServicioSocialSchema,
+    );
+    await queryInterface.createTable(
+      EJE_SERVICIO_SOCIAL_TABLE,
+      EjeServicioSocialSchema,
+    );
+    await queryInterface.createTable(
+      SOLICITUD_SERVICIO_SOCIAL_TABLE,
+      SolicitudServicioSocialSchema,
+    );
+    await queryInterface.createTable(
+      SOLICITUD_SERVICIO_SOCIAL_ALUMNO_TABLE,
+      SolicitudServicioSocialAlumnoSchema,
+    );
 
     // SIIGES 1.0
     await queryInterface.createTable(ACADEMIA_TABLE, AcademiaSchema);
@@ -371,34 +399,6 @@ module.exports = {
     await queryInterface.createTable(SOLICITUD_USUARIO_TABLE, SolicitudUsuarioSchema);
     await queryInterface.createTable(TESTIGO_TABLE, TestigoSchema);
     await queryInterface.createTable(TITULO_ELECTRONICO_TABLE, TituloElectronicoSchema);
-    await queryInterface.createTable(
-      MODALIDAD_SERVICIO_SOCIAL_TABLE,
-      ModalidadServicioSocialSchema,
-    );
-    await queryInterface.createTable(
-      SECTORES_SERVICIO_SOCIAL_TABLE,
-      SectoresServicioSocialSchema,
-    );
-    await queryInterface.createTable(
-      DIMENSIONES_SERVICIO_SOCIAL_TABLE,
-      DimensionesServicioSocialSchema,
-    );
-    await queryInterface.createTable(
-      ESTATUS_SOLICITUDES_SERVICIO_SOCIAL_TABLE,
-      EstatusSolicitudesServicioSocialSchema,
-    );
-    await queryInterface.createTable(
-      EJES_SERVICIO_SOCIAL_TABLE,
-      EjesServicioSocialSchema,
-    );
-    await queryInterface.createTable(
-      SOLICITUDES_SERVICIO_SOCIAL_TABLE,
-      SolicitudesServicioSocialSchema,
-    );
-    await queryInterface.createTable(
-      SOLICITUDES_SERVICIO_SOCIAL_ALUMNOS_TABLE,
-      SolicitudesServicioSocialAlumnosSchema,
-    );
   },
 
   async down(queryInterface) {
@@ -530,6 +530,13 @@ module.exports = {
     await queryInterface.dropTable(ESTATUS_ALUMNO_BECA_TABLE);
     await queryInterface.dropTable(TIPO_SOLICITUD_BECA_TABLE);
     await queryInterface.dropTable(ESTATUS_SOLICITUD_BECA_TABLE);
+    await queryInterface.dropTable(MODALIDAD_SERVICIO_SOCIAL_TABLE);
+    await queryInterface.dropTable(SECTOR_SERVICIO_SOCIAL_TABLE);
+    await queryInterface.dropTable(DIMENSION_SERVICIO_SOCIAL_TABLE);
+    await queryInterface.dropTable(ESTATUS_SOLICITUD_SERVICIO_SOCIAL_TABLE);
+    await queryInterface.dropTable(EJE_SERVICIO_SOCIAL_TABLE);
+    await queryInterface.dropTable(SOLICITUD_SERVICIO_SOCIAL_TABLE);
+    await queryInterface.dropTable(SOLICITUD_SERVICIO_SOCIAL_ALUMNO_TABLE);
 
     // SIIGES 1.0
     await queryInterface.dropTable(ACADEMIA_TABLE);
@@ -567,12 +574,5 @@ module.exports = {
     await queryInterface.dropTable(SOLICITUD_USUARIO_TABLE);
     await queryInterface.dropTable(TESTIGO_TABLE);
     await queryInterface.dropTable(TITULO_ELECTRONICO_TABLE);
-    await queryInterface.dropTable(MODALIDAD_SERVICIO_SOCIAL_TABLE);
-    await queryInterface.dropTable(SECTORES_SERVICIO_SOCIAL_TABLE);
-    await queryInterface.dropTable(DIMENSIONES_SERVICIO_SOCIAL_TABLE);
-    await queryInterface.dropTable(ESTATUS_SOLICITUDES_SERVICIO_SOCIAL_TABLE);
-    await queryInterface.dropTable(EJES_SERVICIO_SOCIAL_TABLE);
-    await queryInterface.dropTable(SOLICITUDES_SERVICIO_SOCIAL_TABLE);
-    await queryInterface.dropTable(SOLICITUDES_SERVICIO_SOCIAL_ALUMNOS_TABLE);
   },
 };

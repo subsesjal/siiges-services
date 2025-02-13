@@ -1,8 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const DIMENSIONES_SERVICIO_SOCIAL_TABLE = 'dimensiones_servicio_social';
+const DIMENSION_SERVICIO_SOCIAL_TABLE = 'dimensiones_servicio_social';
 
-const DimensionesServicioSocialSchema = {
+const DimensionServicioSocialSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -35,22 +35,23 @@ const DimensionesServicioSocialSchema = {
   },
 };
 
-class DimensionesServicioSocial extends Model {
-  static associate() {
+class DimensionServicioSocial extends Model {
+  static associate(models) {
+    this.hasMany(models.EjeServicioSocial, { as: 'ejeServicioSocial', foreignKey: 'dimension_servicio_social_id' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: DIMENSIONES_SERVICIO_SOCIAL_TABLE,
-      modelName: 'DimensionesServicioSocial',
+      tableName: DIMENSION_SERVICIO_SOCIAL_TABLE,
+      modelName: 'DimensionServicioSocial',
       timestamps: false,
     };
   }
 }
 
 module.exports = {
-  DIMENSIONES_SERVICIO_SOCIAL_TABLE,
-  DimensionesServicioSocialSchema,
-  DimensionesServicioSocial,
+  DIMENSION_SERVICIO_SOCIAL_TABLE,
+  DimensionServicioSocialSchema,
+  DimensionServicioSocial,
 };

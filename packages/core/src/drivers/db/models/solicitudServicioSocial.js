@@ -1,11 +1,11 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { CICLO_ESCOLAR_TABLE } = require('./cicloEscolar');
 const { DOMICILIO_TABLE } = require('./domicilio');
-const { ESTATUS_SOLICITUDES_SERVICIO_SOCIAL_TABLE } = require('./estatusSolicitudesServicioSocial');
+const { ESTATUS_SOLICITUD_SERVICIO_SOCIAL_TABLE } = require('./estatusSolicitudServicioSocial');
 
-const SOLICITUDES_SERVICIO_SOCIAL_TABLE = 'solicitudes_servicio_social';
+const SOLICITUD_SERVICIO_SOCIAL_TABLE = 'solicitudes_servicio_social';
 
-const SolicitudesServicioSocialSchema = {
+const SolicitudServicioSocialSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -17,7 +17,7 @@ const SolicitudesServicioSocialSchema = {
     type: DataTypes.INTEGER,
     field: 'estatus_solicitud_servicio_social_id',
     references: {
-      model: ESTATUS_SOLICITUDES_SERVICIO_SOCIAL_TABLE,
+      model: ESTATUS_SOLICITUD_SERVICIO_SOCIAL_TABLE,
       key: 'id',
     },
   },
@@ -39,10 +39,11 @@ const SolicitudesServicioSocialSchema = {
       key: 'id',
     },
   },
-  folio: {
+  folioSolicitud: {
     allowNull: false,
     type: DataTypes.STRING,
     unique: true,
+    field: 'folio_solicitud',
   },
   createdAt: {
     allowNull: false,
@@ -62,25 +63,26 @@ const SolicitudesServicioSocialSchema = {
   },
 };
 
-class SolicitudesServicioSocial extends Model {
+class SolicitudServicioSocial extends Model {
   static associate(models) {
-    this.belongsTo(models.EstatusSolicitudesServicioSocial, { foreignKey: 'estatus_solicitud_servicio_social_id' });
-    this.belongsTo(models.CicloEscolar, { foreignKey: 'ciclo_escolar_id' });
-    this.belongsTo(models.Domicilio, { foreignKey: 'domicilio_id' });
+    this.belongsTo(models.EstatusSolicitudServicioSocial, { as: 'estatusSolicitudServicioSocial' });
+    this.belongsTo(models.CicloEscolar, { as: 'cicloEscolar' });
+    this.belongsTo(models.Domicilio, { as: 'domicilio' });
+    this.hasMany(models.SolicitudServicioSocialAlumno, { as: 'solicitudServicioSocialAlumnos', foreignKey: 'solicitud_servicio_social_id' });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: SOLICITUDES_SERVICIO_SOCIAL_TABLE,
-      modelName: 'SolicitudesServicioSocial',
+      tableName: SOLICITUD_SERVICIO_SOCIAL_TABLE,
+      modelName: 'SolicitudServicioSocial',
       timestamps: false,
     };
   }
 }
 
 module.exports = {
-  SOLICITUDES_SERVICIO_SOCIAL_TABLE,
-  SolicitudesServicioSocialSchema,
-  SolicitudesServicioSocial,
+  SOLICITUD_SERVICIO_SOCIAL_TABLE,
+  SolicitudServicioSocialSchema,
+  SolicitudServicioSocial,
 };

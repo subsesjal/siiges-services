@@ -1,8 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const ESTATUS_SOLICITUDES_SERVICIO_SOCIAL_TABLE = 'estatus_solicitudes_servicio_social';
+const ESTATUS_SOLICITUD_SERVICIO_SOCIAL_TABLE = 'estatus_solicitudes_servicio_social';
 
-const EstatusSolicitudesServicioSocialSchema = {
+const EstatusSolicitudServicioSocialSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -35,14 +35,14 @@ const EstatusSolicitudesServicioSocialSchema = {
   },
 };
 
-class EstatusSolicitudesServicioSocial extends Model {
+class EstatusSolicitudServicioSocial extends Model {
   static associate() {
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: ESTATUS_SOLICITUDES_SERVICIO_SOCIAL_TABLE,
+      tableName: ESTATUS_SOLICITUD_SERVICIO_SOCIAL_TABLE,
       modelName: 'EstatusSolicitudesServicioSocial',
       timestamps: false,
     };
@@ -50,7 +50,7 @@ class EstatusSolicitudesServicioSocial extends Model {
 }
 
 module.exports = {
-  ESTATUS_SOLICITUDES_SERVICIO_SOCIAL_TABLE,
-  EstatusSolicitudesServicioSocialSchema,
-  EstatusSolicitudesServicioSocial,
+  ESTATUS_SOLICITUD_SERVICIO_SOCIAL_TABLE,
+  EstatusSolicitudServicioSocialSchema,
+  EstatusSolicitudServicioSocial,
 };

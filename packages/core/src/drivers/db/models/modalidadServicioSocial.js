@@ -1,6 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const MODALIDAD_SERVICIO_SOCIAL_TABLE = 'modalidad_servicio_social';
+const MODALIDAD_SERVICIO_SOCIAL_TABLE = 'modalidades_servicio_social';
 
 const ModalidadServicioSocialSchema = {
   id: {

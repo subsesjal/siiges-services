@@ -125,6 +125,13 @@ const { SolicitudBecaAlumno, SolicitudBecaAlumnoSchema } = require('./solicitudB
 const { TipoSolicitudBeca, TipoSolicitudBecaSchema } = require('./tipoSolicitudBeca');
 const { EstatusAlumnoBeca, EstatusAlumnoBecaSchema } = require('./estatusAlumnoBeca');
 const { EstatusSolicitudBeca, EstatusSolicitudBecaSchema } = require('./estatusSolicitudBeca');
+const { SolicitudServicioSocial, SolicitudServicioSocialSchema } = require('./solicitudServicioSocial');
+const { SolicitudServicioSocialAlumno, SolicitudServicioSocialAlumnoSchema } = require('./solicitudServicioSocialAlumno');
+const { EjeServicioSocial, EjeServicioSocialSchema } = require('./ejeServicioSocial');
+const { DimensionServicioSocial, DimensionServicioSocialSchema } = require('./dimensionServicioSocial');
+const { SectorServicioSocial, SectorServicioSocialSchema } = require('./sectorServicioSocial');
+const { ModalidadServicioSocial, ModalidadServicioSocialSchema } = require('./modalidadServicioSocial');
+const { EstatusSolicitudServicioSocial, EstatusSolicitudServicioSocialSchema } = require('./estatusSolicitudServicioSocial');
 
 // Siiges 1.0
 const { Academia, AcademiaSchema } = require('./academias');
@@ -162,13 +169,6 @@ const { SolicitudEstatusSolicitud, SolicitudEstatusSolicitudSchema } = require('
 const { SolicitudUsuario, SolicitudUsuarioSchema } = require('./solicitudes_usuarios');
 const { Testigo, TestigoSchema } = require('./testigos');
 const { TituloElectronico, TituloElectronicoSchema } = require('./titulosElectronicos');
-const { SolicitudesServicioSocial, SolicitudesServicioSocialSchema } = require('./solicitudesServicioSocial');
-const { SolicitudesServicioSocialAlumnos, SolicitudesServicioSocialAlumnosSchema } = require('./solicitudesServicioSocialAlumnos');
-const { EjesServicioSocial, EjesServicioSocialSchema } = require('./ejesServicioSocial');
-const { DimensionesServicioSocial, DimensionesServicioSocialSchema } = require('./dimensionesServicioSocial');
-const { SectoresServicioSocial, SectoresServicioSocialSchema } = require('./sectoresServicioSocial');
-const { ModalidadServicioSocial, ModalidadServicioSocialSchema } = require('./modalidadServicioSocial');
-const { EstatusSolicitudesServicioSocial, EstatusSolicitudesServicioSocialSchema } = require('./estatusSolicitudesServicioSocial');
 // Siiges 1.0 Fin
 
 function setupModels(sequelize) {
@@ -329,6 +329,31 @@ function setupModels(sequelize) {
     .config(sequelize));
   TipoModalidad.init(TipoModalidadSchema, TipoModalidad.config(sequelize));
   ModalidadTitulacion.init(ModalidadTitulacionSchema, ModalidadTitulacion.config(sequelize));
+  SectorServicioSocial.init(
+    SectorServicioSocialSchema,
+    SectorServicioSocial.config(sequelize),
+  );
+  DimensionServicioSocial.init(
+    DimensionServicioSocialSchema,
+    DimensionServicioSocial.config(sequelize),
+  );
+  EstatusSolicitudServicioSocial.init(
+    EstatusSolicitudServicioSocialSchema,
+    EstatusSolicitudServicioSocial.config(sequelize),
+  );
+  EjeServicioSocial.init(
+    EjeServicioSocialSchema,
+    EjeServicioSocial.config(sequelize),
+  );
+  SolicitudServicioSocial.init(
+    SolicitudServicioSocialSchema,
+    SolicitudServicioSocial.config(sequelize),
+  );
+  SolicitudServicioSocialAlumno.init(
+    SolicitudServicioSocialAlumnoSchema,
+    SolicitudServicioSocialAlumno.config(sequelize),
+  );
+
   // Siiges 1.0
   Academia.init(AcademiaSchema, Academia.config(sequelize));
   ProgramaEvaluacion.init(ProgramaEvaluacionSchema, ProgramaEvaluacion.config(sequelize));
@@ -381,30 +406,6 @@ function setupModels(sequelize) {
   ModalidadServicioSocial.init(
     ModalidadServicioSocialSchema,
     ModalidadServicioSocial.config(sequelize),
-  );
-  SectoresServicioSocial.init(
-    SectoresServicioSocialSchema,
-    SectoresServicioSocial.config(sequelize),
-  );
-  DimensionesServicioSocial.init(
-    DimensionesServicioSocialSchema,
-    DimensionesServicioSocial.config(sequelize),
-  );
-  EstatusSolicitudesServicioSocial.init(
-    EstatusSolicitudesServicioSocialSchema,
-    EstatusSolicitudesServicioSocial.config(sequelize),
-  );
-  EjesServicioSocial.init(
-    EjesServicioSocialSchema,
-    EjesServicioSocial.config(sequelize),
-  );
-  SolicitudesServicioSocial.init(
-    SolicitudesServicioSocialSchema,
-    SolicitudesServicioSocial.config(sequelize),
-  );
-  SolicitudesServicioSocialAlumnos.init(
-    SolicitudesServicioSocialAlumnosSchema,
-    SolicitudesServicioSocialAlumnos.config(sequelize),
   );
   // Siiges 1.0 Fin
 
@@ -528,6 +529,14 @@ function setupModels(sequelize) {
   FundamentoServicioSocial.associate(sequelize.models);
   TipoModalidad.associate(sequelize.models);
   ModalidadTitulacion.associate(sequelize.models);
+  SolicitudServicioSocial.associate(sequelize.models);
+  SolicitudServicioSocialAlumno.associate(sequelize.models);
+  EjeServicioSocial.associate(sequelize.models);
+  DimensionServicioSocial.associate(sequelize.models);
+  SectorServicioSocial.associate(sequelize.models);
+  ModalidadServicioSocial.associate(sequelize.models);
+  EstatusSolicitudServicioSocial.associate(sequelize.models);
+
   // Siiges 1.0
   Academia.associate(sequelize.models);
   AlumnoObservacion.associate(sequelize.models);
@@ -564,13 +573,6 @@ function setupModels(sequelize) {
   SolicitudUsuario.associate(sequelize.models);
   Testigo.associate(sequelize.models);
   TituloElectronico.associate(sequelize.models);
-  SolicitudesServicioSocial.associate(sequelize.models);
-  SolicitudesServicioSocialAlumnos.associate(sequelize.models);
-  EjesServicioSocial.associate(sequelize.models);
-  DimensionesServicioSocial.associate(sequelize.models);
-  SectoresServicioSocial.associate(sequelize.models);
-  ModalidadServicioSocial.associate(sequelize.models);
-  EstatusSolicitudesServicioSocial.associate(sequelize.models);
   // Siiges 1.0 Fin
 
   SolicitudBeca.init(SolicitudBecaSchema, SolicitudBeca.config(sequelize));
