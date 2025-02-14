@@ -27,6 +27,7 @@ const {
   Usuario,
   Estado,
   InstitucionDgp,
+  Pais,
 } = drivers.sequelize.models;
 
 const {
@@ -100,4 +101,5 @@ module.exports = {
   updateFormacionQuery: updateAndFindQuery(Formacion),
   findOneUsuarioUsuarioQuery: findOneQuery(UsuarioUsuario),
   findOneUsuarioQuery: findOneQuery(Usuario),
+  findAllPaisesQuery: findAllQuery(Pais),
 };

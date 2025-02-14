@@ -1,3 +1,4 @@
+// SIIGES 2.0
 const { Ciclo, CicloSchema } = require('./ciclo');
 const { Domicilio, DomicilioSchema } = require('./domicilio');
 const { Diligencia, DiligenciaSchema } = require('./diligencia');
@@ -119,6 +120,19 @@ const { AsignaturaEquivalentePrograma, AsignaturaEquivalenteProgramaSchema } = r
 const { FundamentoServicioSocial, FundamentoServicioSocialSchema } = require('./fundamentoServicioSocial');
 const { TipoModalidad, TipoModalidadSchema } = require('./tipoModalidad');
 const { ModalidadTitulacion, ModalidadTitulacionSchema } = require('./modalidadTitulacion');
+const { SolicitudBeca, SolicitudBecaSchema } = require('./solicitudBeca');
+const { SolicitudBecaAlumno, SolicitudBecaAlumnoSchema } = require('./solicitudBecaAlumno');
+const { TipoAlumnoBeca, TipoAlumnoBecaSchema } = require('./tipoAlumnoBeca');
+const { EstatusAlumnoBeca, EstatusAlumnoBecaSchema } = require('./estatusAlumnoBeca');
+const { EstatusSolicitudBeca, EstatusSolicitudBecaSchema } = require('./estatusSolicitudBeca');
+const { SolicitudServicioSocial, SolicitudServicioSocialSchema } = require('./solicitudServicioSocial');
+const { SolicitudServicioSocialAlumno, SolicitudServicioSocialAlumnoSchema } = require('./solicitudServicioSocialAlumno');
+const { EjeServicioSocial, EjeServicioSocialSchema } = require('./ejeServicioSocial');
+const { DimensionServicioSocial, DimensionServicioSocialSchema } = require('./dimensionServicioSocial');
+const { SectorServicioSocial, SectorServicioSocialSchema } = require('./sectorServicioSocial');
+const { ModalidadServicioSocial, ModalidadServicioSocialSchema } = require('./modalidadServicioSocial');
+const { EstatusSolicitudServicioSocial, EstatusSolicitudServicioSocialSchema } = require('./estatusSolicitudServicioSocial');
+
 // Siiges 1.0
 const { Academia, AcademiaSchema } = require('./academias');
 const { AlumnoObservacion, AlumnoObservacionSchema } = require('./alumnoObservaciones');
@@ -159,6 +173,7 @@ const { TituloElectronico, TituloElectronicoSchema } = require('./titulosElectro
 
 function setupModels(sequelize) {
   // Initialize models
+  // SIIGES 2.0
   Ciclo.init(CicloSchema, Ciclo.config(sequelize));
   Domicilio.init(DomicilioSchema, Domicilio.config(sequelize));
   Diligencia.init(DiligenciaSchema, Diligencia.config(sequelize));
@@ -315,6 +330,36 @@ function setupModels(sequelize) {
     .config(sequelize));
   TipoModalidad.init(TipoModalidadSchema, TipoModalidad.config(sequelize));
   ModalidadTitulacion.init(ModalidadTitulacionSchema, ModalidadTitulacion.config(sequelize));
+  SectorServicioSocial.init(
+    SectorServicioSocialSchema,
+    SectorServicioSocial.config(sequelize),
+  );
+  DimensionServicioSocial.init(
+    DimensionServicioSocialSchema,
+    DimensionServicioSocial.config(sequelize),
+  );
+  EstatusSolicitudServicioSocial.init(
+    EstatusSolicitudServicioSocialSchema,
+    EstatusSolicitudServicioSocial.config(sequelize),
+  );
+  EjeServicioSocial.init(
+    EjeServicioSocialSchema,
+    EjeServicioSocial.config(sequelize),
+  );
+  SolicitudServicioSocial.init(
+    SolicitudServicioSocialSchema,
+    SolicitudServicioSocial.config(sequelize),
+  );
+  SolicitudServicioSocialAlumno.init(
+    SolicitudServicioSocialAlumnoSchema,
+    SolicitudServicioSocialAlumno.config(sequelize),
+  );
+  SolicitudBeca.init(SolicitudBecaSchema, SolicitudBeca.config(sequelize));
+  SolicitudBecaAlumno.init(SolicitudBecaAlumnoSchema, SolicitudBecaAlumno.config(sequelize));
+  TipoAlumnoBeca.init(TipoAlumnoBecaSchema, TipoAlumnoBeca.config(sequelize));
+  EstatusAlumnoBeca.init(EstatusAlumnoBecaSchema, EstatusAlumnoBeca.config(sequelize));
+  EstatusSolicitudBeca.init(EstatusSolicitudBecaSchema, EstatusSolicitudBeca.config(sequelize));
+
   // Siiges 1.0
   Academia.init(AcademiaSchema, Academia.config(sequelize));
   ProgramaEvaluacion.init(ProgramaEvaluacionSchema, ProgramaEvaluacion.config(sequelize));
@@ -364,9 +409,14 @@ function setupModels(sequelize) {
   SolicitudUsuario.init(SolicitudUsuarioSchema, SolicitudUsuario.config(sequelize));
   Testigo.init(TestigoSchema, Testigo.config(sequelize));
   TituloElectronico.init(TituloElectronicoSchema, TituloElectronico.config(sequelize));
+  ModalidadServicioSocial.init(
+    ModalidadServicioSocialSchema,
+    ModalidadServicioSocial.config(sequelize),
+  );
   // Siiges 1.0 Fin
 
   // Associations
+  // SIIGES 2.0
   Ciclo.associate(sequelize.models);
   Domicilio.associate(sequelize.models);
   Diligencia.associate(sequelize.models);
@@ -486,6 +536,19 @@ function setupModels(sequelize) {
   FundamentoServicioSocial.associate(sequelize.models);
   TipoModalidad.associate(sequelize.models);
   ModalidadTitulacion.associate(sequelize.models);
+  SolicitudServicioSocial.associate(sequelize.models);
+  SolicitudServicioSocialAlumno.associate(sequelize.models);
+  EjeServicioSocial.associate(sequelize.models);
+  DimensionServicioSocial.associate(sequelize.models);
+  SectorServicioSocial.associate(sequelize.models);
+  ModalidadServicioSocial.associate(sequelize.models);
+  EstatusSolicitudServicioSocial.associate(sequelize.models);
+  SolicitudBeca.associate(sequelize.models);
+  SolicitudBecaAlumno.associate(sequelize.models);
+  TipoAlumnoBeca.associate(sequelize.models);
+  EstatusAlumnoBeca.associate(sequelize.models);
+  EstatusSolicitudBeca.associate(sequelize.models);
+
   // Siiges 1.0
   Academia.associate(sequelize.models);
   AlumnoObservacion.associate(sequelize.models);

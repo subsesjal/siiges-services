@@ -1,0 +1,21 @@
+id,dimension_servicio_social_id,nombre,descripcion,created_at
+1,1,Vinculación y cooperación internacional,Vinculación y cooperación internacional,2024-07-30 17:50:41
+2,1,Gobierno abierto y rendición de cuentas,Gobierno abierto y rendición de cuentas,2024-07-30 17:50:41
+3,2,Deporte,Deporte,2024-07-30 17:50:41
+4,2,Desarrollo cultural y creativo,Desarrollo cultural y creativo,2024-07-30 17:50:41
+5,2,Recreación y esparcimiento,Recreación y esparcimiento,2024-07-30 17:50:41
+6,3,Cambio climático y energías renovables,Cambio climático y energías renovables,2024-07-30 17:50:41
+7,3,Movilidad sustentable,Movilidad sustentable,2024-07-30 17:50:41
+8,3,Protección y gestión ambiental,Protección y gestión ambiental,2024-07-30 17:50:41
+9,4,Grupos prioritarios,Grupos prioritarios,2024-07-30 17:50:41
+10,4,Migración,Migración,2024-07-30 17:50:41
+11,4,Pobreza y cohesión social,Pobreza y cohesión social,2024-07-30 17:50:41
+12,4,Salud y seguridad social,Salud y seguridad social,2024-07-30 17:50:41
+13,4,Vivienda,Vivienda,2024-07-30 17:50:41
+14,5,Derechos humanos,Derechos humanos,2024-07-30 17:50:41
+15,5,Protección civil,Protección civil,2024-07-30 17:50:41
+16,5,Seguridad ciudadana,Seguridad ciudadana,2024-07-30 17:50:41
+17,6,Desarrollo rural,Desarrollo rural,2024-07-30 17:50:41
+18,6,Empleo y capital humano,Empleo y capital humano,2024-07-30 17:50:41
+19,6,Financiamiento y emprendimiento,Financiamiento y emprendimiento,2024-07-30 17:50:41
+20,6,Innovación y ciencia,Innovación y ciencia,2024-07-30 17:50:41
