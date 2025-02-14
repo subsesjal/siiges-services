@@ -15,4 +15,5 @@ module.exports = {
   createSolicitudBecaQuery: createQuery(SolicitudBeca),
   findOneSolicitudBecaQuery: findOneQuery(SolicitudBeca),
   countSolicitudesBecasQuery: countQuery(SolicitudBeca),
+  findAllSolicitudBecaQuery: findOneQuery(SolicitudBeca),
 };
