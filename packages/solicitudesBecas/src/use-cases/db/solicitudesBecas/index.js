@@ -2,6 +2,7 @@ const { solicitudesBecas } = require('../../../adapters/db');
 
 const createSolicitudBeca = require('./create.solicitud-beca.use-cases');
 const findAllSolicitudBeca = require('./find-all.solicitud-beca.use-cases');
+const findOneSolicitudBeca = require('./find-one.solicitud-beca.use-cases');
 
 module.exports = {
   createSolicitudBeca: createSolicitudBeca(
@@ -13,5 +14,9 @@ module.exports = {
 
   findAllSolicitudBeca: findAllSolicitudBeca(
     solicitudesBecas.findAllSolicitudBecaQuery,
+  ),
+
+  findOneSolicitudBeca: findOneSolicitudBeca(
+    solicitudesBecas.findOneSolicitudBecaQuery,
   ),
 };
