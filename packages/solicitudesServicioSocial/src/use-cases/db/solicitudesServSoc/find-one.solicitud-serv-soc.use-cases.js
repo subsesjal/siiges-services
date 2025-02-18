@@ -1,3 +1,5 @@
+const { checkers } = require('@siiges-services/shared');
+
 const findOneSolicitudServSoc = (findOneSolicitudServSocQuery) => async (id) => {
   const include = [
     { association: 'estatusSolicitudServicioSocial' },
@@ -5,7 +7,15 @@ const findOneSolicitudServSoc = (findOneSolicitudServSocQuery) => async (id) => 
     { association: 'domicilio' },
   ];
 
-  return findOneSolicitudServSocQuery({ id }, { include });
+  const solicitudServSoc = await findOneSolicitudServSocQuery({ id }, { include, strict: false });
+
+  checkers.throwErrorIfDataIsFalsy(
+    solicitudServSoc,
+    'solicitud-serv-soc',
+    id,
+  );
+
+  return solicitudServSoc;
 };
 
 module.exports = findOneSolicitudServSoc;
