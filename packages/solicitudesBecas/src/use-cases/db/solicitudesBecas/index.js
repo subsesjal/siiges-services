@@ -12,6 +12,6 @@ module.exports = {
   ),
 
   findAllSolicitudBeca: findAllSolicitudBeca(
-    solicitudesBecas.findOneSolicitudBecaQuery,
+    solicitudesBecas.findAllSolicitudBecaQuery,
   ),
 };

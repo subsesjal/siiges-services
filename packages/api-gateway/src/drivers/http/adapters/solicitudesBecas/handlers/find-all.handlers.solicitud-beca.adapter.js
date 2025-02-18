@@ -3,7 +3,7 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function findAllSolicitudBeca(req, reply) {
   try {
-    Logger.info('[Solicitudes-Becas]: Getting paises list');
+    Logger.info('[Solicitudes-Becas]: Getting becas list');
 
     const becas = await this.solicitudBecaServices.findAllSolicitudBeca();
     return reply
