@@ -5,8 +5,8 @@ const { cicloEscolar } = require('../../ciclosEscolares/schema/properties/cicloE
 const { estatusSolicitudBeca } = require('./properties/estatusSolcitudBeca');
 
 const findOneSolicitudBecaSchema = {
-  tags: ['Solicitud Becas'],
-  description: 'Este endpoint devuelve un arreglo de un objeto, donde el objeto contiene los detalles de una solicitud de beca, incluyendo su estatus, ciclo escolar y programa asociado.',
+  tags: ['Solicitudes Becas'],
+  description: 'Este endpoint devuelve un objeto que contiene los detalles de una solicitud de beca, incluyendo su estatus, ciclo escolar y programa asociado.',
   response: {
     200: {
       type: 'object',
