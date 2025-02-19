@@ -16,10 +16,10 @@ async function solicitudBecaRouter(fastify, opts, next) {
   await fastify.get(
     '/',
     {
-      schema: solicitudSchemas.findAllSolicitudesBecaSchema,
+      schema: solicitudSchemas.findAllSolicitudesBecasSchema,
       onRequest: [fastify.authenticate],
     },
-    solicitudesBecasAdapter.findAllSolicitudesBeca,
+    solicitudesBecasAdapter.findAllSolicitudesBecas,
   );
 
   await fastify.get(

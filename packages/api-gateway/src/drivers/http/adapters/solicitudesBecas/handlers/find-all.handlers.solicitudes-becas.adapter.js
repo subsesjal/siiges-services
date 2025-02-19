@@ -1,11 +1,11 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-async function findAllSolicitudesBeca(req, reply) {
+async function findAllSolicitudesBecas(req, reply) {
   try {
     Logger.info('[Solicitudes-Becas]: Getting becas list');
 
-    const becas = await this.solicitudBecaServices.findAllSolicitudesBeca();
+    const becas = await this.solicitudBecaServices.findAllSolicitudesBecas();
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
@@ -15,4 +15,4 @@ async function findAllSolicitudesBeca(req, reply) {
   }
 }
 
-module.exports = { findAllSolicitudesBeca };
+module.exports = { findAllSolicitudesBecas };

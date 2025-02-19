@@ -5,7 +5,7 @@ async function findOneSolicitudBeca(req, reply) {
   try {
     const { solicitudBecaId } = req.params;
 
-    Logger.info(`[Solicitudes-Becas]: Getting beca with id: ${solicitudBecaId}`);
+    Logger.info(`[Solicitud-Beca]: Getting beca with id: ${solicitudBecaId}`);
 
     const beca = await this.solicitudBecaServices.findOneSolicitudBeca({ id: solicitudBecaId });
 

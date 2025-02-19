@@ -1,9 +1,9 @@
 const { createSolicitudBeca } = require('./create.handlers.solicitud-beca.adapters');
-const { findAllSolicitudesBeca } = require('./find-all.handlers.solicitud-beca.adapter');
-const { findOneSolicitudBeca } = require('./find-one.handlers.solicitud-becas.adapter');
+const { findAllSolicitudesBecas } = require('./find-all.handlers.solicitudes-becas.adapter');
+const { findOneSolicitudBeca } = require('./find-one.handlers.solicitud-beca.adapter');
 
 module.exports = {
   createSolicitudBeca,
-  findAllSolicitudesBeca,
+  findAllSolicitudesBecas,
   findOneSolicitudBeca,
 };

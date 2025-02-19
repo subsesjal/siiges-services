@@ -4,7 +4,7 @@ const { responseProperties } = require('./properties/responseProperties');
 const { cicloEscolar } = require('../../ciclosEscolares/schema/properties/cicloEscolar');
 const { estatusSolicitudBeca } = require('./properties/estatusSolcitudBeca');
 
-const findAllSolicitudesBecaSchema = {
+const findAllSolicitudesBecasSchema = {
   tags: ['Solicitudes Becas'],
   description: 'Este endpoint devuelve un arreglo de objetos, donde cada objeto contiene los detalles de una solicitud de beca, incluyendo su estatus, ciclo escolar y programa asociado.',
   response: {
@@ -12,7 +12,7 @@ const findAllSolicitudesBecaSchema = {
       type: 'object',
       properties: {
         data: {
-          type: 'array', // Cambiado a "array" porque es una lista de solicitudes
+          type: 'array',
           items: {
             type: 'object',
             properties: {
@@ -51,4 +51,4 @@ const findAllSolicitudesBecaSchema = {
   },
 };
 
-module.exports = findAllSolicitudesBecaSchema;
+module.exports = findAllSolicitudesBecasSchema;

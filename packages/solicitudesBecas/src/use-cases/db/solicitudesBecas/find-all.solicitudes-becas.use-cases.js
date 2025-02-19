@@ -1,11 +1,11 @@
-const findAllSolicitudesBeca = (findAllSolicitudesBecaQuery) => async () => {
+const findAllSolicitudesBecas = (findAllSolicitudesBecasQuery) => async () => {
   const include = [
     { association: 'estatusSolicitudBeca' },
     { association: 'cicloEscolar' },
     { association: 'programa' },
   ];
 
-  const becas = await findAllSolicitudesBecaQuery(
+  const becas = await findAllSolicitudesBecasQuery(
     {},
     { include, strict: false },
   );
@@ -13,4 +13,4 @@ const findAllSolicitudesBeca = (findAllSolicitudesBecaQuery) => async () => {
   return becas;
 };
 
-module.exports = findAllSolicitudesBeca;
+module.exports = findAllSolicitudesBecas;
