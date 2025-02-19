@@ -12,6 +12,22 @@ async function solicitudServSocRouter(fastify, opts, next) {
     },
     solicitudesServSocAdapter.createSolicitudServSoc,
   );
+  await fastify.get(
+    '/:solicitudServicioSocialId',
+    {
+      schema: solicitudServSocSchemas.findOneSolicitudServSocSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesServSocAdapter.findOneSolicitudServSoc,
+  );
+  await fastify.get(
+    '/',
+    {
+      schema: solicitudServSocSchemas.findAllSolicitudesServSocSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesServSocAdapter.findAllSolicitudesServSoc,
+  );
 
   next();
 }
