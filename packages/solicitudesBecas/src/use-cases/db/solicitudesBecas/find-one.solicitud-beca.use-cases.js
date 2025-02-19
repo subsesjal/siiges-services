@@ -5,17 +5,9 @@ const findOneSolicitudBeca = (
 ) => async (identifierObj) => {
   const filteredQuery = { id: identifierObj.id };
 
-  const include = [
-    {
-      association: 'estatusSolicitudBeca',
-    },
-    {
-      association: 'cicloEscolar',
-    },
-    {
-      association: 'programa',
-    },
-  ];
+  const include = [{ association: 'estatusSolicitudBeca' },
+    { association: 'cicloEscolar' },
+    { association: 'programa' }];
 
   const beca = await findOneSolicitudBecaQuery(filteredQuery, {
     include,

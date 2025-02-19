@@ -3,11 +3,11 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function findOneSolicitudBeca(req, reply) {
   try {
-    const { becaId } = req.params;
+    const { solicitudBecaId } = req.params;
 
-    Logger.info(`[Solicitudes-Becas]: Getting beca with id: ${becaId}`);
+    Logger.info(`[Solicitudes-Becas]: Getting beca with id: ${solicitudBecaId}`);
 
-    const beca = await this.solicitudBecaServices.findOneSolicitudBeca({ id: becaId });
+    const beca = await this.solicitudBecaServices.findOneSolicitudBeca({ id: solicitudBecaId });
 
     return reply
       .code(200)
