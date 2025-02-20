@@ -9,10 +9,12 @@ const {
   createQuery,
   countQuery,
   findOneQuery,
+  findAllQuery,
 } = queries;
 
 module.exports = {
   createSolicitudBecaQuery: createQuery(SolicitudBeca),
   findOneSolicitudBecaQuery: findOneQuery(SolicitudBeca),
   countSolicitudesBecasQuery: countQuery(SolicitudBeca),
+  findAllSolicitudesBecasQuery: findAllQuery(SolicitudBeca),
 };

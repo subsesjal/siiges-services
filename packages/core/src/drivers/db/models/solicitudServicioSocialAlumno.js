@@ -6,6 +6,7 @@ const { GRADO_TABLE } = require('./grado');
 const { MODALIDAD_SERVICIO_SOCIAL_TABLE } = require('./modalidadServicioSocial');
 const { SECTOR_SERVICIO_SOCIAL_TABLE } = require('./sectorServicioSocial');
 const { EJE_SERVICIO_SOCIAL_TABLE } = require('./ejeServicioSocial');
+const { DIMENSION_SERVICIO_SOCIAL_TABLE } = require('./dimensionServicioSocial');
 
 const SOLICITUD_SERVICIO_SOCIAL_ALUMNO_TABLE = 'solicitudes_servicio_social_alumnos';
 
@@ -61,10 +62,19 @@ const SolicitudServicioSocialAlumnoSchema = {
       key: 'id',
     },
   },
-  ejesServicioSocialId: {
+  dimensionServicioSocialId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'ejes_servicio_social_id',
+    field: 'dimension_servicio_social_id',
+    references: {
+      model: DIMENSION_SERVICIO_SOCIAL_TABLE,
+      key: 'id',
+    },
+  },
+  ejeServicioSocialId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'eje_servicio_social_id',
     references: {
       model: EJE_SERVICIO_SOCIAL_TABLE,
       key: 'id',
