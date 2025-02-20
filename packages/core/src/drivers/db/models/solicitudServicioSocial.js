@@ -45,6 +45,9 @@ const SolicitudServicioSocialSchema = {
     unique: true,
     field: 'folio_solicitud',
   },
+  observaciones: {
+    type: DataTypes.TEXT,
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,

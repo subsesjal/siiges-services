@@ -17,3 +17,5 @@ id,nombre,descripcion,created_at
 16,vigilante,Vigilante,2018-09-12 18:00:00
 17,capturista_opd,Capturista OPD,2018-09-12 18:00:00
 18,rev_equiv_sicyt,Rev Equivalencias SICYT,2018-09-12 18:00:00
+19,becas_ies,Becas Académicas IES,2018-09-12 18:00:00
+20,becas_sicyt,Becas Académicas SICYT,2018-09-12 18:00:00
