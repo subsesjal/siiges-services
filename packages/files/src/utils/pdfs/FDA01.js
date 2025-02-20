@@ -14,9 +14,8 @@ const {
   addNutmeg,
 } = require('./pdfHandler');
 
-const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
-const img2 = fs.readFileSync(path.join(__dirname, '/images/img2.png'), { encoding: 'base64' });
-const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encoding: 'base64' });
+const img5 = fs.readFileSync(path.join(__dirname, '/images/img5.png'), { encoding: 'base64' });
+const img4 = fs.readFileSync(path.join(__dirname, '/images/img4.png'), { encoding: 'base64' });
 
 function GenerarFDA01(solicitud) {
   const JsPDF = jsPDF;
@@ -41,19 +40,16 @@ function GenerarFDA01(solicitud) {
   const nombreNivel = niveles
     .find(({ id }) => +id === solicitud?.programa.nivelId).descripcion;
 
-  doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
-  doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
-  doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
-  doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
+  doc.addImage(img4, 'JPEG', 60, 9, 100, 23);
 
-  doc.setFillColor(6, 98, 211);
+  doc.setFillColor(116, 200, 210);
   crearCelda(doc, 165, 40, 30, 7, 'FDA01', 10);
 
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [69, 133, 244], 'OFICIO DE ENTREGA DE DOCUMENTACIÓN', 15, 50);
+  configurarFuenteYAgregarTexto(doc, 'bold', 12, [116, 200, 210], 'OFICIO DE ENTREGA DE DOCUMENTACIÓN', 15, 50);
   currentPositionY += 40;
   let content = `
-  JOSÉ ROSALIO MUÑOZ CASTRO
-  SUBSECRETARIO DE EDUCACIÓN SUPERIOR
+  FANNY GUADALUPE VALDIVIA MÁRQUEZ
+  SUBSECRETARIA DE EDUCACIÓN SUPERIOR
   `;
   currentPositionY = crearSeccion(currentPositionY, doc, content, 'left');
   content = `
@@ -114,7 +110,7 @@ function GenerarFDA01(solicitud) {
   content = `${solicitud.usuario.persona.nombre} ${solicitud.usuario.persona.apellidoPaterno} ${solicitud.usuario.persona.apellidoMaterno}`;
   currentPositionY += 5;
   crearSeccion(currentPositionY, doc, content, 'center');
-  agregarImagenYPaginaPie(doc, img3);
+  agregarImagenYPaginaPie(doc, img5);
 
   const pdfDataUri = doc.output('arraybuffer');
   return pdfDataUri;
