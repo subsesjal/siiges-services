@@ -4,5 +4,5 @@ id,nombre,descripcion,created_at
 3,FOLIOS ASIGNADOS,Folios Asignados,2018-08-08 0:00:00
 4,ATENDER OBSERVACIONES,Atender Observaciones de la Solicitud,2018-08-08 0:00:00
 5,CANCELADA,Solicitud cancelada,2018-08-08 0:00:00
-6,ENVIO TITULACION,Envío a aplicación de titulación,2018-08-08 0:00:00
-7,ENVIO PARCIAL,Envío parcial a aplicación de titulación,2018-08-08 0:00:00
+6,ENVIADO A TITULACION,Envío a aplicación de titulación,2018-08-08 0:00:00
+7,ENVIO PARCIAL A TITULACION,Envío parcial a aplicación de titulación,2018-08-08 0:00:00
