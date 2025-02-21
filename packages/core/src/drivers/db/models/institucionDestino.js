@@ -33,6 +33,10 @@ const InstitucionDestinoSchema = {
     type: DataTypes.STRING,
     field: 'nombre_carrera',
   },
+  nivel: {
+    allowNull: true,
+    type: DataTypes.STRING,
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
