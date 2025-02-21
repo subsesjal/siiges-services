@@ -13,6 +13,15 @@ async function solicitudBecaRouter(fastify, opts, next) {
     solicitudesBecasAdapter.createSolicitudBeca,
   );
 
+  await fastify.patch(
+    '/:solicitudBecaId',
+    {
+      schema: solicitudSchemas.updateSolicitudBecaSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesBecasAdapter.updateSolicitudBeca,
+  );
+
   await fastify.get(
     '/',
     {
