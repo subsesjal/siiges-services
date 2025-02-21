@@ -25,7 +25,6 @@ module.exports = {
     solicitudesBecas.deleteSolicitudBecasQuery,
   ),
 
-=======
   updateSolicitudBeca: updateSolicitudBeca(
     solicitudesBecas.findOneSolicitudBecaQuery,
     solicitudesBecas.updateSolicitudesBecasQuery,
