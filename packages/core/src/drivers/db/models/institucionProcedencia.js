@@ -20,9 +20,14 @@ const InstitucionProcedenciaSchema = {
       key: 'id',
     },
   },
-  nombre: {
+  nivelId: {
     allowNull: false,
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
+    field: 'nivel_id',
+    references: {
+      model: TIPO_INSTITUCION_TABLE,
+      key: 'id',
+    },
   },
   estadoId: {
     allowNull: false,
@@ -32,6 +37,10 @@ const InstitucionProcedenciaSchema = {
       model: ESTADO_TABLE,
       key: 'id',
     },
+  },
+  nombre: {
+    allowNull: false,
+    type: DataTypes.STRING,
   },
   nombreCarrera: {
     allowNull: false,
