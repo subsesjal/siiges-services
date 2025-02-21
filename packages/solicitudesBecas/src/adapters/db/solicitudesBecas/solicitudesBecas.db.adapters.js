@@ -11,6 +11,7 @@ const {
   findOneQuery,
   updateAndFindQuery,
   findAllQuery,
+  deleteAndFindQuery,
 } = queries;
 
 module.exports = {
@@ -19,4 +20,5 @@ module.exports = {
   countSolicitudesBecasQuery: countQuery(SolicitudBeca),
   updateSolicitudesBecasQuery: updateAndFindQuery(SolicitudBeca),
   findAllSolicitudesBecasQuery: findAllQuery(SolicitudBeca),
+  deleteSolicitudBecasQuery: deleteAndFindQuery(SolicitudBeca),
 };
