@@ -31,6 +31,15 @@ async function solicitudBecaRouter(fastify, opts, next) {
     solicitudesBecasAdapter.findOneSolicitudBeca,
   );
 
+  await fastify.delete(
+    '/:solicitudBecaId',
+    {
+      schema: solicitudSchemas.findOneSolicitudBecaSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesBecasAdapter.deleteSolicitudBeca,
+  );
+
   next();
 }
 
