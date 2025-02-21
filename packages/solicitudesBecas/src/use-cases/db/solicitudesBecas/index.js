@@ -19,12 +19,10 @@ module.exports = {
   findOneSolicitudBeca: findOneSolicitudBeca(
     solicitudesBecas.findOneSolicitudBecaQuery,
   ),
-
   deleteSolicitudBeca: deleteSolicitudBeca(
     solicitudesBecas.findOneSolicitudBecaQuery,
     solicitudesBecas.deleteSolicitudBecasQuery,
   ),
-
   updateSolicitudBeca: updateSolicitudBeca(
     solicitudesBecas.findOneSolicitudBecaQuery,
     solicitudesBecas.updateSolicitudesBecasQuery,
