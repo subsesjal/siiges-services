@@ -50,7 +50,7 @@ const DocenteSchema = {
   },
   experiencias: {
     allowNull: true,
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
   },
   observaciones: {
     allowNull: true,
