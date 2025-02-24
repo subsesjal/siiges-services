@@ -144,27 +144,25 @@ Sequelize soporta varios tipos de relaciones: `hasOne`, `belongsTo`, `hasMany`, 
 
 1. **Relación Uno a Uno (`hasOne` y `belongsTo`)**:
    ```javascript
-   const User = require('./user');
-   const Profile = sequelize.define('Profile', {
-     id: {
-       type: DataTypes.INTEGER,
-       autoIncrement: true,
-       primaryKey: true
-     },
-     bio: {
-       type: DataTypes.STRING
-     },
-     userId: {
-       type: DataTypes.INTEGER,
-       references: {
-         model: User,
-         key: 'id'
-       }
-     }
-   });
+   class Alumno extends Model {
+      static associate(models) {
+      this.belongsTo(models.Programa, { as: 'programa' });
+      this.belongsTo(models.Persona, { as: 'persona' });
+      this.belongsTo(models.Situacion, { as: 'situacion' });
+      this.hasMany(models.AlumnoTipoTramite, { as: 'alumnoTipoTramites', foreignKey: 'alumnoId' });
+      this.hasMany(models.Calificacion, { as: 'calificaciones', foreignKey: 'alumnoId' });
+      this.hasOne(models.Validacion, { as: 'validacion', foreignKey: 'alumnoId' });
+      }
 
-   User.hasOne(Profile, { foreignKey: 'userId' });
-   Profile.belongsTo(User, { foreignKey: 'userId' });
+      static config(sequelize) {
+      return {
+      sequelize,
+      tableName: ALUMNO_TABLE,
+      modelName: 'Alumno',
+      timestamps: false,
+      };
+    }
+  }
    ```
 
 2. **Relación Uno a Muchos (`hasMany` y `belongsTo`)**:
