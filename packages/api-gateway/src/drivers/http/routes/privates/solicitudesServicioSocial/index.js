@@ -28,6 +28,14 @@ async function solicitudServSocRouter(fastify, opts, next) {
     },
     solicitudesServSocAdapter.findAllSolicitudesServSoc,
   );
+  await fastify.patch(
+    '/:solicitudServicioSocialId',
+    {
+      schema: solicitudServSocSchemas.updateSolicitudServSocSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesServSocAdapter.updateSolicitudServSoc,
+  );
 
   next();
 }

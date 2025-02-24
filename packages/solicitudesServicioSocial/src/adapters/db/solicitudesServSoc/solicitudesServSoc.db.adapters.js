@@ -3,6 +3,7 @@ const { models, queries } = require('@siiges-services/core');
 
 const {
   SolicitudServicioSocial,
+  Domicilio,
 } = models;
 
 const {
@@ -10,6 +11,7 @@ const {
   countQuery,
   findOneQuery,
   findAllQuery,
+  updateAndFindQuery,
 } = queries;
 
 module.exports = {
@@ -17,4 +19,6 @@ module.exports = {
   findOneSolicitudServicioSocialQuery: findOneQuery(SolicitudServicioSocial),
   countSolicitudesServicioSocialQuery: countQuery(SolicitudServicioSocial),
   findAllSolicitudesServicioSocialQuery: findAllQuery(SolicitudServicioSocial),
+  updateSolicitudServicioSocialQuery: updateAndFindQuery(SolicitudServicioSocial),
+  updateDomicilioQuery: updateAndFindQuery(Domicilio),
 };
