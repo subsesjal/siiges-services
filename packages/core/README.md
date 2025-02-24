@@ -233,13 +233,13 @@ Esta es una configuración del modelo `Alumno` en Sequelize. La función estable
 - `modelName`: El nombre del modelo, en este caso `'Alumno'`.
 - `timestamps`: Indica que no se deben añadir automáticamente las columnas `createdAt` y `updatedAt`.
 ```javascript
-   static  config(sequelize)  {  
-	   return  { 
-		   sequelize, 
-		   tableName: ALUMNO_TABLE, 
-		   modelName:  'Alumno', 
-		   timestamps:  false,  
-		};  
+   static  config(sequelize)  {
+	   return  {
+		   sequelize,
+		   tableName: ALUMNO_TABLE,
+		   modelName:  'Alumno',
+		   timestamps:  false,
+		};
 	}
    ```
 ---
@@ -487,7 +487,7 @@ const csvToJson = require('convert-csv-to-json');
 
 const { ALUMNO_TABLE } = require('../models/alumno');
 
-const alumnosCSV = path.join(__dirname, '../CSVFiles/alumnos.csv');
+const alumnosCSV = path.join(__dirname, '../../CSVFiles/alumnos.csv');
 
 module.exports = {
   async up(queryInterface) {

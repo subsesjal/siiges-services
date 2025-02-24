@@ -4,7 +4,7 @@ const sequelize = require('../../packages/core/src/drivers/db/connection');
 const Logger = require('../../packages/shared/src/utils/logger/index');
 
 const umzug = new Umzug({
-  migrations: { glob: './packages/core/src/drivers/db/seeders/*.js' },
+  migrations: { glob: './packages/core/src/drivers/db/seeders/dev/*.js' },
   // seeders: { glob: './packages/core/src/drivers/db/seeders/*.js' },
   context: sequelize.getQueryInterface(),
   storage: new SequelizeStorage({ sequelize }),

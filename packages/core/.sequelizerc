@@ -2,5 +2,5 @@ module.exports = {
 	config: './src/drivers/mysql/config.js',
 	'models-path': './src/drivers/db/models',
 	'migrations-path': './src/drivers/db/migrations',
-	'seeders-path': './src/drivers/db/seeders',
+	'seeders-path': './src/drivers/db/seeders/dev',
 };
