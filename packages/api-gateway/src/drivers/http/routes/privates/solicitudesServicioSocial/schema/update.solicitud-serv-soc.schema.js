@@ -7,7 +7,7 @@ const { responseProperties } = require('./properties/responseProperties');
 const updateSolicitudServSocSchema = {
   tags: ['Solicitudes Servicio Social'],
   description:
-    'Actualiza una solicitud de Servicio Social.',
+    'Actualiza los datos de una solicitud de Servicio Social con el ID proporcionado. Se debe enviar la información actualizada en el cuerpo de la solicitud. El endpoint devuelve la solicitud actualizada en caso de éxito o un error en caso de fallos en la validación o en la base de datos.',
   body: {
     type: 'object',
     properties: {
