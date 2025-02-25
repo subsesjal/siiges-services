@@ -11,6 +11,10 @@ const {
 } = require('./db/paises');
 
 const {
+  findAllNiveles,
+} = require('./db/niveles');
+
+const {
   createPlantel,
   findOnePlantel,
   findOnePlantelDetalles,
@@ -110,4 +114,5 @@ module.exports = {
   findAllFormacionDirector,
   findOneFormacionDirector,
   updateFormacionDirector,
+  findAllNiveles,
 };
