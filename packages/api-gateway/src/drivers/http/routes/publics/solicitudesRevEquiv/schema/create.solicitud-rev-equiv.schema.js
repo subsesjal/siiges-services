@@ -102,10 +102,9 @@ const createEquivalenciaSchema = {
         required: ['persona', 'institucionProcedencia', 'institucionDestino'],
         if: {
           properties: {
-            asignaturasAntecedentesEquivalentes: {
-              type: 'array',
-            },
+            asignaturasAntecedentesEquivalentes: { type: 'array' },
           },
+          required: ['asignaturasAntecedentesEquivalentes'],
         },
         then: {
           required: ['asignaturasAntecedentesEquivalentes'],
