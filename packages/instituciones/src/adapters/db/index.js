@@ -102,4 +102,5 @@ module.exports = {
   findOneUsuarioUsuarioQuery: findOneQuery(UsuarioUsuario),
   findOneUsuarioQuery: findOneQuery(Usuario),
   findAllPaisesQuery: findAllQuery(Pais),
+  findAllNivelQuery: findAllQuery(Nivel),
 };
