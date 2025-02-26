@@ -36,6 +36,14 @@ async function solicitudServSocRouter(fastify, opts, next) {
     },
     solicitudesServSocAdapter.updateSolicitudServSoc,
   );
+  await fastify.post(
+    '/:solicitudServicioSocialId/solicitudesServicioSocialAlumno',
+    {
+      schema: solicitudServSocSchemas.createSolicitudServSocAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesServSocAdapter.createSolicitudServSocAlumno,
+  );
 
   next();
 }

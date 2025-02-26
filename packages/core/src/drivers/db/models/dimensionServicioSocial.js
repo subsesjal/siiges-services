@@ -37,7 +37,7 @@ const DimensionServicioSocialSchema = {
 
 class DimensionServicioSocial extends Model {
   static associate(models) {
-    this.hasMany(models.EjeServicioSocial, { as: 'ejeServicioSocial', foreignKey: 'dimension_servicio_social_id' });
+    this.hasMany(models.EjeServicioSocial, { as: 'ejeServicioSocial', foreignKey: 'dimensionServicioSocialId' });
   }
 
   static config(sequelize) {
