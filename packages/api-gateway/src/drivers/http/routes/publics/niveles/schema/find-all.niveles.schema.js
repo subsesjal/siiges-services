@@ -1,7 +1,7 @@
-const { niveles } = require('../../../privates/grupos/schema/properties/nivel');
+const { nivel } = require('../../../privates/grupos/schema/properties/nivel');
 const { responseProperties } = require('./properties/responseProperties');
 
-const findAllPaisesSchema = {
+const findAllNivelesSchema = {
   tags: ['Nivel'],
   description: 'Return a list of niveles.',
   querystring: {
@@ -20,7 +20,7 @@ const findAllPaisesSchema = {
             type: 'object',
             properties: {
               id: { type: 'integer' },
-              ...niveles,
+              ...nivel,
               ...responseProperties,
             },
           },
@@ -30,4 +30,4 @@ const findAllPaisesSchema = {
   },
 };
 
-module.exports = findAllPaisesSchema;
+module.exports = findAllNivelesSchema;

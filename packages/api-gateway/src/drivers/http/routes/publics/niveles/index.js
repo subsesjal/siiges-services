@@ -1,11 +1,10 @@
 const { nivelesAdapter } = require('../../../adapters');
-
-// const { findAllNivelesSchema } = require('./schema');
+const { findAllNivelesSchema } = require('./schema');
 
 async function nivelesRouter(fastify, opts, next) {
   await fastify.get(
     '/',
-    //    { schema: findAllNivelesSchema },
+    { schema: findAllNivelesSchema },
     nivelesAdapter.findAllNiveles,
   );
 
