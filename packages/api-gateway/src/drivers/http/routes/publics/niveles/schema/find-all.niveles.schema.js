@@ -2,13 +2,10 @@ const { nivel } = require('../../../privates/grupos/schema/properties/nivel');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findAllNivelesSchema = {
-  tags: ['Nivel'],
-  description: 'Return a list of niveles.',
+  tags: ['Niveles académicos'],
+  description: 'Devuelve una lista de objetos de niveles educativos registrados en el sistema',
   querystring: {
     type: 'object',
-    properties: {
-      estadoId: { type: 'integer' },
-    },
   },
   response: {
     200: {
