@@ -26,5 +26,12 @@ module.exports = {
   createSolicitudServSocAlumno: createSolicitudServSocAlumno(
     solicitudesServSoc.createSolicitudServicioSocialAlumnoQuery,
     solicitudesServSoc.findOneSolicitudServicioSocialAlumnoQuery,
+    solicitudesServSoc.findOneSolicitudServicioSocialQuery,
+    solicitudesServSoc.findOneAlumnoQuery,
+    solicitudesServSoc.findOneGradoQuery,
+    solicitudesServSoc.findOneModalidadServicioSocialQuery,
+    solicitudesServSoc.findOneSectorServicioSocialQuery,
+    solicitudesServSoc.findOneEjeServicioSocialQuery,
+    solicitudesServSoc.findOneDimensionServicioSocialQuery,
   ),
 };

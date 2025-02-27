@@ -1,3 +1,4 @@
+const { solicitudServicioSocialAlumno } = require('./properties/solicitudServicioSocialAlumno');
 const { alumno } = require('./properties/alumno');
 const { grado } = require('./properties/grado');
 const { modalidadServicioSocial } = require('./properties/modalidadServicioSocial');
@@ -20,16 +21,7 @@ const createSolicitudServSocAlumnoSchema = {
   body: {
     type: 'object',
     properties: {
-      solicitudServicioSocialId: { type: 'integer' },
-      alumnoId: { type: 'integer' },
-      gradoId: { type: 'integer' },
-      modalidadServicioSocialId: { type: 'integer' },
-      sectorServicioSocialId: { type: 'integer' },
-      dimensionServicioSocialId: { type: 'integer' },
-      ejeServicioSocialId: { type: 'integer' },
-      lugarReceptor: { type: 'string' },
-      fechaInicio: { type: 'string', format: 'date' },
-      fechaTermino: { type: 'string', format: 'date' },
+      ...solicitudServicioSocialAlumno,
     },
     required: [
       'solicitudServicioSocialId',
@@ -50,16 +42,7 @@ const createSolicitudServSocAlumnoSchema = {
       properties: {
         data: {
           properties: {
-            solicitudServicioSocialId: { type: 'integer' },
-            alumnoId: { type: 'integer' },
-            gradoId: { type: 'integer' },
-            modalidadServicioSocialId: { type: 'integer' },
-            sectorServicioSocialId: { type: 'integer' },
-            dimensionServicioSocialId: { type: 'integer' },
-            ejeServicioSocialId: { type: 'integer' },
-            lugarReceptor: { type: 'string' },
-            fechaInicio: { type: 'string', format: 'date' },
-            fechaTermino: { type: 'string', format: 'date' },
+            ...solicitudServicioSocialAlumno,
             alumno: {
               type: 'object',
               properties: {
