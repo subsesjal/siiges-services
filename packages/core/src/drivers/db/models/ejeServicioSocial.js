@@ -47,7 +47,7 @@ const EjeServicioSocialSchema = {
 
 class EjeServicioSocial extends Model {
   static associate(models) {
-    this.belongsTo(models.DimensionServicioSocial, { as: 'dimension' });
+    this.belongsTo(models.DimensionServicioSocial, { as: 'dimensionServicioSocial' });
   }
 
   static config(sequelize) {

@@ -71,7 +71,7 @@ class SolicitudServicioSocial extends Model {
     this.belongsTo(models.EstatusSolicitudServicioSocial, { as: 'estatusSolicitudServicioSocial' });
     this.belongsTo(models.CicloEscolar, { as: 'cicloEscolar' });
     this.belongsTo(models.Domicilio, { as: 'domicilio' });
-    this.hasMany(models.SolicitudServicioSocialAlumno, { as: 'solicitudServicioSocialAlumnos', foreignKey: 'solicitud_servicio_social_id' });
+    this.hasMany(models.SolicitudServicioSocialAlumno, { as: 'solicitudServicioSocialAlumnos', foreignKey: 'solicitudServicioSocialId' });
   }
 
   static config(sequelize) {
