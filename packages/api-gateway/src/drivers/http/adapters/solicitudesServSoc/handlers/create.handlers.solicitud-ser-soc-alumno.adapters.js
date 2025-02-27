@@ -3,13 +3,13 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function createSolicitudServSocAlumno(req, reply) {
   try {
-    const { ...data } = req.body;
     const { solicitudServicioSocialId } = req.params;
+    const data = req.body;
 
     Logger.info(`[solicitudes Serv Soc Alumno]: Creating record for solicitudServicioSocialId ${solicitudServicioSocialId}`);
 
     const solicitudServSocAlumno = await this.solicitudServicioSocialServices
-      .createSolicitudServSocAlumno(data);
+      .createSolicitudServSocAlumno({ ...data, solicitudServicioSocialId });
 
     return reply
       .code(201)

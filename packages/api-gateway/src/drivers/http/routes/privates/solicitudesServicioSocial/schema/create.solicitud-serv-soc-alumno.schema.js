@@ -1,6 +1,6 @@
 const { solicitudServicioSocialAlumno } = require('./properties/solicitudServicioSocialAlumno');
-const { alumno } = require('./properties/alumno');
-const { grado } = require('./properties/grado');
+const { alumno } = require('../../alumnos/schema/properties/alumno');
+const { grado } = require('../../grupos/schema/properties/grado');
 const { modalidadServicioSocial } = require('./properties/modalidadServicioSocial');
 const { sectorServicioSocial } = require('./properties/sectorServicioSocial');
 const { ejeServicioSocial } = require('./properties/ejeServicioSocial');
@@ -10,7 +10,7 @@ const { responseProperties } = require('./properties/responseProperties');
 const createSolicitudServSocAlumnoSchema = {
   tags: ['Solicitudes Servicio Social Alumno'],
   description:
-      'Crea un registro para asignar un alumno a una solicitud de Servicio Social. Se debe enviar el id de la solicitud en el body (y también en los params, para garantizar coincidencia) junto con el id del alumno, grado, modalidad, sector, dimensión, eje, lugar receptor y las fechas de inicio y término.',
+      'Crea un registro para asignar un alumno a una solicitud de Servicio Social. Se debe enviar el id de la solicitud en el params. De body debe ir el id del alumno, grado, modalidad, sector, dimensión, eje, lugar receptor y las fechas de inicio y término.',
   params: {
     type: 'object',
     properties: {
@@ -24,7 +24,6 @@ const createSolicitudServSocAlumnoSchema = {
       ...solicitudServicioSocialAlumno,
     },
     required: [
-      'solicitudServicioSocialId',
       'alumnoId',
       'gradoId',
       'modalidadServicioSocialId',
