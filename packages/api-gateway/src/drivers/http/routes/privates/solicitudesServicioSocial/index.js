@@ -44,6 +44,22 @@ async function solicitudServSocRouter(fastify, opts, next) {
     },
     solicitudesServSocAdapter.createSolicitudServSocAlumno,
   );
+  await fastify.get(
+    '/:solicitudServicioSocialId/solicitudesServicioSocialAlumno/:solicitudesServicioSocialAlumnosId',
+    {
+      schema: solicitudServSocSchemas.findOneSolicitudServSocAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesServSocAdapter.findOneSolicitudServSocAlumno,
+  );
+  await fastify.get(
+    '/:solicitudServicioSocialId/solicitudesServicioSocialAlumno',
+    {
+      schema: solicitudServSocSchemas.findAllSolicitudesServSocAlumnosSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesServSocAdapter.findAllSolicitudesServSocAlumno,
+  );
 
   next();
 }
