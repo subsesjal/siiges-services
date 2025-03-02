@@ -16,6 +16,12 @@ async function authRouter(fastify, _, next) {
     usuariosAdapter.register,
   );
 
+  await fastify.post(
+    '/tokenRecoveryPassword',
+    { schema: schema.tokenRecoveryPasswordSchema },
+    authAdapter.tokenRecoveryPassword,
+  );
+
   next();
 }
 
