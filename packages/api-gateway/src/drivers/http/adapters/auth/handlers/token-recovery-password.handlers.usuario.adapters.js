@@ -25,7 +25,7 @@ async function tokenRecoveryPassword(req, reply) {
     return reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: 'Correo enviado correctamente' });
+      .send({ data: { message: 'Correo enviado correctamente' } });
   } catch (error) {
     return errorHandler(error, reply);
   }
