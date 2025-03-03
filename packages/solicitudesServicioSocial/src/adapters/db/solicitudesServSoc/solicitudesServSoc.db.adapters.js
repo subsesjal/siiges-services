@@ -36,4 +36,5 @@ module.exports = {
   findOneSectorServicioSocialQuery: findOneQuery(SectorServicioSocial),
   findOneEjeServicioSocialQuery: findOneQuery(EjeServicioSocial),
   findOneDimensionServicioSocialQuery: findOneQuery(DimensionServicioSocial),
+  findAllSolicitudesServicioSocialAlumnoQuery: findAllQuery(SolicitudServicioSocialAlumno),
 };
