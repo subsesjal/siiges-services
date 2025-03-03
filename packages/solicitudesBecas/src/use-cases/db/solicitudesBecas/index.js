@@ -31,7 +31,7 @@ module.exports = {
   createSolicitudBecaAlumno: createSolicitudBecaAlumno(
     solicitudesBecas.createSolicitudesBecasAlumnoQuery,
     solicitudesBecas.findOneSolicitudesBecasAlumnoQuery,
-    solicitudesBecas.findOneSolicitudesBecasQuery,
+    solicitudesBecas.findOneSolicitudBecaQuery,
     solicitudesBecas.findOneAlumnoQuery,
     solicitudesBecas.findOneGradoQuery,
   ),
