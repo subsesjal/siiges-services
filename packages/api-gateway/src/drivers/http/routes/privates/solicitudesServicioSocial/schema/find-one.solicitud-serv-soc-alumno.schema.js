@@ -10,7 +10,7 @@ const { responseProperties } = require('./properties/responseProperties');
 const findOneSolicitudServSocAlumnoSchema = {
   tags: ['Solicitudes Servicio Social Alumno'],
   description:
-    'Obtiene una solicitud de servicio social asignada a un alumno. Se requiere el ID de la solicitud y el ID del alumno en los parámetros.',
+    'Obtiene el dato de un alumno asignado a una solicitud servicio social. Se requiere el id de la solicitud, y el id de solicitud servicio social alumno.',
   params: {
     type: 'object',
     properties: {

@@ -9,7 +9,7 @@ const { responseProperties } = require('./properties/responseProperties');
 
 const findAllSolicitudesServSocAlumnoSchema = {
   tags: ['Solicitudes Servicio Social Alumno'],
-  description: 'Obtiene una lista de todas las solicitudes de Servicio Social asignadas a alumnos.',
+  description: 'Obtiene una lista de todas los alumnos asociados a una solicitud servicio social.',
   response: {
     200: {
       type: 'object',

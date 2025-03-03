@@ -3,7 +3,7 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function findAllSolicitudesServSocAlumno(req, reply) {
   try {
-    Logger.info('[solicitudes Serv Soc Alumno]: Retrieving all solicitudes de servicio social para alumnos');
+    Logger.info('[solicitudes Serv Soc Alumno]: Find all solicitudes servicio social alumnos');
 
     const solicitudesServSocAlumno = await this.solicitudServicioSocialServices
       .findAllSolicitudesServSocAlumno();
