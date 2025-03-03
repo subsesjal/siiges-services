@@ -28,7 +28,7 @@ const tokenRecoveryPassword = (
   });
 
   return {
-    ...createTokenRecoveryPassword,
+    ...createTokenRecoveryPassword.dataValues,
     usuario: usuarioFound.usuario,
     usuarioId: usuarioFound.id,
   };
