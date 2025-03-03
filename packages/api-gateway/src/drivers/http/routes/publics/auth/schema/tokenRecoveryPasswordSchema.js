@@ -15,8 +15,10 @@ const tokenRecoveryPasswordSchema = {
       type: 'object',
       properties: {
         data: {
-          type: 'string',
-          example: 'Correo enviado correctamente',
+          type: 'object',
+          properties: {
+            message: { type: 'string' },
+          },
         },
       },
     },
