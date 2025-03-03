@@ -9,13 +9,13 @@ const {
 const {
   findOneQuery,
   createQuery,
-  updateQuery,
+  updateAndFindQuery,
 } = queries;
 
 module.exports = {
   findOneUserQuery: findOneQuery(Usuario),
-  updateUserQuery: updateQuery(Usuario),
+  updateUserQuery: updateAndFindQuery(Usuario),
   createTokenRecoveryPasswordQuery: createQuery(TokenRecoveryPassword),
   findOneTokenRecoveryPasswordQuery: findOneQuery(TokenRecoveryPassword),
-  updateTokenRecoveryPasswordQuery: updateQuery(TokenRecoveryPassword),
+  updateTokenRecoveryPasswordQuery: updateAndFindQuery(TokenRecoveryPassword),
 };
