@@ -55,7 +55,7 @@ async function solicitudBecaRouter(fastify, opts, next) {
     // schema: solicitudSchemas.createSolicitudBecaSchema,
       onRequest: [fastify.authenticate],
     },
-    solicitudesBecasAdapter.createSolicitudBecasAlumnos,
+    solicitudesBecasAdapter.createSolicitudBecaAlumno,
   );
 
   next();

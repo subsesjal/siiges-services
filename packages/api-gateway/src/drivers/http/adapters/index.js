@@ -32,7 +32,6 @@ const solicitudesServSocAdapter = require('./solicitudesServSoc/handlers');
 const estadosAdapter = require('./estados/handlers');
 const paisesAdapter = require('./paises/handlers');
 const nivelesAdapter = require('./niveles/handlers');
-const createSolicitudBecasAlumnos = require('./solicitudesBecas/handlers');
 
 module.exports = {
   diligenciasAdapter,
@@ -68,5 +67,4 @@ module.exports = {
   estadosAdapter,
   paisesAdapter,
   nivelesAdapter,
-  createSolicitudBecasAlumnos,
 };
