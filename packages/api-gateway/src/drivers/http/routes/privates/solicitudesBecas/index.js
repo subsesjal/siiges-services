@@ -52,7 +52,7 @@ async function solicitudBecaRouter(fastify, opts, next) {
   await fastify.post(
     '/:solicitudBecaId/solicitudesBecasAlumnos',
     {
-    // schema: solicitudSchemas.createSolicitudBecaSchema,
+      schema: solicitudSchemas.createSolicitudBecaAlumno,
       onRequest: [fastify.authenticate],
     },
     solicitudesBecasAdapter.createSolicitudBecaAlumno,
