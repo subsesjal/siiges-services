@@ -10,6 +10,8 @@ const createSolicitudBecasAlumno = (
   const include = [
     { association: 'alumno' },
     { association: 'grado' },
+    { association: 'estatusAlumnoBeca' },
+    { association: 'tipoAlumnoBeca' },
   ];
 
   const queryFunctions = {
