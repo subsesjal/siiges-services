@@ -3,6 +3,9 @@ const { models, queries } = require('@siiges-services/core');
 
 const {
   SolicitudBeca,
+  Alumno,
+  Grado,
+  SolicitudBecaAlumno,
 } = models;
 
 const {
@@ -21,4 +24,8 @@ module.exports = {
   updateSolicitudesBecasQuery: updateAndFindQuery(SolicitudBeca),
   findAllSolicitudesBecasQuery: findAllQuery(SolicitudBeca),
   deleteSolicitudBecasQuery: deleteAndFindQuery(SolicitudBeca),
+  createSolicitudesBecasAlumnoQuery: createQuery(SolicitudBecaAlumno),
+  findOneSolicitudesBecasAlumnoQuery: findOneQuery(SolicitudBecaAlumno),
+  findOneAlumnoQuery: findOneQuery(Alumno),
+  findOneGradoQuery: findOneQuery(Grado),
 };
