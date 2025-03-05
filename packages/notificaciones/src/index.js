@@ -4,5 +4,6 @@
 
 // Services
 const useCases = require('./useCases');
+const config = require('../config/environment');
 
-module.exports = { ...useCases };
+module.exports = { ...useCases, ...config };

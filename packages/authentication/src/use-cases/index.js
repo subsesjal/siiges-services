@@ -5,16 +5,12 @@ const {
   encryptStringHashAlgorithm,
 } = require('./crypto');
 
-const {
-  localStrategy,
-  JwtStrategy,
-} = require('./strategies');
+const strategies = require('./strategies');
 
 module.exports = {
   encryptString,
   getUserEncryptAlgorithm,
   encrypStringHmacAlgorithm,
   encryptStringHashAlgorithm,
-  localStrategy,
-  JwtStrategy,
+  ...strategies,
 };

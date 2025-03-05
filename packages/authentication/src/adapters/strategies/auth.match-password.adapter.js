@@ -38,4 +38,5 @@ const matchHashPassword = (password, passwordSavedDB) => encryptStringHashAlgori
 module.exports = {
   matchHmacPassword,
   matchHashPassword,
+  encrypStringHmacAlgorithm,
 };

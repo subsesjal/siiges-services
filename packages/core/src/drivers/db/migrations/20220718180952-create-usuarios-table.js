@@ -132,6 +132,7 @@ const { DIMENSION_SERVICIO_SOCIAL_TABLE, DimensionServicioSocialSchema } = requi
 const { SECTOR_SERVICIO_SOCIAL_TABLE, SectorServicioSocialSchema } = require('../models/sectorServicioSocial');
 const { MODALIDAD_SERVICIO_SOCIAL_TABLE, ModalidadServicioSocialSchema } = require('../models/modalidadServicioSocial');
 const { ESTATUS_SOLICITUD_SERVICIO_SOCIAL_TABLE, EstatusSolicitudServicioSocialSchema } = require('../models/estatusSolicitudServicioSocial');
+const { TOKEN_RECOVERY_PASSWORD_TABLE, TokenRecoveryPasswordSchema } = require('../models/tokenRecoveryPassword');
 
 // SIIGES 1.0
 const { ACADEMIA_TABLE, AcademiaSchema } = require('../models/academias');
@@ -350,6 +351,10 @@ module.exports = {
       SOLICITUD_SERVICIO_SOCIAL_ALUMNO_TABLE,
       SolicitudServicioSocialAlumnoSchema,
     );
+    await queryInterface.createTable(
+      TOKEN_RECOVERY_PASSWORD_TABLE,
+      TokenRecoveryPasswordSchema,
+    );
 
     // SIIGES 1.0
     await queryInterface.createTable(ACADEMIA_TABLE, AcademiaSchema);
@@ -537,6 +542,7 @@ module.exports = {
     await queryInterface.dropTable(EJE_SERVICIO_SOCIAL_TABLE);
     await queryInterface.dropTable(SOLICITUD_SERVICIO_SOCIAL_TABLE);
     await queryInterface.dropTable(SOLICITUD_SERVICIO_SOCIAL_ALUMNO_TABLE);
+    await queryInterface.dropTable(TOKEN_RECOVERY_PASSWORD_TABLE);
 
     // SIIGES 1.0
     await queryInterface.dropTable(ACADEMIA_TABLE);
