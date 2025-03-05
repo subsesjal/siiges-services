@@ -1,4 +1,4 @@
-// Propiedades de EstatusAlumnoBeca
+// Estatus Alumno Beca
 const estatusAlumnoBeca = {
   id: { type: 'integer' },
   nombre: { type: 'string' },

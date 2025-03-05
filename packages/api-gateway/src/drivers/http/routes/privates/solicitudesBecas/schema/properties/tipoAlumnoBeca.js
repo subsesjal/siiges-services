@@ -1,4 +1,4 @@
-// Propiedades de TipoAlumnoBeca
+// Tipo Alumno Beca
 const tipoAlumnoBeca = {
   id: { type: 'integer' },
   nombre: { type: 'string' },

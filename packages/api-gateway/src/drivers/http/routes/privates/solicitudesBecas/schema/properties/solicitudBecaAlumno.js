@@ -1,4 +1,4 @@
-// Propiedades de SolicitudBecaAlumno
+// Solicitud Beca Alumno
 const solicitudBecaAlumno = {
   solicitudBecaId: { type: 'integer' },
   estatusAlumnoBecaId: { type: 'integer' },

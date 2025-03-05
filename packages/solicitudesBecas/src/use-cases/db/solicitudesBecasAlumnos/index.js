@@ -1,5 +1,13 @@
-const solicitudBecaAlumno = require('../solicitudesBecas/index');
+const { solicitudesBecas } = require('../../../adapters/db');
+
+const createSolicitudBecaAlumno = require('./create.solicitud-beca-alumno.use-case');
 
 module.exports = {
-  solicitudBecaAlumno,
+  createSolicitudBecaAlumno: createSolicitudBecaAlumno(
+    solicitudesBecas.createSolicitudesBecasAlumnoQuery,
+    solicitudesBecas.findOneSolicitudesBecasAlumnoQuery,
+    solicitudesBecas.findOneSolicitudBecaQuery,
+    solicitudesBecas.findOneAlumnoQuery,
+    solicitudesBecas.findOneGradoQuery,
+  ),
 };

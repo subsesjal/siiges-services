@@ -5,7 +5,7 @@ const { cicloEscolar } = require('../../ciclosEscolares/schema/properties/cicloE
 const { usuario } = require('../../usuarios/schema/properties/usuario');
 const { responseProperties } = require('./properties/responseProperties');
 
-const createSolicitudBecaAlumnoSchema = {
+const createSolicitudBecaSchema = {
   tags: ['Solicitudes Becas'],
   description: 'Recibe un objeto con los datos requeridos para una solicitud de beca y guarda por primera vez dicha solicitud en la base de datos.',
   body: {
@@ -67,4 +67,4 @@ const createSolicitudBecaAlumnoSchema = {
   },
 };
 
-module.exports = createSolicitudBecaAlumnoSchema;
+module.exports = createSolicitudBecaSchema;
