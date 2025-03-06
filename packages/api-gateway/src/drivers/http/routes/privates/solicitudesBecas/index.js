@@ -58,6 +58,15 @@ async function solicitudBecaRouter(fastify, opts, next) {
     solicitudesBecasAdapter.createSolicitudBecaAlumno,
   );
 
+  await fastify.get(
+    '/:solicitudBecaId/solicitudesBecasAlumnos/:solicitudBecaAlumnoId',
+    {
+    //  schema: solicitudSchemas.findOneSolicitudBecaAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesBecasAdapter.findOneSolicitudBecaAlumno,
+  );
+
   next();
 }
 
