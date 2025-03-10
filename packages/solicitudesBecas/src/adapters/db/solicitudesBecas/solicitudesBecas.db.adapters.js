@@ -28,4 +28,5 @@ module.exports = {
   findOneSolicitudesBecasAlumnoQuery: findOneQuery(SolicitudBecaAlumno),
   findOneAlumnoQuery: findOneQuery(Alumno),
   findOneGradoQuery: findOneQuery(Grado),
+  findAllSolicitudesBecasAlumnosQuery: findAllQuery(SolicitudBecaAlumno),
 };
