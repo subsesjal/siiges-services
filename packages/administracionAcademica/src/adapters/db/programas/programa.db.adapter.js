@@ -21,7 +21,11 @@ const include = [{
     { association: 'institucion' },
     { association: 'domicilio' },
   ],
-}];
+},
+{ association: 'nivel' },
+{ association: 'modalidad' },
+{ association: 'ciclo' },
+];
 
 const where = {
   acuerdoRvoe: { [Op.or]: { [Op.ne]: null, [Op.ne]: '' } },
