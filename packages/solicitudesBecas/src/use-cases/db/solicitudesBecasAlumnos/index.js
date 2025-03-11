@@ -21,7 +21,7 @@ module.exports = {
     solicitudesBecas.findAllSolicitudesBecasAlumnosQuery,
   ),
   updateSolicitudBecaAlumno: updateSolicitudBecaAlumno(
-    solicitudesBecas.findOneSolicitudBecaQuery,
+    solicitudesBecas.findOneSolicitudesBecasAlumnoQuery,
     solicitudesBecas.updateSolicitudBecaAlumnoQuery,
   ),
 };
