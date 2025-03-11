@@ -2,7 +2,7 @@ const { checkers } = require('@siiges-services/shared');
 
 const updateSolicitudBecaAlumno = (
   findOneSolicitudBecaQuery,
-  updateAndFindSolicitudBecaQuery,
+  updateSolicitudBecaAlumnoQuery,
 ) => async (data, identifierObj) => {
   const include = [
     { association: 'estatusAlumnoBeca' },
@@ -10,10 +10,10 @@ const updateSolicitudBecaAlumno = (
     { association: 'grado' },
   ];
 
-  const solicitudBeca = await findOneSolicitudBecaQuery(identifierObj);
-  checkers.throwErrorIfDataIsFalsy(solicitudBeca, 'solicitudes_becas', identifierObj.id);
+  const solicitudBecaAlumnos = await findOneSolicitudBecaQuery(identifierObj);
+  checkers.throwErrorIfDataIsFalsy(solicitudBecaAlumnos, 'solicitudes_becas_alumno', identifierObj.id);
 
-  return updateAndFindSolicitudBecaQuery(identifierObj, data, { include });
+  return updateSolicitudBecaAlumnoQuery(identifierObj, data, { include });
 };
 
 module.exports = updateSolicitudBecaAlumno;
