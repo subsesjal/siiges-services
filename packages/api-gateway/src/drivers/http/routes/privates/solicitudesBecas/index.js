@@ -76,6 +76,15 @@ async function solicitudBecaRouter(fastify, opts, next) {
     solicitudesBecasAdapter.findAllSolicitudesBecasAlumnos,
   );
 
+  await fastify.patch(
+    '/:solicitudBecaId/solicitudesBecasAlumnos/:solicitudBecaAlumnoId',
+    {
+      schema: solicitudSchemas.updateSolicitudBecaAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesBecasAdapter.updateSolicitudBecaAlumno,
+  );
+
   next();
 }
 

@@ -6,6 +6,7 @@ const deleteSolicitudBecaSchema = require('./delete.solicitud-beca.schema');
 const createSolicitudBecaAlumnoSchema = require('./create.solicitud-beca-alumno.schema');
 const findOneSolicitudBecaAlumnoSchema = require('./find-one.solicitud-beca-alumno.schema');
 const findAllSolicitudesBecasAlumnosSchema = require('./find-all.solicitudes-becas-alumnos.schema');
+const updateSolicitudBecaAlumnoSchema = require('./update.solicitud-beca-alumno.schema');
 
 module.exports = {
   createSolicitudBecaSchema,
@@ -16,4 +17,5 @@ module.exports = {
   createSolicitudBecaAlumnoSchema,
   findOneSolicitudBecaAlumnoSchema,
   findAllSolicitudesBecasAlumnosSchema,
+  updateSolicitudBecaAlumnoSchema,
 };
