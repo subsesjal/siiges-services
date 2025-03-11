@@ -5,10 +5,11 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function tokenRecoveryPassword(req, reply) {
   try {
-    const { correo } = req.body;
+    const { correo, usuario } = req.body;
     Logger.info(`[auth]: Recovery password for: ${correo}`);
 
-    const tokenRecoveryPasswordData = await this.authServices.tokenRecoveryPassword({ correo });
+    const tokenRecoveryPasswordData = await this.authServices
+      .tokenRecoveryPassword({ correo, usuario });
 
     await this.notificacionServices.sendNotificationEmail({
       usuarioId: tokenRecoveryPasswordData.usuarioId,

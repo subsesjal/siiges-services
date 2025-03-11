@@ -7,8 +7,10 @@ const tokenRecoveryPasswordSchema = {
       correo: {
         type: 'string', format: 'email', minLength: 3, maxLength: 50,
       },
+      usuario: {
+        type: 'string',
+      },
     },
-    required: ['correo'],
   },
   response: {
     201: {

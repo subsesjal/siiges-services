@@ -14,7 +14,10 @@ const { encrypStringHmacAlgorithm, matchHmacPassword } = require('../../adapters
 const changePassword = async (userId, password, updateUserPasswordQuery) => {
   const newPassword = encrypStringHmacAlgorithm(password);
 
-  const updatePassword = await updateUserPasswordQuery({ id: userId }, { contrasena: newPassword });
+  const updatePassword = await updateUserPasswordQuery(
+    { id: userId },
+    { contrasena: newPassword, actualizado: 1 },
+  );
   return {
     userId: updatePassword.id,
     correo: updatePassword.correo,

@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const { config } = require('@siiges-services/notificaciones');
 const boom = require('@hapi/boom');
 
 function generateToken() {
@@ -8,8 +9,12 @@ function generateToken() {
 const tokenRecoveryPassword = (
   findOneUserQuery,
   createTokenRecoveryPasswordQuery,
-) => async ({ correo }) => {
-  const usuarioFound = await findOneUserQuery({ correo });
+) => async ({ correo, usuario }) => {
+  const [correoData, usuarioData] = await Promise.all([
+    await findOneUserQuery({ correo }),
+    await findOneUserQuery({ usuario }),
+  ]);
+  const usuarioFound = correoData || usuarioData;
 
   if (!usuarioFound) {
     throw boom.notFound(`El usuario con correo: ${correo}, no existe`);
@@ -20,7 +25,7 @@ const tokenRecoveryPassword = (
   }
 
   const token = generateToken();
-  const expiresAt = new Date(Date.now() + 3600000);
+  const expiresAt = new Date(Date.now() + config.TimeMail || 3600000);
   const createTokenRecoveryPassword = await createTokenRecoveryPasswordQuery({
     usuarioId: usuarioFound.id,
     token,
