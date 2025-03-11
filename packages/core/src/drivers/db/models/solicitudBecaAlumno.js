@@ -92,7 +92,10 @@ class SolicitudBecaAlumno extends Model {
     this.belongsTo(models.SolicitudBeca, { as: 'solicitudBeca' });
     this.belongsTo(models.Alumno, { as: 'alumno' });
     this.belongsTo(models.Grado, { as: 'grado' });
-    this.belongsTo(models.EstatusAlumnoBeca, { as: 'estatusAlumnoBeca' });
+    this.belongsTo(models.EstatusAlumnoBeca, {
+      as: 'estatusSolicitudBeca',
+      foreignKey: 'estatus_alumno_beca_id',
+    });
     this.belongsTo(models.TipoAlumnoBeca, { as: 'tipoAlumnoBeca' });
   }
 
