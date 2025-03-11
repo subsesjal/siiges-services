@@ -5,6 +5,7 @@ const config = {
   userEmail: dotenv.getEnvironmentVar('USER_EMAIL'),
   passwordEmail: dotenv.getEnvironmentVar('PASSWORD_EMAIL'),
   BaseUrlFront: dotenv.getEnvironmentVar('BASE_URL_FRONT'),
+  TimeMail: dotenv.getEnvironmentVar('TIME_MAIL'),
 };
 
 module.exports = {

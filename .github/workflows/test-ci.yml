@@ -60,3 +60,4 @@ jobs:
           DATABASE: mysql
           API_BASE_URL: https://developer:3312
           BASE_URL_FRONT: http://localhost:3000
+          TIME_MAIL: 3600000
