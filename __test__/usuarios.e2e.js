@@ -17,6 +17,7 @@ const {
   createUserWithoutPerson,
   errorMessage,
   updateUserInformation,
+  changePasswordByUserId,
 } = require('./utils/fixtures/users');
 const { models } = require('../packages/core/src/drivers/db/connection');
 
@@ -49,6 +50,17 @@ describe('test for users', () => {
 
       expect(statusCode).toEqual(statusCodeName.unauthorized);
       expect(body.message).toEqual('Unauthorized');
+    });
+  });
+
+  describe('[POST] /api/v1/auth/newPasswordToken', () => {
+    it('should login', async () => {
+      const { body, statusCode } = await api.post('/api/v1/public/auth/newPasswordToken')
+        .send(changePasswordByUserId)
+        .set(apiKey);
+
+      expect(statusCode).toEqual(statusCodeName.created);
+      expect(body.data.message).toEqual('Correo enviado correctamente');
     });
   });
 

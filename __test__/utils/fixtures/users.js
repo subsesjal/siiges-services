@@ -70,6 +70,12 @@ const errorMessage = {
   userIntegerError: 'params/usuarioId must be integer',
 };
 
+const changePasswordByUserId = {
+  userId: 5,
+  oldPassword: loginUser.contrasena,
+  newPassword: 'Aa/1234567890',
+};
+
 module.exports = {
   createUser,
   createUserInitial,
@@ -80,4 +86,5 @@ module.exports = {
   errorPasswordUserCreate,
   errorUserCreate,
   errorMessage,
+  changePasswordByUserId,
 };
