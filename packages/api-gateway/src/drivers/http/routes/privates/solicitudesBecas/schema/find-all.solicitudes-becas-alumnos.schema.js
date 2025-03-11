@@ -1,12 +1,13 @@
 const { solicitudBecaAlumno } = require('./properties/solicitudBecaAlumno');
 const { alumno } = require('../../alumnos/schema/properties/alumno');
+const { persona } = require('../../usuarios/schema/properties/persona');
 const { grado } = require('../../grupos/schema/properties/grado');
 const { estatusAlumnoBeca } = require('./properties/estatusAlumnoBeca');
 const { tipoAlumnoBeca } = require('./properties/tipoAlumnoBeca');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findAllSolicitudesBecasAlumnosSchema = {
-  tags: ['Solicitudes Becas Alumno'],
+  tags: ['Solicitudes Becas'],
   description: 'Este endpoint devuelve un arreglo de objetos, donde cada objeto contiene los detalles de una solicitud de beca de un alumno, incluyendo información del alumno, grado, estatus de la beca y tipo de beca.',
   response: {
     200: {
@@ -26,6 +27,14 @@ const findAllSolicitudesBecasAlumnosSchema = {
                   id: { type: 'integer' },
                   ...alumno,
                   ...responseProperties,
+                  persona: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...persona,
+                      ...responseProperties,
+                    },
+                  },
                 },
               },
               grado: {

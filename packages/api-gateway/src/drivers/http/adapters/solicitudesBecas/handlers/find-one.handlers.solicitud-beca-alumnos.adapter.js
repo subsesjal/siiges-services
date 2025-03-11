@@ -5,15 +5,11 @@ async function findOneSolicitudBecaAlumno(req, reply) {
   try {
     const { solicitudBecaId, solicitudBecaAlumnoId } = req.params;
 
-    if (!solicitudBecaId || !solicitudBecaAlumnoId) {
-      throw new Error('Missing required parameters: solicitudBecaId and solicitudBecaAlumnoId');
-    }
-
     Logger.info(`[Solicitud-Beca]: Getting beca with id: ${solicitudBecaId} and alumno id: ${solicitudBecaAlumnoId}`);
 
     const becaAlumno = await this.solicitudBecaServices.findOneSolicitudBecaAlumno({
       solicitudBecaId,
-      solicitudBecaAlumnoId,
+      id: solicitudBecaAlumnoId,
     });
 
     return reply

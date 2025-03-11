@@ -3,25 +3,34 @@ const { checkers } = require('@siiges-services/shared');
 const findOneSolicitudBecasAlumno = (
   findOneSolicitudesBecasAlumnoQuery,
   findOneSolicitudBecaQuery,
-) => async (identifierObj) => {
+) => async (query) => {
   const include = [
-    { association: 'alumno' },
+    {
+      association: 'alumno',
+      include: [{ association: 'persona' }],
+    },
     { association: 'grado' },
     { association: 'estatusAlumnoBeca' },
     { association: 'tipoAlumnoBeca' },
   ];
 
-  const queryFunctions = {
-    solicitudBeca: [identifierObj.solicitudBecaId, findOneSolicitudBecaQuery],
-  };
+  const solicitud = await findOneSolicitudBecaQuery({ id: query.solicitudBecaId });
+  checkers.throwErrorIfDataIsFalsy(solicitud, 'solicitud_beca', query.solicitudBecaId);
 
-  await checkers.findValidator(queryFunctions);
+  const solicitudBecaAlumno = await findOneSolicitudesBecasAlumnoQuery(
+    query,
+    { include },
+  );
 
-  const where = { id: Number(identifierObj.solicitudBecaAlumnoId) };
+  checkers.throwErrorIfDataIsFalsy(
+    solicitudBecaAlumno,
+    'solicitud_beca_alumno',
+    Object.entries(query)
+      .map(([key, value]) => `${key}: ${value}`)
+      .join(', '),
+  );
 
-  const solicitudCreada = await findOneSolicitudesBecasAlumnoQuery(where, { include });
-
-  return solicitudCreada;
+  return solicitudBecaAlumno;
 };
 
 module.exports = findOneSolicitudBecasAlumno;

@@ -5,8 +5,8 @@ const solicitudBecaAlumno = {
   tipoAlumnoBecaId: { type: 'integer' },
   alumnoId: { type: 'integer' },
   gradoId: { type: 'integer' },
-  promedio: { type: 'integer' },
-  porcentajeBeca: { type: 'integer' },
+  promedio: { type: 'number' },
+  porcentajeBeca: { type: 'integer', minimum: 0, maximum: 100 },
 };
 
 module.exports = { solicitudBecaAlumno };

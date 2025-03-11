@@ -6,7 +6,7 @@ const { tipoAlumnoBeca } = require('./properties/tipoAlumnoBeca');
 const { responseProperties } = require('./properties/responseProperties');
 
 const createSolicitudBecaAlumnoSchema = {
-  tags: ['Solicitudes Becas Alumno'],
+  tags: ['Solicitudes Becas'],
   description: 'Crea una nueva solicitud de beca para un alumno. Se debe enviar el ID de la solicitud de beca en el params y los datos del alumno en el body.',
   params: {
     type: 'object',
