@@ -1,12 +1,13 @@
-const { persona } = require('./properties/persona');
-const { responseProperties } = require('./properties/responseProperties');
 const { usuario } = require('./properties/usuario');
+const { persona } = require('./properties/persona');
 const { rol } = require('./properties/rol');
+const { responseProperties } = require('./properties/responseProperties');
 
-const getUsuarioPrincipalSchema = {
+const getUsuarioSchema = {
   tags: ['Usuario'],
-  description: 'Return a single user related to a given user.',
+  description: 'Given an user id, then return a user of database.',
   params: {
+    title: 'getUsuarioSchema',
     type: 'object',
     properties: {
       usuarioId: { type: 'integer' },
@@ -46,4 +47,4 @@ const getUsuarioPrincipalSchema = {
   },
 };
 
-module.exports = getUsuarioPrincipalSchema;
+module.exports = getUsuarioSchema;
