@@ -8,6 +8,7 @@ const updateSolicitudBeca = (
     { association: 'estatusSolicitudBeca' },
     { association: 'cicloEscolar' },
     { association: 'programa' },
+    { association: 'usuario' },
   ];
 
   const solicitudBeca = await findOneSolicitudBecaQuery(identifierObj);
