@@ -6,6 +6,7 @@ const createUsuarioSchema = require('./createUsuarioSchema');
 const createUsuarioUsuarioSchema = require('./createUsuarioUsuarioSchema');
 const updateUsuarioSchema = require('./updateUsuarioSchema');
 const deleteUsuarioSchema = require('./deleteUsuarioSchema');
+const getUsuarioPrincipalSchema = require('./getUsuarioPrincipalSchema');
 
 module.exports = {
   getAllUsuariosSchema,
@@ -16,4 +17,5 @@ module.exports = {
   createUsuarioUsuarioSchema,
   updateUsuarioSchema,
   deleteUsuarioSchema,
+  getUsuarioPrincipalSchema,
 };

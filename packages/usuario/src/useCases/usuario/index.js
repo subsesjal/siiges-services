@@ -9,6 +9,7 @@ const deleteUser = require('./db/delete.users.use-cases');
 const updateUser = require('./db/update.users.use-cases');
 const findOneUserDetail = require('./db/find-one.users-detail.use-cases');
 const registerUser = require('./db/register.users.use-cases');
+const findOneUserUserPrincipal = require('./db/find-one.user-users-principal.use-cases');
 
 module.exports = {
   findAllUsers: findAllUsers(adapters.findAllQuery),
@@ -39,4 +40,8 @@ module.exports = {
     adapters.createDomicilioQuery,
   ),
   deleteUser: deleteUser(adapters.deleteQuery),
+  findOneUserUserPrincipal: findOneUserUserPrincipal(
+    adapters.findAllUserUsersQuery,
+    adapters.findOneUserQuery,
+  ),
 };

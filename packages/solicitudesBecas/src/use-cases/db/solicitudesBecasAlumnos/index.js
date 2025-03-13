@@ -4,6 +4,7 @@ const createSolicitudBecaAlumno = require('./create.solicitud-beca-alumno.use-ca
 const findOneSolicitudBecaAlumno = require('./find-one.solicitud-beca-alumno.use-cases');
 const findAllSolicitudesBecasAlumnos = require('./find-all.solicitudes-becas-alumnos.use-cases');
 const deleteSolicitudBecaAlumno = require('./delete.solicitud-beca-alumno.use-cases');
+const updateSolicitudBecaAlumno = require('./update.solicitud-beca-alumno.use.case');
 
 module.exports = {
   createSolicitudBecaAlumno: createSolicitudBecaAlumno(
@@ -23,5 +24,9 @@ module.exports = {
   deleteSolicitudBecaAlumno: deleteSolicitudBecaAlumno(
     solicitudesBecas.findOneSolicitudesBecasAlumnoQuery,
     solicitudesBecas.deleteSolicitudBecasAlumnosQuery,
+  ),
+  updateSolicitudBecaAlumno: updateSolicitudBecaAlumno(
+    solicitudesBecas.findOneSolicitudesBecasAlumnoQuery,
+    solicitudesBecas.updateSolicitudBecaAlumnoQuery,
   ),
 };
