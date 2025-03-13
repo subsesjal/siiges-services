@@ -76,7 +76,7 @@ async function solicitudBecaRouter(fastify, opts, next) {
     solicitudesBecasAdapter.findAllSolicitudesBecasAlumnos,
   );
   await fastify.delete(
-    '/:solicitudBecaId/solicitudesBecasAlumnos',
+    '/solicitudesBecasAlumnos/:solicitudBecaAlumnoId',
     {
       schema: solicitudSchemas.deleteSolicitudBecaAlumnoSchema,
       onRequest: [fastify.authenticate],

@@ -2,9 +2,9 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function deleteSolicitudBecaAlumno(req, reply) {
   try {
-    const { solicitudBecaId } = req.params;
+    const { solicitudBecaAlumnoId } = req.params;
     const becaEliminadaAlumno = await this.solicitudBecaServices.deleteSolicitudBecaAlumno(
-      { id: solicitudBecaId },
+      { id: solicitudBecaAlumnoId },
     );
     return reply
       .code(200)
