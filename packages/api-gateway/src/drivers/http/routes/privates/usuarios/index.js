@@ -10,6 +10,7 @@ const {
   updateUsuarioSchema,
   deleteUsuarioSchema,
   getAllUsuarioUsuariosSchema,
+  getUsuarioPrincipalSchema,
 } = require('./schema');
 
 async function usuarioRouter(fastify, opts, next) {
@@ -83,6 +84,15 @@ async function usuarioRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     usuariosAdapter.deleteOne,
+  );
+
+  await fastify.get(
+    '/secundario/:usuarioId',
+    {
+      schema: getUsuarioPrincipalSchema,
+      onRequest: [fastify.authenticate],
+    },
+    usuariosUsuariosAdapter.findOneUserUserPrincipal,
   );
 
   next();

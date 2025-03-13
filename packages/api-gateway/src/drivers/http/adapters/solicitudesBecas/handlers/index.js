@@ -7,6 +7,7 @@ const { createSolicitudBecaAlumno } = require('./create.handlers.solicitud-becas
 const { findOneSolicitudBecaAlumno } = require('./find-one.handlers.solicitud-beca-alumnos.adapter');
 const { findAllSolicitudesBecasAlumnos } = require('./find-all.handlers.solicitudes-becas-alumnos.adapters');
 const { deleteSolicitudBecaAlumno } = require('./delete.handlers.solicitud-beca-alumnos.adapters');
+const { updateSolicitudBecaAlumno } = require('./update.handlers.solicitud-beca-alumno.adapters');
 
 module.exports = {
   createSolicitudBeca,
@@ -18,4 +19,5 @@ module.exports = {
   findOneSolicitudBecaAlumno,
   findAllSolicitudesBecasAlumnos,
   deleteSolicitudBecaAlumno,
+  updateSolicitudBecaAlumno,
 };
