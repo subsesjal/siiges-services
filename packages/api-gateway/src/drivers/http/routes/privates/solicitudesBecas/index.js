@@ -75,6 +75,14 @@ async function solicitudBecaRouter(fastify, opts, next) {
     },
     solicitudesBecasAdapter.findAllSolicitudesBecasAlumnos,
   );
+  await fastify.delete(
+    '/solicitudesBecasAlumnos/:solicitudBecaAlumnoId',
+    {
+      schema: solicitudSchemas.deleteSolicitudBecaAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesBecasAdapter.deleteSolicitudBecaAlumno,
+  );
 
   await fastify.patch(
     '/:solicitudBecaId/solicitudesBecasAlumnos/:solicitudBecaAlumnoId',
