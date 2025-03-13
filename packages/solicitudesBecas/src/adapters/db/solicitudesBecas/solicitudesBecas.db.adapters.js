@@ -24,6 +24,7 @@ module.exports = {
   updateSolicitudesBecasQuery: updateAndFindQuery(SolicitudBeca),
   findAllSolicitudesBecasQuery: findAllQuery(SolicitudBeca),
   deleteSolicitudBecasQuery: deleteAndFindQuery(SolicitudBeca),
+  deleteSolicitudBecasAlumnosQuery: deleteAndFindQuery(SolicitudBecaAlumno),
   createSolicitudesBecasAlumnoQuery: createQuery(SolicitudBecaAlumno),
   findOneSolicitudesBecasAlumnoQuery: findOneQuery(SolicitudBecaAlumno),
   findOneAlumnoQuery: findOneQuery(Alumno),
