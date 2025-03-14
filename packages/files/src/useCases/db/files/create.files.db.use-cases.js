@@ -9,7 +9,7 @@ const createFile = (createFileQuery) => async (data) => {
 
   return {
     ...fileCreated.dataValues,
-    url: `${process.env.SWAGGER_HOST}${fileCreated.ubicacion}`,
+    url: `${process.env.API_BASE_URL}${fileCreated.ubicacion}`,
   };
 };
 

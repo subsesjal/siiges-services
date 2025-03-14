@@ -17,7 +17,7 @@ const findOneFile = (findOneQuery) => async (
 
     return {
       ...file.dataValues,
-      url: `${process.env.SWAGGER_HOST}${file.ubicacion}`,
+      url: `${process.env.API_BASE_URL}${file.ubicacion}`,
     };
   }
   return findOneQuery(
