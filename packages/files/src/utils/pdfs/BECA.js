@@ -5,7 +5,7 @@ require('jspdf-autotable');
 
 const imgHeader = fs.readFileSync(path.join(__dirname, '/images/img4.png'), { encoding: 'base64' });
 
-function GenerarFDA01(solicitud) {
+function GenerarBeca(solicitud, alumnos) {
   const JsPDF = jsPDF;
   const doc = new JsPDF({ orientation: 'landscape' });
   let currentPositionY = 20;
@@ -26,21 +26,19 @@ function GenerarFDA01(solicitud) {
   currentPositionY += 25;
 
   const representante = solicitud.usuario?.persona || {};
-
   // Primera Tabla en formato horizontal
   const tableData = [[
     solicitud.programa?.plantel?.institucion?.nombre || 'No se encuentra',
-    solicitud.programa?.plantel?.nombre || 'No se encuentra',
     solicitud?.programa?.acuerdoRvoe || 'No se encuentra',
     solicitud.programa?.plantel?.domicilio?.calle || 'No se encuentra',
     solicitud.createdAt ? new Date(solicitud.createdAt).toLocaleDateString('es-MX') : 'No se encuentra',
     `${representante.nombre || ''} ${representante.apellidoPaterno || ''} ${representante.apellidoMaterno || ''}`.trim() || 'No se encuentra',
-    solicitud?.usuario?.persona?.correoPrimario || 'No se encuentra',
+    solicitud?.usuario?.correo || 'No se encuentra',
   ]];
 
   doc.autoTable({
     startY: currentPositionY,
-    head: [['Nombre de la Institución', 'Plantel', 'RVOE', 'Domicilio', 'Fecha de Reporte', 'Representante Legal', 'Correo Electrónico']],
+    head: [['Nombre de la Institución', 'RVOE', 'Domicilio', 'Fecha de Reporte', 'Representante Legal', 'Correo Electrónico']],
     body: tableData,
     theme: 'grid',
     styles: { fontSize: 10 },
@@ -49,23 +47,19 @@ function GenerarFDA01(solicitud) {
   currentPositionY = doc.previousAutoTable.finalY + 10;
 
   // Segunda Tabla (Lista de Becados - Extraídos de la solicitud)
-  const becadosData = solicitud.becarios?.map((becario) => [
-    becario.nombre || 'No se encuentra',
-    becario.grado || 'No se encuentra',
-    becario.nivel || 'No se encuentra',
-    becario.promedio || 'No se encuentra',
-    becario.estado || 'No se encuentra',
-    becario.porcentajeBeca || 'No se encuentra',
-    becario.tipoSolicitud || 'No se encuentra',
-    becario.correo || 'No se encuentra',
-    becario.curp || 'No se encuentra',
-    becario.domicilio || 'No se encuentra',
-    becario.municipio || 'No se encuentra',
+  const becadosData = alumnos?.map((becario) => [
+    becario?.alumno?.persona?.nombre || 'No se encuentra',
+    becario?.grado?.nombre || 'No se encuentra',
+    becario?.estatusAlumnoBeca?.nombre || 'No se encuentra',
+    becario?.promedio || 'No se encuentra',
+    becario?.porcentajeBeca || 'No se encuentra',
+    becario?.tipoAlumnoBeca?.nombre || 'No se encuentra',
+    becario?.alumno?.persona?.correoPrimario || 'No se encuentra',
   ]) || [['No hay becados disponibles']];
 
   doc.autoTable({
     startY: currentPositionY,
-    head: [['Nombre', 'Grado E', 'Grado A', 'Promedio', 'Estado', '% Beca', 'Tipo Solicitud', 'Correo Electrónico', 'CURP', 'Domicilio', 'Municipio']],
+    head: [['Nombre', 'Grado', 'Estatus', 'Promedio', '% Beca', 'Tipo Solicitud', 'Correo Electrónico']],
     body: becadosData,
     theme: 'grid',
     styles: { fontSize: 9 },
@@ -75,4 +69,4 @@ function GenerarFDA01(solicitud) {
   return doc.output('arraybuffer');
 }
 
-module.exports = { GenerarFDA01 };
+module.exports = { GenerarBeca };
