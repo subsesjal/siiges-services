@@ -8,14 +8,16 @@ const FEATURE = {
 
 const NOTIFICATION_MAPPING = {
   [FEATURE.PROCESADA]: async (processor, solicitudBeca) => {
+    const { folioSolicitud, url } = solicitudBeca.dataValues;
     await processor({
       usuarioId: solicitudBeca.usuario.id,
       email: solicitudBeca.usuario.correo,
       asunto: `SIGES: Confirmación de Solicitud de Becas con Folio ${solicitudBeca.folioSolicitud}`,
       template: 'reporteSolicitudBecas',
       params: {
-        solicitudBeca,
-        folioSolicitud: solicitudBeca.folioSolicitud,
+        folioSolicitud,
+        url,
+        link: url,
       },
     });
   },
@@ -54,6 +56,18 @@ async function updateSolicitudBeca(request, reply) {
     // const solicitudReport = generateFile(solicitudBeca);
 
     const { estatusSolicitudBecaId } = data;
+
+    if (estatusSolicitudBecaId === FEATURE.PROCESADA) {
+      const valueData = {
+        tipoEntidad: 'SOLICITUD_BECA',
+        tipoDocumento: 'REPORTE_BECAS',
+        entidadId: estatusSolicitudBecaId,
+      };
+      const identifierObj = await this.filesServices.getFileIdentifierObj(valueData);
+      const file = await this.filesServices.findOneFile(identifierObj, null, null, true);
+      solicitudBeca.dataValues.url = file.url;
+    }
+
     const processor = this.notificacionServices.sendNotificationEmail;
     sendNotificationReport(processor, estatusSolicitudBecaId, solicitudBeca);
 

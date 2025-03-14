@@ -10,7 +10,7 @@ const updateFile = (updateFileQuery) => async (identifierObj, changes) => {
 
   return {
     ...fileUpdated.dataValues,
-    url: `${process.env.SWAGGER_HOST}${fileUpdated.ubicacion}`,
+    url: `${process.env.API_BASE_URL}${fileUpdated.ubicacion}`,
   };
 };
 
