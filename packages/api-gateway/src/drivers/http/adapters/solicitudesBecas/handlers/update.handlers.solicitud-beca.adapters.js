@@ -12,9 +12,10 @@ const NOTIFICATION_MAPPING = {
       usuarioId: solicitudBeca.usuario.id,
       email: solicitudBeca.usuario.correo,
       asunto: `SIGES: Confirmación de Solicitud de Becas con Folio ${solicitudBeca.folioSolicitud}`,
-      template: 'reporteSolicituBecas',
+      template: 'reporteSolicitudBecas',
       params: {
         solicitudBeca,
+        folioSolicitud: solicitudBeca.folioSolicitud,
       },
     });
   },
@@ -54,7 +55,7 @@ async function updateSolicitudBeca(request, reply) {
 
     const { estatusSolicitudBecaId } = data;
     const processor = this.notificacionServices.sendNotificationEmail;
-    await sendNotificationReport(processor, estatusSolicitudBecaId, solicitudBeca);
+    sendNotificationReport(processor, estatusSolicitudBecaId, solicitudBeca);
 
     return reply
       .code(201)
