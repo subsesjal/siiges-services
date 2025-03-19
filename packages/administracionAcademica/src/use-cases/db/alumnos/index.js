@@ -13,6 +13,7 @@ const { findAlumnosInscritos } = require('./find-group.alumnos-inscritos.use-cas
 const findAlumnosGrupoAsignatura = require('./find-group.alumnos-grupo.use-cases');
 const updateCalificaciones = require('./update.calificaciones.use-cases');
 const findCalificacionesAlumno = require('./find-group.calificaciones-alumno.use-cases');
+const findAllAlumnosCount = require('./find-all.alumno-count.use-cases');
 
 module.exports = {
   createAlumno: createAlumno(
@@ -83,5 +84,8 @@ module.exports = {
   findCalificacionesAlumno: findCalificacionesAlumno(
     alumnos.findOneAlumnoQuery,
     alumnos.findAllCalificacionesQuery,
+  ),
+  findAllAlumnosCount: findAllAlumnosCount(
+    alumnos.findAllAlumnosQuery,
   ),
 };
