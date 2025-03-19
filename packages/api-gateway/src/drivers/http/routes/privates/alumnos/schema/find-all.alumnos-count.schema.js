@@ -1,6 +1,6 @@
 const findAlumnosCountSchema = {
   tags: ['Alumnos'],
-  description: 'Return the total number of Alumnos filtered by programa and situacion.',
+  description: 'Regresa el total de los alumno dependiendo del programa y la situacion.',
   params: {
     title: 'findAlumnosCountSchema',
     type: 'object',

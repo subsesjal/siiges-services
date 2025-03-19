@@ -13,7 +13,6 @@ const findAllAlumnosCount = (findAllAlumnosQuery) => async ({
 
   return {
     totalAlumnos,
-    alumnos,
   };
 };
 
