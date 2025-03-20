@@ -118,7 +118,7 @@ function generarSeccionyTabla({
       lineWidth: 0.3,
     },
     headStyles: {
-      fillColor: [172, 178, 183],
+      fillColor: [225, 131, 0],
       fontSize: 12,
       textColor: [20, 20, 20],
     },
@@ -185,7 +185,7 @@ function crearFilaFecha({
     showHead: false,
     columnStyles: {
       0: {
-        fillColor: [172, 178, 183],
+        fillColor: [225, 131, 0],
         cellWidth: tableWidth / 2, // Ajustar el ancho de la columna
       },
       1: {
@@ -250,7 +250,7 @@ function seccionIntitucionTabla({
     showHead: false,
     columnStyles: {
       0: {
-        fillColor: [172, 178, 183],
+        fillColor: [225, 131, 0],
       },
       1: {
         fontStyle: 'bold',
@@ -518,9 +518,22 @@ function createTable(doc, item, currentPositionY, xInitial = 15) {
 
   item.contenido.forEach((cell) => {
     const ancho = cell.medida || 111;
-    const colorFondo = cell.color === 'blanco'
-      ? [255, 255, 255]
-      : [172, 178, 183];
+    let colorFondo;
+
+    // Switch para manejar los colores
+    switch (cell.color) {
+      case 'blanco':
+        colorFondo = [255, 255, 255]; // Blanco
+        break;
+      case 'gris':
+        colorFondo = [172, 178, 183]; // Gris
+        break;
+      case 'naranja':
+        colorFondo = [225, 131, 0]; // Naranja
+        break;
+      default:
+        colorFondo = [0, 0, 0]; // Negro (color predeterminado)
+    }
 
     doc.setFillColor(...colorFondo);
     createCell(
@@ -570,7 +583,7 @@ function tableDate(doc, currentPositionY, date, sizeText = 30, sizeDateField = 4
     {
       tipo: 'fila',
       contenido: [
-        { texto: 'Fecha', medida: sizeText, color: 'gris' },
+        { texto: 'Fecha', medida: sizeText, color: 'naranja' },
         { texto: date, medida: sizeDateField, color: 'blanco' },
       ],
       repetirVeces: 1,
