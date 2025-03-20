@@ -5,6 +5,7 @@ const updateSolicitudServSocSchema = require('./update.solicitud-serv-soc.schema
 const createSolicitudServSocAlumnoSchema = require('./create.solicitud-serv-soc-alumno.schema');
 const findOneSolicitudServSocAlumnoSchema = require('./find-one.solicitud-serv-soc-alumno.schema');
 const findAllSolicitudesServSocAlumnosSchema = require('./find-all.solicitudes-serv-soc-alumnos.schema');
+const deleteSolicitudServSocSchema = require('./delete.solicitud-serv-soc.schema');
 
 module.exports = {
   createSolicitudServSocSchema,
@@ -14,4 +15,5 @@ module.exports = {
   createSolicitudServSocAlumnoSchema,
   findOneSolicitudServSocAlumnoSchema,
   findAllSolicitudesServSocAlumnosSchema,
+  deleteSolicitudServSocSchema,
 };
