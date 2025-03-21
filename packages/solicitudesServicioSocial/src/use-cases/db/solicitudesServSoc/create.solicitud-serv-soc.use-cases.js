@@ -1,5 +1,4 @@
-// const { createFolioSolicitudBeca } = require('../../../utils/create-folio-solicitud.utils');
-
+const padNumber = (num, size) => num.toString().padStart(size, '0');
 const createSolicitudServSoc = (
   createSolicitudServSocQuery,
   countSolicitudesServSocQuery,
@@ -14,9 +13,12 @@ const createSolicitudServSoc = (
     searchType: 'date',
   });
 
-  // const folioSolicitud = await createFolioSolicitudServSoc();
-
-  const newData = { folioSolicitud: `FBE${totalSolicitudes}`, ...data };
+  const year = new Date().getFullYear();
+  const count = padNumber(totalSolicitudes, 4);
+  const newData = {
+    folioSolicitud: `FSES${year}${count}`,
+    ...data,
+  };
 
   const include = [
     { association: 'estatusSolicitudServicioSocial' },
