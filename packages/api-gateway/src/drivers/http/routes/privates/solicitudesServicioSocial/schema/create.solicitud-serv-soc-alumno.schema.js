@@ -28,7 +28,6 @@ const createSolicitudServSocAlumnoSchema = {
       'gradoId',
       'modalidadServicioSocialId',
       'sectorServicioSocialId',
-      'dimensionServicioSocialId',
       'ejeServicioSocialId',
       'lugarReceptor',
       'fechaInicio',
@@ -42,6 +41,7 @@ const createSolicitudServSocAlumnoSchema = {
         data: {
           properties: {
             ...solicitudServicioSocialAlumno,
+            ...responseProperties,
             alumno: {
               type: 'object',
               properties: {
