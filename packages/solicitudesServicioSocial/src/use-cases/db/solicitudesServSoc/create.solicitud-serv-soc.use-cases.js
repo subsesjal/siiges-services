@@ -1,4 +1,3 @@
-// const { createFolioSolicitudBeca } = require('../../../utils/create-folio-solicitud.utils');
 const padNumber = (num, size) => num.toString().padStart(size, '0');
 const createSolicitudServSoc = (
   createSolicitudServSocQuery,
@@ -14,7 +13,6 @@ const createSolicitudServSoc = (
     searchType: 'date',
   });
 
-  // const folioSolicitud = await createFolioSolicitudServSoc();
   const year = new Date().getFullYear();
   const count = padNumber(totalSolicitudes, 4);
   const newData = {
