@@ -19,6 +19,7 @@ const {
   findOneQuery,
   findAllQuery,
   updateAndFindQuery,
+  deleteAndFindQuery,
 } = queries;
 
 module.exports = {
@@ -37,4 +38,5 @@ module.exports = {
   findOneEjeServicioSocialQuery: findOneQuery(EjeServicioSocial),
   findOneDimensionServicioSocialQuery: findOneQuery(DimensionServicioSocial),
   findAllSolicitudesServicioSocialAlumnoQuery: findAllQuery(SolicitudServicioSocialAlumno),
+  deleteSolicitudesServicioSocialQuery: deleteAndFindQuery(SolicitudServicioSocial),
 };

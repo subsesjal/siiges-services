@@ -61,6 +61,15 @@ async function solicitudServSocRouter(fastify, opts, next) {
     solicitudesServSocAdapter.findAllSolicitudesServSocAlumno,
   );
 
+  await fastify.delete(
+    '/:solicitudServicioSocialId',
+    {
+      schema: solicitudServSocSchemas.deleteSolicitudServSocSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesServSocAdapter.deleteSolicitudServSoc,
+  );
+
   next();
 }
 
