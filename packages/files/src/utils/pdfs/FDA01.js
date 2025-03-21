@@ -2,77 +2,118 @@ const fs = require('fs');
 const path = require('path');
 const { jsPDF } = require('jspdf');
 require('jspdf-autotable');
+const {
+  ciclos, modalidades, niveles,
+} = require('./constants');
+const {
+  crearCelda, crearSeccion,
+  agregarImagenYPaginaPie,
+  configurarFuenteYAgregarTexto,
+  buscarDescripcionPorId,
+  generarTiposDeTurno,
+  addNutmeg,
+} = require('./pdfHandler');
 
-const imgHeader = fs.readFileSync(path.join(__dirname, '/images/img4.png'), { encoding: 'base64' });
+const img5 = fs.readFileSync(path.join(__dirname, '/images/img5.png'), { encoding: 'base64' });
+const img4 = fs.readFileSync(path.join(__dirname, '/images/img4.png'), { encoding: 'base64' });
 
 function GenerarFDA01(solicitud) {
   const JsPDF = jsPDF;
-  const doc = new JsPDF({ orientation: 'landscape' });
+  const doc = new JsPDF();
+  addNutmeg(doc);
   let currentPositionY = 20;
 
-  // Agregar Encabezado de Imagen
-  doc.addImage(imgHeader, 'JPEG', 60, 9, 100, 23);
-  currentPositionY += 30;
+  const fechaRecepcion = new Date(solicitud.fechaRecepcion);
+  const options = { day: 'numeric', month: 'long', year: 'numeric' };
+  const formatter = new Intl.DateTimeFormat('es-MX', options);
+  const dateFormatted = formatter.format(fechaRecepcion).toUpperCase();
+  const modalidadTipo = buscarDescripcionPorId(modalidades, solicitud.programa.modalidadId);
+  const ciclosTipo = buscarDescripcionPorId(ciclos, solicitud.programa.cicloId);
+  const TIPO_SOLICITUD_MAPPING = {
+    1: 'RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS',
+    2: 'REFRENDO DEL PLAN Y PROGRAMA DE ESTUDIO',
+    3: 'CAMBIO DE DOMICILIO',
+  };
+  const tipoSolicitud = TIPO_SOLICITUD_MAPPING[solicitud.tipoSolicitudId] || 'TIPO DE SOLICITUD DESCONOCIDO';
 
-  // Encabezado de Texto
-  doc.setFont('Helvetica', 'bold');
-  doc.setFontSize(11);
-  doc.text('SECRETARÍA DE INNOVACIÓN, CIENCIA Y TECNOLOGÍA', 148, currentPositionY, { align: 'center' });
-  doc.setFont('Helvetica', 'normal');
+  const turnoTipo = generarTiposDeTurno(solicitud.programa.programaTurnos);
+  const nombreNivel = niveles
+    .find(({ id }) => +id === solicitud?.programa.nivelId).descripcion;
+
+  doc.addImage(img4, 'JPEG', 60, 9, 100, 23);
+
+  doc.setFillColor(116, 200, 210);
+  crearCelda(doc, 165, 40, 30, 7, 'FDA01', 10);
+
+  configurarFuenteYAgregarTexto(doc, 'bold', 12, [116, 200, 210], 'OFICIO DE ENTREGA DE DOCUMENTACIÓN', 15, 50);
+  currentPositionY += 40;
+  let content = `
+  FANNY GUADALUPE VALDIVIA MÁRQUEZ
+  SUBSECRETARIA DE EDUCACIÓN SUPERIOR
+  `;
+  currentPositionY = crearSeccion(currentPositionY, doc, content, 'left');
+  content = `
+  AT´N: MARCO ARTURO CASTRO AGUILERA 
+  DIRECTOR GENERAL DE INCORPORACIÓN Y SERVICIOS ESCOLARES
+  AT´N: MARGARITA FLORES MÁRQUEZ 
+  DIRECTORA DE INCORPORACIÓN
+  
+  ${dateFormatted}
+  `;
+  currentPositionY += 15;
+  currentPositionY = crearSeccion(currentPositionY, doc, content, 'right');
+  configurarFuenteYAgregarTexto(doc, 'normal', 12, [0, 0, 0], '', 100, 58);
+  content = `Por este conducto manifiesto que estoy en condiciones para iniciar el ${tipoSolicitud} del programa ${nombreNivel} en ${solicitud.programa.nombre}, ${modalidadTipo} en periodos ${ciclosTipo}, turno ${turnoTipo} de la institución ${solicitud.programa.plantel.institucion.nombre}`;
+  const marginX = 14;
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const contentWidth = pageWidth - marginX * 2;
   doc.setFontSize(10);
-  doc.text('SUBSECRETARÍA DE EDUCACIÓN SUPERIOR', 148, currentPositionY + 5, { align: 'center' });
-  doc.text('COORDINACIÓN DE BECAS ACADÉMICAS Y SERVICIO SOCIAL', 148, currentPositionY + 10, { align: 'center' });
-  doc.text('REPORTE DE BECAS ACADÉMICAS DE EDUCACIÓN SUPERIOR', 148, currentPositionY + 15, { align: 'center' });
+  doc.setTextColor(0, 0, 0);
+  currentPositionY += 35;
+  doc.text(content, marginX, currentPositionY, {
+    maxWidth: contentWidth,
+    align: 'justify',
+  });
+  content = 'Así mismo declaro Bajo Protesta de Decir la Verdad que la información y los documentos anexos en la presente solicitud son verídicos y fueron elaborados siguiendo principios éticos profesionales, que son de mi conocimiento las penas en que incurren quienes se conducen con falsedad ante autoridad distinta de la judicial, y señaló como domicilio para recibir notificaciones:';
+  currentPositionY += 20;
+  doc.text(content, marginX, currentPositionY, {
+    maxWidth: contentWidth,
+    align: 'justify',
+  });
+  content = `${solicitud.programa.plantel.domicilio.calle}, N° ${solicitud.programa.plantel.domicilio.numeroExterior}, ${solicitud.programa.plantel.domicilio.colonia}, ${solicitud.programa.plantel.domicilio.municipio.nombre}.`;
   currentPositionY += 25;
-
-  const representante = solicitud.usuario?.persona || {};
-
-  // Primera Tabla en formato horizontal
-  const tableData = [[
-    solicitud.programa?.plantel?.institucion?.nombre || 'No se encuentra',
-    solicitud.programa?.plantel?.nombre || 'No se encuentra',
-    solicitud?.programa?.acuerdoRvoe || 'No se encuentra',
-    solicitud.programa?.plantel?.domicilio?.calle || 'No se encuentra',
-    solicitud.createdAt ? new Date(solicitud.createdAt).toLocaleDateString('es-MX') : 'No se encuentra',
-    `${representante.nombre || ''} ${representante.apellidoPaterno || ''} ${representante.apellidoMaterno || ''}`.trim() || 'No se encuentra',
-    solicitud?.usuario?.persona?.correoPrimario || 'No se encuentra',
-  ]];
-
-  doc.autoTable({
-    startY: currentPositionY,
-    head: [['Nombre de la Institución', 'Plantel', 'RVOE', 'Domicilio', 'Fecha de Reporte', 'Representante Legal', 'Correo Electrónico']],
-    body: tableData,
-    theme: 'grid',
-    styles: { fontSize: 10 },
-    headStyles: { fillColor: [172, 178, 183], textColor: [0, 0, 0] },
+  doc.text(content, marginX, currentPositionY, {
+    maxWidth: contentWidth,
+    align: 'justify',
   });
-  currentPositionY = doc.previousAutoTable.finalY + 10;
-
-  // Segunda Tabla (Lista de Becados - Extraídos de la solicitud)
-  const becadosData = solicitud.becarios?.map((becario) => [
-    becario.nombre || 'No se encuentra',
-    becario.grado || 'No se encuentra',
-    becario.nivel || 'No se encuentra',
-    becario.promedio || 'No se encuentra',
-    becario.estado || 'No se encuentra',
-    becario.porcentajeBeca || 'No se encuentra',
-    becario.tipoSolicitud || 'No se encuentra',
-    becario.correo || 'No se encuentra',
-    becario.curp || 'No se encuentra',
-    becario.domicilio || 'No se encuentra',
-    becario.municipio || 'No se encuentra',
-  ]) || [['No hay becados disponibles']];
-
-  doc.autoTable({
-    startY: currentPositionY,
-    head: [['Nombre', 'Grado E', 'Grado A', 'Promedio', 'Estado', '% Beca', 'Tipo Solicitud', 'Correo Electrónico', 'CURP', 'Domicilio', 'Municipio']],
-    body: becadosData,
-    theme: 'grid',
-    styles: { fontSize: 9 },
-    headStyles: { fillColor: [172, 178, 183], textColor: [0, 0, 0] },
+  content = solicitud.programa.plantel.telefono1;
+  currentPositionY += 6;
+  doc.text(content, marginX, currentPositionY, {
+    maxWidth: contentWidth,
+    align: 'justify',
   });
+  content = solicitud.programa.plantel.telefono2;
+  currentPositionY += 6;
+  doc.text(content, marginX, currentPositionY, {
+    maxWidth: contentWidth,
+    align: 'justify',
+  });
+  content = 'Quedo enterado de todas las disposiciones establecidas en la Ley General de Educación, la Ley General de Educación Superior, la Ley de Educación del Estado Libre y Soberano de Jalisco, la Ley de Educación Superior del Estado de Jalisco, así como del Instructivo para la obtención de Reconocimiento de Validez Oficial de Estudios de Educación Superior del Estado de Jalisco.';
+  currentPositionY += 10;
+  doc.text(content, marginX, currentPositionY, {
+    maxWidth: contentWidth,
+    align: 'justify',
+  });
+  content = 'BAJO PROTESTA DE DECIR VERDAD';
+  currentPositionY += 70;
+  currentPositionY = crearSeccion(currentPositionY, doc, content, 'center');
+  content = `${solicitud.usuario.persona.nombre} ${solicitud.usuario.persona.apellidoPaterno} ${solicitud.usuario.persona.apellidoMaterno}`;
+  currentPositionY += 5;
+  crearSeccion(currentPositionY, doc, content, 'center');
+  agregarImagenYPaginaPie(doc, img5);
 
-  return doc.output('arraybuffer');
+  const pdfDataUri = doc.output('arraybuffer');
+  return pdfDataUri;
 }
 
 module.exports = { GenerarFDA01 };
