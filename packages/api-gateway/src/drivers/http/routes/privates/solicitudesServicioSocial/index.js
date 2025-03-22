@@ -77,6 +77,14 @@ async function solicitudServSocRouter(fastify, opts, next) {
     },
     solicitudesServSocAdapter.findAllDimensionesServSoc,
   );
+  await fastify.get(
+    '/ejesServicioSocial',
+    {
+      schema: solicitudServSocSchemas.findAllEjesSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesServSocAdapter.findAllEjesServSoc,
+  );
 
   next();
 }

@@ -7,6 +7,7 @@ const findOneSolicitudServSocAlumnoSchema = require('./find-one.solicitud-serv-s
 const findAllSolicitudesServSocAlumnosSchema = require('./find-all.solicitudes-serv-soc-alumnos.schema');
 const deleteSolicitudServSocSchema = require('./delete.solicitud-serv-soc.schema');
 const findAllDimensionesServSocSchema = require('./find-all.dimensiones.schema');
+const findAllEjesSchema = require('./find-all.ejes-serv-soc.schema');
 
 module.exports = {
   createSolicitudServSocSchema,
@@ -18,4 +19,5 @@ module.exports = {
   findAllSolicitudesServSocAlumnosSchema,
   deleteSolicitudServSocSchema,
   findAllDimensionesServSocSchema,
+  findAllEjesSchema,
 };
