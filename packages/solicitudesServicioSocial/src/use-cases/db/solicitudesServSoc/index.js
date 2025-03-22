@@ -6,6 +6,7 @@ const findAllSolicitudesServSoc = require('./find-all.solicitudes-serv-soc.use-c
 const updateSolicitudServSoc = require('./update.solicitud-serv-soc.use-cases');
 const deleteSolicitudServSoc = require('./delete.solicitud-serv-soc-use-cases');
 const findAllDimensionesServSoc = require('./find-all.dimensiones-serv-soc.use-cases');
+const findAllEjesServSoc = require('./find-all.ejes-serv-soc.use-cases');
 
 module.exports = {
   createSolicitudServSoc: createSolicitudServSoc(
@@ -30,5 +31,8 @@ module.exports = {
   ),
   findAllDimensionesServSoc: findAllDimensionesServSoc(
     solicitudesServSoc.findAllDimensionServicioSocialQuery,
+  ),
+  findAllEjesServSoc: findAllEjesServSoc(
+    solicitudesServSoc.findAllEjeServicioSocialQuery,
   ),
 };

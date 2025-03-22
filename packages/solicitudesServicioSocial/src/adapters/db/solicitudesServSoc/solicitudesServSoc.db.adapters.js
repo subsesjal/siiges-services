@@ -40,4 +40,5 @@ module.exports = {
   findAllSolicitudesServicioSocialAlumnoQuery: findAllQuery(SolicitudServicioSocialAlumno),
   deleteSolicitudesServicioSocialQuery: deleteAndFindQuery(SolicitudServicioSocial),
   findAllDimensionServicioSocialQuery: findAllQuery(DimensionServicioSocial),
+  findAllEjeServicioSocialQuery: findAllQuery(EjeServicioSocial),
 };
