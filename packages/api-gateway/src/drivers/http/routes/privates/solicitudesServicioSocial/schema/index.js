@@ -6,7 +6,7 @@ const createSolicitudServSocAlumnoSchema = require('./create.solicitud-serv-soc-
 const findOneSolicitudServSocAlumnoSchema = require('./find-one.solicitud-serv-soc-alumno.schema');
 const findAllSolicitudesServSocAlumnosSchema = require('./find-all.solicitudes-serv-soc-alumnos.schema');
 const deleteSolicitudServSocSchema = require('./delete.solicitud-serv-soc.schema');
-const findAllDimensionesServSocSchema = require('./find-all.dimensiones-serv-soc.schema');
+const findAllDimensionesServSocSchema = require('./find-all.dimensiones.schema');
 
 module.exports = {
   createSolicitudServSocSchema,
