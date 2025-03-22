@@ -69,6 +69,14 @@ async function solicitudServSocRouter(fastify, opts, next) {
     },
     solicitudesServSocAdapter.deleteSolicitudServSoc,
   );
+  await fastify.get(
+    '/dimensionesServicioSocial',
+    {
+      schema: solicitudServSocSchemas.findAllDimensionesServSocSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesServSocAdapter.findAllDimensionesServSoc,
+  );
 
   next();
 }

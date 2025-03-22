@@ -6,6 +6,7 @@ const { createSolicitudServSocAlumno } = require('./create.handlers.solicitud-se
 const { findOneSolicitudServSocAlumno } = require('./find-one.handlers.solicitud-serv-soc-alumno.adapters');
 const { findAllSolicitudesServSocAlumno } = require('./find-all.handlers.solicitudes-serv-soc-alumnos.adapters');
 const { deleteSolicitudServSoc } = require('./delete.handlers.solicitud-serv-soc.adapters');
+const { findAllDimensionesServSoc } = require('./find-all.handlers.dimensiones-serv-soc.adapters');
 
 module.exports = {
   createSolicitudServSoc,
@@ -16,4 +17,5 @@ module.exports = {
   findOneSolicitudServSocAlumno,
   findAllSolicitudesServSocAlumno,
   deleteSolicitudServSoc,
+  findAllDimensionesServSoc,
 };
