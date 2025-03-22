@@ -3,7 +3,7 @@ const { responseProperties } = require('./properties/responseProperties');
 
 const findAllEjesServSocSchema = {
   tags: ['Ejes Servicio Social'],
-  description: 'Obtiene una lista de todos los ejes de servicio social.',
+  description: 'Obtiene una lista de todos los ejes x dimension ID de servicio social.',
   response: {
     200: {
       type: 'object',

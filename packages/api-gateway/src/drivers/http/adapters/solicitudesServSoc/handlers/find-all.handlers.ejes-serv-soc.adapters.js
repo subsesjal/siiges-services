@@ -3,7 +3,7 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function findAllEjesServSoc(req, reply) {
   try {
-    Logger.info('[solicitudes Serv Soc]: Obtiene una lista de todas los Ejes de servicio social');
+    Logger.info('[solicitudes Serv Soc]: Obtiene una lista de todas los Ejes x Dimension ID de servicio social');
 
     const { dimensionServicioSocialId } = req.query;
 
