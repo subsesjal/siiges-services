@@ -3,6 +3,7 @@ const findOneSolicitudServSocSchema = require('./find-one.solicitud-servicio-soc
 const findAllSolicitudesServSocSchema = require('./find-all.solicitudes-servicio-social.schema');
 const updateSolicitudServSocSchema = require('./update.solicitud-serv-soc.schema');
 const createSolicitudServSocAlumnoSchema = require('./create.solicitud-serv-soc-alumno.schema');
+const updateSolicitudServSocAlumnoSchema = require('./update.solicitud-serv-soc-alumno.schema');
 const findOneSolicitudServSocAlumnoSchema = require('./find-one.solicitud-serv-soc-alumno.schema');
 const findAllSolicitudesServSocAlumnosSchema = require('./find-all.solicitudes-serv-soc-alumnos.schema');
 const deleteSolicitudServSocSchema = require('./delete.solicitud-serv-soc.schema');
@@ -15,6 +16,7 @@ module.exports = {
   findAllSolicitudesServSocSchema,
   updateSolicitudServSocSchema,
   createSolicitudServSocAlumnoSchema,
+  updateSolicitudServSocAlumnoSchema,
   findOneSolicitudServSocAlumnoSchema,
   findAllSolicitudesServSocAlumnosSchema,
   deleteSolicitudServSocSchema,

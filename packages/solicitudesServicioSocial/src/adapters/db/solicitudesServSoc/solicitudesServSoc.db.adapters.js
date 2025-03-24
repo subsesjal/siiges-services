@@ -30,6 +30,7 @@ module.exports = {
   updateSolicitudServicioSocialQuery: updateAndFindQuery(SolicitudServicioSocial),
   updateDomicilioQuery: updateAndFindQuery(Domicilio),
   createSolicitudServicioSocialAlumnoQuery: createQuery(SolicitudServicioSocialAlumno),
+  updateSolicitudServicioSocialAlumnoQuery: updateAndFindQuery(SolicitudServicioSocialAlumno),
   findOneSolicitudServicioSocialAlumnoQuery: findOneQuery(SolicitudServicioSocialAlumno),
   findOneAlumnoQuery: findOneQuery(Alumno),
   findOneGradoQuery: findOneQuery(Grado),
