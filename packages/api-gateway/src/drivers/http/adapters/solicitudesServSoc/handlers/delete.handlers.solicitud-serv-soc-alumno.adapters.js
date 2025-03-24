@@ -11,7 +11,6 @@ async function deleteSolicitudServSocAlumno(req, reply) {
       .deleteSolicitudServSocAlumno({
         id: solicitudesServicioSocialAlumnoId,
       });
-    // console.log(this);
 
     return reply
       .code(200)

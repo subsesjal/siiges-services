@@ -8,7 +8,7 @@ const { dimensionServicioSocial } = require('./properties/dimensionServicioSocia
 const { responseProperties } = require('./properties/responseProperties');
 
 const createSolicitudServSocAlumnoSchema = {
-  tags: ['Solicitudes Servicio Social Alumno'],
+  tags: ['Solicitudes Servicio Social'],
   description:
       'Crea un registro para asignar un alumno a una solicitud de Servicio Social. Se debe enviar el id de la solicitud en el params. De body debe ir el id del alumno, grado, modalidad, sector, dimensión, eje, lugar receptor y las fechas de inicio y término.',
   params: {

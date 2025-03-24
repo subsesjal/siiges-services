@@ -2,7 +2,7 @@ const { solicitudServicioSocialAlumno } = require('./properties/solicitudServici
 const { responseProperties } = require('./properties/responseProperties');
 
 const deleteSolicitudServSocAlumnoSchema = {
-  tags: ['Solicitudes Servicio Social Alumno'],
+  tags: ['Solicitudes Servicio Social'],
   description: 'Este endpoint elimina una solicitud de servicio social Alumno.',
   params: {
     type: 'object',
