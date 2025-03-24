@@ -96,10 +96,6 @@ const findFileServicio = (
             }],
           }],
       },
-      {
-        association: 'usuario',
-        include: [{ association: 'persona' }],
-      },
       { association: 'cicloEscolar' },
     ];
 
@@ -110,11 +106,14 @@ const findFileServicio = (
       strict: false,
     });
 
-    checkers.throwErrorIfDataIsFalsy(solicitudPrograma, 'solicitudPrograma', solicitudServicioSocialId);
+    checkers.throwErrorIfDataIsFalsy(solicitudPrograma, 'solicitudServicioSocial', solicitudServicioSocialId);
 
     const includeAlumnos = [
       { association: 'alumno', include: [{ association: 'persona' }] },
       { association: 'grado' },
+      { association: 'modalidadServicioSocial' },
+      { association: 'sectorServicioSocial' },
+      { association: 'ejeServicioSocial', include: [{ association: 'dimensionServicioSocial' }] },
     ];
 
     const solicitudAlumnos = await findAllSolicitudServSocAlumnoQuery(
