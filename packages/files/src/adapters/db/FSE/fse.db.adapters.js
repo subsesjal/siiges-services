@@ -6,6 +6,8 @@ const {
   Calificacion,
   SolicitudBeca,
   SolicitudBecaAlumno,
+  SolicitudServicioSocial,
+  SolicitudServicioSocialAlumno,
 } = models;
 
 const {
@@ -18,4 +20,6 @@ module.exports = {
   findAllCalificacionesQuery: findAllQuery(Calificacion),
   findOneSolicitudBecaQuery: findOneQuery(SolicitudBeca),
   findAllSolicitudBecaAlumnoQuery: findAllQuery(SolicitudBecaAlumno),
+  findOneSolicitudServSocQuery: findOneQuery(SolicitudServicioSocial),
+  findAllSolicitudServSocAlumnoQuery: findAllQuery(SolicitudServicioSocialAlumno),
 };
