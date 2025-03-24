@@ -247,6 +247,10 @@ const tipoDocumentoObj = [
     id: 62,
     name: 'HISTORIAL_ACADEMICO',
   },
+  {
+    id: 63,
+    name: 'REPORTE_BECAS',
+  },
 ];
 
 module.exports = tipoDocumentoObj;

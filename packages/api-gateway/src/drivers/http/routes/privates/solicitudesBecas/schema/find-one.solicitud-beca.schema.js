@@ -1,4 +1,6 @@
 const { solicitudBeca } = require('./properties/solicitudBeca');
+const { usuario } = require('../../usuarios/schema/properties/usuario');
+const { persona } = require('../../usuarios/schema/properties/persona');
 const { programa } = require('../../solicitudes/schema/properties/programa');
 const { responseProperties } = require('./properties/responseProperties');
 const { cicloEscolar } = require('../../ciclosEscolares/schema/properties/cicloEscolar');
@@ -39,6 +41,22 @@ const findOneSolicitudBecaSchema = {
                 id: { type: 'integer' },
                 ...programa,
                 ...responseProperties,
+              },
+            },
+            usuario: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...usuario,
+                ...responseProperties,
+                persona: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'integer' },
+                    ...persona,
+                    ...responseProperties,
+                  },
+                },
               },
             },
           },

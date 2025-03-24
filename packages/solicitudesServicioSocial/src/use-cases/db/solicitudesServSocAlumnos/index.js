@@ -1,6 +1,7 @@
 const { solicitudesServSoc } = require('../../../adapters/db');
 
 const createSolicitudServSocAlumno = require('./create.solicitud-serv-soc-alumno.use-cases');
+const updateSolicitudServSocAlumno = require('./update.solicitud-serv-soc-alumno.use-cases');
 const findOneSolicitudServSocAlumno = require('./find-one.solicitud-serv-soc-alumno.use-cases');
 const findAllSolicitudesServSocAlumno = require('./find-all.solicitudes-serv-soc-alumnos.use-cases');
 const deleteSolicitudServSocAlumno = require('./delete.solicitud-serv-soc-alumno.use-cases');
@@ -17,6 +18,15 @@ module.exports = {
     solicitudesServSoc.findOneEjeServicioSocialQuery,
     solicitudesServSoc.findOneDimensionServicioSocialQuery,
     solicitudesServSoc.deleteSolicitudServicioSocialAlumnoQuery,
+  ),
+  updateSolicitudServSocAlumno: updateSolicitudServSocAlumno(
+    solicitudesServSoc.updateSolicitudServicioSocialAlumnoQuery,
+    solicitudesServSoc.findOneSolicitudServicioSocialAlumnoQuery,
+    solicitudesServSoc.findOneAlumnoQuery,
+    solicitudesServSoc.findOneGradoQuery,
+    solicitudesServSoc.findOneModalidadServicioSocialQuery,
+    solicitudesServSoc.findOneSectorServicioSocialQuery,
+    solicitudesServSoc.findOneEjeServicioSocialQuery,
   ),
   findOneSolicitudServSocAlumno: findOneSolicitudServSocAlumno(
     solicitudesServSoc.findOneSolicitudServicioSocialAlumnoQuery,

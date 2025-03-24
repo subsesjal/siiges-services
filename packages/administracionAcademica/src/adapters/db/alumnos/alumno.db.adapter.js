@@ -39,4 +39,5 @@ module.exports = {
   updateCalificacionQuery: updateAndFindQuery(Calificacion),
   findAllCalificacionesQuery: findAllQuery(Calificacion),
   deleteCalificacionQuery: deleteAndFindQuery(Calificacion),
+  findAllCount: findAllQuery(Alumno),
 };
