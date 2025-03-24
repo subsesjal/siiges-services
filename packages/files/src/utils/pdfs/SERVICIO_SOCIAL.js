@@ -29,12 +29,12 @@ function GenerarServicio(solicitud, alumnos) {
 
   // Primera tabla (Datos del programa)
   const tableData = [[
-    solicitud.programa?.plantel?.institucion?.nombre || 'No se encuentra',
-    solicitud?.programa?.acuerdoRvoe || 'No se encuentra',
-    solicitud.programa?.plantel?.domicilio?.calle || 'No se encuentra',
-    solicitud.createdAt ? new Date(solicitud.createdAt).toLocaleDateString('es-MX') : 'No se encuentra',
-    `${representante.nombre || ''} ${representante.apellidoPaterno || ''} ${representante.apellidoMaterno || ''}`.trim() || 'No se encuentra',
-    solicitud?.usuario?.correo || 'No se encuentra',
+    solicitud.programa?.plantel?.institucion?.nombre || '',
+    solicitud?.programa?.acuerdoRvoe || '',
+    solicitud.programa?.plantel?.domicilio?.calle || '',
+    solicitud.createdAt ? new Date(solicitud.createdAt).toLocaleDateString('es-MX') : '',
+    `${representante.nombre || ''} ${representante.apellidoPaterno || ''} ${representante.apellidoMaterno || ''}`.trim() || '',
+    solicitud?.usuario?.correo || '',
   ]];
 
   doc.autoTable({
@@ -50,14 +50,15 @@ function GenerarServicio(solicitud, alumnos) {
   // Segunda tabla (Alumnos de servicio social sin columna No y Plan de Estudios)
   const alumnosData = alumnos?.map((alumno) => [
     `${alumno?.alumno?.persona?.nombre || ''} ${alumno?.alumno?.persona?.apellidoPaterno || ''} ${alumno?.alumno?.persona?.apellidoMaterno || ''}`.trim(),
-    alumno?.grado?.nombre || 'No se encuentra',
-    alumno?.estatusAlumnoBeca?.nombre || 'No se encuentra',
-    alumno?.porcentajeBeca || 'No se encuentra',
-    alumno?.alumno?.persona?.correoPrimario || 'No se encuentra',
-    alumno?.alumno?.persona?.curp || 'No se encuentra',
-    alumno?.alumno?.persona?.direccion || 'No se encuentra',
-    alumno?.alumno?.persona?.municipio || 'No se encuentra',
-  ]) || [['No hay alumnos disponibles']];
+    alumno?.grado?.nombre || '',
+    alumno?.modalidadServicioSocial?.nombre || '',
+    alumno?.sectorServicioSocial?.nombre || '',
+    alumno?.lugarReceptor || '',
+    alumno?.ejeServicioSocial?.dimensionServicioSocial?.nombre || '',
+    alumno?.ejeServicioSocial?.nombre || '',
+    new Date(alumno?.fechaInicio).toLocaleDateString('es-MX') || '',
+    new Date(alumno?.fechaTermino).toLocaleDateString('es-MX') || '',
+  ]) || [['']];
 
   doc.autoTable({
     startY: currentPositionY,
@@ -65,12 +66,13 @@ function GenerarServicio(solicitud, alumnos) {
       [
         'Nombre',
         'Grado',
-        'Estatus',
-        '% Beca',
-        'Correo Electrónico',
-        'CURP',
-        'Domicilio',
-        'Municipio',
+        'Modalidad',
+        'Sector',
+        'Lugar receptor',
+        'Dimensiones',
+        'Ejes',
+        'Fecha Inicio',
+        'Fecha Termino',
       ],
     ],
     body: alumnosData,
