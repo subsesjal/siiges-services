@@ -12,6 +12,7 @@ async function solicitudServSocRouter(fastify, opts, next) {
     },
     solicitudesServSocAdapter.createSolicitudServSoc,
   );
+
   await fastify.get(
     '/:solicitudServicioSocialId',
     {
@@ -20,6 +21,7 @@ async function solicitudServSocRouter(fastify, opts, next) {
     },
     solicitudesServSocAdapter.findOneSolicitudServSoc,
   );
+
   await fastify.get(
     '/',
     {
@@ -28,6 +30,7 @@ async function solicitudServSocRouter(fastify, opts, next) {
     },
     solicitudesServSocAdapter.findAllSolicitudesServSoc,
   );
+
   await fastify.patch(
     '/:solicitudServicioSocialId',
     {
@@ -36,6 +39,7 @@ async function solicitudServSocRouter(fastify, opts, next) {
     },
     solicitudesServSocAdapter.updateSolicitudServSoc,
   );
+
   await fastify.post(
     '/:solicitudServicioSocialId/solicitudesServicioSocialAlumno',
     {
@@ -44,6 +48,16 @@ async function solicitudServSocRouter(fastify, opts, next) {
     },
     solicitudesServSocAdapter.createSolicitudServSocAlumno,
   );
+
+  await fastify.patch(
+    '/solicitudesServicioSocialAlumno/:solicitudServicioSocialAlumnoId',
+    {
+      schema: solicitudServSocSchemas.updateSolicitudServSocAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesServSocAdapter.updateSolicitudServSocAlumno,
+  );
+
   await fastify.get(
     '/:solicitudServicioSocialId/solicitudesServicioSocialAlumno/:solicitudesServicioSocialAlumnosId',
     {
@@ -52,6 +66,7 @@ async function solicitudServSocRouter(fastify, opts, next) {
     },
     solicitudesServSocAdapter.findOneSolicitudServSocAlumno,
   );
+
   await fastify.get(
     '/:solicitudServicioSocialId/solicitudesServicioSocialAlumno',
     {
@@ -68,6 +83,24 @@ async function solicitudServSocRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     solicitudesServSocAdapter.deleteSolicitudServSoc,
+  );
+
+  await fastify.get(
+    '/dimensionesServicioSocial',
+    {
+      schema: solicitudServSocSchemas.findAllDimensionesServSocSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesServSocAdapter.findAllDimensionesServSoc,
+  );
+
+  await fastify.get(
+    '/ejesServicioSocial',
+    {
+      schema: solicitudServSocSchemas.findAllEjesSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesServSocAdapter.findAllEjesServSoc,
   );
 
   next();

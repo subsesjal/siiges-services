@@ -9,7 +9,6 @@ const createSolicitudServSocAlumno = (
   findOneModalidadServicioSocialQuery,
   findOneSectorServicioSocialQuery,
   findOneEjeServicioSocialQuery,
-  findOneDimensionServicioSocialQuery,
 ) => async (data) => {
   const include = [
     { association: 'alumno' },
@@ -29,7 +28,6 @@ const createSolicitudServSocAlumno = (
     modalidadServicioSocial: [data.modalidadServicioSocialId, findOneModalidadServicioSocialQuery],
     sectorServicioSocial: [data.sectorServicioSocialId, findOneSectorServicioSocialQuery],
     ejeServicioSocial: [data.ejeServicioSocialId, findOneEjeServicioSocialQuery],
-    dimensionServicioSocial: [data.dimensionServicioSocialId, findOneDimensionServicioSocialQuery],
   };
 
   await checkers.findValidator(queryFunctions);

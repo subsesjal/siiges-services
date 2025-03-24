@@ -7,32 +7,21 @@ const { ejeServicioSocial } = require('./properties/ejeServicioSocial');
 const { dimensionServicioSocial } = require('./properties/dimensionServicioSocial');
 const { responseProperties } = require('./properties/responseProperties');
 
-const createSolicitudServSocAlumnoSchema = {
+const updateSolicitudServSocAlumnoSchema = {
   tags: ['Solicitudes Servicio Social Alumno'],
-  description:
-      'Crea un registro para asignar un alumno a una solicitud de Servicio Social. Se debe enviar el id de la solicitud en el params. De body debe ir el id del alumno, grado, modalidad, sector, dimensión, eje, lugar receptor y las fechas de inicio y término.',
+  description: 'Actualiza un registro para asignar un alumno a una solicitud de Servicio Social. Se debe enviar el id de solicitudSerSocAlumno en el params.',
   params: {
     type: 'object',
     properties: {
-      solicitudServicioSocialId: { type: 'integer' },
+      solicitudServicioSocialAlumnoId: { type: 'integer' },
     },
-    required: ['solicitudServicioSocialId'],
+    required: ['solicitudServicioSocialAlumnoId'],
   },
   body: {
     type: 'object',
     properties: {
       ...solicitudServicioSocialAlumno,
     },
-    required: [
-      'alumnoId',
-      'gradoId',
-      'modalidadServicioSocialId',
-      'sectorServicioSocialId',
-      'ejeServicioSocialId',
-      'lugarReceptor',
-      'fechaInicio',
-      'fechaTermino',
-    ],
   },
   response: {
     201: {
@@ -40,7 +29,6 @@ const createSolicitudServSocAlumnoSchema = {
       properties: {
         data: {
           properties: {
-            id: { type: 'integer' },
             ...solicitudServicioSocialAlumno,
             ...responseProperties,
             alumno: {
@@ -98,4 +86,4 @@ const createSolicitudServSocAlumnoSchema = {
   },
 };
 
-module.exports = createSolicitudServSocAlumnoSchema;
+module.exports = updateSolicitudServSocAlumnoSchema;
