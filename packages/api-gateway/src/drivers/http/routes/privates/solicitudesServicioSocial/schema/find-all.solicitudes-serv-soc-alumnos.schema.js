@@ -1,5 +1,6 @@
 const { solicitudServicioSocialAlumno } = require('./properties/solicitudServicioSocialAlumno');
 const { alumno } = require('../../alumnos/schema/properties/alumno');
+const { persona } = require('../../usuarios/schema/properties/persona'); // Asegúrate de que esta ruta sea correcta
 const { grado } = require('../../grupos/schema/properties/grado');
 const { modalidadServicioSocial } = require('./properties/modalidadServicioSocial');
 const { sectorServicioSocial } = require('./properties/sectorServicioSocial');
@@ -21,12 +22,21 @@ const findAllSolicitudesServSocAlumnoSchema = {
             properties: {
               id: { type: 'integer' },
               ...solicitudServicioSocialAlumno,
+              ...responseProperties,
               alumno: {
                 type: 'object',
                 properties: {
                   id: { type: 'integer' },
                   ...alumno,
                   ...responseProperties,
+                  persona: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...persona,
+                      ...responseProperties,
+                    },
+                  },
                 },
               },
               grado: {
