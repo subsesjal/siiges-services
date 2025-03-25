@@ -149,6 +149,7 @@ function generateTable({
       lineColor: [0, 0, 0],
       lineWidth: 0.3,
       font: 'Nutmeg',
+      textColor: [0, 0, 0],
     },
     headStyles,
     showHead,
@@ -217,6 +218,7 @@ function crearFilaFecha({
   return currentPositionY;
 }
 
+// tabla de institucion debajo de la fecha
 function seccionIntitucionTabla({
   currentPositionY: currentPosition, solicitud, doc, niveles,
 }) {
@@ -243,9 +245,11 @@ function seccionIntitucionTabla({
       lineColor: [0, 0, 0],
       lineWidth: 0.3,
       font: 'Nutmeg',
+      textColor: [0, 0, 0],
     },
     headStyles: {
       fontSize: 15,
+      textColor: [0, 0, 0],
     },
     showHead: false,
     columnStyles: {
@@ -366,9 +370,9 @@ function generateTableWithStyles(headers, tableData, doc, currentPositionY) {
     tableData,
     startY: currentPositionY,
     headStyles: {
-      fillColor: [172, 178, 183],
+      fillColor: [255, 131, 0],
       fontSize: 12,
-      textColor: [20, 20, 20],
+      textColor: [0, 0, 0],
       font: 'Nutmeg',
       halign: 'center',
       valign: 'middle',
@@ -583,7 +587,7 @@ function tableDate(doc, currentPositionY, date, sizeText = 30, sizeDateField = 4
     {
       tipo: 'fila',
       contenido: [
-        { texto: 'Fecha', medida: sizeText, color: 'naranja' },
+        { texto: 'FECHA', medida: sizeText, color: 'naranja' },
         { texto: date, medida: sizeDateField, color: 'blanco' },
       ],
       repetirVeces: 1,
