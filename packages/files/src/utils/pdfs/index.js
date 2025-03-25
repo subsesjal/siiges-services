@@ -12,6 +12,7 @@ const { GenerarOFAD } = require('./OFAD');
 const { GenerarRVOE } = require('./RVOE');
 const { GenerarHistorial } = require('./HISTORIAL');
 const { GenerarBeca } = require('./BECA');
+const { GenerarServicio } = require('./SERVICIO_SOCIAL');
 
 module.exports = {
   GenerarFDA01,
@@ -28,4 +29,5 @@ module.exports = {
   GenerarRVOE,
   GenerarHistorial,
   GenerarBeca,
+  GenerarServicio,
 };

@@ -1,6 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { CICLO_ESCOLAR_TABLE } = require('./cicloEscolar');
 const { DOMICILIO_TABLE } = require('./domicilio');
+const { PROGRAMA_TABLE } = require('./programa');
 const { ESTATUS_SOLICITUD_SERVICIO_SOCIAL_TABLE } = require('./estatusSolicitudServicioSocial');
 
 const SOLICITUD_SERVICIO_SOCIAL_TABLE = 'solicitudes_servicio_social';
@@ -18,6 +19,15 @@ const SolicitudServicioSocialSchema = {
     field: 'estatus_solicitud_servicio_social_id',
     references: {
       model: ESTATUS_SOLICITUD_SERVICIO_SOCIAL_TABLE,
+      key: 'id',
+    },
+  },
+  programaId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'programa_id',
+    references: {
+      model: PROGRAMA_TABLE,
       key: 'id',
     },
   },
@@ -70,6 +80,7 @@ class SolicitudServicioSocial extends Model {
   static associate(models) {
     this.belongsTo(models.EstatusSolicitudServicioSocial, { as: 'estatusSolicitudServicioSocial' });
     this.belongsTo(models.CicloEscolar, { as: 'cicloEscolar' });
+    this.belongsTo(models.Programa, { as: 'programa' });
     this.belongsTo(models.Domicilio, { as: 'domicilio' });
     this.hasMany(models.SolicitudServicioSocialAlumno, { as: 'solicitudServicioSocialAlumnos', foreignKey: 'solicitudServicioSocialId' });
   }

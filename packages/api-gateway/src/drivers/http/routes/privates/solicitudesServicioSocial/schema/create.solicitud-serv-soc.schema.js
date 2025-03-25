@@ -23,6 +23,7 @@ const createSolicitudServicioSocialSchema = {
       'estatusSolicitudServicioSocialId',
       'cicloEscolarId',
       'domicilio',
+      'programaId',
     ],
   },
   response: {
