@@ -19,6 +19,7 @@ const findAllSolicitudesServSocAlumnoSchema = {
           items: {
             type: 'object',
             properties: {
+              id: { type: 'integer' },
               ...solicitudServicioSocialAlumno,
               alumno: {
                 type: 'object',
