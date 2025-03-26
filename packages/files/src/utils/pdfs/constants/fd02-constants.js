@@ -68,7 +68,7 @@ const HEADER_MAIN_TITTLE = [
 
 const columnStyles = {
   0: {
-    fillColor: [172, 178, 183],
+    fillColor: [255, 131, 0],
   },
   1: {
     fontStyle: 'bold',
