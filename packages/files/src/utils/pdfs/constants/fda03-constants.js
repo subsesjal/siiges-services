@@ -5,14 +5,14 @@ const tableAuthorizedData = (authorizedData) => [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '3. EN CASO DE TENER NOMBRE AUTORIZADO', medida: 182, color: 'gris' },
+      { texto: '3. EN CASO DE TENER NOMBRE AUTORIZADO', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
   {
     tipo: 'fila',
     contenido: [
-      { texto: '1', medida: 91, color: 'gris' },
+      { texto: '1', medida: 91, color: 'naranja' },
       { texto: authorizedData?.nombreAutorizado, medida: 91, color: 'blanco' },
     ],
     repetirVeces: 1,
@@ -20,7 +20,7 @@ const tableAuthorizedData = (authorizedData) => [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '2', medida: 91, color: 'gris' },
+      { texto: '2', medida: 91, color: 'naranja' },
       { texto: '', medida: 91, color: 'blanco' },
     ],
     repetirVeces: 1,
@@ -28,7 +28,7 @@ const tableAuthorizedData = (authorizedData) => [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '3', medida: 91, color: 'gris' },
+      { texto: '3', medida: 91, color: 'naranja' },
       {
         texto: authorizedData?.fechaAutorizacion
           ? new Date(authorizedData.fechaAutorizacion).toLocaleDateString('en-US')
@@ -44,14 +44,14 @@ const tableProposedNames = (proposedNames) => [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '2. PROPUESTAS DE NOMBRE', medida: 182, color: 'gris' },
+      { texto: '2. PROPUESTAS DE NOMBRE', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
   {
     tipo: 'fila',
     contenido: [
-      { texto: '1', medida: 91, color: 'gris' },
+      { texto: '1', medida: 91, color: 'naranja' },
       { texto: proposedNames?.nombrePropuesto1, medida: 91, color: 'blanco' },
     ],
     repetirVeces: 1,
@@ -59,7 +59,7 @@ const tableProposedNames = (proposedNames) => [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '2', medida: 91, color: 'gris' },
+      { texto: '2', medida: 91, color: 'naranja' },
       { texto: proposedNames?.nombrePropuesto2, medida: 91, color: 'blanco' },
     ],
     repetirVeces: 1,
@@ -67,7 +67,7 @@ const tableProposedNames = (proposedNames) => [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '3', medida: 91, color: 'gris' },
+      { texto: '3', medida: 91, color: 'naranja' },
       { texto: proposedNames?.nombrePropuesto3, medida: 91, color: 'blanco' },
     ],
     repetirVeces: 1,
@@ -82,14 +82,14 @@ const tableRepresentativeLegal = (representative) => [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '1. DATOS DEL PROPIETARIO O REPRESENTANTE LEGAL', medida: 182, color: 'gris' },
+      { texto: '1. DATOS DEL PROPIETARIO O REPRESENTANTE LEGAL', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
   {
     tipo: 'fila',
     contenido: [
-      { texto: 'NOMBRE (S)', medida: 91, color: 'gris' },
+      { texto: 'NOMBRE (S)', medida: 91, color: 'naranja' },
       { texto: representative?.nombre, medida: 91, color: 'blanco' },
     ],
     repetirVeces: 1,
@@ -97,7 +97,7 @@ const tableRepresentativeLegal = (representative) => [
   {
     tipo: 'fila',
     contenido: [
-      { texto: 'APELLIDO PATERNO', medida: 91, color: 'gris' },
+      { texto: 'APELLIDO PATERNO', medida: 91, color: 'naranja' },
       { texto: representative?.apellidoPaterno, medida: 91, color: 'blanco' },
     ],
     repetirVeces: 1,
@@ -105,7 +105,7 @@ const tableRepresentativeLegal = (representative) => [
   {
     tipo: 'fila',
     contenido: [
-      { texto: 'APELLIDO MATERNO', medida: 91, color: 'gris' },
+      { texto: 'APELLIDO MATERNO', medida: 91, color: 'naranja' },
       { texto: representative?.apellidoMaterno, medida: 91, color: 'blanco' },
     ],
     repetirVeces: 1,

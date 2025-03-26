@@ -40,7 +40,7 @@ const {
 } = require('./pdfHandler');
 
 const img1 = fs.readFileSync(path.join(__dirname, '/images/img4.png'), { encoding: 'base64' });
-const img3 = fs.readFileSync(path.join(__dirname, '/images/img5.png'), { encoding: 'base64' });
+const img3 = fs.readFileSync(path.join(__dirname, '/images/img6.png'), { encoding: 'base64' });
 
 function addHeaderContent(doc) {
   doc.addImage(img1, 'JPEG', 60, 9, 100, 23);
