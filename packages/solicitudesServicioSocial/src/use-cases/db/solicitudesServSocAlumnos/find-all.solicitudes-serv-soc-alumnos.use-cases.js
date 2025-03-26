@@ -1,6 +1,9 @@
 const findAllSolicitudesServSocAlumno = (findAllSolicitudesServSocAlumnoQuery) => async () => {
   const include = [
-    { association: 'alumno' },
+    {
+      association: 'alumno',
+      include: [{ association: 'persona' }],
+    },
     { association: 'grado' },
     { association: 'modalidadServicioSocial' },
     { association: 'sectorServicioSocial' },
