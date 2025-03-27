@@ -53,7 +53,6 @@ async function updateSolicitudBeca(request, reply) {
       .updateSolicitudBeca(data, { id: solicitudBecaId });
 
     // generar archivo pdf a enviar
-    // const solicitudReport = generateFile(solicitudBeca);
 
     const { estatusSolicitudBecaId } = data;
 

@@ -3,6 +3,7 @@ const { estatusSolicitudServicioSocial } = require('./properties/estatusSolicitu
 const { cicloEscolar } = require('../../ciclosEscolares/schema/properties/cicloEscolar');
 const { domicilio } = require('../../usuarios/schema/properties/domicilio');
 const { responseProperties } = require('./properties/responseProperties');
+const { usuario } = require('../../usuarios/schema/properties/usuario');
 
 const updateSolicitudServSocSchema = {
   tags: ['Solicitudes Servicio Social'],
@@ -63,6 +64,14 @@ const updateSolicitudServSocSchema = {
               properties: {
                 id: { type: 'integer' },
                 ...domicilio,
+                ...responseProperties,
+              },
+            },
+            usuario: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...usuario,
                 ...responseProperties,
               },
             },
