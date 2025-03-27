@@ -22,6 +22,7 @@ const createSolicitudServicioSocialSchema = {
     required: [
       'estatusSolicitudServicioSocialId',
       'cicloEscolarId',
+      'usuarioId',
       'domicilio',
       'programaId',
     ],

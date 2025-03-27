@@ -18,6 +18,7 @@ const updateSolicitudServSoc = (
     { association: 'estatusSolicitudServicioSocial' },
     { association: 'cicloEscolar' },
     { association: 'domicilio' },
+    { association: 'usuario' },
   ];
 
   let updatedSolicitud = await updateSolicitudServSocQuery(

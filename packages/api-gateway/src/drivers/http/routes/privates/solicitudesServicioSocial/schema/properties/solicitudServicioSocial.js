@@ -2,6 +2,7 @@
 const solicitudServicioSocial = {
   estatusSolicitudServicioSocialId: { type: 'integer' },
   programaId: { type: 'integer' },
+  usuarioId: { type: 'integer' },
   cicloEscolarId: { type: 'integer' },
   domicilioId: { type: 'integer' },
   folioSolicitud: { type: 'string' },
