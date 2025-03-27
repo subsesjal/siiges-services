@@ -7,7 +7,7 @@ const createSolicitudServSoc = (
   const currentYear = new Date().getFullYear();
 
   const totalSolicitudes = await countSolicitudesServSocQuery(null, {
-    isDeleting: false,
+    isDeleting: true,
     searchColumn: 'created_at',
     searchText: currentYear.toString(),
     searchType: 'date',
