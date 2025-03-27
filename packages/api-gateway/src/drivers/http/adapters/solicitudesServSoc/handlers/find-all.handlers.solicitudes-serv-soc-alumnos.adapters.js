@@ -3,10 +3,12 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function findAllSolicitudesServSocAlumno(req, reply) {
   try {
+    const { solicitudServicioSocialId } = req.params;
+
     Logger.info('[solicitudes Serv Soc Alumno]: Find all solicitudes servicio social alumnos');
 
     const solicitudesServSocAlumno = await this.solicitudServicioSocialServices
-      .findAllSolicitudesServSocAlumno();
+      .findAllSolicitudesServSocAlumno(solicitudServicioSocialId);
 
     return reply
       .code(200)
