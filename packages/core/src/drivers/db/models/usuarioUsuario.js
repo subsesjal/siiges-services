@@ -1,4 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
+const { USUARIO_TABLE } = require('./usuario');
 
 const USUARIO_USUARIO_TABLE = 'usuario_usuarios';
 
@@ -13,11 +14,19 @@ const UsuarioUsuarioSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'principal_id',
+    references: {
+      model: USUARIO_TABLE,
+      key: 'id',
+    },
   },
   secundarioId: {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'secundario_id',
+    references: {
+      model: USUARIO_TABLE,
+      key: 'id',
+    },
   },
   createdAt: {
     allowNull: false,
@@ -40,7 +49,9 @@ const UsuarioUsuarioSchema = {
 };
 
 class UsuarioUsuario extends Model {
-  static associate() {
+  static associate(models) {
+    this.belongsTo(models.Usuario, { as: 'principal', foreignKey: 'principalId' });
+    this.belongsTo(models.Usuario, { as: 'secundario', foreignKey: 'secundarioId' });
   }
 
   static config(sequelize) {

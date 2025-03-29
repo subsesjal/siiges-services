@@ -1,15 +1,24 @@
-const findAllUserUsers = (findAllUserUsersQuery, findOneUserQuery) => async (principalId) => {
-  const query = { principalId };
+const findAllUserUsers = (findAllUserUsersQuery) => async (principalId) => {
+  const include = [
+    {
+      association: 'principal',
+      include: [{ association: 'persona' }, { association: 'rol' }],
+    },
+    {
+      association: 'secundario',
+      include: [{ association: 'persona' }, { association: 'rol' }],
+    },
+  ];
 
-  const userUsers = await findAllUserUsersQuery({}, { query });
+  const userUsers = await findAllUserUsersQuery(
+    { principalId },
+    { include, strict: true },
+  );
 
-  const usersDetail = await Promise.all(userUsers.map(async (userUser) => {
-    const include = [{ association: 'persona' }, { association: 'rol' }];
-    const user = await findOneUserQuery({ id: userUser.secundarioId }, { include });
-    return user;
-  }));
-
-  return usersDetail;
+  return userUsers.map((userUser) => {
+    const userTransformed = userUser.toJSON();
+    return userTransformed.secundario;
+  });
 };
 
 module.exports = findAllUserUsers;
