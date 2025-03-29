@@ -34,7 +34,7 @@ const findAllSolicitudesProgramasSchema = {
               folio: { type: 'string' },
               ...responseProperties,
               estatusSolicitud: {
-                type: 'object',
+                type: ['object', 'null'],
                 properties: {
                   id: { type: 'integer' },
                   ...estatusSolicitud,
@@ -42,7 +42,7 @@ const findAllSolicitudesProgramasSchema = {
                 },
               },
               programa: {
-                type: 'object',
+                type: ['object', 'null'],
                 properties: {
                   id: { type: 'integer' },
                   ...programa,
@@ -59,19 +59,19 @@ const findAllSolicitudesProgramasSchema = {
                   },
                   ...responseProperties,
                   plantel: {
-                    type: 'object',
+                    type: ['object', 'null'],
                     properties: {
                       id: { type: 'integer' },
                       ...plantel,
                       ...responseProperties,
                       domicilio: {
-                        type: 'object',
+                        type: ['object', 'null'],
                         properties: {
                           id: { type: 'integer' },
                           ...domicilio,
                           ...responseProperties,
                           municipio: {
-                            type: 'object',
+                            type: ['object', 'null'],
                             properties: {
                               id: { type: 'integer' },
                               ...municipio,
@@ -79,7 +79,7 @@ const findAllSolicitudesProgramasSchema = {
                             },
                           },
                           estado: {
-                            type: 'object',
+                            type: ['object', 'null'],
                             properties: {
                               id: { type: 'integer' },
                               ...estado,
@@ -89,7 +89,7 @@ const findAllSolicitudesProgramasSchema = {
                         },
                       },
                       institucion: {
-                        type: 'object',
+                        type: ['object', 'null'],
                         properties: {
                           id: { type: 'integer' },
                           ...institucion,
