@@ -1,12 +1,6 @@
 const { solicitud } = require('./properties/solicitud');
-const { programa } = require('./properties/programa');
-const { programaTurnos } = require('./properties/programaTurnos');
 const { estatusSolicitud } = require('./properties/estatusSolicitud');
-const { plantel } = require('../../instituciones/schema/properties/plantel');
-const { institucion } = require('../../instituciones/schema/properties/institucion');
 const { domicilio } = require('../../usuarios/schema/properties/domicilio');
-const { estado } = require('../../usuarios/schema/properties/estado');
-const { municipio } = require('../../usuarios/schema/properties/municipio');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findAllSolicitudesProgramasSchema = {
@@ -45,24 +39,18 @@ const findAllSolicitudesProgramasSchema = {
                 type: ['object', 'null'],
                 properties: {
                   id: { type: 'integer' },
-                  ...programa,
-                  programaTurnos: {
-                    type: 'array',
-                    items: {
-                      type: 'object',
-                      properties: {
-                        id: { type: 'integer' },
-                        ...programaTurnos,
-                        ...responseProperties,
-                      },
-                    },
-                  },
+                  solicitudId: { type: 'integer' },
+                  plantelId: { type: 'integer' },
+                  acuerdoRvoe: { type: 'string' },
+                  nombre: { type: 'string' },
                   ...responseProperties,
                   plantel: {
                     type: ['object', 'null'],
                     properties: {
                       id: { type: 'integer' },
-                      ...plantel,
+                      institucionId: { type: 'integer' },
+                      domicilioId: { type: 'integer' },
+                      claveCentroTrabajo: { type: 'string' },
                       ...responseProperties,
                       domicilio: {
                         type: ['object', 'null'],
@@ -70,29 +58,14 @@ const findAllSolicitudesProgramasSchema = {
                           id: { type: 'integer' },
                           ...domicilio,
                           ...responseProperties,
-                          municipio: {
-                            type: ['object', 'null'],
-                            properties: {
-                              id: { type: 'integer' },
-                              ...municipio,
-                              ...responseProperties,
-                            },
-                          },
-                          estado: {
-                            type: ['object', 'null'],
-                            properties: {
-                              id: { type: 'integer' },
-                              ...estado,
-                              ...responseProperties,
-                            },
-                          },
                         },
                       },
                       institucion: {
                         type: ['object', 'null'],
                         properties: {
                           id: { type: 'integer' },
-                          ...institucion,
+                          tipoInstitucionId: { type: 'integer' },
+                          nombre: { type: 'string' },
                           ...responseProperties,
                         },
                       },
