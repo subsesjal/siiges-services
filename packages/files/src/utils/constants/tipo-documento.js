@@ -255,6 +255,14 @@ const tipoDocumentoObj = [
     id: 64,
     name: 'REPORTE_SERV_SOC',
   },
+  {
+    id: 65,
+    name: 'ACTA_COMITE_SERV_SOC',
+  },
+  {
+    id: 66,
+    name: 'ACTA_COMITE_BECAS',
+  },
 ];
 
 module.exports = tipoDocumentoObj;
