@@ -24,15 +24,13 @@ const {
   switchTablas,
 } = require('./pdfHandler');
 
-const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
-const img2 = fs.readFileSync(path.join(__dirname, '/images/img2.png'), { encoding: 'base64' });
-const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encoding: 'base64' });
+const img1 = fs.readFileSync(path.join(__dirname, '/images/img4.png'), { encoding: 'base64' });
+const img3 = fs.readFileSync(path.join(__dirname, '/images/img6.png'), { encoding: 'base64' });
 let currentPositionY = 0;
 
 function addHeaderContent(doc) {
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
-  doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
-  doc.setFillColor(6, 98, 211);
+  doc.setFillColor(116, 200, 210);
   crearCelda(doc, 166, 40, 30, 7, 'FDA04', 10);
 }
 function redefineAddPage(document) {
@@ -54,7 +52,7 @@ function GenerarFDA04(solicitud) {
   const modalidadTipo = buscarDescripcionPorId(modalidades, solicitud.programa.modalidadId);
   const ciclosTipo = buscarDescripcionPorId(ciclos, solicitud.programa.cicloId);
 
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [69, 133, 244], 'DESCRIPCIÓN DE LAS INSTALACIONES', 14, 45);
+  configurarFuenteYAgregarTexto(doc, 'bold', 12, [116, 200, 210], 'DESCRIPCIÓN DE LAS INSTALACIONES', 14, 45);
   const textoCiclos = ciclosTipo === 'Semestral' ? 'Semestres' : 'Cuatrimestres';
 
   currentPositionY = 60;
@@ -72,15 +70,15 @@ function GenerarFDA04(solicitud) {
     {
       tipo: 'fila',
       contenido: [
-        { texto: '3. DESCRIPCIÓN DEL PLANTEL', medida: 182, color: 'gris' },
+        { texto: '3. DESCRIPCIÓN DEL PLANTEL', medida: 182, color: 'naranja' },
       ],
       repetirVeces: 1,
     },
     {
       tipo: 'fila',
       contenido: [
-        { texto: 'CARACTERÍSTICAS DEL INMUEBLE', medida: 91, color: 'gris' },
-        { texto: 'SISTEMA DE SEGURIDAD', medida: 91, color: 'gris' },
+        { texto: 'CARACTERÍSTICAS DEL INMUEBLE', medida: 91, color: 'naranja' },
+        { texto: 'SISTEMA DE SEGURIDAD', medida: 91, color: 'naranja' },
       ],
       repetirVeces: 1,
     },
@@ -194,7 +192,7 @@ function GenerarFDA04(solicitud) {
     {
       tipo: 'fila',
       contenido: [
-        { texto: 'EDIFICIOS Y/O NIVELES', medida: 91, color: 'gris' },
+        { texto: 'EDIFICIOS Y/O NIVELES', medida: 91, color: 'naranja' },
         { texto: 'BOTIQUÍN', medida: 81, color: 'blanco' },
         { texto: '', medida: 10, color: 'blanco' },
       ],
