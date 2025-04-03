@@ -2,15 +2,15 @@ const tablaDomicilio = (solicitud) => [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '2. DOMICILIO DE LA INSTITUCIÓN', medida: 182, color: 'gris' },
+      { texto: '2. DOMICILIO DE LA INSTITUCIÓN', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
   {
     tipo: 'fila',
     contenido: [
-      { texto: 'CALLE Y NÚMERO', medida: 121.4, color: 'gris' },
-      { texto: 'COLONIA', medida: 60.66, color: 'gris' },
+      { texto: 'CALLE Y NÚMERO', medida: 121.4, color: 'naranja' },
+      { texto: 'COLONIA', medida: 60.66, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -25,9 +25,9 @@ const tablaDomicilio = (solicitud) => [
   {
     tipo: 'fila',
     contenido: [
-      { texto: 'CÓDIGO POSTAL', medida: 60.66, color: 'gris' },
-      { texto: 'DELEGACIÓN O MUNICIPIO', medida: 60.66, color: 'gris' },
-      { texto: 'ENTIDAD FEDERATIVA', medida: 60.66, color: 'gris' },
+      { texto: 'CÓDIGO POSTAL', medida: 60.66, color: 'naranja' },
+      { texto: 'DELEGACIÓN O MUNICIPIO', medida: 60.66, color: 'naranja' },
+      { texto: 'ENTIDAD FEDERATIVA', medida: 60.66, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -43,9 +43,9 @@ const tablaDomicilio = (solicitud) => [
   {
     tipo: 'fila',
     contenido: [
-      { texto: 'NÚMERO TELEFÓNICO', medida: 60.66, color: 'gris' },
-      { texto: 'REDES SOCIALES', medida: 60.66, color: 'gris' },
-      { texto: 'CORREO ELECTRÓNICO', medida: 60.66, color: 'gris' },
+      { texto: 'NÚMERO TELEFÓNICO', medida: 60.66, color: 'naranja' },
+      { texto: 'REDES SOCIALES', medida: 60.66, color: 'naranja' },
+      { texto: 'CORREO ELECTRÓNICO', medida: 60.66, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -63,7 +63,7 @@ const tablaDatosPlan = (solicitud, textoCiclos, modalidadTipo) => [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '1. DATOS DEL PLAN DE ESTUDIOS', medida: 182, color: 'gris' },
+      { texto: '1. DATOS DEL PLAN DE ESTUDIOS', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -119,15 +119,15 @@ const tablaHigiene = [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '4. HIGIENE DEL PLANTEL', medida: 182, color: 'gris' },
+      { texto: '4. HIGIENE DEL PLANTEL', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
   {
     tipo: 'fila',
     contenido: [
-      { texto: 'CONCEPTO', medida: 91, color: 'gris' },
-      { texto: 'DESCRIPCIÓN', medida: 91, color: 'gris' },
+      { texto: 'CONCEPTO', medida: 91, color: 'naranja' },
+      { texto: 'DESCRIPCIÓN', medida: 91, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -296,14 +296,14 @@ const tablaInfraestructuraPrograma = (solicitud) => [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '5. INFRAESTRUCTURA PARA EL PROGRAMA', medida: 182, color: 'gris' },
+      { texto: '5. INFRAESTRUCTURA PARA EL PROGRAMA', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
   {
     tipo: 'fila',
     contenido: [
-      { texto: 'ESPACIOS Y EQUIPAMIENTOS', medida: 182, color: 'gris' },
+      { texto: 'ESPACIOS Y EQUIPAMIENTOS', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -314,7 +314,7 @@ const tablaInfraestructuraPrograma = (solicitud) => [
       {
         texto: 'INSTALACIONES',
         medida: 30.33,
-        color: 'gris',
+        color: 'naranja',
         bold: true,
         tamano: 8,
         acomodoLetra: 'center',
@@ -322,23 +322,23 @@ const tablaInfraestructuraPrograma = (solicitud) => [
       {
         texto: ' CAPACIDAD PROMEDIO  (No. DE ALUMNOS)',
         medida: 30.33,
-        color: 'gris',
+        color: 'naranja',
         bold: true,
         acomodoLetra: 'left',
       },
-      { texto: 'METROS', medida: 30.33, color: 'gris' },
+      { texto: 'METROS', medida: 30.33, color: 'naranja' },
       {
         texto: 'RECURSOS MATERIALES',
         medida: 30.33,
-        color: 'gris',
+        color: 'naranja',
         bold: true,
         acomodoLetra: 'left',
       },
-      { texto: 'UBICACIÓN', medida: 30.33, color: 'gris' },
+      { texto: 'UBICACIÓN', medida: 30.33, color: 'naranja' },
       {
         texto: 'ASIGNATURAS QUE  ATIENDE',
         medida: 30.33,
-        color: 'gris',
+        color: 'naranja',
         bold: true,
         tamano: 9,
         acomodoLetra: 'left',
@@ -352,7 +352,7 @@ const tablaInfraestructuraPrograma = (solicitud) => [
       {
         texto: 'AULAS',
         medida: 182,
-        color: 'gris',
+        color: 'naranja',
         bold: true,
         acomodoLetra: 'left',
       },
@@ -366,7 +366,7 @@ const tablaInfraestructuraPrograma = (solicitud) => [
       {
         texto: 'LABORATORIOS Y TALLERES',
         medida: 182,
-        color: 'gris',
+        color: 'naranja',
         bold: true,
         acomodoLetra: 'left',
       },
@@ -380,7 +380,7 @@ const tablaInfraestructuraPrograma = (solicitud) => [
       {
         texto: 'LABORATORIO DE CÓMPUTO',
         medida: 182,
-        color: 'gris',
+        color: 'naranja',
         bold: true,
         acomodoLetra: 'left',
       },
@@ -394,7 +394,7 @@ const tablaInfraestructuraPrograma = (solicitud) => [
       {
         texto: 'BIBLIOTECA FÍSICA Y VIRTUAL',
         medida: 182,
-        color: 'gris',
+        color: 'naranja',
         bold: true,
         acomodoLetra: 'left',
       },
@@ -419,11 +419,11 @@ const tablaRelacionInstituciones = (solicitud) => [
   {
     tipo: 'fila',
     contenido: [
-      { texto: 'NOMBRE DE LA INSTITUCIÓN', medida: 91, color: 'gris' },
+      { texto: 'NOMBRE DE LA INSTITUCIÓN', medida: 91, color: 'naranja' },
       {
         texto: 'TIEMPO APROXIMADO REQUERIDO PARA LLEGAR A LA ESCUELA  (EN MINUTOS)',
         medida: 91,
-        color: 'gris',
+        color: 'naranja',
         acomodoLetra: 'left',
       },
     ],
