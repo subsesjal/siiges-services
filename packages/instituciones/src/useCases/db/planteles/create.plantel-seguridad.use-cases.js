@@ -14,8 +14,6 @@ const createPlantelSeguridad = (
   const plantel = await findOnePlantelQuery({ id: plantelId });
   checkers.throwErrorIfDataIsFalsy(plantel, 'planteles', plantelId);
 
-  console.log(data);
-
   const result = await Promise.all(data.map(async (item) => {
     const { seguridadSistemaId, cantidad } = item;
 
@@ -23,8 +21,6 @@ const createPlantelSeguridad = (
       plantelId,
       seguridadSistemaId,
     });
-
-    console.log(existingPlantelSeguridad);
 
     if (existingPlantelSeguridad) {
       const updatedPlantelSeguridad = await updatePlantelSeguridadQuery(

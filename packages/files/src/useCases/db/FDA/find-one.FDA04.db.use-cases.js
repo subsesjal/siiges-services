@@ -124,7 +124,6 @@ const findFileFDA04 = (
   });
 
   // eslint-disable-next-line no-console
-  console.log(JSON.stringify(solicitud, null, 2));
   checkers.throwErrorIfDataIsFalsy(solicitud, 'solicitud', solicitudId);
 
   const file = await GenerarFDA04(solicitud);
