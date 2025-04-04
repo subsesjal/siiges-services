@@ -6,7 +6,6 @@ const { modalidad } = require('./properties/modalidad');
 const { institucion } = require('../../instituciones/schema/properties/institucion');
 const { domicilio } = require('../../usuarios/schema/properties/domicilio');
 const { responseProperties } = require('../../instituciones/schema/properties/responseProperties');
-const { turno } = require('./properties/turno');
 
 const findOneProgramaSchema = {
   tags: ['Programa'],
@@ -86,7 +85,9 @@ const findOneProgramaSchema = {
                   turno: {
                     type: 'object',
                     properties: {
-                      ...turno,
+                      id: { type: 'integer' },
+                      nombre: { type: 'string' },
+                      descripcion: { type: 'string' },
                       ...responseProperties,
                     },
                   },
