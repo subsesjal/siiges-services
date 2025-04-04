@@ -29,7 +29,7 @@ const img3 = fs.readFileSync(path.join(__dirname, '/images/img6.png'), { encodin
 let currentPositionY = 0;
 
 function addHeaderContent(doc) {
-  doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
+  doc.addImage(img1, 'JPEG', 60, 9, 100, 23);
   doc.setFillColor(116, 200, 210);
   crearCelda(doc, 166, 40, 30, 7, 'FDA04', 10);
 }
