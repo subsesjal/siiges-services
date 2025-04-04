@@ -90,7 +90,7 @@ const tableModel = [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '1. DESCRIPCIÓN DEL MODELO TEÓRICO-PEDAGÓGICO', medida: 182, color: 'gris' },
+      { texto: '1. DESCRIPCIÓN DEL MODELO TEÓRICO-PEDAGÓGICO', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -106,7 +106,7 @@ const tableInfrastructure = [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '2. DESCRIPCIÓN DE LA INFRAESTRUCTURA TECNOLÓGICA DE LA PLATAFORMA TECNOLÓGICA EDUCATIVA.', medida: 182, color: 'gris' },
+      { texto: '2. DESCRIPCIÓN DE LA INFRAESTRUCTURA TECNOLÓGICA DE LA PLATAFORMA TECNOLÓGICA EDUCATIVA.', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -122,7 +122,7 @@ const tableHeadersUsuarios = [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '3. ROLES DE USUARIOS DE LA PLATAFORMA TECNOLÓGICA EDUCATIVA.', medida: 182, color: 'gris' },
+      { texto: '3. ROLES DE USUARIOS DE LA PLATAFORMA TECNOLÓGICA EDUCATIVA.', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -156,7 +156,7 @@ const tableHeadersVinculos = [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '4. ENLACE O VÍNCULO DE ACCESO PARA LA PLATAFORMA TECNOLÓGICA EDUCATIVA', medida: 182, color: 'gris' },
+      { texto: '4. ENLACE O VÍNCULO DE ACCESO PARA LA PLATAFORMA TECNOLÓGICA EDUCATIVA', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -198,7 +198,7 @@ const tableLinkType = [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '5. TIPO DE ENLACE DE LA PLATAFORMA TECNOLÓGICA EDUCATIVA.', medida: 182, color: 'gris' },
+      { texto: '5. TIPO DE ENLACE DE LA PLATAFORMA TECNOLÓGICA EDUCATIVA.', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -231,7 +231,7 @@ const tableWidthBand = [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '6. ANCHO DE BANDA DISPONIBLE PARA EL USO DE LA PLATAFORMA TECNOLÓGICA EDUCATIVA.', medida: 182, color: 'gris' },
+      { texto: '6. ANCHO DE BANDA DISPONIBLE PARA EL USO DE LA PLATAFORMA TECNOLÓGICA EDUCATIVA.', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -247,7 +247,7 @@ const tableHeaderAdministration = [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '7. ADMINISTRACIÓN Y PLANES DE CRECIMIENTO.', medida: 182, color: 'gris' },
+      { texto: '7. ADMINISTRACIÓN Y PLANES DE CRECIMIENTO.', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -263,7 +263,7 @@ const tableheaderCharacteristics = [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '8. CARACTERÍSTICAS DEL HARDWARE, LAS DEL CÓMPUTO CENTRAL Y DISTRIBUIDO, ASÍ COMO LA BASE DE DATOS.', medida: 182, color: 'gris' },
+      { texto: '8. CARACTERÍSTICAS DEL HARDWARE, LAS DEL CÓMPUTO CENTRAL Y DISTRIBUIDO, ASÍ COMO LA BASE DE DATOS.', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -279,7 +279,7 @@ const tableSoftwareCharacteristics = [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '9. CARACTERÍSTICAS DEL SOFTWARE, LAS DEL CÓMPUTO CENTRAL Y DISTRIBUIDO, ASÍ COMO LA BASE DE DATOS.', medida: 182, color: 'gris' },
+      { texto: '9. CARACTERÍSTICAS DEL SOFTWARE, LAS DEL CÓMPUTO CENTRAL Y DISTRIBUIDO, ASÍ COMO LA BASE DE DATOS.', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -295,7 +295,7 @@ const tableSupport = [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '10. SOPORTE TÉCNICO.', medida: 182, color: 'gris' },
+      { texto: '10. SOPORTE TÉCNICO.', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -322,7 +322,7 @@ const tableSecurity = [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '11. SEGURIDAD DE LA INFORMACIÓN.', medida: 182, color: 'gris' },
+      { texto: '11. SEGURIDAD DE LA INFORMACIÓN.', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -338,7 +338,7 @@ const tableAdvantages = [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '12. VENTAJAS.', medida: 182, color: 'gris' },
+      { texto: '12. VENTAJAS.', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -354,7 +354,7 @@ const tablePlan = [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '13. PLAN DE CONTINGENCIAS.', medida: 182, color: 'gris' },
+      { texto: '13. PLAN DE CONTINGENCIAS.', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
@@ -370,7 +370,7 @@ const tablePermissions = [
   {
     tipo: 'fila',
     contenido: [
-      { texto: '14. PERMISOS, LICENCIAS E INSTRUMENTOS.', medida: 182, color: 'gris' },
+      { texto: '14. PERMISOS, LICENCIAS E INSTRUMENTOS.', medida: 182, color: 'naranja' },
     ],
     repetirVeces: 1,
   },
