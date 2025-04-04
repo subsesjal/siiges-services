@@ -9,6 +9,8 @@ const {
 const {
   Programa,
   Plantel,
+  ProgramaTurno,
+  Turno,
 } = models;
 
 const include = [{
@@ -25,6 +27,12 @@ const include = [{
 { association: 'nivel' },
 { association: 'modalidad' },
 { association: 'ciclo' },
+{
+  association: 'programaTurnos',
+  include: [
+    { association: 'turno' },
+  ],
+},
 ];
 
 const where = {
