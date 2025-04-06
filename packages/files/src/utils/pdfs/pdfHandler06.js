@@ -90,7 +90,7 @@ function generarSeccionyTabla({
   }
 
   // Título de la sección
-  doc.setFillColor(172, 178, 183);
+  doc.setFillColor(255, 131, 0);
   crearCelda(
     doc,
     14, // cellX
@@ -115,7 +115,7 @@ function generarSeccionyTabla({
       font: 'Nutmeg',
     },
     headStyles: {
-      fillColor: [172, 178, 183],
+      fillColor: [255, 131, 0],
       fontSize: 12,
       textColor: [20, 20, 20],
     },
@@ -187,7 +187,7 @@ function seccionIntitucionTabla({
     showHead: false,
     columnStyles: {
       0: {
-        fillColor: [172, 178, 183],
+        fillColor: [255, 131, 0],
       },
       1: {
         fontStyle: 'bold',
@@ -253,7 +253,7 @@ function generateTableWithStyles(headers, tableData, doc, currentPositionY) {
     tableData,
     startY: currentPositionY,
     headStyles: {
-      fillColor: [172, 178, 183],
+      fillColor: [255, 131, 0],
       fontSize: 12,
       textColor: [20, 20, 20],
       font: 'Nutmeg',
