@@ -12,7 +12,7 @@ const HEADER_VINCULACION = ['15. VINCULACIÓN CON COLEGIOS DE PROFESIONISTAS, AC
 
 const columnStyles = {
   0: {
-    fillColor: [172, 178, 183],
+    fillColor: [0, 0, 0],
   },
   1: {
     fontStyle: 'bold',
