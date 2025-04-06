@@ -37,18 +37,15 @@ const {
   agregarImagenYPaginaPie,
   buscarDescripcionPorId,
   generateTotalsTable,
-  crearFilaFecha,
   addNutmeg,
 } = require('./pdfHandler02');
 
-const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
-const img2 = fs.readFileSync(path.join(__dirname, '/images/img2.png'), { encoding: 'base64' });
-const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encoding: 'base64' });
+const img1 = fs.readFileSync(path.join(__dirname, '/images/img4.png'), { encoding: 'base64' });
+const img3 = fs.readFileSync(path.join(__dirname, '/images/img6.png'), { encoding: 'base64' });
 
 function addHeaderContent(doc) {
   doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
-  doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
-  doc.setFillColor(6, 98, 211);
+  doc.setFillColor(116, 200, 210);
 }
 function redefineAddPage(document) {
   const originalAddPage = document.addPage.bind(document);
@@ -69,30 +66,21 @@ function GenerarFDP02(solicitud) {
 
   redefineAddPage(doc);
   addHeaderContent(doc);
+  currentPositionY += 6;
 
-  const fechaFormateada = formatearFecha(solicitud.createdAt);
   const modalidadTipo = buscarDescripcionPorId(modalidades, solicitud.programa.modalidadId);
   const ciclosTipo = buscarDescripcionPorId(ciclos, solicitud.programa.cicloId);
   const fechaVigencia = formatearFecha(solicitud.programa.vigencia);
 
-  doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
-  doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
-
-  doc.setFillColor(0, 127, 204);
+  doc.setFillColor(116, 200, 210);
   crearCelda(doc, 150, 40, 45, 7, 'FDP02');
 
   const nombreNivel = niveles
     .find(({ id }) => +id === solicitud?.programa.nivelId).descripcion;
 
-  configurarFuenteYAgregarTexto(doc, 'bold', 11, [69, 133, 244], 'PLAN DE ESTUDIOS', 14, 50);
-  currentPositionY = crearFilaFecha({
-    currentPositionY,
-    fecha: fechaFormateada,
-    doc,
-  });
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], solicitud.programa.plantel.institucion.nombre, 14, 60);
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], `${nombreNivel} en ${solicitud.programa.nombre}`, 14, 65);
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], fechaVigencia || '', 14, 70);
+  configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], solicitud.programa.plantel.institucion.nombre, 70, 60);
+  configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], `${nombreNivel} en ${solicitud.programa.nombre}`, 70, 65);
+  configurarFuenteYAgregarTexto(doc, 'bold', 12, [125, 125, 125], fechaVigencia || '', 70, 70);
   currentPositionY += 2;
 
   currentPositionY += seccionIntitucionTabla({
