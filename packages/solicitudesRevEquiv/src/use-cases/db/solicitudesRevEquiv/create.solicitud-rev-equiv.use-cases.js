@@ -14,22 +14,22 @@ const createEquivalencia = (
   findOneSolicitudRevEquivQuery,
   createAsignaturaEquivProgrQuery,
   createInstitucionDestinoProgramaQuery,
-  countSolicitudesRevEquivQuery,
+  countSolicitudRevEquivQuery,
 ) => async ({ data }) => {
   const inputData = { ...data };
   const year = new Date().getFullYear();
 
-  const totalSolicitudes = await countSolicitudesRevEquivQuery(null, {
-    isDeleting: false,
+  const totalSolicitudes = await countSolicitudRevEquivQuery(null, {
+    isDeleting: true,
     searchColumn: 'created_at',
     searchText: year.toString(),
     searchType: 'date',
   });
+
   const count = padNumber(totalSolicitudes, 4);
   const prefix = TIPO_TRAMITE_PREFIX[inputData.tipoTramiteId] || 'XX';
   const folio = `F${prefix}${year}${count}`;
-  inputData.folio = folio;
-
+  inputData.folioSolicitud = folio;
   const createInclude = [
     {
       association: 'interesado',

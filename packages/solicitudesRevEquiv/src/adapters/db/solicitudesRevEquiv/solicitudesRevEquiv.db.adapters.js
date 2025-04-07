@@ -15,6 +15,7 @@ const {
   createQuery,
   updateAndFindQuery,
   deleteQuery,
+  countQuery,
 } = queries;
 
 module.exports = {
@@ -29,4 +30,5 @@ module.exports = {
   updateSolicitudRevEquivQuery: updateAndFindQuery(SolicitudRevEquiv),
   findOneAsignaturaQuery: findOneQuery(Asignatura),
   findOneAsignaturaAntecedenteEquivalenteQuery: findOneQuery(AsignaturaAntecedenteEquivalente),
+  countSolicitudRevEquivQuery: countQuery(SolicitudRevEquiv),
 };
