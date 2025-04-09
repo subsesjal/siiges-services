@@ -81,7 +81,10 @@ function GenerarFDA04(solicitud) {
     currentPositionY += switchTablas(item, doc, '', currentPositionY);
   });
 
-  currentPositionY += 10;
+  doc.addPage();
+  addHeaderContent(doc);
+  currentPositionY = 55;
+
   tablaRelacionInstituciones(solicitud).forEach((item) => {
     currentPositionY += switchTablas(item, doc, '', currentPositionY);
   });
