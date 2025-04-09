@@ -59,6 +59,15 @@ const tablaDomicilio = (solicitud) => [
     repetirVeces: 1,
   },
 ];
+
+const ciclos = {
+  1: 'Semestral',
+  2: 'Cuatrimestral',
+  3: 'Anual',
+  4: 'Semestral curriculum flexible',
+  5: 'Cuatrimestral curriculum flexible',
+};
+
 const tablaDatosPlan = (solicitud, textoCiclos, modalidadTipo) => [
   {
     tipo: 'fila',
@@ -79,7 +88,11 @@ const tablaDatosPlan = (solicitud, textoCiclos, modalidadTipo) => [
     tipo: 'fila',
     contenido: [
       { texto: 'TIPO Y NOMBRE DEL PLAN DE ESTUDIOS', medida: 91, color: 'blanco' },
-      { texto: '', medida: 91, color: 'blanco' }, // Debes llenar este valor dinamicamente
+      {
+        texto: `${ciclos[solicitud.programa.cicloId] || ''} ${solicitud.programa.nombre || ''}`,
+        medida: 91,
+        color: 'blanco',
+      },
     ],
     repetirVeces: 1,
   },
@@ -109,165 +122,201 @@ const tablaDatosPlan = (solicitud, textoCiclos, modalidadTipo) => [
         bold: true,
         acomodoLetra: 'center',
       },
-      { texto: '', medida: 91, color: 'blanco' },
+      { texto: `${solicitud.usuario?.persona?.nombre} ${solicitud.usuario?.persona?.apellidoPaterno} ${solicitud.usuario?.persona?.apellidoMaterno}`, medida: 91, color: 'blanco' },
     ],
     repetirVeces: 1,
   },
 ];
 
-const tablaHigiene = [
-  {
-    tipo: 'fila',
-    contenido: [
-      { texto: '4. HIGIENE DEL PLANTEL', medida: 182, color: 'naranja' },
-    ],
-    repetirVeces: 1,
-  },
-  {
-    tipo: 'fila',
-    contenido: [
-      { texto: 'CONCEPTO', medida: 91, color: 'naranja' },
-      { texto: 'DESCRIPCIÓN', medida: 91, color: 'naranja' },
-    ],
-    repetirVeces: 1,
-  },
-  {
-    tipo: 'fila',
-    contenido: [
-      {
-        texto: 'Sanitarios',
-        medida: 91,
-        color: 'blanco',
-        bold: true,
-        acomodoLetra: 'left',
-      },
-      {
-        texto: '',
-        medida: 91,
-        color: 'blanco',
-        acomodoLetra: 'left',
-      },
-    ],
-    altura: 40,
-    repetirVeces: 1,
-  },
-  {
-    tipo: 'fila',
-    contenido: [
-      { texto: 'PERSONAL DE LIMPIEZA DEL PLANTEL', medida: 91, color: 'blanco' },
-      { texto: '', medida: 91, color: 'blanco' },
-    ],
-    repetirVeces: 1,
-  },
-  {
-    tipo: 'fila',
-    contenido: [
-      { texto: 'CESTOS DE BASURA EN EL PLANTEL', medida: 91, color: 'blanco' },
-      { texto: '', medida: 91, color: 'blanco' },
-    ],
-    repetirVeces: 1,
-  },
-  {
-    tipo: 'fila',
-    contenido: [
-      { texto: 'BUTACAS', medida: 91, color: 'blanco' },
-      { texto: '', medida: 91, color: 'blanco' },
-    ],
-    repetirVeces: 1,
-  },
-  {
-    tipo: 'fila',
-    contenido: [
-      { texto: 'VENTANAS', medida: 91, color: 'blanco' },
-      { texto: '', medida: 91, color: 'blanco' },
-    ],
-    repetirVeces: 1,
-  },
-  {
-    tipo: 'fila',
-    contenido: [
-      { texto: 'VENTILACIÓN', medida: 91, color: 'blanco' },
-      { texto: '', medida: 91, color: 'blanco' },
-    ],
-    repetirVeces: 1,
-  },
-];
+const higieneMap = {
+  1: 'Alumnos (varón)',
+  2: 'Alumnas (mujer)',
+  3: 'Administrativos (hombre)',
+  4: 'Administrativas (mujer)',
+  5: 'Personas encargadas de la limpieza',
+  6: 'Cestos de basura',
+  7: 'Número de aulas en el plantel',
+  8: 'Butacas por aula',
+  9: 'Ventanas que pueden abrirse por aula',
+  10: 'Ventiladores en el plantel',
+  11: 'Aires acondicionados en el plantel',
+};
+
+const tablaHigiene = (solicitud) => {
+  const higienes = solicitud.programa.plantel.plantelHigienes || [];
+
+  const getCantidad = (id) => {
+    const hig = higienes.find((h) => h.higieneId === id);
+    return hig?.cantidad != null ? hig.cantidad : '0';
+  };
+
+  const sanitariosTexto = [
+    'Estudiantes\n',
+    `  Alumnos: ${getCantidad(1)}`,
+    `  Alumnas: ${getCantidad(2)}`,
+    '',
+    'Personal docente y administrativo\n',
+    `  Hombres: ${getCantidad(3)}`,
+    `  Mujeres: ${getCantidad(4)}`,
+  ].join('\n');
+
+  return [
+    {
+      tipo: 'fila',
+      contenido: [
+        { texto: '4. HIGIENE DEL PLANTEL', medida: 182, color: 'naranja' },
+      ],
+      repetirVeces: 1,
+    },
+    {
+      tipo: 'fila',
+      contenido: [
+        { texto: 'CONCEPTO', medida: 91, color: 'naranja' },
+        { texto: 'DESCRIPCIÓN', medida: 91, color: 'naranja' },
+      ],
+      repetirVeces: 1,
+    },
+    {
+      tipo: 'fila',
+      contenido: [
+        {
+          texto: 'SANITARIOS',
+          medida: 91,
+          color: 'blanco',
+          bold: true,
+        },
+        {
+          texto: sanitariosTexto,
+          medida: 91,
+          color: 'blanco',
+          acomodoLetra: 'left',
+        },
+      ],
+      altura: 40,
+      repetirVeces: 1,
+    },
+    {
+      tipo: 'fila',
+      contenido: [
+        { texto: 'PERSONAL DE LIMPIEZA DEL PLANTEL', medida: 91, color: 'blanco' },
+        { texto: `${getCantidad(5)}`, medida: 91, color: 'blanco' },
+      ],
+      repetirVeces: 1,
+    },
+    {
+      tipo: 'fila',
+      contenido: [
+        { texto: 'CESTOS DE BASURA EN EL PLANTEL', medida: 91, color: 'blanco' },
+        { texto: `${getCantidad(6)}`, medida: 91, color: 'blanco' },
+      ],
+      repetirVeces: 1,
+    },
+    {
+      tipo: 'fila',
+      contenido: [
+        { texto: 'AULAS', medida: 91, color: 'blanco' },
+        { texto: `${getCantidad(7)}`, medida: 91, color: 'blanco' },
+      ],
+      repetirVeces: 1,
+    },
+    {
+      tipo: 'fila',
+      contenido: [
+        { texto: 'BUTACAS', medida: 91, color: 'blanco' },
+        { texto: `${getCantidad(8)}`, medida: 91, color: 'blanco' },
+      ],
+      repetirVeces: 1,
+    },
+    {
+      tipo: 'fila',
+      contenido: [
+        { texto: 'VENTANAS', medida: 91, color: 'blanco' },
+        { texto: `${getCantidad(9)}`, medida: 91, color: 'blanco' },
+      ],
+      repetirVeces: 1,
+    },
+    {
+      tipo: 'fila',
+      contenido: [
+        { texto: 'VENTILACIÓN', medida: 91, color: 'blanco' },
+        {
+          texto: [10, 11]
+            .map((id) => {
+              const cantidad = getCantidad(id);
+              return cantidad ? `${higieneMap[id]}: ${cantidad}` : '';
+            })
+            .filter(Boolean)
+            .join('\n'),
+          medida: 91,
+          color: 'blanco',
+        },
+      ],
+      repetirVeces: 1,
+    },
+  ];
+};
 
 const generateInfraestructuraRows = (infraestructuras, typeToAdd) => {
-  let additionalRows = [];
+  const aulasIds = [1, 2, 3, 14];
+  const labsIds = [4, 5, 6, 7, 11, 12, 13];
+  const computoIds = [8];
+  const bibliotecaIds = [9, 10];
+
+  let filtered = [];
 
   if (typeToAdd === 'aulas') {
-    additionalRows = infraestructuras.map((infraestructura, index) => ({
-      nombre: infraestructura ? infraestructura.nombre || `AULA ${index + 1}` : `AULA ${index + 1}`,
-      capacidad: infraestructura && infraestructura.capacidad ? infraestructura.capacidad.toString() : '',
-      metros: infraestructura && infraestructura.metros ? infraestructura.metros.toString() : '',
-      recursos: infraestructura && infraestructura.recursos ? infraestructura.recursos : '',
-      ubicacion: infraestructura && infraestructura.ubicacion ? infraestructura.ubicacion : '',
-    }));
+    filtered = infraestructuras.filter((inf) => aulasIds.includes(inf.tipoInstalacionId));
   } else if (typeToAdd === 'labs') {
-    additionalRows = [
-      { nombre: 'LABORATORIO FÍSICO', tamano: 8 },
-      { nombre: 'LABORATORIO VIRTUAL', tamano: 8 },
-      { nombre: 'TALLER FÍSICO' },
-      { nombre: 'TALLER VIRTUAL' },
-    ];
+    filtered = infraestructuras.filter((inf) => labsIds.includes(inf.tipoInstalacionId));
   } else if (typeToAdd === 'computo') {
-    additionalRows = [
-      { nombre: 'LABORATORIO 1', tamano: 8 },
-      { nombre: 'LABORATORIO 2', tamano: 8 },
-    ];
+    filtered = infraestructuras.filter((inf) => computoIds.includes(inf.tipoInstalacionId));
   } else if (typeToAdd === 'biblioteca') {
-    additionalRows = [
-      { nombre: 'BIBLIOTECA FÍSICA' },
-      { nombre: 'BIBLIOTECA VIRTUAL' },
-    ];
+    filtered = infraestructuras.filter((inf) => bibliotecaIds.includes(inf.tipoInstalacionId));
   }
 
-  return additionalRows.map((infraestructura) => {
-    // Calcular altura dinámicamente según el contenido de recursos y asignaturas
-    const contenidoRecursos = infraestructura.recursos || '';
-    const contenidoAsignaturas = infraestructura.asignaturas || '';
+  return filtered.map((infraestructura, index) => {
+    const asignaturas = infraestructura.asignaturasInfraestructura || [];
 
-    // Ajustar tamaño de letra basado en la longitud del contenido
-    let tamanoLetraRecursos = 10; // Tamaño de letra por defecto
-    let tamanoLetraAsignaturas = 10; // Tamaño de letra por defecto
+    const asignaturasStr = asignaturas
+      .map((a) => a?.asignatura?.clave || '')
+      .filter(Boolean)
+      .join('\n');
 
-    if (contenidoRecursos.length > 60) {
-      // Calcular tamaño de letra para que quepa en la celda
-      // eslint-disable-next-line no-mixed-operators
-      tamanoLetraRecursos = Math.floor(30.33 * 10 / contenidoRecursos.length);
+    const recursos = infraestructura.recursos || '';
+    let tamanoLetraRecursos = 10;
+    if (recursos.length > 60) {
+      tamanoLetraRecursos = Math.floor((30.33 * 10) / recursos.length);
     }
 
-    if (contenidoAsignaturas.length > 60) {
-      // Calcular tamaño de letra para que quepa en la celda
-      // eslint-disable-next-line no-mixed-operators
-      tamanoLetraAsignaturas = Math.floor(30.33 * 10 / contenidoAsignaturas.length);
+    let tamanoLetraAsignaturas = 10;
+    if (asignaturasStr.length > 60) {
+      tamanoLetraAsignaturas = Math.floor((30.33 * 10) / asignaturasStr.length);
     }
 
     return {
       tipo: 'fila',
       contenido: [
         {
-          texto: infraestructura.nombre || '',
+          texto: infraestructura.nombre || `Instalación ${index + 1}`,
           medida: 30.33,
           color: 'blanco',
           acomodoLetra: 'left',
-          tamano: infraestructura.tamano || 10, // Si no se especifica tamano, usar 10 por defecto
+          tamano: infraestructura.tamano || 10,
         },
         {
-          texto: infraestructura.capacidad || '',
+          texto: infraestructura.capacidad?.toString() || '',
           medida: 30.33,
           color: 'blanco',
           acomodoLetra: 'center',
         },
         {
-          texto: infraestructura.metros || '',
+          texto: infraestructura.metros?.toString() || '',
           medida: 30.33,
           color: 'blanco',
           acomodoLetra: 'center',
         },
         {
-          texto: contenidoRecursos,
+          texto: recursos,
           medida: 30.33,
           color: 'blanco',
           acomodoLetra: 'left',
@@ -280,7 +329,7 @@ const generateInfraestructuraRows = (infraestructuras, typeToAdd) => {
           acomodoLetra: 'center',
         },
         {
-          texto: contenidoAsignaturas,
+          texto: asignaturasStr,
           medida: 30.33,
           color: 'blanco',
           acomodoLetra: 'left',
@@ -320,7 +369,7 @@ const tablaInfraestructuraPrograma = (solicitud) => [
         acomodoLetra: 'center',
       },
       {
-        texto: ' CAPACIDAD PROMEDIO  (No. DE ALUMNOS)',
+        texto: 'CAPACIDAD PROMEDIO (No. DE ALUMNOS)',
         medida: 30.33,
         color: 'naranja',
         bold: true,
@@ -336,7 +385,7 @@ const tablaInfraestructuraPrograma = (solicitud) => [
       },
       { texto: 'UBICACIÓN', medida: 30.33, color: 'naranja' },
       {
-        texto: 'ASIGNATURAS QUE  ATIENDE',
+        texto: 'ASIGNATURAS QUE ATIENDE',
         medida: 30.33,
         color: 'naranja',
         bold: true,
@@ -412,6 +461,7 @@ const tablaRelacionInstituciones = (solicitud) => [
         texto: '6. RELACIÓN DE INSTITUCIONES DE SALUD ALEDAÑAS, SERVICIOS DE AMBULANCIA U OTROS SERVICIOS DE EMERGENCIA A  LOS CUALES RECURRIRÁ LA INSTITUCIÓN EN CASO DE ALGUNA CONTINGENCIA',
         acomodoLetra: 'left',
         medida: 182,
+        color: 'naranja',
       },
     ],
     altura: 10,
@@ -430,7 +480,6 @@ const tablaRelacionInstituciones = (solicitud) => [
     repetirVeces: 1,
     altura: 8.7,
   },
-  // Iteración sobre las instituciones
   ...solicitud.programa.plantel.saludInstituciones.map((institucion) => ({
     tipo: 'fila',
     contenido: [
