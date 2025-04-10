@@ -70,7 +70,13 @@ const findFileFDA04 = (
           { association: 'plantelSeguridadSistemas' },
           { association: 'plantelHigienes' },
           { association: 'saludInstituciones' },
-          { association: 'infraestructuras' },
+          {
+            association: 'infraestructuras',
+            include: [{
+              association: 'asignaturasInfraestructura',
+              include: [{ association: 'asignatura' }],
+            }],
+          },
           { association: 'tipoInmueble' },
           {
             association: 'domicilio',
