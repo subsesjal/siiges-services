@@ -5,6 +5,7 @@ const { ciclo } = require('./properties/ciclo');
 const { modalidad } = require('./properties/modalidad');
 const { institucion } = require('../../instituciones/schema/properties/institucion');
 const { domicilio } = require('../../usuarios/schema/properties/domicilio');
+const { solicitud } = require('../../solicitudes/schema/properties/solicitud');
 const { responseProperties } = require('../../instituciones/schema/properties/responseProperties');
 
 const findOneProgramaSchema = {
@@ -31,6 +32,7 @@ const findOneProgramaSchema = {
             nivel: {
               type: 'object',
               properties: {
+                id: { type: 'integer' },
                 ...nivel,
                 ...responseProperties,
               },
@@ -38,6 +40,7 @@ const findOneProgramaSchema = {
             ciclo: {
               type: 'object',
               properties: {
+                id: { type: 'integer' },
                 ...ciclo,
                 ...responseProperties,
               },
@@ -45,6 +48,7 @@ const findOneProgramaSchema = {
             modalidad: {
               type: 'object',
               properties: {
+                id: { type: 'integer' },
                 ...modalidad,
                 ...responseProperties,
               },
@@ -92,6 +96,14 @@ const findOneProgramaSchema = {
                     },
                   },
                 },
+              },
+            },
+            solicitud: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...solicitud,
+                ...responseProperties,
               },
             },
           },
