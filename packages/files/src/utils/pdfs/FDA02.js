@@ -39,14 +39,12 @@ const {
   tableDate,
 } = require('./pdfHandler');
 
-const img1 = fs.readFileSync(path.join(__dirname, '/images/img1.png'), { encoding: 'base64' });
-const img2 = fs.readFileSync(path.join(__dirname, '/images/img2.png'), { encoding: 'base64' });
-const img3 = fs.readFileSync(path.join(__dirname, '/images/img3.png'), { encoding: 'base64' });
+const img1 = fs.readFileSync(path.join(__dirname, '/images/img4.png'), { encoding: 'base64' });
+const img3 = fs.readFileSync(path.join(__dirname, '/images/img6.png'), { encoding: 'base64' });
 
 function addHeaderContent(doc) {
-  doc.addImage(img1, 'JPEG', 0, 15, 70, 19);
-  doc.addImage(img2, 'JPEG', 145, 15, 50, 16);
-  doc.setFillColor(6, 98, 211);
+  doc.addImage(img1, 'JPEG', 60, 9, 100, 23);
+  doc.setFillColor(116, 200, 210);
   crearCelda(doc, 166, 40, 30, 7, 'FDA02', 10);
 }
 
@@ -75,7 +73,7 @@ function GenerarFDA02(solicitud) {
 
   redefineAddPage(doc);
   addHeaderContent(doc);
-  configurarFuenteYAgregarTexto(doc, 'bold', 12, [69, 133, 244], 'OFICIO DE ENTREGA DE DOCUMENTACIÓN', 14, currentPositionY);
+  configurarFuenteYAgregarTexto(doc, 'bold', 12, [116, 200, 210], 'OFICIO DE ENTREGA DE DOCUMENTACIÓN', 14, currentPositionY);
   currentPositionY += 5;
   tableDate(doc, currentPositionY, dateFormatted);
   currentPositionY += 10;
@@ -114,9 +112,9 @@ function GenerarFDA02(solicitud) {
 
   const rowsRedesSociales = [
     [
-      `${solicitud.programa.plantel.telefono1},\n${solicitud.programa.plantel.telefono2},\n${solicitud.programa.plantel.telefono3}`,
-      solicitud.programa.plantel.redesSociales,
-      `${solicitud.programa.plantel.correo1},\n${solicitud.programa.plantel.correo2},\n${solicitud.programa.plantel.correo3}`,
+      `${solicitud.programa?.plantel?.telefono1 || ''},\n${solicitud.programa?.plantel?.telefono2 || ''},\n${solicitud.programa?.plantel?.telefono3 || ''}`,
+      solicitud.programa?.plantel?.redesSociales || '',
+      `${solicitud.programa?.plantel?.correo1 || ''},\n${solicitud.programa?.plantel?.correo2 || ''},\n${solicitud.programa?.plantel?.correo3 || ''}`,
     ],
   ];
   generateTableWithStyles(
@@ -160,20 +158,6 @@ function GenerarFDA02(solicitud) {
   doc.addPage();
   addHeaderContent(doc);
   currentPositionY = 55;
-  const rowsRedesSocialesSolicitante = [
-    [
-      `${solicitud?.usuario?.persona?.telefono}`,
-      solicitud?.usuario?.persona?.redesSociales,
-      `${solicitud?.usuario?.persona?.correoPrimario}}`,
-    ],
-  ];
-  generateTableWithStyles(
-    HEADER_TABLA_REDES_SOCIALES,
-    rowsRedesSocialesSolicitante,
-    doc,
-    currentPositionY,
-  );
-  currentPositionY = updateCurrentPositionY(doc, 10);
   const rectorPersona = solicitud.programa.plantel.institucion?.rector?.persona;
   const tablaNombreYApellido = {
     headers: ['NOMBRE (S)', 'PRIMER APELLIDO', 'SEGUNDO APELLIDO'],
@@ -190,33 +174,31 @@ function GenerarFDA02(solicitud) {
   ];
   generateTableWithStyles(HEADER_TABLA_CORREO, tableCorreoRector, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
-  generateTableWithStyles(HEADER_TABLA_CORREO, tableCorreoRector, doc, currentPositionY);
-  currentPositionY = doc.previousAutoTable.finalY;
   currentPositionY = updateCurrentPositionY(doc, 10);
 
   const { directores } = solicitud.programa.plantel;
   const tablaDirectores = {
     headers: ['NOMBRE (S)', 'PRIMER APELLIDO', 'SEGUNDO APELLIDO'],
     body: directores?.map((director) => [
-      director.persona.nombre,
-      director.persona.apellidoPaterno,
-      director.persona.apellidoMaterno,
+      director.persona?.nombre,
+      director.persona?.apellidoPaterno,
+      director.persona?.apellidoMaterno,
     ]),
   };
 
   currentPositionY += generateTableAndSection('DATOS DEL DIRECTOR', tablaDirectores, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
 
-  const correoDirectorBody = solicitud.programa.plantel.directores.map((director) => [
-    director.persona.correoPrimario || 'No disponible',
-    director.persona.correoSecundario || 'No disponible',
-    director.persona.telefono || 'No disponible',
+  const correoDirectorBody = solicitud.programa?.plantel?.directores.map((director) => [
+    director.persona?.correoPrimario || '',
+    director.persona?.correoSecundario || '',
+    director.persona?.telefono || '',
   ]);
 
   generateTableWithStyles(HEADER_TABLA_CORREO, correoDirectorBody, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
   const formacionesBody = [];
-  solicitud.programa.plantel.directores.forEach((director) => {
+  solicitud.programa?.plantel?.directores.forEach((director) => {
     const formaciones = director.dataValues.formacionesDirectores;
     formaciones.forEach((formacion) => {
       formacionesBody.push([formacion.formacion.nivelId, formacion.formacion.nombre]);
@@ -229,7 +211,6 @@ function GenerarFDA02(solicitud) {
 
   currentPositionY += generateTableAndSection('FORMACIÓN ACADÉMICA', formacionDirector, doc, currentPositionY);
   currentPositionY = doc.previousAutoTable.finalY;
-  doc.addPage();
   addHeaderContent(doc);
   currentPositionY = 55;
   const { diligencias } = solicitud;

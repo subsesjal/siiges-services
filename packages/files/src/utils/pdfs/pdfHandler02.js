@@ -31,7 +31,7 @@ function crearCelda(doc, x, y, width, height, texto) {
     / doc.internal.scaleFactor;
   const textoX = x + (width - textoWidth) / 2 + 10; // Calcula la posición X centrada
 
-  if (texto.includes('FD')) setFillColor = [255, 255, 255];
+  if (texto.includes('FD')) setFillColor = [0, 0, 0];
   doc.setTextColor(setFillColor[0], setFillColor[1], setFillColor[2]);
   doc.text(texto, textoX, y + 5); // Usar la posición X centrada
 }
@@ -66,7 +66,7 @@ function crearFilaFecha({
     showHead: false,
     columnStyles: {
       0: {
-        fillColor: [172, 178, 183],
+        fillColor: [255, 131, 0],
         cellWidth: tableWidth / 2, // Ajustar el ancho de la columna
       },
       1: {
@@ -189,7 +189,7 @@ function generarSeccionyTabla({
   }
 
   // Título de la sección
-  doc.setFillColor(172, 178, 183);
+  doc.setFillColor(255, 131, 0);
   crearCelda(
     doc,
     14, // cellX
@@ -207,7 +207,7 @@ function generarSeccionyTabla({
     tableData: tablaData.body,
     startY,
     headStyles: {
-      fillColor: [172, 178, 183],
+      fillColor: [255, 131, 0],
       fontSize: 12,
       textColor: [20, 20, 20],
       font: 'Nutmeg',
@@ -257,7 +257,7 @@ function seccionIntitucionTabla({
     showHead: false,
     columnStyles: {
       0: {
-        fillColor: [172, 178, 183],
+        fillColor: [255, 131, 0],
       },
       1: {
         fontStyle: 'bold',
@@ -338,7 +338,7 @@ function generateTableWithStyles(headers, tableData, doc, currentPositionY, show
         font: 'Nutmeg',
       },
       headStyles: {
-        fillColor: [172, 178, 183],
+        fillColor: [255, 131, 0],
         fontSize: 12,
         textColor: [20, 20, 20],
         font: 'Nutmeg',
@@ -365,7 +365,7 @@ function generateTableWithStyles(headers, tableData, doc, currentPositionY, show
         tableData: [row],
         startY: finalY,
         headStyles: {
-          fillColor: [172, 178, 183],
+          fillColor: [255, 131, 0],
           fontSize: 12,
           textColor: [20, 20, 20],
           font: 'Nutmeg',
@@ -493,7 +493,7 @@ function generateTotalsTable(headers, doc, currentPositionY) {
       font: 'Nutmeg',
     },
     headStyles: {
-      fillColor: [172, 178, 183],
+      fillColor: [255, 131, 0],
       fontSize: 12,
       textColor: [20, 20, 20],
       font: 'Nutmeg',

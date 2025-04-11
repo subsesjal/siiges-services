@@ -1,4 +1,6 @@
-const findAllSolicitudesServSocAlumno = (findAllSolicitudesServSocAlumnoQuery) => async () => {
+const findAllSolicitudesServSocAlumno = (
+  findAllSolicitudesServSocAlumnoQuery,
+) => async (solicitudServicioSocialId) => {
   const include = [
     {
       association: 'alumno',
@@ -13,7 +15,10 @@ const findAllSolicitudesServSocAlumno = (findAllSolicitudesServSocAlumnoQuery) =
     },
   ];
 
-  return findAllSolicitudesServSocAlumnoQuery({}, { include });
+  return findAllSolicitudesServSocAlumnoQuery(
+    { solicitudServicioSocialId },
+    { include, strict: false },
+  );
 };
 
 module.exports = findAllSolicitudesServSocAlumno;

@@ -77,7 +77,11 @@ function crearSeccion(currentPosition, doc, contenido, alineacion = 'justify') {
 }
 
 function generarSeccionyTabla({
-  titulo, tablaData, tableOptions = {}, doc, currentPosition,
+  titulo,
+  tablaData,
+  tableOptions = {},
+  doc,
+  currentPosition,
 }) {
   const pageHeight = doc.internal.pageSize.height;
   const margin = 5;
@@ -90,46 +94,40 @@ function generarSeccionyTabla({
   let currentPositionY = currentPosition;
   if (currentPositionY + textHeight + 20 > availableSpace) {
     doc.addPage();
-    currentPositionY = margin; // Reiniciar la posición vertical en la nueva página
+    currentPositionY = margin;
   }
 
-  // Título de la sección
-  doc.setFillColor(170, 178, 183);
+  // SOLO CAMBIA ESTA PARTE (color naranja)
+  doc.setFillColor(255, 131, 0); // Color naranja directo
   crearCelda(
     doc,
-    14, // cellX
-    currentPositionY, // cellY
-    182, // cellWidth
-    7, // cellHeight
+    14,
+    currentPositionY,
+    182,
+    7,
     titulo,
   );
 
   const startY = currentPositionY + (tableOptions.spaceBeforeTable || 5);
 
-  const previousY = currentPositionY; // Guardar la posición antes de crear la tabla
-
   doc.autoTable({
     startY,
-    head: [tablaData.headers], // Encabezados de la tabla
-    body: tablaData.body, // Datos de la tabla
+    head: [tablaData.headers],
+    body: tablaData.body,
     theme: 'grid',
     styles: {
       lineColor: [0, 0, 0],
       lineWidth: 0.3,
     },
     headStyles: {
-      fillColor: [225, 131, 0],
+      fillColor: [255, 131, 0], // Naranja también para encabezados de tabla
       fontSize: 12,
       textColor: [20, 20, 20],
     },
-    ...tableOptions, // Opciones adicionales de la tabla
+    ...tableOptions,
   });
 
-  const tableHeight = currentPositionY - previousY; // Altura real de la tabla
-
-  currentPositionY += tableHeight + 20; // Espacio después de la tabla
-
-  return currentPositionY;
+  return doc.previousAutoTable.finalY + 20;
 }
 
 function generateTable({
@@ -185,7 +183,7 @@ function crearFilaFecha({
     showHead: false,
     columnStyles: {
       0: {
-        fillColor: [225, 131, 0],
+        fillColor: [255, 131, 0],
         cellWidth: tableWidth / 2, // Ajustar el ancho de la columna
       },
       1: {
@@ -250,7 +248,7 @@ function seccionIntitucionTabla({
     showHead: false,
     columnStyles: {
       0: {
-        fillColor: [225, 131, 0],
+        fillColor: [255, 131, 0],
       },
       1: {
         fontStyle: 'bold',
@@ -300,13 +298,15 @@ function generarTiposDeTurno(programaTurnos) {
 }
 function agregarTextoJustificado(doc, texto, x, y, width, fontSize) {
   const maxY = 260;
-  const words = texto.split(/\s+/); // Divide el texto en palabras
+  const words = texto.split(/\s+/);
   const spaceWidth = doc.getTextWidth(' ');
-  const lineHeight = fontSize * 0.5; // Ajusta la altura de la línea según sea necesario
+  const lineHeight = fontSize * 0.5;
   let currentLine = '';
   const lines = [];
 
+  doc.setFont('Nutmeg', 'normal');
   doc.setFontSize(fontSize);
+  doc.setTextColor(0, 0, 0);
 
   words.forEach((word) => {
     const testLine = `${currentLine + word} `;
@@ -319,23 +319,22 @@ function agregarTextoJustificado(doc, texto, x, y, width, fontSize) {
     }
   });
 
-  lines.push(currentLine.trim()); // Agrega la última línea
+  lines.push(currentLine.trim());
 
   lines.forEach((line, index) => {
-    // Verifica si la posición actual y más la altura de la línea superan el máximo permitido
     if (y + lineHeight > maxY) {
-      doc.addPage(); // Añade una nueva página
-      y = 55; // Reinicia la posición y en la nueva página (margen superior)
+      doc.addPage();
+      y = 55;
+
       doc.setFont('Nutmeg', 'normal');
-      doc.setFontSize(12);
-      doc.setFont(textFont);
+      doc.setFontSize(fontSize);
+      doc.setTextColor(0, 0, 0);
     }
 
     const wordsInLine = line.split(' ');
     let gapSize = spaceWidth;
 
     if (index !== lines.length - 1 && wordsInLine.length > 1) {
-      // Calcula el espacio adicional entre palabras para la justificación
       const lineWidth = doc.getTextWidth(line);
       const extraSpace = (width - lineWidth) / (wordsInLine.length - 1);
       gapSize += extraSpace;
@@ -366,7 +365,7 @@ function generateTableWithStyles(headers, tableData, doc, currentPositionY) {
     tableData,
     startY: currentPositionY,
     headStyles: {
-      fillColor: [172, 178, 183],
+      fillColor: [255, 131, 0],
       fontSize: 12,
       textColor: [20, 20, 20],
       font: 'Nutmeg',
@@ -434,10 +433,10 @@ function agregarImagenYPaginaPie(doc, img) {
 
     doc.text(pageNumberText, pageNumberTextX, pageNumberTextY);
 
-    const imgBottomLeftX = -10;
+    const imgBottomLeftX = 65;
     const imgBottomLeftY = pageHeight - 10;
-    const imgBottomLeftWidth = 210;
-    const imgBottomLeftHeight = 33;
+    const imgBottomLeftWidth = 90;
+    const imgBottomLeftHeight = 23;
 
     doc.addImage(
       img,
@@ -529,7 +528,7 @@ function createTable(doc, item, currentPositionY, xInitial = 15) {
         colorFondo = [172, 178, 183]; // Gris
         break;
       case 'naranja':
-        colorFondo = [225, 131, 0]; // Naranja
+        colorFondo = [255, 131, 0]; // Naranja
         break;
       default:
         colorFondo = [0, 0, 0]; // Negro (color predeterminado)

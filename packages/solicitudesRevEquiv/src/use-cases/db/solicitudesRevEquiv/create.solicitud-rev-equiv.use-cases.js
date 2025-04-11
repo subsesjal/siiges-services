@@ -1,10 +1,35 @@
+const padNumber = (num, size) => num.toString().padStart(size, '0');
+const TIPO_TRAMITE_PREFIX = {
+  1: 'EQP',
+  2: 'EQT',
+  3: 'REP',
+  4: 'RET',
+  5: 'EQD',
+  6: 'RED',
+};
+
 const createEquivalencia = (
   createSolicitudRevEquivQuery,
   createAsignaturaAntEquivQuery,
   findOneSolicitudRevEquivQuery,
   createAsignaturaEquivProgrQuery,
   createInstitucionDestinoProgramaQuery,
+  countSolicitudRevEquivQuery,
 ) => async ({ data }) => {
+  const inputData = { ...data };
+  const year = new Date().getFullYear();
+
+  const totalSolicitudes = await countSolicitudRevEquivQuery(null, {
+    isDeleting: true,
+    searchColumn: 'created_at',
+    searchText: year.toString(),
+    searchType: 'date',
+  });
+
+  const count = padNumber(totalSolicitudes, 4);
+  const prefix = TIPO_TRAMITE_PREFIX[inputData.tipoTramiteId] || 'XX';
+  const folio = `F${prefix}${year}${count}`;
+  inputData.folioSolicitud = folio;
   const createInclude = [
     {
       association: 'interesado',
@@ -16,36 +41,35 @@ const createEquivalencia = (
     },
   ];
 
-  let newSolicitudRevEquiv = await createSolicitudRevEquivQuery(data, createInclude);
+  let newSolicitudRevEquiv = await createSolicitudRevEquivQuery(inputData, createInclude);
   newSolicitudRevEquiv = newSolicitudRevEquiv.toJSON();
 
-  if (data.interesado.institucionDestino.programaId) {
-    createInstitucionDestinoProgramaQuery({
+  if (inputData.interesado.institucionDestino?.programaId) {
+    await createInstitucionDestinoProgramaQuery({
       institucionDestinoId: newSolicitudRevEquiv.interesado.institucionDestino.id,
-      programaId: data.interesado.institucionDestino.programaId,
+      programaId: inputData.interesado.institucionDestino.programaId,
     });
   }
 
-  // Create promises for asignaturasAntecedentesEquivalentes
-  const asignaturasPromises = data.interesado.asignaturasAntecedentesEquivalentes
-    .map(async (asignatura) => {
+  const asignaturas = inputData.interesado.asignaturasAntecedentesEquivalentes;
+
+  if (Array.isArray(asignaturas)) {
+    const asignaturasPromises = asignaturas.map(async (asignatura) => {
       const asignaturaAntEquiv = await createAsignaturaAntEquivQuery({
         interesadoId: newSolicitudRevEquiv.interesadoId,
         ...asignatura,
       });
 
-      // Skip if asignaturaId is not present
       if (!asignatura.asignaturaId) return asignaturaAntEquiv;
 
-      // Create the promise for createAsignaturaEquivProgrQuery
       return createAsignaturaEquivProgrQuery({
         asignaturaAntecedenteEquivalenteId: asignaturaAntEquiv.id,
         asignaturaId: asignatura.asignaturaId,
       });
     });
 
-  // Await all promises
-  await Promise.all(asignaturasPromises);
+    await Promise.all(asignaturasPromises);
+  }
 
   const include = [
     {

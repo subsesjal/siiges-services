@@ -77,6 +77,27 @@ const findOneProgramaSchema = {
                 },
               },
             },
+            programaTurnos: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  id: { type: 'integer' },
+                  programaId: { type: 'integer' },
+                  turnoId: { type: 'integer' },
+                  ...responseProperties,
+                  turno: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      nombre: { type: 'string' },
+                      descripcion: { type: 'string' },
+                      ...responseProperties,
+                    },
+                  },
+                },
+              },
+            },
             solicitud: {
               type: 'object',
               properties: {

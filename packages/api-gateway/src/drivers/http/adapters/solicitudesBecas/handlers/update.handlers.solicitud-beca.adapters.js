@@ -53,7 +53,6 @@ async function updateSolicitudBeca(request, reply) {
       .updateSolicitudBeca(data, { id: solicitudBecaId });
 
     // generar archivo pdf a enviar
-    // const solicitudReport = generateFile(solicitudBeca);
 
     const { estatusSolicitudBecaId } = data;
 
@@ -61,7 +60,7 @@ async function updateSolicitudBeca(request, reply) {
       const valueData = {
         tipoEntidad: 'SOLICITUD_BECA',
         tipoDocumento: 'REPORTE_BECAS',
-        entidadId: estatusSolicitudBecaId,
+        entidadId: solicitudBecaId,
       };
       const identifierObj = await this.filesServices.getFileIdentifierObj(valueData);
       const file = await this.filesServices.findOneFile(identifierObj, null, null, true);

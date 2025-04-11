@@ -70,7 +70,13 @@ const findFileFDA04 = (
           { association: 'plantelSeguridadSistemas' },
           { association: 'plantelHigienes' },
           { association: 'saludInstituciones' },
-          { association: 'infraestructuras' },
+          {
+            association: 'infraestructuras',
+            include: [{
+              association: 'asignaturasInfraestructura',
+              include: [{ association: 'asignatura' }],
+            }],
+          },
           { association: 'tipoInmueble' },
           {
             association: 'domicilio',
@@ -124,7 +130,6 @@ const findFileFDA04 = (
   });
 
   // eslint-disable-next-line no-console
-  console.log(JSON.stringify(solicitud, null, 2));
   checkers.throwErrorIfDataIsFalsy(solicitud, 'solicitud', solicitudId);
 
   const file = await GenerarFDA04(solicitud);
