@@ -1,5 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { TIPO_INSTITUCION_TABLE } = require('./tipoInstitucion');
+const { NIVEL_TABLE } = require('./nivel');
 const { ESTADO_TABLE } = require('./estado');
 
 const INSTITUCION_PROCEDENCIA_TABLE = 'instituciones_procedencia';
@@ -25,7 +26,7 @@ const InstitucionProcedenciaSchema = {
     type: DataTypes.INTEGER,
     field: 'nivel_id',
     references: {
-      model: TIPO_INSTITUCION_TABLE,
+      model: NIVEL_TABLE,
       key: 'id',
     },
   },

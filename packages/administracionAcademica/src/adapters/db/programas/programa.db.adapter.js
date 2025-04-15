@@ -9,8 +9,6 @@ const {
 const {
   Programa,
   Plantel,
-  ProgramaTurno,
-  Turno,
 } = models;
 
 const include = [{
@@ -44,7 +42,7 @@ module.exports = {
   findAllProgramasQuery: findAllQuery(Programa),
   findOneProgramaQuery: findOneQuery(Programa),
   findPlantelProgramasQuery: findAllQuery(Programa),
-  findInstitucionQuery: findAllQuery(Plantel),
+  findPlantelQuery: findAllQuery(Plantel),
   includeProgramasQuery: include,
   whereProgramasQuery: where,
 };
