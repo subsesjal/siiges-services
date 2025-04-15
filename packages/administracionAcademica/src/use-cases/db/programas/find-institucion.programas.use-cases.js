@@ -1,16 +1,27 @@
 const { checkers } = require('@siiges-services/shared');
-const { findPlantelProgramas } = require('./find-plantel.programas.use-cases');
 
-const findInstitucionProgramas = (findInstitucionQuery, plantelQuery) => async (identifierObj) => {
-  const institucion = await findInstitucionQuery(identifierObj, { attributes: ['id'] });
-  if (institucion.length === 0) {
-    checkers.throwErrorIfDataIsFalsy(null, 'Programas', Object.entries(identifierObj)[0].join(': '));
+const findInstitucionProgramas = (
+  findPlantelQuery,
+  findPlantelProgramasQuery,
+  include,
+  whereProgramasQuery,
+) => async (identifierObj) => {
+  const planteles = await findPlantelQuery(identifierObj, { attributes: ['id'] });
+  if (planteles.length === 0) {
+    checkers.throwErrorIfDataIsFalsy(null, 'Planteles', Object.entries(identifierObj)[0].join(': '));
   }
-  const institucionId = institucion.map((item) => item.id);
-  const [find, include, where] = plantelQuery;
 
-  const program = await findPlantelProgramas(find, include, where)(institucionId);
-  return program;
+  const plantelIds = planteles.map((item) => item.id);
+
+  const programas = await findPlantelProgramasQuery(null, {
+    query: {
+      ...whereProgramasQuery,
+      plantelId: plantelIds,
+    },
+    include,
+  });
+
+  return programas;
 };
 
 module.exports = findInstitucionProgramas;

@@ -18,12 +18,10 @@ module.exports = {
     programas.whereProgramasQuery,
   ),
   findInstitucionProgramas: findInstitucionProgramas(
-    programas.findInstitucionQuery,
-    [
-      programas.findPlantelProgramasQuery,
-      programas.includeProgramasQuery,
-      programas.whereProgramasQuery,
-    ],
+    programas.findPlantelQuery,
+    programas.findPlantelProgramasQuery,
+    programas.includeProgramasQuery,
+    programas.whereProgramasQuery,
   ),
   findOnePrograma: findOnePrograma(
     programas.findOneProgramaQuery,
