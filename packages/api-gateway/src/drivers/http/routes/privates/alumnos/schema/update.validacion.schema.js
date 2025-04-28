@@ -27,7 +27,6 @@ const updateValidacionSchema = {
           properties: {
             id: { type: 'integer' },
             ...validacion,
-            observaciones: { type: 'string' },
             ...responseProperties,
           },
         },

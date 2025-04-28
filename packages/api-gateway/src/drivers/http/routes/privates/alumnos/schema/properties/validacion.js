@@ -15,6 +15,7 @@ const validacion = {
   fechaFinAntecedente: { type: 'string', format: 'date-time' },
   fechaExpedicion: { type: 'string', format: 'date-time' },
   fechaValidacion: { type: 'string', format: 'date-time' },
+  observaciones: { type: 'string' },
 };
 
 module.exports = { validacion };
