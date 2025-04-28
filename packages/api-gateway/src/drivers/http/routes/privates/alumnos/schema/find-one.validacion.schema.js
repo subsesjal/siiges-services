@@ -22,6 +22,7 @@ const findOneValidacionSchema = {
           properties: {
             id: { type: 'integer' },
             ...validacion,
+            observaciones: { type: 'string' },
             tipo: {
               type: 'object',
               properties: {
