@@ -41,7 +41,7 @@ const findOneSolicitudProgramaSchema = {
               },
             },
             programa: {
-              type: 'object',
+              type: ['object', 'null'],
               properties: {
                 id: { type: 'integer' },
                 ...programa,
@@ -66,7 +66,7 @@ const findOneSolicitudProgramaSchema = {
                   },
                 },
                 plantel: {
-                  type: 'object',
+                  type: ['object', 'null'],
                   properties: {
                     id: { type: 'integer' },
                     ...plantel,
