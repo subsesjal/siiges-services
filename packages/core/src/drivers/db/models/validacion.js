@@ -110,6 +110,10 @@ const ValidacionSchema = {
     type: DataTypes.DATE,
     field: 'fecha_validacion',
   },
+  observaciones: {
+    allowNull: true,
+    type: DataTypes.TEXT,
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,

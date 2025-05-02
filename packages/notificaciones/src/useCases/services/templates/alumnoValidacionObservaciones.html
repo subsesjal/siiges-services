@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>SIIGES - Observaciones de Validación de Alumno</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #0056b3;
+      font-size: 24px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #0056b3;
+      padding-bottom: 10px;
+    }
+    .header {
+      margin-bottom: 20px;
+    }
+    .info-box {
+      background-color: #f8f8f8;
+      padding: 15px;
+      border-left: 4px solid #0056b3;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #0056b3;
+      color: white;
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #666;
+    }
+    .warning {
+      color: #d9534f;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://siiges.jalisco.gob.mx/logo.png" alt="SIIGES Logo" width="150">
+    </div>
+    
+    <h1>Observaciones en Validación de Alumno</h1>
+    
+    <div class="info-box">
+      <p>Estimada institución <strong>{nombreInstitucion}</strong>,</p>
+      <p>Se han registrado observaciones en el proceso de validación del alumno:</p>
+    </div>
+    
+    <table>
+      <tr>
+        <th>Alumno</th>
+        <td>{nombreAlumno}</td>
+      </tr>
+      <tr>
+        <th>Matrícula</th>
+        <td>{matricula}</td>
+      </tr>
+      <tr>
+        <th>Programa</th>
+        <td>{nombrePrograma}</td>
+      </tr>
+      <tr>
+        <th>Folio</th>
+        <td>{folioSolicitud}</td>
+      </tr>
+    </table>
+    
+    <h2>Observaciones:</h2>
+    <div style="background-color: #fff8e1; padding: 15px; border-left: 4px solid #ffc107;">
+      <p>{observaciones}</p>
+    </div>
+    
+    <p style="margin-top: 20px;">Por favor, atienda estas observaciones en el sistema SIIGES y realice las correcciones correspondientes.</p>
+    
+    <p>Si requiere asistencia o tiene alguna duda, puede contactar al área correspondiente.</p>
+    
+    <div class="footer">
+      <p>Atentamente,</p>
+      <p><strong>Subsecretaría de Educación Superior</strong></p>
+      <p>Secretaría de Innovación, Ciencia y Tecnología</p>
+      <p>Gobierno del Estado de Jalisco</p>
+      
+      <p class="warning">NOTA: Este es un mensaje automático, por favor no responda a este correo.</p>
+    </div>
+  </div>
+</body>
+</html>
