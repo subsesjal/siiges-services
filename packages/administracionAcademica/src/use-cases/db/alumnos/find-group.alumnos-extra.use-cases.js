@@ -7,10 +7,14 @@ const findAlumnosExtra = (
       association: 'alumno',
       include: [
         { association: 'persona' },
-        { association: 'situacion' },
       ],
     },
-    { association: 'asignatura' },
+    {
+      association: 'asignatura',
+      include: [
+        { association: 'grado' },
+      ],
+    },
   ];
 
   const grupos = await findAllGruposQuery({ cicloEscolarId });
