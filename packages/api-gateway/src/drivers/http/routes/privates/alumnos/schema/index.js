@@ -11,6 +11,7 @@ const { updateValidacionSchema } = require('./update.validacion.schema');
 const findAlumnosGrupoSchema = require('./find-group.alumnos-grupo.schema');
 const { deleteAlumnoInscritoSchema } = require('./delete.alumno-inscrito.schema');
 const findAlumnosCountSchema = require('./find-all.alumnos-count.schema');
+const findAlumnosExtraSchema = require('./find-group.alumnos-extra.schema');
 
 module.exports = {
   createAlumnoSchema,
@@ -26,4 +27,5 @@ module.exports = {
   findAlumnosGrupoSchema,
   deleteAlumnoInscritoSchema,
   findAlumnosCountSchema,
+  findAlumnosExtraSchema,
 };
