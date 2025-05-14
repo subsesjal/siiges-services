@@ -1,7 +1,8 @@
 const { calificacion } = require('./properties/calificacion');
 const { alumno } = require('./properties/alumno');
 const { persona } = require('../../usuarios/schema/properties/persona');
-const { situacion } = require('./properties/situacion');
+const { asignatura } = require('../../asignaturas/schema/properties/asignatura');
+const { grado } = require('../../grupos/schema/properties/grado');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findGroupAlumnosExtraSchema = {
@@ -38,14 +39,6 @@ const findGroupAlumnosExtraSchema = {
                       ...responseProperties,
                     },
                   },
-                  situacion: {
-                    type: 'object',
-                    properties: {
-                      id: { type: 'integer' },
-                      ...situacion,
-                      ...responseProperties,
-                    },
-                  },
                   calificaciones: {
                     type: 'array',
                     items: {
@@ -54,6 +47,22 @@ const findGroupAlumnosExtraSchema = {
                         ...calificacion,
                         ...responseProperties,
                       },
+                    },
+                  },
+                },
+              },
+              asignatura: {
+                type: 'object',
+                properties: {
+                  id: { type: 'integer' },
+                  ...asignatura,
+                  ...responseProperties,
+                  grado: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...grado,
+                      ...responseProperties,
                     },
                   },
                 },
