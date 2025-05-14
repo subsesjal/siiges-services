@@ -1,25 +1,11 @@
 const { alumnosAdapter } = require('../../../adapters');
-const {
-  createAlumnoSchema,
-  findOneAlumnoSchema,
-  updateAlumnoSchema,
-  findProgramaAlumnosSchema,
-  deleteAlumnoSchema,
-  alumnosInscripcionSchema,
-  findAlumnosInscritosSchema,
-  createValidacionSchema,
-  findOneValidacionSchema,
-  updateValidacionSchema,
-  findAlumnosGrupoSchema,
-  deleteAlumnoInscritoSchema,
-  findAlumnosCountSchema,
-} = require('./schema');
+const alumnosSchema = require('./schema');
 
 async function asignaturaRouter(fastify, opts, next) {
   await fastify.post(
     '/',
     {
-      schema: createAlumnoSchema,
+      schema: alumnosSchema.createAlumnoSchema,
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.createAlumno,
@@ -28,7 +14,7 @@ async function asignaturaRouter(fastify, opts, next) {
   await fastify.get(
     '/programas/:programaId',
     {
-      schema: findProgramaAlumnosSchema,
+      schema: alumnosSchema.findProgramaAlumnosSchema,
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.findGroupAlumnosPrograma,
@@ -37,7 +23,7 @@ async function asignaturaRouter(fastify, opts, next) {
   await fastify.get(
     '/:alumnoId',
     {
-      schema: findOneAlumnoSchema,
+      schema: alumnosSchema.findOneAlumnoSchema,
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.findOneAlumno,
@@ -46,7 +32,7 @@ async function asignaturaRouter(fastify, opts, next) {
   await fastify.patch(
     '/:alumnoId',
     {
-      schema: updateAlumnoSchema,
+      schema: alumnosSchema.updateAlumnoSchema,
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.updateAlumno,
@@ -55,7 +41,7 @@ async function asignaturaRouter(fastify, opts, next) {
   await fastify.delete(
     '/:alumnoId',
     {
-      schema: deleteAlumnoSchema,
+      schema: alumnosSchema.deleteAlumnoSchema,
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.deleteAlumno,
@@ -64,7 +50,7 @@ async function asignaturaRouter(fastify, opts, next) {
   await fastify.post(
     '/grupos/:grupoId/inscripcion',
     {
-      schema: alumnosInscripcionSchema,
+      schema: alumnosSchema.alumnosInscripcionSchema,
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.alumnosInscripcion,
@@ -73,7 +59,7 @@ async function asignaturaRouter(fastify, opts, next) {
   await fastify.delete(
     '/:alumnoId/grupos/:grupoId/inscripcion',
     {
-      schema: deleteAlumnoInscritoSchema,
+      schema: alumnosSchema.deleteAlumnoInscritoSchema,
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.deleteAlumnoInscrito,
@@ -82,7 +68,7 @@ async function asignaturaRouter(fastify, opts, next) {
   await fastify.get(
     '/grupos/:grupoId/inscripcion',
     {
-      schema: findAlumnosInscritosSchema,
+      schema: alumnosSchema.findAlumnosInscritosSchema,
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.findAlumnosInscritos,
@@ -91,7 +77,7 @@ async function asignaturaRouter(fastify, opts, next) {
   await fastify.post(
     '/:alumnoId/validaciones',
     {
-      schema: createValidacionSchema,
+      schema: alumnosSchema.createValidacionSchema,
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.createAlumnoValidacion,
@@ -100,7 +86,7 @@ async function asignaturaRouter(fastify, opts, next) {
   await fastify.get(
     '/:alumnoId/validaciones',
     {
-      schema: findOneValidacionSchema,
+      schema: alumnosSchema.findOneValidacionSchema,
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.findOneAlumnoValidacion,
@@ -109,7 +95,7 @@ async function asignaturaRouter(fastify, opts, next) {
   await fastify.patch(
     '/:alumnoId/validaciones',
     {
-      schema: updateValidacionSchema,
+      schema: alumnosSchema.updateValidacionSchema,
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.updateAlumnoValidacion,
@@ -118,7 +104,7 @@ async function asignaturaRouter(fastify, opts, next) {
   await fastify.get(
     '/grupos/:grupoId/asignatura/:asignaturaId',
     {
-      schema: findAlumnosGrupoSchema,
+      schema: alumnosSchema.findAlumnosGrupoSchema,
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.findAlumnosGrupo,
@@ -127,10 +113,19 @@ async function asignaturaRouter(fastify, opts, next) {
   await fastify.get(
     '/programas/:programaId/count',
     {
-      schema: findAlumnosCountSchema,
+      schema: alumnosSchema.findAlumnosCountSchema,
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.findAlumnosCount,
+  );
+
+  await fastify.get(
+    '/ciclos/:cicloEscolarId/extraordinarios',
+    {
+      schema: alumnosSchema.findAlumnosExtraSchema,
+      onRequest: [fastify.authenticate],
+    },
+    alumnosAdapter.findAlumnosExtra,
   );
 
   next();
