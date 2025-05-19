@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>SIIGES - Notificación</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+      color: #000000;
+    }
+    .container {
+      max-width: 600px;
+      background-color: #ffffff;
+      margin: 0 auto;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.0);
+      color: #000000
+    }
+    .header {
+      text-align: center;
+      background-color: #1c4e80;
+      padding: 15px;
+      border-radius: 8px 8px 0 0;
+      color: #ffffff;
+
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+    .content {
+      padding: 20px 0;
+    }
+    .content p {
+      line-height: 1.6;
+    }
+    .highlight {
+      color: #1c4e80;
+      font-weight: bold;
+    }
+    .note {
+      margin-top: 30px;
+      font-size: 13px;
+      color: #d9534f;
+      background-color: #f9e6e6;
+      padding: 10px;
+      border-left: 4px solid #d9534f;
+    }
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>SIIGES - Notificación para recepción de solicitud</h1>
+    </div>
+    <div class="content">
+      <p>Estimado/a interesado/a,</p>
+      <p>Tu solicitud de Revalidación/Equivalencia con folio <span class="highlight">{folioSolicitud}</span> se encuntra en proceso de firma.</p>
+
+      <p><strong>Estado actual:</strong> <span class="highlight">Solicitud en firma</span></p>
+
+
+      <p>Quede atento a futuras notificaciones de su proceso.</p>
+
+      <p>Saludos cordiales.</p>
+      <p><strong>Equipo de SIIGES</strong></p>
+    </div>
+    <div class="note">
+      Nota: Este es un mensaje generado automáticamente, por favor no respondas a esta dirección de correo electrónico.
+    </div>
+    <div class="footer">
+      © 2025 SIIGES - Todos los derechos reservados
+    </div>
+  </div>
+</body>
+</html>
