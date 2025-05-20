@@ -53,7 +53,7 @@ async function createEquivalencia(req, reply) {
     // Enviar notificación si hay cambio de estatus
     this.notificacionServices.sendNotificationEmail({
       usuarioId: 14,
-      email: 'joel.duran@jalisco.gob.mx',
+      email: newEquivalencia.interesado.persona.correoPrimario,
       asunto: 'SIIGES: Cambiar de estatus - solicitudRevEquiv',
       template: 'solicitudRevEquivRecibida',
       params: {
