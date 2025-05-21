@@ -52,7 +52,7 @@ async function createEquivalencia(req, reply) {
 
     // Enviar notificación si hay cambio de estatus
     this.notificacionServices.sendNotificationEmail({
-      usuarioId: 14,
+      usuarioId: 212,
       email: newEquivalencia.interesado.persona.correoPrimario,
       asunto: 'SIIGES: Cambiar de estatus - solicitudRevEquiv',
       template: 'solicitudRevEquivRecibida',
