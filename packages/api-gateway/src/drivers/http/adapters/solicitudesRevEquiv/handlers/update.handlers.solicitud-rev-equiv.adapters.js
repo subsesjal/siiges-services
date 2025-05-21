@@ -9,7 +9,7 @@ const FEATURE = {
 const NOTIFICATION_MAPPING = {
   [FEATURE.RECIBIDA]: async (processor, solicitud) => {
     await processor({
-      usuarioId: 14,
+      usuarioId: 212,
       email: solicitud.interesado.persona.correoPrimario,
       asunto: `SIIGES: Solicitud en Firma - Folio ${solicitud.folioSolicitud}`,
       template: 'solicitudRevEquivRecibida',
@@ -20,7 +20,7 @@ const NOTIFICATION_MAPPING = {
   },
   [FEATURE.EN_FIRMA]: async (processor, solicitud) => {
     await processor({
-      usuarioId: 14,
+      usuarioId: 212,
       email: solicitud.interesado.persona.correoPrimario,
       asunto: `SIIGES: Solicitud en Firma - Folio ${solicitud.folioSolicitud}`,
       template: 'solicitudRevEquivEnFirma',
@@ -31,7 +31,7 @@ const NOTIFICATION_MAPPING = {
   },
   [FEATURE.PROCESADA]: async (processor, solicitud) => {
     await processor({
-      usuarioId: 14,
+      usuarioId: 212,
       email: solicitud.interesado.persona.correoPrimario,
       asunto: `SIIGES: Solicitud Procesada - Folio ${solicitud.folioSolicitud}`,
       template: 'solicitudRevEquivProcesada',
@@ -42,7 +42,7 @@ const NOTIFICATION_MAPPING = {
   },
   [FEATURE.ATENDER_OBSERVACIONES]: async (processor, solicitud) => {
     await processor({
-      usuarioId: 14,
+      usuarioId: 212,
       email: solicitud.interesado.persona.correoPrimario,
       asunto: `SIIGES: Atender Observaciones - Folio ${solicitud.folioSolicitud}`,
       template: 'solicitudRevEquivObservaciones',
