@@ -1,5 +1,5 @@
 const swaggerObject = {
-  routePrefix: '/doc',
+  routePrefix: 'doc/internal',
   openapi: {
     info: {
       title: 'SIIGES 2.0 documentation',
