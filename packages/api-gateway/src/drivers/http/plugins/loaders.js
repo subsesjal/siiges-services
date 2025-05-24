@@ -30,7 +30,7 @@ const privateLoader = async (fastify) => {
   });
 };
 
-// Load external routes under the /api/v1 prefix
+// Load external routes under the /api/v2/external prefix
 const externalLoader = async (fastify) => {
   await fastify.register(async (privateScope) => {
     await privateScope.register(swaggerUi, externalSwagger);
