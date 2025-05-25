@@ -1,5 +1,7 @@
 const PluginLoader = require('fastify-plugin');
+const boom = require('@hapi/boom');
 const fastifyJwt = require('@fastify/jwt');
+const errorHandler = require('../utils/errorHandler');
 const { config } = require('../../../../config/environment');
 
 const myCustomMessages = {
@@ -25,6 +27,19 @@ const jwtVerifyPlugin = async (fastify) => {
       await request.jwtVerify();
     } catch (err) {
       reply.send(err);
+    }
+  });
+
+  fastify.decorate('authorizeRole', (expectedRoles = []) => async (request, reply) => {
+    try {
+      await request.jwtVerify();
+      const { rol } = request.user;
+
+      if (!expectedRoles.includes(rol)) {
+        throw boom.forbidden('No tienes permisos suficientes para acceder a este recurso.');
+      }
+    } catch (error) {
+      errorHandler(error, reply);
     }
   });
 };
