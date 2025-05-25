@@ -9,7 +9,7 @@ async function estadoRouter(fastify, opts, next) {
       schema: findAllEstadosSchema,
       onRequest: [
         fastify.authenticate,
-        fastify.authorizeRole(['admin']),
+        fastify.authorizeRole(['externo']),
       ],
     },
     estadosAdapter.findAllEstados,
