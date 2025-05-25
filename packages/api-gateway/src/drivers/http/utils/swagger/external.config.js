@@ -2,28 +2,21 @@ const swaggerObject = {
   routePrefix: '/doc/external',
   openapi: {
     info: {
-      title: 'SIIGES 2.0 documentation',
-      description: 'SIIGES 2.0 swagger API',
-      version: '0.0.1',
+      title: 'SIIGES 2.0 API Externa',
+      description: 'Documentación de la API expuesta para integraciones externas con la plataforma SIIGES 2.0.',
+      version: '1.0.0',
     },
     externalDocs: {
       url: 'https://swagger.io',
-      description: 'Find more info here',
+      description: 'Consulta más información sobre la especificación OpenAPI.',
     },
     servers: [
       {
         url: 'https://{host}',
+        description: 'Servidor de pruebas',
         variables: {
           host: {
             default: process.env.SWAGGER_HOST,
-          },
-        },
-      },
-      {
-        url: 'http://{host}',
-        variables: {
-          host: {
-            default: 'localhost:3000',
           },
         },
       },
@@ -34,13 +27,13 @@ const swaggerObject = {
           type: 'apiKey',
           in: 'header',
           name: 'api_key',
-          description: 'Enter your Apikey in the format: <api_key>',
+          description: 'Proporcione su API KEY. Formato: `<api_key>`',
         },
         token: {
           type: 'http',
           scheme: 'bearer',
           bearerFormat: 'JWT',
-          description: 'Enter your bearer token in the format: Bearer <jwt>',
+          description: 'Proporcione un token JWT. Formato: `Bearer <token>`',
         },
       },
       // Add your schemas here
@@ -56,13 +49,7 @@ const swaggerObject = {
         token: [],
       },
     ],
-    tags: [ // Asegúrate de definir tus etiquetas aquí
-      {
-        name: 'Files',
-        description: 'Operaciones relacionadas con archivos',
-      },
-      // ... otras etiquetas
-    ],
+    tags: [],
     paths: {
       //
     },
