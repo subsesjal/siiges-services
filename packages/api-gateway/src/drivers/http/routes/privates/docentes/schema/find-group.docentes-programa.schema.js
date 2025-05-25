@@ -21,6 +21,7 @@ const findGroupDocentesProgramaSchema = {
         data: {
           type: 'array',
           items: {
+            type: 'object',
             properties: {
               id: { type: 'integer' },
               ...docente,
@@ -36,6 +37,7 @@ const findGroupDocentesProgramaSchema = {
               formacionesDocentes: {
                 type: 'array',
                 items: {
+                  type: 'object',
                   properties: {
                     id: { type: 'integer' },
                     ...formacionDocente,

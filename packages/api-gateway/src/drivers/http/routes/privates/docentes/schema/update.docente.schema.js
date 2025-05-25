@@ -32,6 +32,7 @@ const updateDocenteSchema = {
       formacionesDocentes: {
         type: 'array',
         items: {
+          type: 'object',
           properties: {
             id: { type: 'integer' },
             ...formacion,
@@ -67,6 +68,7 @@ const updateDocenteSchema = {
             formacionesDocentes: {
               type: 'array',
               items: {
+                type: 'object',
                 properties: {
                   id: { type: 'integer' },
                   ...formacionDocente,

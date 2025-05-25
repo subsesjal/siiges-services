@@ -11,33 +11,22 @@ const uploadFileSchema = {
     required: ['archivoAdjunto', 'tipoEntidad', 'entidadId', 'tipoDocumento'],
     properties: {
       archivoAdjunto: {
+        type: 'string',
         format: 'binary',
         description: 'El archivo a cargar',
         isFile: true,
       },
       tipoEntidad: {
-        properties: {
-          value: {
-            type: 'string',
-            description: 'El tipo de entidad',
-          },
-        },
+        type: 'string',
+        description: 'El tipo de entidad',
       },
       entidadId: {
-        properties: {
-          value: {
-            type: 'string',
-            description: 'El ID de la entidad',
-          },
-        },
+        type: 'string',
+        description: 'El ID de la entidad',
       },
       tipoDocumento: {
-        properties: {
-          value: {
-            type: 'string',
-            description: 'El tipo de documento',
-          },
-        },
+        type: 'string',
+        description: 'El tipo de documento',
       },
     },
   },
