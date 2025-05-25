@@ -39,6 +39,7 @@ const createDatosDeProyectoSchema = {
       proyectoTipoProyecto: {
         type: 'array',
         items: {
+          type: 'object',
           properties: {
             ...TipoDeProyectoBody,
           },
@@ -47,6 +48,7 @@ const createDatosDeProyectoSchema = {
       proyectoEspacio: {
         type: 'array',
         items: {
+          type: 'object',
           properties: {
             ...espaciosDeEquipamientoBody,
           },

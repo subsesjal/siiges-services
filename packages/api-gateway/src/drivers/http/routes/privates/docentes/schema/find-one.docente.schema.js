@@ -35,6 +35,7 @@ const findOneDocenteSchema = {
             formacionesDocentes: {
               type: 'array',
               items: {
+                type: 'object',
                 properties: {
                   id: { type: 'integer' },
                   ...formacionDocente,
