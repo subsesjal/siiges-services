@@ -1,74 +1,154 @@
 # siiges-services
-Backend de siiges
 
-This proyect is a monerepo, we use lerna and yarn to manage dependencies.
+**Backend del proyecto SIIGES**
+Este proyecto está estructurado como un *monorepo*. Utilizamos **Lerna** y **Yarn** para la gestión de paquetes y dependencias.
 
-## Create a new package
-In order to create a new package you have to run `lerna create @siiges-services/package-name`
+---
 
-## Link packages
-In order to link packages you have to run `lerna add sourcePackage --scope=destinationPackage`
+Perfecto, aquí tienes la sección actualizada en español con la instrucción para ejecutar `yarn bootstrap` después de crear o enlazar paquetes:
 
-# Configuración del Backend
-Hacer Fork del proyecto:
-- [Backend](https://github.com/subsesjal/siiges-services)
+---
 
-### Clonar el repositorio
-> [!NOTE]
-> Debes estar dentro del proyecto que hiciste **Fork**.
+## 📦 Crear un nuevo paquete
 
-```git clone https://github.com/yourUsername/siiges-services```
+Para crear un nuevo paquete dentro del monorepo, ejecuta:
 
-### Agregar los 3 archivos en el directorio raíz de siiges-services (Backend)
-- dockerfile
-- docker-compose.yml
-- development.env
+```bash
+npx lerna create @siiges-services/nombre-del-paquete
+```
 
-> [!IMPORTANT]
-> Verifica que el puerto y el nombre de la base de datos sean los mismos que los especificados en el archivo Docker ubicado en ***development.env***
+---
 
-> [!IMPORTANT]
-> Antes de hacer las instalaciones de las independencias, deberás acceder al repositorio remoto con el siguiente comando.
+## 🔗 Enlazar paquetes
 
-```git remote add upstream https://github.com/subsesjal/siiges-services.git```
+Para enlazar un paquete como dependencia de otro, ejecuta:
 
-> [!NOTE]
-> Verificar que tu repo esté conectada remotamente con este comando.
+```bash
+npx lerna add @siiges-services/paqueteOrigen --scope=@siiges-services/paqueteDestino
+```
 
-```git remote -v```
+Después de enlazar paquetes, también es recomendable ejecutar:
 
-> [!NOTE]
-> Debe dar un mensaje como este.
+```bash
+yarn bootstrap
+```
 
-> origin  https://github.com/yourUsername/siiges-services.git (fetch)
-> origin  https://github.com/yourUsername/siiges-services.git (push)
-> upstream        https://github.com/subsesjal/siiges-services.git (fetch)
-> upstream        https://github.com/subsesjal/siiges-services.git (push)
+> Esto asegura que todos los paquetes estén correctamente vinculados e instalados.
 
-> [!IMPORTANT]
-> Actualizar para traer los cambios más recientes con este comando.
+---
 
-```git fetch upstream && git rebase upstream/master```
+## ⚙️ Configuración del Backend
 
-### Instalaciones los módulos
-```yarn install or yarn```
+### 1. Hacer Fork del proyecto
 
-### Levantar Docker
-> [!NOTE]
-> Posicionarse en la ruta raíz siiges-services/ y ejecutar el comando.
-> Cuando finalice puedes levantarlo otra vez desde la terminal o desde Docker Desktop.
+Haz un fork del repositorio original desde:
 
-```docker-compose up```
+🔗 [Repositorio Backend](https://github.com/subsesjal/siiges-services)
 
-### Migrar tablas y datos de MySQL
-> [!NOTE]
-> Posicionarse en la ruta raíz siiges-services/packages/core y ejecutar el comando.
+---
 
-```NODE_ENV=development npm run migrations:run```
-```NODE_ENV=development npm run seeds:run```
+### 2. Clonar el repositorio
 
-### Levantar Backend
-> [!NOTE]
-> Posicionarse en la ruta siiges-services/packages/api-gateway/ y ejecutar el comando.
+> 💡 Asegúrate de clonar **tu fork**, no el repositorio original.
 
-```NODE_ENV=development npm run start:dev```
+```bash
+git clone https://github.com/tuUsuario/siiges-services
+```
+
+---
+
+### 3. Agregar archivos necesarios
+
+Debes colocar los siguientes archivos en el directorio raíz (`siiges-services/`):
+
+* `Dockerfile`
+* `docker-compose.yml`
+* `development.env`
+
+> ⚠️ **Importante:** Verifica que el puerto y el nombre de la base de datos en `development.env` coincidan con los utilizados en Docker.
+
+---
+
+### 4. Configurar repositorio remoto
+
+Antes de instalar las dependencias, enlaza el repositorio original como remoto:
+
+```bash
+git remote add upstream https://github.com/subsesjal/siiges-services.git
+```
+
+Verifica que los remotos se hayan configurado correctamente:
+
+```bash
+git remote -v
+```
+
+Deberías ver algo como:
+
+```
+origin  https://github.com/tuUsuario/siiges-services.git (fetch)
+origin  https://github.com/tuUsuario/siiges-services.git (push)
+upstream  https://github.com/subsesjal/siiges-services.git (fetch)
+upstream  https://github.com/subsesjal/siiges-services.git (push)
+```
+
+Actualiza tu rama con los últimos cambios del repositorio original:
+
+```bash
+git fetch upstream && git rebase upstream/master
+```
+
+---
+
+### 5. Instalar dependencias
+
+Desde la raíz del proyecto, instala las dependencias:
+
+```bash
+yarn install
+# o simplemente
+yarn
+```
+
+---
+
+### 6. Levantar Docker
+
+> 💡 Desde la raíz del proyecto (`siiges-services/`), ejecuta:
+
+```bash
+docker-compose up
+```
+
+Puedes verificar y controlar los contenedores desde Docker Desktop si lo prefieres.
+
+---
+
+### 7. Ejecutar migraciones y cargar datos
+
+> 💡 Navega a `packages/core/` antes de ejecutar los comandos:
+
+```bash
+cd packages/core
+NODE_ENV=development npm run migrations:run
+NODE_ENV=development npm run seeds:run
+```
+
+---
+
+### 8. Levantar el Backend
+
+> 💡 Navega a `packages/api-gateway/` y ejecuta:
+
+```bash
+cd packages/api-gateway
+NODE_ENV=development npm run start:dev
+```
+
+---
+
+## 📝 Notas finales
+
+* Asegúrate de tener Docker y Docker Compose instalados correctamente.
+* Usa `NODE_ENV=development` para evitar errores relacionados con entornos.
+* Si tienes problemas al iniciar los servicios, revisa los logs de Docker y la configuración de los `.env`.
