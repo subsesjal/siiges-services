@@ -33,11 +33,14 @@ const jwtVerifyPlugin = async (fastify) => {
   fastify.decorate('authorizeRole', (expectedRoles = []) => async (request, reply) => {
     try {
       await request.jwtVerify();
-      const { rol } = request.user;
+      const { rol, id } = request.user;
 
       if (!expectedRoles.includes(rol)) {
         throw boom.forbidden('No tienes permisos suficientes para acceder a este recurso.');
       }
+
+      // Attach userId to request object so it can be accessed in the route handler
+      request.userId = id;
     } catch (error) {
       errorHandler(error, reply);
     }

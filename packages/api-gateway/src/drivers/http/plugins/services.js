@@ -13,6 +13,7 @@ const SolicitudFolioServices = require('@siiges-services/solicitudesfolios');
 const SolicitudRevEquivServices = require('@siiges-services/solicitudesrevequiv');
 const SolicitudBecaServices = require('@siiges-services/solicitudesbecas');
 const SolicitudServicioSocialServices = require('@siiges-services/solicitudesserviciosocial');
+const ExternalServices = require('@siiges-services/external-service');
 
 async function services(fastify) {
   await Promise.all([fastify.decorate('usuarioServices', UsuarioServices)]);
@@ -29,6 +30,7 @@ async function services(fastify) {
   await Promise.all([fastify.decorate('solicitudRevEquivServices', SolicitudRevEquivServices)]);
   await Promise.all([fastify.decorate('solicitudBecaServices', SolicitudBecaServices)]);
   await Promise.all([fastify.decorate('solicitudServicioSocialServices', SolicitudServicioSocialServices)]);
+  await Promise.all([fastify.decorate('externalServices', ExternalServices)]);
 }
 
 module.exports = PluginLoader(services);
