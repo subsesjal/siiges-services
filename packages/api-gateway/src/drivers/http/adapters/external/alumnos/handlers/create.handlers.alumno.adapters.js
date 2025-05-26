@@ -9,7 +9,7 @@ async function createAlumno(req, reply) {
 
     Logger.info(`[Alumno]: Creating Alumno by user ${userId}`);
 
-    const newAlumno = await this.externalServices.createAlumno(
+    const alumnos = await this.externalServices.createAlumnos(
       { rvoe, userId },
       data,
     );
@@ -17,7 +17,7 @@ async function createAlumno(req, reply) {
     return reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: newAlumno });
+      .send({ data: alumnos });
   } catch (error) {
     return errorHandler(error, reply);
   }

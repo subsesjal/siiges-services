@@ -50,17 +50,28 @@ const createAlumno = {
       type: 'object',
       properties: {
         data: {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              ...alumno,
-              ...responseProperties,
-              persona: {
+          type: 'object',
+          properties: {
+            successes: { type: 'integer' },
+            failures: { type: 'integer' },
+            alumnos: {
+              type: 'array',
+              items: {
                 type: 'object',
                 properties: {
-                  ...persona,
-                  ...responseProperties,
+                  success: { type: 'boolean' },
+                  error: { nullable: true },
+                  alumno: {
+                    ...alumno,
+                    ...responseProperties,
+                    persona: {
+                      type: 'object',
+                      properties: {
+                        ...persona,
+                        ...responseProperties,
+                      },
+                    },
+                  },
                 },
               },
             },
