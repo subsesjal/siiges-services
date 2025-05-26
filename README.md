@@ -5,10 +5,6 @@ Este proyecto está estructurado como un *monorepo*. Utilizamos **Lerna** y **Ya
 
 ---
 
-Perfecto, aquí tienes la sección actualizada en español con la instrucción para ejecutar `yarn bootstrap` después de crear o enlazar paquetes:
-
----
-
 ## 📦 Crear un nuevo paquete
 
 Para crear un nuevo paquete dentro del monorepo, ejecuta:
