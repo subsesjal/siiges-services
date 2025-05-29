@@ -62,13 +62,16 @@ const createAlumno = {
                   success: { type: 'boolean' },
                   error: { nullable: true },
                   alumno: {
-                    ...alumno,
-                    ...responseProperties,
-                    persona: {
-                      type: 'object',
-                      properties: {
-                        ...persona,
-                        ...responseProperties,
+                    type: 'object',
+                    properties: {
+                      ...alumno,
+                      ...responseProperties,
+                      persona: {
+                        type: 'object',
+                        properties: {
+                          ...persona,
+                          ...responseProperties,
+                        },
                       },
                     },
                   },
