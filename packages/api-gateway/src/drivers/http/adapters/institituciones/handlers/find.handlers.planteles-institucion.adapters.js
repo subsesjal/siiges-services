@@ -4,11 +4,13 @@ const errorHandler = require('../../../utils/errorHandler');
 async function findPlantelesInstitucion(req, reply) {
   try {
     const { institucionId } = req.params;
+    const { query } = req;
 
     Logger.info(`[instituciones]: Getting institucion with id ${institucionId} and its planteles list`);
 
     const plantelesInstitucion = await this.institucionServices.findPlantelesInstitucion(
       { id: institucionId },
+      query,
     );
 
     return reply

@@ -11,6 +11,10 @@ const { persona } = require('../../usuarios/schema/properties/persona');
 const findPlantelesInstitucionSchema = {
   tags: ['Plantel'],
   description: 'Given a institucion id, then return a institucion and its planteles of database.',
+  querystring: {
+    type: 'object',
+    properties: { claveCentroTrabajo: { type: 'boolean' } },
+  },
   params: {
     title: 'getInstitucionPlantelesSchema',
     type: 'object',
