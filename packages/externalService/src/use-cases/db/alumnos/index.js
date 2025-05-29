@@ -1,9 +1,12 @@
 const { alumnos } = require('../../../adapters/db');
 
-const createAlumno = require('./create.alumnos.use-cases');
+const createAlumnos = require('./create.alumnos.use-cases');
 
 module.exports = {
-  createAlumno: createAlumno(
+  createAlumnos: createAlumnos(
+    alumnos.findOneUserUsersQuery,
+    alumnos.findOneProgramaQuery,
+    alumnos.findOneAlumnoQuery,
     alumnos.createAlumnoQuery,
   ),
 };
