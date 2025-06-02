@@ -25,7 +25,7 @@ const findGroupAlumnosPrograma = (
   checkers.throwErrorIfDataIsFalsy(programa, 'programas', programaId);
 
   if (matricula) {
-    const alumno = await findOneAlumnoQuery(identifierObj, { include });
+    const alumno = await findOneAlumnoQuery(identifierObj, { include, strict: false });
     checkers.throwErrorIfDataIsFalsy(alumno, 'alumnos', matricula);
     return alumno;
   }

@@ -122,3 +122,7 @@ public
 docker-compose.yml
 .dockerignore
 Dockerfile
+
+#PM2 files
+ecosystem.config.js
+web.config

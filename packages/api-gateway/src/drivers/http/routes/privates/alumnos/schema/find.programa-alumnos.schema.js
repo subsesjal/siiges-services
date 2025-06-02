@@ -94,6 +94,22 @@ const findProgramaAlumnosSchema = {
                   ...responseProperties,
                 },
               },
+              validacion: {
+                type: ['object', 'null'],
+                properties: {
+                  id: { type: 'integer' },
+                  ...validacion,
+                  ...responseProperties,
+                  situacionValidacion: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...situacionesValidacion,
+                      ...responseProperties,
+                    },
+                  },
+                },
+              },
             },
           },
         },
