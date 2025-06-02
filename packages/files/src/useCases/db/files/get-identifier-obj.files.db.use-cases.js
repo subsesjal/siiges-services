@@ -16,6 +16,7 @@ const { findFileFDP06 } = require('../FDP');
 const { findFileOFAD } = require('../OFAD');
 const { findFileRVOE } = require('../RVOE');
 const { findFileHistorial, findFileBeca, findFileServicio } = require('../FSE');
+const { findFileXML } = require('../XML');
 
 const getFileIdentifierObj = async (fileData) => {
   const { tipoEntidad, entidadId, tipoDocumento } = fileData;
@@ -125,9 +126,13 @@ tipoDocumento ${tipoDocumento}`);
       tipoDocumento: tipoDocumentoItem.name,
       tipoEntidad: tipoEntidadItem.name,
     }),
+    TITULO_ELECTRONICO_XML: () => findFileXML(entidadId, fileData, {
+      tipoDocumento: tipoDocumentoItem.name,
+      tipoEntidad: tipoEntidadItem.name,
+    }),
   };
 
-  const validNames = ['FD', 'OFICIO_ADMISORIO', 'ACUERDO_RVOE', 'HISTORIAL_ACADEMICO', 'REPORTE_BECAS', 'REPORTE_SERV_SOC'];
+  const validNames = ['FD', 'OFICIO_ADMISORIO', 'ACUERDO_RVOE', 'HISTORIAL_ACADEMICO', 'REPORTE_BECAS', 'REPORTE_SERV_SOC', 'TITULO_ELECTRONICO_XML'];
 
   if (validNames.some((prefix) => tipoDocumentoItem.name.startsWith(prefix))) {
     await filesFDA[tipoDocumentoItem.name]();
