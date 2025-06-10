@@ -14,6 +14,18 @@ async function asignaturaRouter(fastify, opts, next) {
     alumnosAdapter.create,
   );
 
+  await fastify.post(
+    '/inscripcion',
+    {
+      // schema: schema.inscripcionSchema,
+      onRequest: [
+        fastify.authenticate,
+        fastify.authorizeRole(['externo']),
+      ],
+    },
+    alumnosAdapter.inscripcion,
+  );
+
   /* await fastify.get(
     '/:matricula',
     {
