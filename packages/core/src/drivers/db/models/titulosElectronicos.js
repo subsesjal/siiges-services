@@ -1,7 +1,11 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { INSTITUCION_TABLE } = require('./institucion');
 const { ESTADO_TABLE } = require('./estado');
-const { MODALIDAD_TABLE } = require('./modalidad');
+const { CARGO_TABLE } = require('./cargo');
+const { FUNDAMENTO_SERVICIO_SOCIAL_TABLE } = require('./fundamentoServicioSocial');
+const { NIVEL_TABLE } = require('./nivel');
+const { AUTORIZACION_RECONOCIMIENTO_TABLE } = require('./autorizacionReconocimiento');
+const { MODALIDAD_TITULACION_TABLE } = require('./modalidadTitulacion');
 
 const TITULO_ELECTRONICO_TABLE = 'titulos_electronicos';
 
@@ -34,18 +38,26 @@ const TituloElectronicoSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'cargo_id',
+    references: {
+      model: CARGO_TABLE,
+      key: 'id',
+    },
   },
   autorizacionReconocimientoId: {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'autorizacion_reconocimiento_id',
+    references: {
+      model: AUTORIZACION_RECONOCIMIENTO_TABLE,
+      key: 'id',
+    },
   },
   modalidadTitulacionId: {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'modalidad_titulacion_id',
     references: {
-      model: MODALIDAD_TABLE,
+      model: MODALIDAD_TITULACION_TABLE,
       key: 'id',
     },
   },
@@ -53,16 +65,28 @@ const TituloElectronicoSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'estado_antecedente_id',
+    references: {
+      model: ESTADO_TABLE,
+      key: 'id',
+    },
   },
   fundamentoLegalServicioSocialId: {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'fundamento_legal_servicio_social_id',
+    references: {
+      model: FUNDAMENTO_SERVICIO_SOCIAL_TABLE,
+      key: 'id',
+    },
   },
   tipoEstudioAntecedenteId: {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'tipo_estudio_antecedente_id',
+    references: {
+      model: NIVEL_TABLE,
+      key: 'id',
+    },
   },
   version: {
     allowNull: false,
@@ -252,7 +276,11 @@ class TituloElectronico extends Model {
   static associate(models) {
     this.belongsTo(models.Institucion, { as: 'institucion' });
     this.belongsTo(models.Estado, { as: 'estado' });
-    this.belongsTo(models.Modalidad, { as: 'modalidad' });
+    this.belongsTo(models.ModalidadTitulacion, { as: 'modalidadTitulacion' });
+    this.belongsTo(models.AutorizacionReconocimiento, { as: 'autorizacionReconocimiento' });
+    this.belongsTo(models.Cargo, { as: 'cargo' });
+    this.belongsTo(models.Nivel, { as: 'nivel' });
+    this.belongsTo(models.FundamentoServicioSocial, { as: 'fundamentoServicioSocial' });
   }
 
   static config(sequelize) {
