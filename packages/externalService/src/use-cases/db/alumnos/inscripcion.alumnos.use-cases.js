@@ -73,7 +73,11 @@ const inscripcionAlumnos = (
 
   grupoFound = grupoFound.toJSON();
 
-  const errores = [];
+  let failures = 0;
+  let successes = 0;
+  const asignaturasSucesses = [];
+  const alumnosError = [];
+  const asignaturasError = [];
 
   // Validar que los alumnos existan en el programa
   await Promise.all(dataArray.map(async (data) => {
@@ -91,21 +95,37 @@ const inscripcionAlumnos = (
 
     // Validar que el alumno exista
     if (!alumno) {
-      errores.push(`Alumno con matrícula ${matricula} no encontrado`);
-      return; // No seguir validando asignaturas si no existe el alumno
+      alumnosError.push({
+        success: false,
+        error: `Alumno con matrícula ${matricula} no encontrado`,
+        alumno: { matricula },
+      });
+
+      failures += 1;
+      return;
     }
 
     // Validar que el alumno esté activo
     if (alumno.situacionId !== 1) {
-      errores.push(`El alumno con matrícula ${matricula} no está activo`);
-      return; // No seguir validando asignaturas si el alumno no está activo
+      alumnosError.push({
+        success: false,
+        error: `El alumno con matrícula ${matricula} no está activo`,
+        alumno: { matricula },
+      });
+      failures += 1;
+      return;
     }
 
     // Validar que el alumno tenga una validación correcta
     if (!alumno.validacion
       || !VALIDACIONES_CORRECTAS.includes(alumno.validacion.situacionValidacionId)) {
-      errores.push(`El alumno con matrícula ${matricula} no tiene una validación correcta`);
-      return; // No seguir validando asignaturas si la validación no es correcta
+      alumnosError.push({
+        success: false,
+        error: `El alumno con matrícula ${matricula} no tiene una validación correcta`,
+        alumno: { matricula },
+      });
+      failures += 1;
+      return;
     }
 
     // Validar que las asignaturas existan en el programa y grado
@@ -123,16 +143,25 @@ const inscripcionAlumnos = (
       });
 
       if (!asigFound && !asigOptFound) {
-        errores.push(`
-          - Asignatura con clave ${asignatura} no encontrada en el programa ${programa.acuerdoRvoe} grado ${grupoFound.grado.nombre}.
-          `);
+        asignaturasError.push({
+          success: false,
+          error: `Asignatura con clave ${asignatura} no encontrada en el programa ${programa.acuerdoRvoe} grado ${grupoFound.grado.nombre}.`,
+          asignatura: { clave: asignatura, alumno: { matricula } },
+        });
+        failures += 1;
       }
     }));
   }));
 
   // Lanzar error si hay errores de validación
-  if (errores.length > 0) {
-    throw boom.badRequest(`Errores de validación:\n${errores.join('\n')}`);
+  if (alumnosError.length > 0 || asignaturasError.length > 0) {
+    return {
+      successes,
+      failures,
+      alumnos: alumnosError,
+      asignaturas: asignaturasError,
+    };
+    // throw boom.badRequest(`Errores de validación:\n${errores.join('\n')}`);
   }
 
   for (const data of dataArray) {
@@ -170,7 +199,8 @@ const inscripcionAlumnos = (
       return deleteCalificacionQuery({ id });
     }));
 
-    // Create new calificaciones for asignaturas that do not exist
+    // Crear calificaciones para las asignaturas que no existen
+    // eslint-disable-next-line no-loop-func
     await Promise.all(asignaturas.map(async (clave) => {
       if (!existingAsignaturas.has(clave)) {
         Logger.info(`Creando registro en calificaciones para alumno ${alumno.matricula}, asignatura ${clave}, grupo ${grupoFound.descripcion}`);
@@ -184,13 +214,32 @@ const inscripcionAlumnos = (
           alumnoId: alumno.id,
           grupoId: grupoFound.id,
           asignaturaId: asignaturaFound.id,
-          tipo: 1, // Tipo 1 para calificaciones de asignaturas
+          tipo: 1, // Tipo 1 para calificaciones ordinarias
         });
+
+        asignaturasSucesses.push({
+          success: true,
+          message: `Alumno ${matricula} inscrito en asignatura ${clave} del grupo ${grupoFound.descripcion}`,
+          asignatura: { clave, alumno: { matricula } },
+        });
+        successes += 1;
+      } else {
+        asignaturasSucesses.push({
+          success: true,
+          message: `Alumno ${matricula} ya inscrito en asignatura ${clave} del grupo ${grupoFound.descripcion}`,
+          asignatura: { clave, alumno: { matricula } },
+        });
+        successes += 1;
       }
     }));
   }
 
-  return grupoFound;
+  // Todas las validaciones y operaciones se realizaron correctamente
+  return {
+    successes,
+    failures,
+    asignaturas: asignaturasSucesses,
+  };
 };
 
 module.exports = inscripcionAlumnos;

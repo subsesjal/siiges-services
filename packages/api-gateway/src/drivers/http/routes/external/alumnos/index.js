@@ -17,7 +17,7 @@ async function asignaturaRouter(fastify, opts, next) {
   await fastify.post(
     '/inscripcion',
     {
-      // schema: schema.inscripcionSchema,
+      schema: schema.inscripcionSchema,
       onRequest: [
         fastify.authenticate,
         fastify.authorizeRole(['externo']),
