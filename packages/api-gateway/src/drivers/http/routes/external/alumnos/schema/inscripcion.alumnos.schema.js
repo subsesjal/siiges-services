@@ -1,6 +1,6 @@
 const inscripcionSchema = {
   tags: ['Alumnos'],
-  description: 'Given an object with alumno grupo required data, then save a new AlumnoGrupo in database.',
+  description: 'Registra la inscripción de uno o más alumnos a un grupo específico, asignándoles sus respectivas asignaturas.',
   querystring: {
     type: 'object',
     properties: {
