@@ -8,11 +8,14 @@ const {
   Grupo,
   AlumnoGrupo,
   Asignatura,
+  Calificacion,
 } = models;
 
 const {
   createQuery,
   findOneQuery,
+  findAllQuery,
+  deleteAndFindQuery,
 } = queries;
 
 module.exports = {
@@ -24,4 +27,8 @@ module.exports = {
   findOneAlumnoGrupoQuery: findOneQuery(AlumnoGrupo),
   createAlumnoGrupoQuery: createQuery(AlumnoGrupo),
   findOneAsignaturaQuery: findOneQuery(Asignatura),
+  findAllCalificacionesQuery: findAllQuery(Calificacion),
+  findOneCalificacionQuery: findOneQuery(Calificacion),
+  createCalificacionQuery: createQuery(Calificacion),
+  deleteCalificacionQuery: deleteAndFindQuery(Calificacion),
 };

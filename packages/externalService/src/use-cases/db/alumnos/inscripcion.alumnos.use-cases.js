@@ -1,7 +1,10 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 const boom = require('@hapi/boom');
-// const { Logger, checkers } = require('@siiges-services/shared');
+const { Logger } = require('@siiges-services/shared');
+
+const OPTATIVA = 25; // Clave de asignatura optativa
+const VALIDACIONES_CORRECTAS = [1, 3]; // Situaciones válidas para la validación de alumnos
 
 const validateGrupo = async ({
   findOneGrupoQuery, grupo, grado, cicloEscolar, turno, rvoe,
@@ -24,53 +27,6 @@ const validateGrupo = async ({
   });
 };
 
-const createAlumnoAsignaturasRelations = async ({
-  findOneCalificacionQuery,
-  findOneAsignaturaQuery,
-  createCalificacionQuery,
-  alumnoAsignaturas,
-  asignaturas,
-  alumnoId,
-  programaId,
-  grupoId,
-}) => {
-  await Promise.all(asignaturas.map(async (asignatura) => {
-    if (alumnoAsignaturas.some(({ asignaturaId }) => asignaturaId === asignatura)) {
-      await findOneCalificacionQuery({
-        asignaturaId: asignatura,
-        grupoId,
-        alumnoId,
-      });
-    } else {
-      const asignaturaFound = await findOneAsignaturaQuery({
-        id: asignatura,
-        programaId,
-      });
-
-      if (asignaturaFound) {
-        await createCalificacionQuery({
-          alumnoId,
-          asignaturaId: asignatura,
-          grupoId,
-          tipo: 1,
-        });
-      }
-    }
-  }));
-};
-
-const deleteAlumnoAsignaturasRelations = async ({
-  deleteCalificacionQuery,
-  alumnoAsignaturas,
-  asignaturas,
-}) => {
-  const toDelete = alumnoAsignaturas.filter((
-    alumnoAsignatura,
-  ) => !asignaturas.includes(alumnoAsignatura.asignaturaId));
-
-  await Promise.all(toDelete.map(({ id }) => deleteCalificacionQuery({ id })));
-};
-
 const inscripcionAlumnos = (
   findUserUsersQuery,
   findOneGrupoQuery,
@@ -78,9 +34,8 @@ const inscripcionAlumnos = (
   findOneAlumnoQuery,
   findOneAsignaturaQuery,
   findOneAlumnoGrupoQuery,
-  createAlumnoGrupoQuery,
   findAllCalificacionesQuery,
-  findOneCalificacionQuery,
+  createAlumnoGrupoQuery,
   createCalificacionQuery,
   deleteCalificacionQuery,
 ) => async (identifiers, dataArray) => {
@@ -123,20 +78,54 @@ const inscripcionAlumnos = (
   // Validar que los alumnos existan en el programa
   await Promise.all(dataArray.map(async (data) => {
     const { matricula, asignaturas } = data;
-    const alumno = await findOneAlumnoQuery({ matricula, programaId: programa.id });
+    const alumno = await findOneAlumnoQuery(
+      { matricula, programaId: programa.id },
+      {
+        include: [{
+          association: 'validacion',
+          attributes: ['id', 'situacionValidacionId'],
+        }],
+        strict: false,
+      },
+    );
+
+    // Validar que el alumno exista
     if (!alumno) {
       errores.push(`Alumno con matrícula ${matricula} no encontrado`);
       return; // No seguir validando asignaturas si no existe el alumno
     }
 
+    // Validar que el alumno esté activo
+    if (alumno.situacionId !== 1) {
+      errores.push(`El alumno con matrícula ${matricula} no está activo`);
+      return; // No seguir validando asignaturas si el alumno no está activo
+    }
+
+    // Validar que el alumno tenga una validación correcta
+    if (!alumno.validacion
+      || !VALIDACIONES_CORRECTAS.includes(alumno.validacion.situacionValidacionId)) {
+      errores.push(`El alumno con matrícula ${matricula} no tiene una validación correcta`);
+      return; // No seguir validando asignaturas si la validación no es correcta
+    }
+
+    // Validar que las asignaturas existan en el programa y grado
     await Promise.all(asignaturas.map(async (asignatura) => {
-      const asignaturaFound = await findOneAsignaturaQuery({
+      const asigFound = await findOneAsignaturaQuery({
         clave: asignatura,
         programaId: programa.id,
+        gradoId: grupoFound.gradoId,
       });
 
-      if (!asignaturaFound) {
-        errores.push(`Asignatura con clave ${asignatura} no encontrada en el programa ${programa.acuerdoRvoe}`);
+      const asigOptFound = await findOneAsignaturaQuery({
+        clave: asignatura,
+        programaId: programa.id,
+        gradoId: OPTATIVA,
+      });
+
+      if (!asigFound && !asigOptFound) {
+        errores.push(`
+          - Asignatura con clave ${asignatura} no encontrada en el programa ${programa.acuerdoRvoe} grado ${grupoFound.grado.nombre}.
+          `);
       }
     }));
   }));
@@ -162,26 +151,43 @@ const inscripcionAlumnos = (
       alumnoId: alumno.id,
       grupoId: grupoFound.id,
       tipo: 1,
+    }, {
+      include: [{
+        association: 'asignatura',
+        attributes: ['id', 'clave'],
+      }],
     });
 
-    await Promise.all([
-      createAlumnoAsignaturasRelations({
-        findOneCalificacionQuery,
-        findOneAsignaturaQuery,
-        createCalificacionQuery,
-        alumnoAsignaturas,
-        alumnoId: alumno.id,
-        asignaturas,
-        programaId: programa.id,
-        grupoId: grupoFound.id,
-      }),
-      deleteAlumnoAsignaturasRelations({
-        deleteCalificacionQuery,
-        alumnoAsignaturas,
-        alumnoId: alumno.id,
-        asignaturas,
-      }),
-    ]);
+    // Extraer las claves de las asignaturas del alumno
+    const existingAsignaturas = new Set(alumnoAsignaturas.map((item) => item.asignatura.clave));
+
+    // Filtrar asignaturas que ya existen en las calificaciones del alumno
+    const toDelete = alumnoAsignaturas
+      .filter((item) => !asignaturas.includes(item.asignatura.clave));
+
+    await Promise.all(toDelete.map(({ id }) => {
+      Logger.info(`Eliminando calificación con ID: ${id}`);
+      return deleteCalificacionQuery({ id });
+    }));
+
+    // Create new calificaciones for asignaturas that do not exist
+    await Promise.all(asignaturas.map(async (clave) => {
+      if (!existingAsignaturas.has(clave)) {
+        Logger.info(`Creando registro en calificaciones para alumno ${alumno.matricula}, asignatura ${clave}, grupo ${grupoFound.descripcion}`);
+
+        const asignaturaFound = await findOneAsignaturaQuery({
+          clave,
+          programaId: programa.id,
+        });
+
+        await createCalificacionQuery({
+          alumnoId: alumno.id,
+          grupoId: grupoFound.id,
+          asignaturaId: asignaturaFound.id,
+          tipo: 1, // Tipo 1 para calificaciones de asignaturas
+        });
+      }
+    }));
   }
 
   return grupoFound;

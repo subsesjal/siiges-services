@@ -17,6 +17,9 @@ module.exports = {
     alumnos.findOneAlumnoQuery,
     alumnos.findOneAsignaturaQuery,
     alumnos.findOneAlumnoGrupoQuery,
+    alumnos.findAllCalificacionesQuery,
     alumnos.createAlumnoGrupoQuery,
+    alumnos.createCalificacionQuery,
+    alumnos.deleteCalificacionQuery,
   ),
 };
