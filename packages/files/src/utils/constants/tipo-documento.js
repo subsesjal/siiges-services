@@ -263,6 +263,10 @@ const tipoDocumentoObj = [
     id: 66,
     name: 'ACTA_COMITE_BECAS',
   },
+  {
+    id: 67,
+    name: 'TITULO_ELECTRONICO_XML',
+  },
 ];
 
 module.exports = tipoDocumentoObj;
