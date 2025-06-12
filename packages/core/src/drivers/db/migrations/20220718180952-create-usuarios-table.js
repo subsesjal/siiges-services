@@ -416,7 +416,6 @@ module.exports = {
       ALUMNO_TITULO_ELECTRONICO_TABLE,
       AlumnoTituloElectronicoSchema,
     );
-    await queryInterface.createTable(TITULO_ELECTRONICO_TABLE, TituloElectronicoSchema);
   },
 
   async down(queryInterface) {
