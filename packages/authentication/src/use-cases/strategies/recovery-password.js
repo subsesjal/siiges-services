@@ -10,10 +10,14 @@ const tokenRecoveryPassword = (
   findOneUserQuery,
   createTokenRecoveryPasswordQuery,
 ) => async ({ correo, usuario }) => {
-  const [correoData, usuarioData] = await Promise.all([
-    await findOneUserQuery({ correo }),
-    await findOneUserQuery({ usuario }),
-  ]);
+  let correoData;
+  let usuarioData;
+  if (correo) {
+    correoData = await findOneUserQuery({ correo });
+  }
+  if (usuario) {
+    usuarioData = await findOneUserQuery({ usuario });
+  }
   const usuarioFound = correoData || usuarioData;
 
   if (!usuarioFound) {
@@ -36,6 +40,7 @@ const tokenRecoveryPassword = (
     ...createTokenRecoveryPassword.dataValues,
     usuario: usuarioFound.usuario,
     usuarioId: usuarioFound.id,
+    usuarioCorreo: usuarioFound.correo,
   };
 };
 
