@@ -133,6 +133,9 @@ const { SectorServicioSocial, SectorServicioSocialSchema } = require('./sectorSe
 const { ModalidadServicioSocial, ModalidadServicioSocialSchema } = require('./modalidadServicioSocial');
 const { EstatusSolicitudServicioSocial, EstatusSolicitudServicioSocialSchema } = require('./estatusSolicitudServicioSocial');
 const { TokenRecoveryPassword, TokenRecoveryPasswordSchema } = require('./tokenRecoveryPassword');
+const { AutorizacionReconocimiento, AutorizacionReconocimientoSchema } = require('./autorizacionReconocimiento');
+const { Cargo, CargoSchema } = require('./cargo');
+const { AlumnoTituloElectronico, AlumnoTituloElectronicoSchema } = require('./alumnosTitulosElectronicos');
 
 // Siiges 1.0
 const { Academia, AcademiaSchema } = require('./academias');
@@ -410,7 +413,16 @@ function setupModels(sequelize) {
   );
   SolicitudUsuario.init(SolicitudUsuarioSchema, SolicitudUsuario.config(sequelize));
   Testigo.init(TestigoSchema, Testigo.config(sequelize));
+  AutorizacionReconocimiento.init(
+    AutorizacionReconocimientoSchema,
+    AutorizacionReconocimiento.config(sequelize),
+  );
+  Cargo.init(CargoSchema, Cargo.config(sequelize));
   TituloElectronico.init(TituloElectronicoSchema, TituloElectronico.config(sequelize));
+  AlumnoTituloElectronico.init(
+    AlumnoTituloElectronicoSchema,
+    AlumnoTituloElectronico.config(sequelize),
+  );
   ModalidadServicioSocial.init(
     ModalidadServicioSocialSchema,
     ModalidadServicioSocial.config(sequelize),
@@ -587,7 +599,10 @@ function setupModels(sequelize) {
   SolicitudEstatusSolicitud.associate(sequelize.models);
   SolicitudUsuario.associate(sequelize.models);
   Testigo.associate(sequelize.models);
+  AutorizacionReconocimiento.associate(sequelize.models);
+  Cargo.associate(sequelize.models);
   TituloElectronico.associate(sequelize.models);
+  AlumnoTituloElectronico.associate(sequelize.models);
   // Siiges 1.0 Fin
 }
 

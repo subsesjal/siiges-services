@@ -17,7 +17,7 @@ function getUbication({ tipoEntidad, tipoDocumento }, fileName) {
 }
 
 async function uploadFile(fileMetdata, fileUploaded) {
-  const identifierObj = await db.getFileIdentifierObj(fileMetdata);
+  const identifierObj = await db.getFileIdentifierObj(fileMetdata, fileUploaded);
   const previousFile = await db.findOneFile(identifierObj);
   const fileName = await fs.writeBus(fileUploaded, fileMetdata, previousFile);
 

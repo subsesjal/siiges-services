@@ -133,6 +133,9 @@ const { SECTOR_SERVICIO_SOCIAL_TABLE, SectorServicioSocialSchema } = require('..
 const { MODALIDAD_SERVICIO_SOCIAL_TABLE, ModalidadServicioSocialSchema } = require('../models/modalidadServicioSocial');
 const { ESTATUS_SOLICITUD_SERVICIO_SOCIAL_TABLE, EstatusSolicitudServicioSocialSchema } = require('../models/estatusSolicitudServicioSocial');
 const { TOKEN_RECOVERY_PASSWORD_TABLE, TokenRecoveryPasswordSchema } = require('../models/tokenRecoveryPassword');
+const { AUTORIZACION_RECONOCIMIENTO_TABLE, AutorizacionReconocimientoSchema } = require('../models/autorizacionReconocimiento');
+const { CARGO_TABLE, CargoSchema } = require('../models/cargo');
+const { ALUMNO_TITULO_ELECTRONICO_TABLE, AlumnoTituloElectronicoSchema } = require('../models/alumnosTitulosElectronicos');
 
 // SIIGES 1.0
 const { ACADEMIA_TABLE, AcademiaSchema } = require('../models/academias');
@@ -403,6 +406,16 @@ module.exports = {
     );
     await queryInterface.createTable(SOLICITUD_USUARIO_TABLE, SolicitudUsuarioSchema);
     await queryInterface.createTable(TESTIGO_TABLE, TestigoSchema);
+    await queryInterface.createTable(
+      AUTORIZACION_RECONOCIMIENTO_TABLE,
+      AutorizacionReconocimientoSchema,
+    );
+    await queryInterface.createTable(CARGO_TABLE, CargoSchema);
+    await queryInterface.createTable(TITULO_ELECTRONICO_TABLE, TituloElectronicoSchema);
+    await queryInterface.createTable(
+      ALUMNO_TITULO_ELECTRONICO_TABLE,
+      AlumnoTituloElectronicoSchema,
+    );
     await queryInterface.createTable(TITULO_ELECTRONICO_TABLE, TituloElectronicoSchema);
   },
 
@@ -579,6 +592,9 @@ module.exports = {
     await queryInterface.dropTable(SOLICITUD_ESTADO_SOLICITUD_TABLE);
     await queryInterface.dropTable(SOLICITUD_USUARIO_TABLE);
     await queryInterface.dropTable(TESTIGO_TABLE);
+    await queryInterface.dropTable(AUTORIZACION_RECONOCIMIENTO_TABLE);
+    await queryInterface.dropTable(CARGO_TABLE);
     await queryInterface.dropTable(TITULO_ELECTRONICO_TABLE);
+    await queryInterface.dropTable(ALUMNO_TITULO_ELECTRONICO_TABLE);
   },
 };
