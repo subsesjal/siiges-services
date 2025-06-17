@@ -16,6 +16,7 @@ const {
   findOneQuery,
   findAllQuery,
   deleteAndFindQuery,
+  updateAndFindQuery,
 } = queries;
 
 module.exports = {
@@ -30,5 +31,6 @@ module.exports = {
   findAllCalificacionesQuery: findAllQuery(Calificacion),
   findOneCalificacionQuery: findOneQuery(Calificacion),
   createCalificacionQuery: createQuery(Calificacion),
+  updateCalificacionQuery: updateAndFindQuery(Calificacion),
   deleteCalificacionQuery: deleteAndFindQuery(Calificacion),
 };
