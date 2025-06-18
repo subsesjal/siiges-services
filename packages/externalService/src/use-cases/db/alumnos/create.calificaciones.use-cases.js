@@ -235,7 +235,7 @@ const createCalificaciones = (
     });
 
     // Si la calificación extraordinaria es válida, crearla
-    if (extraordinaria.calificacion) {
+    if (extraordinaria?.calificacion) {
       const calificacionExtFound = await findOneCalificacionQuery({
         alumnoId: alumnoGrupo.alumnoId,
         asignaturaId: asigFound ? asigFound.id : asigOptFound.id,
