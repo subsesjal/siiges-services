@@ -104,6 +104,17 @@ const inscripcionAlumnos = (
       return;
     }
 
+    // Validar que el alumno esté activo
+    if (alumno.situacionId !== 1) {
+      alumnosError.push({
+        success: false,
+        error: `El alumno con matrícula ${matricula} no está activo`,
+        alumno: { matricula },
+      });
+      failures += 1;
+      return;
+    }
+
     // Validar que las asignaturas existan en el programa y grado
     await Promise.all(asignaturas.map(async (asignatura) => {
       const asigFound = await findOneAsignaturaQuery({
