@@ -4,7 +4,6 @@ const boom = require('@hapi/boom');
 const { Logger } = require('@siiges-services/shared');
 
 const OPTATIVA = 25; // Clave de asignatura optativa
-const VALIDACIONES_CORRECTAS = [1, 3]; // Situaciones válidas para la validación de alumnos
 
 const validateGrupo = async ({
   findOneGrupoQuery, grupo, grado, cicloEscolar, turno, rvoe,
@@ -101,29 +100,6 @@ const inscripcionAlumnos = (
         alumno: { matricula },
       });
 
-      failures += 1;
-      return;
-    }
-
-    // Validar que el alumno esté activo
-    if (alumno.situacionId !== 1) {
-      alumnosError.push({
-        success: false,
-        error: `El alumno con matrícula ${matricula} no está activo`,
-        alumno: { matricula },
-      });
-      failures += 1;
-      return;
-    }
-
-    // Validar que el alumno tenga una validación correcta
-    if (!alumno.validacion
-      || !VALIDACIONES_CORRECTAS.includes(alumno.validacion.situacionValidacionId)) {
-      alumnosError.push({
-        success: false,
-        error: `El alumno con matrícula ${matricula} no tiene una validación correcta`,
-        alumno: { matricula },
-      });
       failures += 1;
       return;
     }
