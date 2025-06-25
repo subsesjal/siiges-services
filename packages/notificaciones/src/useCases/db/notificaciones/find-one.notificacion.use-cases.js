@@ -15,7 +15,7 @@ const findOneNotificaciones = (
   const getNotification = await findNotificationQuery({ id });
   checkers.throwErrorIfDataIsFalsy(getNotification, 'Notificacion', id);
 
-  const response = getNotification;
+  const response = getNotification.toJSON();
   let newStatus = response.status;
 
   if (newStatus !== 'OPENED') {
@@ -45,9 +45,8 @@ const findOneNotificaciones = (
     emailHtml = emailHtml.replace(regex, replacedValue);
   });
 
-  // con  ...response.get({ plain: true }), convertimos la instancia en unobjeto plano
   return {
-    ...response.get({ plain: true }),
+    ...response,
     status: newStatus,
     emailHtml,
   };
