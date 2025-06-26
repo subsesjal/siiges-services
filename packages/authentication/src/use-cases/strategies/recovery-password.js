@@ -29,7 +29,8 @@ const tokenRecoveryPassword = (
   }
 
   const token = generateToken();
-  const expiresAt = new Date(Date.now() + config.TIME_MAIL || 3600000);
+
+  const expiresAt = new Date(Date.now() + parseInt(config.TimeMail, 10) || 3600000);
   const createTokenRecoveryPassword = await createTokenRecoveryPasswordQuery({
     usuarioId: usuarioFound.id,
     token,

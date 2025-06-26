@@ -23,7 +23,7 @@ const TokenRecoveryPasswordSchema = {
     type: DataTypes.STRING,
   },
   expiresAt: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.DATE,
     field: 'expires_at',
     defaultValue: null,
