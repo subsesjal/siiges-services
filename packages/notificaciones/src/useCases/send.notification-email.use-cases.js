@@ -13,7 +13,7 @@ const sendNotificationEmail = async ({
     asunto,
     template,
     data: JSON.stringify(params),
-    status: 'pending',
+    status: 'PENDIENTE DE REVISIÓN',
   };
 
   try {
@@ -25,7 +25,7 @@ const sendNotificationEmail = async ({
       throw new Error(nodemailerService.error);
     }
 
-    notificacion.status = 'enviado';
+    notificacion.status = 'ENVIADO';
 
     await notificacion.save();
     return notificacion;
