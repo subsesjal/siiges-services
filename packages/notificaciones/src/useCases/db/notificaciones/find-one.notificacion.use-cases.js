@@ -1,12 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const { checkers } = require('@siiges-services/shared');
-const templateHelper = require('../../helpers');
-
-const ADD_DETAILS_MAPPING = {
-  observacionSolicitud: templateHelper.generateMapObservaciones,
-  folioDocumentosAlumnos: templateHelper.generateMapFoliosAlumnos,
-};
+const { addDetailsHtml } = require('../../utils/add-template-html');
 
 const findOneNotificaciones = (
   findNotificationQuery,
@@ -25,11 +20,7 @@ const findOneNotificaciones = (
 
   const templateName = response.template;
   let dataParsed = JSON.parse(response.data);
-
-  const detailMapping = ADD_DETAILS_MAPPING[templateName];
-  if (detailMapping) {
-    dataParsed = detailMapping(dataParsed);
-  }
+  dataParsed = addDetailsHtml(dataParsed, templateName);
 
   const templatePath = path.join(__dirname, '..', '..', 'services', 'templates', `${templateName}.html`);
 
