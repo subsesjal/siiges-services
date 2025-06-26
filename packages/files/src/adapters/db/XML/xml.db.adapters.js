@@ -4,6 +4,7 @@ const {
   Alumno,
   TituloElectronico,
   AlumnoTituloElectronico,
+  File,
 } = models;
 
 const {
@@ -16,4 +17,5 @@ module.exports = {
   createTituloElectronicoQuery: createQuery(TituloElectronico),
   createAlumnoTituloElectronicoQuery: createQuery(AlumnoTituloElectronico),
   findOneAlumnoTituloElectronicoQuery: findOneQuery(AlumnoTituloElectronico),
+  findOneFileQuery: findOneQuery(File),
 };

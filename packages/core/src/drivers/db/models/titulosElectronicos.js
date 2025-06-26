@@ -279,8 +279,8 @@ class TituloElectronico extends Model {
     this.belongsTo(models.ModalidadTitulacion, { as: 'modalidadTitulacion' });
     this.belongsTo(models.AutorizacionReconocimiento, { as: 'autorizacionReconocimiento' });
     this.belongsTo(models.Cargo, { as: 'cargo' });
-    this.belongsTo(models.Nivel, { as: 'nivel' });
-    this.belongsTo(models.FundamentoServicioSocial, { as: 'fundamentoServicioSocial' });
+    this.belongsTo(models.Nivel, { as: 'nivel', foreignKey: 'tipoEstudioAntecedenteId' });
+    this.belongsTo(models.FundamentoServicioSocial, { as: 'fundamentoServicioSocial', foreignKey: 'fundamentoLegalServicioSocialId' });
   }
 
   static config(sequelize) {
