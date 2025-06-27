@@ -4,12 +4,7 @@ const fs = require('fs');
 const nodemailer = require('nodemailer');
 const { Logger } = require('@siiges-services/shared');
 const { config } = require('../../../config/environment');
-const templateHelper = require('../helpers');
-
-const ADD_DETAILS_MAPPING = {
-  observacionSolicitud: templateHelper.generateMapObservaciones,
-  folioDocumentosAlumnos: templateHelper.generateMapFoliosAlumnos,
-};
+const { addDetailsHtml } = require('../utils/add-template-html');
 
 const sendEmail = async ({
   email, asunto, template, data,
@@ -19,8 +14,7 @@ const sendEmail = async ({
   });
 
   let dataParsed = JSON.parse(data);
-  const detailMapping = ADD_DETAILS_MAPPING[template];
-  dataParsed = detailMapping ? detailMapping(dataParsed) : dataParsed;
+  dataParsed = addDetailsHtml(dataParsed, template);
 
   // generateMapObservaciones(dataParsed, template);
   const templatePath = path.join(__dirname, 'templates', `${template}.html`);

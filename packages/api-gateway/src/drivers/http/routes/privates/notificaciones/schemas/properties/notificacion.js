@@ -8,6 +8,7 @@ const notificacion = {
   data: { type: 'string' },
   sentAt: { type: 'string', format: 'date-time' },
   openedAt: { type: 'string', format: 'date-time' },
+  emailHtml: { type: 'string' },
 };
 
 module.exports = { notificacion };
