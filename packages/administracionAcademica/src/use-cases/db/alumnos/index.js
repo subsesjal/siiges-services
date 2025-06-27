@@ -4,6 +4,7 @@ const {
 
 const createAlumno = require('./create.alumno.use-cases');
 const findOneAlumno = require('./find-one.alumno.use-cases');
+const findOneAlumnoTitulo = require('./find-one.alumno-titulo.use-cases');
 const updateAlumno = require('./update.alumno.use-cases');
 const findGroupAlumnosPrograma = require('./find-group.alumnos-programa.use-cases');
 const deleteAlumno = require('./delete.alumno.use-cases');
@@ -25,6 +26,9 @@ module.exports = {
   ),
   findOneAlumno: findOneAlumno(
     alumnos.findOneAlumnoQuery,
+  ),
+  findOneAlumnoTitulo: findOneAlumnoTitulo(
+    alumnos.findOneAlumnoTituloQuery,
   ),
   updateAlumno: updateAlumno(
     alumnos.findOneAlumnoQuery,
