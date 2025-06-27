@@ -13,7 +13,7 @@ const sendNotificationEmail = async ({
     asunto,
     template,
     data: JSON.stringify(params),
-    status: 'PENDIENTE DE REVISIÓN',
+    status: 'PENDIENTE',
   };
 
   try {
