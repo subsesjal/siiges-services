@@ -3,7 +3,7 @@
 const boom = require('@hapi/boom');
 const { Logger } = require('@siiges-services/shared');
 
-const INACTIVO = 2;
+const ACTIVO = 1;
 
 const createAlumnos = (
   findUserUsersQuery,
@@ -56,7 +56,7 @@ const createAlumnos = (
 
     const newData = {
       ...alumno,
-      situacionId: INACTIVO, // Situación Inactivo por defecto
+      situacionId: ACTIVO, // Situación  por defecto
       programaId: programa.id,
       estatus: 1,
     };
