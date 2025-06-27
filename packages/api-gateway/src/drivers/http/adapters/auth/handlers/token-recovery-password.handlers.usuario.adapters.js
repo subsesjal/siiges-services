@@ -19,7 +19,7 @@ async function tokenRecoveryPassword(req, reply) {
       params: {
         usuario: tokenRecoveryPasswordData.usuario,
         token: tokenRecoveryPasswordData.token,
-        url: `${config.BaseUrlFront}/recovery-password/${tokenRecoveryPasswordData.token}`,
+        url: `${config.BaseUrlFront}/autenticacion/recovery-password/${tokenRecoveryPasswordData.token}`,
       },
     });
 
