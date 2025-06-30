@@ -9,6 +9,7 @@ const findOneNotificacionesSchema = {
     properties: {
       notificacionId: { type: 'number' },
     },
+    required: ['notificacionId'],
   },
   response: {
     200: {
@@ -20,6 +21,7 @@ const findOneNotificacionesSchema = {
             id: { type: 'integer' },
             ...notificacion,
             ...responseProperties,
+            emailHtml: { type: 'string' },
           },
         },
       },
