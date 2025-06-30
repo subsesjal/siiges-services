@@ -11,6 +11,10 @@ const createFileXML = (
 ) => async (alumnoId, fileMetadata, fileUploaded) => {
   Logger.info(`[createFileXML] Procesando XML para alumnoId: ${alumnoId}`);
 
+  if (!fileUploaded) {
+    return;
+  }
+
   const parser = new xml2js.Parser({
     explicitArray: false,
     ignoreAttrs: false,
@@ -128,6 +132,7 @@ const createFileXML = (
 
   Logger.info('[createFileXML] Titulo Electronico creado exitosamente');
 
+  // eslint-disable-next-line consistent-return
   return tituloInsertado;
 };
 
