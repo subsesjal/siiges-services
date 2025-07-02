@@ -21,6 +21,14 @@ const NoticiaSchema = {
     allowNull: true,
     type: DataTypes.TEXT,
   },
+  urlImage: {
+    allowNull: false,
+    type: DataTypes.STRING,
+  },
+  urlNotice: {
+    allowNull: false,
+    type: DataTypes.STRING,
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
