@@ -22,12 +22,12 @@ const NoticiaSchema = {
     type: DataTypes.TEXT,
   },
   urlImagen: {
-    allowNull: false,
+    allowNull: true,
     field: 'url_imagen',
     type: DataTypes.STRING,
   },
   urlNoticia: {
-    allowNull: false,
+    allowNull: true,
     field: 'url_noticia',
     type: DataTypes.STRING,
   },
