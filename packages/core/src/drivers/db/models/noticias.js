@@ -21,6 +21,16 @@ const NoticiaSchema = {
     allowNull: true,
     type: DataTypes.TEXT,
   },
+  urlImagen: {
+    allowNull: true,
+    field: 'url_imagen',
+    type: DataTypes.STRING,
+  },
+  urlNoticia: {
+    allowNull: true,
+    field: 'url_noticia',
+    type: DataTypes.STRING,
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
