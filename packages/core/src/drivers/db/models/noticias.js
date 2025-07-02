@@ -21,12 +21,14 @@ const NoticiaSchema = {
     allowNull: true,
     type: DataTypes.TEXT,
   },
-  urlImage: {
+  urlImagen: {
     allowNull: false,
+    field: 'url_imagen',
     type: DataTypes.STRING,
   },
-  urlNotice: {
+  urlNoticia: {
     allowNull: false,
+    field: 'url_noticia',
     type: DataTypes.STRING,
   },
   createdAt: {
