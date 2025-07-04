@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { jsPDF } = require('jspdf');
+const QRCode = require('qrcode');
 const { addNutmeg } = require('./pdfHandler');
 
 const img7 = fs.readFileSync(path.join(__dirname, '/images/img7.png'), { encoding: 'base64' });
@@ -16,7 +17,27 @@ function formatearFecha(fechaString) {
   return `${dia}/${mes}/${anio}`;
 }
 
-function GenerarTitulo(alumnoTituloElectronico, xmlString) {
+async function agregarQR(doc, tituloElectronico, yBase) {
+  const urlFront = process.env.BASE_URL_FRONT;
+  const url = `${urlFront}/tituloElectronico/${tituloElectronico?.folioControl}/consultarFolio`;
+
+  const qrDataUrl = await QRCode.toDataURL(url, {
+    errorCorrectionLevel: 'H',
+    type: 'image/png',
+    quality: 1,
+    margin: 1,
+    width: 128,
+  });
+
+  const qrSize = 150;
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const qrX = pageWidth - qrSize - 50;
+  const qrY = yBase + 30;
+
+  doc.addImage(qrDataUrl, 'PNG', qrX, qrY, qrSize, qrSize);
+}
+
+async function GenerarTitulo(alumnoTituloElectronico, xmlString) {
   const JsPDF = jsPDF;
   const doc = new JsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
   addNutmeg(doc);
@@ -251,6 +272,7 @@ function GenerarTitulo(alumnoTituloElectronico, xmlString) {
   const selloAutoridadLines = doc.splitTextToSize(tituloElectronico?.selloAutenticacion || '', doc.internal.pageSize.getWidth() * 0.55);
   y += 8;
   doc.text(selloAutoridadLines, 57, y);
+  await agregarQR(doc, tituloElectronico, authY);
 
   doc.addPage();
   doc.setFontSize(8);
