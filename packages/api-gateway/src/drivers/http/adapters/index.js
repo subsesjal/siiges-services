@@ -19,6 +19,7 @@ const gruposAdapter = require('./grupos/handlers');
 const ciclosEscolaresAdapter = require('./ciclosEscolares/handlers');
 const gradosAdapter = require('./grados/handlers');
 const notificacionesAdapter = require('./notificaciones/handlers');
+const noticiasAdapter = require('./noticias/handlers');
 const calificacionesAdapter = require('./calificaciones/handlers');
 const orgColegiadosAdapter = require('./orgColegiados/handlers');
 const acuerdosAdapter = require('./acuerdos/handlers');
@@ -67,4 +68,5 @@ module.exports = {
   estadosAdapter,
   paisesAdapter,
   nivelesAdapter,
+  noticiasAdapter,
 };
