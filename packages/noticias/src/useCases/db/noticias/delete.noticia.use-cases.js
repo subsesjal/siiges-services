@@ -1,7 +1,7 @@
 const deleteNoticia = (
-  findNoticiaQuery,
-) => async () => {
-  const noticias = await findNoticiaQuery();
+  deleteNoticiaQuery,
+) => async (data) => {
+  const noticias = await deleteNoticiaQuery(data);
 
   return noticias;
 };

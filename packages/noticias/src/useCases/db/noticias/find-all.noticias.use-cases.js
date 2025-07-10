@@ -1,7 +1,7 @@
 const findAllNoticias = (
-  findNoticiaQuery,
+  findAllNoticiaQuery,
 ) => async () => {
-  const noticias = await findNoticiaQuery();
+  const noticias = await findAllNoticiaQuery();
 
   return noticias;
 };
