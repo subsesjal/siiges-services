@@ -1,7 +1,7 @@
 const updateNoticia = (
-  findNoticiaQuery,
-) => async () => {
-  const noticias = await findNoticiaQuery();
+  updateNoticiaQuery,
+) => async (identifierObject, data) => {
+  const noticias = await updateNoticiaQuery(identifierObject, data);
 
   return noticias;
 };

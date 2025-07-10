@@ -1,7 +1,8 @@
 const createNoticia = (
-  findNoticiaQuery,
-) => async () => {
-  const noticias = await findNoticiaQuery();
+  createNoticiaQuery,
+) => async (data) => {
+  console.log(data);
+  const noticias = await createNoticiaQuery(data);
 
   return noticias;
 };
