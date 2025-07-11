@@ -64,8 +64,7 @@ const findFileFDA01 = (
 
   checkers.throwErrorIfDataIsFalsy(solicitud, 'solicitud', solicitudId);
 
-  const file = await GenerarFDA01(solicitud);
-
+  const file = await GenerarFDA01(solicitud.toJSON());
   return Buffer.from(file);
 };
 
