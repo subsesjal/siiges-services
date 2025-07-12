@@ -146,8 +146,8 @@ const envioTitulacion = (
           await service.create(dataTransformed);
         } catch (error) {
           Logger.error('Request failed:', {
-            error: error.response.data,
-            statusCode: error.status,
+            error: error?.response?.data || error,
+            statusCode: error?.status || 500,
           });
           return { dataTransformed, success: false };
         }

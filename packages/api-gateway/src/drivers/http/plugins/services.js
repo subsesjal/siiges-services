@@ -6,6 +6,7 @@ const SolicitudServices = require('@siiges-services/solicitudes');
 const InspeccionServices = require('@siiges-services/inspecciones');
 const AuthenticationServices = require('@siiges-services/authentication');
 const NotificacionServices = require('@siiges-services/notificaciones');
+const NoticiaServices = require('@siiges-services/noticias');
 const AdministracionAcademicaServices = require('@siiges-services/administracionacademica');
 const OpdServices = require('@siiges-services/opd');
 const VigilanciaServices = require('@siiges-services/vigilancias');
@@ -23,6 +24,7 @@ async function services(fastify) {
   await Promise.all([fastify.decorate('inspeccionServices', InspeccionServices)]);
   await Promise.all([fastify.decorate('authServices', AuthenticationServices)]);
   await Promise.all([fastify.decorate('notificacionServices', NotificacionServices)]);
+  await Promise.all([fastify.decorate('noticiaServices', NoticiaServices)]);
   await Promise.all([fastify.decorate('administracionAcademicaServices', AdministracionAcademicaServices)]);
   await Promise.all([fastify.decorate('opdServices', OpdServices)]);
   await Promise.all([fastify.decorate('vigilanciaServices', VigilanciaServices)]);
