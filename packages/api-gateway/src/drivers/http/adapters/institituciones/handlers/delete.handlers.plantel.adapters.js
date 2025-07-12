@@ -17,7 +17,7 @@ async function sendEmailNotification(notificacionServices, emailDestination, idU
 async function deletePlantel(req, reply) {
   try {
     const { institucionId, plantelId } = req.params;
-    const usuarioId = req.user.userPayload.id;
+    const usuarioId = req.user.id;
     const usuario = await this.usuarioServices.findOneUser({ id: usuarioId });
     const { correo } = usuario.dataValues;
     const { id } = usuario.dataValues;

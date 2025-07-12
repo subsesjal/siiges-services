@@ -18,7 +18,7 @@ async function createPlantel(req, reply) {
   try {
     const { institucionId } = req.params;
     const { ...data } = req.body;
-    const usuarioId = req.user.userPayload.id;
+    const usuarioId = req.user.id;
     const usuario = await this.usuarioServices.findOneUser({ id: usuarioId });
     const { correo } = usuario.dataValues;
     const { id } = usuario.dataValues;
