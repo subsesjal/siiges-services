@@ -113,6 +113,15 @@ async function trayectoriaRouter(fastify, opts, next) {
     solicitudesFoliosAdapter.envioTitulacion,
   );
 
+  await fastify.get(
+    '/reporteFolios',
+    {
+      schema: solicitudSchemas.reportSolicitudFolioAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesFoliosAdapter.reportFolioDocumentoAlumno,
+  );
+
   next();
 }
 

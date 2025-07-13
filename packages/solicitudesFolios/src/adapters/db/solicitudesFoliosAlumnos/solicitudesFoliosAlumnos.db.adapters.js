@@ -27,4 +27,5 @@ module.exports = {
   findOneAlumnoQuery: findOneQuery(Alumno),
   findAllSolicitudFolioAlumnosQuery: findAllQuery(SolicitudFolioAlumno),
   deleteSolicitudFolioAlumnoQuery: deleteAndFindQuery(SolicitudFolioAlumno),
+  reportFolioDocumentoAlumnoQuery: findAllQuery(FolioDocumentoAlumno),
 };
