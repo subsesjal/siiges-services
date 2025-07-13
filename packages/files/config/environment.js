@@ -1,9 +1,9 @@
-const { dotenv } = require('@siiges-services/shared');
+const { join } = require('path');
 
-const DEFAULT_PATH_FILE = '../../../../../../'; // Default fallback path for the configuration file
+const DEFAULT_PATH_FILE = join('../../../'); // Default fallback path for the configuration file
 
 const config = {
-  pathFile: dotenv.getEnvironmentVar('PATH_FILE') || DEFAULT_PATH_FILE,
+  pathFile: process.env.PATH_FILE || DEFAULT_PATH_FILE,
 };
 
 module.exports = {

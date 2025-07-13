@@ -1,6 +1,6 @@
 const { join } = require('path');
-const { pathFile } = require('../../../config/env-vars');
+const { config } = require('../../../../files/config/environment');
 
-const rootDir = join(pathFile);
+const rootDir = join(config.pathFile);
 
 module.exports = rootDir;
