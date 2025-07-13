@@ -1,7 +1,30 @@
+const path = require('path');
+const fs = require('fs');
 const { Logger } = require('@siiges-services/shared');
 const boom = require('@hapi/boom');
 const errorHandler = require('../../utils/errorHandler');
 const { tipoExtension } = require('../../utils/constants');
+
+async function downloadFile(req, reply) {
+  try {
+    const { ...data } = req.query;
+
+    if (!data.ubicacion) {
+      throw boom.badRequest(
+        '[files:download]: the request needs the query parameter: ubicacion',
+      );
+    }
+    const filePath = path.resolve(__dirname, '../../../../../../../public', data.ubicacion.replace('/uploads/', 'uploads/'));
+    const fileName = data.ubicacion;
+
+    return reply
+      .header('Content-Disposition', `attachment; filename="${fileName}"`)
+      .header('Content-Type', 'application/octet-stream')
+      .send(fs.createReadStream(filePath));
+  } catch (error) {
+    return errorHandler(error, reply);
+  }
+}
 
 async function findOneFile(req, reply) {
   try {
@@ -14,8 +37,7 @@ async function findOneFile(req, reply) {
     }
     Logger.info(`[files]: Getting files ${data.tipoDocumento} with entidadId ${data.entidadId}`);
 
-    const identifierObj = await this.filesServices.getFileIdentifierObj(data);
-    const file = await this.filesServices.findOneFile(identifierObj, null, null, true);
+    const file = await this.filesServices.findOneFile(data);
 
     return reply
       .code(200)
@@ -92,4 +114,5 @@ module.exports = {
   findOneFile,
   uploadFile,
   deleteFile,
+  downloadFile,
 };

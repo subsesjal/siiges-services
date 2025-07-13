@@ -1,4 +1,3 @@
-const { GenerarFDA01 } = require('./FDA01');
 const { GenerarFDA02 } = require('./FDA02');
 const { GenerarFDA03 } = require('./FDA03');
 const { GenerarFDA04 } = require('./FDA04');
@@ -16,7 +15,6 @@ const { GenerarServicio } = require('./SERVICIO_SOCIAL');
 const { GenerarTitulo } = require('./TITULO');
 
 module.exports = {
-  GenerarFDA01,
   GenerarFDA02,
   GenerarFDA03,
   GenerarFDA04,

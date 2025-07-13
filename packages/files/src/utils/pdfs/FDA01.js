@@ -23,18 +23,25 @@ function GenerarFDA01(solicitud) {
   addNutmeg(doc);
   let currentPositionY = 20;
 
-  const fechaRecepcion = new Date(solicitud.fechaRecepcion);
+  const fechaRecepcion = solicitud.fechaRecepcion && new Date(solicitud.fechaRecepcion);
   const options = { day: 'numeric', month: 'long', year: 'numeric' };
   const formatter = new Intl.DateTimeFormat('es-MX', options);
-  const dateFormatted = formatter.format(fechaRecepcion).toUpperCase();
+  const dateFormatted = solicitud.fechaRecepcion && formatter.format(fechaRecepcion).toUpperCase();
   const modalidadTipo = buscarDescripcionPorId(modalidades, solicitud.programa.modalidadId);
   const ciclosTipo = buscarDescripcionPorId(ciclos, solicitud.programa.cicloId);
   const TIPO_SOLICITUD_MAPPING = {
-    1: 'RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS',
+    1: 'RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS (RVOE)',
     2: 'REFRENDO DEL PLAN Y PROGRAMA DE ESTUDIO',
     3: 'CAMBIO DE DOMICILIO',
   };
   const tipoSolicitud = TIPO_SOLICITUD_MAPPING[solicitud.tipoSolicitudId] || 'TIPO DE SOLICITUD DESCONOCIDO';
+
+  const ratificacionesNombre = solicitud?.programa?.plantel?.institucion?.ratificacionesNombre[0]
+    || {};
+
+  const nombreInstitucion = ratificacionesNombre.esNombreAutorizado
+    ? solicitud?.programa?.plantel?.institucion?.nombre || ''
+    : `${ratificacionesNombre.nombrePropuesto1}, ${ratificacionesNombre.nombrePropuesto2}, ${ratificacionesNombre.nombrePropuesto3}`;
 
   const turnoTipo = generarTiposDeTurno(solicitud.programa.programaTurnos);
   const nombreNivel = niveles
@@ -53,17 +60,19 @@ function GenerarFDA01(solicitud) {
   `;
   currentPositionY = crearSeccion(currentPositionY, doc, content, 'left');
   content = `
-  AT´N: MARCO ARTURO CASTRO AGUILERA 
+  AT´N: MARCO ARTURO CASTRO AGUILERA
   DIRECTOR GENERAL DE INCORPORACIÓN Y SERVICIOS ESCOLARES
-  AT´N: MARGARITA FLORES MÁRQUEZ 
+  AT´N: MARGARITA FLORES MÁRQUEZ
   DIRECTORA DE INCORPORACIÓN
-  
-  ${dateFormatted}
+
+  ${dateFormatted || ''}
   `;
   currentPositionY += 15;
   currentPositionY = crearSeccion(currentPositionY, doc, content, 'right');
   configurarFuenteYAgregarTexto(doc, 'normal', 12, [0, 0, 0], '', 100, 58);
-  content = `Por este conducto manifiesto que estoy en condiciones para iniciar el ${tipoSolicitud} del programa ${nombreNivel} en ${solicitud.programa.nombre}, ${modalidadTipo} en periodos ${ciclosTipo}, turno ${turnoTipo} de la institución ${solicitud.programa.plantel.institucion.nombre}`;
+  content = `Por este conducto manifiesto que estoy en condiciones para iniciar el trámite de SOLICITUD DE ${tipoSolicitud} del programa ${nombreNivel.toUpperCase()} en ${solicitud.programa.nombre.toUpperCase()}, modalidad ${modalidadTipo.toUpperCase()} en periodos ${ciclosTipo.toUpperCase()}, turno ${turnoTipo.toUpperCase()}, de la Institución ${nombreInstitucion.toUpperCase()}.
+
+  `;
   const marginX = 14;
   const pageWidth = doc.internal.pageSize.getWidth();
   const contentWidth = pageWidth - marginX * 2;

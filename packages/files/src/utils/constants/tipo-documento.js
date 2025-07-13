@@ -271,6 +271,14 @@ const tipoDocumentoObj = [
     id: 68,
     name: 'TITULO_ELECTRONICO_PDF',
   },
+  {
+    id: 69,
+    name: 'FDP03',
+  },
+  {
+    id: 70,
+    name: 'FDP04',
+  },
 ];
 
 module.exports = tipoDocumentoObj;
