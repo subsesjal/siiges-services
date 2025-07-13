@@ -1,18 +1,18 @@
 const { Logger } = require('@siiges-services/shared');
-const { findFileFDA01 } = require('../../useCases/db/FDA');
-const { findFileFDA02 } = require('../../useCases/db/FDA');
-const { findFileFDA03 } = require('../../useCases/db/FDA');
-const { findFileFDA04 } = require('../../useCases/db/FDA');
-const { findFileFDA05 } = require('../../useCases/db/FDA');
-const { findFileFDA06 } = require('../../useCases/db/FDA');
-const { findFileFDP01 } = require('../../useCases/db/FDP');
-const { findFileFDP02 } = require('../../useCases/db/FDP');
-const { findFileFDP05 } = require('../../useCases/db/FDP');
-const { findFileFDP06 } = require('../../useCases/db/FDP');
-const { findFileOFAD } = require('../../useCases/db/OFAD');
-const { findFileRVOE } = require('../../useCases/db/RVOE');
-const { findFileHistorial, findFileBeca, findFileServicio } = require('../../useCases/db/FSE');
-const { createFileXML, findFileTitulo } = require('../../useCases/db/TITULO_ELECTRONICO');
+const { buildFileFDA01 } = require('../db/FDA');
+const { findFileFDA02 } = require('../db/FDA');
+const { findFileFDA03 } = require('../db/FDA');
+const { findFileFDA04 } = require('../db/FDA');
+const { findFileFDA05 } = require('../db/FDA');
+const { findFileFDA06 } = require('../db/FDA');
+const { findFileFDP01 } = require('../db/FDP');
+const { findFileFDP02 } = require('../db/FDP');
+const { findFileFDP05 } = require('../db/FDP');
+const { findFileFDP06 } = require('../db/FDP');
+const { findFileOFAD } = require('../db/OFAD');
+const { findFileRVOE } = require('../db/RVOE');
+const { findFileHistorial, findFileBeca, findFileServicio } = require('../db/FSE');
+const { createFileXML, findFileTitulo } = require('../db/TITULO_ELECTRONICO');
 
 /**
  * Objeto `filesFDA` que contiene funciones para encontrar archivos FDA específicos.
@@ -40,17 +40,11 @@ const { createFileXML, findFileTitulo } = require('../../useCases/db/TITULO_ELEC
  * const resultadoFDA02 = await filesFDA['FDA02']();
  * ```
  */
-const generatePdfFile = async ({
+const buildPdfFile = async ({
   tipoDocumentoItem, tipoEntidadItem, entidadId, fileMetaData,
 }, fileUploaded) => {
-  Logger.info('[Files:generatePdfFile]: Generating file based on tipoDocumento and tipoEntidad');
-  Logger.info(`[Files:generatePdfFile]: tipoDocumentoItem: ${JSON.stringify(tipoDocumentoItem)}`);
-  Logger.info(`[Files:generatePdfFile]: tipoEntidadItem: ${JSON.stringify(tipoEntidadItem)}`);
-  Logger.info(`[Files:generatePdfFile]: entidadId: ${entidadId}`);
-  Logger.info(`[Files:generatePdfFile]: fileMetaData: ${JSON.stringify(fileMetaData)}`);
-
   const filesGenerator = {
-    FDA01: async () => findFileFDA01(
+    FDA01: async () => buildFileFDA01(
       entidadId,
       fileMetaData,
       { tipoDocumento: tipoDocumentoItem.name, tipoEntidad: tipoEntidadItem.name },
@@ -142,4 +136,4 @@ const generatePdfFile = async ({
   return null;
 };
 
-module.exports = { generatePdfFile };
+module.exports = { buildPdfFile };

@@ -1,13 +1,19 @@
 const { checkers } = require('@siiges-services/shared');
 
-const findFileFDA01 = (
+const buildFileFDA01 = (
   findOneSolicitudProgramaQuery,
-  GenerarFDA01,
+  createPhpFile,
 ) => async (solicitudId) => {
   const include = [{
     association: 'programa',
     include: [
-      { association: 'programaTurnos' },
+      { association: 'nivel' },
+      { association: 'modalidad' },
+      {
+        association: 'programaTurnos',
+        include: [{ association: 'turno' }],
+      },
+      { association: 'ciclo' },
       { association: 'trayectoria' },
       {
         association: 'plantel',
@@ -52,7 +58,19 @@ const findFileFDA01 = (
   },
   {
     association: 'usuario',
-    include: [{ association: 'persona' }],
+    include: [
+      {
+        association: 'persona',
+        include: [
+          {
+            association: 'domicilio',
+            include: [
+              { association: 'municipio' },
+            ],
+          },
+        ],
+      },
+    ],
   },
   { association: 'estatusSolicitud' }];
 
@@ -64,8 +82,8 @@ const findFileFDA01 = (
 
   checkers.throwErrorIfDataIsFalsy(solicitud, 'solicitud', solicitudId);
 
-  const file = await GenerarFDA01(solicitud.toJSON());
+  const file = await createPhpFile(solicitud.toJSON());
   return Buffer.from(file);
 };
 
-module.exports = { findFileFDA01 };
+module.exports = { buildFileFDA01 };

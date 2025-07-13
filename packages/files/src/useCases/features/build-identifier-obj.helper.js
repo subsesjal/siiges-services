@@ -1,8 +1,8 @@
 // External dependencies
 const { checkers, Logger } = require('@siiges-services/shared');
 // Internal dependencies
-const { findOneDocumentType } = require('../../useCases/db/document-type');
-const { findOneEntityType } = require('../../useCases/db/entity-type');
+const { findOneDocumentType } = require('../db/document-type');
+const { findOneEntityType } = require('../db/entity-type');
 
 const buildIdentifierObj = async (fileData) => {
   const { tipoEntidad, entidadId, tipoDocumento } = fileData;

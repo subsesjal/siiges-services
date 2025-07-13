@@ -1,7 +1,7 @@
 const { buildIdentifierObj } = require('./build-identifier-obj.helper');
-const { generatePdfFile } = require('./get-file-generator.helper');
+const { buildPdfFile } = require('./get-file-builder.helper');
 
 module.exports = {
   buildIdentifierObj,
-  generatePdfFile,
+  buildPdfFile,
 };

@@ -2,7 +2,6 @@
 const { checkers } = require('@siiges-services/shared');
 const db = require('./db');
 const fs = require('./fs');
-const { buildIdentifierObj, generatePdfFile } = require('../utils/features');
 
 function createData({ tipoDocumentoId, tipoEntidadId, entidadId }, nombre, ubicacion) {
   return {
@@ -18,18 +17,19 @@ function getUbication({ tipoEntidad, tipoDocumento }, fileName) {
   return `/uploads/${tipoEntidad}/${tipoDocumento}/${(fileName)}`;
 }
 
-async function findOneFile(fileMetdata) {
+const findOneFile = (buildIdentifierObj, buildPdfFile) => async (fileMetdata) => {
   const identifierObj = await buildIdentifierObj(fileMetdata);
-  const generator = await generatePdfFile(identifierObj);
+  const builder = await buildPdfFile(identifierObj);
 
   const previousFile = await db.findOneFile(identifierObj.fileMetaData);
 
-  if (generator) {
-    const file = await generator();
+  if (builder) {
+    const file = await builder();
 
     const fileName = await fs.writeBus(file, fileMetdata, previousFile);
     const ubication = getUbication(fileMetdata, fileName);
     const data = createData(identifierObj.fileMetaData, fileName, ubication);
+
     if (previousFile) return db.updateFile(previousFile.id, data);
     return db.createFile(data);
   }
@@ -37,6 +37,6 @@ async function findOneFile(fileMetdata) {
   checkers.throwErrorIfDataIsFalsy(previousFile, 'file', identifierObj.fileMetaData);
 
   return previousFile;
-}
+};
 
 module.exports = findOneFile;

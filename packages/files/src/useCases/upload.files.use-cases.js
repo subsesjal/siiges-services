@@ -1,7 +1,6 @@
 // Internal dependencies
 const db = require('./db');
 const fs = require('./fs');
-const { buildIdentifierObj } = require('../utils/features');
 
 function createData({ tipoDocumentoId, tipoEntidadId, entidadId }, nombre, ubicacion) {
   return {
@@ -17,7 +16,7 @@ function getUbication({ tipoEntidad, tipoDocumento }, fileName) {
   return `/uploads/${tipoEntidad}/${tipoDocumento}/${(fileName)}`;
 }
 
-async function uploadFile(fileMetdata, fileUploaded) {
+const uploadFile = (buildIdentifierObj) => async (fileMetdata, fileUploaded) => {
   const identifierObj = await buildIdentifierObj(fileMetdata);
 
   const previousFile = await db.findOneFile(identifierObj.fileMetaData);
@@ -29,6 +28,6 @@ async function uploadFile(fileMetdata, fileUploaded) {
   if (previousFile) return db.updateFile(previousFile.id, data);
 
   return db.createFile(data);
-}
+};
 
 module.exports = uploadFile;
