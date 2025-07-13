@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const fsp = require('fs/promises');
+const { config } = require('../../../config/environment');
 
 async function existDir(dirFilePath) {
   const statsPath = await fsp.stat(dirFilePath);
@@ -24,7 +25,7 @@ async function createDirIfNotExist(dirFilePath) {
 }
 
 function getFileDirPath(tipoEntidad, tipoDocumento) {
-  return path.join(__dirname, '../../../../../', 'public', 'uploads', tipoEntidad, tipoDocumento);
+  return path.join(config.pathFile, 'public', 'uploads', tipoEntidad, tipoDocumento);
 }
 
 module.exports = {
