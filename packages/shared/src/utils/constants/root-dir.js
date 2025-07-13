@@ -1,6 +1,6 @@
 const { join } = require('path');
-const { dotenv } = require('@siiges-services/shared');
+const { pathFile } = require('../../../config/env-vars');
 
-const rootDir = join(dotenv.getEnvironmentVar('PATH_FILE'));
+const rootDir = join(pathFile);
 
 module.exports = rootDir;
