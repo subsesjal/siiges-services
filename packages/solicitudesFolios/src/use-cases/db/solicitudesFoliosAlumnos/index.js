@@ -9,6 +9,7 @@ const updateSolicitudFolioAlumno = require('./update.solicitud-folio-alumno.use-
 const findAllSolicitudFolioAlumnos = require('./find-all.solicitud-folio-alumnos.use-cases');
 const deleteSolicitudFolioAlumno = require('./delete.solicitud-folio-alumno.use-cases');
 const assignFoliosAlumnos = require('./assign.folios-alumnos.use-cases');
+const reportFolioDocumentoAlumno = require('./report.folio-documento-alumno.use-cases');
 
 module.exports = {
   createSolicitudFolioAlumno: createSolicitudFolioAlumno(
@@ -42,5 +43,8 @@ module.exports = {
     solicitudesFolios.createLibroQuery,
     solicitudesFolios.findAllFojaQuery,
     solicitudesFolios.createFojaQuery,
+  ),
+  reportFolioDocumentoAlumno: reportFolioDocumentoAlumno(
+    solicitudesFoliosAlumnos.reportFolioDocumentoAlumnoQuery,
   ),
 };
