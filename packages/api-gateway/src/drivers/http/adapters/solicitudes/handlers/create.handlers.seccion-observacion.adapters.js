@@ -16,7 +16,7 @@ async function createSendMailObservacion(req, reply) {
 
     const { usuarioId, email, params } = mailOptions;
 
-    await this.notificacionServices.sendNotificationEmail({
+    this.notificacionServices.sendNotificationEmail({
       usuarioId,
       email,
       asunto: `ATENDER OBSERVACIONES - SOLICITUD #${params.folio}`,

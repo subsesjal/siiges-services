@@ -24,7 +24,6 @@ async function createPlantel(req, reply) {
     const { id } = usuario.dataValues;
     const nombreUsuario = usuario.dataValues.usuario;
     Logger.info('[instituciones]: Creating plantel in institucion');
-    sendEmailNotification(this.notificacionServices, correo, id, nombreUsuario);
     const opts = [
       { association: 'domicilio' },
     ];
@@ -34,6 +33,8 @@ async function createPlantel(req, reply) {
       data,
       opts,
     );
+
+    sendEmailNotification(this.notificacionServices, correo, id, nombreUsuario);
 
     return reply
       .code(201)
