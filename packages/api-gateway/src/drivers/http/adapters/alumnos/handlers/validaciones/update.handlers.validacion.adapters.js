@@ -16,7 +16,7 @@ async function updateAlumnoValidacion(req, reply) {
 
     // Enviar notificación si hay observaciones
     if (observaciones) {
-      await this.notificacionServices.sendNotificationEmail({
+      this.notificacionServices.sendNotificationEmail({
         usuarioId: 14,
         email: 'joel.duran@jalisco.gob.mx',
         asunto: 'SIIGES: Atender observaciones de validación de alumno',
