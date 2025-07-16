@@ -9,7 +9,7 @@ const helmet = require('@fastify/helmet'); // Adds security headers
 const cors = require('@fastify/cors'); // Enables Cross-Origin Resource Sharing
 
 // Internal dependencies
-const { Logger, constants } = require('@siiges-services/shared');
+const { Logger } = require('@siiges-services/shared');
 const { validateApiKey } = require('./utils/auth.handler'); // Middleware to validate API key
 const { config } = require('../../../config/environment'); // Environment config (ports, host, whitelist, etc.)
 const { maxFileSize } = require('./utils/constants'); // Constant for max upload size
@@ -31,7 +31,7 @@ fastify.register(helmet);
 
 // Serve static files (e.g., from public/)
 fastify.register(fastifyStatic, {
-  root: path.join(constants.rootDir, 'public'),
+  root: path.join(__dirname, '../../../../../', 'public'),
 });
 
 // Automatically register custom plugins from the plugins directory
