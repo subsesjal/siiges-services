@@ -11,7 +11,7 @@ const NOTIFICATION_MAPPING = {
     await processor({
       usuarioId: 212,
       email: solicitud.interesado.persona.correoPrimario,
-      asunto: `SIGES: Solicitud en Firma - Folio ${solicitud.folioSolicitud}`,
+      asunto: `SIIGES: Solicitud en Firma - Folio ${solicitud.folioSolicitud}`,
       template: 'solicitudRevEquivRecibida',
       params: {
         folioSolicitud: solicitud.folioSolicitud,
@@ -22,7 +22,7 @@ const NOTIFICATION_MAPPING = {
     await processor({
       usuarioId: 212,
       email: solicitud.interesado.persona.correoPrimario,
-      asunto: `SIGES: Solicitud en Firma - Folio ${solicitud.folioSolicitud}`,
+      asunto: `SIIGES: Solicitud en Firma - Folio ${solicitud.folioSolicitud}`,
       template: 'solicitudRevEquivEnFirma',
       params: {
         folioSolicitud: solicitud.folioSolicitud,
@@ -33,7 +33,7 @@ const NOTIFICATION_MAPPING = {
     await processor({
       usuarioId: 212,
       email: solicitud.interesado.persona.correoPrimario,
-      asunto: `SIGES: Solicitud Procesada - Folio ${solicitud.folioSolicitud}`,
+      asunto: `SIIGES: Solicitud Procesada - Folio ${solicitud.folioSolicitud}`,
       template: 'solicitudRevEquivProcesada',
       params: {
         folioSolicitud: solicitud.folioSolicitud,
@@ -44,7 +44,7 @@ const NOTIFICATION_MAPPING = {
     await processor({
       usuarioId: 212,
       email: solicitud.interesado.persona.correoPrimario,
-      asunto: `SIGES: Atender Observaciones - Folio ${solicitud.folioSolicitud}`,
+      asunto: `SIIGES: Atender Observaciones - Folio ${solicitud.folioSolicitud}`,
       template: 'solicitudRevEquivObservaciones',
       params: {
         folioSolicitud: solicitud.folioSolicitud,
@@ -68,8 +68,14 @@ async function updateSolicitudRevEquiv(req, reply) {
     const updatedEquiv = await this.solicitudRevEquivServices
       .updateSolicitudRevEquiv(data, { id: solicitudRevEquivId });
 
+    // Enviar notificación si hay cambio de estatus
+    if (solicitudRevEquivId) {
+      const processor = this.notificacionServices.sendNotificationEmail;
+      sendNotificationEstatus(processor, updatedEquiv.estatusSolicitudRevEquivId, updatedEquiv);
+    }
+
     return reply
-      .code(200)
+      .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
       .send({ data: updatedEquiv });
   } catch (error) {
