@@ -27,7 +27,10 @@ async function updateAlumnoValidacion(req, reply) {
         asunto: `SIIGES: Atender observaciones de validación de alumno con matrícula ${alumno?.matricula}`,
         template: 'alumnoValidacionObservaciones',
         params: {
+          matricula: alumno?.matricula,
           nombreInstitucion: institucion?.nombre,
+          nombrePrograma: programa?.nombre,
+          rvoe: programa?.acuerdoRvoe,
           nombreAlumno: `${alumno?.persona?.nombre} ${alumno?.persona?.apellidoPaterno} ${alumno?.persona?.apellidoMaterno}`,
           observaciones,
         },
