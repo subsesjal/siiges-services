@@ -13,6 +13,7 @@ const updateAlumnoValidacion = (
     {
       association: 'alumno',
       include: [
+        { association: 'persona' },
         {
           association: 'programa',
           include: [
