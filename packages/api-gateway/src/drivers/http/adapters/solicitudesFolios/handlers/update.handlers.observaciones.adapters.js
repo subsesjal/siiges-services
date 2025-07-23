@@ -16,7 +16,7 @@ async function updateObservaciones(req, reply) {
       this.notificacionServices.sendNotificationEmail({
         usuarioId: solicitudFolio?.programa?.plantel?.institucion?.usuario?.id,
         email: solicitudFolio?.programa?.plantel?.institucion?.usuario?.correo,
-        asunto: 'SIIGES: Atender observaciones de solicitud de folios',
+        asunto: 'SIGES: Atender observaciones de solicitud de folios',
         template: 'solicitudFolioObservaciones',
         params: {
           email: solicitudFolio?.programa?.plantel?.institucion?.usuario?.correo,

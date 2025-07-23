@@ -6,7 +6,7 @@ async function sendEmailNotification(notificacionServices, emailDestination, idU
   await notificacionServices.sendNotificationEmail({
     usuarioId: idUser,
     email: emailDestination,
-    asunto: 'SIIGES: Confirmación de Eliminación de Solicitud',
+    asunto: 'SIGES: Confirmación de Eliminación de Solicitud',
     template: 'deleteSolicitud',
     params: {
       user: userName,
