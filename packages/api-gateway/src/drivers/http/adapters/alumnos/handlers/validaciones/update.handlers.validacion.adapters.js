@@ -17,6 +17,7 @@ async function updateAlumnoValidacion(req, reply) {
     const notificationData = alumnoValidacion.toJSON();
     const alumno = notificationData?.alumno || {};
     const programa = alumno?.programa || {};
+    const institucion = programa?.plantel?.institucion || {};
     const usuario = programa?.plantel?.institucion?.usuario || {};
 
     if (observaciones) {
@@ -26,8 +27,8 @@ async function updateAlumnoValidacion(req, reply) {
         asunto: `SIIGES: Atender observaciones de validación de alumno con matrícula ${alumno?.matricula}`,
         template: 'alumnoValidacionObservaciones',
         params: {
-          nombreInstitucion: '',
-          nombreAlumno: '',
+          nombreInstitucion: institucion?.nombre,
+          nombreAlumno: `${alumno?.persona?.nombre} ${alumno?.persona?.apellidoPaterno} ${alumno?.persona?.apellidoMaterno}`,
           observaciones,
         },
       });
