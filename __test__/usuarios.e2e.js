@@ -119,7 +119,7 @@ describe('test for users', () => {
     it('should Unauthorized access', async () => {
       const { statusCode, body: error } = await api.get('/api/v1/usuarios/').set(apiKey);
       expect(statusCode).toEqual(statusCodeName.unauthorized);
-      expect(error.message).toEqual('Autorization token header[Bearer] is missing!');
+      expect(error.message).toEqual('¡Falta el encabezado de autorización [Bearer]!');
     });
   });
 

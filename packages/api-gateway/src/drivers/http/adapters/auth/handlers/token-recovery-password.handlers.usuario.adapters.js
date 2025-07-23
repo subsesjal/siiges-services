@@ -13,13 +13,13 @@ async function tokenRecoveryPassword(req, reply) {
 
     await this.notificacionServices.sendNotificationEmail({
       usuarioId: tokenRecoveryPasswordData.usuarioId,
-      email: correo,
+      email: tokenRecoveryPasswordData.usuarioCorreo,
       asunto: `SOLICITUD DE CAMBIO DE CONTRASEÑA #${tokenRecoveryPasswordData.usuario}`,
       template: 'recoveryPassword',
       params: {
         usuario: tokenRecoveryPasswordData.usuario,
         token: tokenRecoveryPasswordData.token,
-        url: `${config.BaseUrlFront}/recovery-password/${tokenRecoveryPasswordData.token}`,
+        url: `${config.BaseUrlFront}/autenticacion/recovery-password/${tokenRecoveryPasswordData.token}`,
       },
     });
 

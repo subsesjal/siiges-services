@@ -2,51 +2,57 @@
 // External dependencies
 const path = require('path');
 const Fastify = require('fastify');
-const multipart = require('@fastify/multipart');
-const fastifyStatic = require('@fastify/static');
-const AutoLoad = require('@fastify/autoload');
-const helmet = require('@fastify/helmet');
-const cors = require('@fastify/cors');
+const multipart = require('@fastify/multipart'); // Enables file uploads
+const fastifyStatic = require('@fastify/static'); // Serves static files
+const AutoLoad = require('@fastify/autoload'); // Automatically loads routes/plugins
+const helmet = require('@fastify/helmet'); // Adds security headers
+const cors = require('@fastify/cors'); // Enables Cross-Origin Resource Sharing
 
 // Internal dependencies
 const { Logger } = require('@siiges-services/shared');
-const { validateApiKey } = require('./utils/auth.handler');
-const { config } = require('../../../config/environment');
-const { maxFileSize } = require('./utils/constants');
+const { validateApiKey } = require('./utils/auth.handler'); // Middleware to validate API key
+const { config } = require('../../../config/environment'); // Environment config (ports, host, whitelist, etc.)
+const { maxFileSize } = require('./utils/constants'); // Constant for max upload size
+const { publicLoader, privateLoader, externalLoader } = require('./plugins/loaders');
 
+// Fastify instance configuration
 const fastify = Fastify({
   ajv: {
     customOptions: {
-      allErrors: true,
+      allErrors: true, // Collect all validation errors instead of stopping at the first
     },
-    plugins: [multipart.ajvFilePlugin],
+    plugins: [multipart.ajvFilePlugin], // File upload validation
   },
-  logger: process.env.NODE_ENV === 'development',
+  logger: process.env.NODE_ENV === 'development', // Use logger only in dev
 });
 
+// Register security headers middleware
 fastify.register(helmet);
 
+// Serve static files (e.g., from public/)
 fastify.register(fastifyStatic, {
   root: path.join(__dirname, '../../../../../', 'public'),
 });
 
+// Automatically register custom plugins from the plugins directory
 fastify.register(AutoLoad, {
   dir: path.join(__dirname, 'plugins'),
 });
 
+// Enable multipart uploads with size limit and attach files to `request.body`
 fastify.register(multipart, {
   attachFieldsToBody: true,
-  limits: {
-    fileSize: maxFileSize,
-  },
+  limits: { fileSize: maxFileSize },
 });
 
+// Configure and register CORS with whitelist logic
 const options = {
   origin: (origin, cb) => {
     if (config.whiteList.includes(origin)) {
-      cb(null, true);
+      cb(null, true); // Allow request
     } else {
-      cb(new Error('Not allowed'), false);
+      Logger.warn(`Blocked CORS request from origin: ${origin}`);
+      cb(new Error('Not allowed'), false); // Block request
     }
   },
 };
@@ -55,22 +61,15 @@ fastify.register(cors, {
   options,
 });
 
+// Add preHandler hook to validate API Key for all routes
 fastify.addHook('preHandler', validateApiKey);
 
-// Public routes
-fastify.register(AutoLoad, {
-  dir: path.join(__dirname, 'routes/publics'),
-  ignorePattern: /.*(schema).*/,
-  options: { prefix: 'api/v1/public' },
-});
+// Register each scoped route group
+fastify.register(publicLoader);
+fastify.register(privateLoader);
+fastify.register(externalLoader);
 
-// Private routes
-fastify.register(AutoLoad, {
-  dir: path.join(__dirname, 'routes/privates'),
-  ignorePattern: /.*(schema).*/,
-  options: { prefix: 'api/v1' },
-});
-
+// Server startup function
 const start = async () => {
   await fastify.listen(
     {

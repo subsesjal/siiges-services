@@ -21,3 +21,4 @@ id,nombre,descripcion,created_at
 20,becas_sicyt,Becas Académicas SICYT,2018-09-12 18:00:00
 21,serv_soc_ies,Servicio Social IES,2018-09-12 18:00:00
 22,serv_soc_sicyt,Servicio Social SICYT,2018-09-12 18:00:00
+23,externo,Partner,2018-09-12 18:00:00

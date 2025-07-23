@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const boom = require('@hapi/boom');
+const { constants } = require('@siiges-services/shared');
 const Logger = require('../../../../../shared/src/utils/logger/index');
 
 function createData({ tipoDocumentoId, tipoEntidadId, entidadId }, nombre, ubicacion) {
@@ -24,7 +25,7 @@ async function uploadFile(fileMetdata, identifierObj, fileUploaded, alumnoId) {
   const rutaArchivo = `HISTORIAL_alumnoId_${alumnoId}.pdf`;
   const ubication = getUbication(fileMetdata, rutaArchivo);
   const data = createData(identifierObj, rutaArchivo, ubication);
-  const ruta = path.join(__dirname, '../../../../../../public', ubication);
+  const ruta = path.join(constants.rootDir, 'public', ubication);
 
   // Asegurarse de que las carpetas de destino existan
   fs.mkdirSync(path.dirname(ruta), { recursive: true });

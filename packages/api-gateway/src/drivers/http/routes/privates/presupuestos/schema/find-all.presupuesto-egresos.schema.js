@@ -27,6 +27,7 @@ const findAllPresupuestoSchema = {
               presupuesto: {
                 type: 'array',
                 items: {
+                  type: 'object',
                   properties: {
                     id: { type: 'integer' },
                     ...presupuestos,

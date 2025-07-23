@@ -10,15 +10,18 @@ const {
 
 const {
   Alumno,
+  TituloElectronico,
   AlumnoTipoTramite,
   Persona,
   Asignatura,
   Calificacion,
   AlumnoGrupo,
+  Grupo,
 } = models;
 
 module.exports = {
   findOneAlumnoQuery: findOneQuery(Alumno),
+  findOneAlumnoTituloQuery: findOneQuery(TituloElectronico),
   findOneAlumnoTipoTramiteQuery: findOneQuery(AlumnoTipoTramite),
   createAlumnoQuery: createQuery(Alumno),
   createAlumnoGrupoQuery: createQuery(AlumnoGrupo),
@@ -40,4 +43,5 @@ module.exports = {
   findAllCalificacionesQuery: findAllQuery(Calificacion),
   deleteCalificacionQuery: deleteAndFindQuery(Calificacion),
   findAllCount: findAllQuery(Alumno),
+  findAllGruposQuery: findAllQuery(Grupo),
 };

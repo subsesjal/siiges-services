@@ -1,0 +1,30 @@
+{
+  "name": "@siiges-services/noticias",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "elmejorlui <elmejorlui@gmail.com>",
+  "homepage": "https://github.com/elmejorlui/siiges-services#readme",
+  "license": "ISC",
+  "main": "src/index.js",
+  "directories": {
+    "src": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "src",
+    "__tests__"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elmejorlui/siiges-services.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/elmejorlui/siiges-services/issues"
+  }
+}

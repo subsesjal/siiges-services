@@ -7,6 +7,7 @@ const config = {
   serverHost: dotenv.getEnvironmentVar('SERVER_HOST'),
   serverPort: dotenv.getEnvironmentVar('SERVER_PORT'),
   apiKey: dotenv.getEnvironmentVar('API_KEY'),
+  externalApiKey: dotenv.getEnvironmentVar('EXTERNAL_API_KEY'),
   authJwtSecret: dotenv.getEnvironmentVar('AUTH_JWT_SECRET'),
   expToken: dotenv.getEnvironmentVar('EXPIRATION_TOKEN'),
   whiteList,

@@ -11,6 +11,14 @@ const tipoExtension = [
     mimeType: 'image/jpeg',
     ext: '.jpg, jpeg',
   },
+  {
+    mimeType: 'application/xml',
+    ext: '.xml',
+  },
+  {
+    mimeType: 'text/xml',
+    ext: '.xml',
+  },
 ];
 
 const maxFileSize = 3 * 1024 * 1024;

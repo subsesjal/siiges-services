@@ -1,6 +1,7 @@
 const { checkers } = require('@siiges-services/shared');
+const { Op } = require('sequelize');
 
-const findPlantelesInstitucion = (findOneInstitucionQuery) => async (identifierObj) => {
+const findPlantelesInstitucion = (findOneInstitucionQuery) => async (identifierObj, query) => {
   const include = [
     {
       association: 'rector',
@@ -9,6 +10,18 @@ const findPlantelesInstitucion = (findOneInstitucionQuery) => async (identifierO
     { association: 'ratificacionesNombre' },
     {
       association: 'planteles',
+      ...(query.claveCentroTrabajo
+        ? {
+          where: {
+            claveCentroTrabajo: {
+              [Op.or]: [
+                { [Op.ne]: null },
+                { [Op.ne]: '' },
+              ],
+            },
+          },
+        }
+        : {}),
       include: [
         {
           association: 'domicilio',
@@ -21,10 +34,10 @@ const findPlantelesInstitucion = (findOneInstitucionQuery) => async (identifierO
     }];
 
   const plantelesInstitucion = await findOneInstitucionQuery(identifierObj, {
-    undefined,
     include,
     strict: false,
   });
+
   checkers.throwErrorIfDataIsFalsy(plantelesInstitucion);
 
   return plantelesInstitucion;

@@ -51,8 +51,8 @@ const updateAlumnoValidacion = (
     Usuario: [usuarioId, findOneUsuarioQuery],
     Estado: [estadoId, findOneEstadoQuery],
     Nivel: [nivelId, findOneNivelQuery],
-    SituacionesValidacion: [tipoValidacionId, findOneSituacionesValidacionQuery],
-    TipoValidaciones: [situacionValidacionId, findOneTipoValidacionesQuery],
+    TipoValidaciones: [tipoValidacionId, findOneTipoValidacionesQuery],
+    SituacionesValidacion: [situacionValidacionId, findOneSituacionesValidacionQuery],
   };
 
   const validacion = await findOneValidacionesQuery({ alumnoId }, { attributes: ['id'] });

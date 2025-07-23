@@ -15,6 +15,7 @@ const createPresupuestoSchema = {
       presupuesto: {
         type: 'array',
         items: {
+          type: 'object',
           properties: {
             ...presupuestos,
           },
@@ -34,6 +35,7 @@ const createPresupuestoSchema = {
             presupuesto: {
               type: 'array',
               items: {
+                type: 'object',
                 properties: {
                   ...presupuestos,
                   tipoPresupuesto: {

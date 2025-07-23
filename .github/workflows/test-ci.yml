@@ -41,6 +41,7 @@ jobs:
           SERVER_PORT: 9000
           SERVER_HOST: 127.0.0.1
           API_KEY: zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx
+          EXTERNAL_API_KEY: zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx
           AUTH_JWT_SECRET: 9fRk3VN4ugE6Ipjd0xBo25lyKGbnMAWe
           AUTH_JWT_ALGORITHM: RS256
           AUTH_HMAC_ALGORITHM: sha256
@@ -61,3 +62,4 @@ jobs:
           API_BASE_URL: https://developer:3312
           BASE_URL_FRONT: http://localhost:3000
           TIME_MAIL: 3600000
+          PATH_FILE: ../../../../../../

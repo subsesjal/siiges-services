@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { checkers } = require('@siiges-services/shared');
+const { checkers, constants } = require('@siiges-services/shared');
 
 function createData({ tipoDocumentoId, tipoEntidadId, entidadId }, nombre, ubicacion) {
   return {
@@ -22,7 +22,7 @@ async function uploadFile(fileMetdata, identifierObj, fileUploaded, solicitudId)
   const rutaArchivo = `RVOE_solicitudId_${solicitudId}.pdf`;
   const ubication = getUbication(fileMetdata, rutaArchivo);
   const data = createData(identifierObj, rutaArchivo, ubication);
-  const ruta = path.join(__dirname, '../../../../../../public', ubication);
+  const ruta = path.join(constants.rootDir, 'public', ubication);
   fs.mkdirSync(path.dirname(ruta), { recursive: true });
   const fileBuffer = Buffer.from(fileUploaded);
   const dest = fs.createWriteStream(ruta);

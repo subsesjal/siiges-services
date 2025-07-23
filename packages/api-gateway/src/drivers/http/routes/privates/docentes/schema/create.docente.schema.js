@@ -24,6 +24,7 @@ const createDocenteSchema = {
       formacionesDocentes: {
         type: 'array',
         items: {
+          type: 'object',
           properties: {
             ...formacion,
           },
@@ -61,6 +62,7 @@ const createDocenteSchema = {
             formacionesDocentes: {
               type: 'array',
               items: {
+                type: 'object',
                 properties: {
                   id: { type: 'integer' },
                   ...formacionDocente,

@@ -113,6 +113,7 @@ class SolicitudFolioAlumno extends Model {
   static associate(models) {
     this.belongsTo(models.Alumno, { as: 'alumno' });
     this.belongsTo(models.SolicitudFolio, { as: 'solicitudFolio' });
+    this.belongsTo(models.FundamentoServicioSocial, { as: 'fundamentoServicioSocial' });
     this.hasOne(models.FolioDocumentoAlumno, { as: 'folioDocumentoAlumno', foreignKey: 'solicitudFolioAlumnoId' });
   }
 

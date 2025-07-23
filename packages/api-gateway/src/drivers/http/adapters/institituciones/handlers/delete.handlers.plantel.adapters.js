@@ -17,17 +17,18 @@ async function sendEmailNotification(notificacionServices, emailDestination, idU
 async function deletePlantel(req, reply) {
   try {
     const { institucionId, plantelId } = req.params;
-    const usuarioId = req.user.userPayload.id;
+    const usuarioId = req.user.id;
     const usuario = await this.usuarioServices.findOneUser({ id: usuarioId });
     const { correo } = usuario.dataValues;
     const { id } = usuario.dataValues;
     const nombreUsuario = usuario.dataValues.usuario;
     Logger.info(`[instituciones]: Deleting plantel ${plantelId}`);
-    sendEmailNotification(this.notificacionServices, correo, id, nombreUsuario);
     const plantel = await this.institucionServices.deletePlantel({
       institucionId,
       plantelId,
     });
+
+    sendEmailNotification(this.notificacionServices, correo, id, nombreUsuario);
 
     return reply
       .code(200)

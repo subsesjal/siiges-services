@@ -11,7 +11,7 @@ async function loginUser(req, reply) {
     Logger.info('[api/usuarios/findOne]: the usuario was found');
 
     const userPayload = await this.authServices.jwtAdapter.createUserTokenPayload(usuarioFound);
-    const token = this.jwt.sign({ userPayload });
+    const token = this.jwt.sign(userPayload);
 
     return reply
       .code(200)

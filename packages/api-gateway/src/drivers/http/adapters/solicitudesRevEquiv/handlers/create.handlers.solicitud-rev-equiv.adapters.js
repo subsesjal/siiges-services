@@ -50,6 +50,17 @@ async function createEquivalencia(req, reply) {
       await this.filesServices.uploadFile(dataFile, archivoAdjunto);
     }, Promise.resolve());
 
+    // Enviar notificación si hay cambio de estatus
+    this.notificacionServices.sendNotificationEmail({
+      usuarioId: 212,
+      email: newEquivalencia.interesado.persona.correoPrimario,
+      asunto: 'SIIGES: Cambiar de estatus - solicitudRevEquiv',
+      template: 'solicitudRevEquivRecibida',
+      params: {
+        folioSolicitud: newEquivalencia.folioSolicitud,
+      },
+    });
+
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
