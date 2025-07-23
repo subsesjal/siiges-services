@@ -19,7 +19,7 @@ async function asignacionFolioAlumno(req, reply) {
     this.notificacionServices.sendNotificationEmail({
       usuarioId: solicitudFolio?.programa?.plantel?.institucion?.usuario?.id,
       email: solicitudFolio?.programa?.plantel?.institucion?.usuario?.correo,
-      asunto: 'SIIGES: Folios de documentos asignados',
+      asunto: 'SIGES: Folios de documentos asignados',
       template: 'folioDocumentosAlumnos',
       params: {
         email: solicitudFolio?.programa?.plantel?.institucion?.usuario?.correo,

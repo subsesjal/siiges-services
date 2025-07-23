@@ -14,7 +14,6 @@ const TrayectoriaSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
     field: 'programa_id',
-    unique: true,
     references: {
       model: PROGRAMA_TABLE,
       key: 'id',

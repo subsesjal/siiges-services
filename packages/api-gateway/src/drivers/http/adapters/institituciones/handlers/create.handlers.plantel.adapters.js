@@ -6,7 +6,7 @@ async function sendEmailNotification(notificacionServices, emailDestination, idU
   await notificacionServices.sendNotificationEmail({
     usuarioId: idUser,
     email: emailDestination,
-    asunto: 'SIIGES: Confirmación para Creación de Plantel',
+    asunto: 'SIGES: Confirmación para Creación de Plantel',
     template: 'createPlantel',
     params: {
       user: userName,
