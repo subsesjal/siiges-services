@@ -7,6 +7,7 @@ module.exports = {
   createFileXML: createFileXML(
     xmlAdapter.findOneAlumnoTituloElectronicoQuery,
     xmlAdapter.findOneAlumnoQuery,
+    xmlAdapter.findOneTituloElectronicoQuery,
     xmlAdapter.createTituloElectronicoQuery,
     xmlAdapter.createAlumnoTituloElectronicoQuery,
   ),

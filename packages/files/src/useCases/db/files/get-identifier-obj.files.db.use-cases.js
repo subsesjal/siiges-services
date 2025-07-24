@@ -126,7 +126,12 @@ tipoDocumento ${tipoDocumento}`);
       tipoDocumento: tipoDocumentoItem.name,
       tipoEntidad: tipoEntidadItem.name,
     }),
-    TITULO_ELECTRONICO_XML: () => createFileXML(entidadId, fileMetdata, fileUploaded),
+    TITULO_ELECTRONICO_XML: () => createFileXML(
+      entidadId,
+      fileMetdata,
+      fileUploaded,
+      { migracion: false },
+    ),
     TITULO_ELECTRONICO_PDF: () => findFileTitulo(entidadId, fileMetdata, {
       tipoDocumento: tipoDocumentoItem.name,
       tipoEntidad: tipoEntidadItem.name,
@@ -136,7 +141,11 @@ tipoDocumento ${tipoDocumento}`);
   const validNames = ['FD', 'OFICIO_ADMISORIO', 'ACUERDO_RVOE', 'HISTORIAL_ACADEMICO', 'REPORTE_BECAS', 'REPORTE_SERV_SOC', 'TITULO_ELECTRONICO_XML', 'TITULO_ELECTRONICO_PDF'];
 
   if (validNames.some((prefix) => tipoDocumentoItem.name.startsWith(prefix))) {
-    await filesFDA[tipoDocumentoItem.name]();
+    const response = await filesFDA[tipoDocumentoItem.name]();
+
+    if (tipoDocumentoItem.name === 'TITULO_ELECTRONICO_XML' && response?.alumnoId) {
+      fileMetdata.entidadId = response.alumnoId;
+    }
   }
 
   return fileMetdata;
