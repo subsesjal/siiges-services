@@ -209,7 +209,7 @@ This constants tell you where is the root project dir.
 ```
 const { constants } = require('@siiges-services/shared');
 
-constants.rootDir;
+process.env.PATH_FILE;
 ```
 
 ## dotenv

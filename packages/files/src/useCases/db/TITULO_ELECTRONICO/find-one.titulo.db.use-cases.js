@@ -27,7 +27,7 @@ async function uploadFile(fileMetdata, identifierObj, fileUploaded, solicitudId)
   const rutaArchivo = `TITULO_${solicitudId}.pdf`;
   const ubication = getUbication(fileMetdata, rutaArchivo);
   const data = createData(identifierObj, rutaArchivo, ubication);
-  const ruta = path.join(constants.rootDir, 'public', ubication);
+  const ruta = path.join(process.env.PATH_FILE, 'public', ubication);
 
   try {
     fs.mkdirSync(path.dirname(ruta), { recursive: true });
@@ -76,7 +76,7 @@ const findFileTitulo = (
       throw boom.conflict('No se encuentra un título electrónico registrado.');
     }
 
-    const ruta = path.join(constants.rootDir, 'public', fileXML?.ubicacion);
+    const ruta = path.join(process.env.PATH_FILE, 'public', fileXML?.ubicacion);
 
     const fileStringXML = fs.readFileSync(ruta, 'utf8');
 

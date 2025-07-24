@@ -25,7 +25,7 @@ async function uploadFile(fileMetdata, identifierObj, fileUploaded, alumnoId) {
   const rutaArchivo = `HISTORIAL_alumnoId_${alumnoId}.pdf`;
   const ubication = getUbication(fileMetdata, rutaArchivo);
   const data = createData(identifierObj, rutaArchivo, ubication);
-  const ruta = path.join(constants.rootDir, 'public', ubication);
+  const ruta = path.join(process.env.PATH_FILE, 'public', ubication);
 
   // Asegurarse de que las carpetas de destino existan
   fs.mkdirSync(path.dirname(ruta), { recursive: true });
