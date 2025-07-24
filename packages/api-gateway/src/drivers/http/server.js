@@ -31,7 +31,7 @@ fastify.register(helmet);
 
 // Serve static files (e.g., from public/)
 fastify.register(fastifyStatic, {
-  root: path.join(__dirname, '../../../../../', 'public'),
+  root: path.join(process.env.PATH_FILE, 'public'),
 });
 
 // Automatically register custom plugins from the plugins directory
