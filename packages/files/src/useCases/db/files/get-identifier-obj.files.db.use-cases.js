@@ -143,7 +143,7 @@ tipoDocumento ${tipoDocumento}`);
   if (validNames.some((prefix) => tipoDocumentoItem.name.startsWith(prefix))) {
     const response = await filesFDA[tipoDocumentoItem.name]();
 
-    if (tipoDocumentoItem.name === 'TITULO_ELECTRONICO_XML') {
+    if (tipoDocumentoItem.name === 'TITULO_ELECTRONICO_XML' && response?.alumnoId) {
       fileMetdata.entidadId = response.alumnoId;
     }
   }
