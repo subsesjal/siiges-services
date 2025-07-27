@@ -9,6 +9,37 @@ const updateAlumnoValidacion = (
   findOneEstadoQuery,
   findOneNivelQuery,
 ) => async ({ alumnoId, ...data }) => {
+  const include = [
+    {
+      association: 'alumno',
+      include: [
+        { association: 'persona' },
+        {
+          association: 'programa',
+          include: [
+            {
+              association: 'plantel',
+              include: [
+                {
+                  association: 'institucion',
+                  include: [
+                    {
+                      association: 'usuario',
+                      include: [
+                        { association: 'persona' },
+                      ],
+                    },
+                  ],
+
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
   const {
     usuarioId,
     estadoId,
@@ -16,6 +47,7 @@ const updateAlumnoValidacion = (
     tipoValidacionId,
     situacionValidacionId,
   } = data;
+
   const queryFunctions = {
     Usuario: [usuarioId, findOneUsuarioQuery],
     Estado: [estadoId, findOneEstadoQuery],
@@ -23,14 +55,13 @@ const updateAlumnoValidacion = (
     TipoValidaciones: [tipoValidacionId, findOneTipoValidacionesQuery],
     SituacionesValidacion: [situacionValidacionId, findOneSituacionesValidacionQuery],
   };
-  const findAlumno = await findOneValidacionesQuery({ alumnoId }, { attributes: ['id'] });
-  checkers.throwErrorIfDataIsFalsy(findAlumno, 'Alumno', alumnoId);
+
+  const validacion = await findOneValidacionesQuery({ alumnoId }, { attributes: ['id'] });
+  checkers.throwErrorIfDataIsFalsy(validacion, 'validaciones', JSON.stringify({ alumnoId }));
 
   await checkers.findValidator(queryFunctions);
 
-  const updateAlumno = await updateValidacionesQuery({ alumnoId }, data);
-
-  return updateAlumno;
+  return updateValidacionesQuery({ alumnoId }, data, { include });
 };
 
 module.exports = { updateAlumnoValidacion };

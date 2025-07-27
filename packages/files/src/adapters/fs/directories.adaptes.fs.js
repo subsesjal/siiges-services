@@ -25,7 +25,7 @@ async function createDirIfNotExist(dirFilePath) {
 }
 
 function getFileDirPath(tipoEntidad, tipoDocumento) {
-  return path.join(config.pathFile, 'public', 'uploads', tipoEntidad, tipoDocumento);
+  return path.join(process.env.PATH_FILE, 'public', 'uploads', tipoEntidad, tipoDocumento);
 }
 
 module.exports = {

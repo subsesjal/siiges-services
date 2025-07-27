@@ -16,7 +16,7 @@ async function sendEmailNotification(notificacionServices, emailDestination, idU
   await notificacionServices.sendNotificationEmail({
     usuarioId: idUser,
     email: emailDestination,
-    asunto: 'SIIGES: Confirmación de Recepción de Solicitud para Creación de Usuario RVOE',
+    asunto: 'SIGES: Confirmación de Recepción de Solicitud para Creación de Usuario RVOE',
     template: 'preRegistroUsuario',
     params: {
       user: userName,

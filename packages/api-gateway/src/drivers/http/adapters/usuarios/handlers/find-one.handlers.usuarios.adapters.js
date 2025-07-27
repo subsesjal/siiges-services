@@ -18,17 +18,6 @@ async function findOne(req, reply) {
   try {
     const usuario = await findOneUsuario(this, usuarioId);
 
-    await this.notificacionServices.sendNotificationEmail({
-      usuarioId: usuario.id,
-      email: usuario.correo,
-      asunto: 'Usuario econtrado exitosamente',
-      template: 'usuarioCreado',
-      params: {
-        email: usuario.correo,
-        usuario: usuario.usuario,
-      },
-    });
-
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')

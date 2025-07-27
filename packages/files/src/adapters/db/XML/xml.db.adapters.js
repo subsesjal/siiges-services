@@ -15,6 +15,7 @@ const {
 module.exports = {
   findOneAlumnoQuery: findOneQuery(Alumno),
   createTituloElectronicoQuery: createQuery(TituloElectronico),
+  findOneTituloElectronicoQuery: findOneQuery(TituloElectronico),
   createAlumnoTituloElectronicoQuery: createQuery(AlumnoTituloElectronico),
   findOneAlumnoTituloElectronicoQuery: findOneQuery(AlumnoTituloElectronico),
   findOneFileQuery: findOneQuery(File),

@@ -6,7 +6,7 @@ async function updateAlumnoValidacion(req, reply) {
     const { observaciones, ...data } = req.body;
     const { alumnoId } = req.params;
 
-    Logger.info(`[Alumno]: Actualizando validación para alumno ${alumnoId}`);
+    Logger.info(`[Validacion]: Updating validacion - alumno ${alumnoId}`);
 
     const alumnoValidacion = await this.administracionAcademicaServices.updateAlumnoValidacion({
       alumnoId,
@@ -14,14 +14,24 @@ async function updateAlumnoValidacion(req, reply) {
       observaciones,
     });
 
-    // Enviar notificación si hay observaciones
+    const notificationData = alumnoValidacion.toJSON();
+    const alumno = notificationData?.alumno || {};
+    const programa = alumno?.programa || {};
+    const institucion = programa?.plantel?.institucion || {};
+    const usuario = programa?.plantel?.institucion?.usuario || {};
+
     if (observaciones) {
-      await this.notificacionServices.sendNotificationEmail({
-        usuarioId: 14,
-        email: 'joel.duran@jalisco.gob.mx',
-        asunto: 'SIIGES: Atender observaciones de validación de alumno',
+      this.notificacionServices.sendNotificationEmail({
+        usuarioId: usuario?.id,
+        email: usuario?.correo,
+        asunto: `SIIGES: Atender observaciones de validación de alumno con matrícula ${alumno?.matricula}`,
         template: 'alumnoValidacionObservaciones',
         params: {
+          matricula: alumno?.matricula,
+          nombreInstitucion: institucion?.nombre,
+          nombrePrograma: programa?.nombre,
+          rvoe: programa?.acuerdoRvoe,
+          nombreAlumno: `${alumno?.persona?.nombre} ${alumno?.persona?.apellidoPaterno} ${alumno?.persona?.apellidoMaterno}`,
           observaciones,
         },
       });

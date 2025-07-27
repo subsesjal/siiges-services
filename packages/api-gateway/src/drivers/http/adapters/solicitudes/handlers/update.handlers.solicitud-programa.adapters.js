@@ -6,7 +6,7 @@ async function sendEmailNotification(notificacionServices, emailDestination, idU
   await notificacionServices.sendNotificationEmail({
     usuarioId: idUser,
     email: emailDestination,
-    asunto: 'SIIGES: Confirmación de Recepción de Solicitud para Creación de Solicitud',
+    asunto: 'SIGES: Confirmación de Recepción de Solicitud para Creación de Solicitud',
     template: 'createSolicitud',
     params: {
       user: userName,
