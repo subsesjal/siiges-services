@@ -17,10 +17,10 @@ function getUbication({ tipoEntidad, tipoDocumento }, fileName) {
   return `/uploads/${tipoEntidad}/${tipoDocumento}/${(fileName)}`;
 }
 
-const findOneFile = (buildIdentifierObj, buildPdfFile) => async (fileMetdata) => {
+const findOneFile = (buildIdentifierObj, buildFile) => async (fileMetdata) => {
   Logger.info('[files.findOneFile.use-case]: Iniciando búsqueda de archivo');
   const { input, identifiers } = await buildIdentifierObj(fileMetdata);
-  const builder = await buildPdfFile(input);
+  const builder = await buildFile(input);
   const previousFile = await db.findOneFile(identifiers);
 
   if (builder) {
