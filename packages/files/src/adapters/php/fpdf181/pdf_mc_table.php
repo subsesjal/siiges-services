@@ -10,6 +10,7 @@ class PDF_MC_Table extends FPDF
   var $widths;
   var $aligns;
   var $lineHeight;
+  var $colors;
 
   //Set the array of column widths
   function SetWidths($w)
@@ -63,12 +64,12 @@ class PDF_MC_Table extends FPDF
       //Save the current position
       $x = $this->GetX();
       $y = $this->GetY();
-      
+
       $arrayColor = (isset($this->colors[$i]) && !empty($this->colors[$i])) ? $this->colors[$i] : [255, 255, 255];
       $r = $arrayColor[0];
       $g = $arrayColor[1];
       $b = $arrayColor[2];
-      
+
       $this->SetFillColor($r, $g, $b);
       //Draw the border
       $this->Rect($x, $y, $w, $h, 'FD');
