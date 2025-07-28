@@ -7,6 +7,7 @@ const mysql = {
   dbPassword: dotenv.getEnvironmentVar('DB_PASSWORD_MYSQL'),
   dbPort: dotenv.getEnvironmentVar('DB_PORT_MYSQL'),
   dbUser: dotenv.getEnvironmentVar('DB_USER_MYSQL'),
+  dbLogging: dotenv.getEnvironmentVar('LOGGING'),
 };
 
 module.exports = {

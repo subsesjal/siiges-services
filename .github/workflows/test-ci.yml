@@ -63,3 +63,4 @@ jobs:
           BASE_URL_FRONT: http://localhost:3000
           TIME_MAIL: 3600000
           PATH_FILE: ${{ github.workspace }}
+          LOGGING: true

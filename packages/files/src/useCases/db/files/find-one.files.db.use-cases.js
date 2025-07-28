@@ -6,7 +6,7 @@ const findOneFile = (findOneQuery) => async (
   include,
   getFile = false,
 ) => {
-  Logger.info(`[files:findOne]: Getting file with identifier ${identifierObj}`);
+  Logger.info(`[files]: Obteniendo archivo con identificador: ${JSON.stringify(identifierObj)}`);
 
   if (getFile) {
     const file = await findOneQuery(

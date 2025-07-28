@@ -9,7 +9,7 @@ const createFileXML = (
   findOneTituloElectronicoQuery,
   createTituloElectronicoQuery,
   createAlumnoTituloElectronicoQuery,
-) => async (alumnoId, fileMetadata, fileUploaded, options) => {
+) => async (alumnoId, fileUploaded, options) => {
   Logger.info(`[createFileXML] Procesando XML para alumnoId: ${alumnoId}`);
 
   if (!fileUploaded) {

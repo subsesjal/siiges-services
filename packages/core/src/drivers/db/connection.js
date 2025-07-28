@@ -5,7 +5,7 @@ const setupModels = require('./models');
 
 const { mysql } = config;
 const {
-  dbHost, dbPort, dbUser, dbPassword, dbName, dbAdmin,
+  dbHost, dbPort, dbUser, dbPassword, dbName, dbAdmin, dbLogging,
 } = mysql;
 
 const USER = encodeURIComponent(dbUser);
@@ -14,7 +14,7 @@ const URI = `${dbAdmin}://${USER}:${PASSWORD}@${dbHost}:${dbPort}/${dbName}`;
 
 const sequelize = new Sequelize(URI, {
   dialect: `${dbAdmin}`,
-  logging: process.env.NODE_ENV !== 'test',
+  logging: dbLogging === 'true' || false,
   dialectOptions: {
     ssl: {
       rejectUnauthorized: false,
