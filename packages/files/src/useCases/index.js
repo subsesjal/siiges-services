@@ -9,8 +9,8 @@ module.exports = {
     buildIdentifierObj,
     buildPdfFile,
   ),
-  deleteFile,
   uploadFile: uploadFile(
     buildIdentifierObj,
   ),
+  deleteFile,
 };

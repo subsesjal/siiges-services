@@ -1,5 +1,5 @@
 // Internal dependencies
-const { checkers } = require('@siiges-services/shared');
+const { checkers, Logger } = require('@siiges-services/shared');
 const db = require('./db');
 const fs = require('./fs');
 
@@ -18,23 +18,22 @@ function getUbication({ tipoEntidad, tipoDocumento }, fileName) {
 }
 
 const findOneFile = (buildIdentifierObj, buildPdfFile) => async (fileMetdata) => {
-  const identifierObj = await buildIdentifierObj(fileMetdata);
-  const builder = await buildPdfFile(identifierObj);
-
-  const previousFile = await db.findOneFile(identifierObj.fileMetaData);
+  Logger.info('[files.findOneFile.use-case]: Iniciando búsqueda de archivo');
+  const { input, identifiers } = await buildIdentifierObj(fileMetdata);
+  const builder = await buildPdfFile(input);
+  const previousFile = await db.findOneFile(identifiers);
 
   if (builder) {
     const file = await builder();
-
-    const fileName = await fs.writeBus(file, fileMetdata, previousFile);
-    const ubication = getUbication(fileMetdata, fileName);
-    const data = createData(identifierObj.fileMetaData, fileName, ubication);
+    const fileName = await fs.writeBus(file, input, previousFile);
+    const ubication = getUbication(input, fileName);
+    const data = createData(identifiers, fileName, ubication);
 
     if (previousFile) return db.updateFile(previousFile.id, data);
     return db.createFile(data);
   }
 
-  checkers.throwErrorIfDataIsFalsy(previousFile, 'file', identifierObj.fileMetaData);
+  checkers.throwErrorIfDataIsFalsy(previousFile, 'file', identifiers);
 
   return previousFile;
 };

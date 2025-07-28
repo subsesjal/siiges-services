@@ -5,6 +5,7 @@ const { findOneDocumentType } = require('../db/document-type');
 const { findOneEntityType } = require('../db/entity-type');
 
 const buildIdentifierObj = async (fileData) => {
+  Logger.info('[files]: Construyendo identificador de archivo');
   const { tipoEntidad, entidadId, tipoDocumento } = fileData;
 
   const tipoEntidadItem = await findOneEntityType(tipoEntidad);
@@ -14,15 +15,21 @@ const buildIdentifierObj = async (fileData) => {
   checkers.throwErrorIfDataIsFalsy(entidadId, 'entidadId', entidadId);
   checkers.throwErrorIfDataIsFalsy(tipoDocumentoItem, 'tipoDocumento', tipoDocumento);
 
-  Logger.info('[Files:getFileIdentifierObj]: Identifier obtained');
+  Logger.info('[files]: Identificador de archivo construido correctamente', {
+    entidadId,
+    tipoDocumento: tipoDocumentoItem,
+    tipoEntidad: tipoEntidadItem,
+  });
 
   return {
-    entidadId,
-    tipoDocumentoItem,
-    tipoEntidadItem,
-    fileMetaData: {
-      tipoDocumentoId: tipoDocumentoItem.id,
+    input: {
+      tipoEntidad, // string recibido (ej. 'SOLICITUD')
+      tipoDocumento, // string recibido (ej. 'OFICIO')
+      entidadId,
+    },
+    identifiers: {
       tipoEntidadId: tipoEntidadItem.id,
+      tipoDocumentoId: tipoDocumentoItem.id,
       entidadId,
     },
   };
