@@ -3,6 +3,7 @@ const alumno = {
   personaId: { type: 'integer' },
   situacionId: { type: 'integer' },
   programaId: { type: 'integer' },
+  tipoTramiteId: { type: 'integer' },
   matricula: { type: 'string' },
   estatus: { type: 'integer' },
   adeudoMaterias: { type: 'integer' },
