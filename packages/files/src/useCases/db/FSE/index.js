@@ -1,14 +1,15 @@
 const { fseAdapter } = require('../../../adapters/db');
-const { GenerarHistorial, GenerarBeca, GenerarServicio } = require('../../../utils/pdfs');
-const { findFileHistorial } = require('./find-one.Historial.db.use-cases');
+const phpAdapter = require('../../../adapters/php/helpers');
+const { GenerarBeca, GenerarServicio } = require('../../../utils/pdfs');
+const { buildFileHistorial } = require('./build.HISOTIAL.db.use-cases');
 const { findFileBeca } = require('./find-one.Beca.db.use-cases');
 const { findFileServicio } = require('./find-one.Servicio.db.use-cases');
 
 module.exports = {
-  findFileHistorial: findFileHistorial(
+  buildFileHistorial: buildFileHistorial(
     fseAdapter.findOneAlumnoQuery,
     fseAdapter.findAllCalificacionesQuery,
-    GenerarHistorial,
+    phpAdapter.createPhpFile,
   ),
   findFileBeca: findFileBeca(
     fseAdapter.findOneSolicitudBecaQuery,

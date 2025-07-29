@@ -3,7 +3,7 @@ const { checkers } = require('@siiges-services/shared');
 const buildFileFDA01 = (
   findOneSolicitudProgramaQuery,
   createPhpFile,
-) => async (solicitudId) => {
+) => async (solicitudId, tipoDocumento) => {
   const include = [{
     association: 'programa',
     include: [
@@ -82,7 +82,7 @@ const buildFileFDA01 = (
 
   checkers.throwErrorIfDataIsFalsy(solicitud, 'solicitud', solicitudId);
 
-  const file = await createPhpFile(solicitud.toJSON());
+  const file = await createPhpFile(solicitud.toJSON(), tipoDocumento);
   return Buffer.from(file);
 };
 
