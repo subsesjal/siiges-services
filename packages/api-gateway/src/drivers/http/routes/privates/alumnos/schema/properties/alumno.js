@@ -3,6 +3,7 @@ const alumno = {
   personaId: { type: 'integer' },
   situacionId: { type: 'integer' },
   programaId: { type: 'integer' },
+  tipoTramiteId: { type: 'integer' },
   matricula: { type: 'string' },
   estatus: { type: 'integer' },
   adeudoMaterias: { type: 'integer' },
@@ -16,6 +17,7 @@ const alumno = {
   observaciones1: { type: 'string' },
   observaciones2: { type: 'string' },
   fechaBaja: { type: 'string', format: 'date-time' },
+  observacionesBaja: { type: 'string' },
   alumnoTipoTramite: { type: 'integer' },
 };
 
