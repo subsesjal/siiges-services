@@ -1,6 +1,22 @@
 <?php
 require(realpath(__DIR__ . "/../formatos/pdf.php"));
 
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
+// Optional: write uncaught exceptions to stderr
+set_exception_handler(function ($e) {
+    file_put_contents('php://stderr', "Uncaught Exception: " . $e->getMessage() . "\n");
+    file_put_contents('php://stderr', $e->getTraceAsString() . "\n");
+    exit(1);
+});
+
+set_error_handler(function ($severity, $message, $file, $line) {
+    file_put_contents('php://stderr', "Error [$severity]: $message in $file on line $line\n");
+    exit(1);
+});
+
 // Leer datos JSON desde stdin
 $data = json_decode(file_get_contents('php://stdin'), true);
 
@@ -186,7 +202,7 @@ foreach ($calificacionCiclo as $ciclos => $ciclo) {
     $dataCalificacionAsignatura = array(
       [
         "clave_asignatura" => iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $detalle["asignatura"]["clave"]),
-        "seriacion_asignatura" => iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $detalle["asignatura"]["seriacion"]),
+        "seriacion_asignatura" => iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $detalle["asignatura"]["seriacion"] ?? ''),
         "nombre_asignatura" => iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $detalle["asignatura"]["nombre"]),
         "tipo_asignaura" => iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $tipo_txt),
         "calificacion" => iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $detalle["calificacion"]),
