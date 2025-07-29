@@ -44,6 +44,7 @@ const AlumnoSchema = {
   tipoTramiteId: {
     allowNull: false,
     type: DataTypes.INTEGER,
+    defaultValue: 7,
     field: 'tipo_tramite_id',
     references: {
       model: TIPO_TRAMITE_TABLE,
