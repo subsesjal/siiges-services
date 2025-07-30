@@ -1,16 +1,15 @@
+/* eslint-disable consistent-return */
 const fs = require('fs/promises');
 const xml2js = require('xml2js');
 const { Logger } = require('@siiges-services/shared');
 const boom = require('@hapi/boom');
 
 const createFileXML = (
-  findOneAlumnoTituloElectronicoQuery,
-  findOneAlumnoQuery,
+  findOneProgramaQuery,
   findOneTituloElectronicoQuery,
   createTituloElectronicoQuery,
-  createAlumnoTituloElectronicoQuery,
-) => async (alumnoId, fileUploaded, options) => {
-  Logger.info(`[createFileXML] Procesando XML para alumnoId: ${alumnoId}`);
+) => async (entidadId, tipoDocumento, fileUploaded) => {
+  Logger.info('[createFileXML] Procesando XML');
 
   if (!fileUploaded) {
     return;
@@ -34,13 +33,12 @@ const createFileXML = (
   const parsed = await parser.parseStringPromise(xmlBuffer.toString('utf8'));
   const titulo = parsed?.TituloElectronico;
 
-  const isMigracion = options?.migracion;
   const curpXML = titulo.Profesionista?.$?.curp;
   const rvoeXML = titulo.Carrera?.$?.numeroRvoe;
   const firma = titulo.FirmaResponsables?.FirmaResponsable?.$;
 
-  const buildPayload = (alumno) => ({
-    institucionId: alumno.programa?.plantel?.institucionId,
+  const buildPayload = (programa) => ({
+    institucionId: programa?.plantel?.institucionId,
     estadoId: titulo.Expedicion?.$?.idEntidadFederativa,
     cargoId: firma?.idCargo,
     autorizacionReconocimientoId: Number(titulo.Carrera?.$?.idAutorizacionReconocimiento),
@@ -85,86 +83,34 @@ const createFileXML = (
   });
 
   const include = [
-    {
-      association: 'persona',
-      where: { curp: curpXML },
-    },
-    {
-      association: 'programa',
-      where: { acuerdoRvoe: rvoeXML },
-      include: [{
-        association: 'plantel',
-        include: [
-          { association: 'institucion' },
-          {
-            association: 'domicilio',
-            include: [
-              { association: 'estado' },
-              { association: 'municipio' },
-            ],
-          },
-        ],
-      }],
-    },
+    { association: 'plantel', attributes: ['institucionId'] },
   ];
+  const programa = await findOneProgramaQuery({ acuerdoRvoe: rvoeXML }, { include });
 
-  let tituloElectronico;
-  let alumnoTituloElectronico;
-
-  if (isMigracion) {
-    const alumno = await findOneAlumnoQuery(null, {
-      include,
-      strict: true,
-    });
-
-    if (!alumno) {
-      throw boom.conflict('El alumno no existe o no corresponde a este título electrónico. - migracion');
-    }
-
-    tituloElectronico = await findOneTituloElectronicoQuery({
-      folioControl: titulo.$?.folioControl,
-    });
-
-    if (!tituloElectronico) {
-      tituloElectronico = await createTituloElectronicoQuery(buildPayload(alumno));
-    }
-
-    alumnoTituloElectronico = await findOneAlumnoTituloElectronicoQuery({
-      alumnoId: alumno.id,
-    });
-
-    if (!alumnoTituloElectronico) {
-      alumnoTituloElectronico = await createAlumnoTituloElectronicoQuery({
-        alumnoId: alumno.id,
-        tituloElectronicoId: tituloElectronico.id,
-      });
-    }
-  } else {
-    alumnoTituloElectronico = await findOneAlumnoTituloElectronicoQuery({ alumnoId });
-
-    if (alumnoTituloElectronico) {
-      throw boom.conflict('El alumno ya tiene un título electrónico registrado.');
-    }
-
-    const alumno = await findOneAlumnoQuery({ id: alumnoId }, {
-      include,
-      strict: true,
-    });
-
-    if (!alumno) {
-      throw boom.conflict('El titulo no corresponde a este alumno.');
-    }
-
-    tituloElectronico = await createTituloElectronicoQuery(buildPayload(alumno));
-
-    alumnoTituloElectronico = await createAlumnoTituloElectronicoQuery({
-      alumnoId: alumno.id,
-      tituloElectronicoId: tituloElectronico.id,
-    });
+  if (!programa) {
+    Logger.error(`[createFileXML] Programa no encontrado para RVOE: ${rvoeXML}`);
+    throw boom.notFound(`Programa no encontrado para RVOE: ${rvoeXML}`);
   }
 
-  // eslint-disable-next-line consistent-return
-  return alumnoTituloElectronico;
+  const tituloElectronicoFound = await findOneTituloElectronicoQuery({
+    folioControl: titulo.$?.folioControl,
+    institucionId: programa?.plantel?.institucionId,
+  });
+
+  if (tituloElectronicoFound) {
+    Logger.info(`[createFileXML] Título electrónico ya existe para folioControl: ${titulo.$?.folioControl}`);
+    return {
+      tituloElectronico: tituloElectronicoFound.toJSON(),
+      entidadId: tituloElectronicoFound.id,
+    };
+  }
+
+  const tituloElectronico = await createTituloElectronicoQuery(buildPayload(programa.toJSON()));
+
+  return {
+    tituloElectronico: tituloElectronico.toJSON(),
+    entidadId: tituloElectronico.id,
+  };
 };
 
 module.exports = { createFileXML };

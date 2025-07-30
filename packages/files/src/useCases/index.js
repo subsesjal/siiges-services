@@ -11,6 +11,7 @@ module.exports = {
   ),
   uploadFile: uploadFile(
     buildIdentifierObj,
+    buildFile,
   ),
   deleteFile,
 };
