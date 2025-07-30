@@ -2,6 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PERSONA_TABLE } = require('./persona');
 const { SITUACION_TABLE } = require('./situacion');
 const { PROGRAMA_TABLE } = require('./programa');
+const { TIPO_TRAMITE_TABLE } = require('./tipoTramite');
 
 const ALUMNO_TABLE = 'alumnos';
 
@@ -37,6 +38,16 @@ const AlumnoSchema = {
     field: 'programa_id',
     references: {
       model: PROGRAMA_TABLE,
+      key: 'id',
+    },
+  },
+  tipoTramiteId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    defaultValue: 7,
+    field: 'tipo_tramite_id',
+    references: {
+      model: TIPO_TRAMITE_TABLE,
       key: 'id',
     },
   },
@@ -100,6 +111,11 @@ const AlumnoSchema = {
     allowNull: true,
     type: DataTypes.DATE,
     field: 'fecha_baja',
+  },
+  observacionesBaja: {
+    allowNull: true,
+    type: DataTypes.TEXT,
+    field: 'observaciones_baja',
   },
   createdAt: {
     allowNull: false,

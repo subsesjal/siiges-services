@@ -19,73 +19,73 @@ const findAllSolicitudesUsuarioSchema = {
     },
     required: ['usuarioId'],
   },
-  response: {
-    200: {
-      type: 'object',
-      properties: {
-        data: {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              id: { type: 'integer' },
-              ...solicitud,
-              folio: { type: 'string' },
-              ...responseProperties,
-              estatusSolicitud: {
-                type: 'object',
-                properties: {
-                  id: { type: 'integer' },
-                  ...estatusSolicitud,
-                  ...responseProperties,
-                },
-              },
-              programa: {
-                type: 'object',
-                properties: {
-                  id: { type: 'integer' },
-                  ...programa,
-                  ...responseProperties,
-                  plantel: {
-                    type: 'object',
-                    properties: {
-                      id: { type: 'integer' },
-                      ...plantel,
-                      ...responseProperties,
-                      domicilio: {
-                        type: 'object',
-                        properties: {
-                          id: { type: 'integer' },
-                          ...domicilio,
-                          ...responseProperties,
-                          municipio: {
-                            type: 'object',
-                            properties: {
-                              id: { type: 'integer' },
-                              ...municipio,
-                              ...responseProperties,
-                            },
-                          },
-                          estado: {
-                            type: 'object',
-                            properties: {
-                              id: { type: 'integer' },
-                              ...estado,
-                              ...responseProperties,
-                            },
-                          },
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  },
+  // response: {
+  //   200: {
+  //     type: 'object',
+  //     properties: {
+  //       data: {
+  //         type: 'array',
+  //         items: {
+  //           type: 'object',
+  //           properties: {
+  //             id: { type: 'integer' },
+  //             ...solicitud,
+  //             folio: { type: 'string' },
+  //             ...responseProperties,
+  //             estatusSolicitud: {
+  //               type: 'object',
+  //               properties: {
+  //                 id: { type: 'integer' },
+  //                 ...estatusSolicitud,
+  //                 ...responseProperties,
+  //               },
+  //             },
+  //             programa: {
+  //               type: 'object',
+  //               properties: {
+  //                 id: { type: 'integer' },
+  //                 ...programa,
+  //                 ...responseProperties,
+  //                 plantel: {
+  //                   type: 'object',
+  //                   properties: {
+  //                     id: { type: 'integer' },
+  //                     ...plantel,
+  //                     ...responseProperties,
+  //                     domicilio: {
+  //                       type: 'object',
+  //                       properties: {
+  //                         id: { type: 'integer' },
+  //                         ...domicilio,
+  //                         ...responseProperties,
+  //                         municipio: {
+  //                           type: 'object',
+  //                           properties: {
+  //                             id: { type: 'integer' },
+  //                             ...municipio,
+  //                             ...responseProperties,
+  //                           },
+  //                         },
+  //                         estado: {
+  //                           type: 'object',
+  //                           properties: {
+  //                             id: { type: 'integer' },
+  //                             ...estado,
+  //                             ...responseProperties,
+  //                           },
+  //                         },
+  //                       },
+  //                     },
+  //                   },
+  //                 },
+  //               },
+  //             },
+  //           },
+  //         },
+  //       },
+  //     },
+  //   },
+  // },
 };
 
 module.exports = findAllSolicitudesUsuarioSchema;
