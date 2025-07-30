@@ -23,7 +23,7 @@ const findOneFile = (buildIdentifierObj, buildFile) => async (fileMetdata) => {
   const builder = await buildFile(input);
   const previousFile = await db.findOneFile(identifiers);
 
-  if (builder) {
+  if (builder && input.tipoDocumento !== 'TITULO_ELECTRONICO_XML') {
     const file = await builder();
     const fileName = await fs.writeBus(file, input, previousFile);
     const ubication = getUbication(input, fileName);

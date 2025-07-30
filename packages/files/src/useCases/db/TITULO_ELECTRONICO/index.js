@@ -5,11 +5,9 @@ const { GenerarTitulo } = require('../../../utils/pdfs');
 
 module.exports = {
   createFileXML: createFileXML(
-    xmlAdapter.findOneAlumnoTituloElectronicoQuery,
-    xmlAdapter.findOneAlumnoQuery,
+    xmlAdapter.findOneProgramaQuery,
     xmlAdapter.findOneTituloElectronicoQuery,
     xmlAdapter.createTituloElectronicoQuery,
-    xmlAdapter.createAlumnoTituloElectronicoQuery,
   ),
   findFileTitulo: findFileTitulo(
     xmlAdapter.findOneAlumnoTituloElectronicoQuery,

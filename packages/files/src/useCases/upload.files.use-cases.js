@@ -16,8 +16,16 @@ function getUbication({ tipoEntidad, tipoDocumento }, fileName) {
   return `/uploads/${tipoEntidad}/${tipoDocumento}/${(fileName)}`;
 }
 
-const uploadFile = (buildIdentifierObj) => async (fileMetdata, fileUploaded) => {
+const uploadFile = (buildIdentifierObj, buildFile) => async (fileMetdata, fileUploaded) => {
   const { input, identifiers } = await buildIdentifierObj(fileMetdata);
+
+  if (input.tipoDocumento === 'TITULO_ELECTRONICO_XML') {
+    const builder = await buildFile(input, fileUploaded);
+    const response = await builder();
+
+    input.entidadId = response.entidadId;
+    identifiers.entidadId = response.entidadId;
+  }
 
   const previousFile = await db.findOneFile(identifiers);
 
