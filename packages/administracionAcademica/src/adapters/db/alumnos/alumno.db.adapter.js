@@ -22,6 +22,7 @@ const {
 module.exports = {
   findOneAlumnoQuery: findOneQuery(Alumno),
   findOneAlumnoTituloQuery: findOneQuery(TituloElectronico),
+  findAllTitulosQuery: findAllQuery(TituloElectronico),
   findOneAlumnoTipoTramiteQuery: findOneQuery(AlumnoTipoTramite),
   createAlumnoQuery: createQuery(Alumno),
   createAlumnoGrupoQuery: createQuery(AlumnoGrupo),
