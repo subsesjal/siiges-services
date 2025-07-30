@@ -9,6 +9,9 @@ const {
   AlumnoGrupo,
   Asignatura,
   Calificacion,
+  CicloEscolar,
+  Grado,
+  Turno,
 } = models;
 
 const {
@@ -22,9 +25,13 @@ const {
 module.exports = {
   createAlumnoQuery: createQuery(Alumno),
   findOneAlumnoQuery: findOneQuery(Alumno),
+  findOneGradoQuery: findOneQuery(Grado),
+  findOneTurnoQuery: findOneQuery(Turno),
   findOneUserUsersQuery: findOneQuery(UsuarioUsuario),
   findOneProgramaQuery: findOneQuery(Programa),
   findOneGrupoQuery: findOneQuery(Grupo),
+  findAllGrupoQuery: findAllQuery(Grupo),
+  createGrupoQuery: createQuery(Grupo),
   findOneAlumnoGrupoQuery: findOneQuery(AlumnoGrupo),
   createAlumnoGrupoQuery: createQuery(AlumnoGrupo),
   findOneAsignaturaQuery: findOneQuery(Asignatura),
@@ -33,4 +40,7 @@ module.exports = {
   createCalificacionQuery: createQuery(Calificacion),
   updateCalificacionQuery: updateAndFindQuery(Calificacion),
   deleteCalificacionQuery: deleteAndFindQuery(Calificacion),
+  findAllCiclosEscolaresQuery: findAllQuery(CicloEscolar),
+  findOneCiclosEscolaresQuery: findOneQuery(CicloEscolar),
+  createCicloEscolarQuery: createQuery(CicloEscolar),
 };

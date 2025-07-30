@@ -1,7 +1,7 @@
 const { alumnosAdapter } = require('../../../adapters/external');
 const schema = require('./schema');
 
-async function asignaturaRouter(fastify, opts, next) {
+async function alumnosRouter(fastify, opts, next) {
   await fastify.post(
     '/',
     {
@@ -41,4 +41,4 @@ async function asignaturaRouter(fastify, opts, next) {
   next();
 }
 
-module.exports = asignaturaRouter;
+module.exports = alumnosRouter;

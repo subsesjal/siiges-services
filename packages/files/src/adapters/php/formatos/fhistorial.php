@@ -205,9 +205,9 @@ foreach ($calificacionCiclo as $ciclos => $ciclo) {
         "seriacion_asignatura" => iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $detalle["asignatura"]["seriacion"] ?? ''),
         "nombre_asignatura" => iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $detalle["asignatura"]["nombre"]),
         "tipo_asignaura" => iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $tipo_txt),
-        "calificacion" => iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $detalle["calificacion"]),
+        "calificacion" => iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $detalle["calificacion"] ?? ''),
         "creditos" => iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $detalle["asignatura"]["creditos"]),
-        "fecha_examen" => iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $detalle["fechaExamen"]),
+        "fecha_examen" => iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $detalle["fechaExamen"] ?? ''),
       ]
     );
 
