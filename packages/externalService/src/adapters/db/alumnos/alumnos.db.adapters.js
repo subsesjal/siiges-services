@@ -9,6 +9,7 @@ const {
   AlumnoGrupo,
   Asignatura,
   Calificacion,
+  CicloEscolar,
 } = models;
 
 const {
@@ -33,4 +34,5 @@ module.exports = {
   createCalificacionQuery: createQuery(Calificacion),
   updateCalificacionQuery: updateAndFindQuery(Calificacion),
   deleteCalificacionQuery: deleteAndFindQuery(Calificacion),
+  findAllCiclosEscolaresQuery: findAllQuery(CicloEscolar),
 };
