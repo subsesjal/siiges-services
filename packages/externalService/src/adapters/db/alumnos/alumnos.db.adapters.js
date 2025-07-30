@@ -26,6 +26,7 @@ module.exports = {
   findOneUserUsersQuery: findOneQuery(UsuarioUsuario),
   findOneProgramaQuery: findOneQuery(Programa),
   findOneGrupoQuery: findOneQuery(Grupo),
+  findAllGrupoQuery: findAllQuery(Grupo),
   findOneAlumnoGrupoQuery: findOneQuery(AlumnoGrupo),
   createAlumnoGrupoQuery: createQuery(AlumnoGrupo),
   findOneAsignaturaQuery: findOneQuery(Asignatura),
