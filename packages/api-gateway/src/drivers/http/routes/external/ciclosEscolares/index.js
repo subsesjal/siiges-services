@@ -14,6 +14,18 @@ async function ciclosEscolaresRouter(fastify, opts, next) {
     ciclosAdapter.findAll,
   );
 
+  await fastify.post(
+    '/',
+    {
+      schema: schema.createCicloEscolar,
+      onRequest: [
+        fastify.authenticate,
+        fastify.authorizeRole(['externo']),
+      ],
+    },
+    ciclosAdapter.create,
+  );
+
   next();
 }
 

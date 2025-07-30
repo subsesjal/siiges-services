@@ -35,4 +35,6 @@ module.exports = {
   updateCalificacionQuery: updateAndFindQuery(Calificacion),
   deleteCalificacionQuery: deleteAndFindQuery(Calificacion),
   findAllCiclosEscolaresQuery: findAllQuery(CicloEscolar),
+  findOneCiclosEscolaresQuery: findOneQuery(CicloEscolar),
+  createCicloEscolarQuery: createQuery(CicloEscolar),
 };
