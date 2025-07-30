@@ -1,14 +1,22 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../../utils/errorHandler');
 
-async function createCicloEscolar(req, reply) {
-  Logger.info('[CicloEscolar.createCicloEscolar.handler]: Obteniendo ciclos escolares para Rvoe');
+async function createGrupo(req, reply) {
+  Logger.info('[CicloEscolar.createGrupo.handler]: Creando grupo para Rvoe');
   try {
     const { userId } = req;
-    const { rvoe } = req.query;
+    const {
+      rvoe, cicloEscolar, grado, turno,
+    } = req.query;
     const data = req.body;
 
-    const ciclo = await this.externalServices.createCicloEscolar({ rvoe, userId }, data);
+    const ciclo = await this.externalServices.createGrupo({
+      rvoe,
+      cicloEscolar,
+      grado,
+      turno,
+      userId,
+    }, data);
 
     return reply
       .code(201)
@@ -20,5 +28,5 @@ async function createCicloEscolar(req, reply) {
 }
 
 module.exports = {
-  create: createCicloEscolar,
+  create: createGrupo,
 };

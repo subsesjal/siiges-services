@@ -1,7 +1,7 @@
 const { alumnos } = require('../../../adapters/db');
 
 const findAllGrupos = require('./find-all.grupos.use-cases');
-const createCicloEscolar = require('./create.ciclo.use-case');
+const createGrupo = require('./create.grupo.use-case');
 
 module.exports = {
   findAllGrupos: findAllGrupos(
@@ -9,10 +9,13 @@ module.exports = {
     alumnos.findOneProgramaQuery,
     alumnos.findAllGrupoQuery,
   ),
-  createCicloEscolar: createCicloEscolar(
+  createGrupo: createGrupo(
     alumnos.findOneUserUsersQuery,
     alumnos.findOneProgramaQuery,
     alumnos.findOneCiclosEscolaresQuery,
-    alumnos.createCicloEscolarQuery,
+    alumnos.findOneGradoQuery,
+    alumnos.findOneTurnoQuery,
+    alumnos.findOneGrupoQuery,
+    alumnos.createGrupoQuery,
   ),
 };

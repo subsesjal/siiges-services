@@ -9,6 +9,11 @@ const createCicloEscolar = {
     properties: { rvoe: { type: 'string' } },
     required: ['rvoe'],
   },
+  body: {
+    type: 'object',
+    properties: { ...cicloEscolar },
+    required: ['nombre', 'descripcion'],
+  },
   response: {
     201: {
       type: 'object',

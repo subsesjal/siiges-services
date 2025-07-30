@@ -14,17 +14,17 @@ async function gruposRouter(fastify, opts, next) {
     gruposAdapter.findAll,
   );
 
-  /* await fastify.post(
+  await fastify.post(
     '/',
     {
-      schema: schema.createCicloEscolar,
+      schema: schema.createGrupo,
       onRequest: [
         fastify.authenticate,
         fastify.authorizeRole(['externo']),
       ],
     },
-    ciclosAdapter.create,
-  ); */
+    gruposAdapter.create,
+  );
 
   next();
 }
