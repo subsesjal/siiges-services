@@ -4,6 +4,7 @@ const { Logger } = require('@siiges-services/shared');
 
 const FORMATOS_MAPPING = {
   FDA01: 'fda01.php',
+  FDA02: 'fda02.php',
   HISTORIAL_ACADEMICO: 'fhistorial.php',
 };
 

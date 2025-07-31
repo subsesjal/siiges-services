@@ -1,6 +1,11 @@
 const { Logger } = require('@siiges-services/shared');
 const {
-  buildFileFDA01, findFileFDA02, findFileFDA03, findFileFDA04, findFileFDA05, findFileFDA06,
+  buildFileFDA01,
+  buildFileFDA02,
+  findFileFDA03,
+  findFileFDA04,
+  findFileFDA05,
+  findFileFDA06,
 } = require('../db/FDA');
 const {
   findFileFDP01, findFileFDP02, findFileFDP05, findFileFDP06,
@@ -14,7 +19,7 @@ const buildFile = async (input, fileUploaded) => {
   const { tipoDocumento, entidadId } = input;
   const filesGenerator = {
     FDA01: async () => buildFileFDA01(entidadId, tipoDocumento),
-    FDA02: async () => findFileFDA02(entidadId, tipoDocumento),
+    FDA02: async () => buildFileFDA02(entidadId, tipoDocumento),
     FDA03: async () => findFileFDA03(entidadId, tipoDocumento),
     FDA04: async () => findFileFDA04(entidadId, tipoDocumento),
     FDA05: async () => findFileFDA05(entidadId, tipoDocumento),
