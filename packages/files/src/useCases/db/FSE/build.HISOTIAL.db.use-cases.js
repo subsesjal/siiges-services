@@ -56,9 +56,9 @@ const buildFileHistorial = (
   checkers.throwErrorIfDataIsFalsy(calificaciones, 'calificaciones', alumnoId);
 
   const file = await createPhpFile({
-    alumno: alumno.toJSON(),
+    alumno: alumno.toJSON(), // Primer argumento un objeto
     calificaciones: calificaciones.map((calificacion) => calificacion.toJSON()),
-  }, tipoDocumento);
+  }, tipoDocumento); // Tipo de documento
   return Buffer.from(file);
 };
 
