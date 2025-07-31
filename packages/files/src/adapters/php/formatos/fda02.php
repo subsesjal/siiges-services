@@ -1,7 +1,6 @@
 <?php
 require(realpath(__DIR__ . "/../formatos/pdf.php"));
 
-// Función segura para iconv (convierte arrays en strings)
 function safe_iconv($string)
 {
   if (is_array($string)) {
@@ -10,16 +9,13 @@ function safe_iconv($string)
   return iconv('UTF-8', 'ISO-8859-1//TRANSLIT', (string)$string);
 }
 
-// Leer datos JSON desde stdin
 $data = json_decode(file_get_contents('php://stdin'), true);
 
-// Verificar si el JSON es válido
 if (!$data) {
   fwrite(STDERR, "No se recibieron datos válidos o el JSON está malformado.\n");
   exit(1);
 }
 
-// Variables principales (ajustadas porque el JSON no tiene clave 'solicitud')
 $solicitud = $data ?? [];
 $programa = $solicitud['programa'] ?? [];
 $plantel = $programa['plantel'] ?? [];
@@ -104,7 +100,7 @@ $dataPrograma = [
 
 $pdf->SetWidths([80, 95]);
 $pdf->SetLineHeight(5);
-$pdf->SetColors([[191, 191, 191], [255, 255, 255]]); // Títulos grises, datos blancos
+$pdf->SetColors([[255, 161, 61], [255, 255, 255]]); // Títulos grises, datos blancos
 
 foreach ($dataPrograma as $item) {
   $pdf->Row([
@@ -117,7 +113,7 @@ $pdf->Ln(5);
 // Nivel, Turno, Modalidad, Ciclo
 // $sizeCell = 43.5;
 $pdf->SetFont("Nutmegb", "", 9);
-$pdf->SetFillColor(166, 166, 166);
+$pdf->SetFillColor(255, 161, 61);
 
 $pdf->Cell(64, 5, "NIVEL DE ESTUDIO", 1, 0, "C", true);
 $pdf->Cell(30, 5, "TURNO", 1, 0, "C", true);
@@ -141,16 +137,18 @@ if (is_array($turnos)) {
   }
 }
 
+$pdf->SetFont("Nutmegb", "", 7);
 $pdf->Cell(64, 5, safe_iconv(mb_strtoupper($nivel["descripcion"] ?? "")), 1, 0, "C", true);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(30, 5, safe_iconv(mb_strtoupper(implode(" / ", $turnosTxt))), 1, 0, "C", true);
 $pdf->Cell(40, 5, safe_iconv(mb_strtoupper($modalidad["nombre"] ?? "")), 1, 0, "C", true);
 $pdf->Cell(40, 5, safe_iconv(mb_strtoupper($ciclo["nombre"] ?? "")), 1, 0, "C", true);
 $pdf->Ln(10);
 
 // Domicilio de la institución
-$pdf->SetFillColor(166, 166, 166);
+$pdf->SetFillColor(255, 161, 61);
 $pdf->Cell(174, 5, safe_iconv("DOMICILIO DE LA INSTITUCIÓN"), 1, 1, "C", true);
-$pdf->SetFillColor(191, 191, 191);
+$pdf->SetFillColor(255, 213, 176);
 $pdf->Cell(116, 5, safe_iconv("CALLE Y NÚMERO"), 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv("COLONIA"), 1, 0, "C", true);
 $pdf->Ln();
@@ -162,7 +160,7 @@ $pdf->Cell(58, 5, safe_iconv(mb_strtoupper($domicilioPlantel["colonia"] ?? "")),
 $pdf->Ln();
 
 // Código Postal, Municipio, Estado
-$pdf->SetFillColor(191, 191, 191);
+$pdf->SetFillColor(255, 213, 176);
 $pdf->Cell(58, 5, safe_iconv("CÓDIGO POSTAL"), 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv("DELEGACIÓN O MUNICIPIO"), 1, 0, "C", true);
 $pdf->Cell(58, 5, "ENTIDAD FEDERATIVA", 1, 0, "C", true);
@@ -180,7 +178,7 @@ $pdf->Cell(58, 5, safe_iconv($estado["nombre"] ?? ""), 1, 0, "C", true);
 $pdf->Ln();
 
 // Teléfonos, redes, correos
-$pdf->SetFillColor(191, 191, 191);
+$pdf->SetFillColor(255, 213, 176);
 $pdf->Cell(58, 5, safe_iconv("NÚMERO TELEFÓNICO"), 1, 0, "C", true);
 $pdf->Cell(58, 5, "REDES SOCIALES", 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv("CORREO ELECTRÓNICO"), 1, 0, "C", true);
@@ -196,7 +194,7 @@ $pdf->Ln();
 
 // ----------------------
 // Sección de solicitante
-$pdf->SetFillColor(166, 166, 166);
+$pdf->SetFillColor(255, 161, 61);
 $pdf->Cell(174, 5, safe_iconv("DATOS DEL SOLICITANTE (PERSONA FÍSICA O REPRESENTANTE LEGAL DE LA PERSONA JURÍDICA)"), 1, 0, "C", true);
 $pdf->Ln();
 
@@ -209,7 +207,7 @@ $dataPersonaSolicitante = [
 
 $pdf->SetWidths([80, 94]);
 $pdf->SetLineHeight(5);
-$pdf->SetColors([[191, 191, 191], [255, 255, 255]]);
+$pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
 
 foreach ($dataPersonaSolicitante as $item) {
   $pdf->Row([
@@ -219,7 +217,7 @@ foreach ($dataPersonaSolicitante as $item) {
 }
 
 // Domicilio del solicitante
-$pdf->SetFillColor(191, 191, 191);
+$pdf->SetFillColor(255, 213, 176);
 $pdf->Cell(116, 5, safe_iconv("CALLE Y NÚMERO"), 1, 0, "C", true);
 $pdf->Cell(58, 5, "COLONIA", 1, 0, "C", true);
 $pdf->Ln();
@@ -232,9 +230,9 @@ $pdf->Ln();
 $pdf->Ln();
 
 // Seecion del rector
-$pdf->SetFillColor(166, 166, 166);
+$pdf->SetFillColor(255, 161, 61);
 $pdf->Cell(174, 5, safe_iconv("DATOS DEL RECTOR"), 1, 1, "C", true);
-$pdf->SetFillColor(191, 191, 191);
+$pdf->SetFillColor(255, 213, 176);
 $pdf->Cell(58, 5, safe_iconv("NOMBRE (S)"), 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv("APELLIDO PATERNO"), 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv("APELLIDO MATERNO"), 1, 0, "C", true);
@@ -251,7 +249,7 @@ $pdf->Cell(58, 5, safe_iconv(mb_strtoupper($rectorPersona["apellidoMaterno"])), 
 $pdf->Ln();
 
 // Mas datos del rector
-$pdf->SetFillColor(191, 191, 191);
+$pdf->SetFillColor(255, 213, 176);
 $pdf->SetFont("Nutmeg", "", 7);
 $pdf->Cell(58, 5, safe_iconv("CORREO ELECTRÓNICO INSTITUCIONAL"), 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv("CORREO ELECTRÓNICO PERSONAL"), 1, 0, "C", true);
@@ -266,9 +264,9 @@ $pdf->Cell(58, 5, safe_iconv($rectorPersona["celular"] ?? ""), 1, 0, "C", true);
 $pdf->Ln();
 
 // Formaciones del rector
-$pdf->SetFillColor(166, 166, 166);
+$pdf->SetFillColor(255, 161, 61);
 $pdf->Cell(174, 5, safe_iconv("FOMACIÓN ACADÉMICA"), 1, 1, "C", true);
-$pdf->SetFillColor(191, 191, 191);
+$pdf->SetFillColor(255, 213, 176);
 $pdf->Cell(87, 5, safe_iconv("GRADO EDUCATIVO"), 1, 0, "C", true);
 $pdf->Cell(87, 5, safe_iconv("NOMBRE DE LOS ESTUDIOS"), 1, 0, "C", true);
 $pdf->Ln();
@@ -297,25 +295,23 @@ $pdf->Cell(87, 5, safe_iconv(mb_strtoupper($formacionRector["nombre"] ?? "")), 1
 $pdf->Ln();
 
 // Mas datos de formaciones del rector
-$pdf->SetFillColor(191, 191, 191);
+$pdf->SetFillColor(255, 213, 176);
 $pdf->SetFont("Nutmeg", "", 7);
-$pdf->Cell(87, 5, safe_iconv("NOMBRE DE LA INSTITUCIÓN EDUCATIVA DE PROCEDENCIA"), 1, 0, "C", true);
-$pdf->Cell(87, 5, safe_iconv("DOCUMENTO QUE ACREDITA SUS ESTUDIOS"), 1, 0, "C", true);
+$pdf->Cell(174, 5, safe_iconv("NOMBRE DE LA INSTITUCIÓN EDUCATIVA DE PROCEDENCIA"), 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->SetFillColor(255, 255, 255);
-$pdf->Cell(87, 5, safe_iconv($formacionRector["institucion"] ?? ""), 1, 0, "C", true);
-$pdf->Cell(87, 5, safe_iconv(""), 1, 0, "C", true);
+$pdf->Cell(174, 5, safe_iconv($formacionRector["institucion"] ?? ""), 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->AddPage();
 
 // Seccion del director
 $pdf->Ln(20);
-$pdf->SetFillColor(166, 166, 166);
+$pdf->SetFillColor(255, 161, 61);
 $pdf->Cell(174, 5, safe_iconv("DATOS DEL DIRECTOR"), 1, 1, "C", true);
-$pdf->SetFillColor(191, 191, 191);
+$pdf->SetFillColor(255, 213, 176);
 $pdf->Cell(58, 5, safe_iconv("NOMBRE (S)"), 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv("APELLIDO PATERNO"), 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv("APELLIDO MATERNO"), 1, 0, "C", true);
@@ -325,14 +321,14 @@ $director = $plantel["directores"];
 $directorPersona = $director[0]["persona"];
 
 $pdf->SetFont("Nutmeg", "", 9);
-$pdf->SetFillColor(255, 255, 255); // Fondo blanco para datos
+$pdf->SetFillColor(255, 255, 255);
 $pdf->Cell(58, 5, safe_iconv(mb_strtoupper(($directorPersona["nombre"]))), 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv(mb_strtoupper($directorPersona["apellidoPaterno"])), 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv(mb_strtoupper($directorPersona["apellidoMaterno"])), 1, 0, "C", true);
 $pdf->Ln();
 
 // Mas datos del rector
-$pdf->SetFillColor(191, 191, 191);
+$pdf->SetFillColor(255, 213, 176);
 $pdf->SetFont("Nutmeg", "", 7);
 $pdf->Cell(58, 5, safe_iconv("CORREO ELECTRÓNICO INSTITUCIONAL"), 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv("CORREO ELECTRÓNICO PERSONAL"), 1, 0, "C", true);
@@ -347,9 +343,9 @@ $pdf->Cell(58, 5, safe_iconv($directorPersona["celular"] ?? ""), 1, 0, "C", true
 $pdf->Ln();
 
 // Formaciones del rector
-$pdf->SetFillColor(166, 166, 166);
+$pdf->SetFillColor(255, 161, 61);
 $pdf->Cell(174, 5, safe_iconv("FOMACIÓN ACADÉMICA"), 1, 1, "C", true);
-$pdf->SetFillColor(191, 191, 191);
+$pdf->SetFillColor(255, 213, 176);
 $pdf->Cell(87, 5, safe_iconv("GRADO EDUCATIVO"), 1, 0, "C", true);
 $pdf->Cell(87, 5, safe_iconv("NOMBRE DE LOS ESTUDIOS"), 1, 0, "C", true);
 $pdf->Ln();
@@ -378,21 +374,19 @@ $pdf->Cell(87, 5, safe_iconv(mb_strtoupper($formacionRector["nombre"] ?? "")), 1
 $pdf->Ln();
 
 // Mas datos de formaciones del rector
-$pdf->SetFillColor(191, 191, 191);
+$pdf->SetFillColor(255, 213, 176);
 $pdf->SetFont("Nutmeg", "", 7);
-$pdf->Cell(87, 5, safe_iconv("NOMBRE DE LA INSTITUCIÓN EDUCATIVA DE PROCEDENCIA"), 1, 0, "C", true);
-$pdf->Cell(87, 5, safe_iconv("DOCUMENTO QUE ACREDITA SUS ESTUDIOS"), 1, 0, "C", true);
+$pdf->Cell(174, 5, safe_iconv("NOMBRE DE LA INSTITUCIÓN EDUCATIVA DE PROCEDENCIA"), 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->SetFillColor(255, 255, 255);
-$pdf->Cell(87, 5, safe_iconv($formacionRector["institucion"] ?? ""), 1, 0, "C", true);
-$pdf->Cell(87, 5, safe_iconv(""), 1, 0, "C", true);
+$pdf->Cell(174, 5, safe_iconv($formacionRector["institucion"] ?? ""), 1, 0, "C", true);
 $pdf->Ln();
 $pdf->Ln();
 
 // Sección de Personal designado
-$pdf->SetFillColor(166, 166, 166);
+$pdf->SetFillColor(255, 161, 61);
 $pdf->SetFont("Nutmeg", "", 7);
 $pdf->Cell(174, 5, safe_iconv("PERSONAL DESIGNADO PARA REALIZAR DILIGENCIAS PARA EL DESARROLLO Y SEGUIMIENTO DE LA SOLICITUD DE RVOE"), 1, 0, "C", true);
 $pdf->Ln();
@@ -424,7 +418,7 @@ $personalDesignado = [
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->SetWidths([80, 94]);
 $pdf->SetLineHeight(5);
-$pdf->SetColors([[191, 191, 191], [255, 255, 255]]);
+$pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
 
 foreach ($personalDesignado as $item) {
   $pdf->Row([
@@ -435,19 +429,19 @@ foreach ($personalDesignado as $item) {
 $pdf->Ln();
 
 // Sección de Nombres propuestos para la institución educativa
-$pdf->SetFillColor(166, 166, 166);
+$pdf->SetFillColor(255, 161, 61);
 $pdf->Cell(174, 5, safe_iconv("NOMBRES PROPUESTOS PARA LA INSTITUCIÓN EDUCATIVA"), 1, 0, "C", true);
 $pdf->Ln();
 
 $nombresPropuestos = [
-  ["1", $ratificacion[0]['nombrePropuesto1'] ?? ""],
-  ["2", $ratificacion[0]['nombrePropuesto2'] ?? ""],
-  ["3", $ratificacion[0]['nombrePropuesto3'] ?? ""],
+  ["NOMBRE PROPUESTO 1", $ratificacion[0]['nombrePropuesto1'] ?? ""],
+  ["NOMBRE PROPUESTO 2", $ratificacion[0]['nombrePropuesto2'] ?? ""],
+  ["NOMBRE PROPUESTO 3", $ratificacion[0]['nombrePropuesto3'] ?? ""],
 ];
 
 $pdf->SetWidths([80, 94]);
 $pdf->SetLineHeight(5);
-$pdf->SetColors([[191, 191, 191], [255, 255, 255]]);
+$pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
 
 foreach ($nombresPropuestos as $item) {
   $pdf->Row([
@@ -456,13 +450,16 @@ foreach ($nombresPropuestos as $item) {
   ]);
 }
 
-// ----------------------
 // Firma final
 $pdf->Ln(25);
 $pdf->SetFont("Nutmeg", "", 11);
 $pdf->Cell(0, 5, safe_iconv("BAJO PROTESTA DE DECIR VERDAD"), 0, 1, "C");
 $pdf->SetFont("Nutmegb", "", 11);
-$pdf->Cell(0, 5, safe_iconv(mb_strtoupper($usuario["persona"]["nombre"] ?? "")), 0, 1, "C");
+$pdf->Cell(0, 5, safe_iconv(mb_strtoupper(trim(
+      ($usuario["persona"]['nombre'] ?? '') . ' ' . 
+      ($usuario["persona"]['apellidoPaterno'] ?? '') . ' ' . 
+      ($usuario["persona"]['apellidoMaterno'] ?? '')
+    ) ?? "")), 0, 1, "C");
 
 // Generar PDF
 $pdf->Output("I", "FDA02.pdf");
