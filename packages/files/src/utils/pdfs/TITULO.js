@@ -9,7 +9,7 @@ const img7 = fs.readFileSync(path.join(__dirname, '/images/img7.png'), { encodin
 function formatearFecha(fechaString) {
   if (!fechaString) return '';
 
-  const fecha = new Date(fechaString);
+  const fecha = new Date(`${fechaString}T00:00:00`);
   const dia = String(fecha.getDate()).padStart(2, '0');
   const mes = String(fecha.getMonth() + 1).padStart(2, '0');
   const anio = fecha.getFullYear();
@@ -37,12 +37,10 @@ async function agregarQR(doc, tituloElectronico, yBase) {
   doc.addImage(qrDataUrl, 'PNG', qrX, qrY, qrSize, qrSize);
 }
 
-async function GenerarTitulo(alumnoTituloElectronico, xmlString) {
+async function GenerarTitulo(tituloElectronico, xmlString) {
   const JsPDF = jsPDF;
   const doc = new JsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
   addNutmeg(doc);
-
-  const { tituloElectronico } = alumnoTituloElectronico;
 
   doc.addImage(img7, 'PNG', 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
   doc.setTextColor(0, 0, 0);
@@ -123,7 +121,7 @@ async function GenerarTitulo(alumnoTituloElectronico, xmlString) {
   const instDatoY = institY + 36;
   const institWidth = blockWidth;
   const institX = blockX;
-  centerTextInBox(tituloElectronico?.institucionProcedencia || '', institX, institWidth, instDatoY, 8, false);
+  centerTextInBox(tituloElectronico?.nombreInstitucion || '', institX, institWidth, instDatoY, 8, false);
   drawLine(instDatoY + 4);
   centerTextInBox('Nombre o denominación', institX, institWidth, instDatoY + 15, 8);
 
@@ -279,9 +277,12 @@ async function GenerarTitulo(alumnoTituloElectronico, xmlString) {
   doc.setFont('Nutmeg', 'normal');
   doc.setTextColor(150);
   const maxXmlWidth = doc.internal.pageSize.getWidth() - 114;
-  const xmlLines = doc.splitTextToSize(xmlString, maxXmlWidth);
-  const startY = 80;
-  doc.text(xmlLines, 57, startY);
+
+  if (xmlString) {
+    const xmlLines = doc.splitTextToSize(xmlString, maxXmlWidth);
+    const startY = 80;
+    doc.text(xmlLines, 57, startY);
+  }
 
   return doc.output('arraybuffer');
 }

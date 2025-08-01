@@ -67,6 +67,10 @@ const tipoEntidadObj = [
     id: 17,
     name: 'SOLICITUD_SERV_SOC',
   },
+  {
+    id: 18,
+    name: 'TITULO_ELECTRONICO',
+  },
 ];
 
 module.exports = tipoEntidadObj;
