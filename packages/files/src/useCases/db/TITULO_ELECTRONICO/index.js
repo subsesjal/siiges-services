@@ -10,7 +10,7 @@ module.exports = {
     xmlAdapter.createTituloElectronicoQuery,
   ),
   findFileTitulo: findFileTitulo(
-    xmlAdapter.findOneAlumnoTituloElectronicoQuery,
+    xmlAdapter.findOneTituloElectronicoQuery,
     xmlAdapter.findOneFileQuery,
     GenerarTitulo,
   ),
