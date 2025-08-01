@@ -22,13 +22,12 @@ const findFileTitulo = (
     entidadId,
   });
 
-  if (!fileXML) {
-    throw boom.conflict('No se encuentra un título electrónico registrado.');
+  let fileStringXML = null;
+
+  if (fileXML) {
+    const ruta = path.join(process.env.PATH_FILE, 'public', fileXML.ubicacion);
+    fileStringXML = fs.readFileSync(ruta, 'utf8');
   }
-
-  const ruta = path.join(process.env.PATH_FILE, 'public', fileXML?.ubicacion);
-
-  const fileStringXML = fs.readFileSync(ruta, 'utf8');
 
   const file = await GenerarTitulo(tituloElectronico, fileStringXML);
   return Buffer.from(file);
