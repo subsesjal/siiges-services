@@ -9,7 +9,7 @@ const img7 = fs.readFileSync(path.join(__dirname, '/images/img7.png'), { encodin
 function formatearFecha(fechaString) {
   if (!fechaString) return '';
 
-  const fecha = new Date(fechaString);
+  const fecha = new Date(`${fechaString}T00:00:00`);
   const dia = String(fecha.getDate()).padStart(2, '0');
   const mes = String(fecha.getMonth() + 1).padStart(2, '0');
   const anio = fecha.getFullYear();
@@ -121,7 +121,7 @@ async function GenerarTitulo(tituloElectronico, xmlString) {
   const instDatoY = institY + 36;
   const institWidth = blockWidth;
   const institX = blockX;
-  centerTextInBox(tituloElectronico?.institucionProcedencia || '', institX, institWidth, instDatoY, 8, false);
+  centerTextInBox(tituloElectronico?.nombreInstitucion || '', institX, institWidth, instDatoY, 8, false);
   drawLine(instDatoY + 4);
   centerTextInBox('Nombre o denominación', institX, institWidth, instDatoY + 15, 8);
 
