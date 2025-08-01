@@ -37,12 +37,10 @@ async function agregarQR(doc, tituloElectronico, yBase) {
   doc.addImage(qrDataUrl, 'PNG', qrX, qrY, qrSize, qrSize);
 }
 
-async function GenerarTitulo(alumnoTituloElectronico, xmlString) {
+async function GenerarTitulo(tituloElectronico, xmlString) {
   const JsPDF = jsPDF;
   const doc = new JsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
   addNutmeg(doc);
-
-  const { tituloElectronico } = alumnoTituloElectronico;
 
   doc.addImage(img7, 'PNG', 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
   doc.setTextColor(0, 0, 0);
