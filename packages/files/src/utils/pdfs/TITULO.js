@@ -277,9 +277,12 @@ async function GenerarTitulo(tituloElectronico, xmlString) {
   doc.setFont('Nutmeg', 'normal');
   doc.setTextColor(150);
   const maxXmlWidth = doc.internal.pageSize.getWidth() - 114;
-  const xmlLines = doc.splitTextToSize(xmlString, maxXmlWidth);
-  const startY = 80;
-  doc.text(xmlLines, 57, startY);
+
+  if (xmlString) {
+    const xmlLines = doc.splitTextToSize(xmlString, maxXmlWidth);
+    const startY = 80;
+    doc.text(xmlLines, 57, startY);
+  }
 
   return doc.output('arraybuffer');
 }
