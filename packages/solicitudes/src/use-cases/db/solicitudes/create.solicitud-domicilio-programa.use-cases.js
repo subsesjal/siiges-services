@@ -11,7 +11,7 @@ function removeIds(obj) {
     return obj.map(removeIds);
   }
 
-  const keysToRemove = ['id', 'createdAt', 'updatedAt', 'deletedAt'];
+  const keysToRemove = ['id', 'createdAt', 'updatedAt', 'deletedAt', 'acuerdoRvoe', 'fechaSurteEfecto'];
 
   const newObj = Object.keys(obj)
     .filter((key) => !keysToRemove.includes(key))
@@ -26,23 +26,15 @@ function removeIds(obj) {
 }
 
 const createDomicilioSolicitudPrograma = (
-  findOneUsuarioQuery,
-  findOneProgramaQuery,
-  findOnePlantelQuery,
   findOneSolicitudQuery,
   countSolicitudesQuery,
   createSolicitudProgramaQuery,
-) => async ({ programaId, plantelId, usuarioId }) => {
-  // Validation for the user, program and plantel
-  const usuario = await findOneUsuarioQuery({ id: usuarioId });
-  checkers.throwErrorIfDataIsFalsy(usuario, 'usuarios', usuarioId);
-  const programa = await findOneProgramaQuery({ id: programaId });
-  checkers.throwErrorIfDataIsFalsy(programa, 'programas', programaId);
-  const { usuarioId: solicitudUsuarioId, solicitudId } = programa;
-  if (solicitudUsuarioId !== usuarioId) boom.badRequest('[solicitudes]: The user is not the owner of the program');
-  const plantel = await findOnePlantelQuery({ id: plantelId });
-  checkers.throwErrorIfDataIsFalsy(plantel, 'planteles', plantelId);
-  if (plantel.usuarioId !== usuarioId) boom.badRequest('[solicitudes]: The user is not the owner of the plantel');
+) => async ({ solicitudId, plantelId }, data) => {
+  const { tipoSolicitudId } = data;
+
+  if (tipoSolicitudId !== 3) {
+    throw boom.badRequest('[Solicitudes]: El tipo de solicitud no es cambio de domicilio');
+  }
 
   const include = [{
     association: 'programa',
@@ -51,10 +43,7 @@ const createDomicilioSolicitudPrograma = (
       { association: 'asignaturas' },
       { association: 'trayectoria' },
     ],
-  },
-  { association: 'representante' },
-  { association: 'diligencias' },
-  ];
+  }];
 
   const solicitud = await findOneSolicitudQuery({ id: solicitudId }, {
     undefined,

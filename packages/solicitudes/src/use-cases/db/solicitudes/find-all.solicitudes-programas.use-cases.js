@@ -26,9 +26,8 @@ const findAllSolicitudesProgramas = (
         { association: 'institucion' }],
       }],
   },
-  {
-    association: 'estatusSolicitud',
-  }];
+  { association: 'estatusSolicitud' },
+  { association: 'tipoSolicitud' }];
 
   let query = {};
   if (usuarioId) {

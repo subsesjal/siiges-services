@@ -65,7 +65,7 @@ const updateInstitucionSchema = {
               },
             },
             rector: {
-              type: 'object',
+              type: ['object', 'null'],
               properties: {
                 ...rector,
                 ...responseProperties,
