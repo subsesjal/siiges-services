@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-await-in-loop */
 const { checkers, Logger } = require('@siiges-services/shared');
 
 const SITUACION_INACTIVO = 2;
@@ -82,12 +84,20 @@ const processSolicitudRevEquiv = (
     ?.asignaturasAntecedenteEquivalente;
   const errores = [];
 
-  const asignaturasCalificacion = asignaturasAntecedenteEquivalente.map(async (obj) => {
+  const asignaturasCalificacion = [];
+
+  for (const obj of asignaturasAntecedenteEquivalente) {
     const calificacion = obj.calificacionEquivalente;
     const asignatura = obj.asignaturaEquivalentePrograma?.asignatura;
 
-    const grupo = await findOneGrupoQuery({
-      cicloEscolarId: cicloEquivalente.id, gradoId: asignatura.gradoId, turnoId: 1, descripcion: 'UNICO',
+    Logger.info('Asignatura');
+    Logger.info(JSON.stringify(asignatura));
+
+    let grupo = await findOneGrupoQuery({
+      cicloEscolarId: cicloEquivalente.id,
+      gradoId: asignatura.gradoId,
+      turnoId: 1,
+      descripcion: 'UNICO',
     });
 
     if (grupo) {
@@ -98,17 +108,17 @@ const processSolicitudRevEquiv = (
 
       if (!alumnoGrupo) {
         errores.push(`Alumno no encontrado en el grupo ${grupo.id}`);
-        /* await createAlumnoGrupoQuery({
+        await createAlumnoGrupoQuery({
           alumnoId: newAlumno.id,
           grupoId: grupo.id,
-        }); */
+        });
       }
     }
 
     if (!grupo) {
-      errores.push(`Grupo no encontrado para el ciclo escolar ${cicloEquivalente.id}, grado ${asignatura.gradoId}, descipcion UNICO`);
+      errores.push(`Grupo no encontrado para el ciclo escolar ${cicloEquivalente.id}, grado ${asignatura.gradoId}, descripcion UNICO`);
 
-      /* grupo = await createGrupoQuery({
+      grupo = await createGrupoQuery({
         cicloEscolarId: cicloEquivalente.id,
         gradoId: asignatura.gradoId,
         turnoId: 1,
@@ -118,24 +128,23 @@ const processSolicitudRevEquiv = (
       await createAlumnoGrupoQuery({
         alumnoId: newAlumno.id,
         grupoId: grupo.id,
-      }); */
+      });
     }
 
-    return {
+    asignaturasCalificacion.push({
       alumnoId: newAlumno.id,
-      grupoId: grupo.id,
+      grupoId: grupo?.id,
       asignaturaId: asignatura.id,
       calificacion,
       tipo: 1,
       fechaExamen: new Date(),
-    };
-  });
-
-  Logger.info(JSON.stringify(asignaturasCalificacion));
+    });
+  }
 
   return {
     alumnoData,
     errores,
+    asignaturasCalificacion,
   };
 };
 

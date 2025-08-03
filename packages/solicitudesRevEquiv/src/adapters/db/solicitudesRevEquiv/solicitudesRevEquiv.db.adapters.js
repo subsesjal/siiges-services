@@ -10,6 +10,7 @@ const {
   Alumno,
   CicloEscolar,
   Grupo,
+  AlumnoGrupo,
 } = models;
 
 const {
@@ -39,5 +40,6 @@ module.exports = {
   createCicloEscolarQuery: createQuery(CicloEscolar),
   findOneGrupoQuery: findOneQuery(Grupo),
   createGrupoQuery: createQuery(Grupo),
-
+  findOneAlumnoGrupoQuery: findOneQuery(AlumnoGrupo),
+  createAlumnoGrupoQuery: createQuery(AlumnoGrupo),
 };
