@@ -2,12 +2,11 @@ const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
 async function createSolicitudPrograma(req, reply) {
+  Logger.info('[solicitudes]: Crear solicitud por tipo de solicitud programa');
   try {
     const { ...data } = req.body;
-    const { solicitudId } = req.query;
+    const { solicitudId, plantelId } = req.params;
     const { tipoSolicitudId } = data;
-
-    Logger.info('[solicitudes]: Creating solicitud');
 
     let solicitud = {};
 
@@ -18,6 +17,12 @@ async function createSolicitudPrograma(req, reply) {
       case 2:
         solicitud = await this.solicitudServices.createRefrendoSolicitudPrograma(
           { solicitudId },
+          data,
+        );
+        break;
+      case 3:
+        solicitud = await this.solicitudServices.createDomicilioSolicitudPrograma(
+          { solicitudId, plantelId },
           data,
         );
         break;

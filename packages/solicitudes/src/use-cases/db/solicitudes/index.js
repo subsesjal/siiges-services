@@ -29,11 +29,9 @@ module.exports = {
     solicitudes.createProgramaTurnoQuery,
   ),
   createRefrendoSolicitudPrograma: createRefrendoSolicitudPrograma(
-    solicitudes.findOneUsuarioQuery,
     solicitudes.findOneSolicitudProgramaQuery,
     solicitudes.countSolicitudesQuery,
     solicitudes.createSolicitudProgramaQuery,
-    solicitudes.createProgramaTurnoQuery,
   ),
   findAllSolicitudesProgramas: findAllSolicitudesProgramas(
     solicitudes.findAllSolicitudesProgramasQuery,
@@ -84,9 +82,6 @@ module.exports = {
     solicitudes.findProgramasBySolicitudIdQuery,
   ),
   createDomicilioSolicitudPrograma: createDomicilioSolicitudPrograma(
-    solicitudes.findOneUsuarioQuery,
-    solicitudes.findOneProgramaQuery,
-    solicitudes.findOnePlantelQuery,
     solicitudes.findOneSolicitudQuery,
     solicitudes.countSolicitudesQuery,
     solicitudes.createSolicitudProgramaQuery,

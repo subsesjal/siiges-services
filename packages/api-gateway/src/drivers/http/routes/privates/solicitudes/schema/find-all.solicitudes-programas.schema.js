@@ -1,5 +1,6 @@
 const { solicitud } = require('./properties/solicitud');
 const { estatusSolicitud } = require('./properties/estatusSolicitud');
+const { tipoSolicitud } = require('./properties/tipoSolicitud');
 const { domicilio } = require('../../usuarios/schema/properties/domicilio');
 const { responseProperties } = require('./properties/responseProperties');
 
@@ -32,6 +33,14 @@ const findAllSolicitudesProgramasSchema = {
                 properties: {
                   id: { type: 'integer' },
                   ...estatusSolicitud,
+                  ...responseProperties,
+                },
+              },
+              tipoSolicitud: {
+                type: ['object', 'null'],
+                properties: {
+                  id: { type: 'integer' },
+                  ...tipoSolicitud,
                   ...responseProperties,
                 },
               },

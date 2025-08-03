@@ -11,7 +11,7 @@ function removeIds(obj) {
     return obj.map(removeIds);
   }
 
-  const keysToRemove = ['id', 'createdAt', 'updatedAt', 'deletedAt'];
+  const keysToRemove = ['id', 'createdAt', 'updatedAt', 'deletedAt', 'acuerdoRvoe', 'fechaSurteEfecto'];
 
   const newObj = Object.keys(obj)
     .filter((key) => !keysToRemove.includes(key))
@@ -26,7 +26,6 @@ function removeIds(obj) {
 }
 
 const createRefrendoSolicitudPrograma = (
-  findOneUsuarioQuery,
   findOneSolicitudQuery,
   countSolicitudesQuery,
   createSolicitudProgramaQuery,
@@ -36,7 +35,7 @@ const createRefrendoSolicitudPrograma = (
 
   if (tipoSolicitudId !== 2) {
     throw boom.badRequest(
-      '[solicitudes]: Tipo Solicitud is not correct',
+      '[Solicitudes]: El tipo de solicitud no es un refrendo',
     );
   }
   const include = [{
@@ -46,9 +45,7 @@ const createRefrendoSolicitudPrograma = (
       { association: 'asignaturas' },
       { association: 'trayectoria' },
     ],
-  },
-  { association: 'representante' },
-  ];
+  }];
 
   const solicitud = await findOneSolicitudQuery({ id: solicitudId }, {
     undefined,

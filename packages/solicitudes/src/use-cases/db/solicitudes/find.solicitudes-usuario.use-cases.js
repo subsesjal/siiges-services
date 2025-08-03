@@ -16,9 +16,8 @@ const findSolicitudesUsuario = (
       }],
     }],
   },
-  {
-    association: 'estatusSolicitud',
-  }];
+  { association: 'estatusSolicitud' },
+  { association: 'tipoSolicitud' }];
 
   let { usuarioId } = identifierObj;
   const { rolId } = await findOneUsuarioQuery({ id: usuarioId });
