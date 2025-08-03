@@ -16,7 +16,6 @@ const {
   updateEvaluaciones,
   findCumplimiento,
 } = require('./evaluaciones');
-const { createDomicilioSolicitudPrograma } = require('./create.handlers.domicilio-solicitud-programa.adapters');
 
 module.exports = {
   deleteSolicitud,
@@ -35,5 +34,4 @@ module.exports = {
   findOneSolicitudDetalle,
   findCumplimiento,
   createSendMailObservacion,
-  createDomicilioSolicitudPrograma,
 };

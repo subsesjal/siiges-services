@@ -5,7 +5,7 @@ const createDomicilioSolicitudProgramaSchema = {
     title: 'updateSolcitudSeccionObservacionSchema',
     type: 'object',
     properties: {
-      programaId: { type: 'integer' },
+      solicitudId: { type: 'integer' },
       plantelId: { type: 'integer' },
     },
   },
