@@ -2,10 +2,11 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function processSolicitudRevEquiv(req, reply) {
   try {
+    const data = req.body;
     const { solicitudRevEquivId } = req.params;
 
     const solicitud = await this.solicitudRevEquivServices
-      .processRevEquiv({ id: solicitudRevEquivId });
+      .processSolicitudRevEquiv({ id: solicitudRevEquivId }, data);
 
     return reply
       .code(201)

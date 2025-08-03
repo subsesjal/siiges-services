@@ -43,6 +43,11 @@ module.exports = {
     solicitudesRevEquiv.findOneSolicitudRevEquivQuery,
     solicitudesRevEquiv.findOneAlumnoQuery,
     solicitudesRevEquiv.createAlumnoQuery,
-
+    solicitudesRevEquiv.findOneCicloEscolarQuery,
+    solicitudesRevEquiv.createCicloEscolarQuery,
+    solicitudesRevEquiv.findOneGrupoQuery,
+    solicitudesRevEquiv.createGrupoQuery,
+    solicitudesRevEquiv.findOneAlumnoGrupoQuery,
+    solicitudesRevEquiv.createAlumnoGrupoQuery,
   ),
 };
