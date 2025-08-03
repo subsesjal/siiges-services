@@ -7,6 +7,7 @@ const {
   AsignaturaEquivalentePrograma,
   InstitucionDestinoPrograma,
   Asignatura,
+  Alumno,
 } = models;
 
 const {
@@ -31,4 +32,6 @@ module.exports = {
   findOneAsignaturaQuery: findOneQuery(Asignatura),
   findOneAsignaturaAntecedenteEquivalenteQuery: findOneQuery(AsignaturaAntecedenteEquivalente),
   countSolicitudRevEquivQuery: countQuery(SolicitudRevEquiv),
+  findOneAlumnoQuery: findOneQuery(Alumno),
+  createAlumnoQuery: createQuery(Alumno),
 };
