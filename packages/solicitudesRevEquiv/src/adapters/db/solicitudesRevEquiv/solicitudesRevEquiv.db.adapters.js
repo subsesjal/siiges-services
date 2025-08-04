@@ -44,6 +44,7 @@ module.exports = {
   createGrupoQuery: createQuery(Grupo),
   findOneAlumnoGrupoQuery: findOneQuery(AlumnoGrupo),
   createAlumnoGrupoQuery: createQuery(AlumnoGrupo),
+  findOneCalificacionQuery: findOneQuery(Calificacion),
   createCalificacionQuery: createQuery(Calificacion),
   findOneEquivQuery: findOneQuery(Equivalencia),
   createEquiQuery: createQuery(Equivalencia),

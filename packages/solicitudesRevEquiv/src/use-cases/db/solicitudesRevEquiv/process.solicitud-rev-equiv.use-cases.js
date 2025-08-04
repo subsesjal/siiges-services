@@ -14,8 +14,8 @@ const processSolicitudRevEquiv = (
   createGrupoQuery,
   findOneAlumnoGrupoQuery,
   createAlumnoGrupoQuery,
-  createCalificacionQuery,
   findOneCalificacionQuery,
+  createCalificacionQuery,
   findEquivQuery,
   createEquivQuery,
 ) => async (identifierObj, data) => {
