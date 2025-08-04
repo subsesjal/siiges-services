@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
-const { checkers, Logger } = require('@siiges-services/shared');
+const { checkers } = require('@siiges-services/shared');
 
 const SITUACION_INACTIVO = 2;
 
@@ -14,6 +14,10 @@ const processSolicitudRevEquiv = (
   createGrupoQuery,
   findOneAlumnoGrupoQuery,
   createAlumnoGrupoQuery,
+  createCalificacionQuery,
+  findOneCalificacionQuery,
+  findEquivQuery,
+  createEquivQuery,
 ) => async (identifierObj, data) => {
   const solicitudRevEquiv = await findOneSolicitudRevEquivQuery(identifierObj, {
     include: [{
@@ -56,7 +60,13 @@ const processSolicitudRevEquiv = (
     throw new Error('Programa no asociado a la solicitud');
   }
 
-  const { matricula } = data;
+  const {
+    matricula, folioExpediente, folioResolucion, fechaResolucion,
+  } = data;
+
+  if (!matricula || !folioExpediente || !folioResolucion || !fechaResolucion) {
+    throw new Error('Datos incompletos para procesar la solicitud de equivalencia');
+  }
 
   const existingAlumno = await findOneAlumnoQuery({ matricula, programaId });
   if (existingAlumno) {
@@ -74,6 +84,16 @@ const processSolicitudRevEquiv = (
   // Crear el nuevo alumno (comentado para propósitos de depuración)
   const newAlumno = !existingAlumno ? await createAlumnoQuery(alumnoData) : existingAlumno;
 
+  const equivalenciaInterna = await findEquivQuery({ alumnoId: newAlumno.id });
+  if (!equivalenciaInterna) {
+    await createEquivQuery({
+      alumnoId: newAlumno.id,
+      folioExpediente,
+      folioResolucion,
+      fechaResolucion,
+    });
+  }
+
   const cicloEquivalente = await findOneCicloEscolarQuery({ programaId, nombre: 'EQUIV' });
   if (!cicloEquivalente) {
     await createCicloEscolarQuery({ programaId, nombre: 'EQUIV' });
@@ -82,16 +102,12 @@ const processSolicitudRevEquiv = (
   const asignaturasAntecedenteEquivalente = solicitudJson
     ?.interesado
     ?.asignaturasAntecedenteEquivalente;
-  const errores = [];
 
   const asignaturasCalificacion = [];
 
   for (const obj of asignaturasAntecedenteEquivalente) {
     const calificacion = obj.calificacionEquivalente;
     const asignatura = obj.asignaturaEquivalentePrograma?.asignatura;
-
-    Logger.info('Asignatura');
-    Logger.info(JSON.stringify(asignatura));
 
     let grupo = await findOneGrupoQuery({
       cicloEscolarId: cicloEquivalente.id,
@@ -107,7 +123,6 @@ const processSolicitudRevEquiv = (
       });
 
       if (!alumnoGrupo) {
-        errores.push(`Alumno no encontrado en el grupo ${grupo.id}`);
         await createAlumnoGrupoQuery({
           alumnoId: newAlumno.id,
           grupoId: grupo.id,
@@ -116,8 +131,6 @@ const processSolicitudRevEquiv = (
     }
 
     if (!grupo) {
-      errores.push(`Grupo no encontrado para el ciclo escolar ${cicloEquivalente.id}, grado ${asignatura.gradoId}, descripcion UNICO`);
-
       grupo = await createGrupoQuery({
         cicloEscolarId: cicloEquivalente.id,
         gradoId: asignatura.gradoId,
@@ -141,11 +154,23 @@ const processSolicitudRevEquiv = (
     });
   }
 
-  return {
-    alumnoData,
-    errores,
-    asignaturasCalificacion,
-  };
+  const calificaciones = await Promise.all(
+    asignaturasCalificacion.map(async (calificacion) => {
+      const existingCalificacion = await findOneCalificacionQuery({
+        alumnoId: calificacion.alumnoId,
+        asignaturaId: calificacion.asignaturaId,
+        grupoId: calificacion.grupoId,
+      });
+
+      if (!existingCalificacion) {
+        return createCalificacionQuery(calificacion);
+      }
+
+      return existingCalificacion;
+    }),
+  );
+
+  return calificaciones;
 };
 
 module.exports = processSolicitudRevEquiv;

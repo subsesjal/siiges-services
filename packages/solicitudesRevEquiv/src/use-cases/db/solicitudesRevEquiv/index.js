@@ -49,5 +49,8 @@ module.exports = {
     solicitudesRevEquiv.createGrupoQuery,
     solicitudesRevEquiv.findOneAlumnoGrupoQuery,
     solicitudesRevEquiv.createAlumnoGrupoQuery,
+    solicitudesRevEquiv.createCalificacionQuery,
+    solicitudesRevEquiv.findOneEquivQuery,
+    solicitudesRevEquiv.createEquiQuery,
   ),
 };

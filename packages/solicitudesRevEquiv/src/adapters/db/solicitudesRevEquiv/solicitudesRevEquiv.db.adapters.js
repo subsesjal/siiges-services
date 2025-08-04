@@ -11,6 +11,8 @@ const {
   CicloEscolar,
   Grupo,
   AlumnoGrupo,
+  Calificacion,
+  Equivalencia,
 } = models;
 
 const {
@@ -42,4 +44,7 @@ module.exports = {
   createGrupoQuery: createQuery(Grupo),
   findOneAlumnoGrupoQuery: findOneQuery(AlumnoGrupo),
   createAlumnoGrupoQuery: createQuery(AlumnoGrupo),
+  createCalificacionQuery: createQuery(Calificacion),
+  findOneEquivQuery: findOneQuery(Equivalencia),
+  createEquiQuery: createQuery(Equivalencia),
 };
