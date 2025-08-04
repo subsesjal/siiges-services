@@ -81,7 +81,6 @@ const processSolicitudRevEquiv = (
     estatus: 1,
     tipoTramiteId: solicitudJson.tipoTramiteId,
   };
-  // Crear el nuevo alumno (comentado para propósitos de depuración)
   const newAlumno = !existingAlumno ? await createAlumnoQuery(alumnoData) : existingAlumno;
 
   const equivalenciaInterna = await findEquivQuery({ alumnoId: newAlumno.id });
