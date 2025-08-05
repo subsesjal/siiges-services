@@ -1,4 +1,5 @@
 const { infraestructura } = require('./properties/infraestructura');
+const { tipoInstalacion } = require('./properties/tipoInstalacion');
 const { asignaturaInfraestructura } = require('./properties/asignaturaInfraestructura');
 const { asignatura } = require('../../asignaturas/schema/properties/asignatura');
 const { responseProperties } = require('./properties/responseProperties');
@@ -39,6 +40,14 @@ const findGroupPlantelInfraestructuraSchema = {
                     },
                   },
                 },
+              },
+            },
+            tipoInstalacion: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...tipoInstalacion,
+                ...responseProperties,
               },
             },
           },
