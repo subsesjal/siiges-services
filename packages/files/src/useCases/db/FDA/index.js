@@ -4,6 +4,8 @@ const pdfAdapter = require('../../../utils/pdfs');
 
 const { buildFileFDA01 } = require('./build.FDA01.db.use-cases');
 const { buildFileFDA02 } = require('./build.FDA02.db.use-cases');
+const { buildFileFDA03 } = require('./build.FDA03.db.use-cases');
+const { buildFileFDA06 } = require('./build.FDA06.db.use-cases');
 const { findFileFDA02 } = require('./find-one.FDA02.db.use-cases');
 const { findFileFDA03 } = require('./find-one.FDA03.db.use-cases');
 const { findFileFDA04 } = require('./find-one.FDA04.db.use-cases');
@@ -16,6 +18,14 @@ module.exports = {
     phpAdapter.createPhpFile,
   ),
   buildFileFDA02: buildFileFDA02(
+    fdaAdapter.findOneSolicitudProgramaQuery,
+    phpAdapter.createPhpFile,
+  ),
+  buildFileFDA03: buildFileFDA03(
+    fdaAdapter.findOneSolicitudProgramaQuery,
+    phpAdapter.createPhpFile,
+  ),
+  buildFileFDA06: buildFileFDA06(
     fdaAdapter.findOneSolicitudProgramaQuery,
     phpAdapter.createPhpFile,
   ),
