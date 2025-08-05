@@ -9,12 +9,14 @@ const findGroupPlantelInfraestructura = (
   const AULA_ID = 1;
   const { plantelId, programaId } = identifierObj;
 
-  const include = [{
-    association: 'asignaturasInfraestructura',
-    include: [
-      { association: 'asignatura' },
-    ],
-  }];
+  const include = [
+    { association: 'tipoInstalacion' },
+    {
+      association: 'asignaturasInfraestructura',
+      include: [
+        { association: 'asignatura' },
+      ],
+    }];
 
   const plantelInfraestructuras = await findAllInfraestructuraQuery({
     plantelId,

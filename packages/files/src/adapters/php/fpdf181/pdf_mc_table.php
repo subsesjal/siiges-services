@@ -18,6 +18,12 @@ class PDF_MC_Table extends FPDF
     $this->widths = $w;
   }
 
+// Alias para compatibilidad con código actua
+  function SetColWidths($w)
+  {
+    $this->SetWidths($w);
+  }
+
   //Set the array of column alignments
   function SetAligns($a)
   {
@@ -80,6 +86,29 @@ class PDF_MC_Table extends FPDF
       $this->SetXY($x + $w, $y);
     }
     //Go to the next line
+    $this->Ln($h);
+  }
+
+  function RowBlanco($data)
+  {
+    $nb = 0;
+    for ($i = 0; $i < count($data); $i++) {
+      $nb = max($nb, $this->NbLines($this->widths[$i], $data[$i]));
+    }
+    $h = $this->lineHeight * $nb;
+    $this->CheckPageBreak($h);
+
+    for ($i = 0; $i < count($data); $i++) {
+      $w = $this->widths[$i];
+      $a = isset($this->aligns[$i]) ? $this->aligns[$i] : 'L';
+      $x = $this->GetX();
+      $y = $this->GetY();
+
+      $this->SetFillColor(255, 255, 255);
+      $this->Rect($x, $y, $w, $h, 'FD');
+      $this->MultiCell($w, 3, $data[$i], 0, $a);
+      $this->SetXY($x + $w, $y);
+    }
     $this->Ln($h);
   }
 

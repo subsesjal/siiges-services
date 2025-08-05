@@ -33,7 +33,7 @@ const updateInfraestructura = (
   let infraestructura;
 
   if (infraestructuraJson.tipoInstalacionId !== AULA_ID) {
-    infraestructura = await updateInfraestructuraQuery({ id: infraestructuraId }, data);
+    infraestructura = await updateInfraestructuraQuery({ id: infraestructuraId }, data, { include: [{ association: 'tipoInstalacion' }] });
   } else {
     // update infraestructura
     // find programa
@@ -46,7 +46,8 @@ const updateInfraestructura = (
     });
     checkers.throwErrorIfDataIsFalsy(infraestructuraPrograma, 'infraestructurasProgramas', `infraestructuraId: ${infraestructuraId} and programaId: ${programaId}`);
 
-    infraestructura = await updateInfraestructuraQuery({ id: infraestructuraId }, data);
+    infraestructura = await updateInfraestructuraQuery({ id: infraestructuraId }, data, { include: [{ association: 'tipoInstalacion' }] });
+    infraestructura = infraestructura.toJSON();
 
     const newAsignaturasInfraestructuraArray = [];
     if (data.asignaturasInfraestructura && data.asignaturasInfraestructura.length > 0) {
@@ -100,7 +101,7 @@ const updateInfraestructura = (
       }));
     }
 
-    infraestructura.dataValues.asignaturasInfraestructura = newAsignaturasInfraestructuraArray;
+    infraestructura.asignaturasInfraestructura = newAsignaturasInfraestructuraArray;
   }
 
   return infraestructura;

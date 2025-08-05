@@ -7,6 +7,12 @@ const {
   AsignaturaEquivalentePrograma,
   InstitucionDestinoPrograma,
   Asignatura,
+  Alumno,
+  CicloEscolar,
+  Grupo,
+  AlumnoGrupo,
+  Calificacion,
+  Equivalencia,
 } = models;
 
 const {
@@ -19,7 +25,6 @@ const {
 } = queries;
 
 module.exports = {
-  // Create
   createSolicitudRevEquivQuery: createQuery(SolicitudRevEquiv),
   createAsignaturaAntecedenteEquivalente: createQuery(AsignaturaAntecedenteEquivalente),
   createAsignaturaEquivalenteProgramaQuery: createQuery(AsignaturaEquivalentePrograma),
@@ -31,4 +36,16 @@ module.exports = {
   findOneAsignaturaQuery: findOneQuery(Asignatura),
   findOneAsignaturaAntecedenteEquivalenteQuery: findOneQuery(AsignaturaAntecedenteEquivalente),
   countSolicitudRevEquivQuery: countQuery(SolicitudRevEquiv),
+  findOneAlumnoQuery: findOneQuery(Alumno),
+  createAlumnoQuery: createQuery(Alumno),
+  findOneCicloEscolarQuery: findOneQuery(CicloEscolar),
+  createCicloEscolarQuery: createQuery(CicloEscolar),
+  findOneGrupoQuery: findOneQuery(Grupo),
+  createGrupoQuery: createQuery(Grupo),
+  findOneAlumnoGrupoQuery: findOneQuery(AlumnoGrupo),
+  createAlumnoGrupoQuery: createQuery(AlumnoGrupo),
+  findOneCalificacionQuery: findOneQuery(Calificacion),
+  createCalificacionQuery: createQuery(Calificacion),
+  findOneEquivQuery: findOneQuery(Equivalencia),
+  createEquiQuery: createQuery(Equivalencia),
 };

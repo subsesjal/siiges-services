@@ -56,6 +56,15 @@ async function solicitudesRevEquivRouter(fastify, opts, next) {
     solicitudesRevEquiv.findOneAsignaturaAntecedenteEquivalente,
   );
 
+  await fastify.post(
+    '/:solicitudRevEquivId/procesar',
+    {
+      // schema: solicitudesSchema.findOneAsignaturaAntecedenteEquivalenteSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesRevEquiv.processSolicitudRevEquiv,
+  );
+
   next();
 }
 

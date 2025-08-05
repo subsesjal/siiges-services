@@ -5,6 +5,13 @@ const { Logger } = require('@siiges-services/shared');
 const FORMATOS_MAPPING = {
   FDA01: 'fda01.php',
   FDA02: 'fda02.php',
+  FDA03: 'fda03.php',
+  FDA04: 'fda04.php', // Falta
+  FDA06: 'fda06.php',
+  FDP02: 'fdp02.php', // Falta
+  FDP05: 'fdp05.php',
+  FDP06: 'fdp06.php',
+  OFICIO_ADMISORIO: 'ofad.php',
   HISTORIAL_ACADEMICO: 'fhistorial.php',
 };
 
