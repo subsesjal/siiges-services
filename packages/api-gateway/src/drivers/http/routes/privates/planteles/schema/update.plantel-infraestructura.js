@@ -1,4 +1,5 @@
 const { infraestructura } = require('./properties/infraestructura');
+const { tipoInstalacion } = require('./properties/tipoInstalacion');
 const { asignaturaInfraestructura } = require('./properties/asignaturaInfraestructura');
 const { infraestructuraPrograma } = require('./properties/infraestructuraPrograma');
 const { responseProperties } = require('./properties/responseProperties');
@@ -43,6 +44,14 @@ const updateInfraestructuraSchema = {
             id: { type: 'integer' },
             ...infraestructura,
             ...responseProperties,
+            tipoInstalacion: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...tipoInstalacion,
+                ...responseProperties,
+              },
+            },
             asignaturasInfraestructura: {
               type: 'array',
               items: {

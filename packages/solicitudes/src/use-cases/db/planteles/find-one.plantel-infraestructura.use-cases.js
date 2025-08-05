@@ -5,12 +5,14 @@ const findOnePlantelInfraestructura = (
 ) => async (identifierObj) => {
   const { plantelId, infraestructuraId } = identifierObj;
 
-  const include = [{
-    association: 'asignaturasInfraestructura',
-    include: [
-      { association: 'asignatura' },
-    ],
-  }];
+  const include = [
+    { association: 'tipoInstalacion' },
+    {
+      association: 'asignaturasInfraestructura',
+      include: [
+        { association: 'asignatura' },
+      ],
+    }];
 
   const plantelInfraestructura = await findOneInfraestructuraQuery({
     id: infraestructuraId,
