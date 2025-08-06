@@ -15,6 +15,7 @@ const { persona } = require('../../usuarios/schema/properties/persona');
 const { modalidad } = require('../../programas/schema/properties/modalidad');
 const { nivel } = require('../../grupos/schema/properties/nivel');
 const { turno } = require('../../grupos/schema/properties/turno');
+const { tipoSolicitud } = require('./properties/tipoSolicitud');
 
 const findOneSolicitudDetalleSchema = {
   tags: ['Solicitudes'],
@@ -43,6 +44,14 @@ const findOneSolicitudDetalleSchema = {
               properties: {
                 id: { type: 'integer' },
                 ...estatusSolicitud,
+                ...responseProperties,
+              },
+            },
+            tipoSolicitud: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...tipoSolicitud,
                 ...responseProperties,
               },
             },

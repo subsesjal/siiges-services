@@ -43,7 +43,8 @@ const findOneSolicitudPrograma = (findOneSolicitudProgramaQuery) => async (ident
     association: 'diligencias',
     include: [{ association: 'persona' }],
   },
-  { association: 'estatusSolicitud' }];
+  { association: 'estatusSolicitud' },
+  { association: 'tipoSolicitud' }];
 
   const solicitud = await findOneSolicitudProgramaQuery(identifierObj, {
     undefined,
