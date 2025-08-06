@@ -12,6 +12,10 @@ const { ratificacionNombre } = require('../../instituciones/schema/properties/ra
 const { trayectoria } = require('../../trayectorias/schema/properties/trayectoria');
 const { rector } = require('../../instituciones/schema/properties/rector');
 const { persona } = require('../../usuarios/schema/properties/persona');
+const { modalidad } = require('../../programas/schema/properties/modalidad');
+const { nivel } = require('../../grupos/schema/properties/nivel');
+const { turno } = require('../../grupos/schema/properties/turno');
+const { tipoSolicitud } = require('./properties/tipoSolicitud');
 
 const findOneSolicitudDetalleSchema = {
   tags: ['Solicitudes'],
@@ -43,12 +47,35 @@ const findOneSolicitudDetalleSchema = {
                 ...responseProperties,
               },
             },
+            tipoSolicitud: {
+              type: 'object',
+              properties: {
+                id: { type: 'integer' },
+                ...tipoSolicitud,
+                ...responseProperties,
+              },
+            },
             programa: {
               type: 'object',
               properties: {
                 id: { type: 'integer' },
                 ...programa,
-                ...responseProperties,
+                nivel: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'string' },
+                    ...nivel,
+                    ...responseProperties,
+                  },
+                },
+                modalidad: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'string' },
+                    ...modalidad,
+                    ...responseProperties,
+                  },
+                },
                 programaTurnos: {
                   type: 'array',
                   items: {
@@ -57,6 +84,14 @@ const findOneSolicitudDetalleSchema = {
                       id: { type: 'integer' },
                       ...programaTurnos,
                       ...responseProperties,
+                      turno: {
+                        type: 'object',
+                        properties: {
+                          id: { type: 'string' },
+                          ...turno,
+                          ...responseProperties,
+                        },
+                      },
                     },
                   },
                 },
