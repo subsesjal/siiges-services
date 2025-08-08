@@ -67,6 +67,8 @@ protected $LayoutMode;         // layout display mode
 protected $metadata;           // document properties
 protected $PDFVersion;         // PDF version number
 
+public $justAddedPage = false;
+
 /*******************************************************************************
 *                               Public methods                                 *
 *******************************************************************************/
@@ -355,6 +357,7 @@ function AddPage($orientation='', $size='', $rotation=0)
 	}
 	$this->TextColor = $tc;
 	$this->ColorFlag = $cf;
+	$this->justAddedPage = true;
 }
 
 function Header()
@@ -766,6 +769,41 @@ function MultiCell($w, $h, $txt, $border=0, $align='J', $fill=false)
 		$b .= 'B';
 	$this->Cell($w,$h,substr($s,$j,$i-$j),$b,2,$align,$fill);
 	$this->x = $this->lMargin;
+}
+function ExpandHeaderRow($pdf, $texts, $widths, $lineHeight = 5, $border = 1, $align = 'C', $fill = true)
+{
+    $maxLines = 1;
+
+    foreach ($texts as $txt) {
+        $lines = substr_count($txt, "\n") + 1;
+        if ($lines > $maxLines) {
+            $maxLines = $lines;
+        }
+    }
+
+    $maxHeight = $maxLines * $lineHeight;
+
+    foreach ($texts as $i => $txt) {
+        $w = $widths[$i];
+        $x = $pdf->GetX();
+        $y = $pdf->GetY();
+
+        $lines = substr_count($txt, "\n") + 1;
+        $textHeight = $lines * $lineHeight;
+
+        $offsetY = ($maxHeight - $textHeight) / 2;
+
+        if ($fill || $border) {
+            $pdf->Rect($x, $y, $w, $maxHeight, $fill ? 'FD' : 'D');
+        }
+
+        $pdf->SetXY($x, $y + $offsetY);
+
+        $pdf->MultiCell($w, $lineHeight, safe_iconv($txt), 0, $align, false);
+
+        $pdf->SetXY($x + $w, $y);
+    }
+    $pdf->Ln($maxHeight);
 }
 
 function Write($h, $txt, $link='')

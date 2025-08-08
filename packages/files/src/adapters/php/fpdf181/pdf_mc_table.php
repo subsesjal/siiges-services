@@ -96,7 +96,10 @@ class PDF_MC_Table extends FPDF
       $nb = max($nb, $this->NbLines($this->widths[$i], $data[$i]));
     }
     $h = $this->lineHeight * $nb;
-    $this->CheckPageBreak($h);
+
+    if ($this->CheckPageBreak($h + 25)) {
+      $this->Ln(25);
+    }
 
     for ($i = 0; $i < count($data); $i++) {
       $w = $this->widths[$i];
@@ -106,7 +109,13 @@ class PDF_MC_Table extends FPDF
 
       $this->SetFillColor(255, 255, 255);
       $this->Rect($x, $y, $w, $h, 'FD');
-      $this->MultiCell($w, 3, $data[$i], 0, $a);
+
+      $lines = $this->NbLines($w, $data[$i]);
+      $cellHeight = $this->lineHeight * $lines;
+      $verticalOffset = ($h - $cellHeight) / 2;
+      $this->SetXY($x, $y + $verticalOffset);
+
+      $this->MultiCell($w, $this->lineHeight, $data[$i], 0, $a);
       $this->SetXY($x + $w, $y);
     }
     $this->Ln($h);
@@ -114,9 +123,12 @@ class PDF_MC_Table extends FPDF
 
   function CheckPageBreak($h)
   {
-    //If the height h would cause an overflow, add a new page immediately
-    if ($this->GetY() + $h > $this->PageBreakTrigger)
-      $this->AddPage($this->CurOrientation);
+    $margenInferior = 20;
+    if ($this->GetY() + $h > ($this->h - $margenInferior)) {
+      $this->AddPage("P", "Letter");
+      return true;
+    }
+    return false;
   }
 
   function NbLines($w, $txt)
