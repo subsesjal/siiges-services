@@ -7,23 +7,10 @@ const buildFileFDP02 = (
   const include = [{
     association: 'programa',
     include: [
-      { association: 'programaTurnos' },
-      {
-        association: 'docentes',
-        include: [
-          { association: 'persona' },
-          {
-            association: 'formacionesDocentes',
-            include: [{ association: 'formacion' }],
-          },
-          {
-            association: 'asignaturasDocentes',
-            include: [{ association: 'asignatura' }],
-          },
-        ],
-      },
+      { association: 'ciclo' },
+      { association: 'nivel' },
+      { association: 'modalidad' },
       { association: 'asignaturas' },
-      { association: 'trayectoria' },
       {
         association: 'plantel',
         include: [{
@@ -34,36 +21,10 @@ const buildFileFDP02 = (
           ],
         },
         {
-          association: 'directores',
-          include: [
-            { association: 'persona' },
-            {
-              association: 'formacionesDirectores',
-              include: [{ association: 'formacion' }],
-            },
-          ],
-        },
-        {
           association: 'institucion',
-          include: [
-            { association: 'ratificacionesNombre' },
-            {
-              association: 'rector',
-              include: [
-                { association: 'persona' },
-                {
-                  association: 'formacionesRectores',
-                  include: [{ association: 'formacion' }],
-                },
-              ],
-            },
-          ],
+          include: [{ association: 'ratificacionesNombre' }],
         }],
       }],
-  },
-  {
-    association: 'diligencias',
-    include: [{ association: 'persona' }],
   },
   {
     association: 'usuario',

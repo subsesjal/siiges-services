@@ -64,6 +64,7 @@ $pdf->Cell(0, 5, safe_iconv(mb_strtoupper($fechaFormateada)), 0, 1, "R");
 $pdf->Ln(5);
 
 $pdf->SetFillColor(255, 161, 61);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("DATOS DEL PROPIETARIO O REPRESENTANTE LEGAL"), 1, 0, "C", true);
 $pdf->Ln();
 
@@ -77,6 +78,7 @@ $pdf->SetWidths([70, 104]);
 $pdf->SetLineHeight(5);
 $pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
 
+$pdf->SetFont("Nutmeg", "", 9);
 foreach ($dataPersonaSolicitante as $item) {
   $pdf->Row([
     safe_iconv($item[0]),
@@ -91,6 +93,7 @@ if (is_array($ratificacion) && isset($ratificacion[0])) {
 
   if ($esNombreAutorizado) {
     $pdf->SetFillColor(255, 161, 61);
+    $pdf->SetFont("Nutmegb", "", 9);
     $pdf->Cell(174, 5, safe_iconv("EN CASO DE TENER NOMBRE AUTORIZADO"), 1, 0, "C", true);
     $pdf->Ln();
 
@@ -106,6 +109,7 @@ if (is_array($ratificacion) && isset($ratificacion[0])) {
     $pdf->SetWidths([70, 104]);
     $pdf->SetLineHeight(5);
     $pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
+    $pdf->SetFont("Nutmeg", "", 9);
 
     foreach ($nombresAutorizados as $item) {
       $pdf->Row([
@@ -116,6 +120,7 @@ if (is_array($ratificacion) && isset($ratificacion[0])) {
     $pdf->Ln();
   } else {
     $pdf->SetFillColor(255, 161, 61);
+    $pdf->SetFont("Nutmegb", "", 9);
     $pdf->Cell(174, 5, safe_iconv("PROPUESTAS DE NOMBRE"), 1, 0, "C", true);
     $pdf->Ln();
 
@@ -128,6 +133,7 @@ if (is_array($ratificacion) && isset($ratificacion[0])) {
     $pdf->SetWidths([70, 104]);
     $pdf->SetLineHeight(5);
     $pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
+    $pdf->SetFont("Nutmeg", "", 9);
 
     foreach ($propuestas as $item) {
       $pdf->Row([

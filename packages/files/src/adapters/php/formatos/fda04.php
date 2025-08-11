@@ -93,7 +93,9 @@ $pdf->SetWidths([80, 95]);
 $pdf->SetLineHeight(5);
 $pdf->SetFillColor(255, 161, 61);
 $pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(175, 5, safe_iconv("1. DATOS DEL PLAN DE ESTUDIOS"), 1, 1, "C", true);
+$pdf->SetFont("Nutmeg", "", 9);
 foreach ($dataPrograma as $item) {
     $pdf->Row([
         safe_iconv(mb_strtoupper($item['name'])),
@@ -104,8 +106,10 @@ $pdf->Ln(5);
 
 // Domicilio de la institución
 $pdf->SetFillColor(255, 161, 61);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("2. DOMICILIO DE LA INSTITUCIÓN"), 1, 1, "C", true);
 $pdf->SetFillColor(255, 213, 176);
+$pdf->SetFont("Nutmeg", "", 9);
 $pdf->Cell(116, 5, safe_iconv("CALLE Y NÚMERO"), 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv("COLONIA"), 1, 0, "C", true);
 $pdf->Ln();
@@ -151,8 +155,10 @@ $pdf->Ln();
 
 // Seccion de Descripcion del plantel (3)
 $pdf->SetFillColor(255, 161, 61);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("3. DESCRIPCIÓN DEL PLANTEL"), 1, 1, "C", true);
 $pdf->SetFillColor(255, 213, 176);
+$pdf->SetFont("Nutmeg", "", 9);
 $pdf->Cell(174, 5, safe_iconv("CARACTERÍSTICAS DEL INMUEBLE"), 1, 0, "C", true);
 
 $esConstruido = $tipoInmueble === 1 ? "X" : "";
@@ -249,8 +255,10 @@ $pdf->Ln(20);
 
 // Seccion de Higiene del plantel (4)
 $pdf->SetFillColor(255, 161, 61);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("4. HIGIENE DEL PLANTEL"), 1, 1, "C", true);
 $pdf->SetFillColor(255, 213, 176);
+$pdf->SetFont("Nutmeg", "", 9);
 $pdf->Cell(80, 5, safe_iconv("CONCEPTO"), 1, 0, "C", true);
 $pdf->Cell(94, 5, safe_iconv("DESCRIPCIÓN"), 1, 0, "C", true);
 $pdf->Ln();
@@ -303,8 +311,10 @@ $pdf->Ln(5);
 
 // Seccion de Infraestructura del programa (5)
 $pdf->SetFillColor(255, 161, 61);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("5. INFRAESTRUCTURA PARA EL PROGRAMA"), 1, 1, "C", true);
 $pdf->SetFillColor(255, 213, 176);
+$pdf->SetFont("Nutmeg", "", 9);
 $pdf->Cell(174, 5, safe_iconv("ESPACIOS Y EQUIPAMIENTOS"), 1, 0, "C", true);
 $pdf->Ln();
 
@@ -369,12 +379,13 @@ mostrarInfraestructuraPorTipo($pdf, $infraestructuras, "BIBLIOTECA FÍSICA Y VIR
 $pdf->Ln(5);
 
 // Seccion de Relacion de Instituciones (6)
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->SetFillColor(255, 161, 61);
 $pdf->ExpandHeaderRow($pdf, [
     "6. RELACIÓN DE INSTITUCIONES DE SALUD ALEDAÑAS, SERVICIOS DE\nAMBULANCIA U OTROS SERVICIOS DE EMERGENCIA A LOS CUALES RECURRIRÁ\nLA INSTITUCIÓN EN CASO DE ALGUNA CONTINGENCIA",
 ], [174]);
 $pdf->SetFillColor(255, 213, 176);
+$pdf->SetFont("Nutmeg", "", 9);
 $widths = [87, 87];
 
 $texts = [
