@@ -9,7 +9,13 @@ const findAllSolicitudesProgramas = (
   findAllSolicitudesQuery,
   findOneUsuarioQuery,
   findOneUsuarioUsuarioQuery,
-) => async ({ usuarioId, estatusSolicitudId }) => {
+  countSolicitudesQuery,
+) => async ({
+  usuarioId,
+  estatusSolicitudId,
+  limit = 5,
+  offset: page = 0,
+}) => {
   const include = [{
     association: 'programa',
     include: [
@@ -29,28 +35,41 @@ const findAllSolicitudesProgramas = (
   { association: 'estatusSolicitud' },
   { association: 'tipoSolicitud' }];
 
-  let query = {};
+  let where = { };
   if (usuarioId) {
     const usuario = await findUsuarios(
       findOneUsuarioQuery,
       findOneUsuarioUsuarioQuery,
       usuarioId,
     );
-    query = {
+    where = {
       usuarioId: usuario,
     };
   }
-  if (estatusSolicitudId) query.estatusSolicitudId = estatusSolicitudId.split(',');
+  if (estatusSolicitudId) where.estatusSolicitudId = estatusSolicitudId.split(',');
 
-  const solicitudes = await findAllSolicitudesQuery(
-    query,
-    {
-      include,
-      strict: false,
-    },
-  );
+  const offset = page ? (page - 1) * limit : 0;
+  const [totalItems, solicitudes] = await Promise.all([
+    countSolicitudesQuery(where),
+    findAllSolicitudesQuery(
+      where,
+      {
+        limit,
+        offset,
+        include,
+        strict: false,
+      },
+    ),
+  ]);
 
-  return solicitudes;
+  const filterOptions = {
+    currentPageItems: solicitudes.length,
+    totalItems,
+    currentPage: page,
+    totalPages: limit ? Math.ceil(totalItems / limit) : 1,
+  };
+
+  return { solicitudes, filterOptions };
 };
 
 module.exports = findAllSolicitudesProgramas;
