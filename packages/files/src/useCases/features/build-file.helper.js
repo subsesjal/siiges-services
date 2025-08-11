@@ -4,13 +4,11 @@ const {
   buildFileFDA02,
   buildFileFDA03,
   buildFileFDA04,
-  // findFileFDA04,
   buildFileFDA06,
 } = require('../db/FDA');
 const {
   findFileFDP01,
-  findFileFDP02,
-  // buildFileFDP02,
+  buildFileFDP02,
   buildFileFDP05,
   buildFileFDP06,
 } = require('../db/FDP');
@@ -28,7 +26,7 @@ const buildFile = async (input, fileUploaded) => {
     FDA04: async () => buildFileFDA04(entidadId, tipoDocumento),
     FDA06: async () => buildFileFDA06(entidadId, tipoDocumento),
     FDP01: async () => findFileFDP01(entidadId, tipoDocumento),
-    FDP02: async () => findFileFDP02(entidadId, tipoDocumento),
+    FDP02: async () => buildFileFDP02(entidadId, tipoDocumento),
     FDP05: async () => buildFileFDP05(entidadId, tipoDocumento),
     FDP06: async () => buildFileFDP06(entidadId, tipoDocumento),
     OFICIO_ADMISORIO: async () => buildFileOFAD(entidadId, tipoDocumento),

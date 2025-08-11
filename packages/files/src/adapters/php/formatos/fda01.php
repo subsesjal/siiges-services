@@ -90,8 +90,10 @@ $pdf->Cell(0, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "AT´N: DIRECTOR GENERAL
 
 $pdf->Ln(5);
 $pdf->SetFont("Nutmeg", "", 9);
+$fechaRaw = $solicitud["fecha"] ?? null;
+$fechaFormateada = $fechaRaw ? date("d/m/Y", strtotime($fechaRaw)) : "";
 
-$pdf->Cell(0, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $solicitud['fecha']), 0, 1, "R");
+$pdf->Cell(0, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $fechaFormateada), 0, 1, "R");
 $pdf->Ln(5);
 $pdf->MultiCell(0, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "Por este conducto manifiesto que estoy en condiciones para iniciar el trámite de "
   . mb_strtoupper($titulo)
@@ -126,6 +128,6 @@ $pdf->Ln(30);
 $pdf->SetFont("Nutmegb", "", 11);
 $pdf->Cell(0, 5, (iconv('UTF-8', 'ISO-8859-1//TRANSLIT',mb_strtoupper("Bajo protesta de decir verdad"))), 0, 1, "C");
 $pdf->SetFont("Nutmeg", "", 11);
-$pdf->Cell(0, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT',mb_strtoupper($usuario["nombre"])), 0, 1, "C");
+$pdf->Cell(0, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT',mb_strtoupper($usuario["nombre"] . " " . $usuario["apellidoPaterno"] . " " . $usuario["apellidoMaterno"])), 0, 1, "C");
 
 echo $pdf->Output('S');
