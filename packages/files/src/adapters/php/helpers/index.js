@@ -6,7 +6,7 @@ const FORMATOS_MAPPING = {
   FDA01: 'fda01.php',
   FDA02: 'fda02.php',
   FDA03: 'fda03.php',
-  FDA04: 'fda04.php', // Falta
+  FDA04: 'fda04.php',
   FDA06: 'fda06.php',
   FDP02: 'fdp02.php', // Falta
   FDP05: 'fdp05.php',
