@@ -3,6 +3,7 @@ const { checkers } = require('@siiges-services/shared');
 const findOneAlumnos = (findOneAlumnosQuery) => async (identifierObj) => {
   const include = [
     { association: 'persona' },
+    { association: 'equivalencia' },
     { association: 'alumnoTipoTramites' },
     {
       association: 'programa',

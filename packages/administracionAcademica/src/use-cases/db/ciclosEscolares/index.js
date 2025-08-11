@@ -11,16 +11,15 @@ const findCicloEscolar = findOneCicloEscolar(ciclosEscolares.findOneCicloEscolar
 module.exports = {
   createCicloEscolar: createCicloEscolar(
     ciclosEscolares.findOneProgramaQuery,
+    ciclosEscolares.findOneCicloEscolarQuery,
     ciclosEscolares.createCicloEscolarQuery,
   ),
   findGroupCicloEscolar: findGroupCicloEscolar(
     ciclosEscolares.findGroupCicloEscolarQuery,
-    ciclosEscolares.whereCicloEscolarQuery,
   ),
   findOneCicloEscolar: findCicloEscolar,
   updateCicloEscolar: updateCicloEscolar(
-    findCicloEscolar,
-    ciclosEscolares.findOneProgramaQuery,
+    ciclosEscolares.findOneCicloEscolarQuery,
     ciclosEscolares.updateCicloEscolarQuery,
   ),
   deleteCicloEscolar: deleteCicloEscolar(
