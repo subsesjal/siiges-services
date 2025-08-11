@@ -5,6 +5,7 @@ const { programa } = require('../../solicitudes/schema/properties/programa');
 const { plantel } = require('../../instituciones/schema/properties/plantel');
 const { institucion } = require('../../instituciones/schema/properties/institucion');
 const { domicilio } = require('../../usuarios/schema/properties/domicilio');
+const { equivalencia } = require('./properties/equivalencia');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findOneAlumnoSchema = {
@@ -73,6 +74,14 @@ const findOneAlumnoSchema = {
                     },
                   },
                 },
+              },
+            },
+            equivalencia: {
+              type: ['object', 'null'],
+              properties: {
+                id: { type: 'integer' },
+                ...equivalencia,
+                ...responseProperties,
               },
             },
           },
