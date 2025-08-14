@@ -112,7 +112,7 @@ if (is_array($ratificacion) && isset($ratificacion[0])) {
     $pdf->SetFont("Nutmeg", "", 9);
 
     foreach ($nombresAutorizados as $item) {
-      $pdf->Row([
+      $pdf->RowBlanco([
         safe_iconv($item[0]),
         safe_iconv(mb_strtoupper($item[1]))
       ]);
@@ -136,7 +136,7 @@ if (is_array($ratificacion) && isset($ratificacion[0])) {
     $pdf->SetFont("Nutmeg", "", 9);
 
     foreach ($propuestas as $item) {
-      $pdf->Row([
+      $pdf->RowBlanco([
         safe_iconv($item[0]),
         safe_iconv(mb_strtoupper($item[1]))
       ]);

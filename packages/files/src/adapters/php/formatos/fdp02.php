@@ -350,7 +350,7 @@ if (is_array($asignaturas) && count($asignaturas)) {
     $totalCred = 0;
 
     $pdf->SetFont("Nutmeg", "", 8);
-    $pdf->SetFillColor(255, 255, 255);
+    $pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
     $pdf->SetWidths($colWidths);
     $pdf->SetAligns(["C", "C", "C", "C", "C", "C", "C", "C"]);
 
@@ -408,6 +408,8 @@ if (is_array($asignaturas) && count($asignaturas)) {
       "value" => $totCredCarrera . " CRÉDITOS",
     ],
   ];
+
+  $pdf->SetColors([[255, 161, 61], [255, 255, 255]]);
 
   foreach ($totales as $t) {
     $pdf->RowBlanco([
