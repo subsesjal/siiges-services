@@ -125,7 +125,7 @@ $pdf->Cell(40, 5, "CICLO", 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->SetFont("Nutmeg", "", 9);
-$pdf->SetFillColor(255, 255, 255);
+$pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
 
 $turnos = $programa["programaTurnos"] ?? ($programa["turnos"] ?? []);
 $turnosTxt = [];
@@ -161,7 +161,7 @@ $pdf->Cell(58, 5, safe_iconv("COLONIA"), 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->SetFont("Nutmeg", "", 9);
-$pdf->SetFillColor(255, 255, 255);
+$pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
 $pdf->SetWidths([116, 58]);
 $pdf->SetAligns(["C", "C"]);
 $pdf->RowBlanco([
@@ -179,7 +179,7 @@ $municipio = $domicilioPlantel["municipio"];
 $estado = $domicilioPlantel["estado"];
 
 $pdf->SetFont("Nutmeg", "", 9);
-$pdf->SetFillColor(255, 255, 255);
+$pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
 $pdf->SetWidths([58, 58, 58]);
 $pdf->SetAligns(["C", "C", "C"]);
 $pdf->RowBlanco([
@@ -217,13 +217,14 @@ $dataPersonaSolicitante = [
   ["NACIONALIDAD", $usuario['persona']['nacionalidad'] ?? ""],
 ];
 
-$pdf->SetWidths([80, 94]);
+$pdf->SetWidths([70, 104]);
 $pdf->SetLineHeight(5);
 $pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
+$pdf->SetAligns(["C", "L"]);
 $pdf->SetFont("Nutmeg", "", 9);
 
 foreach ($dataPersonaSolicitante as $item) {
-  $pdf->Row([
+  $pdf->RowBlanco([
     safe_iconv($item[0]),
     safe_iconv(mb_strtoupper($item[1]))
   ]);
@@ -235,7 +236,7 @@ $pdf->Cell(58, 5, "COLONIA", 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->SetFont("Nutmeg", "", 9);
-$pdf->SetFillColor(255, 255, 255);
+$pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
 $pdf->SetWidths([116, 58]);
 $pdf->SetAligns(["C", "C"]);
 $pdf->RowBlanco([
@@ -343,6 +344,7 @@ if ($rector) {
     $pdf->RowBlanco([
       safe_iconv($formacionRector["institucion"] ?? "")
     ]);
+    $pdf->Ln();
   } else {
     $pdf->Ln();
   }
@@ -351,7 +353,6 @@ if ($rector) {
 $directores = $plantel["directores"] ?? [];
 
 if (!empty($directores)) {
-  $pdf->Ln(20);
   $pdf->SetFillColor(255, 161, 61);
   $pdf->SetFont("Nutmegb", "", 9);
   $pdf->Cell(174, 5, safe_iconv("DATOS DEL DIRECTOR"), 1, 1, "C", true);
@@ -365,7 +366,7 @@ if (!empty($directores)) {
   $directorObj = $directores[0] ?? [];
   $directorPersona = $directorObj["persona"] ?? [];
 
-  $pdf->SetFillColor(255, 255, 255);
+  $pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
   $pdf->SetWidths([58, 58, 58]);
   $pdf->SetAligns(["C", "C", "C"]);
   $pdf->RowBlanco([
@@ -382,7 +383,7 @@ if (!empty($directores)) {
   $pdf->Ln();
 
   $pdf->SetFont("Nutmeg", "", 9);
-  $pdf->SetFillColor(255, 255, 255);
+  $pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
   $pdf->SetWidths([58, 58, 58]);
   $pdf->SetAligns(["C", "C", "C"]);
   $pdf->RowBlanco([
@@ -419,7 +420,7 @@ if (!empty($directores)) {
     $pdf->Cell(87, 5, safe_iconv("NOMBRE DE LOS ESTUDIOS"), 1, 0, "C", true);
     $pdf->Ln();
 
-    $pdf->SetFillColor(255, 255, 255);
+    $pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
     $pdf->SetWidths([87, 87]);
     $pdf->SetAligns(["C", "C"]);
     $pdf->RowBlanco([
@@ -432,11 +433,11 @@ if (!empty($directores)) {
     $pdf->Ln();
 
     $pdf->SetFont("Nutmeg", "", 9);
-    $pdf->SetFillColor(255, 255, 255);
+    $pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
     $pdf->SetWidths([174]);
     $pdf->SetAligns(["C"]);
     $pdf->RowBlanco([
-      safe_iconv($formDirec["institucion"] ?? "")
+      safe_iconv(mb_strtoupper($formDirec["institucion"]) ?? "")
     ]);
     $pdf->Ln();
   } else {
@@ -481,7 +482,7 @@ $pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
 $pdf->SetAligns(["C", "L"]);
 
 foreach ($personalDesignado as $item) {
-  $pdf->Row([
+  $pdf->RowBlanco([
     safe_iconv($item[0]),
     safe_iconv(mb_strtoupper($item[1]))
   ]);
@@ -506,7 +507,7 @@ $pdf->SetAligns(["C", "L"]);
 $pdf->SetFont("Nutmeg", "", 9);
 
 foreach ($nombresPropuestos as $item) {
-  $pdf->Row([
+  $pdf->RowBlanco([
     safe_iconv($item[0]),
     safe_iconv(mb_strtoupper($item[1]))
   ]);
