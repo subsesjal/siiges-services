@@ -4,6 +4,7 @@ const ciclosEscolares = require('./ciclosEscolares/ciclosEscolares.db.adapter');
 const grupos = require('./grupos/grupos.db.adapter');
 const grados = require('./grados/grados.db.adapter');
 const validaciones = require('./validaciones/validacion.db.adapter');
+const equivalencias = require('./equivalencias/equivalencias.db.adapter');
 
 module.exports = {
   alumnos,
@@ -12,4 +13,5 @@ module.exports = {
   grupos,
   grados,
   validaciones,
+  equivalencias,
 };

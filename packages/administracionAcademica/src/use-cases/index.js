@@ -24,6 +24,11 @@ const {
   deleteGrupo,
 } = require('./db/grupos');
 
+const {
+  createEquivalenciaInterna,
+  updateEquivalenciaInterna,
+} = require('./db/equivalencias');
+
 const grados = require('./db/grados');
 
 const validaciones = require('./db/validaciones');
@@ -41,6 +46,8 @@ module.exports = {
   createGrupo,
   findOneGrupo,
   findGroupGrupo,
+  createEquivalenciaInterna,
+  updateEquivalenciaInterna,
   updateGrupo,
   deleteGrupo,
   ...alumnos,
