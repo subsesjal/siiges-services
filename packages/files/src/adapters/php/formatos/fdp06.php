@@ -57,6 +57,7 @@ $gradoTxt = [
     'DÉCIMO',
     'UNDÉCIMO',
     'DUODÉCIMO',
+    'OPTATIVA',
 ];
 $nivelesTexto = [
     1 => "Licenciatura",
@@ -66,6 +67,9 @@ $nivelesTexto = [
     5 => "Doctorado",
     6 => "Profesional Asociado",
 ];
+
+$cicloId = (int) ($ciclo['id'] ?? 1);
+$cicloIdx = max(0, min(count($cicloTxt) - 1, $cicloId - 1));
 
 $pdf = new PDF();
 $pdf->AliasNbPages();
@@ -98,8 +102,8 @@ $domPlantel = trim("$calle $telefono");
 $dataPrograma = [
     ["name" => "NOMBRE DE LA INSTITUCIÓN", "description" => $institucion["nombre"] ?? ""],
     ["name" => "NIVEL Y NOMBRE DEL PLAN DE ESTUDIOS", "description" => ($nivel["descripcion"] ?? "") . " en " . ($programa["nombre"] ?? "")],
-    ["name" => "DURACIÓN DEL PROGRAMA", "description" => ($programa["duracionPeriodos"] ?? '') . ' - PERIODOS ' . ($cicloTxt[($ciclo["id"] ?? 1) - 1])],
-    ["name" => "TIPO DE TRÁMITE", "description" => $tituloTipoSolicitud[($solicitud["tipoSolicitudId"] ?? 0)] ?? ''],
+    ["name" => "DURACIÓN DEL PROGRAMA", "description" => ($programa["duracionPeriodos"] ?? '') . ' - PERIODOS ' . ($cicloTxt[$cicloIdx] ?? '')],
+    ["name" => "TIPO DE TRÁMITE", "description" => $tituloTipoSolicitud[($solicitud["tipoSolicitudId"] ?? 0)] ?? ""],
     ["name" => "DOMICILIO Y NÚMERO DE TELÉFONO", "description" => $domPlantel],
 ];
 
@@ -144,10 +148,12 @@ foreach ($asignaturasPorGrado as $gradoId => $items) {
         $pdf->SetTextColor(0, 0, 0);
     }
 
-    $tituloGrado = $gradoTxt[$gradoId - 1] ?? "GRADO $gradoId";
+    $idx = max(0, min(count($gradoTxt) - 1, (int) $gradoId - 1));
+    $tituloGrado = $gradoTxt[$idx];
     $pdf->SetFillColor(255, 161, 61);
     $pdf->SetFont("Nutmegb", "", 9);
-    $cicloNombre = $cicloTxtSingular[($ciclo["id"] ?? 1) - 1];
+
+    $cicloNombre = $cicloTxtSingular[$cicloIdx] ?? '';
     $pdf->Cell(array_sum($colWidths), 5, safe_iconv("$tituloGrado $cicloNombre"), 1, 1, "C", true);
 
     $pdf->SetFillColor(255, 213, 176);
@@ -168,7 +174,7 @@ foreach ($asignaturasPorGrado as $gradoId => $items) {
     }
     $pdf->Ln();
 
-    $pdf->SetFont("Nutmeg", "", 5);
+    $pdf->SetFont("Nutmeg", "", 6);
     foreach ($items as $entry) {
         $docente = $entry['docente'];
         $asignatura = $entry['asignatura'];
@@ -201,6 +207,8 @@ foreach ($asignaturasPorGrado as $gradoId => $items) {
             3 => "OTRO",
             default => "",
         };
+
+        $pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
 
         $pdf->RowBlanco([
             safe_iconv(mb_strtoupper($nombreDocente)),

@@ -85,36 +85,43 @@ $fechaFormateada = $fechaRaw ? date("d/m/Y", strtotime($fechaRaw)) : "";
 $pdf->Cell(0, 5, safe_iconv(mb_strtoupper($fechaFormateada)), 0, 1, "R");
 $pdf->Ln(5);
 
-$pdf->SetFont("Nutmeg", "", 9);
 $pdf->SetFillColor(255, 161, 61);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("1. PROGRAMA DE SEGUIMIENTO DE LA TRAYECTORIA ACADÉMICA DE LOS ESTUDIANTES"), 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->SetFillColor(255, 255, 255);
+$pdf->SetFont("Nutmeg", "", 9);
 $pdf->MultiCell(174, 5, safe_iconv($trayectoria["programaSeguimiento"] ?? ""), 1, "J", true);
 $pdf->Ln();
 
 $pdf->SetFillColor(255, 161, 61);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("2. FUNCIÓN TUTORIAL"), 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->SetFillColor(255, 255, 255);
+$pdf->SetFont("Nutmeg", "", 9);
 $pdf->MultiCell(174, 5, safe_iconv($trayectoria["funcionTutorial"] ?? ""), 1, "J", true);
 $pdf->Ln();
 
 $pdf->SetFillColor(255, 161, 61);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("3. TIPO DE TUTORÍA"), 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->SetFillColor(255, 255, 255);
+$pdf->SetFont("Nutmeg", "", 9);
 $pdf->MultiCell(174, 5, safe_iconv($trayectoria["tipoTutoria"] ?? ""), 1, "J", true);
 $pdf->Ln();
 
 $pdf->SetFillColor(255, 161, 61);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("4. TASA DE EGRESOS"), 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->SetFillColor(255, 255, 255);
+$pdf->SetFont("Nutmeg", "", 9);
 $pdf->MultiCell(174, 5, safe_iconv($trayectoria["tasaEgreso"] ?? ""), 1, "J", true);
 $pdf->Ln();
 

@@ -142,6 +142,7 @@ class Alumno extends Model {
     this.belongsTo(models.Situacion, { as: 'situacion' });
     this.hasMany(models.AlumnoTipoTramite, { as: 'alumnoTipoTramites', foreignKey: 'alumnoId' });
     this.hasMany(models.Calificacion, { as: 'calificaciones', foreignKey: 'alumnoId' });
+    this.hasOne(models.Equivalencia, { as: 'equivalencia', foreignKey: 'alumnoId' });
     this.hasOne(models.Validacion, { as: 'validacion', foreignKey: 'alumnoId' });
   }
 

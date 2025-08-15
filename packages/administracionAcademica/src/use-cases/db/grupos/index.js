@@ -12,6 +12,7 @@ const findGrupo = findOneGrupo(
 
 module.exports = {
   createGrupo: createGrupo(
+    grupos.findOneGrupoQuery,
     grupos.findOneCicloEscolarQuery,
     grupos.findOneTurnoQuery,
     grupos.findOneGradoQuery,
@@ -26,7 +27,7 @@ module.exports = {
     grupos.findOneTurnoQuery,
     grupos.findOneGradoQuery,
     grupos.updateGrupoQuery,
-    findGrupo,
+    grupos.findOneGrupoQuery,
   ),
   deleteGrupo: deleteGrupo(
     findGrupo,

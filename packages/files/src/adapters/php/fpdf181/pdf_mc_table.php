@@ -18,7 +18,7 @@ class PDF_MC_Table extends FPDF
     $this->widths = $w;
   }
 
-// Alias para compatibilidad con código actua
+  // Alias para compatibilidad con código actua
   function SetColWidths($w)
   {
     $this->SetWidths($w);
@@ -107,7 +107,14 @@ class PDF_MC_Table extends FPDF
       $x = $this->GetX();
       $y = $this->GetY();
 
-      $this->SetFillColor(255, 255, 255);
+      $arrayColor = (isset($this->colors[$i]) && !empty($this->colors[$i]))
+        ? $this->colors[$i]
+        : [255, 255, 255];
+      $r = $arrayColor[0];
+      $g = $arrayColor[1];
+      $b = $arrayColor[2];
+
+      $this->SetFillColor($r, $g, $b);
       $this->Rect($x, $y, $w, $h, 'FD');
 
       $lines = $this->NbLines($w, $data[$i]);
