@@ -1,3 +1,5 @@
+const boom = require('@hapi/boom');
+
 const updateCicloEscolar = (
   findOneCicloEscolarQuery,
   updateCicloEscolarQuery,
@@ -10,7 +12,7 @@ const updateCicloEscolar = (
     const exists = await findOneCicloEscolarQuery({ programaId: cicloEscolar.programaId, nombre });
 
     if (exists) {
-      throw new Error(`El ciclo escolar ${nombre} ya existe para este programa`);
+      throw boom.conflict(`El ciclo escolar ${nombre} ya existe para este programa.`);
     }
   }
 

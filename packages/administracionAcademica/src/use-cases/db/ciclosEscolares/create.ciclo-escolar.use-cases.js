@@ -1,3 +1,4 @@
+const boom = require('@hapi/boom');
 const { checkers } = require('@siiges-services/shared');
 
 const createCicloEscolar = (
@@ -11,7 +12,7 @@ const createCicloEscolar = (
   const exists = await findOneCicloEscolarQuery({ programaId, nombre });
 
   if (exists) {
-    throw new Error(`El ciclo escolar ${nombre} ya existe para este programa`);
+    throw boom.conflict(`El ciclo escolar ${nombre} ya existe para este programa.`);
   }
 
   return createCicloEscolarQuery(data);
