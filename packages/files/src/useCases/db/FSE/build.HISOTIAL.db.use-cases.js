@@ -40,7 +40,7 @@ const buildFileHistorial = (
 
   const includeCalificaciones = [
     { association: 'alumno' },
-    { association: 'asignatura' },
+    { association: 'asignatura', paranoid: false },
     {
       association: 'grupo',
       include: [

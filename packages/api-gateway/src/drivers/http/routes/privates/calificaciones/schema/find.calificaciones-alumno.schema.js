@@ -27,7 +27,7 @@ const findCalificacionesAlumnoSchema = {
               ...calificacion,
               ...responseProperties,
               asignatura: {
-                type: 'object',
+                type: ['object', 'null'],
                 properties: {
                   id: { type: 'integer' },
                   ...asignatura,
