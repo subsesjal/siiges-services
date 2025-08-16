@@ -16,6 +16,7 @@ const authAdapter = require('./auth/handlers');
 const alumnosAdapter = require('./alumnos/handlers');
 const programasAdapter = require('./administracionAcademica/programas/handlers');
 const gruposAdapter = require('./grupos/handlers');
+const equivalenciasInternasAdapter = require('./equivalenciasInternas/handlers');
 const ciclosEscolaresAdapter = require('./ciclosEscolares/handlers');
 const gradosAdapter = require('./grados/handlers');
 const notificacionesAdapter = require('./notificaciones/handlers');
@@ -53,6 +54,7 @@ module.exports = {
   alumnosAdapter,
   programasAdapter,
   gruposAdapter,
+  equivalenciasInternasAdapter,
   ciclosEscolaresAdapter,
   gradosAdapter,
   notificacionesAdapter,
