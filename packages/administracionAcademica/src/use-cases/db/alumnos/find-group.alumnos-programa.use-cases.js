@@ -12,6 +12,7 @@ const findGroupAlumnosPrograma = (
   const include = [
     { association: 'persona' },
     { association: 'situacion' },
+    { association: 'equivalencia' },
     {
       association: 'validacion',
       include: [
