@@ -279,6 +279,14 @@ const tipoDocumentoObj = [
     id: 70,
     name: 'FDP04',
   },
+  {
+    id: 71,
+    name: 'CERTIFICADO_PARCIAL_EQUIVALENCIA',
+  },
+  {
+    id: 72,
+    name: 'RESOLUCION_EQUIVALENCIA',
+  },
 ];
 
 module.exports = tipoDocumentoObj;
