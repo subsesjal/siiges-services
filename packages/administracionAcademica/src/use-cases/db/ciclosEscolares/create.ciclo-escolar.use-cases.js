@@ -1,15 +1,21 @@
+const boom = require('@hapi/boom');
 const { checkers } = require('@siiges-services/shared');
 
 const createCicloEscolar = (
   findOneProgramaQuery,
+  findOneCicloEscolarQuery,
   createCicloEscolarQuery,
-) => async (identifierObj) => {
-  const { programaId: id } = identifierObj;
-  await checkers.findValidator({ Programa: [id, findOneProgramaQuery] });
+) => async (data) => {
+  const { programaId, nombre } = data;
+  await checkers.findValidator({ Programa: [programaId, findOneProgramaQuery] });
 
-  const cicloEscolar = await createCicloEscolarQuery(identifierObj);
+  const exists = await findOneCicloEscolarQuery({ programaId, nombre });
 
-  return cicloEscolar;
+  if (exists) {
+    throw boom.conflict(`El ciclo escolar ${nombre} ya existe para este programa.`);
+  }
+
+  return createCicloEscolarQuery(data);
 };
 
 module.exports = { createCicloEscolar };

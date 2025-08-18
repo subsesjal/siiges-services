@@ -93,7 +93,9 @@ $pdf->SetWidths([80, 95]);
 $pdf->SetLineHeight(5);
 $pdf->SetFillColor(255, 161, 61);
 $pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(175, 5, safe_iconv("1. DATOS DEL PLAN DE ESTUDIOS"), 1, 1, "C", true);
+$pdf->SetFont("Nutmeg", "", 9);
 foreach ($dataPrograma as $item) {
     $pdf->Row([
         safe_iconv(mb_strtoupper($item['name'])),
@@ -104,17 +106,22 @@ $pdf->Ln(5);
 
 // Domicilio de la institución
 $pdf->SetFillColor(255, 161, 61);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("2. DOMICILIO DE LA INSTITUCIÓN"), 1, 1, "C", true);
 $pdf->SetFillColor(255, 213, 176);
+$pdf->SetFont("Nutmeg", "", 9);
 $pdf->Cell(116, 5, safe_iconv("CALLE Y NÚMERO"), 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv("COLONIA"), 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->SetFont("Nutmeg", "", 9);
-$pdf->SetFillColor(255, 255, 255); // Fondo blanco para datos
-$pdf->Cell(116, 5, safe_iconv(mb_strtoupper(($domicilioPlantel["calle"] ?? "") . " " . ($domicilioPlantel["numeroExterior"] ?? ""))), 1, 0, "C", true);
-$pdf->Cell(58, 5, safe_iconv(mb_strtoupper($domicilioPlantel["colonia"] ?? "")), 1, 0, "C", true);
-$pdf->Ln();
+$pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
+$pdf->SetWidths([116, 58]);
+$pdf->SetAligns(["C", "C"]);
+$pdf->RowBlanco([
+  safe_iconv(mb_strtoupper(($domicilioPlantel["calle"] ?? "") . " " . ($domicilioPlantel["numeroExterior"] ?? ""))),
+  safe_iconv(mb_strtoupper($domicilioPlantel["colonia"] ?? ""))
+]);
 
 // Código Postal, Municipio, Estado
 $pdf->SetFillColor(255, 213, 176);
@@ -123,16 +130,18 @@ $pdf->Cell(58, 5, safe_iconv("DELEGACIÓN O MUNICIPIO"), 1, 0, "C", true);
 $pdf->Cell(58, 5, "ENTIDAD FEDERATIVA", 1, 0, "C", true);
 $pdf->Ln();
 
-$postal = $domicilioPlantel["codigoPostal"];
 $municipio = $domicilioPlantel["municipio"];
 $estado = $domicilioPlantel["estado"];
 
 $pdf->SetFont("Nutmeg", "", 9);
-$pdf->SetFillColor(255, 255, 255);
-$pdf->Cell(58, 5, safe_iconv($domicilioPlantel["codigoPostal"] ?? ""), 1, 0, "C", true);
-$pdf->Cell(58, 5, safe_iconv($municipio["nombre"] ?? ""), 1, 0, "C", true);
-$pdf->Cell(58, 5, safe_iconv($estado["nombre"] ?? ""), 1, 0, "C", true);
-$pdf->Ln();
+$pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
+$pdf->SetWidths([58, 58, 58]);
+$pdf->SetAligns(["C", "C", "C"]);
+$pdf->RowBlanco([
+  safe_iconv($domicilioPlantel["codigoPostal"] ?? ""),
+  safe_iconv($municipio["nombre"] ?? ""),
+  safe_iconv($estado["nombre"] ?? "")
+]);
 
 // Teléfonos, redes, correos
 $pdf->SetFillColor(255, 213, 176);
@@ -142,17 +151,22 @@ $pdf->Cell(58, 5, safe_iconv("CORREO ELECTRÓNICO"), 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->SetFont("Nutmeg", "", 9);
-$pdf->SetFillColor(255, 255, 255);
-$pdf->Cell(58, 5, safe_iconv(($plantel["telefono1"] ?? "") . " " . ($plantel["telefono2"] ?? "")), 1, 0, "C", true);
-$pdf->Cell(58, 5, safe_iconv($plantel["redesSociales"] ?? ""), 1, 0, "C", true);
-$pdf->Cell(58, 5, safe_iconv($plantel["correo1"] ?? ""), 1, 0, "C", true);
-$pdf->Ln();
+$pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
+$pdf->SetWidths([58, 58, 58]);
+$pdf->SetAligns(["C", "C", "C"]);
+$pdf->RowBlanco([
+  safe_iconv(($plantel["telefono1"] ?? "") . " " . ($plantel["telefono2"] ?? "")),
+  safe_iconv($plantel["redesSociales"] ?? ""),
+  safe_iconv($plantel["correo1"] ?? "")
+]);
 $pdf->Ln();
 
 // Seccion de Descripcion del plantel (3)
 $pdf->SetFillColor(255, 161, 61);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("3. DESCRIPCIÓN DEL PLANTEL"), 1, 1, "C", true);
 $pdf->SetFillColor(255, 213, 176);
+$pdf->SetFont("Nutmeg", "", 9);
 $pdf->Cell(174, 5, safe_iconv("CARACTERÍSTICAS DEL INMUEBLE"), 1, 0, "C", true);
 
 $esConstruido = $tipoInmueble === 1 ? "X" : "";
@@ -160,23 +174,41 @@ $esAdaptado   = $tipoInmueble === 2 ? "X" : "";
 $esMixto      = $tipoInmueble === 3 ? "X" : "";
 
 // Segunda fila del encabezado
-$pdf->SetFillColor(255, 255, b: 255);
+$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetWidths([140, 34]);
+$pdf->SetAligns(["C", "C"]);
 $pdf->Ln();
+$pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
+
 switch ($tipoInmueble) {
   case 1:
-    $pdf->Cell(140, 5, safe_iconv("CONSTRUIDO PARA LA ESCUELA"), 1, 0, "C", true);
-    $pdf->Cell(34, 5, safe_iconv($esConstruido), 1, 0, "C", true);
+    $pdf->RowBlanco([
+      safe_iconv("CONSTRUIDO PARA LA ESCUELA"),
+      safe_iconv($esConstruido)
+    ]);
+    $pdf->Ln(-5);
     break;
   case 2:
-    $pdf->Cell(140, 5, safe_iconv("ADAPTADO"), 1, 1, "C", true);
-    $pdf->Cell(34, 5, safe_iconv($esAdaptado), 1, 1, "C", true);
+    $pdf->RowBlanco([
+      safe_iconv("ADAPTADO"),
+      safe_iconv($esAdaptado)
+    ]);
+    $pdf->Ln(-5);
     break;
   case 3:
-    $pdf->Cell(140, 5, safe_iconv("MIXTO"), 1, 1, "C", true);
-    $pdf->Cell(34, 5, safe_iconv($esMixto), 1, 1, "C", true);
+    $pdf->RowBlanco([
+      safe_iconv("MIXTO"),
+      safe_iconv($esMixto)
+    ]);
+    $pdf->Ln(-5);
     break;
   default:
-    $pdf->Cell(174, 5, safe_iconv("NO ESPECIFICADO"), 1, 1, "C", true);
+    $pdf->SetWidths([174]);
+    $pdf->SetAligns(["C"]);
+    $pdf->RowBlanco([
+      safe_iconv("NO ESPECIFICADO")
+    ]);
+    $pdf->Ln(-5);
     break;
 }
 
@@ -197,17 +229,14 @@ $pdf->SetFillColor(255, 213, 176);
 $pdf->Cell(174, 5, safe_iconv("EDIFICIOS Y/O NIVELES"), 1, 0, "C", true);
 $pdf->SetFillColor(255, 255, 255);
 $pdf->Ln();
+$pdf->SetWidths([140, 34]);
+$pdf->SetAligns(["C", "C"]);
 
 foreach ($niveles as $nivel) {
-    $pdf->Cell(140, 5, safe_iconv($nivel['label']), 1, 0, "C", true);
-
-    if (in_array($nivel['id'], $nivelesSeleccionados)) {
-        $pdf->Cell(34, 5, "X", 1, 0, "C", true);
-    } else {
-        $pdf->Cell(34, 5, "", 1, 0, "C", true);
-    }
-
-    $pdf->Ln();
+    $pdf->RowBlanco([
+        safe_iconv($nivel['label']),
+        in_array($nivel['id'], $nivelesSeleccionados) ? "X" : ""
+    ]);
 }
 
 // Sistema de seguridad
@@ -236,21 +265,24 @@ $pdf->SetFont("Nutmeg", "", 9);
 $pdf->Cell(140, 5, safe_iconv("DESCRIPCIÓN"), 1, 0, "C", true);
 $pdf->Cell(34, 5, safe_iconv("No."), 1, 0, "C", true);
 $pdf->Ln();
+$pdf->SetWidths([140, 34]);
+$pdf->SetAligns(["C", "C"]);
 
 foreach ($seguridadCatalogo as $id => $descripcion) {
     $cantidad = $seguridadPorId[$id] ?? '';
-    $pdf->Cell(140, 5, safe_iconv($descripcion), 1, 0, "C", true);
-    $pdf->Cell(34, 5, safe_iconv($cantidad), 1, 0, "C", true);
-    $pdf->Ln();
+    $pdf->RowBlanco([
+        safe_iconv($descripcion),
+        safe_iconv($cantidad)
+    ]);
 }
-
-$pdf->AddPage("P", "Letter");
-$pdf->Ln(20);
+$pdf->Ln();
 
 // Seccion de Higiene del plantel (4)
 $pdf->SetFillColor(255, 161, 61);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("4. HIGIENE DEL PLANTEL"), 1, 1, "C", true);
 $pdf->SetFillColor(255, 213, 176);
+$pdf->SetFont("Nutmeg", "", 9);
 $pdf->Cell(80, 5, safe_iconv("CONCEPTO"), 1, 0, "C", true);
 $pdf->Cell(94, 5, safe_iconv("DESCRIPCIÓN"), 1, 0, "C", true);
 $pdf->Ln();
@@ -294,7 +326,7 @@ $pdf->SetLineHeight(5);
 $pdf->SetFillColor(255, 161, 61);
 $pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
 foreach ($dataHigiene as $item) {
-    $pdf->Row([
+    $pdf->RowBlanco([
         safe_iconv(mb_strtoupper($item['name'])),
         safe_iconv(mb_strtoupper($item['description']))
     ]);
@@ -303,8 +335,10 @@ $pdf->Ln(5);
 
 // Seccion de Infraestructura del programa (5)
 $pdf->SetFillColor(255, 161, 61);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("5. INFRAESTRUCTURA PARA EL PROGRAMA"), 1, 1, "C", true);
 $pdf->SetFillColor(255, 213, 176);
+$pdf->SetFont("Nutmeg", "", 9);
 $pdf->Cell(174, 5, safe_iconv("ESPACIOS Y EQUIPAMIENTOS"), 1, 0, "C", true);
 $pdf->Ln();
 
@@ -334,7 +368,7 @@ function mostrarInfraestructuraPorTipo($pdf, $infraestructuras, $titulo, $tipoId
     $pdf->Cell(174, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $titulo), 1, 0, "C", true);
     $pdf->Ln();
 
-    $pdf->SetFillColor(255, 255, 255); // fondo blanco para datos
+    $pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
     $pdf->SetWidths([29, 29, 29, 29, 29, 29]);
     $pdf->SetAligns(['C', 'C', 'C', 'L', 'C', 'C']);
     $pdf->SetLineHeight(4);
@@ -369,12 +403,13 @@ mostrarInfraestructuraPorTipo($pdf, $infraestructuras, "BIBLIOTECA FÍSICA Y VIR
 $pdf->Ln(5);
 
 // Seccion de Relacion de Instituciones (6)
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Nutmegb", "", 9);
 $pdf->SetFillColor(255, 161, 61);
 $pdf->ExpandHeaderRow($pdf, [
     "6. RELACIÓN DE INSTITUCIONES DE SALUD ALEDAÑAS, SERVICIOS DE\nAMBULANCIA U OTROS SERVICIOS DE EMERGENCIA A LOS CUALES RECURRIRÁ\nLA INSTITUCIÓN EN CASO DE ALGUNA CONTINGENCIA",
 ], [174]);
 $pdf->SetFillColor(255, 213, 176);
+$pdf->SetFont("Nutmeg", "", 9);
 $widths = [87, 87];
 
 $texts = [

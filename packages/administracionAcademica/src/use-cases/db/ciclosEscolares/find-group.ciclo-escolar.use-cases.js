@@ -1,10 +1,7 @@
 const findGroupCicloEscolar = (
   findGroupCicloEscolarQuery,
-  whereCicloEscolarQuery,
 ) => async (identifierObj) => {
-  const cicloEscolar = await findGroupCicloEscolarQuery(identifierObj, {
-    query: whereCicloEscolarQuery,
-  });
+  const cicloEscolar = await findGroupCicloEscolarQuery(identifierObj);
 
   return cicloEscolar;
 };

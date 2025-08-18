@@ -1,19 +1,32 @@
 const { checkers } = require('@siiges-services/shared');
+const boom = require('@hapi/boom');
 
 const createGrupo = (
+  findOneGrupoQuery,
   findOneCicloEscolarQuery,
   findOneTurnoQuery,
   findOneGradoQuery,
   createGrupoQuery,
-) => async (identifierObj) => {
+) => async (data) => {
   const queryFunctions = {
-    turno: [identifierObj.turnoId, findOneTurnoQuery],
-    grado: [identifierObj.gradoId, findOneGradoQuery],
-    cicloEscolar: [identifierObj.cicloEscolarId, findOneCicloEscolarQuery],
+    turno: [data.turnoId, findOneTurnoQuery],
+    grado: [data.gradoId, findOneGradoQuery],
+    cicloEscolar: [data.cicloEscolarId, findOneCicloEscolarQuery],
   };
   await checkers.findValidator(queryFunctions);
 
-  const grupo = await createGrupoQuery(identifierObj);
+  const grupoExists = await findOneGrupoQuery({
+    descripcion: data.descripcion,
+    turnoId: data.turnoId,
+    gradoId: data.gradoId,
+    cicloEscolarId: data.cicloEscolarId,
+  });
+
+  if (grupoExists) {
+    throw boom.conflict(`El grupo ${data.descripcion} ya existe para el turno, grado y ciclo escolar especificados.`);
+  }
+
+  const grupo = await createGrupoQuery(data);
 
   return grupo;
 };
