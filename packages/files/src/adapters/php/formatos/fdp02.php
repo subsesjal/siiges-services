@@ -110,6 +110,20 @@ $nivelesTexto = [
   6 => "Profesional Asociado",
 ];
 
+$antecedentesMap = [
+  "1" => "Bachillerato",
+  "2" => "Licenciatura",
+  "3" => "Técnico Superior Universitario",
+  "4" => "Especialidad",
+  "5" => "Maestría",
+  "6" => "Doctorado",
+  "7" => "Profesional Asociado",
+  "8" => "Educación Continua"
+];
+
+$antecedenteId = (string)($programa["antecedenteAcademico"] ?? "");
+$antecedenteDesc = $antecedentesMap[$antecedenteId] ?? "";
+
 $cicloId = (int) ($ciclo['id'] ?? 1);
 $cicloIdx = max(0, min(count($cicloTxt) - 1, $cicloId - 1));
 
@@ -120,9 +134,9 @@ $pdf->SetMargins(20, 20, 20);
 $pdf->SetAutoPageBreak(true, 30);
 
 $pdf->SetFont("Nutmeg", "", 9);
-$fechaRaw = $solicitud["fecha"] ?? null;
-$fechaFormateada = $fechaRaw ? date("d/m/Y", strtotime($fechaRaw)) : "";
-$pdf->Cell(0, 5, safe_iconv(mb_strtoupper($fechaFormateada)), 0, 1, "R");
+// $fechaRaw = $solicitud["fecha"] ?? null;
+// $fechaFormateada = $fechaRaw ? date("d/m/Y", strtotime($fechaRaw)) : "";
+// $pdf->Cell(0, 5, safe_iconv(mb_strtoupper($fechaFormateada)), 0, 1, "R");
 $pdf->Ln(5);
 
 $calle = $domicilioPlantel['calle'] ?? '';
@@ -154,7 +168,7 @@ $pdf->Ln();
 
 $pdf->SetFillColor(255, 255, 255);
 $pdf->SetFont("Nutmeg", "", 9);
-$pdf->MultiCell(174, 5, safe_iconv($programa["antecedenteAcademico"] ?? ""), 1, "J", true);
+$pdf->MultiCell(174, 5, safe_iconv($antecedenteDesc), 1, "J", true);
 $pdf->Ln();
 
 $pdf->SetFillColor(255, 161, 61);
@@ -337,6 +351,24 @@ if (is_array($asignaturas) && count($asignaturas)) {
   ];
 
   foreach ($porSem as $gradoId => $lista) {
+    $lineHeightHeader = 5;
+    $headerLinesMax = 1;
+    foreach ($encabezados as $txt) {
+      $headerLinesMax = max($headerLinesMax, substr_count($txt, "\n") + 1);
+    }
+    $headerHeight   = $headerLinesMax * $lineHeightHeader;
+    $tituloHeight   = 6;
+    $reservaPrimera = 3 * ($pdf->lineHeight ?? 5);
+    $bottomMargin   = 20;
+
+    $needed = $tituloHeight + $headerHeight + $reservaPrimera;
+    $pageH  = $pdf->GetPageHeight();
+
+    if ($pdf->GetY() + $needed > ($pageH - $bottomMargin)) {
+      $pdf->AddPage('P', 'Letter');
+      $pdf->Ln(5);
+    }
+
     $pdf->SetFillColor(255, 161, 61);
     $pdf->SetFont("Nutmegb", "", 9);
     $pdf->Cell(174, 6, safe_iconv(mb_strtoupper($getSemesterTitle($gradoId))), 1, 1, "C", true);
@@ -425,6 +457,7 @@ if (is_array($asignaturas) && count($asignaturas)) {
   $pdf->SetFillColor(255, 255, 255);
   $pdf->SetFont("Nutmeg", "", 8);
   $pdf->Cell(174, 6, safe_iconv("SIN ASIGNATURAS REGISTRADAS"), 1, 1, "C", true);
+  $pdf->Ln();
 }
 
 $pdf->SetFillColor(255, 161, 61);
