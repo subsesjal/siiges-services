@@ -8,11 +8,12 @@ const FORMATOS_MAPPING = {
   FDA03: 'fda03.php',
   FDA04: 'fda04.php',
   FDA06: 'fda06.php',
-  FDP02: 'fdp02.php', // Falta
+  FDP02: 'fdp02.php',
   FDP05: 'fdp05.php',
   FDP06: 'fdp06.php',
   OFICIO_ADMISORIO: 'ofad.php',
   HISTORIAL_ACADEMICO: 'fhistorial.php',
+  ACUERDO_RVOE: 'frvoe.php',
 };
 
 const createPhpFile = async (data, tipoDocumento) => new Promise((resolve, reject) => {
