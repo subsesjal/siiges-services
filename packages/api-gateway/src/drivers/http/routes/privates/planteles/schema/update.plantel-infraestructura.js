@@ -23,7 +23,7 @@ const updateInfraestructuraSchema = {
       nombre: { type: 'string' },
       ubicacion: { type: 'string' },
       capacidad: { type: 'integer' },
-      metros: { type: 'integer' },
+      metros: { type: 'number' },
       recursos: { type: 'string' },
       asignaturasInfraestructura: {
         type: 'array',
