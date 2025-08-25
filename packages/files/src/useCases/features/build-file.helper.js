@@ -12,7 +12,7 @@ const {
   buildFileFDP06,
 } = require('../db/FDP');
 const { buildFileOFAD } = require('../db/OFAD');
-const { findFileRVOE } = require('../db/RVOE');
+const { buildFileAcuerdoRvoe } = require('../db/RVOE');
 const { buildFileHistorial, findFileBeca, findFileServicio } = require('../db/FSE');
 const { createFileXML, findFileTitulo } = require('../db/TITULO_ELECTRONICO');
 
@@ -28,7 +28,7 @@ const buildFile = async (input, fileUploaded) => {
     FDP05: async () => buildFileFDP05(entidadId, tipoDocumento),
     FDP06: async () => buildFileFDP06(entidadId, tipoDocumento),
     OFICIO_ADMISORIO: async () => buildFileOFAD(entidadId, tipoDocumento),
-    ACUERDO_RVOE: async () => findFileRVOE(entidadId, tipoDocumento),
+    ACUERDO_RVOE: async () => buildFileAcuerdoRvoe(entidadId, tipoDocumento),
     HISTORIAL_ACADEMICO: async () => buildFileHistorial(entidadId, tipoDocumento),
     REPORTE_BECAS: async () => findFileBeca(entidadId, tipoDocumento),
     REPORTE_SERV_SOC: async () => findFileServicio(entidadId, tipoDocumento),

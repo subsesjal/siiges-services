@@ -46,12 +46,39 @@ async function GenerarTitulo(tituloElectronico, xmlString) {
   doc.setTextColor(0, 0, 0);
   doc.setFont('Nutmeg', 'normal');
 
-  const centerTextInBox = (text, x, width, y, size = 8, bold = false) => {
-    const textWidth = doc.getTextWidth(text);
-    const xCentered = x + (width - textWidth) / 2;
+  const centerTextInBox = (
+    text,
+    x,
+    width,
+    y,
+    size = 8,
+    bold = false,
+    alignBottom = false,
+    refHeight = 0,
+  ) => {
+    if (!text) return { height: 0, lastY: y };
+
     doc.setFont('Nutmeg', bold ? 'bold' : 'normal');
     doc.setFontSize(size);
-    doc.text(text ?? '', xCentered, y);
+
+    const lines = doc.splitTextToSize(text, width);
+    const lineHeight = size * 1.2;
+    const totalHeight = lines.length * lineHeight;
+
+    let startY = y;
+    if (alignBottom && refHeight > totalHeight) {
+      startY = y + (refHeight - totalHeight);
+    }
+
+    let lastY = startY;
+    lines.forEach((line, i) => {
+      const textWidth = doc.getTextWidth(line);
+      const xCentered = x + (width - textWidth) / 2;
+      lastY = startY + i * lineHeight;
+      doc.text(line, xCentered, lastY);
+    });
+
+    return { height: totalHeight, lastY };
   };
 
   const drawCenteredBlockTitle = (text, xStart, width, y, fontSize = 8) => {
@@ -106,14 +133,33 @@ async function GenerarTitulo(tituloElectronico, xmlString) {
   const colWidths2 = [250, 250];
   const colX2 = [blockX, blockX + colWidths2[0]];
 
-  centerTextInBox(tituloElectronico?.curp || '', colX2[0], colWidths2[0], colY2, 8, false);
-  centerTextInBox(tituloElectronico?.nombreCarrera || '', colX2[1], colWidths2[1], colY2, 8, false);
+  const programaBox = centerTextInBox(
+    tituloElectronico?.nombreCarrera || '',
+    colX2[1],
+    colWidths2[1],
+    colY2,
+    8,
+    false,
+  );
 
-  drawLine(colY2 + 4);
-  centerTextInBox('CURP', colX2[0], colWidths2[0], colY2 + 15, 8);
-  centerTextInBox('Nombre del programa', colX2[1], colWidths2[1], colY2 + 15, 8);
+  const curpBox = centerTextInBox(
+    tituloElectronico?.curp || '',
+    colX2[0],
+    colWidths2[0],
+    colY2,
+    8,
+    false,
+    true,
+    programaBox.height,
+  );
 
-  const institY = curpY + 45;
+  const maxY = Math.max(curpBox.lastY, programaBox.lastY);
+  drawLine(maxY + 4);
+
+  centerTextInBox('CURP', colX2[0], colWidths2[0], maxY + 15, 8);
+  centerTextInBox('Nombre del programa', colX2[1], colWidths2[1], maxY + 15, 8);
+
+  const institY = maxY + 40;
   doc.setFillColor(180, 206, 235);
   doc.rect(blockX, institY, blockWidth, 16, 'F');
   drawCenteredBlockTitle('Datos de la institución educativa', blockX, blockWidth, institY + 12);
@@ -142,12 +188,22 @@ async function GenerarTitulo(tituloElectronico, xmlString) {
   centerTextInBox('Entidad federativa', colXExp[1], colWidthsExp[1], expDatoY + 15, 8);
 
   const fechaY = expDatoY + 55;
-  centerTextInBox(formatearFecha(
-    tituloElectronico?.fechaInicio,
-  ), colXExp[0], colWidthsExp[0], fechaY, 8, false);
-  centerTextInBox(formatearFecha(
-    tituloElectronico?.fechaTerminacion,
-  ), colXExp[1], colWidthsExp[1], fechaY, 8, false);
+  centerTextInBox(
+    formatearFecha(tituloElectronico?.fechaInicio),
+    colXExp[0],
+    colWidthsExp[0],
+    fechaY,
+    8,
+    false,
+  );
+  centerTextInBox(
+    formatearFecha(tituloElectronico?.fechaTerminacion),
+    colXExp[1],
+    colWidthsExp[1],
+    fechaY,
+    8,
+    false,
+  );
 
   drawLine(fechaY + 4);
   centerTextInBox('Fecha de inicio', colXExp[0], colWidthsExp[0], fechaY + 15, 8);
@@ -163,9 +219,14 @@ async function GenerarTitulo(tituloElectronico, xmlString) {
     8,
     false,
   );
-  centerTextInBox(formatearFecha(
-    tituloElectronico?.fechaExpedicion,
-  ), colXExp[1], colWidthsExp[1], examenY, 8, false);
+  centerTextInBox(
+    formatearFecha(tituloElectronico?.fechaExpedicion),
+    colXExp[1],
+    colWidthsExp[1],
+    examenY,
+    8,
+    false,
+  );
 
   drawLine(examenY + 4);
   centerTextInBox('Fecha de examen o exención de examen profesional', colXExp[0], colWidthsExp[0], examenY + 15, 8);
