@@ -40,7 +40,7 @@ const InfraestructuraSchema = {
     type: DataTypes.INTEGER,
   },
   metros: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.NUMBER,
   },
   recursos: {
     type: DataTypes.STRING,
