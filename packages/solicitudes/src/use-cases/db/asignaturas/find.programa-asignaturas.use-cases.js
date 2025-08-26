@@ -20,10 +20,7 @@ const findProgramaAsignaturas = (
     });
 
     const asignaturasTipo2 = await findProgramaAsignaturasQuery(identifierObj, {
-      query: {
-        tipo: 2,
-        gradoId: 25,
-      },
+      query: { tipo: 2 },
     });
 
     asignaturas = [...asignaturasTipo1, ...asignaturasTipo2];
