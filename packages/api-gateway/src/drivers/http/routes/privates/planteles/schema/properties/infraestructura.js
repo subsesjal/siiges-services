@@ -6,7 +6,7 @@ const infraestructura = {
   nombre: { type: 'string' },
   ubicacion: { type: 'string' },
   capacidad: { type: 'integer' },
-  metros: { type: 'integer' },
+  metros: { type: 'string' },
   recursos: { type: 'string' },
 };
 
