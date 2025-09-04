@@ -3,9 +3,18 @@ const findAllSolicitudesServSoc = (findAllSolicitudServSocQuery) => async () => 
     { association: 'estatusSolicitudServicioSocial' },
     { association: 'cicloEscolar' },
     { association: 'domicilio' },
+    {
+      association: 'programa',
+      attributes: ['id', 'nombre'],
+    },
   ];
 
-  return findAllSolicitudServSocQuery({}, { include });
+  const servSoc = await findAllSolicitudServSocQuery(
+    {},
+    { include, strict: false },
+  );
+
+  return servSoc;
 };
 
 module.exports = findAllSolicitudesServSoc;
