@@ -47,14 +47,51 @@ set_error_handler(function ($severity, $message, $file, $line) {
   exit(1);
 });
 
-function safe_iconv($string)
+function safe_iconv($value)
 {
-  if (is_array($string)) {
-    $string = implode(", ", $string);
-  } elseif (is_object($string)) {
-    $string = json_encode($string);
+  if (is_array($value)) {
+    $value = implode(", ", $value);
+  } elseif (is_object($value)) {
+    $value = json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
   }
-  return iconv('UTF-8', 'ISO-8859-1//TRANSLIT', (string) $string);
+  if ($value === null) return '';
+  $s = (string) $value;
+
+  $canMb = function_exists('mb_convert_encoding');
+
+  $conv = function (string $str, string $from, string $to) use ($canMb) {
+    if ($canMb) {
+      return @mb_convert_encoding($str, $to, $from);
+    }
+    return @iconv($from, $to, $str);
+  };
+
+  $isUtf8 = (preg_match('//u', $s) === 1);
+
+  if (!$isUtf8) {
+    $tmp = $conv($s, 'Windows-1252', 'UTF-8');
+    if ($tmp !== false && $tmp !== '' && preg_match('//u', $tmp)) {
+      $s = $tmp;
+    } else {
+      $tmp = $conv($s, 'ISO-8859-1', 'UTF-8');
+      if ($tmp !== false && $tmp !== '' && preg_match('//u', $tmp)) {
+        $s = $tmp;
+      } else {
+        $s = @iconv('UTF-8', 'UTF-8//IGNORE', $s);
+        if ($s === false) $s = '';
+      }
+    }
+  }
+
+  $out = @iconv('UTF-8', 'ISO-8859-1//TRANSLIT//IGNORE', $s);
+  if ($out === false || $out === '') {
+    $out = $canMb ? @mb_convert_encoding($s, 'ISO-8859-1', 'UTF-8') : @iconv('UTF-8', 'ISO-8859-1//IGNORE', $s);
+  }
+
+  if ($out === false) {
+    $out = '';
+  }
+  return $out;
 }
 
 $data = json_decode(file_get_contents('php://stdin'), true);
