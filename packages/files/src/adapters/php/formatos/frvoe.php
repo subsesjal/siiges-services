@@ -104,7 +104,6 @@ $pdf->Ln(25);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFillColor(115, 199, 209);
 $pdf->Cell(140, 5, "", 0, 0, "L");
-$pdf->Cell(35, 6, "FDA06", 0, 0, "R", true);
 $pdf->Ln(10);
 
 $pdf->SetTextColor(115, 199, 209);

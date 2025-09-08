@@ -6,12 +6,31 @@ const buildFileFDA04 = (
 ) => async (solicitudId, tipoDocumento) => {
   const include = [{
     association: 'programa',
+    attributes: [
+      'id',
+      'duracionPeriodos',
+      'nombre',
+    ],
     include: [
-      { association: 'ciclo' },
-      { association: 'nivel' },
-      { association: 'modalidad' },
+      { association: 'ciclo', attributes: ['id'] },
+      { association: 'nivel', attributes: ['id', 'descripcion'] },
+      { association: 'modalidad', attributes: ['id', 'nombre', 'descripcion'] },
       {
         association: 'plantel',
+        attributes: [
+          'id',
+          'tipoInmuebleId',
+          'correo1',
+          'correo2',
+          'correo3',
+          'telefono1',
+          'telefono2',
+          'telefono3',
+          'paginaWeb',
+          'redesSociales',
+          'especificaciones',
+          'dimensiones',
+        ],
         include: [
           {
             association: 'plantelEdificioNiveles',
@@ -24,7 +43,11 @@ const buildFileFDA04 = (
             association: 'infraestructuras',
             include: [{
               association: 'asignaturasInfraestructura',
-              include: [{ association: 'asignatura' }],
+              include: [
+                {
+                  association: 'asignatura',
+                  attributes: ['id', 'clave'],
+                }],
             }],
           },
           {
@@ -34,7 +57,7 @@ const buildFileFDA04 = (
               { association: 'municipio' },
             ],
           },
-          { association: 'institucion' },
+          { association: 'institucion', attributes: ['id', 'nombre'] },
         ],
       }],
   },
