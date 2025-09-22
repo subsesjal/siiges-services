@@ -251,11 +251,7 @@ $promedio_calificacion = 0;
 // print_r($pdf->programa);
 if ($total_materias != 0) {
   $promedio_calificacion = $total_calificaciones / $total_materias;
-  if ($programa['calificacionDecimal'] == 1) :
-    $promedio_calificacion = round($promedio_calificacion, 1);
-  elseif ($programa['calificacionDecimal'] == 2) :
-    $promedio_calificacion = round($promedio_calificacion, 0);
-  endif;
+  $promedio_calificacion = number_format($promedio_calificacion, 1, '.', '');
 }
 
 $pdf->SetFont("Nutmeg", "", 9);
