@@ -1,4 +1,4 @@
-const { ciclosEscolares, grupos } = require('../../../adapters/db');
+const { ciclosEscolares } = require('../../../adapters/db');
 
 const { createCicloEscolar } = require('./create.ciclo-escolar.use-cases');
 const { findGroupCicloEscolar } = require('./find-group.ciclo-escolar.use-cases');
@@ -23,8 +23,7 @@ module.exports = {
     ciclosEscolares.updateCicloEscolarQuery,
   ),
   deleteCicloEscolar: deleteCicloEscolar(
-    ciclosEscolares.findOneCicloEscolarQuery,
+    findCicloEscolar,
     ciclosEscolares.deleteCicloEscolarQuery,
-    grupos.findGroupGrupoQuery,
   ),
 };
