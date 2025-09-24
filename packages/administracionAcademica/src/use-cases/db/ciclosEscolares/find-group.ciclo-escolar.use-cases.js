@@ -1,9 +1,9 @@
 const findGroupCicloEscolar = (
   findGroupCicloEscolarQuery,
-) => async (identifierObj) => {
-  const cicloEscolar = await findGroupCicloEscolarQuery(identifierObj);
 
-  return cicloEscolar;
+) => async (identifierObj) => {
+  const grupos = await findGroupCicloEscolarQuery(identifierObj);
+  return grupos;
 };
 
 module.exports = { findGroupCicloEscolar };
