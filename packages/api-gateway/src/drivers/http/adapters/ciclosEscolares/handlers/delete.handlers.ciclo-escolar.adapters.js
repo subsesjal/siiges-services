@@ -7,16 +7,14 @@ async function deleteCicloEscolar(request, reply) {
   try {
     const { cicloEscolarId } = request.params;
 
-    Logger.info('[Ciclo escolar]: deleted Ciclo Escolar');
-
-    const cicloEscolar = await this.administracionAcademicaServices.deleteCicloEscolar(
-      { id: cicloEscolarId },
-    );
+    Logger.info(`[Ciclo escolar]: Eliminando ciclo escolar ${cicloEscolarId}`);
+    const result = await this.administracionAcademicaServices
+      .deleteCicloEscolar({ id: cicloEscolarId });
 
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: cicloEscolar });
+      .send({ data: result });
   } catch (error) {
     return errorHandler(error, reply);
   }
