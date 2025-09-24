@@ -3,7 +3,7 @@ const findGroupCicloEscolar = (
 
 ) => async (identifierObj) => {
   const grupos = await findGroupCicloEscolarQuery(identifierObj);
-  return grupos;
+  return grupos;s
 };
 
 module.exports = { findGroupCicloEscolar };
