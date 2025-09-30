@@ -258,6 +258,10 @@ if ($total_materias != 0) {
   }
 }
 
+if ($pdf->checkNewPage()) {
+  $pdf->Ln(20);
+}
+
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->SetFillColor(191, 191, 191);
 $pdf->Cell(50, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "CRÉDITOS OBTENIDOS"), 1, 0, "C", true);
