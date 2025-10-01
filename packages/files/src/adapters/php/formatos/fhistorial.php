@@ -7,14 +7,14 @@ error_reporting(E_ALL);
 
 // Optional: write uncaught exceptions to stderr
 set_exception_handler(function ($e) {
-    file_put_contents('php://stderr', "Uncaught Exception: " . $e->getMessage() . "\n");
-    file_put_contents('php://stderr', $e->getTraceAsString() . "\n");
-    exit(1);
+  file_put_contents('php://stderr', "Uncaught Exception: " . $e->getMessage() . "\n");
+  file_put_contents('php://stderr', $e->getTraceAsString() . "\n");
+  exit(1);
 });
 
 set_error_handler(function ($severity, $message, $file, $line) {
-    file_put_contents('php://stderr', "Error [$severity]: $message in $file on line $line\n");
-    exit(1);
+  file_put_contents('php://stderr', "Error [$severity]: $message in $file on line $line\n");
+  exit(1);
 });
 
 // Leer datos JSON desde stdin
@@ -149,7 +149,7 @@ foreach ($calificacionesInput as $calificacion) {
   $asignatura['tipo_txt'] = $tipoTxt;
 
   // Agregar consecutivo
-  $calificacion['consecutivo'] = (int)($asignatura['consecutivo'] ?? 0);
+  $calificacion['consecutivo'] = (int) ($asignatura['consecutivo'] ?? 0);
 
   // Insertar datos enriquecidos
   $calificacion['asignatura'] = $asignatura;
@@ -238,8 +238,8 @@ foreach ($calificacionCiclo as $ciclos => $ciclo) {
     }
 
     if (is_numeric($detalle["calificacion"]) && $detalle["calificacion"] >= $programa["calificacionAprobatoria"]) {
-      $total_creditos += (int)($detalle["asignatura"]["creditos"] ?? 0);
-      $total_calificaciones += (float)($detalle["calificacion"] ?? 0);
+      $total_creditos += (int) ($detalle["asignatura"]["creditos"] ?? 0);
+      $total_calificaciones += (float) ($detalle["calificacion"] ?? 0);
       $total_materias += 1;
     }
   }
@@ -258,6 +258,10 @@ if ($total_materias != 0) {
   }
 }
 
+if ($pdf->checkNewPage()) {
+  $pdf->Ln(20);
+}
+
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->SetFillColor(191, 191, 191);
 $pdf->Cell(50, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "CRÉDITOS OBTENIDOS"), 1, 0, "C", true);
@@ -266,13 +270,18 @@ $pdf->Ln();
 
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->SetFillColor(255, 255, 255);
-$pdf->Cell(50, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $total_creditos . " de " .  $programa["creditos"]), 1, 0, "C", true);
+$pdf->Cell(50, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $total_creditos . " de " . $programa["creditos"]), 1, 0, "C", true);
 $pdf->Cell(50, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $promedio_calificacion), 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->Ln(15);
+
+if ($pdf->checkNewPage()) {
+  $pdf->Ln(20);
+}
+
 // Fecha
-$fecha =  $pdf->convertirFecha(date("Y-m-d"));
+$fecha = $pdf->convertirFecha(date("Y-m-d"));
 $pdf->SetFont("Nutmegbk", "", 8);
 $pdf->MultiCell(176, 3, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "El presente historial consigna las calificaciones que hasta la fecha han sido registradas en el  Sistema Integral de Información para la Gestión de la Educación Superior (SIIGES), el cumplimiento parcial o total del plan de estudios, los créditos obtenidos y la calificación total o parcial serán acreditados solamente por un certificado autorizado.
 
