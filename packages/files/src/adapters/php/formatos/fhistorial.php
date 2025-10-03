@@ -251,8 +251,12 @@ $promedio_calificacion = 0;
 // print_r($pdf->programa);
 if ($total_materias != 0) {
   $promedio_calificacion = $total_calificaciones / $total_materias;
+  
   if (!empty($programa['calificacionDecimal']) && $programa['calificacionDecimal'] === true) {
-    $promedio_calificacion = number_format($promedio_calificacion, 1, '.', '');
+    $promedio_calificacion = round($promedio_calificacion, 1);
+    if (fmod($promedio_calificacion, 1) == 0.0) {
+      $promedio_calificacion = (int) $promedio_calificacion;
+    }
   } else {
     $promedio_calificacion = round($promedio_calificacion, 0);
   }
