@@ -13,23 +13,25 @@ const findGroupPlantelInfraestructura = (
     { association: 'tipoInstalacion' },
     {
       association: 'asignaturasInfraestructura',
-      include: [
-        { association: 'asignatura' },
-      ],
-    }];
+      include: [{ association: 'asignatura' }],
+    },
+  ];
 
-  const plantelInfraestructuras = await findAllInfraestructuraQuery({
-    plantelId,
-    tipoInstalacionId: { [Op.not]: AULA_ID },
-  }, {
-    include,
-    strict: false,
-  });
+  const plantelInfraestructuras = await findAllInfraestructuraQuery(
+    {
+      plantelId,
+      tipoInstalacionId: { [Op.not]: AULA_ID },
+    },
+    {
+      include,
+      strict: false,
+    },
+  );
 
-  const infraestructuras = plantelInfraestructuras
-    .map((infraestructura) => infraestructura.toJSON());
+  const infraestructuras = (plantelInfraestructuras || [])
+    .map((infraestructura) => infraestructura?.toJSON?.() ?? null)
+    .filter(Boolean);
 
-  // find programa
   const programa = await findOneProgramaQuery({ id: programaId, plantelId });
   let infraestructurasAsignaturas = [];
 
@@ -38,17 +40,22 @@ const findGroupPlantelInfraestructura = (
       programaId,
     });
 
-    infraestructurasAsignaturas = await Promise.all(programaInfraestructuras
-      .map(async (programaInfraestructura) => {
-        const plantelInfraestructuraAsignatura = await findOneInfraestructuraQuery({
-          id: programaInfraestructura.infraestructuraId,
-        }, {
-          include,
-          strict: false,
-        });
+    infraestructurasAsignaturas = await Promise.all(
+      programaInfraestructuras.map(async (programaInfraestructura) => {
+        const plantelInfraestructuraAsignatura = await findOneInfraestructuraQuery(
+          { id: programaInfraestructura.infraestructuraId },
+          { include, strict: false },
+        );
+
+        if (!plantelInfraestructuraAsignatura) {
+          return null;
+        }
 
         return plantelInfraestructuraAsignatura.toJSON();
-      }));
+      }),
+    );
+
+    infraestructurasAsignaturas = infraestructurasAsignaturas.filter(Boolean);
   }
 
   return [...infraestructuras, ...infraestructurasAsignaturas];
