@@ -449,4 +449,4 @@ $pdf->Cell(0, 5, safe_iconv(mb_strtoupper(trim(
 ) ?? "")), 0, 1, "C");
 
 // Generar PDF
-echo $pdf->Output('S');
+$pdf->Output('I', 'FDA04.pdf');
