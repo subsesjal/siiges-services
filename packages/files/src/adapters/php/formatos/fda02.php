@@ -450,43 +450,56 @@ $pdf->SetFont("Nutmegb", "", 7);
 $pdf->Cell(174, 5, safe_iconv("PERSONAL DESIGNADO PARA REALIZAR DILIGENCIAS PARA EL DESARROLLO Y SEGUIMIENTO DE LA SOLICITUD DE RVOE"), 1, 0, "C", true);
 $pdf->Ln();
 
-$diligentePersona = $nombresDiligencias[0]['persona'] ?? [];
-
-$horaInicio = isset($nombresDiligencias[0]['horaInicio']) ? new DateTime($nombresDiligencias[0]['horaInicio']) : null;
-$horaFin = isset($nombresDiligencias[0]['horaFin']) ? new DateTime($nombresDiligencias[0]['horaFin']) : null;
-
-$horarioAtencion = '';
-if ($horaInicio && $horaFin) {
-  $horarioAtencion = $horaInicio->format('H:i') . ' - ' . $horaFin->format('H:i');
-}
-
-$personalDesignado = [
-  [
-    "NOMBRE COMPLETO",
-    trim(
-      ($diligentePersona['nombre'] ?? '') . ' ' .
-      ($diligentePersona['apellidoPaterno'] ?? '') . ' ' .
-      ($diligentePersona['apellidoMaterno'] ?? '')
-    )
-  ],
-  ["CARGO", $diligentePersona['tituloCargo'] ?? ""],
-  ["NÚMERO TELEFÓNICO", $diligentePersona['telefono'] ?? ""],
-  ["CORREO ELECTRÓNICO", $diligentePersona['correoPrimario'] ?? ""],
-  ["HORARIO DE ATENCIÓN", $horarioAtencion],
-];
-
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->SetWidths([70, 104]);
 $pdf->SetLineHeight(5);
 $pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
 $pdf->SetAligns(["C", "L"]);
 
-foreach ($personalDesignado as $item) {
-  $pdf->RowBlanco([
-    safe_iconv($item[0]),
-    safe_iconv(mb_strtoupper($item[1]))
-  ]);
+if (!empty($nombresDiligencias)) {
+  foreach ($nombresDiligencias as $diligencia) {
+    $diligentePersona = $diligencia['persona'] ?? [];
+    $horaInicio = isset($diligencia['horaInicio']) ? new DateTime($diligencia['horaInicio'], new DateTimeZone('UTC')) : null;
+    $horaFin = isset($diligencia['horaFin']) ? new DateTime($diligencia['horaFin'], new DateTimeZone('UTC')) : null;
+
+    if ($horaInicio)
+      $horaInicio->setTimezone(new DateTimeZone('America/Mexico_City'));
+    if ($horaFin)
+      $horaFin->setTimezone(new DateTimeZone('America/Mexico_City'));
+
+    $horarioAtencion = '';
+    if ($horaInicio && $horaFin) {
+      $horarioAtencion = $horaInicio->format('H:i') . ' - ' . $horaFin->format('H:i');
+    }
+
+    $personalDesignado = [
+      [
+        "NOMBRE COMPLETO",
+        trim(
+          ($diligentePersona['nombre'] ?? '') . ' ' .
+          ($diligentePersona['apellidoPaterno'] ?? '') . ' ' .
+          ($diligentePersona['apellidoMaterno'] ?? '')
+        )
+      ],
+      ["CARGO", $diligentePersona['tituloCargo'] ?? ""],
+      ["NÚMERO TELEFÓNICO", $diligentePersona['telefono'] ?? ""],
+      ["CORREO ELECTRÓNICO", $diligentePersona['correoPrimario'] ?? ""],
+      ["HORARIO DE ATENCIÓN", $horarioAtencion],
+    ];
+
+    foreach ($personalDesignado as $item) {
+      $pdf->RowBlanco([
+        safe_iconv($item[0]),
+        safe_iconv(mb_strtoupper($item[1]))
+      ]);
+    }
+
+    $pdf->Ln(5);
+  }
+} else {
+  $pdf->Cell(174, 5, safe_iconv("SIN PERSONAL REGISTRADO"), 1, 1, "C");
 }
+
 $pdf->Ln();
 
 $pdf->SetFillColor(255, 161, 61);
@@ -524,3 +537,4 @@ $pdf->Cell(0, 5, safe_iconv(mb_strtoupper(trim(
 ) ?? "")), 0, 1, "C");
 
 echo $pdf->Output('S');
+?>
