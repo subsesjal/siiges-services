@@ -13,27 +13,33 @@ const buildFileFDA04 = (
   const AULA_ID = 1;
   const include = [{
     association: 'programa',
+    attributes: ['id', 'duracionPeriodos', 'nombre'],
     include: [
-      { association: 'ciclo' },
-      { association: 'nivel' },
-      { association: 'modalidad' },
+      { association: 'ciclo', attributes: ['id'] },
+      { association: 'nivel', attributes: ['id', 'descripcion'] },
+      { association: 'modalidad', attributes: ['id', 'nombre', 'descripcion'] },
       {
         association: 'plantel',
+        attributes: [
+          'id',
+          'tipoInmuebleId',
+          'correo1',
+          'correo2',
+          'correo3',
+          'telefono1',
+          'telefono2',
+          'telefono3',
+          'paginaWeb',
+          'redesSociales',
+          'especificaciones',
+          'dimensiones',
+        ],
         include: [
           {
             association: 'plantelEdificioNiveles',
             include: [{ association: 'edificioNivel' }],
           },
           { association: 'plantelSeguridadSistemas' },
-          { association: 'plantelHigienes' },
-          { association: 'saludInstituciones' },
-          {
-            association: 'infraestructuras',
-            include: [{
-              association: 'asignaturasInfraestructura',
-              include: [{ association: 'asignatura' }],
-            }],
-          },
           {
             association: 'domicilio',
             include: [
@@ -41,7 +47,7 @@ const buildFileFDA04 = (
               { association: 'municipio' },
             ],
           },
-          { association: 'institucion' },
+          { association: 'institucion', attributes: ['id', 'nombre'] },
         ],
       },
     ],
