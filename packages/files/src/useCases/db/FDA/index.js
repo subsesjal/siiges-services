@@ -28,6 +28,11 @@ module.exports = {
   ),
   buildFileFDA04: buildFileFDA04(
     fdaAdapter.findOneSolicitudProgramaQuery,
+    fdaAdapter.findAllInfraestructura,
+    fdaAdapter.findAllInfraestructuraPrograma,
+    fdaAdapter.findOneInfraestructura,
+    fdaAdapter.findPlantelHigieneByPlantelId,
+    fdaAdapter.findSaludInstitucionesByPlantelId,
     phpAdapter.createPhpFile,
   ),
   buildFileFDA06: buildFileFDA06(
