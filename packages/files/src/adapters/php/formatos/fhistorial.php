@@ -1,22 +1,24 @@
 <?php
+<?php
 require(realpath(__DIR__ . "/../formatos/pdf.php"));
 
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+// Optional: write uncaught exceptions to stderr
 set_exception_handler(function ($e) {
-    file_put_contents('php://stderr', "Uncaught Exception: " . $e->getMessage() . "\n");
-    file_put_contents('php://stderr', $e->getTraceAsString() . "\n");
-    exit(1);
+  file_put_contents('php://stderr', "Uncaught Exception: " . $e->getMessage() . "\n");
+  file_put_contents('php://stderr', $e->getTraceAsString() . "\n");
+  exit(1);
 });
 
 set_error_handler(function ($severity, $message, $file, $line) {
-    file_put_contents('php://stderr', "Error [$severity]: $message in $file on line $line\n");
-    exit(1);
+  file_put_contents('php://stderr', "Error [$severity]: $message in $file on line $line\n");
+  exit(1);
 });
 
-// Helper para convertir texto seguro
+// Helper para convertir texto UTF-8 a ISO-8859-1 y evitar errores de codificación
 function safe_text($text) {
     return mb_convert_encoding($text ?? '', 'ISO-8859-1', 'UTF-8');
 }
@@ -24,11 +26,14 @@ function safe_text($text) {
 // Leer datos JSON desde stdin
 $data = json_decode(file_get_contents('php://stdin'), true);
 
+// Verifica si el JSON es válido
 if (!$data) {
   fwrite(STDERR, "No se recibieron datos válidos o el JSON está malformado.\n");
   exit(1);
 }
 
+
+// make new object
 $pdf = new PDF();
 
 $alumno = $data['alumno'] ?? [];
@@ -73,11 +78,16 @@ $dataPrograma = array(
   ],
 );
 
+//set widht for each column (6 columns)
 $pdf->SetWidths(array(80, 95));
+
+//set line height
 $pdf->SetLineHeight(5);
+
 $pdf->SetColors([[191, 191, 191], []]);
 
 foreach ($dataPrograma as $item) {
+  // write data using Row() method containing array of values
   $pdf->Row(array(
     $item['name'],
     $item['description']
@@ -90,6 +100,7 @@ $pdf->SetFillColor(166, 166, 166);
 $pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(176, 5, safe_text("DATOS DEL ALUMNO"), 1, 1, "C", true);
 
+// add table heading using standard cells
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->SetFillColor(191, 191, 191);
 $pdf->Cell(29, 5, safe_text("MATRÍCULA"), 1, 0, "C", true);
@@ -97,6 +108,7 @@ $pdf->Cell(118, 5, safe_text("NOMBRE DEL ALUMNO"), 1, 0, "C", true);
 $pdf->Cell(29, 5, safe_text("ESTATUS"), 1, 0, "C", true);
 $pdf->Ln();
 
+// Tabla de domicilio de la institucion
 $dataDetalleDomicilioInstitucion1 = array(
   [
     "matricula" => safe_text(mb_strtoupper($alumno["matricula"])),
@@ -105,12 +117,16 @@ $dataDetalleDomicilioInstitucion1 = array(
   ]
 );
 
+//set widht for each column (6 columns)
 $pdf->SetWidths(array(29, 118, 29));
+
+//set line height
 $pdf->SetLineHeight(5);
 $pdf->SetColors([]);
 $pdf->SetFont("Nutmeg", "", 9);
 
 foreach ($dataDetalleDomicilioInstitucion1 as $item) {
+  // write data using Row() method containing array of values
   $pdf->Row(array(
     $item['matricula'],
     $item['nombre_alumno'],
@@ -130,6 +146,7 @@ foreach ($calificacionesInput as $calificacion) {
   $grupo = $calificacion['grupo'] ?? [];
   $cicloEscolar = $grupo['cicloEscolar'] ?? [];
 
+  // Agregar campo tipo_txt (como en el código original)
   $tipoTxt = match ($asignatura['tipo'] ?? '') {
     '1' => 'Ordinario',
     '2' => 'Extraordinario',
@@ -137,8 +154,10 @@ foreach ($calificacionesInput as $calificacion) {
   };
   $asignatura['tipo_txt'] = $tipoTxt;
 
-  $calificacion['consecutivo'] = (int)($asignatura['consecutivo'] ?? 0);
+  // Agregar consecutivo
+  $calificacion['consecutivo'] = (int) ($asignatura['consecutivo'] ?? 0);
 
+  // Insertar datos enriquecidos
   $calificacion['asignatura'] = $asignatura;
   $calificacion['ciclo_escolar'] = $cicloEscolar;
 
@@ -184,8 +203,6 @@ foreach ($calificacionCiclo as $ciclos => $ciclo) {
       case 2:
         $tipo_txt = "Extraordinario";
         break;
-      default:
-        $tipo_txt = "Desconocido";
     }
 
     $dataCalificacionAsignatura = array(
@@ -200,12 +217,17 @@ foreach ($calificacionCiclo as $ciclos => $ciclo) {
       ]
     );
 
+    //set widht for each column (6 columns)
     $pdf->SetWidths(array(16, 17, 65, 22, 16, 13, 27));
+
+    //set line height
     $pdf->SetLineHeight(5);
     $pdf->SetColors([]);
     $pdf->SetFont("Nutmeg", "", 7);
 
+    //Imprime la fila
     foreach ($dataCalificacionAsignatura as $item) {
+      // write data using Row() method containing array of values
       $pdf->Row(array(
         $item['clave_asignatura'],
         $item['seriacion_asignatura'],
@@ -222,8 +244,8 @@ foreach ($calificacionCiclo as $ciclos => $ciclo) {
     }
 
     if (is_numeric($detalle["calificacion"]) && $detalle["calificacion"] >= $programa["calificacionAprobatoria"]) {
-      $total_creditos += (int)($detalle["asignatura"]["creditos"] ?? 0);
-      $total_calificaciones += (float)($detalle["calificacion"] ?? 0);
+      $total_creditos += (int) ($detalle["asignatura"]["creditos"] ?? 0);
+      $total_calificaciones += (float) ($detalle["calificacion"] ?? 0);
       $total_materias += 1;
     }
   }
@@ -232,13 +254,22 @@ foreach ($calificacionCiclo as $ciclos => $ciclo) {
 }
 $promedio_calificacion = 0;
 
+// print_r($pdf->programa);
 if ($total_materias != 0) {
   $promedio_calificacion = $total_calificaciones / $total_materias;
-  if ($programa['calificacionDecimal'] == 1) :
-    $promedio_calificacion = round($promedio_calificacion, 1);
-  elseif ($programa['calificacionDecimal'] == 2) :
+
+  if (!empty($programa['calificacionDecimal']) && $programa['calificacionDecimal'] === true) {
+    $promedio_calificacion = floor($promedio_calificacion * 10) / 10;
+    if (fmod($promedio_calificacion, 1) == 0.0) {
+      $promedio_calificacion = (int) $promedio_calificacion;
+    }
+  } else {
     $promedio_calificacion = round($promedio_calificacion, 0);
-  endif;
+  }
+}
+
+if ($pdf->checkNewPage()) {
+  $pdf->Ln(20);
 }
 
 $pdf->SetFont("Nutmeg", "", 9);
@@ -249,12 +280,18 @@ $pdf->Ln();
 
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->SetFillColor(255, 255, 255);
-$pdf->Cell(50, 5, safe_text($total_creditos . " de " .  $programa["creditos"]), 1, 0, "C", true);
+$pdf->Cell(50, 5, safe_text($total_creditos . " de " . $programa["creditos"]), 1, 0, "C", true);
 $pdf->Cell(50, 5, safe_text($promedio_calificacion), 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->Ln(15);
-$fecha =  $pdf->convertirFecha(date("Y-m-d"));
+
+if ($pdf->checkNewPage()) {
+  $pdf->Ln(20);
+}
+
+// Fecha
+$fecha = $pdf->convertirFecha(date("Y-m-d"));
 $pdf->SetFont("Nutmegbk", "", 8);
 $pdf->MultiCell(176, 3, safe_text("El presente historial consigna las calificaciones que hasta la fecha han sido registradas en el  Sistema Integral de Información para la Gestión de la Educación Superior (SIIGES), el cumplimiento parcial o total del plan de estudios, los créditos obtenidos y la calificación total o parcial serán acreditados solamente por un certificado autorizado.
 
