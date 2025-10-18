@@ -19,6 +19,22 @@ const tipoExtension = [
     mimeType: 'text/xml',
     ext: '.xml',
   },
+  {
+    mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    ext: '.xlsx',
+  },
+  {
+    mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    ext: '.docx',
+  },
+  {
+    mimeType: 'application/vnd.ms-excel',
+    ext: '.xls',
+  },
+  {
+    mimeType: 'application/msword',
+    ext: '.doc',
+  },
 ];
 
 const maxFileSize = 3 * 1024 * 1024;
