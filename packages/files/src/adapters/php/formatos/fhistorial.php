@@ -1,5 +1,4 @@
 <?php
-<?php
 require(realpath(__DIR__ . "/../formatos/pdf.php"));
 
 ini_set('display_errors', '1');
