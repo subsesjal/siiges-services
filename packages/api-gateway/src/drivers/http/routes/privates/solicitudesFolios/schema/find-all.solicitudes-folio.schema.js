@@ -20,6 +20,8 @@ const findAllSolicitudesProgramasSchema = {
       tipoDocumentoId: { type: 'string' },
       tipoSolicitudFolioId: { type: 'string' },
       programaId: { type: 'string' },
+      institucionId: { type: 'string' },
+      plantelId: { type: 'string' },
     },
   },
   response: {
