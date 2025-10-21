@@ -39,9 +39,9 @@ const programa = {
   flexibilidadCurricular: { type: 'string' },
   objetivoGeneral: { type: 'string' },
   objetivosParticulares: { type: 'string' },
-  calificacionMinima: { type: 'integer' },
-  calificacionMaxima: { type: 'integer' },
-  calificacionAprobatoria: { type: 'integer' },
+  calificacionMinima: { type: 'number' },
+  calificacionMaxima: { type: 'number' },
+  calificacionAprobatoria: { type: 'number' },
   calificacionDecimal: { type: 'boolean' },
 };
 
