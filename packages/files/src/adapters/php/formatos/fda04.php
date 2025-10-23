@@ -427,15 +427,29 @@ foreach ($saludInstituciones as $institucion) {
     $nombre = $institucion['nombre'] ?? '';
     $tiempo = $institucion['tiempo'] ?? '';
 
-    // Convierte el tiempo "00:30:00" a minutos legibles
     $partes = explode(':', $tiempo);
-    $minutos = (int) $partes[0] * 60 + (int) $partes[1];
+    $horas = (int) ($partes[0] ?? 0);
+    $minutos = (int) ($partes[1] ?? 0);
+
+    if ($horas > 0 && $minutos > 0) {
+        $tiempoTexto = "{$horas} h {$minutos} min";
+    } elseif ($horas > 0) {
+        $tiempoTexto = "{$horas} h";
+    } elseif ($minutos > 0) {
+        $tiempoTexto = "{$minutos} min";
+    } else {
+        $tiempoTexto = "0 min";
+    }
 
     $pdf->RowBlanco([
         safe_iconv($nombre),
-        safe_iconv("{$minutos} minutos")
+        safe_iconv($tiempoTexto)
     ]);
 }
+
+if ($pdf->checkNewPage()) {
+    $pdf->Ln(20);
+  }
 
 // Firma final
 $pdf->Ln(25);
