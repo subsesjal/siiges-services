@@ -1,10 +1,14 @@
-const findAllSolicitudesFolios = (
-  findAllSolicitudesFoliosQuery,
-) => async (query = {}) => {
+const { Op } = require('sequelize');
+
+const findAllSolicitudesFolios = (findAllSolicitudesFoliosQuery) => async (query = {}) => {
   const filteredQuery = Object.fromEntries(
-    // eslint-disable-next-line no-unused-vars
-    Object.entries(query).filter(([_, value]) => value !== undefined),
+    Object.entries(query).filter(([, value]) => value !== undefined),
   );
+
+  if (filteredQuery.estatus) {
+    filteredQuery.estatus = filteredQuery.estatus.split(',').map(Number);
+  }
+
   const include = [
     {
       association: 'programa',
@@ -14,28 +18,17 @@ const findAllSolicitudesFolios = (
           association: 'plantel',
           ...(filteredQuery.plantelId && { where: { id: filteredQuery.plantelId } }),
           include: [
-            {
-              association: 'domicilio',
-              ...(filteredQuery.domicilioId && { where: { id: filteredQuery.domicilioId } }),
-              include: [
-                { association: 'estado' },
-                { association: 'municipio' },
-              ],
-            },
-            {
-              association: 'institucion',
-              ...(filteredQuery.institucionId && { where: { id: filteredQuery.institucionId } }),
-            },
+            { association: 'domicilio', include: [{ association: 'estado' }, { association: 'municipio' }] },
+            { association: 'institucion', ...(filteredQuery.institucionId && { where: { id: filteredQuery.institucionId } }) },
           ],
         },
       ],
     },
     {
       association: 'estatusSolicitudFolio',
-      ...(filteredQuery.estatusSolicitudFolioId && {
-        where:
-        {
-          id: filteredQuery.estatusSolicitudFolioId.map(Number),
+      ...(filteredQuery.estatus && {
+        where: {
+          id: { [Op.in]: filteredQuery.estatus },
         },
       }),
     },
@@ -45,22 +38,12 @@ const findAllSolicitudesFolios = (
     },
     {
       association: 'tipoSolicitudFolio',
-      ...(filteredQuery.tipoSolicitudFolioId && {
-        where: {
-          id: filteredQuery.tipoSolicitudFolioId,
-        },
-      }),
+      // eslint-disable-next-line max-len
+      ...(filteredQuery.tipoSolicitudFolioId && { where: { id: filteredQuery.tipoSolicitudFolioId } }),
     },
   ];
 
-  const solicitudes = await findAllSolicitudesFoliosQuery(
-    null,
-    {
-      include,
-      strict: true,
-    },
-  );
-
+  const solicitudes = await findAllSolicitudesFoliosQuery(null, { include, strict: true });
   return solicitudes;
 };
 
