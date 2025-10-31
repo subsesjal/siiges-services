@@ -14,6 +14,8 @@ const FORMATOS_MAPPING = {
   OFICIO_ADMISORIO: 'ofad.php',
   HISTORIAL_ACADEMICO: 'fhistorial.php',
   ACUERDO_RVOE: 'frvoe.php',
+  FORMATO_ASIGNACION_FOLIOS_CER: 'fcertificado.php',
+  FORMATO_ASIGNACION_FOLIOS_TIT: 'ftitulo.php',
 };
 
 const createPhpFile = async (data, tipoDocumento) => new Promise((resolve, reject) => {

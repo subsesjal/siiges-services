@@ -15,6 +15,7 @@ const { buildFileOFAD } = require('../db/OFAD');
 const { buildFileAcuerdoRvoe } = require('../db/RVOE');
 const { buildFileHistorial, findFileBeca, findFileServicio } = require('../db/FSE');
 const { createFileXML, findFileTitulo } = require('../db/TITULO_ELECTRONICO');
+const { buildFileFOLIOCER } = require('../db/FOLIOS');
 
 const buildFile = async (input, fileUploaded) => {
   const { tipoDocumento, entidadId } = input;
@@ -34,6 +35,8 @@ const buildFile = async (input, fileUploaded) => {
     REPORTE_SERV_SOC: async () => findFileServicio(entidadId, tipoDocumento),
     TITULO_ELECTRONICO_XML: async () => createFileXML(entidadId, tipoDocumento, fileUploaded),
     TITULO_ELECTRONICO_PDF: async () => findFileTitulo(entidadId, tipoDocumento),
+    FORMATO_ASIGNACION_FOLIOS_CER: async () => buildFileFOLIOCER(entidadId, tipoDocumento),
+    FORMATO_ASIGNACION_FOLIOS_TIT: async () => buildFileFOLIOCER(entidadId, tipoDocumento),
   };
 
   if (Object.hasOwn(filesGenerator, tipoDocumento)) {
