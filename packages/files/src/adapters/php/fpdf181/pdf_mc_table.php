@@ -137,6 +137,54 @@ class PDF_MC_Table extends FPDF
     }
     return false;
   }
+  function RowBlancoLandscape($data)
+  {
+    $nb = 0;
+    for ($i = 0; $i < count($data); $i++) {
+      $nb = max($nb, $this->NbLines($this->widths[$i], $data[$i]));
+    }
+    $h = $this->lineHeight * $nb;
+
+    if ($this->CheckPageBreakLandscape($h + 25)) {
+      $this->Ln(5);
+    }
+
+    for ($i = 0; $i < count($data); $i++) {
+      $w = $this->widths[$i];
+      $a = isset($this->aligns[$i]) ? $this->aligns[$i] : 'L';
+      $x = $this->GetX();
+      $y = $this->GetY();
+
+      $arrayColor = (isset($this->colors[$i]) && !empty($this->colors[$i]))
+        ? $this->colors[$i]
+        : [255, 255, 255];
+      $r = $arrayColor[0];
+      $g = $arrayColor[1];
+      $b = $arrayColor[2];
+
+      $this->SetFillColor($r, $g, $b);
+      $this->Rect($x, $y, $w, $h, 'FD');
+
+      $lines = $this->NbLines($w, $data[$i]);
+      $cellHeight = $this->lineHeight * $lines;
+      $verticalOffset = ($h - $cellHeight) / 2;
+      $this->SetXY($x, $y + $verticalOffset);
+
+      $this->MultiCell($w, $this->lineHeight, $data[$i], 0, $a);
+      $this->SetXY($x + $w, $y);
+    }
+    $this->Ln($h);
+  }
+
+  function CheckPageBreakLandscape($h)
+  {
+    $margenInferior = 20;
+    if ($this->GetY() + $h > ($this->h - $margenInferior)) {
+      $this->AddPage("L", "Letter");
+      return true;
+    }
+    return false;
+  }
 
   function NbLines($w, $txt)
   {
