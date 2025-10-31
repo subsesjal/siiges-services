@@ -287,6 +287,14 @@ const tipoDocumentoObj = [
     id: 72,
     name: 'RESOLUCION_EQUIVALENCIA',
   },
+  {
+    id: 73,
+    name: 'FORMATO_ASIGNACION_FOLIOS_CER',
+  },
+  {
+    id: 74,
+    name: 'FORMATO_ASIGNACION_FOLIOS_TIT',
+  },
 ];
 
 module.exports = tipoDocumentoObj;
