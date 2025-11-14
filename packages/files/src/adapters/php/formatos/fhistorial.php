@@ -18,8 +18,9 @@ set_error_handler(function ($severity, $message, $file, $line) {
 });
 
 // Helper para convertir texto UTF-8 a ISO-8859-1 y evitar errores de codificación
-function safe_text($text) {
-    return mb_convert_encoding($text ?? '', 'ISO-8859-1', 'UTF-8');
+function safe_text($text)
+{
+  return mb_convert_encoding($text ?? '', 'ISO-8859-1', 'UTF-8');
 }
 
 // Leer datos JSON desde stdin
@@ -169,12 +170,19 @@ foreach ($calificacionesInput as $calificacion) {
   $calificacionCiclo[$nombreCiclo][] = $calificacion;
 }
 
+uksort($calificacionCiclo, function ($a, $b) {
+  return strcmp($a, $b);
+});
+
 foreach ($calificacionCiclo as $ciclos => $ciclo) {
   if ($pdf->checkNewPage()) {
     $pdf->Ln(20);
   }
 
   $ciclo = $pdf->array_sort($ciclo, 'consecutivo', SORT_ASC);
+  usort($ciclo, function ($a, $b) {
+    return strcmp($a['asignatura']['clave'], $b['asignatura']['clave']);
+  });
   $pdf->SetFillColor(166, 166, 166);
   $pdf->SetFont("Nutmeg", "", 9);
   $pdf->Cell(176, 5, safe_text(mb_strtoupper('CICLO ESCOLAR ' . $ciclos)), 1, 1, "C", true);
