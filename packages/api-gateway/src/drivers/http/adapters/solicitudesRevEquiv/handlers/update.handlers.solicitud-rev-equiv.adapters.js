@@ -11,7 +11,9 @@ const TIPO_TRAMITE_NOMBRES = {
   2: 'Equivalencia Total',
   3: 'Revalidación Parcial',
   4: 'Revalidación Total',
-  5: 'Revalidación Duplicado',
+  5: 'Equivalencia Duplicado',
+  6: 'Revalidación Duplicado',
+  7: 'N/A',
 };
 
 const NOTIFICATION_MAPPING = {
