@@ -6,6 +6,16 @@ const FEATURE = {
   ATENDER_OBSERVACIONES: 5,
 };
 
+const TIPO_TRAMITE_NOMBRES = {
+  1: 'Equivalencia Parcial',
+  2: 'Equivalencia Total',
+  3: 'Revalidación Parcial',
+  4: 'Revalidación Total',
+  5: 'Equivalencia Duplicado',
+  6: 'Revalidación Duplicado',
+  7: 'N/A',
+};
+
 const NOTIFICATION_MAPPING = {
   [FEATURE.RECIBIDA]: async (processor, solicitud) => {
     await processor({
@@ -41,15 +51,18 @@ const NOTIFICATION_MAPPING = {
     });
   },
   [FEATURE.ATENDER_OBSERVACIONES]: async (processor, solicitud) => {
+    const params = {
+      folioSolicitud: solicitud.folioSolicitud,
+      observaciones: solicitud.observaciones,
+      tipoSolicitud: TIPO_TRAMITE_NOMBRES[solicitud.tipoTramiteId],
+    };
+
     await processor({
       usuarioId: 212,
       email: solicitud.interesado.persona.correoPrimario,
       asunto: `SIIGES: Atender Observaciones - Folio ${solicitud.folioSolicitud}`,
       template: 'solicitudRevEquivObservaciones',
-      params: {
-        folioSolicitud: solicitud.folioSolicitud,
-        observaciones: solicitud.observaciones,
-      },
+      params,
     });
   },
 };
@@ -64,7 +77,6 @@ async function updateSolicitudRevEquiv(req, reply) {
   try {
     const data = req.body;
     const { solicitudRevEquivId } = req.params;
-
     const updatedEquiv = await this.solicitudRevEquivServices
       .updateSolicitudRevEquiv(data, { id: solicitudRevEquivId });
 
@@ -73,7 +85,6 @@ async function updateSolicitudRevEquiv(req, reply) {
       const processor = this.notificacionServices.sendNotificationEmail;
       sendNotificationEstatus(processor, updatedEquiv.estatusSolicitudRevEquivId, updatedEquiv);
     }
-
     return reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')

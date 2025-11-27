@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>SIGES - Notificación</title>
+  <title>Solicitud con observaciones</title>
   <style>
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
@@ -17,7 +17,7 @@
       margin: 0 auto;
       padding: 30px;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.0);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       color: #000000;
     }
     .header {
@@ -36,18 +36,27 @@
     }
     .content p {
       line-height: 1.6;
+      margin-bottom: 15px;
     }
     .highlight {
       color: #1c4e80;
       font-weight: bold;
     }
+    .email-link {
+      color: #1c4e80;
+      text-decoration: none;
+    }
+    .email-link:hover {
+      text-decoration: underline;
+    }
     .note {
       margin-top: 30px;
       font-size: 13px;
-      color: #d9534f;
-      background-color: #f9e6e6;
-      padding: 10px;
-      border-left: 4px solid #d9534f;
+      color: #856404;
+      background-color: #fff3cd;
+      padding: 15px;
+      border-left: 4px solid #ffc107;
+      line-height: 1.6;
     }
     .footer {
       text-align: center;
@@ -60,26 +69,27 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>SIGES - Notificación para recepción de solicitud</h1>
+      <h1>Solicitud de {tipoSolicitud} con observaciones</h1>
     </div>
     <div class="content">
-      <p>Estimado/a interesado/a,</p>
+      <p>Estimado usuario,</p>
 
-      <p>Tu solicitud de Revalidación/Equivalencia con folio <span class="highlight">{folioSolicitud}</span> ha sido recibida correctamente.</p>
+      <p>Tu solicitud con folio <span class="highlight">{folioSolicitud}</span> ha cambiado de estatus.</p>
 
-      <p><strong>Estado actual:</strong> <span class="highlight">Solicitud en observaciones</span></p>
+      <p><strong>Estatus:</strong> <span class="highlight">Solicitud con observaciones</span></p>
 
-      <p><strong>Observaciones:</strong> <span class="highlight">{observaciones}</span> </p>
+      <p><strong>Observaciones:</strong> {observaciones}</p>
 
-      <p>Por favor, revisa las observaciones realizadas y realiza las correcciones .</p>
-
-      <p>Quede atento a futuras notificaciones de su proceso.</p>
-
-      <p>Saludos cordiales,</p>
-      <p><strong>Equipo de SIGES</strong></p>
+      <p>Favor de enviar los documentos o información faltante al correo:
+        <a href="mailto:alejandra.arteaga@jalisco.gob.mx" class="email-link">
+          alejandra.arteaga@jalisco.gob.mx
+        </a>
+      </p>
     </div>
     <div class="note">
-      Nota: Este es un mensaje generado automáticamente, por favor no respondas a esta dirección de correo electrónico.
+      <strong>Nota:</strong> El plazo para solventar observaciones es de ocho días hábiles a partir de la prevención.
+      Una vez hecha la prevención, el trámite será suspendido y se reanudará al día hábil siguiente en que se cumpla con el objeto de la prevención.
+      Si no se cumplen las observaciones dentro del plazo señalado, la solicitud será desechada, pero puedes ingresarla nuevamente como nuevo trámite cuando cuentes con toda la documentación.
     </div>
     <div class="footer">
       © 2025 SIGES - Todos los derechos reservados
