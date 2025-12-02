@@ -1,6 +1,7 @@
 const errorHandler = require('../../../utils/errorHandler');
 
 const FEATURE = {
+  RECIBIDA: 1,
   EN_FIRMA: 3,
   PROCESADA: 4,
   ATENDER_OBSERVACIONES: 5,
@@ -60,7 +61,7 @@ const NOTIFICATION_MAPPING = {
     await processor({
       usuarioId: 212,
       email: solicitud.interesado.persona.correoPrimario,
-      asunto: `SIIGES: Atender Observaciones - Folio ${solicitud.folioSolicitud}`,
+      asunto: `SIIGES: Atender Observaciones - RevEquiv ${solicitud.folioSolicitud}`,
       template: 'solicitudRevEquivObservaciones',
       params,
     });
