@@ -122,6 +122,15 @@ async function trayectoriaRouter(fastify, opts, next) {
     solicitudesFoliosAdapter.reportFolioDocumentoAlumno,
   );
 
+  await fastify.get(
+    '/reporteFolios/csv',
+    {
+      schema: solicitudSchemas.reportSolicitudFolioAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesFoliosAdapter.reportFolioDocumentoAlumnoCSV,
+  );
+
   next();
 }
 
