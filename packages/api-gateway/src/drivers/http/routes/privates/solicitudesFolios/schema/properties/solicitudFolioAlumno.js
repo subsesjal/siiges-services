@@ -11,7 +11,6 @@ const solicitudFolioAlumno = {
   fechaElaboracion: { type: 'string', format: 'date-time' },
   fechaExpedicion: { type: 'string', format: 'date-time' },
   fechaExamenProfesional: { type: 'string', format: 'date-time' },
-  fechaExencionExamenProfesional: { type: 'string', format: 'date-time' },
 };
 
 module.exports = { solicitudFolioAlumno };
