@@ -14,6 +14,16 @@ const FILE_KEYS_MAPPING = {
   COMPROBANTE_PAGO_TRAMITE: 'COMPROBANTE_PAGO_TRAMITE',
 };
 
+const TIPO_TRAMITE_NOMBRES = {
+  1: 'Equivalencia Parcial',
+  2: 'Equivalencia Total',
+  3: 'Revalidación Parcial',
+  4: 'Revalidación Total',
+  5: 'Equivalencia Duplicado',
+  6: 'Revalidación Duplicado',
+  7: 'N/A',
+};
+
 async function createEquivalencia(req, reply) {
   try {
     const dataField = req.body.DATA;
@@ -27,10 +37,11 @@ async function createEquivalencia(req, reply) {
         .code(400)
         .send({ message: 'Error al parsear los datos JSON en el campo DATA.' });
     }
-    Logger.info('[SolicitudRevEquiv]: Creating SolicitudRevEquiv');
 
+    Logger.info('[SolicitudRevEquiv]: Creating SolicitudRevEquiv');
     const newEquivalencia = await this.solicitudRevEquivServices.createSolicitudRevEquiv({ data });
     const { id } = newEquivalencia;
+
     const fileKeys = Object.keys(req.body)
       .filter((key) => Object.prototype.hasOwnProperty.call(FILE_KEYS_MAPPING, key) && key !== 'DATA');
 
@@ -40,24 +51,23 @@ async function createEquivalencia(req, reply) {
       if (!archivoAdjunto) {
         throw boom.badRequest('Archivo adjunto requerido para: ', key);
       }
-
       const dataFile = {
         tipoEntidad: 'SOLICITUD_REV_EQUIV',
         entidadId: id,
         tipoDocumento: key,
       };
-
       await this.filesServices.uploadFile(dataFile, archivoAdjunto);
     }, Promise.resolve());
 
-    // Enviar notificación si hay cambio de estatus
-    this.notificacionServices.sendNotificationEmail({
+    // Enviar notificación de solicitud recibida
+    await this.notificacionServices.sendNotificationEmail({
       usuarioId: 212,
       email: newEquivalencia.interesado.persona.correoPrimario,
-      asunto: 'SIIGES: Cambiar de estatus - solicitudRevEquiv',
+      asunto: `SIIGES: Solicitud Recibida - Folio ${newEquivalencia.folioSolicitud}`,
       template: 'solicitudRevEquivRecibida',
       params: {
         folioSolicitud: newEquivalencia.folioSolicitud,
+        tipoSolicitud: TIPO_TRAMITE_NOMBRES[newEquivalencia.tipoTramiteId] || 'Equivalencia',
       },
     });
 
