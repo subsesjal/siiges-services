@@ -5,6 +5,7 @@ const FEATURE = {
   EN_FIRMA: 3,
   PROCESADA: 4,
   ATENDER_OBSERVACIONES: 5,
+  CANCELADA: 6,
 };
 
 const TIPO_TRAMITE_NOMBRES = {
@@ -22,10 +23,11 @@ const NOTIFICATION_MAPPING = {
     await processor({
       usuarioId: 212,
       email: solicitud.interesado.persona.correoPrimario,
-      asunto: `SIIGES: Solicitud en Firma - Folio ${solicitud.folioSolicitud}`,
+      asunto: `SIIGES: Solicitud Recibida - Folio ${solicitud.folioSolicitud}`,
       template: 'solicitudRevEquivRecibida',
       params: {
         folioSolicitud: solicitud.folioSolicitud,
+        tipoSolicitud: TIPO_TRAMITE_NOMBRES[solicitud.tipoTramiteId] || 'Equivalencia',
       },
     });
   },
@@ -37,6 +39,7 @@ const NOTIFICATION_MAPPING = {
       template: 'solicitudRevEquivEnFirma',
       params: {
         folioSolicitud: solicitud.folioSolicitud,
+        tipoSolicitud: TIPO_TRAMITE_NOMBRES[solicitud.tipoTramiteId] || 'Equivalencia',
       },
     });
   },
@@ -48,6 +51,7 @@ const NOTIFICATION_MAPPING = {
       template: 'solicitudRevEquivProcesada',
       params: {
         folioSolicitud: solicitud.folioSolicitud,
+        tipoSolicitud: TIPO_TRAMITE_NOMBRES[solicitud.tipoTramiteId] || 'Equivalencia',
       },
     });
   },
@@ -55,15 +59,26 @@ const NOTIFICATION_MAPPING = {
     const params = {
       folioSolicitud: solicitud.folioSolicitud,
       observaciones: solicitud.observaciones,
-      tipoSolicitud: TIPO_TRAMITE_NOMBRES[solicitud.tipoTramiteId],
+      tipoSolicitud: TIPO_TRAMITE_NOMBRES[solicitud.tipoTramiteId] || 'Equivalencia',
     };
-
     await processor({
       usuarioId: 212,
       email: solicitud.interesado.persona.correoPrimario,
       asunto: `SIIGES: Atender Observaciones - RevEquiv ${solicitud.folioSolicitud}`,
       template: 'solicitudRevEquivObservaciones',
       params,
+    });
+  },
+  [FEATURE.CANCELADA]: async (processor, solicitud) => {
+    await processor({
+      usuarioId: 212,
+      email: solicitud.interesado.persona.correoPrimario,
+      asunto: `SIIGES: Solicitud Cancelada - Folio ${solicitud.folioSolicitud}`,
+      template: 'solicitudRevEquivCancelada',
+      params: {
+        folioSolicitud: solicitud.folioSolicitud,
+        tipoSolicitud: TIPO_TRAMITE_NOMBRES[solicitud.tipoTramiteId] || 'Equivalencia',
+      },
     });
   },
 };
@@ -86,6 +101,7 @@ async function updateSolicitudRevEquiv(req, reply) {
       const processor = this.notificacionServices.sendNotificationEmail;
       sendNotificationEstatus(processor, updatedEquiv.estatusSolicitudRevEquivId, updatedEquiv);
     }
+
     return reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')

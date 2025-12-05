@@ -19,7 +19,9 @@ const TIPO_TRAMITE_NOMBRES = {
   2: 'Equivalencia Total',
   3: 'Revalidación Parcial',
   4: 'Revalidación Total',
-  5: 'Revalidación Duplicado',
+  5: 'Equivalencia Duplicado',
+  6: 'Revalidación Duplicado',
+  7: 'N/A',
 };
 
 async function createEquivalencia(req, reply) {
@@ -27,6 +29,7 @@ async function createEquivalencia(req, reply) {
     const dataField = req.body.DATA;
     const fileData = await req.saveRequestFiles();
     let data;
+
     try {
       data = JSON.parse(dataField.value);
     } catch (error) {
@@ -34,6 +37,7 @@ async function createEquivalencia(req, reply) {
         .code(400)
         .send({ message: 'Error al parsear los datos JSON en el campo DATA.' });
     }
+
     Logger.info('[SolicitudRevEquiv]: Creating SolicitudRevEquiv');
     const newEquivalencia = await this.solicitudRevEquivServices.createSolicitudRevEquiv({ data });
     const { id } = newEquivalencia;
@@ -56,22 +60,16 @@ async function createEquivalencia(req, reply) {
     }, Promise.resolve());
 
     // Enviar notificación de solicitud recibida
-    try {
-      await this.notificacionServices.sendNotificationEmail({
-        usuarioId: 212,
-        email: newEquivalencia.interesado.persona.correoPrimario,
-        asunto: `SIIGES: Solicitud Recibida - Folio ${newEquivalencia.folioSolicitud}`,
-        template: 'solicitudRevEquivRecibida',
-        params: {
-          folioSolicitud: newEquivalencia.folioSolicitud,
-          tipoSolicitud: TIPO_TRAMITE_NOMBRES[newEquivalencia.tipoTramiteId] || 'Equivalencia',
-        },
-      });
-      Logger.info(`[SolicitudRevEquiv]: Correo enviado exitosamente a ${newEquivalencia.interesado.persona.correoPrimario}`);
-    } catch (emailError) {
-      // Log del error pero no detener el proceso
-      Logger.error('[SolicitudRevEquiv]: Error al enviar correo de notificación:', emailError);
-    }
+    await this.notificacionServices.sendNotificationEmail({
+      usuarioId: 212,
+      email: newEquivalencia.interesado.persona.correoPrimario,
+      asunto: `SIIGES: Solicitud Recibida - Folio ${newEquivalencia.folioSolicitud}`,
+      template: 'solicitudRevEquivRecibida',
+      params: {
+        folioSolicitud: newEquivalencia.folioSolicitud,
+        tipoSolicitud: TIPO_TRAMITE_NOMBRES[newEquivalencia.tipoTramiteId] || 'Equivalencia',
+      },
+    });
 
     return reply
       .code(200)
@@ -81,4 +79,5 @@ async function createEquivalencia(req, reply) {
     return errorHandler(error, reply);
   }
 }
+
 module.exports = createEquivalencia;
