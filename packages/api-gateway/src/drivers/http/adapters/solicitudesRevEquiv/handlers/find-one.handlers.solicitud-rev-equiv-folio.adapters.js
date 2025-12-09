@@ -1,11 +1,11 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-async function findSolicitudRevEquivPublic(req, reply) {
+async function findSolicitudRevEquivByFolio(req, reply) {
   try {
-    const { folioSolicitud } = req.params;
+    const { folioSolicitud } = req.query;
 
-    Logger.info('[SolicitudRevEquiv]: Public GET equivalencia por folio');
+    Logger.info('[SolicitudRevEquiv]: Public GET equivalencia por folio (query param)');
 
     const solicitudRevEquiv = await this.solicitudRevEquivServices
       .findOneSolicitudRevEquiv({ folioSolicitud });
@@ -19,4 +19,4 @@ async function findSolicitudRevEquivPublic(req, reply) {
   }
 }
 
-module.exports = findSolicitudRevEquivPublic;
+module.exports = findSolicitudRevEquivByFolio;
