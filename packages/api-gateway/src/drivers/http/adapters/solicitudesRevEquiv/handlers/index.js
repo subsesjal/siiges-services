@@ -6,6 +6,7 @@ const updateSolicitudRevEquiv = require('./update.handlers.solicitud-rev-equiv.a
 const createAsignaturaAntecedenteEquivalente = require('./create.handlers.asignatura-antecedente-equivalente.adapter');
 const findOneAsignaturaAntecedenteEquivalente = require('./find-one.handlers.asignatura-antecedente-equivalente.adapters');
 const processSolicitudRevEquiv = require('./process.handlers.solicitud-rev-equiv.adapters');
+const findSolicitudRevEquivByFolio = require('./find-one.handlers.solicitud-rev-equiv-folio.adapters');
 
 module.exports = {
   createSolicitudRevEquiv,
@@ -16,4 +17,5 @@ module.exports = {
   createAsignaturaAntecedenteEquivalente,
   findOneAsignaturaAntecedenteEquivalente,
   processSolicitudRevEquiv,
+  findSolicitudRevEquivByFolio,
 };
