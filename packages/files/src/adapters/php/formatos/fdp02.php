@@ -540,6 +540,6 @@ $pdf->Cell($lineWidth, 0, "", 'T', 1, "C");
 $pdf->Ln(2);
 
 // Texto fijo de la autoridad
-$pdf->MultiCell(0, 5, safe_iconv("ING. MARCO ARTURO CASTRO\nAGUILERA\nDIRECTOR GENERAL DE\nINCORPORACIÓN Y SERVICIOS\nESCOLARES"), 0, "C");
+$pdf->MultiCell(0, 5, safe_iconv("ING. ADRIANA CIBRIÁN SUÁREZ\nDIRECTORA GENERAL DE\nINCORPORACIÓN Y SERVICIOS\nESCOLARES"), 0, "C");
 
 echo $pdf->Output('S');

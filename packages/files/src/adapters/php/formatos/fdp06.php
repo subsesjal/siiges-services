@@ -259,11 +259,8 @@ $fechaFormateadaLarga = "$dia de $mes del $anio";
 $pdf->Ln(25);
 $pdf->SetFont("Nutmeg", "", 8);
 
-$alturaFirma = 3 * 5 + 15;
-
-if ($pdf->GetY() + $alturaFirma > $pdf->GetPageHeight() - 20) {
-    $pdf->AddPage("P", "Letter");
-    $pdf->Ln(25);
+if ($pdf->checkNewPage()) {
+    $pdf->Ln(20);
 }
 
 $posY = $pdf->GetY();
@@ -286,7 +283,7 @@ $pdf->SetXY($posX, $posY);
 $pdf->MultiCell(
     $anchoFirma,
     5,
-    safe_iconv("ING. MARCO ARTURO CASTRO AGUILERA\nDIRECTOR GENERAL DE\nINCORPORACIÓN Y SERVICIOS\nESCOLARES"),
+    safe_iconv("ING. ADRIANA CIBRIÁN SUÁREZ\nDIRECTORA GENERAL DE\nINCORPORACIÓN Y SERVICIOS\nESCOLARES"),
     0,
     "C",
     "T"
