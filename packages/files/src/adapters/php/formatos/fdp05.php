@@ -126,6 +126,11 @@ $pdf->MultiCell(174, 5, safe_iconv($trayectoria["tasaEgreso"] ?? ""), 1, "J", tr
 $pdf->Ln();
 
 $pdf->Ln(25);
+
+if ($pdf->checkNewPage()) {
+  $pdf->Ln(20);
+}
+
 $pdf->SetFont("Nutmeg", "", 11);
 $pdf->Cell(0, 5, safe_iconv("BAJO PROTESTA DE DECIR VERDAD"), 0, 1, "C");
 
