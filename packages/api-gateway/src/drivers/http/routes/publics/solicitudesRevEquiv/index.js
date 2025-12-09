@@ -13,7 +13,7 @@ async function solicitudesRevEquivRouter(fastify, opts, next) {
   );
 
   await fastify.get(
-    '/:folioSolicitud',
+    '/',
     {
       schema: solicitudesSchema.findSolicitudRevEquivSchema,
     },
