@@ -10,6 +10,7 @@ const updateSolicitudRevEquiv = (
         { association: 'persona', include: [{ association: 'domicilio' }] },
         { association: 'institucionProcedencia' },
         { association: 'institucionDestino' },
+        { association: 'asignaturasAntecedenteEquivalente' },
       ],
     },
   ];
@@ -36,15 +37,6 @@ const updateSolicitudRevEquiv = (
     const personaData = { ...data.interesado.persona };
     delete personaData.domicilio;
     await persona.update(personaData);
-  }
-
-  if (data.interesado) {
-    const interesadoData = { ...data.interesado };
-    delete interesadoData.persona;
-    delete interesadoData.institucionDestino;
-    delete interesadoData.institucionProcedencia;
-
-    await interesado.update(interesadoData);
   }
 
   if (data.interesado?.institucionProcedencia) {
