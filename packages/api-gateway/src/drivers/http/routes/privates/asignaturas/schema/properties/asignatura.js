@@ -16,7 +16,7 @@ const asignatura = {
   horasIndependiente: { type: 'integer' },
   minimoHoras: { type: 'integer' },
   minimoCreditos: { type: 'integer' },
-  creditos: { type: 'integer' },
+  creditos: { type: 'number' },
   tipo: {
     type: 'integer',
     enum: [1, 2],

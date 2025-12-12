@@ -251,7 +251,7 @@ foreach ($calificacionCiclo as $ciclos => $ciclo) {
     }
 
     if (is_numeric($detalle["calificacion"]) && $detalle["calificacion"] >= $programa["calificacionAprobatoria"]) {
-      $total_creditos += (int) ($detalle["asignatura"]["creditos"] ?? 0);
+      $total_creditos += (float) ($detalle["asignatura"]["creditos"] ?? 0);
       $total_calificaciones += (float) ($detalle["calificacion"] ?? 0);
       $total_materias += 1;
     }
