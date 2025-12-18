@@ -90,11 +90,11 @@ const buildFileCertitulo = (
 
   const calificacionesNumericas = calificaciones
     .map((c) => Number(c.calificacion))
-    .filter((n) => !Number(n));
+    .filter((n) => !Number.isNaN(n) && n > 0);
 
   const promedioGeneral = calificacionesNumericas.length > 0
-    ? (calificacionesNumericas.reduce((sum, n) => sum
-    + n, 0) / calificacionesNumericas.length).toFixed(1)
+    ? (calificacionesNumericas.reduce((sum, n) => sum + n, 0)
+    / calificacionesNumericas.length).toFixed(1)
     : 'N/A';
 
   const certificado = {
@@ -111,11 +111,6 @@ const buildFileCertitulo = (
     director: folioDocAlumno.alumno.programa.plantel.director || 'DIRECTOR DEL PLANTEL',
     ciclos: ciclosOrdenados,
   };
-
-  const jsonOriginal = calificaciones.map((c) => (c.toJSON ? c.toJSON() : c));
-  console.log(JSON.stringify(jsonOriginal, null, 2));
-  console.log(JSON.stringify(ciclosOrdenados, null, 2));
-  console.log(JSON.stringify(certificado, null, 2));
 
   const file = await GenerarCertificado(certificado, tipoDocumento);
   return Buffer.from(file);
