@@ -1,13 +1,23 @@
 const solicitudesRevEquiv = require('../../../adapters/solicitudesRevEquiv/handlers');
-const createAsignaturasAntecedentesEquivalencia = require('./schema/index');
+const asignaturasAntecedentesEquivalnetesSchema = require('./schema/index');
 
 async function asignaturasAntecedenteEquivalenteRouter(fastify, opts, next) {
   await fastify.post(
     '/',
     {
-      schema: createAsignaturasAntecedentesEquivalencia,
+      schema:
+      asignaturasAntecedentesEquivalnetesSchema.createAsignaturasAntecedentesEquivalencia,
     },
     solicitudesRevEquiv.createAsignaturaAntecedenteEquivalente,
+  );
+
+  await fastify.get(
+    '/:asignaturaAntecedenteEquivalenteId',
+    {
+      schema:
+      asignaturasAntecedentesEquivalnetesSchema.findOneAsignaturaAntecedenteEquivalenteSchema,
+    },
+    solicitudesRevEquiv.findOneAsignaturaAntecedenteEquivalente,
   );
 
   next();
