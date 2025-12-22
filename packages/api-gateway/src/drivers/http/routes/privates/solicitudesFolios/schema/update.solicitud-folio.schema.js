@@ -30,6 +30,7 @@ const createSolicitudFolioSchema = {
           properties: {
             id: { type: 'integer' },
             folioSolicitud: { type: 'string' },
+            url: { type: 'string' },
             ...solicitudFolio,
             ...responseProperties,
             programa: {
