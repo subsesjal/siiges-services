@@ -29,6 +29,15 @@ async function asignaturasAntecedenteEquivalenteRouter(fastify, opts, next) {
     solicitudesRevEquiv.deleteAsignaturaAntecedenteEquivalente,
   );
 
+  await fastify.patch(
+    '/:asignaturaAntecedenteEquivalenteId',
+    {
+      schema:
+      asignaturasAntecedentesEquivalnetesSchema.updateAsignaturaAntecedenteEquivalenteSchema,
+    },
+    solicitudesRevEquiv.updateAsignaturaAntecedenteEquivalente,
+  );
+
   next();
 }
 
