@@ -49,4 +49,6 @@ module.exports = {
   findOneEquivQuery: findOneQuery(Equivalencia),
   createEquiQuery: createQuery(Equivalencia),
   deleteAsignaturaAntecedenteEquivalenteQuery: deleteQuery(AsignaturaAntecedenteEquivalente),
+  updateAsignaturaAntecedenteEquivalente: updateAndFindQuery(AsignaturaAntecedenteEquivalente),
+
 };
