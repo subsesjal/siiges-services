@@ -35,7 +35,6 @@ const createFolioDocumento = async ({
   });
 
   const nuevoConsecutivo = totalFoliosLibro + 1;
-  const consecutivoFormateado = String(nuevoConsecutivo).padStart(6, '0');
 
   const letraNivel = NIVELES_MAP[nivel] || nivel.charAt(0).toUpperCase();
 
@@ -45,7 +44,7 @@ const createFolioDocumento = async ({
     ? SOLICITUDES_MAP[tipoSolicitudFolio]
     : '';
 
-  const folio = `${letraNivel}${letraTipoDocumento}${letraTipoSolicitud}${libro.nombre}${año}${consecutivoFormateado}`;
+  const folio = `${letraNivel}${letraTipoDocumento}${letraTipoSolicitud}${libro.nombre}${año}-${nuevoConsecutivo}`;
 
   return folio;
 };
