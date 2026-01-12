@@ -71,6 +71,10 @@ const tipoEntidadObj = [
     id: 18,
     name: 'TITULO_ELECTRONICO',
   },
+  {
+    id: 19,
+    name: 'FOLIO_DOCUMENTO_ALUMNO',
+  },
 ];
 
 module.exports = tipoEntidadObj;

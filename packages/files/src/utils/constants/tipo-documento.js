@@ -295,6 +295,10 @@ const tipoDocumentoObj = [
     id: 74,
     name: 'FORMATO_ASIGNACION_FOLIOS_TIT',
   },
+  {
+    id: 75,
+    name: 'CERTIFICADO_ELECTRONICO_PDF',
+  },
 ];
 
 module.exports = tipoDocumentoObj;
