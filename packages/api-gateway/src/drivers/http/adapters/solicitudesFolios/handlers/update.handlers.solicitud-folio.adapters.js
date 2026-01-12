@@ -26,12 +26,6 @@ const NOTIFICATION_MAPPING = {
       params: {
         folioSolicitud,
         url: solicitudFolio.dataValues.url,
-        foliosAlumnos: [
-          {
-            nombreAlumno: 'Alumno prueba',
-            folio: 'FOL-001',
-          },
-        ],
       },
     });
   },
