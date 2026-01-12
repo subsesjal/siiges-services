@@ -48,4 +48,7 @@ module.exports = {
   createCalificacionQuery: createQuery(Calificacion),
   findOneEquivQuery: findOneQuery(Equivalencia),
   createEquiQuery: createQuery(Equivalencia),
+  deleteAsignaturaAntecedenteEquivalenteQuery: deleteQuery(AsignaturaAntecedenteEquivalente),
+  updateAsignaturaAntecedenteEquivalente: updateAndFindQuery(AsignaturaAntecedenteEquivalente),
+
 };
