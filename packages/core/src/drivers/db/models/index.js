@@ -136,6 +136,8 @@ const { TokenRecoveryPassword, TokenRecoveryPasswordSchema } = require('./tokenR
 const { AutorizacionReconocimiento, AutorizacionReconocimientoSchema } = require('./autorizacionReconocimiento');
 const { Cargo, CargoSchema } = require('./cargo');
 const { AlumnoTituloElectronico, AlumnoTituloElectronicoSchema } = require('./alumnosTitulosElectronicos');
+const { TokenExterno, TokenExternoSchema } = require('./tokenExterno');
+const { DocumentoFirmado, DocumentoFirmadoSchema } = require('./documentoFirmado');
 
 // Siiges 1.0
 const { Academia, AcademiaSchema } = require('./academias');
@@ -427,6 +429,8 @@ function setupModels(sequelize) {
     ModalidadServicioSocialSchema,
     ModalidadServicioSocial.config(sequelize),
   );
+  TokenExterno.init(TokenExternoSchema, TokenExterno.config(sequelize));
+  DocumentoFirmado.init(DocumentoFirmadoSchema, DocumentoFirmado.config(sequelize));
   // Siiges 1.0 Fin
 
   // Associations
@@ -604,6 +608,10 @@ function setupModels(sequelize) {
   TituloElectronico.associate(sequelize.models);
   AlumnoTituloElectronico.associate(sequelize.models);
   // Siiges 1.0 Fin
+
+  // Firma Electrónica
+  TokenExterno.associate(sequelize.models);
+  DocumentoFirmado.associate(sequelize.models);
 }
 
 module.exports = setupModels;
