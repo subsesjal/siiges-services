@@ -12,6 +12,14 @@ async function solicitudesRevEquivRouter(fastify, opts, next) {
     solicitudesRevEquiv.createSolicitudRevEquiv,
   );
 
+  await fastify.get(
+    '/',
+    {
+      schema: solicitudesSchema.findSolicitudRevEquivSchema,
+    },
+    solicitudesRevEquiv.findSolicitudRevEquivByFolio,
+  );
+
   next();
 }
 
