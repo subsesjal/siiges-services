@@ -283,7 +283,7 @@ $pdf->SetXY($posX, $posY);
 $pdf->MultiCell(
     $anchoFirma,
     5,
-    safe_iconv("ING. ADRIANA CIBRIÁN SUÁREZ\nDIRECTORA GENERAL DE\nINCORPORACIÓN Y SERVICIOS\nESCOLARES"),
+    safe_iconv("MTRA. ADRIANA CIBRIÁN SUÁREZ\nDIRECTORA GENERAL DE\nINCORPORACIÓN Y SERVICIOS\nESCOLARES"),
     0,
     "C",
     "T"
