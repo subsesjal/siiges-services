@@ -139,7 +139,7 @@ $pdf->Cell(0, 5, safe_iconv(
 
 $pdf->Ln(25);
 $pdf->SetFont("Nutmeg", "", 11);
-$pdf->Cell(0, 5, safe_iconv("ING. MARCO ARTURO CASTRO AGUILERA"), 0, 1, "C");
+$pdf->Cell(0, 5, safe_iconv("MTRA. ADRIANA CIBRIÁN SUÁREZ"), 0, 1, "C");
 $pdf->SetFont("Nutmegb", "", 11);
 $pdf->Cell(0, 5, safe_iconv("DIRECTOR GENERAL DE INCORPORACIÓN Y SERVICIOS ESCOLARES"), 0, 1, "C");
 
