@@ -19,7 +19,7 @@ class PDF extends PDF_MC_Table
     $this->SetFont("Nutmegbk", "", 7);
     $this->SetTextColor(0, 0, 0);
     $this->Ln(5);
-    $this->Image(realpath(__DIR__ . "/../images/direccion_sicyt.png"), 60, 250, 60);
+    $this->Image(realpath(__DIR__ . "/../images/direccion_nueva_sicyt.png"), 60, 250, 60);
     $this->SetY(-20);
     $this->SetTextColor(191, 191, 191);
     $this->Cell(0, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "Página " . $this->PageNo()), 0, 0, "R");
