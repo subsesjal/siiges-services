@@ -11,7 +11,7 @@ const TokenExternoSchema = {
   },
   servicio: {
     allowNull: false,
-    type: DataTypes.STRING(50),
+    type: DataTypes.STRING,
     comment: 'Identificador del servicio externo (ej: firma_certificado)',
   },
   accessToken: {
@@ -22,15 +22,15 @@ const TokenExternoSchema = {
   },
   tokenType: {
     allowNull: true,
-    type: DataTypes.STRING(20),
+    type: DataTypes.STRING,
     field: 'token_type',
     defaultValue: 'bearer',
   },
   expiresIn: {
     allowNull: false,
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     field: 'expires_in',
-    comment: 'Tiempo de expiración en segundos',
+    comment: 'Tiempo de expiración del token',
   },
   fechaObtencion: {
     allowNull: false,

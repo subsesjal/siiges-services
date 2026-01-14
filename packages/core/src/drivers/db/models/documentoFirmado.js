@@ -1,5 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { SOLICITUD_FOLIO_TABLE } = require('./solicitudFolio');
+const { CATALOGO_FIRMA_ELECTRONICA } = require('./catalogoFirmaElectronica');
 
 const DOCUMENTO_FIRMADO_TABLE = 'documentos_firmados';
 
@@ -10,14 +10,31 @@ const DocumentoFirmadoSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  solicitudFolioId: {
+  catalogoFirmaElectronicaId: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'solicitud_folio_id',
+    field: 'catalogo_firma_electronica_id',
     references: {
-      model: SOLICITUD_FOLIO_TABLE,
+      model: CATALOGO_FIRMA_ELECTRONICA,
       key: 'id',
     },
+  },
+  objetoPorFirmar: {
+    allowNull: false,
+    type: DataTypes.TEXT,
+    field: 'objeto_por_firmar',
+    comment: 'JSON del objeto que se va a firmar',
+  },
+  pkcs7: {
+    allowNull: false,
+    type: DataTypes.TEXT,
+    comment: 'Firma electrónica en formato PKCS#7',
+  },
+  folioInterno: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    field: 'folio_interno',
+    comment: 'Folio interno del sistema SIIGES',
   },
   folioValidacion: {
     allowNull: false,
@@ -26,14 +43,14 @@ const DocumentoFirmadoSchema = {
     comment: 'Folio de validación generado por el servicio de firma',
   },
   hashObjetoFirmado: {
-    allowNull: false,
-    type: DataTypes.STRING(255),
+    allowNull: true,
+    type: DataTypes.STRING,
     field: 'hash_objeto_firmado',
     comment: 'Hash MD5 del objeto firmado',
   },
   idDocumento: {
-    allowNull: false,
-    type: DataTypes.STRING(50),
+    allowNull: true,
+    type: DataTypes.STRING,
     field: 'id_documento',
     comment: 'ID del documento generado por el servicio de firma',
   },
@@ -44,7 +61,7 @@ const DocumentoFirmadoSchema = {
     comment: 'Información del certificado del firmante',
   },
   objetoFirmado: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.TEXT,
     field: 'objeto_firmado',
     comment: 'JSON del objeto que fue firmado',
@@ -57,37 +74,37 @@ const DocumentoFirmadoSchema = {
   },
   uriValidacion: {
     allowNull: true,
-    type: DataTypes.STRING(255),
+    type: DataTypes.STRING,
     field: 'uri_validacion',
     comment: 'URI para validación pública del documento',
   },
   tipoDocumento: {
     allowNull: true,
-    type: DataTypes.STRING(100),
+    type: DataTypes.STRING,
     field: 'tipo_documento',
     comment: 'Tipo de documento firmado',
   },
   claveDocumento: {
     allowNull: true,
-    type: DataTypes.STRING(20),
+    type: DataTypes.STRING,
     field: 'clave_documento',
     comment: 'Clave del catálogo de documentos',
   },
   tipoServicio: {
     allowNull: true,
-    type: DataTypes.STRING(255),
+    type: DataTypes.STRING,
     field: 'tipo_servicio',
     comment: 'Descripción del tipo de servicio',
   },
   estatusFirmado: {
-    allowNull: false,
-    type: DataTypes.STRING(50),
+    allowNull: true,
+    type: DataTypes.STRING,
     field: 'estatus_firmado',
     defaultValue: 'exitoso',
     comment: 'Estado del proceso de firmado',
   },
   fechaFirmado: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.DATE,
     field: 'fecha_firmado',
     defaultValue: Sequelize.NOW,
