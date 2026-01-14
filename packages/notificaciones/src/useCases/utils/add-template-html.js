@@ -2,7 +2,6 @@ const templateHelper = require('../helpers');
 
 const ADD_DETAILS_MAPPING = {
   observacionSolicitud: templateHelper.generateMapObservaciones,
-  folioDocumentosAlumnos: templateHelper.generateMapFoliosAlumnos,
 };
 
 module.exports = {
