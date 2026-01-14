@@ -173,6 +173,9 @@ const { SOLICITUD_ESTADO_SOLICITUD_TABLE, SolicitudEstatusSolicitudSchema } = re
 const { SOLICITUD_USUARIO_TABLE, SolicitudUsuarioSchema } = require('../models/solicitudes_usuarios');
 const { TESTIGO_TABLE, TestigoSchema } = require('../models/testigos');
 const { TITULO_ELECTRONICO_TABLE, TituloElectronicoSchema } = require('../models/titulosElectronicos');
+const { DOCUMENTO_FIRMADO_TABLE, DocumentoFirmadoSchema } = require('../models/documentoFirmado');
+const { CATALOGO_FIRMA_ELECTRONICA_TABLE, CatalogoFirmaElectronicaSchema } = require('../models/catalogoFirmaElectronica');
+const { TOKEN_EXTERNO_TABLE, TokenExternoSchema } = require('../models/tokenExterno');
 
 module.exports = {
   async up(queryInterface) {
@@ -357,6 +360,18 @@ module.exports = {
     await queryInterface.createTable(
       TOKEN_RECOVERY_PASSWORD_TABLE,
       TokenRecoveryPasswordSchema,
+    );
+    await queryInterface.createTable(
+      CATALOGO_FIRMA_ELECTRONICA_TABLE,
+      CatalogoFirmaElectronicaSchema,
+    );
+    await queryInterface.createTable(
+      TOKEN_EXTERNO_TABLE,
+      TokenExternoSchema,
+    );
+    await queryInterface.createTable(
+      DOCUMENTO_FIRMADO_TABLE,
+      DocumentoFirmadoSchema,
     );
 
     // SIIGES 1.0
@@ -555,6 +570,9 @@ module.exports = {
     await queryInterface.dropTable(SOLICITUD_SERVICIO_SOCIAL_TABLE);
     await queryInterface.dropTable(SOLICITUD_SERVICIO_SOCIAL_ALUMNO_TABLE);
     await queryInterface.dropTable(TOKEN_RECOVERY_PASSWORD_TABLE);
+    await queryInterface.dropTable(CATALOGO_FIRMA_ELECTRONICA_TABLE);
+    await queryInterface.dropTable(TOKEN_EXTERNO_TABLE);
+    await queryInterface.dropTable(DOCUMENTO_FIRMADO_TABLE);
 
     // SIIGES 1.0
     await queryInterface.dropTable(ACADEMIA_TABLE);
