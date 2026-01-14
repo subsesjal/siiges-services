@@ -1,12 +1,62 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
+const FEATURE = {
+  FOLIOS_ASIGNADOS: 3,
+};
+
+const TIPO_DOCUMENTO_POR_SOLICITUD = {
+  1: 'FORMATO_ASIGNACION_FOLIOS_TIT',
+  2: 'FORMATO_ASIGNACION_FOLIOS_CER',
+};
+
+const NOTIFICATION_MAPPING = {
+  [FEATURE.FOLIOS_ASIGNADOS]: async (processor, solicitudFolio) => {
+    const { folioSolicitud } = solicitudFolio;
+
+    const usuarioInstitucion = solicitudFolio.programa?.plantel?.institucion?.usuario;
+
+    if (!usuarioInstitucion) {
+      throw new Error('Usuario de institución no encontrado');
+    }
+    await processor({
+      usuarioId: usuarioInstitucion.id,
+      email: usuarioInstitucion.correo,
+      asunto: `SIGES: Folios asignados - Solicitud ${folioSolicitud}`,
+      template: 'folioDocumentosAlumnos',
+      params: {
+        folioSolicitud,
+        url: solicitudFolio.dataValues.url,
+      },
+    });
+  },
+};
+
+/**
+ * @param {Function} processor - Function to send notifications
+ * @param {number} estatusSolicitudFolioId - ID of the status of the solicitud folio
+ * @param {Object} solicitudFolio - The solicitud folio object
+ */
+async function sendNotificationReport(processor, estatusSolicitudFolioId, solicitudFolio) {
+  const action = NOTIFICATION_MAPPING[estatusSolicitudFolioId];
+
+  if (!action) {
+    return;
+  }
+  await action(processor, solicitudFolio);
+}
+
+/**
+ * Handler to assign folios to students and send notification
+ * @param {Object} req - The request object
+ * @param {Object} reply - The reply object
+ */
 async function asignacionFolioAlumno(req, reply) {
   try {
     const { solicitudFolioId } = req.params;
 
     Logger.info('[solicitudes-folios]: Assing folios Alumnos');
-    const foliosAlumnos = await this.solicitudFolioServices.assignFoliosAlumnos(
+    await this.solicitudFolioServices.assignFoliosAlumnos(
       { id: solicitudFolioId },
     );
 
@@ -15,30 +65,31 @@ async function asignacionFolioAlumno(req, reply) {
       { id: solicitudFolioId },
     );
 
-    Logger.info('[notification]: Sending notification');
-    this.notificacionServices.sendNotificationEmail({
-      usuarioId: solicitudFolio?.programa?.plantel?.institucion?.usuario?.id,
-      email: solicitudFolio?.programa?.plantel?.institucion?.usuario?.correo,
-      asunto: 'SIGES: Folios de documentos asignados',
-      template: 'folioDocumentosAlumnos',
-      params: {
-        email: solicitudFolio?.programa?.plantel?.institucion?.usuario?.correo,
-        usuario: solicitudFolio?.programa?.plantel?.institucion?.usuario?.usuario,
-        nombre: solicitudFolio?.programa?.plantel?.institucion?.nombre,
-        folioSolicitud: solicitudFolio.folioSolicitud,
-        programa: solicitudFolio?.programa?.nombre,
-        nivel: solicitudFolio?.programa?.nivel?.descripcion,
-        rvoe: solicitudFolio?.programa?.acuerdoRvoe,
-        tipoDocumento: solicitudFolio?.tipoDocumento?.nombre,
-        tipoSolicitudFolio: solicitudFolio?.tipoSolicitudFolio?.nombre,
-        foliosAlumnos,
-      },
-    });
+    const tipoDocumento = TIPO_DOCUMENTO_POR_SOLICITUD[solicitudFolio.tipoDocumentoId];
+
+    const valueData = {
+      tipoEntidad: 'SOLICITUD_FOLIO',
+      tipoDocumento,
+      entidadId: solicitudFolioId,
+    };
+
+    const file = await this.filesServices.findOneFile(valueData);
+
+    if (!file) {
+      throw new Error('Archivo PDF no encontrado para la solicitud');
+    }
+
+    solicitudFolio.dataValues.url = file?.url;
+
+    const processor = this.notificacionServices.sendNotificationEmail;
+    await sendNotificationReport(processor, solicitudFolio.estatusSolicitudFolioId, solicitudFolio);
 
     return reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: foliosAlumnos });
+      .send({
+        data: solicitudFolio,
+      });
   } catch (error) {
     return errorHandler(error, reply);
   }
