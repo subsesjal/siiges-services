@@ -11,7 +11,7 @@ function formatearFecha(fechaString) {
   return `${dia}/${mes}/${anio}`;
 }
 
-const reportFolioDocumentoAlumno = (
+const reportFolioDocumentoAlumnoCSV = (
   reportFolioDocumentoAlumnoQuery,
 ) => async (query = {}) => {
   const TIPO_DOCUMENTO = {
@@ -31,10 +31,7 @@ const reportFolioDocumentoAlumno = (
             { association: 'estado' },
           ],
         },
-        {
-          association: 'programa',
-          include: [{ association: 'nivel' }],
-        },
+        { association: 'programa' },
       ],
     },
     {
@@ -58,15 +55,7 @@ const reportFolioDocumentoAlumno = (
     },
     {
       association: 'solicitudFolioAlumno',
-      include: [
-        {
-          association: 'fundamentoServicioSocial',
-        },
-        {
-          association: 'solicitudFolio',
-          include: [{ association: 'tipoSolicitudFolio' }],
-        },
-      ],
+      include: [{ association: 'fundamentoServicioSocial' }],
     },
   ];
 
@@ -88,21 +77,14 @@ const reportFolioDocumentoAlumno = (
     Nombre_Carrera: item.alumno?.programa?.nombre,
     Fecha_Inicio: formatearFecha(item?.solicitudFolioAlumno?.fechaInicio),
     Fecha_Terminacion: formatearFecha(item?.solicitudFolioAlumno?.fechaTerminacion),
-    Fecha_Elaboracion: formatearFecha(item?.solicitudFolioAlumno?.fechaElaboracion),
-    Fecha_Registro: formatearFecha(item?.createdAt),
     Institucion_Procedencia: item.alumno?.validacion?.nombreInstitucionEmisora,
-    Nivel_Estudio_Nombre: item.alumno?.programa?.nivel?.descripcion,
+    Nivel_Estudio_Nombre: item.alumno?.validacion?.nivel?.nombre,
     Estado_Nombre: item.alumno?.validacion?.estado?.nombre,
     Antecedentes_Fecha_Inicio: formatearFecha(item.alumno?.validacion?.fechaInicioAntecedente),
     Antecedentes_Fecha_Terminacion: formatearFecha(item.alumno?.validacion?.fechaFinAntecedente),
     Numero_Cedula: item.alumno?.validacion?.cedulaProfesional,
     Fecha_Expedicion: formatearFecha(item?.solicitudFolioAlumno?.fechaExpedicion),
-    Folio_Institucion: '',
-    Folio_Documento: item?.folioDocumento,
-    Foja: item?.foja?.nombre,
-    Libro: item?.libro?.nombre,
-    RVOE: item?.alumno?.programa?.acuerdoRvoe,
-    Tipo_Certificado: item?.solicitudFolioAlumno?.solicitudFolio?.tipoSolicitudFolio?.descripcion,
+    Folio: item?.folioDocumento,
     Fecha_Examen_Profesional: formatearFecha(item?.solicitudFolioAlumno?.fechaExamenProfesional),
     Cumplio_Servicio_Social: item?.solicitudFolioAlumno?.cumplioServicioSocial ? 'Si' : 'No',
     Fundamento_Legal_Servicio_Social: item?.solicitudFolioAlumno?.fundamentoServicioSocial?.nombre,
@@ -111,4 +93,4 @@ const reportFolioDocumentoAlumno = (
   return mapped;
 };
 
-module.exports = reportFolioDocumentoAlumno;
+module.exports = reportFolioDocumentoAlumnoCSV;
