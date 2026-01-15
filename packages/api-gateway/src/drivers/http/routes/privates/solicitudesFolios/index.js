@@ -49,6 +49,16 @@ async function trayectoriaRouter(fastify, opts, next) {
     solicitudesFoliosAdapter.updateObservaciones,
   );
 
+  // Firma Certificado
+  await fastify.post(
+    '/firmaCertificado',
+    {
+      schema: solicitudSchemas.createFirmaCertificadoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesFoliosAdapter.createFirmaCertificado,
+  );
+
   // Solicitud Folio Alumno
   await fastify.get(
     '/solicitudesFoliosAlumnos/:solicitudFolioAlumnoId',

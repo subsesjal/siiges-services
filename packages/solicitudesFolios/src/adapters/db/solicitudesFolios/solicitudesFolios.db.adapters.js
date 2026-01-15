@@ -5,6 +5,9 @@ const {
   SolicitudFolio,
   Libro,
   Foja,
+  CatalogoFirmaElectronica,
+  DocumentoFirmado,
+  TokenExterno,
 } = models;
 
 const {
@@ -25,4 +28,17 @@ module.exports = {
   createFojaQuery: createQuery(Foja),
   findOneLibroQuery: findOneQuery(Libro),
   findAllFojaQuery: findAllQuery(Foja),
+
+  // CatalogoFirmaElectronica
+  findOneCatalogoFirmaElectronicaQuery: findOneQuery(CatalogoFirmaElectronica),
+
+  // DocumentoFirmado
+  createDocumentoFirmadoQuery: createQuery(DocumentoFirmado),
+  findOneDocumentoFirmadoQuery: findOneQuery(DocumentoFirmado),
+  updateDocumentoFirmadoQuery: updateAndFindQuery(DocumentoFirmado),
+
+  // TokenExterno
+  createTokenExternoQuery: createQuery(TokenExterno),
+  findOneTokenExternoQuery: findOneQuery(TokenExterno),
+  updateTokenExternoQuery: updateAndFindQuery(TokenExterno),
 };
