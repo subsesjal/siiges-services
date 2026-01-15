@@ -136,6 +136,9 @@ const { TOKEN_RECOVERY_PASSWORD_TABLE, TokenRecoveryPasswordSchema } = require('
 const { AUTORIZACION_RECONOCIMIENTO_TABLE, AutorizacionReconocimientoSchema } = require('../models/autorizacionReconocimiento');
 const { CARGO_TABLE, CargoSchema } = require('../models/cargo');
 const { ALUMNO_TITULO_ELECTRONICO_TABLE, AlumnoTituloElectronicoSchema } = require('../models/alumnosTitulosElectronicos');
+const { DOCUMENTO_FIRMADO_TABLE, DocumentoFirmadoSchema } = require('../models/documentoFirmado');
+const { TOKEN_EXTERNO_TABLE, TokenExternoSchema } = require('../models/tokenExterno');
+const { CATALOGO_FIRMA_ELECTRONICA_TABLE, CatalogoFirmaElectronicaSchema } = require('../models/catalogoFirmaElectronica');
 
 // SIIGES 1.0
 const { ACADEMIA_TABLE, AcademiaSchema } = require('../models/academias');
@@ -173,9 +176,6 @@ const { SOLICITUD_ESTADO_SOLICITUD_TABLE, SolicitudEstatusSolicitudSchema } = re
 const { SOLICITUD_USUARIO_TABLE, SolicitudUsuarioSchema } = require('../models/solicitudes_usuarios');
 const { TESTIGO_TABLE, TestigoSchema } = require('../models/testigos');
 const { TITULO_ELECTRONICO_TABLE, TituloElectronicoSchema } = require('../models/titulosElectronicos');
-const { DOCUMENTO_FIRMADO_TABLE, DocumentoFirmadoSchema } = require('../models/documentoFirmado');
-const { CATALOGO_FIRMA_ELECTRONICA_TABLE, CatalogoFirmaElectronicaSchema } = require('../models/catalogoFirmaElectronica');
-const { TOKEN_EXTERNO_TABLE, TokenExternoSchema } = require('../models/tokenExterno');
 
 module.exports = {
   async up(queryInterface) {
