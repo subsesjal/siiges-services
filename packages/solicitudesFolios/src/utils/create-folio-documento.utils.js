@@ -9,6 +9,17 @@ const SOLICITUDES_MAP = {
   Duplicado: 'D',
 };
 
+const NIVELES_MAP = {
+  Licenciatura: 'L',
+  Bachillerato: 'B',
+  TSU: 'T',
+  'Técnico Superior Universitario': 'T',
+  Especialidad: 'E',
+  Maestría: 'M',
+  Doctorado: 'D',
+  'Profesional Asociado': 'P',
+};
+
 const createFolioDocumento = async ({
   nivel,
   tipoDocumento,
@@ -24,12 +35,16 @@ const createFolioDocumento = async ({
   });
 
   const nuevoConsecutivo = totalFoliosLibro + 1;
-  const consecutivoFormateado = String(nuevoConsecutivo).padStart(6, '0');
+
+  const letraNivel = NIVELES_MAP[nivel] || nivel.charAt(0).toUpperCase();
 
   const letraTipoDocumento = DOCUMENTOS_MAP[tipoDocumento];
-  const letraTipoSolicitud = SOLICITUDES_MAP[tipoSolicitudFolio];
 
-  const folio = `${nivel}${letraTipoDocumento}${letraTipoSolicitud}${libro.nombre}${año}${consecutivoFormateado}`;
+  const letraTipoSolicitud = tipoDocumento === 'Certificado'
+    ? SOLICITUDES_MAP[tipoSolicitudFolio]
+    : '';
+
+  const folio = `${letraNivel}${letraTipoDocumento}${letraTipoSolicitud}${libro.nombre}${año}-${nuevoConsecutivo}`;
 
   return folio;
 };
