@@ -19,7 +19,7 @@ const createAlumnoFolioSchema = {
     properties: {
       ...solicitudFolioAlumno,
     },
-    required: ['fechaTerminacion', 'fechaElaboracion'],
+    required: ['fechaTerminacion'],
   },
   response: {
     201: {
