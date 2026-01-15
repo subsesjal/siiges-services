@@ -87,9 +87,7 @@ async function asignacionFolioAlumno(req, reply) {
     return reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({
-        data: solicitudFolio,
-      });
+      .send({ data: solicitudFolio });
   } catch (error) {
     return errorHandler(error, reply);
   }
