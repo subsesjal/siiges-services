@@ -15,7 +15,7 @@ async function asignaturasAntecedenteEquivalenteRouter(fastify, opts, next) {
     '/:asignaturaAntecedenteEquivalenteId',
     {
       schema:
-      asignaturasAntecedentesEquivalnetesSchema.findOneAsignaturaAntecedenteEquivalenteSchema,
+     asignaturasAntecedentesEquivalnetesSchema.findOneAsignaturaAntecedenteEquivalenteSchema,
     },
     solicitudesRevEquiv.findOneAsignaturaAntecedenteEquivalente,
   );
