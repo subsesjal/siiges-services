@@ -29,5 +29,6 @@ module.exports = {
     solicitudesFolios.createTokenExternoQuery,
     solicitudesFolios.updateTokenExternoQuery,
     solicitudesFolios.createDocumentoFirmadoQuery,
+    solicitudesFolios.updateDocumentoFirmadoQuery,
   ),
 };
