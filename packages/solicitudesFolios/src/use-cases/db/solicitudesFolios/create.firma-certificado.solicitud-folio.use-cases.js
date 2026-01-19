@@ -2,40 +2,45 @@ const { checkers, Logger } = require('@siiges-services/shared');
 const boom = require('@hapi/boom');
 const axios = require('axios');
 const forge = require('node-forge');
+const { config } = require('../../../../config/environment');
 
 const SERVICIO_FIRMA_CERTIFICADO = 'firma_certificado';
 
-// Configuración hardcodeada para desarrollo
-
-
 const getBasicAuthHeader = () => {
-  const credentials = `${CONFIG.clientId}:${CONFIG.clientSecret}`;
+  const { clientId, clientSecret } = config.firmaElectronica;
+  const credentials = `${clientId}:${clientSecret}`;
   const base64Credentials = Buffer.from(credentials).toString('base64');
   return `Basic ${base64Credentials}`;
 };
 
 const obtenerTokenExterno = async () => {
+  const { baseUrl, username, password } = config.firmaElectronica;
+
   const response = await axios({
     method: 'POST',
-    url: `${CONFIG.baseUrl}/feauth/token`,
+    url: `${baseUrl}/feauth/token`,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       Authorization: getBasicAuthHeader(),
     },
     data: new URLSearchParams({
-      username: CONFIG.username,
-      password: CONFIG.password,
-      grant_type: CONFIG.grantType,
+      username,
+      password,
+      grant_type: 'password',
     }).toString(),
   });
+
+  Logger.info(`[firma-certificado] Token obtenido exitosamente primis ${response.data}`);
 
   return response.data;
 };
 
 const firmarDocumentoExterno = async (pkcs7, claveDocumento, tipoServicio, accessToken) => {
+  const { baseUrl } = config.firmaElectronica;
+
   const response = await axios({
     method: 'POST',
-    url: `${CONFIG.baseUrl}/firmadocumento`,
+    url: `${baseUrl}/firmadocumento`,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       Authorization: `Bearer ${accessToken}`,
@@ -126,6 +131,7 @@ const createFirmaCertificado = (
   createTokenExternoQuery,
   updateTokenExternoQuery,
   createDocumentoFirmadoQuery,
+  updateDocumentoFirmadoQuery,
 ) => async (data, { folioDocumento }) => {
   const {
     archivoCer,
@@ -146,13 +152,23 @@ const createFirmaCertificado = (
   const pkcs7 = generarPKCS7(archivoCer, archivoKey, passwordKey, objetoPorFirmar);
   Logger.info('[firma-certificado] PKCS7 generado exitosamente');
 
-  // 3. Buscar token existente
+  // 3. Guardar documento firmado (antes de llamar API)
+  Logger.info('[firma-certificado] Guardando documento antes de firmar');
+  let documentoFirmado = await createDocumentoFirmadoQuery({
+    catalogoFirmaElectronicaId: catalogo.id,
+    objetoPorFirmar,
+    pkcs7,
+    folioInterno,
+    estatusFirmado: 'pendiente',
+  });
+
+  // 4. Buscar token existente
   let tokenExterno = await findOneTokenExternoQuery({
     servicio: SERVICIO_FIRMA_CERTIFICADO,
     activo: true,
   });
 
-  // 4. Obtener o renovar token si expiró
+  // 5. Obtener o renovar token si expiró
   if (isTokenExpired(tokenExterno)) {
     Logger.info('[firma-certificado] Token expirado o no existe, solicitando nuevo token');
 
@@ -181,11 +197,21 @@ const createFirmaCertificado = (
       Logger.info('[firma-certificado] Token obtenido exitosamente');
     } catch (error) {
       Logger.error(`[firma-certificado] Error al obtener token: ${error.message}`);
+
+      // Actualizar documento con error
+      await updateDocumentoFirmadoQuery(
+        { id: documentoFirmado.id },
+        {
+          estatusFirmado: 'error',
+          firmaResponse: `Error al obtener token: ${error.message}`,
+        },
+      );
+
       throw boom.badGateway('Error al obtener token del servicio de firma electrónica');
     }
   }
 
-  // 5. Llamar al servicio de firma
+  // 6. Llamar al servicio de firma
   Logger.info('[firma-certificado] Enviando documento a firmar');
 
   let firmaResponse;
@@ -196,39 +222,61 @@ const createFirmaCertificado = (
       catalogo.tipoServicio,
       tokenExterno.accessToken,
     );
+    Logger.info(`[firma-certificado] Respuesta recibida: ${JSON.stringify(firmaResponse)}`);
   } catch (error) {
-    Logger.error(`[firma-certificado] Error al firmar documento: ${error.message}`);
-    Logger.error(`[firma-certificado] Response data: ${JSON.stringify(error.response?.data)}`);
-    Logger.error(`[firma-certificado] Response status: ${error.response?.status}`);
+    Logger.error(`[firma-certificado] Error al firmar documente: ${error.message}`);
+
+    const errorMessage = error.response?.data
+      ? JSON.stringify(error.response.data)
+      : error.message;
+
+    // Actualizar documento con error
+    await updateDocumentoFirmadoQuery(
+      { id: documentoFirmado.id },
+      {
+        estatusFirmado: 'error',
+        firmaResponse: `Error al firmar: ${errorMessage}`,
+      },
+    );
+
     throw boom.badGateway('Error al firmar documento con servicio externo');
   }
 
-  // 6. Validar respuesta del servicio
+  // 7. Validar respuesta del servicio
   if (!firmaResponse || !firmaResponse.identificadorunico) {
     Logger.error('[firma-certificado] Respuesta inválida del servicio de firma');
+
+    // Actualizar documento con error
+    await updateDocumentoFirmadoQuery(
+      { id: documentoFirmado.id },
+      {
+        estatusFirmado: 'error',
+        firmaResponse: `Respuesta inválida: ${JSON.stringify(firmaResponse)}`,
+      },
+    );
+
     throw boom.badGateway('Respuesta inválida del servicio de firma electrónica');
   }
 
-  // 7. Guardar documento firmado
-  const documentoFirmado = await createDocumentoFirmadoQuery({
-    catalogoFirmaElectronicaId: catalogo.id,
-    objetoPorFirmar,
-    pkcs7,
-    folioInterno,
-    identificadorUnico: firmaResponse.identificadorunico,
-    hashObjetoFirmado: firmaResponse.hashobjetofirmado,
-    secuenciaDocumento: firmaResponse.secuenciadocumento,
-    datosFirmante: firmaResponse.datosfirmante,
-    objetoFirmado: firmaResponse.objetofirmado,
-    firmaResponse: firmaResponse.firmaresponse,
-    uriValidacion: firmaResponse.urivalidacion,
-    tipoDocumento: firmaResponse.tipodocumento,
-    identificadorDocumento: firmaResponse.identificadordocumento,
-    dependenciaDocumento: firmaResponse.dependenciadocumento,
-    firmaDigital: firmaResponse.firmadigital,
-    estatusFirmado: 'exitoso',
-    fechaFirmado: firmaResponse.fechafirmado ? new Date(firmaResponse.fechafirmado) : new Date(),
-  });
+  // 8. Actualizar documento firmado con respuesta exitosa
+  documentoFirmado = await updateDocumentoFirmadoQuery(
+    { id: documentoFirmado.id },
+    {
+      identificadorUnico: firmaResponse.identificadorunico,
+      hashObjetoFirmado: firmaResponse.hashobjetofirmado,
+      secuenciaDocumento: firmaResponse.secuenciadocumento,
+      datosFirmante: firmaResponse.datosfirmante,
+      objetoFirmado: firmaResponse.objetofirmado,
+      firmaResponse: firmaResponse.firmaresponse,
+      uriValidacion: firmaResponse.urivalidacion,
+      tipoDocumento: firmaResponse.tipodocumento,
+      identificadorDocumento: firmaResponse.identificadordocumento,
+      dependenciaDocumento: firmaResponse.dependenciadocumento,
+      firmaDigital: firmaResponse.firmadigital,
+      estatusFirmado: 'exitoso',
+      fechaFirmado: firmaResponse.fechafirmado ? new Date(firmaResponse.fechafirmado) : new Date(),
+    },
+  );
 
   Logger.info(`[firma-certificado] Documento firmado exitosamente: ${documentoFirmado.id}`);
 
