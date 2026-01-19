@@ -12,7 +12,6 @@ const updateAsignaturaAntecedenteEquivalenteSchema = {
       ...asignaturaAntecedenteEquivalente,
     },
     required: [
-      'interesadoId',
       'nombreAsignaturaEquivalente',
       'calificacionEquivalente',
       'nombreAsignaturaAntecedente',
