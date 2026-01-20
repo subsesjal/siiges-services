@@ -6,13 +6,15 @@ const { responseProperties } = require('../../../privates/solicitudesRevEquiv/sc
 const findOneAsignaturaAntecedenteEquivalenteSchema = {
   tags: ['Solicitudes Antecedente Asignaturas'],
   description: 'Obtener una asignatura antecedente equivalente por id',
+
   params: {
     type: 'object',
     properties: {
-      id: { type: 'integer' },
+      asignaturaAntecedenteEquivalenteId: { type: 'integer' },
     },
     required: ['asignaturaAntecedenteEquivalenteId'],
   },
+
   response: {
     200: {
       type: 'object',
@@ -23,13 +25,17 @@ const findOneAsignaturaAntecedenteEquivalenteSchema = {
             id: { type: 'integer' },
             ...asignaturaAntecedenteEquivalente,
             ...responseProperties,
+
             asignaturaEquivalentePrograma: {
               type: 'object',
+              nullable: true,
               properties: {
                 ...asignaturaEquivalentePrograma,
                 ...responseProperties,
+
                 asignatura: {
                   type: 'object',
+                  nullable: true,
                   properties: {
                     ...asignatura,
                     ...responseProperties,

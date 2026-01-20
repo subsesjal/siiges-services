@@ -47,6 +47,8 @@ module.exports = {
   updateAsignaturaAntecedenteEquivalente: updateAsignaturaAntecedenteEquivalente(
     solicitudesRevEquiv.updateAsignaturaAntecedenteEquivalente,
     solicitudesRevEquiv.findOneAsignaturaAntecedenteEquivalenteQuery,
+    solicitudesRevEquiv.updateAsignaturaEquivalenteProgramaQuery,
+    solicitudesRevEquiv.findOneAsignaturaEquivalenteProgramaQuery,
   ),
   processSolicitudRevEquiv: processSolicitudRevEquiv(
     solicitudesRevEquiv.findOneSolicitudRevEquivQuery,
