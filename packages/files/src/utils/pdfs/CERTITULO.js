@@ -4,19 +4,44 @@ const { jsPDF } = require('jspdf');
 const QRCode = require('qrcode');
 const { addNutmeg } = require('./pdfHandler');
 
-const imgCertificadoFondo = fs.readFileSync(
-  path.join(__dirname, '/images/imgCertificadoFondo.png'),
-  { encoding: 'base64' },
-);
+const img7 = fs.readFileSync(path.join(__dirname, '/images/img7.png'), { encoding: 'base64' });
 
-async function generarQR(url) {
-  return QRCode.toDataURL(url, {
+function numeroALetras(num) {
+  const letras = {
+    0: 'CERO',
+    1: 'UNO',
+    2: 'DOS',
+    3: 'TRES',
+    4: 'CUATRO',
+    5: 'CINCO',
+    6: 'SEIS',
+    7: 'SIETE',
+    8: 'OCHO',
+    9: 'NUEVE',
+    10: 'DIEZ',
+    20: 'VEINTE',
+    30: 'TREINTA',
+    40: 'CUARENTA',
+    50: 'CINCUENTA',
+    60: 'SESENTA',
+    70: 'SETENTA',
+    80: 'OCHENTA',
+    90: 'NOVENTA',
+    100: 'CIEN',
+  };
+  return letras[num] || '';
+}
+
+async function agregarQR(doc, url, xPos, yPos, size = 80) {
+  const qrDataUrl = await QRCode.toDataURL(url, {
     errorCorrectionLevel: 'H',
     type: 'image/png',
     quality: 1,
     margin: 1,
-    width: 120,
+    width: 128,
   });
+
+  doc.addImage(qrDataUrl, 'PNG', xPos, yPos, size, size);
 }
 
 async function GenerarCertificado(certificado) {
@@ -26,314 +51,411 @@ async function GenerarCertificado(certificado) {
 
   const width = doc.internal.pageSize.getWidth();
   const height = doc.internal.pageSize.getHeight();
-  doc.addImage(imgCertificadoFondo, 'PNG', 0, 0, width, height);
+
+  doc.addImage(img7, 'PNG', 0, 0, width, height);
   doc.setTextColor(0, 0, 0);
   doc.setFont('Nutmeg', 'normal');
 
-  const drawText = ({
+  const centerTextInBox = (
     text,
-    x = 0,
-    y = 0,
-    size = 9,
+    x,
+    boxWidth,
+    y,
+    size = 8,
     bold = false,
-    align = 'left',
-    width: boxWidth = 470,
-  }) => {
-    if (!text) return;
-    const safeText = String(text);
+    alignBottom = false,
+    refHeight = 0,
+  ) => {
+    if (!text) return { height: 0, lastY: y };
+
     doc.setFont('Nutmeg', bold ? 'bold' : 'normal');
     doc.setFontSize(size);
 
-    const lines = doc.splitTextToSize(safeText, boxWidth);
-    let currentY = y;
-    if (align === 'center') {
-      lines.forEach((line) => {
-        const lineWidth = doc.getTextWidth(line);
-        const centeredX = (width - lineWidth) / 2;
-        doc.text(line, centeredX, currentY);
-        currentY += size + 2;
-      });
-      return;
+    const lines = doc.splitTextToSize(text, boxWidth);
+    const lineHeight = size * 1.2;
+    const totalHeight = lines.length * lineHeight;
+
+    let startY = y;
+    if (alignBottom && refHeight > totalHeight) {
+      startY = y + (refHeight - totalHeight);
     }
 
-    if (['left', 'right'].includes(align)) {
-      doc.text(lines, x, y, { align });
-      return;
-    }
-
-    if (align === 'justify' && boxWidth) {
-      lines.forEach((line) => {
-        const words = line.split(' ');
-        if (words.length === 1) {
-          doc.text(line, x, currentY);
-        } else {
-          const textWidth = doc.getTextWidth(line);
-          const spaceCount = words.length - 1;
-          const spaceWidth = (boxWidth - textWidth) / spaceCount;
-          let cursor = x;
-          words.forEach((word, i) => {
-            doc.text(word, cursor, currentY);
-            if (i < words.length - 1) cursor += doc.getTextWidth(word) + spaceWidth;
-          });
-        }
-        currentY += size + 1;
-      });
-    }
-  };
-
-  const checkNewPage = (yPos, marginBottom = 100) => {
-    if (yPos > height - marginBottom) {
-      doc.addPage();
-      doc.addImage(imgCertificadoFondo, 'PNG', 0, 0, width, height);
-      return 100;
-    }
-    return yPos;
-  };
-
-  drawText({
-    text: 'SECRETARÍA DE EDUCACIÓN DEL ESTADO DE JALISCO',
-    y: 70,
-    x: width / 2,
-    size: 11,
-    bold: true,
-    align: 'center',
-  });
-  drawText({
-    text: 'CERTIFICADO DE TERMINACIÓN DE ESTUDIOS',
-    y: 85,
-    x: width / 2,
-    size: 10,
-    bold: true,
-    align: 'center',
-  });
-  drawText({
-    text: 'EDUCACIÓN INTENSIVA',
-    y: 100,
-    x: width / 2,
-    size: 10,
-    bold: true,
-    align: 'center',
-  });
-
-  doc.setFontSize(7);
-  const textoIntro = `El plantel educativo ${certificado?.nombrePlantel?.toUpperCase() || ''} ubicado en ${certificado?.municipio || ''}, Jalisco, con Clave de Centro de Trabajo ${certificado?.cct || ''} con clave de RVOE ${certificado?.rvoe || ''}, CERTIFICA que`;
-  drawText({
-    text: textoIntro,
-    y: 140,
-    size: 7,
-    align: 'center',
-    width: 500,
-  });
-
-  let yAlumno = 170;
-  drawText({
-    text: certificado?.nombreAlumno?.toUpperCase() || '',
-    x: width / 2,
-    y: yAlumno,
-    size: 9.5,
-    bold: true,
-    align: 'center',
-  });
-
-  yAlumno += 15;
-  const textoAlumno = `Con Clave Única de Registro de Población ${certificado?.curp || ''} y número de matrícula ${certificado?.matricula || ''} acreditó totalmente las ${certificado?.totalAsignaturas || ''} asignaturas que comprende el plan de estudios vigente del bachillerato intensivo semiescolarizado, en el periodo del 12 de octubre del 2020 al 15 de julio del 2022.`;
-  drawText({
-    text: textoAlumno,
-    y: yAlumno,
-    size: 7,
-    align: 'center',
-    width: 500,
-  });
-
-  const tablaX = 57;
-  const tablaAncho = 500;
-  const mitad = tablaX + tablaAncho / 2;
-  const altoFila = 10;
-  const y = yAlumno + 25;
-  const ciclos = certificado.ciclos || [];
-  const mitadCiclos = Math.ceil(ciclos.length / 2);
-  const col1 = ciclos.slice(0, mitadCiclos);
-  const col2 = ciclos.slice(mitadCiclos);
-
-  const colAsignaturaAncho = (tablaAncho / 2) * 0.85;
-  const colCalifAncho = (tablaAncho / 2) * 0.15;
-
-  const lineaCalif1 = tablaX + colAsignaturaAncho;
-  const lineaCalif2 = mitad + colAsignaturaAncho;
-
-  doc.setLineWidth(0.8);
-
-  const centroAsig1 = tablaX + (colAsignaturaAncho / 2);
-  const centroCalif1 = lineaCalif1 + (colCalifAncho / 2);
-
-  doc.setFont('Nutmeg', 'bold');
-  doc.setFontSize(7);
-
-  let headerWidth = doc.getTextWidth('ASIGNATURAS');
-  doc.text('ASIGNATURAS', centroAsig1 - (headerWidth / 2), y + 14);
-
-  headerWidth = doc.getTextWidth('CALIF.');
-  doc.text('CALIF.', centroCalif1 - (headerWidth / 2), y + 9);
-  headerWidth = doc.getTextWidth('FINAL');
-  doc.text('FINAL', centroCalif1 - (headerWidth / 2), y + 17);
-
-  const centroAsig2 = mitad + (colAsignaturaAncho / 2);
-  const centroCalif2 = lineaCalif2 + (colCalifAncho / 2);
-
-  headerWidth = doc.getTextWidth('ASIGNATURAS');
-  doc.text('ASIGNATURAS', centroAsig2 - (headerWidth / 2), y + 14);
-
-  headerWidth = doc.getTextWidth('CALIF.');
-  doc.text('CALIF.', centroCalif2 - (headerWidth / 2), y + 9);
-  headerWidth = doc.getTextWidth('FINAL');
-  doc.text('FINAL', centroCalif2 - (headerWidth / 2), y + 17);
-
-  doc.line(tablaX, y + 22, tablaX + tablaAncho, y + 22);
-
-  const renderCiclos = (col, startX, lineaDivisoria, anchoCalif, yStart) => {
-    let yPos = yStart;
-    col.forEach((ciclo) => {
-      yPos = checkNewPage(yPos);
-
-      drawText({
-        text: ciclo.cicloNombre.toUpperCase(),
-        x: startX + 5,
-        y: yPos,
-        bold: true,
-        size: 7,
-      });
-      yPos += 9;
-
-      (ciclo.asignaturas || []).forEach((m) => {
-        drawText({
-          text: m.nombre || '',
-          x: startX + 5,
-          y: yPos,
-          size: 7,
-        });
-
-        const califX = lineaDivisoria + (anchoCalif / 2);
-        const califText = m.calificacion?.toString() || '';
-        doc.setFont('Nutmeg', 'normal');
-        doc.setFontSize(7);
-        const califWidth = doc.getTextWidth(califText);
-        doc.text(califText, califX - (califWidth / 2), yPos);
-
-        yPos += altoFila;
-      });
-
-      yPos += 2;
+    let lastY = startY;
+    lines.forEach((line, i) => {
+      const textWidth = doc.getTextWidth(line);
+      const xCentered = x + (boxWidth - textWidth) / 2;
+      lastY = startY + i * lineHeight;
+      doc.text(line, xCentered, lastY);
     });
-    return yPos;
+
+    return { height: totalHeight, lastY };
   };
 
-  const yMateria = y + 30;
-  const yFinCol1 = renderCiclos(col1, tablaX, lineaCalif1, colCalifAncho, yMateria);
-  const yFinCol2 = renderCiclos(col2, mitad, lineaCalif2, colCalifAncho, yMateria);
-  const finTablaY = Math.max(yFinCol1, yFinCol2) + 5;
+  const drawCenteredBlockTitle = (text, xStart, boxWidth, y, fontSize = 8) => {
+    const textWidth = doc.getTextWidth(text);
+    const xCentered = xStart + (boxWidth - textWidth) / 2;
+    doc.setFont('Nutmeg', 'bold');
+    doc.setFontSize(fontSize);
+    doc.text(text, xCentered, y);
+  };
 
-  doc.roundedRect(tablaX, y, tablaAncho, finTablaY - y, 5, 5, 'S');
+  const drawLine = (y) => {
+    doc.line(57, y, 557, y);
+  };
 
-  doc.line(mitad, y, mitad, finTablaY);
+  doc.setFontSize(9);
+  const centerX = width / 2;
+  doc.text('SECRETARÍA DE INNOVACIÓN, CIENCIA', centerX, 70, { align: 'center' });
+  doc.text('Y TECNOLOGÍA DE JALISCO.', centerX, 85, { align: 'center' });
+  doc.text('SUBSECRETARÍA DE EDUCACIÓN SUPERIOR.', centerX, 100, { align: 'center' });
 
-  doc.line(lineaCalif1, y, lineaCalif1, finTablaY);
-  doc.line(lineaCalif2, y, lineaCalif2, finTablaY);
+  doc.setFontSize(8.5);
+  doc.setFont('Nutmeg', 'normal');
+  doc.text(
+    'Con base en el capítulo 2 artículo 71 de la ley General de Educación Superior, se expide el presente título a:',
+    57,
+    150,
+  );
 
-  const yPostTabla = finTablaY + 10;
-  const col1X = tablaX;
+  const baseY = 160;
+  const blockX = 57;
+  const blockWidth = 500;
+  doc.setFillColor(252, 133, 32);
+  doc.rect(blockX, baseY, blockWidth, 14, 'F');
+  drawCenteredBlockTitle('Datos del titulado', blockX, blockWidth, baseY + 10);
 
-  let promedio = certificado?.promedioGeneral;
-  if (typeof promedio === 'string') {
-    const num = parseFloat(promedio);
-    promedio = Number.isFinite(num) ? num.toFixed(1) : 'N/A';
-  } else if (typeof promedio === 'number' && Number.isFinite(promedio)) {
-    promedio = promedio.toFixed(1);
-  } else {
-    promedio = 'N/A';
-  }
+  const datosY = baseY + 36;
+  const colWidths = [160, 160, 160];
+  const colX = [blockX, blockX + colWidths[0], blockX + colWidths[0] + colWidths[1]];
 
-  const textY = yPostTabla + 5;
+  centerTextInBox(certificado?.nombreAlumno || '', colX[0], colWidths[0], datosY, 8, false);
+  centerTextInBox(certificado?.paternoAlumno || '', colX[1], colWidths[1], datosY, 8, false);
+  centerTextInBox(certificado?.maternoAlumno || '', colX[2], colWidths[2], datosY, 8, false);
 
-  drawText({
-    text: 'PROMEDIO GENERAL',
-    x: col1X,
-    y: textY,
-    size: 6,
-    bold: true,
-    align: 'left',
-  });
+  drawLine(datosY + 4);
 
-  drawText({
-    text: 'DE APROVECHAMIENTO',
-    x: col1X,
-    y: textY + 8,
-    size: 6,
-    bold: true,
-    align: 'left',
-  });
+  centerTextInBox('Nombre(s)', colX[0], colWidths[0], datosY + 15, 8);
+  centerTextInBox('Primer apellido', colX[1], colWidths[1], datosY + 15, 8);
+  centerTextInBox('Segundo apellido', colX[2], colWidths[2], datosY + 15, 8);
 
-  const rectY = textY + 20;
-  const rectWidth = 70;
-  const rectHeight = 20;
-  const rectX = col1X;
+  const curpY = datosY + 45;
+  const colY2 = curpY;
+  const colWidths2 = [250, 250];
+  const colX2 = [blockX, blockX + colWidths2[0]];
 
-  doc.setLineWidth(0.8);
-  doc.rect(rectX, rectY, rectWidth, rectHeight);
+  const programaBox = centerTextInBox(
+    certificado?.carrera || '',
+    colX2[1],
+    colWidths2[1],
+    colY2,
+    8,
+    false,
+  );
 
-  const calificacionX = rectX + (rectWidth / 2);
-  const calificacionY = rectY + (rectHeight / 2) + 4;
+  const curpBox = centerTextInBox(
+    certificado?.curp || '',
+    colX2[0],
+    colWidths2[0],
+    colY2,
+    8,
+    false,
+    true,
+    programaBox.height,
+  );
 
-  doc.setFont('Nutmeg', 'bold');
-  doc.setFontSize(11);
-  const textWidth = doc.getTextWidth(promedio);
-  doc.text(promedio, calificacionX - (textWidth / 2), calificacionY);
+  const maxY = Math.max(curpBox.lastY, programaBox.lastY);
+  drawLine(maxY + 4);
 
-  const qrSize = 80;
-  const qrY = rectY + rectHeight + 10;
-  const qrX = rectX + (rectWidth / 2) - (qrSize / 2);
+  centerTextInBox('CURP', colX2[0], colWidths2[0], maxY + 15, 8);
+  centerTextInBox('Nombre del programa', colX2[1], colWidths2[1], maxY + 15, 8);
 
-  const qrUrl = `${process.env.BASE_URL_FRONT || 'https://siiges.jalisco.gob.mx'}/certificado/${certificado?.folioControl || 'folio'}/consultarFolio`;
-  const qrDataUrl = await generarQR(qrUrl);
-  doc.addImage(qrDataUrl, 'PNG', qrX, qrY, qrSize, qrSize);
+  const institY = maxY + 40;
+  doc.setFillColor(252, 133, 32);
+  doc.rect(blockX, institY, blockWidth, 16, 'F');
+  drawCenteredBlockTitle('Datos de la institución educativa', blockX, blockWidth, institY + 12);
 
-  doc.setFontSize(7);
-  let yTexto = yPostTabla;
-  const salto = 9;
-  const col2X = rectX + rectWidth + 15;
-  const col2Ancho = width - col2X - 40;
+  const instDatoY = institY + 36;
+  const institWidth = blockWidth;
+  const institX = blockX;
+  centerTextInBox(certificado?.nombrePlantel || '', institX, institWidth, instDatoY, 8, false);
+  drawLine(instDatoY + 4);
+  centerTextInBox('Nombre o denominación', institX, institWidth, instDatoY + 15, 8);
 
-  const legalLines = [
-    { bold: true, text: 'Autoridad educativa: ' },
-    { bold: false, text: 'JUAN CARLOS FLORES MIRAMONTES, SECRETARIO DE EDUCACIÓN.' },
-    { bold: true, text: 'No. certificado autoridad educativa: ' },
-    { bold: false, text: '00000000000000002473' },
-    { bold: true, text: 'Sello digital autoridad educativa:' },
-    { bold: false, text: '20103314|59719347|NTk3MTkzNDd8UG9saXRpY2EgRXN0YW1wYSBUaWVtcG89MS4zLjYuMS40LjEuOTIwMy4yLjEsIERpZ2VzdGlvbiBFc3RhbXBhIFRpZW1wbz01MzAxRkI0MUM4ODRGN0MzRjE4MDZFQUVFQUI3M0U3RTE0MDRENTM3Q0I5MzEwNTYwMjk0MkVEMTZBRUY2RjZELCBOdW1lcm8gU2VjdWVuY2lhIEVzdGFtcGEgVGllbXBvPTQyNzU1NzMyLCBGZWNoYSBFbWlzaW9uIEVzdGFtcGEgVGllbXBvPTIwMjUxMTE5MDQzMTI3Wg==| 20D' },
-    { bold: true, text: 'Fecha y hora de timbrado: ' },
-    { bold: false, text: '19/07/2022 1:35pm' },
-    { bold: false, text: 'Con fundamento en lo dispuesto por el artículo 60 de la Ley General de Educación, los certificados de estudios expedidos por instituciones del Sistema Educativo Nacional, tienen validez en la República Mexicana sin necesidad de trámites adicionales de autenticación o legalización favoreciendo el tránsito del estudiante por el Sistema Educativo Nacional.' },
-    { bold: false, text: 'El presente certificado de estudios ha sido firmado mediante el uso de la firma electrónica avanzada, amparada por un certificado vigente a la fecha de su emisión y es válido de conformidad con lo dispuesto en los artículos 4, 7, 9, 11, 13, 14, 15 y 29 de la Ley de Firma Electrónica Avanzada para el Estado de Jalisco y sus Municipios, y demás aplicables del Reglamento de la Ley de Firma Electrónica Avanzada para el Estado de Jalisco y sus Municipios' },
-    { bold: false, text: 'La versión electrónica del presente documento, su integridad y autoría se podrá comprobar a través de la página electrónica de la Dirección de Acreditación, Incorporación y Revalidación Educativa de la Secretaría de Educación del Estado de Jalisco, por medio de la siguiente liga: http://consultaescolar.jalisco.gob.mx/escolar . De igual manera, podrá verificar el documento electrónico por medio del código QR.' },
-  ];
+  const expY = instDatoY + 40;
+  doc.setFillColor(252, 133, 32);
+  doc.rect(blockX, expY, blockWidth, 16, 'F');
+  drawCenteredBlockTitle('Datos de expedición', blockX, blockWidth, expY + 12);
 
-  legalLines.forEach((line) => {
-    doc.setFont('Nutmeg', line.bold ? 'bold' : 'normal');
-    const wrapped = doc.splitTextToSize(line.text, col2Ancho);
-    doc.text(wrapped, col2X, yTexto);
-    yTexto += wrapped.length * salto;
-  });
+  const expDatoY = expY + 32;
+  const colWidthsExp = [250, 250];
+  const colXExp = [blockX, blockX + colWidthsExp[0]];
 
-  const yFolio = Math.max(qrY + 70, yTexto + 5);
+  centerTextInBox(certificado?.folioControl || '', colXExp[0], colWidthsExp[0], expDatoY, 8, false);
+  centerTextInBox('Jalisco', colXExp[1], colWidthsExp[1], expDatoY, 8, false);
 
+  drawLine(expDatoY + 4);
+  centerTextInBox('Folio', colXExp[0], colWidthsExp[0], expDatoY + 15, 8);
+  centerTextInBox('Entidad federativa', colXExp[1], colWidthsExp[1], expDatoY + 15, 8);
+
+  const fechaY = expDatoY + 44;
+  centerTextInBox(
+    certificado?.fechaInicio || '',
+    colXExp[0],
+    colWidthsExp[0],
+    fechaY,
+    8,
+    false,
+  );
+  centerTextInBox(
+    certificado?.fechaTerminacion || '',
+    colXExp[1],
+    colWidthsExp[1],
+    fechaY,
+    8,
+    false,
+  );
+
+  drawLine(fechaY + 4);
+  centerTextInBox('Fecha de inicio', colXExp[0], colWidthsExp[0], fechaY + 15, 8);
+  centerTextInBox('Fecha de terminación', colXExp[1], colWidthsExp[1], fechaY + 15, 8);
+
+  const examenY = fechaY + 44;
+  centerTextInBox(
+    certificado?.fechaExamen || '',
+    colXExp[0],
+    colWidthsExp[0],
+    examenY,
+    8,
+    false,
+  );
+  centerTextInBox(
+    certificado?.fechaExpedicion || '',
+    colXExp[1],
+    colWidthsExp[1],
+    examenY,
+    8,
+    false,
+  );
+
+  drawLine(examenY + 4);
+  centerTextInBox('Fecha de examen o exención de examen profesional', colXExp[0], colWidthsExp[0], examenY + 15, 8);
+  centerTextInBox('Fecha de expedición', colXExp[1], colWidthsExp[1], examenY + 15, 8);
+
+  const promedioSeccionY = examenY + 44;
+  doc.setFillColor(252, 133, 32);
+  doc.rect(blockX, promedioSeccionY, blockWidth, 14, 'F');
+  doc.setTextColor(0, 0, 0);
   doc.setFont('Nutmeg', 'bold');
   doc.setFontSize(8);
-  doc.text(`Folio ${certificado?.folioControl || 'CTE1422068255'}`, tablaX, yFolio);
+  const promedioTitleText = 'Promedio General del Certificado';
+  const promedioTitleWidth = doc.getTextWidth(promedioTitleText);
+  doc.text(promedioTitleText, blockX
+    + (blockWidth - promedioTitleWidth) / 2, promedioSeccionY + 10);
+
+  const promedioDatoY = promedioSeccionY + 28;
+  doc.setFont('Nutmeg', 'normal');
+  doc.setFontSize(8);
+  const promedioText = `PROMEDIO: ${certificado?.promedioGeneral || 'N/A'}`;
+  const promedioTextWidth = doc.getTextWidth(promedioText);
+  doc.text(promedioText, blockX + (blockWidth - promedioTextWidth) / 2, promedioDatoY);
+
+  drawLine(promedioDatoY + 8);
+
+  const fechaPromedioY = promedioDatoY + 22;
+  doc.setFont('Nutmeg', 'normal');
+  doc.setFontSize(8);
+  const fechaPromedioText = certificado?.fechaPromedio || 'a 14 de octubre de 2025';
+  const fechaPromedioWidth = doc.getTextWidth(fechaPromedioText);
+  doc.text(fechaPromedioText, blockX + (blockWidth - fechaPromedioWidth) / 2, fechaPromedioY);
+
+  const verificacionY = fechaPromedioY + 30;
+
+  const datosVerificacion = {
+    identificadorDocumento: certificado?.identificadorDocumento || 'DD-SEC-ADMON-0005',
+    noSecuencia: certificado?.noSecuencia || '012345678',
+    fechaFirmado: certificado?.fechaFirmado || '02/Enero/2026 13:30:00',
+    selloDigital: certificado?.selloDigital || 'MIIEpQIBAAKCAQEA0Z3VS5JJcds7N9S5jZqPHNmNvXbQwZ4efghIJKLmnoPQrStUvWxYz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
+    sitioVerificacion: certificado?.sitioVerificacion || 'https://dev.jalisco.gob.mx/sitiovalidacionfe/#/busqueda',
+    nombreFirmante: certificado?.nombreFirmante || 'Mtra. Fanny Guadalupe Valdivia Márquez',
+    cargoFirmante: certificado?.cargoFirmante || 'Subsecretaria de Educación Superior',
+    firmaElectronica: certificado?.firmaElectronica || 'MIIEpQIBAAKCAQEA0Z3VS5JJcds7N9S5jZqPHNmNvXbQwZ4efghIJKLmnoPQrStUvWxYz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
+  };
+
+  const leftColumnX = blockX;
+  const leftColumnWidth = 330;
+  const qrX = blockX + leftColumnWidth + 20;
+  const qrSize = 150;
+  const lineSpacing = 10;
+  const sectionSpacing = 16;
+  const grayColor = [120, 120, 120];
+  const blackColor = [0, 0, 0];
+
+  let y = verificacionY;
+
+  doc.setFont('Nutmeg', 'bold');
+  doc.setFontSize(7);
+  doc.setTextColor(...blackColor);
+  doc.text('Datos de verificación', leftColumnX, y);
+  y += lineSpacing + 2;
 
   doc.setFont('Nutmeg', 'normal');
+  doc.setFontSize(5);
+  doc.setTextColor(...grayColor);
+  doc.text(`Identificador de documento: ${datosVerificacion.identificadorDocumento}`, leftColumnX, y);
+  y += lineSpacing;
+
+  doc.text(`No. de secuencia: ${datosVerificacion.noSecuencia}`, leftColumnX, y);
+  y += lineSpacing;
+
+  doc.text(`Fecha de firmado: ${datosVerificacion.fechaFirmado}`, leftColumnX, y);
+  y += lineSpacing + 4;
+
+  doc.text('Sello digital:', leftColumnX, y);
+  y += 6;
+  const selloLines = doc.splitTextToSize(datosVerificacion.selloDigital, leftColumnWidth);
+  doc.text(selloLines, leftColumnX, y);
+  y += selloLines.length * 5 + 6;
+
+  doc.text(`Sitio de verificación: ${datosVerificacion.sitioVerificacion}`, leftColumnX, y);
+  y += sectionSpacing;
+
+  doc.setFont('Nutmeg', 'bold');
   doc.setFontSize(7);
-  const textoExp = 'El presente documento se expide en Guadalajara, Jalisco a los veinte días del mes de julio del dos mil veintidós.';
-  const textoExpSplit = doc.splitTextToSize(textoExp, width - 120);
-  doc.text(textoExpSplit, tablaX, yFolio + 12);
+  doc.setTextColor(...blackColor);
+  doc.text('Autorizó / Firma electrónica', leftColumnX, y);
+  y += lineSpacing + 2;
+
+  doc.setFont('Nutmeg', 'normal');
+  doc.setFontSize(5);
+  doc.setTextColor(...grayColor);
+  doc.text(datosVerificacion.nombreFirmante, leftColumnX, y);
+  y += lineSpacing;
+
+  doc.text(datosVerificacion.cargoFirmante, leftColumnX, y);
+  y += lineSpacing + 4;
+
+  doc.text('Firma electrónica:', leftColumnX, y);
+  y += 6;
+  const firmaLines = doc.splitTextToSize(datosVerificacion.firmaElectronica, leftColumnWidth);
+  doc.text(firmaLines, leftColumnX, y);
+
+  const qrUrl = datosVerificacion.sitioVerificacion;
+  await agregarQR(doc, qrUrl, qrX, verificacionY, qrSize);
+
+  doc.addPage();
+  doc.addImage(img7, 'PNG', 0, 0, width, height);
+  doc.setTextColor(0, 0, 0);
+  doc.setFont('Nutmeg', 'normal');
+
+  doc.setFontSize(9);
+  doc.text('SECRETARÍA DE INNOVACIÓN, CIENCIA', centerX, 70, { align: 'center' });
+  doc.text('Y TECNOLOGÍA DE JALISCO.', centerX, 85, { align: 'center' });
+  doc.text('SUBSECRETARÍA DE EDUCACIÓN SUPERIOR.', centerX, 100, { align: 'center' });
+
+  doc.setFontSize(8.5);
+  doc.setFont('Nutmeg', 'bold');
+  doc.text('CERTIFICADO TOTAL DE ESTUDIOS', centerX, 115, { align: 'center' });
+
+  doc.setFontSize(7);
+  doc.setFont('Nutmeg', 'normal');
+  doc.text(
+    'Con base en el capítulo 2 art. 71 de la ley General de Educación Superior, se expide el presente certificado a:',
+    57,
+    135,
+  );
+
+  const datosSeccionY = 145;
+  doc.setFillColor(252, 133, 32);
+  doc.rect(blockX, datosSeccionY, blockWidth, 14, 'F');
+  doc.setTextColor(0, 0, 0);
+  doc.setFont('Nutmeg', 'bold');
+  doc.setFontSize(8);
+  const datosCertText = 'Datos del certificado';
+  const datosCertWidth = doc.getTextWidth(datosCertText);
+  doc.text(datosCertText, blockX + (blockWidth - datosCertWidth) / 2, datosSeccionY + 10);
+  doc.setTextColor(0, 0, 0);
+
+  doc.setFont('Nutmeg', 'normal');
+  doc.setFontSize(6);
+  const textoDescriptivo = `Cuya fotografía aparece al margen, cursó y aprobó las asignaturas que se consignan en el plan de estudios de la ${certificado?.carrera?.toUpperCase() || ''}.`;
+  const textoDescriptivoLines = doc.splitTextToSize(textoDescriptivo, blockWidth);
+  doc.text(textoDescriptivoLines, blockX, datosSeccionY + 28);
+
+  const tablaY = datosSeccionY + 42;
+  const tablaX = blockX;
+  const tablaAncho = blockWidth;
+
+  const colAsignaturaAncho = tablaAncho * 0.50;
+  const colPeriodoAncho = tablaAncho * 0.18;
+  const colNumAncho = tablaAncho * 0.08;
+  const colLetraAncho = tablaAncho * 0.24;
+
+  const xAsignatura = tablaX;
+  const xPeriodo = tablaX + colAsignaturaAncho;
+  const xNum = xPeriodo + colPeriodoAncho;
+  const xLetra = xNum + colNumAncho;
+
+  doc.setFont('Nutmeg', 'bold');
+  doc.setFontSize(6);
+
+  doc.text('ASIGNATURAS', xAsignatura + 5, tablaY);
+
+  doc.text('PERIODO', xPeriodo + (colPeriodoAncho / 2) - (doc.getTextWidth('PERIODO') / 2), tablaY);
+
+  doc.text('NÚM', xNum + (colNumAncho / 2) - (doc.getTextWidth('NÚM') / 2), tablaY);
+  doc.text('CALIFICACIÓN LETRA', xLetra + (colLetraAncho / 2) - (doc.getTextWidth('CALIFICACIÓN LETRA') / 2), tablaY);
+
+  const grados = certificado?.grados || [];
+  let yPos = tablaY + 12;
+  const altoFila = 8;
+  const margenInferior = 60;
+  const posicionNuevaPagina = 140;
+
+  const addNewPage = () => {
+    doc.addPage();
+    doc.addImage(img7, 'PNG', 0, 0, width, height);
+    doc.setTextColor(0, 0, 0);
+    return posicionNuevaPagina;
+  };
+
+  grados.forEach((grado) => {
+    const asignaturas = grado.asignaturas || [];
+
+    const alturaGradoCompleto = altoFila + (asignaturas.length * altoFila) + 4;
+
+    if (yPos + alturaGradoCompleto > height - margenInferior) {
+      yPos = addNewPage();
+    }
+
+    doc.setFont('Nutmeg', 'bold');
+    doc.setFontSize(6);
+    doc.text((grado.gradoNombre || '').toUpperCase(), xAsignatura + 5, yPos);
+    yPos += altoFila;
+
+    asignaturas.forEach((asig) => {
+      doc.setFont('Nutmeg', 'normal');
+      doc.setFontSize(6);
+
+      const nombreAsig = (asig.nombre || '').toUpperCase();
+      doc.text(nombreAsig, xAsignatura + 15, yPos);
+
+      const periodo = asig.periodo || '';
+      const periodoWidth = doc.getTextWidth(periodo);
+      doc.text(periodo, xPeriodo + (colPeriodoAncho / 2) - (periodoWidth / 2), yPos);
+
+      const calNum = asig.calificacion?.toString() || '';
+      const calNumWidth = doc.getTextWidth(calNum);
+      doc.text(calNum, xNum + (colNumAncho / 2) - (calNumWidth / 2), yPos);
+
+      const calLetra = asig.calificacionLetra || numeroALetras(parseInt(asig.calificacion, 10)) || '';
+      const calLetraWidth = doc.getTextWidth(calLetra);
+      doc.text(calLetra, xLetra + (colLetraAncho / 2) - (calLetraWidth / 2), yPos);
+
+      yPos += altoFila;
+    });
+
+    yPos += 4;
+  });
 
   return doc.output('arraybuffer');
 }
