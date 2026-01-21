@@ -29,6 +29,18 @@ const fastify = Fastify({
 // Register security headers middleware
 fastify.register(helmet);
 
+// Hook para trazabilidad: loguear usuario del JWT en cada petición
+fastify.addHook('onResponse', (request, reply, done) => {
+  const { method, url } = request;
+  const { statusCode } = reply;
+  const user = request.user || null;
+  const timestamp = new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' });
+
+  Logger.info(`[API Request] ${timestamp} | ${method} ${url} | User ID: ${user?.id || 'anonymous'} | Usuario: ${user?.usuario || 'N/A'} | Status: ${statusCode}`);
+
+  done();
+});
+
 // Serve static files (e.g., from public/)
 fastify.register(fastifyStatic, {
   root: path.join(process.env.PATH_FILE || 'C:/files', 'public'),

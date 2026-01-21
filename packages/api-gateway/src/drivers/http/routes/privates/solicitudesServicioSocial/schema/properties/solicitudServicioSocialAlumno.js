@@ -7,8 +7,8 @@ const solicitudServicioSocialAlumno = {
   sectorServicioSocialId: { type: 'integer' },
   ejeServicioSocialId: { type: 'integer' },
   lugarReceptor: { type: 'string' },
-  fechaInicio: { type: 'string', format: 'date' },
-  fechaTermino: { type: 'string', format: 'date' },
+  fechaInicio: { type: 'string' }, // Cambio de date format
+  fechaTermino: { type: 'string' }, // Cambio de date format
 };
 
 module.exports = { solicitudServicioSocialAlumno };

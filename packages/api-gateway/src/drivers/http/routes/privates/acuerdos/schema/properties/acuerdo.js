@@ -4,7 +4,7 @@ const acuerdo = {
   estatus: { type: 'string' },
   descripcion: { type: 'string' },
   descripcionSeguimiento: { type: 'string' },
-  fecha: { type: 'string', format: 'date' },
+  fecha: { type: 'string' }, // Cambio de date format
 };
 
 module.exports = { acuerdo };
