@@ -2,8 +2,8 @@
 const alumnoGrupo = {
   alumnoId: { type: 'integer' },
   grupoId: { type: 'integer' },
-  periodoFechaInicio: { type: 'string', format: 'date' },
-  periodoFechaFin: { type: 'string', format: 'date' },
+  periodoFechaInicio: { type: 'string' }, // Cambio de date format
+  periodoFechaFin: { type: 'string' }, // Cambio de date format
 };
 
 module.exports = { alumnoGrupo };

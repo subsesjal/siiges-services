@@ -21,21 +21,21 @@ const tituloElectronico = {
   cveInstitucion: { type: 'string' },
   cveCarrera: { type: 'string' },
   nombreCarrera: { type: 'string' },
-  fechaInicio: { type: 'string', format: 'date' },
-  fechaTerminacion: { type: 'string', format: 'date' },
+  fechaInicio: { type: 'string' }, // Cambio de date format
+  fechaTerminacion: { type: 'string' }, // Cambio de date format
   numeroRvoe: { type: 'string' },
   curp: { type: 'string' },
   nombre: { type: 'string' },
   primerApellido: { type: 'string' },
   segundoApellido: { type: 'string' },
   correoElectronico: { type: 'string' },
-  fechaExpedicion: { type: 'string', format: 'date' },
-  fechaExamenProfesional: { type: 'string', format: 'date' },
-  fechaExencionExamenProfesional: { type: 'string', format: 'date' },
+  fechaExpedicion: { type: 'string' }, // Cambio de date format
+  fechaExamenProfesional: { type: 'string' }, // Cambio de date format
+  fechaExencionExamenProfesional: { type: 'string' }, // Cambio de date format
   cumplioServicioSocial: { type: 'integer' },
   institucionProcedencia: { type: 'string' },
-  fechaInicioAntecedente: { type: 'string', format: 'date' },
-  fechaTerminacionAntecedente: { type: 'string', format: 'date' },
+  fechaInicioAntecedente: { type: 'string' }, // Cambio de date format
+  fechaTerminacionAntecedente: { type: 'string' }, // Cambio de date format
   noCedula: { type: 'string', nullable: true },
   folioDigital: { type: 'string' },
   fechaAutenticacion: { type: 'string', format: 'date-time' },
