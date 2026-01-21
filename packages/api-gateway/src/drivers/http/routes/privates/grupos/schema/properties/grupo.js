@@ -4,8 +4,8 @@ const grupo = {
   gradoId: { type: 'integer' },
   descripcion: { type: 'string' },
   generacion: { type: 'string' },
-  generacionFechaInicio: { type: 'string', format: 'date' },
-  generacionFechaFin: { type: 'string', format: 'date' },
+  generacionFechaInicio: { type: 'string' }, // Cambio de date format
+  generacionFechaFin: { type: 'string' }, // Cambio de date format
 };
 
 module.exports = { grupo };
