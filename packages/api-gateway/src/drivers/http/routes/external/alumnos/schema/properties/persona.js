@@ -3,7 +3,7 @@ const persona = {
   nombre: { type: 'string' },
   apellidoPaterno: { type: 'string' },
   apellidoMaterno: { type: 'string' },
-  fechaNacimiento: { type: 'string', format: 'date' },
+  fechaNacimiento: { type: 'string' }, // Cambio de date format
   sexo: { type: 'string', enum: ['Masculino', 'Femenino'] },
   nacionalidad: { type: 'string', enum: ['Mexicana', 'Otro'] },
   telefono: { type: 'string', minLength: 10, maxLength: 10 },

@@ -10,7 +10,7 @@ const createEquivalenciaInternaSchema = {
       alumnoId: { type: 'integer' },
       folioExpediente: { type: 'string' },
       folioResolucion: { type: 'string' },
-      fechaResolucion: { type: 'string', format: 'date' },
+      fechaResolucion: { type: 'string' }, // Cambio de date format
     },
     required: ['alumnoId', 'folioExpediente', 'folioResolucion', 'fechaResolucion'],
   },
@@ -25,7 +25,7 @@ const createEquivalenciaInternaSchema = {
             alumnoId: { type: 'integer' },
             folioExpediente: { type: 'string' },
             folioResolucion: { type: 'string' },
-            fechaResolucion: { type: 'string', format: 'date' },
+            fechaResolucion: { type: 'string' }, // Cambio de date format
             ...responseProperties,
           },
         },

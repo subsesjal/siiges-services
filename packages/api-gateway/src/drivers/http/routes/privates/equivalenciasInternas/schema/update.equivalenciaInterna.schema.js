@@ -13,7 +13,7 @@ const updateEquivalenciaInternaSchema = {
     properties: {
       folioExpediente: { type: 'string' },
       folioResolucion: { type: 'string' },
-      fechaResolucion: { type: 'string', format: 'date' },
+      fechaResolucion: { type: 'string' }, // Cambio de date format
     },
     additionalProperties: false,
   },
@@ -28,7 +28,7 @@ const updateEquivalenciaInternaSchema = {
             alumnoId: { type: 'integer' },
             folioExpediente: { type: 'string' },
             folioResolucion: { type: 'string' },
-            fechaResolucion: { type: 'string', format: 'date' },
+            fechaResolucion: { type: 'string' }, // Cambio de date format
             ...responseProperties,
           },
         },

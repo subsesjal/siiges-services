@@ -26,7 +26,7 @@ const calificacionesSchema = {
               type: 'object',
               properties: {
                 calificacion: { type: 'number' },
-                fechaExamen: { type: 'string', format: 'date' },
+                fechaExamen: { type: 'string' }, // Cambio de date format
               },
               required: ['calificacion', 'fechaExamen'],
             },
@@ -34,7 +34,7 @@ const calificacionesSchema = {
               type: 'object',
               properties: {
                 calificacion: { type: ['string', 'number'] },
-                fechaExamen: { type: 'string', format: 'date' },
+                fechaExamen: { type: 'string' }, // Cambio de date format
               },
               required: ['calificacion', 'fechaExamen'],
             },
@@ -73,14 +73,14 @@ const calificacionesSchema = {
                         type: 'object',
                         properties: {
                           calificacion: { type: 'number' },
-                          fechaExamen: { type: 'string', format: 'date' },
+                          fechaExamen: { type: 'string' }, // Cambio de date format
                         },
                       },
                       extraordinaria: {
                         type: 'object',
                         properties: {
                           calificacion: { type: ['string', 'number'] },
-                          fechaExamen: { type: 'string', format: 'date' },
+                          fechaExamen: { type: 'string' }, // Cambio de date format
                         },
                       },
                     },
