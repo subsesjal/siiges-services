@@ -17,10 +17,20 @@ set_error_handler(function ($severity, $message, $file, $line) {
   exit(1);
 });
 
-// Helper para convertir texto UTF-8 a ISO-8859-1 y evitar errores de codificación
-function safe_text($text)
-{
-  return mb_convert_encoding($text ?? '', 'ISO-8859-1', 'UTF-8');
+// Función segura para convertir texto UTF-8 a ISO-8859-1
+function safe_text($text) {
+  if ($text === null || $text === '') {
+    return '';
+  }
+  // Limpiar caracteres problemáticos (espacios no rompibles, etc.)
+  $text = preg_replace('/[\x{00A0}\x{2000}-\x{200F}\x{2028}\x{2029}\x{202F}\x{205F}\x{3000}]/u', ' ', $text);
+  // Convertir usando mb_convert_encoding que es más tolerante
+  $converted = @mb_convert_encoding($text, 'ISO-8859-1', 'UTF-8');
+  if ($converted === false) {
+    // Fallback: eliminar caracteres no ASCII
+    return preg_replace('/[^\x20-\x7E]/', '', $text);
+  }
+  return $converted;
 }
 
 // Leer datos JSON desde stdin
@@ -62,19 +72,19 @@ $pdf->SetFont("Nutmeg", "", 9);
 $dataPrograma = array(
   [
     "name" => safe_text("NOMBRE DE LA INSTITUCIÓN"),
-    "description" => safe_text(mb_strtoupper($institucion["nombre"]))
+    "description" => safe_text(mb_strtoupper($institucion["nombre"] ?? ''))
   ],
   [
     "name" => safe_text("CLAVE DE CENTRO DE TRABAJO"),
-    "description" => safe_text(mb_strtoupper($plantel["claveCentroTrabajo"]))
+    "description" => safe_text(mb_strtoupper($plantel["claveCentroTrabajo"] ?? ''))
   ],
   [
     "name" => safe_text("NUMERO DE ACUERDO"),
-    "description" => safe_text(mb_strtoupper($programa["acuerdoRvoe"]))
+    "description" => safe_text(mb_strtoupper($programa["acuerdoRvoe"] ?? ''))
   ],
   [
     "name" => safe_text("NIVEL Y NOMBRE DEL PLAN DE ESTUDIOS"),
-    "description" => safe_text(mb_strtoupper($nivel["descripcion"] . " en " . $programa["nombre"]))
+    "description" => safe_text(mb_strtoupper(($nivel["descripcion"] ?? '') . " en " . ($programa["nombre"] ?? '')))
   ],
 );
 
@@ -111,9 +121,9 @@ $pdf->Ln();
 // Tabla de domicilio de la institucion
 $dataDetalleDomicilioInstitucion1 = array(
   [
-    "matricula" => safe_text(mb_strtoupper($alumno["matricula"])),
-    "nombre_alumno" => safe_text(mb_strtoupper($alumno["persona"]["apellidoPaterno"] . " " . $alumno["persona"]["apellidoMaterno"] . " " . $alumno["persona"]["nombre"])),
-    "estatus" => safe_text(mb_strtoupper($alumno["situacion"]["nombre"])),
+    "matricula" => safe_text(mb_strtoupper($alumno["matricula"] ?? '')),
+    "nombre_alumno" => safe_text(mb_strtoupper(($alumno["persona"]["apellidoPaterno"] ?? '') . " " . ($alumno["persona"]["apellidoMaterno"] ?? '') . " " . ($alumno["persona"]["nombre"] ?? ''))),
+    "estatus" => safe_text(mb_strtoupper($alumno["situacion"]["nombre"] ?? '')),
   ]
 );
 
@@ -170,19 +180,12 @@ foreach ($calificacionesInput as $calificacion) {
   $calificacionCiclo[$nombreCiclo][] = $calificacion;
 }
 
-uksort($calificacionCiclo, function ($a, $b) {
-  return strcmp($a, $b);
-});
-
 foreach ($calificacionCiclo as $ciclos => $ciclo) {
   if ($pdf->checkNewPage()) {
     $pdf->Ln(20);
   }
 
   $ciclo = $pdf->array_sort($ciclo, 'consecutivo', SORT_ASC);
-  usort($ciclo, function ($a, $b) {
-    return strcmp($a['asignatura']['clave'], $b['asignatura']['clave']);
-  });
   $pdf->SetFillColor(166, 166, 166);
   $pdf->SetFont("Nutmeg", "", 9);
   $pdf->Cell(176, 5, safe_text(mb_strtoupper('CICLO ESCOLAR ' . $ciclos)), 1, 1, "C", true);
@@ -287,7 +290,7 @@ $pdf->Ln();
 
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->SetFillColor(255, 255, 255);
-$pdf->Cell(50, 5, safe_text($total_creditos . " de " . $programa["creditos"]), 1, 0, "C", true);
+$pdf->Cell(50, 5, safe_text($total_creditos . " de " . ($programa["creditos"] ?? '')), 1, 0, "C", true);
 $pdf->Cell(50, 5, safe_text($promedio_calificacion), 1, 0, "C", true);
 $pdf->Ln();
 
@@ -305,4 +308,4 @@ $pdf->MultiCell(176, 3, safe_text("El presente historial consigna las calificaci
 La información del presente cumple fines informativos, único para la consulta de la Institución y la Dirección de Servicios Escolares, fecha de consulta " . $fecha), 0, "J");
 $pdf->Ln(5);
 
-$pdf->Output("I", "kardex_" . $alumno["matricula"] . ".pdf");
+$pdf->Output("I", "kardex_" . ($alumno["matricula"] ?? '') . ".pdf");
