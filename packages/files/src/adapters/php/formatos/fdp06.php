@@ -1,9 +1,11 @@
 <?php
+ob_start();
+
 require(realpath(__DIR__ . "/../formatos/pdf.php"));
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
+ini_set('display_errors', '0');
+ini_set('display_startup_errors', '0');
+error_reporting(0);
 
 set_exception_handler(function ($e) {
     file_put_contents('php://stderr', "Uncaught Exception: " . $e->getMessage() . "\n");
@@ -289,4 +291,18 @@ $pdf->MultiCell(
     "T"
 );
 
-$pdf->Output("I", "FDP06.pdf");
+// Limpiar cualquier salida accidental antes de enviar el PDF
+ob_end_clean();
+
+// Obtener el PDF como string para calcular Content-Length
+$pdfContent = $pdf->Output("S", "FDP06.pdf");
+
+// Enviar headers correctos para Chrome y Edge
+header('Content-Type: application/pdf');
+header('Content-Disposition: inline; filename="FDP06.pdf"');
+header('Content-Length: ' . strlen($pdfContent));
+header('Cache-Control: private, max-age=0, must-revalidate');
+header('Pragma: public');
+header('Accept-Ranges: bytes');
+
+echo $pdfContent;
