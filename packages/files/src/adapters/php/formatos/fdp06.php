@@ -1,11 +1,9 @@
 <?php
-ob_start();
-
 require(realpath(__DIR__ . "/../formatos/pdf.php"));
 
-ini_set('display_errors', '0');
-ini_set('display_startup_errors', '0');
-error_reporting(0);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 set_exception_handler(function ($e) {
     file_put_contents('php://stderr', "Uncaught Exception: " . $e->getMessage() . "\n");
@@ -41,11 +39,12 @@ $domicilioPlantel = $plantel['domicilio'] ?? [];
 $cicloTxt = ["SEMESTRALES", "CUATRIMESTRALES", "ANUALES", "SEMESTRALES", "CUATRIMESTRALES"];
 $cicloTxtSingular = ["SEMESTRE", "CUATRIMESTRE", "AÑO", "SEMESTRE", "CUATRIMESTRE"];
 $tituloTipoSolicitud = [
-    "SOLICITUD DE RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS",
-    "SOLICITUD DE REFRENDO A PLAN Y PROGRAMA DE ESTUDIO",
-    "SOLICITUD DE CAMBIO DE DOMICILIO",
-    "SOLICITUD DE CAMBIO DE REPRESENTANTE LEGAL"
+    1 => "SOLICITUD DE RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS",
+    2 => "SOLICITUD DE REFRENDO A PLAN Y PROGRAMA DE ESTUDIO",
+    3 => "SOLICITUD DE CAMBIO DE DOMICILIO",
+    4 => "SOLICITUD DE CAMBIO DE REPRESENTANTE LEGAL",
 ];
+
 $gradoTxt = [
     'PRIMER',
     'SEGUNDO',
@@ -291,18 +290,4 @@ $pdf->MultiCell(
     "T"
 );
 
-// Limpiar cualquier salida accidental antes de enviar el PDF
-ob_end_clean();
-
-// Obtener el PDF como string para calcular Content-Length
-$pdfContent = $pdf->Output("S", "FDP06.pdf");
-
-// Enviar headers correctos para Chrome y Edge
-header('Content-Type: application/pdf');
-header('Content-Disposition: inline; filename="FDP06.pdf"');
-header('Content-Length: ' . strlen($pdfContent));
-header('Cache-Control: private, max-age=0, must-revalidate');
-header('Pragma: public');
-header('Accept-Ranges: bytes');
-
-echo $pdfContent;
+$pdf->Output("I", "FDP06.pdf");
