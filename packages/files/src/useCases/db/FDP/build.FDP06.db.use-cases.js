@@ -4,14 +4,12 @@ const buildFileFDP06 = (
   findOneSolicitudProgramaQuery,
   createPhpFile,
 ) => async (solicitudId, tipoDocumento) => {
+  // Solo incluir los datos necesarios para FDP06
   const include = [{
     association: 'programa',
     include: [
-      { association: 'programaTurnos' },
       { association: 'ciclo' },
-      { association: 'trayectoria' },
       { association: 'nivel' },
-      { association: 'modalidad' },
       {
         association: 'docentes',
         include: [
@@ -26,54 +24,19 @@ const buildFileFDP06 = (
           },
         ],
       },
-      { association: 'asignaturas' },
-      { association: 'trayectoria' },
       {
         association: 'plantel',
-        include: [{
-          association: 'domicilio',
-          include: [
-            { association: 'estado' },
-            { association: 'municipio' },
-          ],
-        },
-        {
-          association: 'directores',
-          include: [
-            { association: 'persona' },
-            {
-              association: 'formacionesDirectores',
-              include: [{ association: 'formacion' }],
-            },
-          ],
-        },
-        {
-          association: 'institucion',
-          include: [
-            { association: 'ratificacionesNombre' },
-            {
-              association: 'rector',
-              include: [
-                { association: 'persona' },
-                {
-                  association: 'formacionesRectores',
-                  include: [{ association: 'formacion' }],
-                },
-              ],
-            },
-          ],
-        }],
-      }],
-  },
-  {
-    association: 'diligencias',
-    include: [{ association: 'persona' }],
+        include: [
+          { association: 'domicilio' },
+          { association: 'institucion' },
+        ],
+      },
+    ],
   },
   {
     association: 'usuario',
     include: [{ association: 'persona' }],
-  },
-  { association: 'estatusSolicitud' }];
+  }];
 
   const solicitud = await findOneSolicitudProgramaQuery({ id: solicitudId }, {
     undefined,
