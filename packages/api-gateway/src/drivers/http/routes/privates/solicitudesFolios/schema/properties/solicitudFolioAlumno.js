@@ -1,6 +1,7 @@
 // Solicitud Folio Alumno
 const solicitudFolioAlumno = {
   alumnoId: { type: 'integer' },
+  consecutivo: { type: 'integer' },
   solicitudFolioId: { type: 'integer' },
   modalidadTitulacionId: { type: 'integer' },
   fundamentoServicioSocialId: { type: 'integer' },

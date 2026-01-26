@@ -11,6 +11,7 @@ const createSolicitudFolioAlumno = (
   findOneSolicitudFolioQuery,
   createAlumnoFolioQuery,
   findOneSolicitudFolioAlumnoQuery,
+  countSolicitudFolioAlumnosQuery,
 ) => async (data) => {
   const solicitudFolio = await findOneSolicitudFolioQuery({ id: data.solicitudFolioId });
   checkers.throwErrorIfDataIsFalsy(solicitudFolio, 'solicitudes-folios', data.solicitudFolioId);
@@ -34,8 +35,13 @@ const createSolicitudFolioAlumno = (
     throw boom.conflict('Alumno validation status is not valid');
   }
 
-  const result = await createAlumnoFolioQuery(data);
+  const totalAlumnos = await countSolicitudFolioAlumnosQuery({
+    solicitudFolioId: data.solicitudFolioId,
+  }, { isDeleting: false });
 
+  const consecutivo = totalAlumnos + 1;
+
+  const result = await createAlumnoFolioQuery({ ...data, consecutivo });
   const include = [
     {
       association: 'alumno',

@@ -13,6 +13,11 @@ const SolicitudFolioAlumnoSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
+  consecutivo: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    field: 'consecutivo',
+  },
   alumnoId: {
     allowNull: false,
     type: DataTypes.INTEGER,
