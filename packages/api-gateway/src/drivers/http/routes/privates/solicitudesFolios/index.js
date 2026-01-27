@@ -49,6 +49,16 @@ async function trayectoriaRouter(fastify, opts, next) {
     solicitudesFoliosAdapter.updateObservaciones,
   );
 
+  // Firma Certificado Digital
+  await fastify.post(
+    '/firmaCertificado',
+    {
+      schema: solicitudSchemas.firmaCertificadoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesFoliosAdapter.firmaCertificado,
+  );
+
   // Solicitud Folio Alumno
   await fastify.get(
     '/solicitudesFoliosAlumnos/:solicitudFolioAlumnoId',
