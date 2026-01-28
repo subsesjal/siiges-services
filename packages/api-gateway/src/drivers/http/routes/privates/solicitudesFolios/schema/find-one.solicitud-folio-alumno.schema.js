@@ -22,11 +22,9 @@ const findOneAlumnoSchema = {
           properties: {
             id: { type: 'integer' },
 
-            // campos propios de solicitud_folio_alumno
             ...solicitudFolioAlumno,
             ...responseProperties,
 
-            // datos derivados / de negocio
             tipoSolicitudFolio: {
               type: 'string',
               description: 'Tipo de solicitud de folio',
@@ -34,6 +32,16 @@ const findOneAlumnoSchema = {
             tipoDocumento: {
               type: 'string',
               description: 'Tipo de documento (certificado, titulo, etc)',
+            },
+
+            folioDocumentoAlumno: {
+              type: 'object',
+              properties: {
+                folioDocumento: {
+                  type: 'string',
+                  description: 'Folio compuesto del documento (libro + foja o equivalente)',
+                },
+              },
             },
 
             alumno: {
