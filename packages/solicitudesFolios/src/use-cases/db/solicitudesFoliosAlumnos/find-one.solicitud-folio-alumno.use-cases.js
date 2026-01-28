@@ -3,6 +3,10 @@ const { checkers } = require('@siiges-services/shared');
 const findOneSolicitudFolioAlumno = (findOneSolicitudFolioAlumnoQuery) => async ({ id }) => {
   const include = [
     {
+      association: 'folioDocumentoAlumno',
+      attributes: ['folioDocumento'],
+    },
+    {
       association: 'alumno',
       include: [
         {
@@ -47,10 +51,18 @@ const findOneSolicitudFolioAlumno = (findOneSolicitudFolioAlumnoQuery) => async 
     },
   ];
 
-  const alumno = await findOneSolicitudFolioAlumnoQuery({ id }, { include });
-  checkers.throwErrorIfDataIsFalsy(alumno, 'solicitudes-folios-alumnos', id);
+  const solicitud = await findOneSolicitudFolioAlumnoQuery(
+    { id },
+    { include },
+  );
 
-  return alumno;
+  checkers.throwErrorIfDataIsFalsy(
+    solicitud,
+    'solicitudes-folios-alumnos',
+    id,
+  );
+
+  return solicitud;
 };
 
 module.exports = findOneSolicitudFolioAlumno;
