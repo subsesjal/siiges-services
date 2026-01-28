@@ -5,7 +5,44 @@ const findOneSolicitudFolioAlumno = (findOneSolicitudFolioAlumnoQuery) => async 
     {
       association: 'alumno',
       include: [
-        { association: 'persona' },
+        {
+          association: 'persona',
+          attributes: [
+            'nombre',
+            'apellidoPaterno',
+            'apellidoMaterno',
+            'curp',
+          ],
+        },
+        {
+          association: 'programa',
+          attributes: ['nombre', 'acuerdo_rvoe'],
+          include: [
+            {
+              association: 'nivel',
+              attributes: ['nombre'],
+            },
+            {
+              association: 'plantel',
+              attributes: ['clave_centro_trabajo'],
+              include: [
+                {
+                  association: 'domicilio',
+                  attributes: [
+                    'calle',
+                    'numero_exterior',
+                    'numero_interior',
+                    'colonia',
+                  ],
+                },
+                {
+                  association: 'institucion',
+                  attributes: ['nombre'],
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
   ];
