@@ -36,6 +36,8 @@ module.exports = {
   findOneAsignaturaQuery: findOneQuery(Asignatura),
   findOneAsignaturaAntecedenteEquivalenteQuery: findOneQuery(AsignaturaAntecedenteEquivalente),
   countSolicitudRevEquivQuery: countQuery(SolicitudRevEquiv),
+  updateAsignaturaEquivalenteProgramaQuery: updateAndFindQuery(AsignaturaEquivalentePrograma),
+  findOneAsignaturaEquivalenteProgramaQuery: findOneQuery(AsignaturaEquivalentePrograma),
   findOneAlumnoQuery: findOneQuery(Alumno),
   createAlumnoQuery: createQuery(Alumno),
   findOneCicloEscolarQuery: findOneQuery(CicloEscolar),

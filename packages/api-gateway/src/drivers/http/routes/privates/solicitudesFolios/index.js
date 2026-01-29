@@ -107,7 +107,7 @@ async function trayectoriaRouter(fastify, opts, next) {
   await fastify.post(
     '/:solicitudFolioId/asignacionFolios',
     {
-      schema: solicitudSchemas.assignFoliosAlumnosSchema,
+      // schema: solicitudSchemas.assignFoliosAlumnosSchema,
       onRequest: [fastify.authenticate],
     },
     solicitudesFoliosAdapter.asignacionFolioAlumno,
