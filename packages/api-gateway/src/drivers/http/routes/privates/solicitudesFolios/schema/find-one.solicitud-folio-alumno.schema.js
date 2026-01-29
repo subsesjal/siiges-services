@@ -1,6 +1,6 @@
 const { solicitudFolioAlumno } = require('./properties/solicitudFolioAlumno');
 const { responseProperties } = require('./properties/responseProperties');
-// const { alumno } = require('../../alumnos/schema/properties/alumno');
+const { alumno } = require('../../alumnos/schema/properties/alumno');
 const { persona } = require('../../usuarios/schema/properties/persona');
 
 const findOneAlumnoSchema = {
@@ -21,10 +21,8 @@ const findOneAlumnoSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-
             ...solicitudFolioAlumno,
             ...responseProperties,
-
             tipoSolicitudFolio: {
               type: 'string',
               description: 'Tipo de solicitud de folio',
@@ -39,16 +37,15 @@ const findOneAlumnoSchema = {
               properties: {
                 folioDocumento: {
                   type: 'string',
-                  description: 'Folio compuesto del documento (libro + foja o equivalente)',
+                  description: 'Folio compuesto del documento',
                 },
               },
             },
-
             alumno: {
               type: 'object',
               properties: {
-                matricula: { type: 'string' },
-
+                ...alumno,
+                ...responseProperties,
                 persona: {
                   type: 'object',
                   properties: {
