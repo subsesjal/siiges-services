@@ -2,7 +2,7 @@ const axios = require('axios');
 const { config } = require('../../../../config/environment');
 
 const makeRequest = async (url, method = 'GET', data = null) => {
-  const apiUrl = config.apiBaseUrl + url;
+  const apiUrl = config.urlTitulacion + url;
 
   const options = {
     method,
