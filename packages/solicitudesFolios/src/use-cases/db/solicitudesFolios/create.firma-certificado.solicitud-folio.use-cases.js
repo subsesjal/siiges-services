@@ -4,6 +4,11 @@ const { config } = require('../../../../config/environment');
 
 const SERVICIO_FIRMA_CERTIFICADO = 'firma_certificado';
 
+const TIPO_DOCUMENTO_CATALOGO = {
+  certificado: 'D001',
+  certificadoElectronico: 'D001',
+};
+
 const getBasicAuthHeader = () => {
   const { clientId, clientSecret } = config.firmaElectronica;
   const credentials = `${clientId}:${clientSecret}`;
@@ -98,10 +103,19 @@ const createFirmaCertificado = (
     throw new Error('El campo pkcs7 es requerido');
   }
 
+  const tipoDocumento = objetoPorFirmar?.tipoDocumento || 'certificado';
+  const claveDocumentoCatalogo = TIPO_DOCUMENTO_CATALOGO[tipoDocumento];
+
+  if (!claveDocumentoCatalogo) {
+    throw new Error(`Tipo de documento no soportado: ${tipoDocumento}`);
+  }
+
+  Logger.info(`[firma-certificado] Tipo documento: ${tipoDocumento} -> Clave catálogo: ${claveDocumentoCatalogo}`);
+
   const catalogo = await findOneCatalogoFirmaElectronicaQuery({
-    claveDocumento: folioInterno,
+    claveDocumento: claveDocumentoCatalogo,
   });
-  checkers.throwErrorIfDataIsFalsy(catalogo, 'catalogo-firma-electronica', folioInterno);
+  checkers.throwErrorIfDataIsFalsy(catalogo, 'catalogo-firma-electronica', claveDocumentoCatalogo);
 
   Logger.info('[firma-certificado] Guardando documento antes de firmar');
   let documentoFirmado = await createDocumentoFirmadoQuery({
@@ -134,7 +148,10 @@ const createFirmaCertificado = (
           },
         );
 
-        return documentoFirmado;
+        return {
+          folioInterno: documentoFirmado.folioInterno,
+          estatusFirmado: documentoFirmado.estatusFirmado,
+        };
       }
 
       const tokenData = {
@@ -168,7 +185,10 @@ const createFirmaCertificado = (
         },
       );
 
-      return documentoFirmado;
+      return {
+        folioInterno: documentoFirmado.folioInterno,
+        estatusFirmado: documentoFirmado.estatusFirmado,
+      };
     }
   }
 
@@ -194,7 +214,10 @@ const createFirmaCertificado = (
       },
     );
 
-    return documentoFirmado;
+    return {
+      folioInterno: documentoFirmado.folioInterno,
+      estatusFirmado: documentoFirmado.estatusFirmado,
+    };
   }
 
   if (!firmaResponse.success) {
@@ -208,7 +231,10 @@ const createFirmaCertificado = (
       },
     );
 
-    return documentoFirmado;
+    return {
+      folioInterno: documentoFirmado.folioInterno,
+      estatusFirmado: documentoFirmado.estatusFirmado,
+    };
   }
 
   if (!firmaResponse.data || !firmaResponse.data.identificadorunico) {
@@ -222,7 +248,10 @@ const createFirmaCertificado = (
       },
     );
 
-    return documentoFirmado;
+    return {
+      folioInterno: documentoFirmado.folioInterno,
+      estatusFirmado: documentoFirmado.estatusFirmado,
+    };
   }
 
   documentoFirmado = await updateDocumentoFirmadoQuery(
@@ -248,7 +277,10 @@ const createFirmaCertificado = (
 
   Logger.info(`[firma-certificado] Documento firmado exitosamente: ${documentoFirmado.id}`);
 
-  return documentoFirmado;
+  return {
+    folioInterno: documentoFirmado.folioInterno,
+    estatusFirmado: documentoFirmado.estatusFirmado,
+  };
 };
 
 module.exports = createFirmaCertificado;

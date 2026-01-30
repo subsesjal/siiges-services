@@ -19,6 +19,11 @@ const reportFolioDocumentoAlumno = (
     certificado: 2,
   };
 
+  const TIPO_DOCUMENTO_NOMBRE = {
+    titulo: 'Título',
+    certificado: 'Certificado',
+  };
+
   const include = [
     {
       association: 'alumno',
@@ -80,6 +85,7 @@ const reportFolioDocumentoAlumno = (
 
   const mapped = solicitudes.map((item) => ({
     id: item.id,
+    Solicitud_Folio_Alumno_Id: item?.solicitudFolioAlumno?.id,
     CURP: item?.alumno?.persona?.curp,
     Nombre: item.alumno?.persona?.nombre,
     Apellido_Paterno: item.alumno?.persona?.apellidoPaterno,
@@ -103,6 +109,7 @@ const reportFolioDocumentoAlumno = (
     Libro: item?.libro?.nombre,
     RVOE: item?.alumno?.programa?.acuerdoRvoe,
     Tipo_Certificado: item?.solicitudFolioAlumno?.solicitudFolio?.tipoSolicitudFolio?.descripcion,
+    Tipo_Documento: TIPO_DOCUMENTO_NOMBRE[query.tipoDocumento] || query.tipoDocumento,
     Fecha_Examen_Profesional: formatearFecha(item?.solicitudFolioAlumno?.fechaExamenProfesional),
     Cumplio_Servicio_Social: item?.solicitudFolioAlumno?.cumplioServicioSocial ? 'Si' : 'No',
     Fundamento_Legal_Servicio_Social: item?.solicitudFolioAlumno?.fundamentoServicioSocial?.nombre,
