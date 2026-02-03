@@ -72,21 +72,8 @@ const createFirmaCertificado = (
   createDocumentoFirmadoQuery,
   updateDocumentoFirmadoQuery,
 ) => async (data, { folioInterno }) => {
-  const { pkcs7, objetoPorFirmar } = data;
+  const { pkcs7, objetoPorFirmar, tipoDocumento } = data;
 
-  if (!pkcs7) {
-    throw new Error('El campo pkcs7 es requerido');
-  }
-
-  if (!objetoPorFirmar) {
-    throw new Error('El campo objetoPorFirmar es requerido');
-  }
-
-  if (!objetoPorFirmar.tipoDocumento) {
-    throw new Error('El campo tipoDocumento es requerido en objetoPorFirmar');
-  }
-
-  const { tipoDocumento } = objetoPorFirmar;
   const claveDocumentoCatalogo = TIPO_DOCUMENTO_CATALOGO[tipoDocumento];
 
   if (!claveDocumentoCatalogo) {
