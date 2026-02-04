@@ -1,11 +1,11 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-async function createFirmaCertificado(req, reply) {
+async function createFirmaDocumento(req, reply) {
   try {
     const { folioInterno } = req.query;
 
-    Logger.info('[solicitudes]: Creating firma certificado');
+    Logger.info('[solicitudes]: Creating firma documento');
 
     const { body } = req;
     const data = {
@@ -15,7 +15,7 @@ async function createFirmaCertificado(req, reply) {
       folioInterno,
     };
 
-    const certificado = await this.solicitudFolioServices.createFirmaCertificado(
+    const documento = await this.solicitudFolioServices.createFirmaDocumento(
       data,
       { folioInterno },
     );
@@ -23,10 +23,10 @@ async function createFirmaCertificado(req, reply) {
     return reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: certificado });
+      .send({ data: documento });
   } catch (error) {
     return errorHandler(error, reply);
   }
 }
 
-module.exports = { createFirmaCertificado };
+module.exports = { createFirmaDocumento };

@@ -64,7 +64,7 @@ const isTokenExpired = (tokenExterno) => {
   return now >= fechaExpiracion;
 };
 
-const createFirmaCertificado = (
+const createFirmaDocumento = (
   findOneCatalogoFirmaElectronicaQuery,
   findOneTokenExternoQuery,
   createTokenExternoQuery,
@@ -185,4 +185,4 @@ const createFirmaCertificado = (
   };
 };
 
-module.exports = createFirmaCertificado;
+module.exports = createFirmaDocumento;
