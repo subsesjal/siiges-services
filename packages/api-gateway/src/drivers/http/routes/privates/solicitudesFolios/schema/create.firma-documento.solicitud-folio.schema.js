@@ -1,7 +1,7 @@
 const { firma } = require('./properties/firma');
 const { responseProperties } = require('./properties/responseProperties');
 
-const createFirmaCertificadoSchema = {
+const createFirmaDocumentoSchema = {
   tags: ['Solicitudes Folios'],
   description: 'Firma electrónicamente un documento usando el servicio del Gobierno de Jalisco',
   querystring: {
@@ -37,4 +37,4 @@ const createFirmaCertificadoSchema = {
   },
 };
 
-module.exports = { createFirmaCertificadoSchema };
+module.exports = { createFirmaDocumentoSchema };

@@ -6,7 +6,7 @@ const createSolicitudFolio = require('./create.solicitud-folio.use-cases');
 const findOneSolicitudFolio = require('./find-one.solicitud-folio.use-cases');
 const findAllSolicitudesFolios = require('./find-all.solicitudes-folios.use-cases');
 const updateSolicitudFolio = require('./update.solicitud-folio.use-cases');
-const createFirmaCertificado = require('./create.firma-certificado.solicitud-folio.use-cases');
+const createFirmaDocumento = require('./create.firma-documento.solicitud-folio.use-cases');
 
 module.exports = {
   createSolicitudFolio: createSolicitudFolio(
@@ -23,7 +23,7 @@ module.exports = {
   findOneSolicitudFolio: findOneSolicitudFolio(
     solicitudesFolios.findOneSolicitudFolioQuery,
   ),
-  createFirmaCertificado: createFirmaCertificado(
+  createFirmaDocumento: createFirmaDocumento(
     solicitudesFolios.findOneCatalogoFirmaElectronicaQuery,
     solicitudesFolios.findOneTokenExternoQuery,
     solicitudesFolios.createTokenExternoQuery,
