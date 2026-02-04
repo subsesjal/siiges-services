@@ -90,7 +90,7 @@ $institucionNombre = $institucion["nombre"] ?? "NO REGISTRADA";
 
 $primerAlumno = $solicitudFoliosAlumnos[0] ?? null;
 $folioDocAlumno = $primerAlumno['folioDocumentoAlumno'] ?? [];
-$libro = $folioDocAlumno['libro']['nombre'] 
+$libro = $folioDocAlumno['libro']['nombre']
   ?? ($folioDocAlumno[0]['libro']['nombre'] ?? 'N/A');
 
 $claveCT = $plantel["claveCentroTrabajo"] ?? "N/A";
@@ -161,7 +161,7 @@ foreach ($solicitudFoliosAlumnos as $alumno) {
   $folioDocumentoAlumno = $alumno['folioDocumentoAlumno'] ?? [];
   $foja = $folioDocumentoAlumno['foja']['nombre'] ?? '';
   $folioTitulo = $folioDocumentoAlumno['folioDocumento'] ?? '';
-  $fechaRegistro = $alumno['fechaExpedicion'] ?? '';
+  $fechaRegistro = $alumno['fechaRegistro'] ?? '';
 
   $pdf->RowBlancoLandscape([
     safe_iconv(mb_strtoupper($apellidoPaterno)),

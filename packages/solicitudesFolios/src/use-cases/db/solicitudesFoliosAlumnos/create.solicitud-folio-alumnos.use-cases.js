@@ -13,6 +13,12 @@ const createSolicitudFolioAlumno = (
   findOneSolicitudFolioAlumnoQuery,
 ) => async (data) => {
   const solicitudFolio = await findOneSolicitudFolioQuery({ id: data.solicitudFolioId });
+
+  const fechaRegistro = solicitudFolio.createdAt;
+
+  const fechaExpedicion = new Date(solicitudFolio.createdAt);
+  fechaExpedicion.setDate(fechaExpedicion.getDate() + 5);
+
   checkers.throwErrorIfDataIsFalsy(solicitudFolio, 'solicitudes-folios', data.solicitudFolioId);
 
   const alumnoInclude = [
@@ -34,7 +40,7 @@ const createSolicitudFolioAlumno = (
     throw boom.conflict('Alumno validation status is not valid');
   }
 
-  const result = await createAlumnoFolioQuery(data);
+  const result = await createAlumnoFolioQuery({ ...data, fechaRegistro, fechaExpedicion });
 
   const include = [
     {
