@@ -31,6 +31,8 @@ module.exports = {
   deleteSolicitudFolioAlumno: deleteSolicitudFolioAlumno(
     solicitudesFoliosAlumnos.findOneSolicitudFolioAlumnoQuery,
     solicitudesFoliosAlumnos.deleteSolicitudFolioAlumnoQuery,
+    solicitudesFoliosAlumnos.updateSolicitudFolioAlumnoQuery,
+    solicitudesFoliosAlumnos.findAllSolicitudFolioAlumnosQuery,
   ),
   assignFoliosAlumnos: assignFoliosAlumnos(
     solicitudesFolios.findOneSolicitudFolioQuery,
