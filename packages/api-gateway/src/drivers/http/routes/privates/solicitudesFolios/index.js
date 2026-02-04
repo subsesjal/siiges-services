@@ -50,12 +50,12 @@ async function trayectoriaRouter(fastify, opts, next) {
   );
 
   await fastify.post(
-    '/firmaCertificado',
+    '/firmaDocumento',
     {
-      schema: solicitudSchemas.createFirmaCertificadoSchema,
+      schema: solicitudSchemas.createFirmaDocumentoSchema,
       onRequest: [fastify.authenticate],
     },
-    solicitudesFoliosAdapter.createFirmaCertificado,
+    solicitudesFoliosAdapter.createFirmaDocumento,
   );
 
   // Solicitud Folio Alumno

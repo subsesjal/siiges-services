@@ -14,7 +14,7 @@ const { asignacionFolioAlumno } = require('./assign.handlers.folios-alumnos.adap
 const { envioTitulacion } = require('./send.handlers.titulacion-folios.adapters');
 const { reportFolioDocumentoAlumno } = require('./report.handlers.folio-documento-alumno.adapters');
 const { reportFolioDocumentoAlumnoCSV } = require('./report.handlers.folio-documento-alumno-csv.adapters');
-const { createFirmaCertificado } = require('./create.firma-certificado.solicitud-folio.adapters');
+const { createFirmaDocumento } = require('./create.firma-documento.solicitud-folio.adapters');
 
 module.exports = {
   createSolicitudFolio,
@@ -31,5 +31,5 @@ module.exports = {
   envioTitulacion,
   reportFolioDocumentoAlumno,
   reportFolioDocumentoAlumnoCSV,
-  createFirmaCertificado,
+  createFirmaDocumento,
 };
