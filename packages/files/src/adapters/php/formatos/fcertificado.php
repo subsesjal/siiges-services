@@ -91,7 +91,7 @@ $institucionNombre = $institucion["nombre"] ?? "NO REGISTRADA";
 
 $primerAlumno = $solicitudFoliosAlumnos[0] ?? null;
 $folioDocAlumno = $primerAlumno['folioDocumentoAlumno'] ?? [];
-$libro = $folioDocAlumno['libro']['nombre'] 
+$libro = $folioDocAlumno['libro']['nombre']
   ?? ($folioDocAlumno[0]['libro']['nombre'] ?? 'N/A');
 
 $claveCT = $plantel["claveCentroTrabajo"] ?? "N/A";
@@ -100,12 +100,12 @@ $folioPago = $solicitud["folioPago"] ?? "N/A";
 $pdf->RowBlanco([
   safe_iconv("FECHA DE ENVÍO DE LA SOLICITUD"),
   safe_iconv($fechaEnvio),
-  safe_iconv("INSTITUCIONES DE EDUCACIÓN SUPERIOR"),
+  safe_iconv("INSTITUCIÓN DE EDUCACIÓN SUPERIOR"),
   safe_iconv(mb_strtoupper($institucionNombre))
 ]);
 
 $pdf->RowBlanco([
-  safe_iconv("TIPO DE CERTIFICADO"),
+  safe_iconv("TIPO DE DOCUMENTO"),
   safe_iconv(mb_strtoupper($tipoCertificado)),
   safe_iconv("LIBRO"),
   safe_iconv($libro)
@@ -162,8 +162,8 @@ foreach ($solicitudFoliosAlumnos as $alumno) {
   $nombre = $persona['nombre'] ?? '';
 
   $fechaTerminacion = $alumno['fechaTerminacion'] ?? '';
-  $fechaElaboracion = $alumno['fechaElaboracion'] ?? '';
-  $fechaRegistro = $alumno['fechaExpedicion'] ?? '';
+  $fechaExpedicion = $alumno['fechaExpedicion'] ?? '';
+  $fechaRegistro = $alumno['fechaRegistro'] ?? '';
 
   $folioDocumentoAlumno = $alumno['folioDocumentoAlumno'] ?? [];
   $foja = $folioDocumentoAlumno['foja']['nombre'] ?? '';
@@ -174,7 +174,7 @@ foreach ($solicitudFoliosAlumnos as $alumno) {
     safe_iconv(mb_strtoupper($apellidoMaterno)),
     safe_iconv(mb_strtoupper($nombre)),
     safe_iconv($fechaTerminacion ? date("d/m/Y", strtotime($fechaTerminacion)) : ''),
-    safe_iconv($fechaElaboracion ? date("d-m-Y", strtotime($fechaElaboracion)) : ''),
+    safe_iconv($fechaExpedicion ? date("d-m-Y", strtotime($fechaExpedicion)) : ''),
     safe_iconv($foja),
     safe_iconv($folioCertificado),
     safe_iconv($fechaRegistro ? date("d-m-Y", strtotime($fechaRegistro)) : '')
