@@ -11,7 +11,7 @@ const deleteSolicitudFolioAlumno = (
 
   const { solicitudFolioId } = alumno;
 
-  await deleteSolicitudFolioAlumnoQuery({ id });
+  const alumnoEliminado = await deleteSolicitudFolioAlumnoQuery({ id });
 
   const alumnos = await findAllSolicitudFolioAlumnosQuery(
     { solicitudFolioId },
@@ -25,7 +25,7 @@ const deleteSolicitudFolioAlumno = (
     )),
   );
 
-  return true;
+  return alumnoEliminado;
 };
 
 module.exports = deleteSolicitudFolioAlumno;
