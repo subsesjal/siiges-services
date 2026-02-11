@@ -47,5 +47,6 @@ module.exports = {
   ),
   reportFolioDocumentoAlumno: reportFolioDocumentoAlumno(
     solicitudesFoliosAlumnos.reportFolioDocumentoAlumnoQuery,
+    solicitudesFoliosAlumnos.findAllDocumentosFirmadoQuery,
   ),
 };

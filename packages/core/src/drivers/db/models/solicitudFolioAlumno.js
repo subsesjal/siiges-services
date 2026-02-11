@@ -69,10 +69,10 @@ const SolicitudFolioAlumnoSchema = {
     type: DataTypes.DATE,
     field: 'fecha_terminacion',
   },
-  fechaElaboracion: {
+  fechaRegistro: {
     allowNull: true,
     type: DataTypes.DATE,
-    field: 'fecha_elaboracion',
+    field: 'fecha_registro',
   },
   folioActa: {
     allowNull: true,
