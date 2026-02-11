@@ -6,6 +6,7 @@ module.exports = {
   buildFileCertitulo: buildFileCertitulo(
     certitulosAdapter.findOneFolioDocumentoAlumnoQuery,
     certitulosAdapter.findAllCalificacionesQuery,
+    certitulosAdapter.findOneDocumentoFirmadoQuery,
     GenerarCertificado,
   ),
 };

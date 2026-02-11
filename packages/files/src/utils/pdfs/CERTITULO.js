@@ -271,14 +271,14 @@ async function GenerarCertificado(certificado) {
   const verificacionY = fechaPromedioY + 30;
 
   const datosVerificacion = {
-    identificadorDocumento: certificado?.identificadorDocumento || 'DD-SEC-ADMON-0005',
-    noSecuencia: certificado?.noSecuencia || '012345678',
-    fechaFirmado: certificado?.fechaFirmado || '02/Enero/2026 13:30:00',
-    selloDigital: certificado?.selloDigital || 'MIIEpQIBAAKCAQEA0Z3VS5JJcds7N9S5jZqPHNmNvXbQwZ4efghIJKLmnoPQrStUvWxYz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
-    sitioVerificacion: certificado?.sitioVerificacion || 'https://dev.jalisco.gob.mx/sitiovalidacionfe/#/busqueda',
-    nombreFirmante: certificado?.nombreFirmante || 'Mtra. Fanny Guadalupe Valdivia Márquez',
-    cargoFirmante: certificado?.cargoFirmante || 'Subsecretaria de Educación Superior',
-    firmaElectronica: certificado?.firmaElectronica || 'MIIEpQIBAAKCAQEA0Z3VS5JJcds7N9S5jZqPHNmNvXbQwZ4efghIJKLmnoPQrStUvWxYz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
+    identificadorDocumento: certificado?.identificadorUnico,
+    noSecuencia: certificado?.secuenciaDocumento,
+    fechaFirmado: certificado?.fechaFirmado,
+    selloDigital: certificado?.firmaDigital,
+    sitioVerificacion: certificado?.sitioVerificacion,
+    nombreFirmante: certificado?.nombreFirmante,
+    cargoFirmante: certificado?.cargoFirmante,
+    firmaElectronica: certificado?.firmaElectronica,
   };
 
   const leftColumnX = blockX;
