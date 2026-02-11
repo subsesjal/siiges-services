@@ -13,6 +13,7 @@ function formatearFecha(fechaString) {
 
 const reportFolioDocumentoAlumno = (
   reportFolioDocumentoAlumnoQuery,
+  findAllDocumentosFirmadosQuery,
 ) => async (query = {}) => {
   const TIPO_DOCUMENTO = {
     titulo: 1,
@@ -27,23 +28,27 @@ const reportFolioDocumentoAlumno = (
   const include = [
     {
       association: 'alumno',
+      required: false,
       include: [
-        { association: 'persona' },
+        { association: 'persona', required: false },
         {
           association: 'validacion',
+          required: false,
           include: [
-            { association: 'nivel' },
-            { association: 'estado' },
+            { association: 'nivel', required: false },
+            { association: 'estado', required: false },
           ],
         },
         {
           association: 'programa',
-          include: [{ association: 'nivel' }],
+          required: false,
+          include: [{ association: 'nivel', required: false }],
         },
       ],
     },
     {
       association: 'libro',
+      required: true,
       where: {
         nombre: {
           [Op.eq]: query.libro,
@@ -55,6 +60,7 @@ const reportFolioDocumentoAlumno = (
     },
     {
       association: 'foja',
+      required: true,
       where: {
         nombre: {
           [Op.between]: [query.fojaInicio, query.fojaFin],
@@ -63,13 +69,16 @@ const reportFolioDocumentoAlumno = (
     },
     {
       association: 'solicitudFolioAlumno',
+      required: false,
       include: [
         {
           association: 'fundamentoServicioSocial',
+          required: false,
         },
         {
           association: 'solicitudFolio',
-          include: [{ association: 'tipoSolicitudFolio' }],
+          required: false,
+          include: [{ association: 'tipoSolicitudFolio', required: false }],
         },
       ],
     },
@@ -79,41 +88,71 @@ const reportFolioDocumentoAlumno = (
     { tipoDocumentoId: TIPO_DOCUMENTO[query.tipoDocumento] },
     {
       include,
-      strict: true,
+      strict: false,
     },
   );
 
-  const mapped = solicitudes.map((item) => ({
-    id: item.id,
-    Solicitud_Folio_Alumno_Id: item?.solicitudFolioAlumno?.id,
-    CURP: item?.alumno?.persona?.curp,
-    Nombre: item.alumno?.persona?.nombre,
-    Apellido_Paterno: item.alumno?.persona?.apellidoPaterno,
-    Apellido_Materno: item.alumno?.persona?.apellidoMaterno,
-    Correo_Electronico: item.alumno?.persona?.correoPrimario,
-    Nombre_Carrera: item.alumno?.programa?.nombre,
-    Fecha_Inicio: formatearFecha(item?.solicitudFolioAlumno?.fechaInicio),
-    Fecha_Terminacion: formatearFecha(item?.solicitudFolioAlumno?.fechaTerminacion),
-    Fecha_Elaboracion: formatearFecha(item?.solicitudFolioAlumno?.fechaElaboracion),
-    Fecha_Registro: formatearFecha(item?.createdAt),
-    Institucion_Procedencia: item.alumno?.validacion?.nombreInstitucionEmisora,
-    Nivel_Estudio_Nombre: item.alumno?.programa?.nivel?.descripcion,
-    Estado_Nombre: item.alumno?.validacion?.estado?.nombre,
-    Antecedentes_Fecha_Inicio: formatearFecha(item.alumno?.validacion?.fechaInicioAntecedente),
-    Antecedentes_Fecha_Terminacion: formatearFecha(item.alumno?.validacion?.fechaFinAntecedente),
-    Numero_Cedula: item.alumno?.validacion?.cedulaProfesional,
-    Fecha_Expedicion: formatearFecha(item?.solicitudFolioAlumno?.fechaExpedicion),
-    Folio_Institucion: '',
-    Folio_Documento: item?.folioDocumento,
-    Foja: item?.foja?.nombre,
-    Libro: item?.libro?.nombre,
-    RVOE: item?.alumno?.programa?.acuerdoRvoe,
-    Tipo_Certificado: item?.solicitudFolioAlumno?.solicitudFolio?.tipoSolicitudFolio?.descripcion,
-    Tipo_Documento: TIPO_DOCUMENTO_NOMBRE[query.tipoDocumento] || query.tipoDocumento,
-    Fecha_Examen_Profesional: formatearFecha(item?.solicitudFolioAlumno?.fechaExamenProfesional),
-    Cumplio_Servicio_Social: item?.solicitudFolioAlumno?.cumplioServicioSocial ? 'Si' : 'No',
-    Fundamento_Legal_Servicio_Social: item?.solicitudFolioAlumno?.fundamentoServicioSocial?.nombre,
-  }));
+  const foliosDocumentos = solicitudes
+    .map((item) => item.folioDocumento)
+    .filter(Boolean);
+
+  const documentosFirmadosMap = {};
+
+  if (foliosDocumentos.length > 0) {
+    const resultadoFirmados = await findAllDocumentosFirmadosQuery({
+      folioInterno: {
+        [Op.in]: foliosDocumentos,
+      },
+    });
+
+    const documentosFirmados = Array.isArray(resultadoFirmados)
+      ? resultadoFirmados
+      : [];
+
+    documentosFirmados.forEach((doc) => {
+      documentosFirmadosMap[doc.folioInterno] = doc.estatusFirmado;
+    });
+  }
+
+  const mapped = solicitudes.map((item) => {
+    const estatusFirmado = item.folioDocumento
+      ? documentosFirmadosMap[item.folioDocumento] || null
+      : null;
+
+    return {
+      id: item.id,
+      Solicitud_Folio_Alumno_Id: item?.solicitudFolioAlumno?.id,
+      CURP: item?.alumno?.persona?.curp,
+      Nombre: item.alumno?.persona?.nombre,
+      Apellido_Paterno: item.alumno?.persona?.apellidoPaterno,
+      Apellido_Materno: item.alumno?.persona?.apellidoMaterno,
+      Correo_Electronico: item.alumno?.persona?.correoPrimario,
+      Nombre_Carrera: item.alumno?.programa?.nombre,
+      Fecha_Inicio: formatearFecha(item?.solicitudFolioAlumno?.fechaInicio),
+      Fecha_Terminacion: formatearFecha(item?.solicitudFolioAlumno?.fechaTerminacion),
+      Fecha_Elaboracion: formatearFecha(item?.solicitudFolioAlumno?.fechaElaboracion),
+      Fecha_Registro: formatearFecha(item?.solicitudFolioAlumno?.fechaRegistro),
+      Institucion_Procedencia: item.alumno?.validacion?.nombreInstitucionEmisora,
+      Nivel_Estudio_Nombre: item.alumno?.programa?.nivel?.descripcion,
+      Estado_Nombre: item.alumno?.validacion?.estado?.nombre,
+      Antecedentes_Fecha_Inicio: formatearFecha(item.alumno?.validacion?.fechaInicioAntecedente),
+      Antecedentes_Fecha_Terminacion: formatearFecha(item.alumno?.validacion?.fechaFinAntecedente),
+      Numero_Cedula: item.alumno?.validacion?.cedulaProfesional,
+      Fecha_Expedicion: formatearFecha(item?.solicitudFolioAlumno?.fechaExpedicion),
+      Folio_Institucion: '',
+      Folio_Documento: item?.folioDocumento,
+      Foja: item?.foja?.nombre,
+      Libro: item?.libro?.nombre,
+      RVOE: item?.alumno?.programa?.acuerdoRvoe,
+      Tipo_Certificado: item?.solicitudFolioAlumno?.solicitudFolio?.tipoSolicitudFolio?.descripcion,
+      Tipo_Documento: TIPO_DOCUMENTO_NOMBRE[query.tipoDocumento] || query.tipoDocumento,
+      Fecha_Examen_Profesional: formatearFecha(item?.solicitudFolioAlumno?.fechaExamenProfesional),
+      Cumplio_Servicio_Social: item?.solicitudFolioAlumno?.cumplioServicioSocial ? 'Si' : 'No',
+      Fundamento_Legal_Servicio_Social: item?.solicitudFolioAlumno
+        ?.fundamentoServicioSocial?.nombre,
+      Estatus_Firmado: estatusFirmado,
+    };
+  });
 
   return mapped;
 };
