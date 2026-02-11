@@ -16,6 +16,7 @@ const formatDateDMY = (value) => {
 const buildFileCertitulo = (
   findOneFolioDocumentoAlumnoQuery,
   findAllCalificacionesQuery,
+  findOneDocumentoFirmadoQuery,
   GenerarCertificado,
 ) => async (folioDocAlumnoId, tipoDocumento) => {
   const include = [
@@ -58,6 +59,13 @@ const buildFileCertitulo = (
     'folioDocumentoAlumno',
     folioDocAlumnoId,
   );
+
+  let documentoFirmado = null;
+  if (folioDocAlumno.folioDocumento) {
+    documentoFirmado = await findOneDocumentoFirmadoQuery({
+      folioInterno: folioDocAlumno.folioDocumento,
+    });
+  }
 
   const includeCalificaciones = [
     { association: 'asignatura' },
@@ -123,6 +131,20 @@ const buildFileCertitulo = (
     ).toFixed(1)
     : 'N/A';
 
+  const parsearDatosFirmante = (datosFirmante) => {
+    if (!datosFirmante) return { nombreFirmante: 'N/A', cargoFirmante: 'N/A' };
+
+    const nombreMatch = datosFirmante.match(/O=([^,]+)/);
+    const cargoMatch = datosFirmante.match(/OU=([^,]+)/);
+
+    return {
+      nombreFirmante: nombreMatch ? nombreMatch[1].trim() : 'N/A',
+      cargoFirmante: cargoMatch ? cargoMatch[1].trim() : 'N/A',
+    };
+  };
+
+  const { nombreFirmante, cargoFirmante } = parsearDatosFirmante(documentoFirmado?.datosFirmante);
+
   const certificado = {
     folioControl: folioDocAlumno.folioDocumento,
     nombreAlumno: folioDocAlumno.alumno.persona.nombre,
@@ -146,6 +168,14 @@ const buildFileCertitulo = (
       folioDocAlumno.alumno.programa.plantel.director
       || 'DIRECTOR DEL PLANTEL',
     grados: gradosOrdenados,
+    identificadorUnico: documentoFirmado?.identificadorUnico,
+    secuenciaDocumento: documentoFirmado?.secuenciaDocumento,
+    fechaFirmado: formatDateDMY(documentoFirmado.fechaFirmado),
+    firmaDigital: documentoFirmado?.hashObjetoFirmado,
+    sitioVerificacion: `https://portalvalidacion.jalisco.gob.mx/#/resultado/${documentoFirmado?.uriValidacion}`,
+    nombreFirmante,
+    cargoFirmante,
+    firmaElectronica: documentoFirmado?.firmaDigital,
   };
 
   const file = await GenerarCertificado(certificado, tipoDocumento);
