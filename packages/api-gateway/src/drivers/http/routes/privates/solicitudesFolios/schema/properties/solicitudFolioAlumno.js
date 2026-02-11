@@ -9,7 +9,6 @@ const solicitudFolioAlumno = {
   folioActa: { type: 'string' },
   fechaInicio: { type: 'string', format: 'date-time' },
   fechaTerminacion: { type: 'string', format: 'date-time' },
-  // fechaExpedicion: { type: 'string', format: 'date-time' },
   fechaExamenProfesional: { type: 'string', format: 'date-time' },
 };
 
