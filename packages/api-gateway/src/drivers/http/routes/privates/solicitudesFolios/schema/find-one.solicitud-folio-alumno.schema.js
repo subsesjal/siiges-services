@@ -21,6 +21,7 @@ const findOneAlumnoSchema = {
           type: 'object',
           properties: {
             id: { type: 'integer' },
+            fechaExpedicion: { type: 'string', format: 'date-time' },
             ...solicitudFolioAlumno,
             ...responseProperties,
             alumno: {
