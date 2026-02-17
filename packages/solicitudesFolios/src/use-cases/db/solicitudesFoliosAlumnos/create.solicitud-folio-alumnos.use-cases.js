@@ -15,6 +15,15 @@ const createSolicitudFolioAlumno = (
 ) => async (data) => {
   const solicitudFolio = await findOneSolicitudFolioQuery({ id: data.solicitudFolioId });
   checkers.throwErrorIfDataIsFalsy(solicitudFolio, 'solicitudes-folios', data.solicitudFolioId);
+  const fechaExpedicion = new Date(solicitudFolio.createdAt);
+  fechaExpedicion.setHours(0, 0, 0, 0);
+
+  const dia = fechaExpedicion.getDay();
+  if (dia === 6) fechaExpedicion.setDate(fechaExpedicion.getDate() + 2);
+  if (dia === 0) fechaExpedicion.setDate(fechaExpedicion.getDate() + 1);
+
+  const fechaRegistro = new Date(fechaExpedicion);
+  fechaRegistro.setDate(fechaExpedicion.getDate() + 5);
 
   const alumnoInclude = [
     { association: 'persona' },
@@ -41,7 +50,12 @@ const createSolicitudFolioAlumno = (
 
   const consecutivo = totalAlumnos + 1;
 
-  const result = await createAlumnoFolioQuery({ ...data, consecutivo });
+  const result = await createAlumnoFolioQuery({
+    ...data,
+    consecutivo,
+    fechaRegistro,
+    fechaExpedicion,
+  });
   const include = [
     {
       association: 'alumno',
