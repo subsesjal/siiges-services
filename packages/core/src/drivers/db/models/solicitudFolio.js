@@ -63,6 +63,17 @@ const SolicitudFolioSchema = {
     type: DataTypes.STRING,
     field: 'folio_pago',
   },
+  claveDgp: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    field: 'clave_dgp',
+  },
+  claveCarrera: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    field: 'clave_carrera',
+  },
+
   observaciones: {
     allowNull: true,
     type: DataTypes.TEXT,
