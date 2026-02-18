@@ -17,6 +17,8 @@ const createSolicitudFolioSchema = {
       'programaId',
       'fecha',
       'folioPago',
+      'claveDgp',
+      'claveCarrera',
     ],
   },
   response: {
