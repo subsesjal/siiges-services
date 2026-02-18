@@ -6,6 +6,8 @@ const solicitudFolio = {
   programaId: { type: 'integer' },
   fecha: { type: 'string', format: 'date-time' },
   folioPago: { type: 'string' },
+  claveDgp: { type: 'string' },
+  claveCarrera: { type: 'string' },
   observaciones: { type: 'string' },
 };
 
