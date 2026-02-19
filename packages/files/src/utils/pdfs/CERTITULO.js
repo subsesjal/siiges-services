@@ -112,19 +112,19 @@ async function GenerarCertificado(certificado) {
   doc.setFontSize(8.5);
   doc.setFont('Nutmeg', 'normal');
   doc.text(
-    'Con base en el capítulo 2 artículo 71 de la ley General de Educación Superior, se expide el presente título a:',
+    'Con base en el 16 de la Ley de Educación Superior del Estado de Jalisco, se expide el presente CERTIFICADO a:',
     57,
-    150,
+    130,
   );
 
-  const baseY = 160;
+  const baseY = 135;
   const blockX = 57;
   const blockWidth = 500;
   doc.setFillColor(252, 133, 32);
   doc.rect(blockX, baseY, blockWidth, 14, 'F');
   drawCenteredBlockTitle('Datos del titulado', blockX, blockWidth, baseY + 10);
 
-  const datosY = baseY + 36;
+  const datosY = baseY + 26;
   const colWidths = [160, 160, 160];
   const colX = [blockX, blockX + colWidths[0], blockX + colWidths[0] + colWidths[1]];
 
@@ -138,7 +138,7 @@ async function GenerarCertificado(certificado) {
   centerTextInBox('Primer apellido', colX[1], colWidths[1], datosY + 15, 8);
   centerTextInBox('Segundo apellido', colX[2], colWidths[2], datosY + 15, 8);
 
-  const curpY = datosY + 45;
+  const curpY = datosY + 30;
   const colY2 = curpY;
   const colWidths2 = [250, 250];
   const colX2 = [blockX, blockX + colWidths2[0]];
@@ -169,106 +169,160 @@ async function GenerarCertificado(certificado) {
   centerTextInBox('CURP', colX2[0], colWidths2[0], maxY + 15, 8);
   centerTextInBox('Nombre del programa', colX2[1], colWidths2[1], maxY + 15, 8);
 
-  const institY = maxY + 40;
+  // NUEVA SECCIÓN EN DOS COLUMNAS (ajustadas las proporciones)
+  const dobleColumnaY = maxY + 25;
+
+  // Columna izquierda: Datos de la institución educativa (MÁS PEQUEÑA)
+  const colIzqX = blockX;
+  const colIzqWidth = 200; // Reducido de 240 a 200
+
   doc.setFillColor(252, 133, 32);
-  doc.rect(blockX, institY, blockWidth, 16, 'F');
-  drawCenteredBlockTitle('Datos de la institución educativa', blockX, blockWidth, institY + 12);
+  doc.rect(colIzqX, dobleColumnaY, colIzqWidth, 16, 'F');
+  drawCenteredBlockTitle('Datos de la institución educativa', colIzqX, colIzqWidth, dobleColumnaY + 12);
 
-  const instDatoY = institY + 36;
-  const institWidth = blockWidth;
-  const institX = blockX;
-  centerTextInBox(certificado?.nombrePlantel || '', institX, institWidth, instDatoY, 8, false);
-  drawLine(instDatoY + 4);
-  centerTextInBox('Nombre o denominación', institX, institWidth, instDatoY + 15, 8);
+  const institDatoY = dobleColumnaY + 26;
+  centerTextInBox(certificado?.nombrePlantel || '', colIzqX, colIzqWidth, institDatoY, 8, false);
+  doc.line(colIzqX, institDatoY + 4, colIzqX + colIzqWidth, institDatoY + 4);
+  centerTextInBox('Nombre o denominación', colIzqX, colIzqWidth, institDatoY + 15, 8);
 
-  const expY = instDatoY + 40;
+  // CCT, RVOE, FECHA DEL RVOE (lista vertical con valores alineados a la derecha)
+  let institExtraY = institDatoY + 35;
+  doc.setFont('Nutmeg', 'normal');
+  doc.setFontSize(7);
+
+  doc.text('CCT:', colIzqX, institExtraY);
+  doc.text(certificado?.cct || 'N/A', colIzqX + colIzqWidth, institExtraY, { align: 'right' });
+  institExtraY += 12;
+
+  doc.text('RVOE:', colIzqX, institExtraY);
+  doc.text(certificado?.rvoe || 'N/A', colIzqX + colIzqWidth, institExtraY, { align: 'right' });
+  institExtraY += 12;
+
+  doc.text('FECHA DEL RVOE:', colIzqX, institExtraY);
+  doc.text(certificado?.fechaRvoe || 'N/A', colIzqX + colIzqWidth, institExtraY, { align: 'right' });
+  institExtraY += 12;
+
+  doc.text('CLAVE DE INSTITUCIÓN:', colIzqX, institExtraY);
+  doc.text('14337', colIzqX + colIzqWidth, institExtraY, { align: 'right' });
+  institExtraY += 12;
+
+  doc.text('CLAVE DE CARRERA:', colIzqX, institExtraY);
+  doc.text('21010', colIzqX + colIzqWidth, institExtraY, { align: 'right' });
+
+  // Columna derecha: Datos de expedición (MÁS GRANDE)
+  const colDerX = colIzqX + colIzqWidth + 20;
+  const colDerWidth = 280; // Aumentado de 240 a 280
+
   doc.setFillColor(252, 133, 32);
-  doc.rect(blockX, expY, blockWidth, 16, 'F');
-  drawCenteredBlockTitle('Datos de expedición', blockX, blockWidth, expY + 12);
+  doc.rect(colDerX, dobleColumnaY, colDerWidth, 16, 'F');
+  drawCenteredBlockTitle('Datos de expedición', colDerX, colDerWidth, dobleColumnaY + 12);
 
-  const expDatoY = expY + 32;
-  const colWidthsExp = [250, 250];
-  const colXExp = [blockX, blockX + colWidthsExp[0]];
+  const expDatoY = dobleColumnaY + 26;
 
-  centerTextInBox(certificado?.folioControl || '', colXExp[0], colWidthsExp[0], expDatoY, 8, false);
-  centerTextInBox('Jalisco', colXExp[1], colWidthsExp[1], expDatoY, 8, false);
+  // Dos columnas dentro de Datos de expedición (Folio y Fecha expedición)
+  const colFolioWidth = 140; // Aumentado de 120 a 140
+  const colFechaWidth = 140; // Aumentado de 120 a 140
+  const colFolioX = colDerX;
+  const colFechaX = colDerX + colFolioWidth;
 
-  drawLine(expDatoY + 4);
-  centerTextInBox('Folio', colXExp[0], colWidthsExp[0], expDatoY + 15, 8);
-  centerTextInBox('Entidad federativa', colXExp[1], colWidthsExp[1], expDatoY + 15, 8);
+  // Folio (columna izquierda)
+  centerTextInBox(certificado?.folioControl || '', colFolioX, colFolioWidth, expDatoY, 8, false);
+  doc.line(colFolioX, expDatoY + 4, colFolioX + colFolioWidth, expDatoY + 4);
+  centerTextInBox('Folio', colFolioX, colFolioWidth, expDatoY + 15, 8);
 
-  const fechaY = expDatoY + 44;
-  centerTextInBox(
-    certificado?.fechaInicio || '',
-    colXExp[0],
-    colWidthsExp[0],
-    fechaY,
-    8,
-    false,
-  );
-  centerTextInBox(
-    certificado?.fechaTerminacion || '',
-    colXExp[1],
-    colWidthsExp[1],
-    fechaY,
-    8,
-    false,
-  );
+  // Fecha de expedición (columna derecha)
+  centerTextInBox(certificado?.fechaExpedicion || '', colFechaX, colFechaWidth, expDatoY, 8, false);
+  doc.line(colFechaX, expDatoY + 4, colFechaX + colFechaWidth, expDatoY + 4);
+  centerTextInBox('Fecha de expedición', colFechaX, colFechaWidth, expDatoY + 15, 8);
 
-  drawLine(fechaY + 4);
-  centerTextInBox('Fecha de inicio', colXExp[0], colWidthsExp[0], fechaY + 15, 8);
-  centerTextInBox('Fecha de terminación', colXExp[1], colWidthsExp[1], fechaY + 15, 8);
+  let expExtraY = expDatoY + 35;
 
-  const examenY = fechaY + 44;
-  centerTextInBox(
-    certificado?.fechaExamen || '',
-    colXExp[0],
-    colWidthsExp[0],
-    examenY,
-    8,
-    false,
-  );
-  centerTextInBox(
-    certificado?.fechaExpedicion || '',
-    colXExp[1],
-    colWidthsExp[1],
-    examenY,
-    8,
-    false,
-  );
+  // Columna izquierda interna (Libro, Foja, fechas)
+  const colExpIzqX = colDerX;
+  const colExpIzqWidth = 140; // Aumentado de 120 a 140
 
-  drawLine(examenY + 4);
-  centerTextInBox('Fecha de examen o exención de examen profesional', colXExp[0], colWidthsExp[0], examenY + 15, 8);
-  centerTextInBox('Fecha de expedición', colXExp[1], colWidthsExp[1], examenY + 15, 8);
+  doc.setFont('Nutmeg', 'normal');
+  doc.setFontSize(7);
 
-  const promedioSeccionY = examenY + 44;
+  doc.text('Libro', colExpIzqX, expExtraY);
+  doc.text(certificado?.libro || 'N/A', colExpIzqX + colExpIzqWidth, expExtraY, { align: 'right' });
+  expExtraY += 12;
+
+  doc.text('Foja', colExpIzqX, expExtraY);
+  doc.text(certificado?.foja || 'N/A', colExpIzqX + colExpIzqWidth, expExtraY, { align: 'right' });
+  expExtraY += 12;
+
+  doc.text('Fecha de inicio', colExpIzqX, expExtraY);
+  doc.text(certificado?.fechaInicio || 'N/A', colExpIzqX + colExpIzqWidth, expExtraY, { align: 'right' });
+  expExtraY += 12;
+
+  doc.text('Fecha de terminación', colExpIzqX, expExtraY);
+  doc.text(certificado?.fechaTerminacion || 'N/A', colExpIzqX + colExpIzqWidth, expExtraY, { align: 'right' });
+
+  // Columna derecha interna (Entidad federativa - SIN LÍNEA)
+  const colExpDerX = colDerX + colExpIzqWidth;
+  const colExpDerWidth = 140;
+
+  const expDerY = expDatoY + 32;
+  // Mover "Jalisco" y "Entidad federativa" más a la derecha
+  const offsetDerecha = 10; // Ajusta este valor para mover más o menos
+  centerTextInBox('Jalisco', colExpDerX + offsetDerecha, colExpDerWidth - offsetDerecha, expDerY, 8, false);
+  centerTextInBox('Entidad federativa', colExpDerX + offsetDerecha, colExpDerWidth - offsetDerecha, expDerY + 12, 8);
+
+  // Tercera fila: Promedio General del Certificado y Tipo de Certificado
+  const promedioTipoY = expDerY + 22;
+
+  // Dividir la columna derecha en dos sub-columnas con separación - MÁS A LA DERECHA
+  const subColWidth = (colExpDerWidth - 2) / 2;
+  const subColPromedioX = colExpDerX + offsetDerecha; // Movido a la derecha
+  const subColTipoX = colExpDerX + subColWidth + 2 + offsetDerecha; // Movido a la derecha
+
+  // Promedio (sub-columna izquierda)
   doc.setFillColor(252, 133, 32);
-  doc.rect(blockX, promedioSeccionY, blockWidth, 14, 'F');
+  doc.rect(subColPromedioX, promedioTipoY, subColWidth - 10, 16, 'F');
   doc.setTextColor(0, 0, 0);
   doc.setFont('Nutmeg', 'bold');
-  doc.setFontSize(8);
-  const promedioTitleText = 'Promedio General del Certificado';
-  const promedioTitleWidth = doc.getTextWidth(promedioTitleText);
-  doc.text(promedioTitleText, blockX
-    + (blockWidth - promedioTitleWidth) / 2, promedioSeccionY + 10);
+  doc.setFontSize(5);
+  const promedioText = 'Promedio General del Certificado';
+  const promedioLines = doc.splitTextToSize(promedioText, subColWidth - 14);
+  let promedioTextY = promedioTipoY + 6; // Aumentado de 5 a 6
+  promedioLines.forEach((line) => {
+    const lineWidth = doc.getTextWidth(line);
+    doc.text(line, subColPromedioX + ((subColWidth - 10) - lineWidth) / 2, promedioTextY);
+    promedioTextY += 5; // Aumentado de 4 a 5
+  });
 
-  const promedioDatoY = promedioSeccionY + 28;
+  const promedioValorY = promedioTipoY + 23; // Aumentado de 22 a 23
   doc.setFont('Nutmeg', 'normal');
-  doc.setFontSize(8);
-  const promedioText = `PROMEDIO: ${certificado?.promedioGeneral || 'N/A'}`;
-  const promedioTextWidth = doc.getTextWidth(promedioText);
-  doc.text(promedioText, blockX + (blockWidth - promedioTextWidth) / 2, promedioDatoY);
+  doc.setFontSize(6);
+  const promedioValor = `PROMEDIO: ${certificado?.promedioGeneral || 'N/A'}`;
+  const promedioValorWidth = doc.getTextWidth(promedioValor);
+  doc.text(promedioValor, subColPromedioX
+    + ((subColWidth - 10) - promedioValorWidth) / 2, promedioValorY);
 
-  drawLine(promedioDatoY + 8);
+  // Tipo de Certificado (sub-columna derecha)
+  doc.setFillColor(252, 133, 32);
+  doc.rect(subColTipoX, promedioTipoY, subColWidth - 10, 16, 'F');
+  doc.setFont('Nutmeg', 'bold');
+  doc.setFontSize(6);
+  const tipoText = 'Tipo de Certificado';
+  const tipoLines = doc.splitTextToSize(tipoText, subColWidth - 14);
+  let tipoTextY = promedioTipoY + 6; // Aumentado de 5 a 6
+  tipoLines.forEach((line) => {
+    const lineWidth = doc.getTextWidth(line);
+    doc.text(line, subColTipoX + ((subColWidth - 10) - lineWidth) / 2, tipoTextY);
+    tipoTextY += 5; // Aumentado de 4 a 5
+  });
 
-  const fechaPromedioY = promedioDatoY + 22;
+  const tipoValorY = promedioTipoY + 23; // Aumentado de 22 a 23
   doc.setFont('Nutmeg', 'normal');
-  doc.setFontSize(8);
-  const fechaPromedioText = certificado?.fechaPromedio || 'a 14 de octubre de 2025';
-  const fechaPromedioWidth = doc.getTextWidth(fechaPromedioText);
-  doc.text(fechaPromedioText, blockX + (blockWidth - fechaPromedioWidth) / 2, fechaPromedioY);
+  doc.setFontSize(6);
+  const tipoValor = certificado?.tipoCertificado || 'TOTAL';
+  const tipoValorWidth = doc.getTextWidth(tipoValor);
+  doc.text(tipoValor, subColTipoX + ((subColWidth - 10) - tipoValorWidth) / 2, tipoValorY);
 
-  const verificacionY = fechaPromedioY + 30;
+  // Continuar con el resto del documento
+  const verificacionY = Math.max(institExtraY, promedioValorY) + 20;
 
   const datosVerificacion = {
     identificadorDocumento: certificado?.identificadorUnico,
@@ -399,9 +453,7 @@ async function GenerarCertificado(certificado) {
   doc.setFontSize(6);
 
   doc.text('ASIGNATURAS', xAsignatura + 5, tablaY);
-
   doc.text('PERIODO', xPeriodo + (colPeriodoAncho / 2) - (doc.getTextWidth('PERIODO') / 2), tablaY);
-
   doc.text('NÚM', xNum + (colNumAncho / 2) - (doc.getTextWidth('NÚM') / 2), tablaY);
   doc.text('CALIFICACIÓN LETRA', xLetra + (colLetraAncho / 2) - (doc.getTextWidth('CALIFICACIÓN LETRA') / 2), tablaY);
 
@@ -420,7 +472,6 @@ async function GenerarCertificado(certificado) {
 
   grados.forEach((grado) => {
     const asignaturas = grado.asignaturas || [];
-
     const alturaGradoCompleto = altoFila + (asignaturas.length * altoFila) + 4;
 
     if (yPos + alturaGradoCompleto > height - margenInferior) {
