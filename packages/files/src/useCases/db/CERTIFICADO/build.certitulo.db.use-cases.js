@@ -1,3 +1,4 @@
+const util = require('util');
 const { checkers } = require('@siiges-services/shared');
 
 const formatDateDMY = (value) => {
@@ -22,7 +23,15 @@ const buildFileCertitulo = (
   const include = [
     {
       association: 'solicitudFolioAlumno',
+      include: [
+        {
+          association: 'solicitudFolio',
+          include: [{ association: 'tipoSolicitudFolio' }],
+        },
+      ],
     },
+    { association: 'libro' },
+    { association: 'foja' },
     {
       association: 'alumno',
       include: [
@@ -53,6 +62,8 @@ const buildFileCertitulo = (
     { id: folioDocAlumnoId },
     { include, strict: false },
   );
+
+  console.log(JSON.stringify(folioDocAlumno, null, 2));
 
   checkers.throwErrorIfDataIsFalsy(
     folioDocAlumno,
@@ -162,6 +173,7 @@ const buildFileCertitulo = (
     fechaExpedicion: formatDateDMY(folioDocAlumno?.solicitudFolioAlumno?.fechaExpedicion),
     cct: folioDocAlumno.alumno.programa.plantel.claveCentroTrabajo,
     rvoe: folioDocAlumno.alumno.programa.acuerdoRvoe,
+    fechaRvoe: formatDateDMY(folioDocAlumno.alumno.programa.fechaSurteEfecto),
     totalAsignaturas: calificaciones.length,
     promedioGeneral,
     director:
@@ -172,11 +184,17 @@ const buildFileCertitulo = (
     secuenciaDocumento: documentoFirmado?.secuenciaDocumento,
     fechaFirmado: formatDateDMY(documentoFirmado.fechaFirmado),
     firmaDigital: documentoFirmado?.hashObjetoFirmado,
+    tipoCertificado: folioDocAlumno?.solicitudFolioAlumno
+      ?.solicitudFolio?.tipoSolicitudFolio?.descripcion,
+    libro: folioDocAlumno.libro?.nombre,
+    foja: folioDocAlumno.foja?.nombre,
     sitioVerificacion: `https://portalvalidacion.jalisco.gob.mx/#/resultado/${documentoFirmado?.uriValidacion}`,
     nombreFirmante,
     cargoFirmante,
     firmaElectronica: documentoFirmado?.firmaDigital,
   };
+
+  console.log(util.inspect(certificado, { depth: null, colors: true }));
 
   const file = await GenerarCertificado(certificado, tipoDocumento);
 
