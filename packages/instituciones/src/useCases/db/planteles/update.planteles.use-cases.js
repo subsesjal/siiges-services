@@ -5,6 +5,7 @@ const updatePlantel = (
   updatePlantelQuery,
   updateDomicilioQuery,
   updatePersonaQuery,
+  createDirectorQuery,
 ) => async (
   identifierObj,
   data,
@@ -16,24 +17,43 @@ const updatePlantel = (
     include: [{ association: 'persona' }],
   }];
 
-  const plantel = await findOnePlantelQuery({ id: plantelId, institucionId }, {
-    undefined,
-    include,
-    strict: false,
-  });
+  const plantel = await findOnePlantelQuery(
+    { id: plantelId, institucionId },
+    { include, strict: false },
+  );
 
   checkers.throwErrorIfDataIsFalsy(plantel, 'planteles', plantelId);
 
-  const plantelUpdated = await updatePlantelQuery({ id: plantelId, institucionId }, data);
+  const plantelUpdated = await updatePlantelQuery(
+    { id: plantelId, institucionId },
+    data,
+  );
 
   const { domicilio, director } = data;
+  const directorActual = plantel.directores?.[0];
 
-  if (domicilio && (checkers.IsDate(plantelUpdated)) && plantel.domicilioId) {
-    await updateDomicilioQuery({ id: plantel.domicilioId }, domicilio);
+  if (domicilio && plantelUpdated && plantel.domicilioId) {
+    await updateDomicilioQuery(
+      { id: plantel.domicilioId },
+      domicilio,
+    );
   }
 
-  if (director && (checkers.IsDate(plantelUpdated)) && plantel.directores[0].personaId) {
-    await updatePersonaQuery({ id: plantel.directores[0].personaId }, director.persona);
+  if (director && plantelUpdated) {
+    if (directorActual?.personaId) {
+      await updatePersonaQuery(
+        { id: directorActual.personaId },
+        director.persona,
+      );
+    } else {
+      await createDirectorQuery(
+        {
+          plantelId: plantel.id,
+          ...director,
+        },
+        [{ association: 'persona' }],
+      );
+    }
   }
 
   return plantelUpdated;
