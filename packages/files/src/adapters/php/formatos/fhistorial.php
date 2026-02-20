@@ -126,7 +126,7 @@ $dataDetalleDomicilioInstitucion1 = array(
     "estatus" => safe_text(mb_strtoupper($alumno["situacion"]["nombre"] ?? '')),
     "validaciones" => safe_text(mb_strtoupper($alumno["validacion"]["situacionValidacion"]['nombre'] ?? '')),
   ]
-);
+); 
 
 //set widht for each column (6 columns)
 $pdf->SetWidths(array(29, 89, 29, 29));
