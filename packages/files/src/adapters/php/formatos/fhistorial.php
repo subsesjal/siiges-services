@@ -118,7 +118,6 @@ $pdf->Cell(29, 5, safe_text("MATRÍCULA"), 1, 0, "C", true);
 $pdf->Cell(89, 5, safe_text("NOMBRE DEL ALUMNO"), 1, 0, "C", true); // Ajustado a 89
 $pdf->Cell(29, 5, safe_text("ESTATUS"), 1, 0, "C", true);
 $pdf->Cell(29, 5, safe_text("VALIDACIÓN"), 1, 1, "C", true);
-//$pdf->Ln();
 
 // Tabla de domicilio de la institucion
 $dataDetalleDomicilioInstitucion1 = array(
@@ -126,7 +125,6 @@ $dataDetalleDomicilioInstitucion1 = array(
     "matricula" => safe_text(mb_strtoupper($alumno["matricula"] ?? '')),
     "nombre_alumno" => safe_text(mb_strtoupper(($alumno["persona"]["apellidoPaterno"] ?? '') . " " . ($alumno["persona"]["apellidoMaterno"] ?? '') . " " . ($alumno["persona"]["nombre"] ?? ''))),
     "estatus" => safe_text(mb_strtoupper($alumno["situacion"]["nombre"] ?? '')),
-    // Pintar Validacion
     "validaciones" => safe_text(mb_strtoupper($alumno["validacion"]["situacionValidacion"]['nombre'] ?? '')),
   ]
 );
