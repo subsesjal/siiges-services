@@ -115,9 +115,10 @@ $pdf->Cell(176, 5, safe_text("DATOS DEL ALUMNO"), 1, 1, "C", true);
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->SetFillColor(191, 191, 191);
 $pdf->Cell(29, 5, safe_text("MATRÍCULA"), 1, 0, "C", true);
-$pdf->Cell(118, 5, safe_text("NOMBRE DEL ALUMNO"), 1, 0, "C", true);
+$pdf->Cell(89, 5, safe_text("NOMBRE DEL ALUMNO"), 1, 0, "C", true); // Ajustado a 89
 $pdf->Cell(29, 5, safe_text("ESTATUS"), 1, 0, "C", true);
-$pdf->Ln();
+$pdf->Cell(29, 5, safe_text("VALIDACIÓN"), 1, 1, "C", true);
+//$pdf->Ln();
 
 // Tabla de domicilio de la institucion
 $dataDetalleDomicilioInstitucion1 = array(
@@ -125,11 +126,13 @@ $dataDetalleDomicilioInstitucion1 = array(
     "matricula" => safe_text(mb_strtoupper($alumno["matricula"] ?? '')),
     "nombre_alumno" => safe_text(mb_strtoupper(($alumno["persona"]["apellidoPaterno"] ?? '') . " " . ($alumno["persona"]["apellidoMaterno"] ?? '') . " " . ($alumno["persona"]["nombre"] ?? ''))),
     "estatus" => safe_text(mb_strtoupper($alumno["situacion"]["nombre"] ?? '')),
+    // Pintar Validacion
+    "validaciones" => safe_text(mb_strtoupper($alumno["validacion"]["situacionValidacion"]['nombre'] ?? '')),
   ]
 );
 
 //set widht for each column (6 columns)
-$pdf->SetWidths(array(29, 118, 29));
+$pdf->SetWidths(array(29, 89, 29, 29));
 
 //set line height
 $pdf->SetLineHeight(5);
@@ -141,7 +144,8 @@ foreach ($dataDetalleDomicilioInstitucion1 as $item) {
   $pdf->Row(array(
     $item['matricula'],
     $item['nombre_alumno'],
-    $item['estatus']
+    $item['estatus'],
+    $item['validaciones']
   ));
 }
 
