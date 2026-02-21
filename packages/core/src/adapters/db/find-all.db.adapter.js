@@ -9,8 +9,12 @@ const findAllQuery = (model) => async (identifierObj, dbParams = {}) => {
     isDeleting = false,
     query = undefined,
     order = undefined,
+    limit = undefined,
+    offset = undefined,
   } = dbParams;
   return model.findAll({
+    limit,
+    offset,
     attributes,
     order,
     where: getWhere(identifierObj, isDeleting, query),
