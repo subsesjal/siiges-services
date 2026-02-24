@@ -125,7 +125,7 @@ $dataDetalleDomicilioInstitucion1 = array(
     "matricula" => safe_text(mb_strtoupper($alumno["matricula"] ?? '')),
     "nombre_alumno" => safe_text(mb_strtoupper(($alumno["persona"]["apellidoPaterno"] ?? '') . " " . ($alumno["persona"]["apellidoMaterno"] ?? '') . " " . ($alumno["persona"]["nombre"] ?? ''))),
     "estatus" => safe_text(mb_strtoupper($alumno["situacion"]["nombre"] ?? '')),
-    "validaciones" => safe_text(mb_strtoupper($alumno["validacion"]["situacionValidacion"]['nombre'] ?? '')),
+    "validaciones" => safe_text(mb_strtoupper($alumno["validacion"]["situacionValidacion"]['nombre'] ?? 'Sin Validar')),
   ]
 ); 
 
