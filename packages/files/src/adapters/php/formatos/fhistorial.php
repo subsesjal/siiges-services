@@ -184,6 +184,18 @@ foreach ($calificacionesInput as $calificacion) {
   $calificacionCiclo[$nombreCiclo][] = $calificacion;
 }
 
+uksort($calificacionCiclo, function($a, $b) {
+    $añoA = substr($a, 0, 4);
+    $añoB = substr($b, 0, 4);
+    $periodoA = substr($a, 4);
+    $periodoB = substr($b, 4);
+
+    if ($añoB !== $añoA) {
+        return $añoA <=> $añoB;
+    }
+    return $periodoA <=> $periodoB;
+});
+
 foreach ($calificacionCiclo as $ciclos => $ciclo) {
   if ($pdf->checkNewPage()) {
     $pdf->Ln(20);
