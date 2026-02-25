@@ -182,13 +182,13 @@ foreach ($calificacionesInput as $calificacion) {
 }
 
 uksort($calificacionCiclo, function($a, $b) {
-    $añoA = substr($a, 0, 4);
-    $añoB = substr($b, 0, 4);
+    $yearA = substr($a, 0, 4);
+    $yearB = substr($b, 0, 4);
     $periodoA = substr($a, 4);
     $periodoB = substr($b, 4);
 
-    if ($añoB !== $añoA) {
-        return $añoA <=> $añoB;
+    if ($yearB !== $yearA) {
+        return $yearA <=> $yearB;
     }
     return $periodoA <=> $periodoB;
 });
