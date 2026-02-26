@@ -10,6 +10,12 @@ const buildFileHistorial = (
     { association: 'persona' },
     { association: 'situacion' },
     { association: 'alumnoTipoTramites' },
+    { 
+      association: 'validacion', 
+      include: [
+        { association: 'situacionValidacion' } 
+      ] 
+    },
     {
       association: 'programa',
       include: [
