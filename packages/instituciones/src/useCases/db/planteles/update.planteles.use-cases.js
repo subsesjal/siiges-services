@@ -32,14 +32,14 @@ const updatePlantel = (
   const { domicilio, director } = data;
   const directorActual = plantel.directores?.[0];
 
-  if (domicilio && checkers.isDate(plantelUpdated) && plantel.domicilioId) {
+  if (domicilio && checkers.IsDate(plantelUpdated) && plantel.domicilioId) {
     await updateDomicilioQuery(
       { id: plantel.domicilioId },
       domicilio,
     );
   }
 
-  if (director && checkers.isDate(plantelUpdated)) {
+  if (director && checkers.IsDate(plantelUpdated)) {
     if (directorActual?.personaId) {
       await updatePersonaQuery(
         { id: directorActual.personaId },
