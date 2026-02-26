@@ -82,6 +82,7 @@ module.exports = {
     updatePlantelQuery,
     updateDomicilioQuery,
     updatePersonaQuery,
+    createDirectorQuery,
   ),
   deletePlantel: deletePlantel(deletePlantelQuery),
   createDirectorPlantel: createDirectorPlantel(
