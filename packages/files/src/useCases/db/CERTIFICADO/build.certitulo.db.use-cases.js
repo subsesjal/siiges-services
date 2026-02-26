@@ -214,6 +214,8 @@ const buildFileCertitulo = (
     calificacionMinima: folioDocAlumno.alumno.programa?.calificacionMinima,
     calificacionMaxima: folioDocAlumno.alumno.programa?.calificacionMaxima,
     calificacionAprobatoria: folioDocAlumno.alumno.programa?.calificacionAprobatoria,
+    claveInstitucionDGP: folioDocAlumno?.solicitudFolioAlumno?.solicitudFolio?.claveInstitucionDGP,
+    claveCarreraDGP: folioDocAlumno?.solicitudFolioAlumno?.solicitudFolio?.claveCarreraDGP,
   };
 
   const file = await GenerarCertificado(certificado, tipoDocumento);

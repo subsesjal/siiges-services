@@ -382,11 +382,11 @@ async function GenerarCertificado(certificado) {
   institExtraY += 12;
 
   doc.text('CLAVE DE INSTITUCIÓN:', colIzqX, institExtraY);
-  doc.text('14337', colIzqX + colIzqWidth, institExtraY, { align: 'right' });
+  doc.text(certificado?.claveInstitucionDGP || 'N/A', colIzqX + colIzqWidth, institExtraY, { align: 'right' });
   institExtraY += 12;
 
   doc.text('CLAVE DE CARRERA:', colIzqX, institExtraY);
-  doc.text('21010', colIzqX + colIzqWidth, institExtraY, { align: 'right' });
+  doc.text(certificado?.claveCarreraDGP || 'N/A', colIzqX + colIzqWidth, institExtraY, { align: 'right' });
 
   const colDerX = colIzqX + colIzqWidth + 20;
   const colDerWidth = 280;
