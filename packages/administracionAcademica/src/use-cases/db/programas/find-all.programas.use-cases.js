@@ -15,6 +15,7 @@ const findAllProgramas = (
       {
         query: { fechaSurteEfecto: { [Op.lte]: new Date() } },
         include,
+        subQuery: false,
       },
     );
 
