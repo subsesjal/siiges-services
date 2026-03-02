@@ -14,7 +14,7 @@ const { createInclude, getWhere } = require('../utils');
  * @return {(identifierObj: {any: string|number},
  * dbParams?: {attributes:string[], include:string[], strict:boolean,
  * isDeleting:boolean, query:Object})
- * => Promise<Object|null>} identifierObj  -
+ * => Promise<Object|null>} identifierObj -
  * An asynchronous function that accepts an identifier object and optional
  * database parameters, and returns the result of the database query.
  *
@@ -37,12 +37,14 @@ const findOneQuery = (model) => async (identifierObj, dbParams = {}) => {
     strict = true,
     isDeleting = false,
     query = undefined,
+    subQuery = undefined,
   } = dbParams;
 
   return model.findOne({
     attributes,
     where: getWhere(identifierObj, isDeleting, query),
     include: createInclude(include, strict),
+    subQuery,
   });
 };
 
