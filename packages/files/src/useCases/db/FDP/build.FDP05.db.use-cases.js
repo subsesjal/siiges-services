@@ -9,6 +9,7 @@ const buildFileFDP05 = (
     include: [
       { association: 'programaTurnos' },
       { association: 'trayectoria' },
+      { association: 'modalidad' },
       {
         association: 'plantel',
         include: [{

@@ -65,7 +65,7 @@ $pdf->AliasNbPages();
 $pdf->AddPage("P", "Letter");
 $pdf->SetMargins(20, 20, 20);
 
-$pdf->SetFont("Nutmegb", "", 11);
+$pdf->SetFont("Garetb", "", 11);
 $pdf->Ln(25);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFillColor(115, 199, 209);
@@ -74,15 +74,14 @@ $pdf->Cell(35, 6, "FDA02", 0, 0, "R", true);
 $pdf->Ln(10);
 
 $pdf->SetTextColor(115, 199, 209);
-$pdf->Cell(0, 5, safe_iconv($tituloTipoSolicitud[($solicitud["tipoSolicitudId"] ?? 1) - 1]), 0, 1, "L");
+$pdf->Cell(0, 5, safe_iconv($tituloTipoSolicitud[($solicitud["tipoSolicitudId"] ?? 1) - 1]), 0, 1, "C");
 $pdf->SetTextColor(0, 0, 0);
-$pdf->Ln(5);
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $fechaRaw = $solicitud["fecha"] ?? date("Y-m-d");
 $fechaFormateada = date("d/m/Y", strtotime($fechaRaw));
 $pdf->Cell(0, 5, safe_iconv(mb_strtoupper($fechaFormateada)), 0, 1, "R");
-$pdf->Ln(5);
+$pdf->Ln(2);
 
 $dataPrograma = [
   [
@@ -115,7 +114,7 @@ foreach ($dataPrograma as $item) {
 }
 $pdf->Ln(5);
 
-$pdf->SetFont("Nutmegb", "", 9);
+$pdf->SetFont("Garetb", "", 9);
 $pdf->SetFillColor(255, 161, 61);
 
 $pdf->Cell(64, 5, "NIVEL DE ESTUDIO", 1, 0, "C", true);
@@ -124,7 +123,7 @@ $pdf->Cell(40, 5, "MODALIDAD", 1, 0, "C", true);
 $pdf->Cell(40, 5, "CICLO", 1, 0, "C", true);
 $pdf->Ln();
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
 
 $turnos = $programa["programaTurnos"] ?? ($programa["turnos"] ?? []);
@@ -140,7 +139,7 @@ if (is_array($turnos)) {
   }
 }
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->SetWidths([64, 30, 40, 40]);
 $pdf->SetAligns(["C", "C", "C", "C"]);
 $pdf->RowBlanco([
@@ -152,15 +151,15 @@ $pdf->RowBlanco([
 $pdf->Ln();
 
 $pdf->SetFillColor(255, 161, 61);
-$pdf->SetFont("Nutmegb", "", 9);
+$pdf->SetFont("Garetb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("DOMICILIO DE LA INSTITUCIÓN"), 1, 1, "C", true);
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->SetFillColor(255, 213, 176);
 $pdf->Cell(116, 5, safe_iconv("CALLE Y NÚMERO"), 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv("COLONIA"), 1, 0, "C", true);
 $pdf->Ln();
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
 $pdf->SetWidths([116, 58]);
 $pdf->SetAligns(["C", "C"]);
@@ -178,7 +177,7 @@ $pdf->Ln();
 $municipio = $domicilioPlantel["municipio"];
 $estado = $domicilioPlantel["estado"];
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
 $pdf->SetWidths([58, 58, 58]);
 $pdf->SetAligns(["C", "C", "C"]);
@@ -194,7 +193,7 @@ $pdf->Cell(58, 5, "REDES SOCIALES", 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv("CORREO ELECTRÓNICO"), 1, 0, "C", true);
 $pdf->Ln();
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->SetFillColor(255, 255, 255);
 $pdf->SetWidths([58, 58, 58]);
 $pdf->SetAligns(["C", "C", "C"]);
@@ -206,7 +205,7 @@ $pdf->RowBlanco([
 $pdf->Ln();
 
 $pdf->SetFillColor(255, 161, 61);
-$pdf->SetFont("Nutmegb", "", 9);
+$pdf->SetFont("Garetb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("DATOS DEL SOLICITANTE (PERSONA FÍSICA O REPRESENTANTE LEGAL DE LA PERSONA JURÍDICA)"), 1, 0, "C", true);
 $pdf->Ln();
 
@@ -221,7 +220,7 @@ $pdf->SetWidths([70, 104]);
 $pdf->SetLineHeight(5);
 $pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
 $pdf->SetAligns(["C", "L"]);
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 
 foreach ($dataPersonaSolicitante as $item) {
   $pdf->RowBlanco([
@@ -235,7 +234,7 @@ $pdf->Cell(116, 5, safe_iconv("CALLE Y NÚMERO"), 1, 0, "C", true);
 $pdf->Cell(58, 5, "COLONIA", 1, 0, "C", true);
 $pdf->Ln();
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
 $pdf->SetWidths([116, 58]);
 $pdf->SetAligns(["C", "C"]);
@@ -249,10 +248,10 @@ $rector = $institucion["rector"] ?? [];
 
 if ($rector) {
   $pdf->SetFillColor(255, 161, 61);
-  $pdf->SetFont("Nutmegb", "", 9);
+  $pdf->SetFont("Garetb", "", 9);
   $pdf->Cell(174, 5, safe_iconv("DATOS DEL RECTOR"), 1, 1, "C", true);
   $pdf->SetFillColor(255, 213, 176);
-  $pdf->SetFont("Nutmeg", "", 9);
+  $pdf->SetFont("Garet", "", 9);
 
   $pdf->Cell(58, 5, safe_iconv("NOMBRE (S)"), 1, 0, "C", true);
   $pdf->Cell(58, 5, safe_iconv("APELLIDO PATERNO"), 1, 0, "C", true);
@@ -261,7 +260,7 @@ if ($rector) {
 
   $rectorPersona = $rector["persona"] ?? [];
 
-  $pdf->SetFont("Nutmeg", "", 9);
+  $pdf->SetFont("Garet", "", 9);
   $pdf->SetFillColor(255, 255, 255);
   $pdf->SetWidths([58, 58, 58]);
   $pdf->SetAligns(["C", "C", "C"]);
@@ -272,13 +271,13 @@ if ($rector) {
   ]);
 
   $pdf->SetFillColor(255, 213, 176);
-  $pdf->SetFont("Nutmeg", "", 7);
+  $pdf->SetFont("Garet", "", 7);
   $pdf->Cell(58, 5, safe_iconv("CORREO ELECTRÓNICO INSTITUCIONAL"), 1, 0, "C", true);
   $pdf->Cell(58, 5, safe_iconv("CORREO ELECTRÓNICO PERSONAL"), 1, 0, "C", true);
   $pdf->Cell(58, 5, safe_iconv("NÚMERO DE TELÉFONO CELULAR"), 1, 0, "C", true);
   $pdf->Ln();
 
-  $pdf->SetFont("Nutmeg", "", 9);
+  $pdf->SetFont("Garet", "", 9);
   $pdf->SetFillColor(255, 255, 255);
   $pdf->SetWidths([58, 58, 58]);
   $pdf->SetAligns(["C", "C", "C"]);
@@ -316,11 +315,11 @@ if ($rector) {
     $nivelDescripcion = $niveles[$nivelId] ?? 'SIN ESPECIFICAR';
 
     $pdf->SetFillColor(255, 161, 61);
-    $pdf->SetFont("Nutmegb", "", 9);
+    $pdf->SetFont("Garetb", "", 9);
     $pdf->Cell(174, 5, safe_iconv("FORMACIÓN ACADÉMICA"), 1, 1, "C", true);
 
     $pdf->SetFillColor(255, 213, 176);
-    $pdf->SetFont("Nutmeg", "", 9);
+    $pdf->SetFont("Garet", "", 9);
     $pdf->Cell(87, 5, safe_iconv("GRADO EDUCATIVO"), 1, 0, "C", true);
     $pdf->Cell(87, 5, safe_iconv("NOMBRE DE LOS ESTUDIOS"), 1, 0, "C", true);
     $pdf->Ln();
@@ -337,7 +336,7 @@ if ($rector) {
     $pdf->Cell(174, 5, safe_iconv("NOMBRE DE LA INSTITUCIÓN EDUCATIVA DE PROCEDENCIA"), 1, 0, "C", true);
     $pdf->Ln();
 
-    $pdf->SetFont("Nutmeg", "", 9);
+    $pdf->SetFont("Garet", "", 9);
     $pdf->SetFillColor(255, 255, 255);
     $pdf->SetWidths([174]);
     $pdf->SetAligns(["C"]);
@@ -354,10 +353,10 @@ $directores = $plantel["directores"] ?? [];
 
 if (!empty($directores)) {
   $pdf->SetFillColor(255, 161, 61);
-  $pdf->SetFont("Nutmegb", "", 9);
+  $pdf->SetFont("Garetb", "", 9);
   $pdf->Cell(174, 5, safe_iconv("DATOS DEL DIRECTOR"), 1, 1, "C", true);
   $pdf->SetFillColor(255, 213, 176);
-  $pdf->SetFont("Nutmeg", "", 9);
+  $pdf->SetFont("Garet", "", 9);
   $pdf->Cell(58, 5, safe_iconv("NOMBRE (S)"), 1, 0, "C", true);
   $pdf->Cell(58, 5, safe_iconv("APELLIDO PATERNO"), 1, 0, "C", true);
   $pdf->Cell(58, 5, safe_iconv("APELLIDO MATERNO"), 1, 0, "C", true);
@@ -376,13 +375,13 @@ if (!empty($directores)) {
   ]);
 
   $pdf->SetFillColor(255, 213, 176);
-  $pdf->SetFont("Nutmeg", "", 7);
+  $pdf->SetFont("Garet", "", 7);
   $pdf->Cell(58, 5, safe_iconv("CORREO ELECTRÓNICO INSTITUCIONAL"), 1, 0, "C", true);
   $pdf->Cell(58, 5, safe_iconv("CORREO ELECTRÓNICO PERSONAL"), 1, 0, "C", true);
   $pdf->Cell(58, 5, safe_iconv("NÚMERO DE TELÉFONO CELULAR"), 1, 0, "C", true);
   $pdf->Ln();
 
-  $pdf->SetFont("Nutmeg", "", 9);
+  $pdf->SetFont("Garet", "", 9);
   $pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
   $pdf->SetWidths([58, 58, 58]);
   $pdf->SetAligns(["C", "C", "C"]);
@@ -411,11 +410,11 @@ if (!empty($directores)) {
     $nivelDescripcion = $niveles[$nivelId] ?? 'SIN ESPECIFICAR';
 
     $pdf->SetFillColor(255, 161, 61);
-    $pdf->SetFont("Nutmegb", "", 9);
+    $pdf->SetFont("Garetb", "", 9);
     $pdf->Cell(174, 5, safe_iconv("FORMACIÓN ACADÉMICA"), 1, 1, "C", true);
 
     $pdf->SetFillColor(255, 213, 176);
-    $pdf->SetFont("Nutmeg", "", 9);
+    $pdf->SetFont("Garet", "", 9);
     $pdf->Cell(87, 5, safe_iconv("GRADO EDUCATIVO"), 1, 0, "C", true);
     $pdf->Cell(87, 5, safe_iconv("NOMBRE DE LOS ESTUDIOS"), 1, 0, "C", true);
     $pdf->Ln();
@@ -432,7 +431,7 @@ if (!empty($directores)) {
     $pdf->Cell(174, 5, safe_iconv("NOMBRE DE LA INSTITUCIÓN EDUCATIVA DE PROCEDENCIA"), 1, 0, "C", true);
     $pdf->Ln();
 
-    $pdf->SetFont("Nutmeg", "", 9);
+    $pdf->SetFont("Garet", "", 9);
     $pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
     $pdf->SetWidths([174]);
     $pdf->SetAligns(["C"]);
@@ -446,11 +445,11 @@ if (!empty($directores)) {
 }
 
 $pdf->SetFillColor(255, 161, 61);
-$pdf->SetFont("Nutmegb", "", 7);
+$pdf->SetFont("Garetb", "", 7);
 $pdf->Cell(174, 5, safe_iconv("PERSONAL DESIGNADO PARA REALIZAR DILIGENCIAS PARA EL DESARROLLO Y SEGUIMIENTO DE LA SOLICITUD DE RVOE"), 1, 0, "C", true);
 $pdf->Ln();
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->SetWidths([70, 104]);
 $pdf->SetLineHeight(5);
 $pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
@@ -503,7 +502,7 @@ if (!empty($nombresDiligencias)) {
 $pdf->Ln();
 
 $pdf->SetFillColor(255, 161, 61);
-$pdf->SetFont("Nutmegb", "", 9);
+$pdf->SetFont("Garetb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("NOMBRES PROPUESTOS PARA LA INSTITUCIÓN EDUCATIVA"), 1, 0, "C", true);
 $pdf->Ln();
 
@@ -517,7 +516,7 @@ $pdf->SetWidths([70, 104]);
 $pdf->SetLineHeight(5);
 $pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
 $pdf->SetAligns(["C", "L"]);
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 
 foreach ($nombresPropuestos as $item) {
   $pdf->RowBlanco([
@@ -527,9 +526,9 @@ foreach ($nombresPropuestos as $item) {
 }
 
 $pdf->Ln(25);
-$pdf->SetFont("Nutmeg", "", 11);
+$pdf->SetFont("Garet", "", 11);
 $pdf->Cell(0, 5, safe_iconv("BAJO PROTESTA DE DECIR VERDAD"), 0, 1, "C");
-$pdf->SetFont("Nutmegb", "", 11);
+$pdf->SetFont("Garetb", "", 11);
 $pdf->Cell(0, 5, safe_iconv(mb_strtoupper(trim(
   ($usuario["persona"]['nombre'] ?? '') . ' ' .
   ($usuario["persona"]['apellidoPaterno'] ?? '') . ' ' .

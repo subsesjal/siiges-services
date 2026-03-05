@@ -32,7 +32,7 @@ $pdf->AliasNbPages();
 $pdf->AddPage("P", "Letter");
 $pdf->SetMargins(20, 20, 20);
 
-$pdf->SetFont("Nutmegb", "", 11);
+$pdf->SetFont("Garetb", "", 11);
 $pdf->Ln(25);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFillColor(115, 199, 209);
@@ -46,12 +46,12 @@ $tituloInicial = $tipoSolicitudId === 1
 
 $pdf->SetFillColor(255, 255, 255);
 $pdf->SetTextColor(115, 199, 209);
-$pdf->SetFont("Nutmegb", "", 11);
+$pdf->SetFont("Garetb", "", 11);
 $pdf->MultiCell(0, 5, safe_iconv($tituloInicial), 0, 1, "L");
 $pdf->SetTextColor(0, 0, 0);
 $pdf->Ln(5);
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->Ln(5);
 
 $usuarioNombre = trim(
@@ -132,15 +132,15 @@ $pdf->MultiCell(0, 5, safe_iconv(
 ), 0, "J");
 
 $pdf->Ln(25);
-$pdf->SetFont("Nutmeg", "", 11);
+$pdf->SetFont("Garet", "", 11);
 $pdf->Cell(0, 5, safe_iconv(
   "ATENTAMENTE"
 ), 0, 1, "C");
 
 $pdf->Ln(25);
-$pdf->SetFont("Nutmeg", "", 11);
+$pdf->SetFont("Garet", "", 11);
 $pdf->Cell(0, 5, safe_iconv("MTRA. ADRIANA CIBRIÁN SUÁREZ"), 0, 1, "C");
-$pdf->SetFont("Nutmegb", "", 11);
+$pdf->SetFont("Garetb", "", 11);
 $pdf->Cell(0, 5, safe_iconv("DIRECTOR GENERAL DE INCORPORACIÓN Y SERVICIOS ESCOLARES"), 0, 1, "C");
 
 $pdf->Output("I", "FDA02.pdf");

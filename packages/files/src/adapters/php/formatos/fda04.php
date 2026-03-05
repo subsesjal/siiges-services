@@ -51,7 +51,7 @@ $pdf->AliasNbPages();
 $pdf->AddPage("P", "Letter");
 $pdf->SetMargins(20, 20, 20);
 
-$pdf->SetFont("Nutmegb", "", 11);
+$pdf->SetFont("Garetb", "", 11);
 $pdf->Ln(25);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFillColor(115, 199, 209);
@@ -60,15 +60,14 @@ $pdf->Cell(35, 6, "FDA04", 0, 0, "R", true);
 $pdf->Ln(10);
 
 $pdf->SetTextColor(115, 199, 209);
-$pdf->Cell(0, 5, safe_iconv("DESCRIPCIÓN DE LAS INSTALACIONES"), 0, 1, "L");
+$pdf->Cell(0, 5, safe_iconv("DESCRIPCIÓN DE LAS INSTALACIONES"), 0, 1, "C");
 $pdf->SetTextColor(0, 0, 0);
-$pdf->Ln(5);
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $fechaRaw = $solicitud["fecha"] ?? date("Y-m-d");
 $fechaFormateada = date("d/m/Y", strtotime($fechaRaw));
 $pdf->Cell(0, 5, safe_iconv(mb_strtoupper($fechaFormateada)), 0, 1, "R");
-$pdf->Ln(5);
+$pdf->Ln(2);
 
 $calle = $domicilioPlantel['calle'] ?? '';
 $telefono = ("  Tel - " . $plantel['telefono1'] . ", " . $plantel['telefono2'] . ", " . $plantel['telefono3']) ?? '';
@@ -93,9 +92,9 @@ $pdf->SetWidths([80, 95]);
 $pdf->SetLineHeight(5);
 $pdf->SetFillColor(255, 161, 61);
 $pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
-$pdf->SetFont("Nutmegb", "", 9);
+$pdf->SetFont("Garetb", "", 9);
 $pdf->Cell(175, 5, safe_iconv("1. DATOS DEL PLAN DE ESTUDIOS"), 1, 1, "C", true);
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 foreach ($dataPrograma as $item) {
     $pdf->Row([
         safe_iconv(mb_strtoupper($item['name'])),
@@ -106,15 +105,15 @@ $pdf->Ln(5);
 
 // Domicilio de la institución
 $pdf->SetFillColor(255, 161, 61);
-$pdf->SetFont("Nutmegb", "", 9);
+$pdf->SetFont("Garetb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("2. DOMICILIO DE LA INSTITUCIÓN"), 1, 1, "C", true);
 $pdf->SetFillColor(255, 213, 176);
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->Cell(116, 5, safe_iconv("CALLE Y NÚMERO"), 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv("COLONIA"), 1, 0, "C", true);
 $pdf->Ln();
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
 $pdf->SetWidths([116, 58]);
 $pdf->SetAligns(["C", "C"]);
@@ -133,7 +132,7 @@ $pdf->Ln();
 $municipio = $domicilioPlantel["municipio"];
 $estado = $domicilioPlantel["estado"];
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
 $pdf->SetWidths([58, 58, 58]);
 $pdf->SetAligns(["C", "C", "C"]);
@@ -150,7 +149,7 @@ $pdf->Cell(58, 5, "REDES SOCIALES", 1, 0, "C", true);
 $pdf->Cell(58, 5, safe_iconv("CORREO ELECTRÓNICO"), 1, 0, "C", true);
 $pdf->Ln();
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->SetColors([[255, 255, 255], [255, 255, 255]]);
 $pdf->SetWidths([58, 58, 58]);
 $pdf->SetAligns(["C", "C", "C"]);
@@ -163,10 +162,10 @@ $pdf->Ln();
 
 // Seccion de Descripcion del plantel (3)
 $pdf->SetFillColor(255, 161, 61);
-$pdf->SetFont("Nutmegb", "", 9);
+$pdf->SetFont("Garetb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("3. DESCRIPCIÓN DEL PLANTEL"), 1, 1, "C", true);
 $pdf->SetFillColor(255, 213, 176);
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->Cell(174, 5, safe_iconv("CARACTERÍSTICAS DEL INMUEBLE"), 1, 0, "C", true);
 
 $esConstruido = $tipoInmueble === 1 ? "X" : "";
@@ -174,7 +173,7 @@ $esAdaptado   = $tipoInmueble === 2 ? "X" : "";
 $esMixto      = $tipoInmueble === 3 ? "X" : "";
 
 // Segunda fila del encabezado
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->SetWidths([140, 34]);
 $pdf->SetAligns(["C", "C"]);
 $pdf->Ln();
@@ -223,7 +222,7 @@ $niveles = [
   ['id' => 4,  'label' => 'CUARTO PISO'],
 ];
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->Ln();
 $pdf->SetFillColor(255, 213, 176);
 $pdf->Cell(174, 5, safe_iconv("EDIFICIOS Y/O NIVELES"), 1, 0, "C", true);
@@ -261,7 +260,7 @@ $pdf->Cell(174, 5, safe_iconv("SISTEMA DE SEGURIDAD"), 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->SetFillColor(255, 255, 255);
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->Cell(140, 5, safe_iconv("DESCRIPCIÓN"), 1, 0, "C", true);
 $pdf->Cell(34, 5, safe_iconv("No."), 1, 0, "C", true);
 $pdf->Ln();
@@ -279,10 +278,10 @@ $pdf->Ln();
 
 // Seccion de Higiene del plantel (4)
 $pdf->SetFillColor(255, 161, 61);
-$pdf->SetFont("Nutmegb", "", 9);
+$pdf->SetFont("Garetb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("4. HIGIENE DEL PLANTEL"), 1, 1, "C", true);
 $pdf->SetFillColor(255, 213, 176);
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->Cell(80, 5, safe_iconv("CONCEPTO"), 1, 0, "C", true);
 $pdf->Cell(94, 5, safe_iconv("DESCRIPCIÓN"), 1, 0, "C", true);
 $pdf->Ln();
@@ -335,15 +334,15 @@ $pdf->Ln(5);
 
 // Seccion de Infraestructura del programa (5)
 $pdf->SetFillColor(255, 161, 61);
-$pdf->SetFont("Nutmegb", "", 9);
+$pdf->SetFont("Garetb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("5. INFRAESTRUCTURA PARA EL PROGRAMA"), 1, 1, "C", true);
 $pdf->SetFillColor(255, 213, 176);
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->Cell(174, 5, safe_iconv("ESPACIOS Y EQUIPAMIENTOS"), 1, 0, "C", true);
 $pdf->Ln();
 
 $widths = [29, 29, 29, 29, 29, 29];
-$pdf->SetFont("Nutmeg", "", 8);
+$pdf->SetFont("Garet", "", 8);
 
 $texts = [
     "INSTALACIONES",
@@ -403,13 +402,13 @@ mostrarInfraestructuraPorTipo($pdf, $infraestructuras, "BIBLIOTECA FÍSICA Y VIR
 $pdf->Ln(5);
 
 // Seccion de Relacion de Instituciones (6)
-$pdf->SetFont("Nutmegb", "", 9);
+$pdf->SetFont("Garetb", "", 9);
 $pdf->SetFillColor(255, 161, 61);
 $pdf->ExpandHeaderRow($pdf, [
     "6. RELACIÓN DE INSTITUCIONES DE SALUD ALEDAÑAS, SERVICIOS DE\nAMBULANCIA U OTROS SERVICIOS DE EMERGENCIA A LOS CUALES RECURRIRÁ\nLA INSTITUCIÓN EN CASO DE ALGUNA CONTINGENCIA",
 ], [174]);
 $pdf->SetFillColor(255, 213, 176);
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $widths = [87, 87];
 
 $texts = [
@@ -453,9 +452,9 @@ if ($pdf->checkNewPage()) {
 
 // Firma final
 $pdf->Ln(25);
-$pdf->SetFont("Nutmeg", "", 11);
+$pdf->SetFont("Garet", "", 11);
 $pdf->Cell(0, 5, safe_iconv("BAJO PROTESTA DE DECIR VERDAD"), 0, 1, "C");
-$pdf->SetFont("Nutmegb", "", 11);
+$pdf->SetFont("Garetb", "", 11);
 $pdf->Cell(0, 5, safe_iconv(mb_strtoupper(trim(
     ($usuario["persona"]['nombre'] ?? '') . ' ' .
     ($usuario["persona"]['apellidoPaterno'] ?? '') . ' ' .

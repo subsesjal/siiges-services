@@ -43,7 +43,7 @@ $pdf->AliasNbPages();
 $pdf->AddPage("P", "Letter");
 $pdf->SetMargins(20, 20, 20);
 
-$pdf->SetFont("Nutmegb", "", 11);
+$pdf->SetFont("Garetb", "", 11);
 $pdf->Ln(25);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFillColor(115, 199, 209);
@@ -52,19 +52,18 @@ $pdf->Cell(35, 6, "FDA03", 0, 0, "R", true);
 $pdf->Ln(10);
 
 $pdf->SetTextColor(115, 199, 209);
-$pdf->Cell(0, 5, safe_iconv("SOLICITUD PARA LA AUTORIZACIÓN DE NOMBRE DE LA INSTITUCIÓN"), 0, 1, "L");
+$pdf->Cell(0, 5, safe_iconv("SOLICITUD PARA LA AUTORIZACIÓN DE NOMBRE DE LA INSTITUCIÓN"), 0, 1, "C");
 $pdf->SetTextColor(0, 0, 0);
-$pdf->Ln(5);
 
 $pdf->SetTextColor(0, 0, 0);
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $fechaRaw = $solicitud["fecha"] ?? date("Y-m-d");
 $fechaFormateada = date("d/m/Y", strtotime($fechaRaw));
 $pdf->Cell(0, 5, safe_iconv(mb_strtoupper($fechaFormateada)), 0, 1, "R");
-$pdf->Ln(5);
+$pdf->Ln(2);
 
 $pdf->SetFillColor(255, 161, 61);
-$pdf->SetFont("Nutmegb", "", 9);
+$pdf->SetFont("Garetb", "", 9);
 $pdf->Cell(174, 5, safe_iconv("DATOS DEL PROPIETARIO O REPRESENTANTE LEGAL"), 1, 0, "C", true);
 $pdf->Ln();
 
@@ -78,7 +77,7 @@ $pdf->SetWidths([70, 104]);
 $pdf->SetLineHeight(5);
 $pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 foreach ($dataPersonaSolicitante as $item) {
   $pdf->Row([
     safe_iconv($item[0]),
@@ -93,7 +92,7 @@ if (is_array($ratificacion) && isset($ratificacion[0])) {
 
   if ($esNombreAutorizado) {
     $pdf->SetFillColor(255, 161, 61);
-    $pdf->SetFont("Nutmegb", "", 9);
+    $pdf->SetFont("Garetb", "", 9);
     $pdf->Cell(174, 5, safe_iconv("EN CASO DE TENER NOMBRE AUTORIZADO"), 1, 0, "C", true);
     $pdf->Ln();
 
@@ -109,7 +108,7 @@ if (is_array($ratificacion) && isset($ratificacion[0])) {
     $pdf->SetWidths([70, 104]);
     $pdf->SetLineHeight(5);
     $pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
-    $pdf->SetFont("Nutmeg", "", 9);
+    $pdf->SetFont("Garet", "", 9);
 
     foreach ($nombresAutorizados as $item) {
       $pdf->RowBlanco([
@@ -120,7 +119,7 @@ if (is_array($ratificacion) && isset($ratificacion[0])) {
     $pdf->Ln();
   } else {
     $pdf->SetFillColor(255, 161, 61);
-    $pdf->SetFont("Nutmegb", "", 9);
+    $pdf->SetFont("Garetb", "", 9);
     $pdf->Cell(174, 5, safe_iconv("PROPUESTAS DE NOMBRE"), 1, 0, "C", true);
     $pdf->Ln();
 
@@ -133,7 +132,7 @@ if (is_array($ratificacion) && isset($ratificacion[0])) {
     $pdf->SetWidths([70, 104]);
     $pdf->SetLineHeight(5);
     $pdf->SetColors([[255, 213, 176], [255, 255, 255]]);
-    $pdf->SetFont("Nutmeg", "", 9);
+    $pdf->SetFont("Garet", "", 9);
 
     foreach ($propuestas as $item) {
       $pdf->RowBlanco([
@@ -146,9 +145,9 @@ if (is_array($ratificacion) && isset($ratificacion[0])) {
 }
 
 $pdf->Ln(25);
-$pdf->SetFont("Nutmeg", "", 11);
+$pdf->SetFont("Garet", "", 11);
 $pdf->Cell(0, 5, safe_iconv("BAJO PROTESTA DE DECIR VERDAD"), 0, 1, "C");
-$pdf->SetFont("Nutmegb", "", 11);
+$pdf->SetFont("Garetb", "", 11);
 $pdf->Cell(0, 5, safe_iconv(mb_strtoupper(trim(
   ($usuario["persona"]['nombre'] ?? '') . ' ' .
   ($usuario["persona"]['apellidoPaterno'] ?? '') . ' ' .

@@ -10,6 +10,7 @@ const buildFileFDP06 = (
     include: [
       { association: 'ciclo' },
       { association: 'nivel' },
+      { association: 'modalidad' },
       {
         association: 'docentes',
         include: [
