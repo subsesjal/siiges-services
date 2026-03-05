@@ -27,9 +27,9 @@ class PDF_FOLIO_CER extends PDF
     $this->Image(realpath(__DIR__ . "/../images/jalisco.png"), 230, 10, 25);
 
     // Texto institucional centrado
-    $this->AddFont('Nutmeg', '', 'Nutmeg-Regular.php');
-    $this->AddFont('Nutmegb', '', 'Nutmeg-Bold.php');
-    $this->SetFont("Nutmegb", "", 9);
+    $this->AddFont('Garet', '', 'Garet-Regular.php');
+    $this->AddFont('Garetb', '', 'Garet-Bold.php');
+    $this->SetFont("Garetb", "", 9);
     $this->SetY(15);
     $this->Cell(0, 5, safe_iconv("SECRETARÍA DE INNOVACIÓN, CIENCIA Y TECNOLOGÍA"), 0, 1, "C");
     $this->Cell(0, 5, safe_iconv("SUBSECRETARÍA DE EDUCACIÓN SUPERIOR"), 0, 1, "C");
@@ -71,13 +71,13 @@ $pdf->AliasNbPages();
 $pdf->AddPage("L", "Letter");
 $pdf->SetMargins(15, 15, 15);
 
-$pdf->SetFont("Nutmegb", "", 11);
+$pdf->SetFont("Garetb", "", 11);
 $pdf->SetTextColor(115, 199, 209);
 $pdf->Cell(0, 8, safe_iconv("FOLIOS OTORGADOS PARA CERTIFICADOS"), 0, 1, "C");
 $pdf->Ln(5);
 $pdf->SetTextColor(0, 0, 0);
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->SetLineHeight(5);
 $pdf->SetWidths([55, 55, 55, 55]);
 $pdf->SetAligns(["C", "C", "C", "C"]);
@@ -127,12 +127,12 @@ $pdf->RowBlanco([
 
 $pdf->Ln(10);
 
-$pdf->SetFont("Nutmegb", "", 9);
+$pdf->SetFont("Garetb", "", 9);
 $pdf->SetFillColor(255, 161, 61);
 $pdf->Cell(250, 6, safe_iconv("LISTADO DE ALUMNOS"), 1, 1, "C", true);
 $pdf->Ln(0);
 
-$pdf->SetFont("Nutmeg", "", 8);
+$pdf->SetFont("Garet", "", 8);
 $pdf->SetFillColor(255, 213, 176);
 $widths = [35, 35, 50, 30, 30, 20, 25, 25];
 $texts = [
@@ -147,7 +147,7 @@ $texts = [
 ];
 $pdf->ExpandHeaderRow($pdf, $texts, $widths);
 
-$pdf->SetFont("Nutmeg", "", 8);
+$pdf->SetFont("Garet", "", 8);
 $pdf->SetFillColor(255, 255, 255);
 
 $pdf->SetLineHeight(6);
@@ -188,14 +188,14 @@ if ($pdf->checkNewPageLandscape()) {
   $pdf->Ln(0);
 }
 
-$pdf->SetFont("Nutmegb", "", 9);
+$pdf->SetFont("Garetb", "", 9);
 $pdf->Cell(130, 5, safe_iconv("NOMBRE Y FIRMA DEL DIRECTOR DE LA INSTITUCIÓN"), 0, 0, "L");
 $pdf->Cell(100, 5, safe_iconv("NOMBRE Y FIRMA DE RECIBIDO CONTROL ESCOLAR"), 0, 1, "L");
 $pdf->Ln(10);
 
 $pdf->SetDrawColor(180, 180, 180);
 $pdf->SetTextColor(180, 180, 180);
-$pdf->SetFont("Nutmegb", "", 8);
+$pdf->SetFont("Garetb", "", 8);
 
 $y = $pdf->GetY();
 $selloSize = 40;

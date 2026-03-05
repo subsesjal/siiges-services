@@ -32,7 +32,7 @@ $pdf->AliasNbPages();
 $pdf->AddPage("P", "Letter");
 $pdf->SetMargins(20, 20, 20);
 
-$pdf->SetFont("Nutmegb", "", 11);
+$pdf->SetFont("Garetb", "", 11);
 $pdf->Ln(25);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFillColor(115, 199, 209);
@@ -41,15 +41,14 @@ $pdf->Cell(35, 6, "FDA06", 0, 0, "R", true);
 $pdf->Ln(10);
 
 $pdf->SetTextColor(115, 199, 209);
-$pdf->Cell(0, 5, safe_iconv("OBLIGACIONES ADQUIRIDAS AL OBTENER UN RVOE"), 0, 1, "L");
+$pdf->Cell(0, 5, safe_iconv("OBLIGACIONES ADQUIRIDAS AL OBTENER UN RVOE"), 0, 1, "C");
 $pdf->SetTextColor(0, 0, 0);
-$pdf->Ln(5);
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $fechaRaw = $solicitud["fecha"] ?? date("Y-m-d");
 $fechaFormateada = date("d/m/Y", strtotime($fechaRaw));
 $pdf->Cell(0, 5, safe_iconv(mb_strtoupper($fechaFormateada)), 0, 1, "R");
-$pdf->Ln(5);
+$pdf->Ln(2);
 
 if ("Masculino" == $usuario["persona"]["sexo"]) {
     $prefijo = "El";
@@ -212,9 +211,9 @@ $pdf->MultiCell(0, 5, safe_iconv(
 ), 0, "J");
 
 $pdf->Ln(25);
-$pdf->SetFont("Nutmeg", "", 11);
+$pdf->SetFont("Garet", "", 11);
 $pdf->Cell(0, 5, safe_iconv("BAJO PROTESTA DE DECIR VERDAD"), 0, 1, "C");
-$pdf->SetFont("Nutmegb", "", 11);
+$pdf->SetFont("Garetb", "", 11);
 $pdf->Cell(0, 5, safe_iconv(mb_strtoupper(trim(
     ($usuario["persona"]['nombre'] ?? '') . ' ' .
     ($usuario["persona"]['apellidoPaterno'] ?? '') . ' ' .
