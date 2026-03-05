@@ -7,16 +7,15 @@ class PDF extends PDF_MC_Table
   function Header()
   {
     $this->Image(realpath(__DIR__ ."/../images/encabezado.png"), 60, 15, 75);
-    $this->AddFont('Nutmeg', '', 'Nutmeg-Regular.php');
-    $this->AddFont('Nutmegb', '', 'Nutmeg-Bold.php');
-    $this->AddFont('Nutmegbk', '', 'Nutmeg-Book.php');
+    $this->AddFont('Garet', '', 'Garet-Regular.php');
+    $this->AddFont('Garetb', '', 'Garet-Bold.php');
   }
 
   // Pie de p�gina
   function Footer()
   {
     $this->SetY(-30);
-    $this->SetFont("Nutmegbk", "", 7);
+    $this->SetFont("Garet", "", 7);
     $this->SetTextColor(0, 0, 0);
     $this->Ln(5);
     $this->Image(realpath(__DIR__ . "/../images/direccion_nueva_sicyt.png"), 60, 250, 60);
