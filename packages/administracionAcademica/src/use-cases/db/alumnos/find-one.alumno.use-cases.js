@@ -15,6 +15,15 @@ const findOneAlumnos = (findOneAlumnosQuery) => async (identifierObj) => {
         ],
       }],
     },
+    {
+      association: 'alumnoGrupos',
+      include: [{
+        association: 'grupo',
+        include: [{
+          association: 'grado'
+        }]
+      }]
+    },
   ];
 
   const alumno = await findOneAlumnosQuery(identifierObj, {
