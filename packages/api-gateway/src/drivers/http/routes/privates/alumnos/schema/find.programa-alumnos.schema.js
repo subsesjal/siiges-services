@@ -4,6 +4,9 @@ const { situacion } = require('./properties/situacion');
 const { equivalencia } = require('./properties/equivalencia');
 const { validacion } = require('./properties/validacion');
 const { situacionesValidacion } = require('./properties/situacionValidacion');
+const { alumnoGrupo } = require('./properties/alumnoGrupo');
+const { grupo } = require('../../../privates/grupos/schema/properties/grupo');
+const { grado } = require('../../../privates/grupos/schema/properties/grado');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findProgramaAlumnosSchema = {
@@ -70,6 +73,33 @@ const findProgramaAlumnosSchema = {
                     },
                   },
                 },
+                alumnoGrupos: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...alumnoGrupo,
+                      ...responseProperties,
+                      grupo: {
+                        type: 'object',
+                        properties: {
+                          id: { type: 'integer' },
+                          ...grupo,
+                          ...responseProperties,
+                          grado: {
+                            type: 'object',
+                            properties: {
+                              id: { type: 'integer' },
+                              ...grado,
+                              ...responseProperties,
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
               },
             },
           },
@@ -119,7 +149,33 @@ const findProgramaAlumnosSchema = {
                   },
                 },
               },
-            },
+              alumnoGrupos: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: { type: 'integer' },
+                    ...alumnoGrupo,
+                    ...responseProperties,
+                    grupo: {
+                      type: 'object',
+                      properties: {
+                        id: { type: 'integer' },
+                        ...grupo,
+                        ...responseProperties,
+                        grado: {
+                          type: 'object',
+                          properties: {
+                            id: { type: 'integer' },
+                            ...grado,
+                            ...responseProperties,
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },            },
           },
         },
       },

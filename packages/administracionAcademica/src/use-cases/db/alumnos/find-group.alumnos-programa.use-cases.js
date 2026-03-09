@@ -18,7 +18,15 @@ const findGroupAlumnosPrograma = (
       include: [
         { association: 'situacionValidacion' },
       ],
-
+    },
+    {
+      association: 'alumnoGrupos',
+      include: [{
+        association: 'grupo',
+        include: [{
+          association: 'grado'
+        }]
+      }]
     },
   ];
 
