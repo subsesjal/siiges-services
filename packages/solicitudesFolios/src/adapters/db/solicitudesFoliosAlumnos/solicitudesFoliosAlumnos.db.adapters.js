@@ -5,6 +5,7 @@ const {
   SolicitudFolioAlumno,
   Alumno,
   FolioDocumentoAlumno,
+  DocumentoFirmado,
 } = models;
 
 const {
@@ -28,5 +29,6 @@ module.exports = {
   findAllSolicitudFolioAlumnosQuery: findAllQuery(SolicitudFolioAlumno),
   deleteSolicitudFolioAlumnoQuery: deleteAndFindQuery(SolicitudFolioAlumno),
   reportFolioDocumentoAlumnoQuery: findAllQuery(FolioDocumentoAlumno),
+  findAllDocumentosFirmadoQuery: findAllQuery(DocumentoFirmado),
   countSolicitudFolioAlumnosQuery: countQuery(SolicitudFolioAlumno),
 };
