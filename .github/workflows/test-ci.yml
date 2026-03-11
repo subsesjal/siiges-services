@@ -64,3 +64,9 @@ jobs:
           TIME_MAIL: 3600000
           PATH_FILE: ${{ github.workspace }}
           LOGGING: true
+          FIRMA_ELECTRONICA_BASE_URL: https://ws.jalisco.gob.mx/fe_desarrollo
+          FIRMA_ELECTRONICA_CLIENT_ID: fe
+          FIRMA_ELECTRONICA_CLIENT_SECRET: F1rm@!2019.r3sT
+          FIRMA_ELECTRONICA_USERNAME: prueba3
+          FIRMA_ELECTRONICA_PASSWORD: marzo.19
+          URL_TITULACION: https://siiges.titulacion.jalisco.gob.mx
