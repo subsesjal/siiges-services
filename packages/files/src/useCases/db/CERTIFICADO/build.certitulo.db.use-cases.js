@@ -122,6 +122,7 @@ const buildFileCertitulo = (
     calificacionesPorGrado[gradoId].asignaturas.push({
       asignaturaId: c.asignaturaId,
       nombre: c.asignatura?.nombre || '',
+      clave: c.asignatura?.clave || '',
       periodo: cicloNombre,
       calificacion: calificacionProcesada,
       tipo: c.tipo,

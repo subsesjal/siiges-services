@@ -225,6 +225,33 @@ async function agregarFooter(doc, certificado) {
   });
 }
 
+function ordenarGradosYAsignaturas(grados) {
+  return grados.map((grado) => {
+    const gradoNombre = (grado.gradoNombre || '').toUpperCase();
+
+    const esFlexible = gradoNombre.includes('FLEXIBLE');
+    const esOptativa = gradoNombre.includes('OPTATIVA');
+
+    let asignaturasOrdenadas = [...(grado.asignaturas || [])];
+
+    if (esOptativa || esFlexible) {
+      // Mantiene el orden de captura (orden actual)
+    } else {
+      // Rígida: ordenar por clave de materia
+      asignaturasOrdenadas = asignaturasOrdenadas.sort((a, b) => {
+        const claveA = String(a.clave || '');
+        const claveB = String(b.clave || '');
+        return claveA.localeCompare(claveB, undefined, { numeric: true });
+      });
+    }
+
+    return {
+      ...grado,
+      asignaturas: asignaturasOrdenadas,
+    };
+  });
+}
+
 async function GenerarCertificado(certificado) {
   const JsPDF = jsPDF;
   const doc = new JsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
@@ -294,7 +321,7 @@ async function GenerarCertificado(certificado) {
   doc.setFontSize(8.5);
   doc.setFont('Garet', 'normal');
   doc.text(
-    'Con base en el 16 de la Ley de Educación Superior del Estado de Jalisco, se expide el presente CERTIFICADO a:',
+    'Con base en el artículo 16 de la Ley de Educación Superior del Estado de Jalisco, se expide el presente CERTIFICADO a:',
     57,
     130,
   );
@@ -550,7 +577,8 @@ async function GenerarCertificado(certificado) {
     }
   };
 
-  const grados = certificado?.grados || [];
+  const gradosOriginales = certificado?.grados || [];
+  const grados = ordenarGradosYAsignaturas(gradosOriginales);
   const margenInferior = 220;
   const altoFila = 5.5;
 
