@@ -114,6 +114,15 @@ async function trayectoriaRouter(fastify, opts, next) {
   );
 
   await fastify.post(
+    '/:solicitudFolioId/envioNotificacion',
+    {
+      schema: solicitudSchemas.envioNotificacionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesFoliosAdapter.envioNotificacion,
+  );
+
+  await fastify.post(
     '/:solicitudFolioId/envioTitulacion',
     {
       schema: solicitudSchemas.sendAppTitulacion,
