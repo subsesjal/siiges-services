@@ -51,7 +51,7 @@ async function sendNotificationReport(processor, tipoNotificacion, solicitudFoli
  * @param {Object} req - The request object
  * @param {Object} reply - The reply object
  */
-async function asignacionFolioAlumno(req, reply) {
+async function envioNotificacion(req, reply) {
   try {
     const { solicitudFolioId } = req.params;
     const { tipoNotificacion } = req.body;
@@ -89,4 +89,4 @@ async function asignacionFolioAlumno(req, reply) {
   }
 }
 
-module.exports = { asignacionFolioAlumno };
+module.exports = { envioNotificacion };
