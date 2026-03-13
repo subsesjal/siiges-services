@@ -11,6 +11,7 @@ const assignFoliosAlumnosSchema = require('./assign.folios-documentos.schema');
 const sendAppTitulacion = require('./send.app-titulacion.schema');
 const reportSolicitudFolioAlumnoSchema = require('./report.solicitud-folio-alumnos.schema');
 const createFirmaDocumentoSchema = require('./create.firma-documento.solicitud-folio.schema');
+const envioNotificacionSchema = require('./envio-notificacion.schema');
 
 module.exports = {
   createSolicitudFolioSchema,
@@ -26,4 +27,5 @@ module.exports = {
   sendAppTitulacion,
   reportSolicitudFolioAlumnoSchema,
   createFirmaDocumentoSchema,
+  envioNotificacionSchema,
 };
