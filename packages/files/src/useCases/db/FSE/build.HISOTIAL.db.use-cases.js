@@ -1,5 +1,47 @@
 const { checkers, Logger } = require('@siiges-services/shared');
 
+function ordenarCalificacionesPorCurricula(calificaciones) {
+  const calificacionesPorGrado = {};
+
+  calificaciones.forEach((cal) => {
+    const gradoNombre = cal.grupo?.grado?.nombre || 'SIN GRADO';
+
+    if (!calificacionesPorGrado[gradoNombre]) {
+      calificacionesPorGrado[gradoNombre] = [];
+    }
+
+    calificacionesPorGrado[gradoNombre].push(cal);
+  });
+
+  const calificacionesOrdenadas = [];
+
+  Object.entries(calificacionesPorGrado).forEach(([gradoNombre, cals]) => {
+    const gradoNombreUpper = gradoNombre.toUpperCase();
+    const esFlexible = gradoNombreUpper.includes('FLEXIBLE');
+    const esOptativa = gradoNombreUpper.includes('OPTATIVA');
+
+    let calsOrdenadas = [...cals];
+
+    if (esOptativa || esFlexible) {
+      calsOrdenadas = calsOrdenadas.sort((a, b) => {
+        const idA = a.id || 0;
+        const idB = b.id || 0;
+        return idA - idB;
+      });
+    } else {
+      calsOrdenadas = calsOrdenadas.sort((a, b) => {
+        const claveA = String(a.asignatura?.clave || '');
+        const claveB = String(b.asignatura?.clave || '');
+        return claveA.localeCompare(claveB, undefined, { numeric: true });
+      });
+    }
+
+    calificacionesOrdenadas.push(...calsOrdenadas);
+  });
+
+  return calificacionesOrdenadas;
+}
+
 const buildFileHistorial = (
   findOneAlumnoQuery,
   findAllCalificacionesQuery,
@@ -10,11 +52,11 @@ const buildFileHistorial = (
     { association: 'persona' },
     { association: 'situacion' },
     { association: 'alumnoTipoTramites' },
-    { 
-      association: 'validacion', 
+    {
+      association: 'validacion',
       include: [
-        { association: 'situacionValidacion' } 
-      ] 
+        { association: 'situacionValidacion' },
+      ],
     },
     {
       association: 'programa',
@@ -55,16 +97,22 @@ const buildFileHistorial = (
       ],
     },
   ];
+
   const calificaciones = await findAllCalificacionesQuery({ alumnoId }, {
     include: includeCalificaciones,
     strict: false,
   });
+
   checkers.throwErrorIfDataIsFalsy(calificaciones, 'calificaciones', alumnoId);
 
+  const calificacionesJSON = calificaciones.map((calificacion) => calificacion.toJSON());
+  const calificacionesOrdenadas = ordenarCalificacionesPorCurricula(calificacionesJSON);
+
   const file = await createPhpFile({
-    alumno: alumno.toJSON(), // Primer argumento un objeto
-    calificaciones: calificaciones.map((calificacion) => calificacion.toJSON()),
-  }, tipoDocumento); // Tipo de documento
+    alumno: alumno.toJSON(),
+    calificaciones: calificacionesOrdenadas,
+  }, tipoDocumento);
+
   return Buffer.from(file);
 };
 
