@@ -199,7 +199,18 @@ foreach ($calificacionCiclo as $ciclos => $ciclo) {
     $pdf->Ln(20);
   }
 
-  $ciclo = $pdf->array_sort($ciclo, 'consecutivo', SORT_ASC);
+  $tieneConsecutivos = false;
+  foreach ($ciclo as $cal) {
+    if (isset($cal['consecutivo']) && $cal['consecutivo'] > 0) {
+      $tieneConsecutivos = true;
+      break;
+    }
+  }
+
+  if ($tieneConsecutivos) {
+    $ciclo = $pdf->array_sort($ciclo, 'consecutivo', SORT_ASC);
+  }
+
   $pdf->SetFillColor(166, 166, 166);
   $pdf->SetFont("Garet", "", 9);
   $pdf->Cell(176, 5, safe_text(mb_strtoupper('CICLO ESCOLAR ' . $ciclos)), 1, 1, "C", true);
