@@ -241,7 +241,14 @@ function ordenarGradosYAsignaturas(grados) {
       asignaturasOrdenadas = asignaturasOrdenadas.sort((a, b) => {
         const claveA = String(a.clave || '');
         const claveB = String(b.clave || '');
-        return claveA.localeCompare(claveB, undefined, { numeric: true });
+        return claveA.localeCompare(
+          claveB,
+          undefined,
+          {
+            numeric: true,
+            sensitivity: 'base',
+          },
+        );
       });
     }
 

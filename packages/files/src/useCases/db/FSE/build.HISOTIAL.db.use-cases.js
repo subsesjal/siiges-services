@@ -32,7 +32,14 @@ function ordenarCalificacionesPorCurricula(calificaciones) {
       calsOrdenadas = calsOrdenadas.sort((a, b) => {
         const claveA = String(a.asignatura?.clave || '');
         const claveB = String(b.asignatura?.clave || '');
-        return claveA.localeCompare(claveB, undefined, { numeric: true });
+        return claveA.localeCompare(
+          claveB,
+          undefined,
+          {
+            numeric: true,
+            sensitivity: 'base',
+          },
+        );
       });
     }
 
