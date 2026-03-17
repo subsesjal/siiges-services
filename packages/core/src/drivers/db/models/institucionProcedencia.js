@@ -58,6 +58,29 @@ const InstitucionProcedenciaSchema = {
     type: DataTypes.STRING,
     field: 'nombre_carrera',
   },
+  fechaInicio: {
+    allowNull: true,
+    type: DataTypes.DATE,
+    field: 'fecha_inicio',
+  },
+  fechaFin: {
+    allowNull: true,
+    type: DataTypes.DATE,
+    field: 'fecha_fin',
+  },
+  telefono: {
+    allowNull: true,
+    type: DataTypes.STRING(20),
+  },
+  paginaWeb: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'pagina_web',
+  },
+  correo: {
+    allowNull: true,
+    type: DataTypes.STRING,
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
