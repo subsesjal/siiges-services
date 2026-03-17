@@ -126,7 +126,7 @@ $dataDetalleDomicilioInstitucion1 = array(
     "estatus" => safe_text(mb_strtoupper($alumno["situacion"]["nombre"] ?? '')),
     "validaciones" => safe_text(mb_strtoupper($alumno["validacion"]["situacionValidacion"]['nombre'] ?? 'Sin Validar')),
   ]
-); 
+);
 
 //set widht for each column (6 columns)
 $pdf->SetWidths(array(29, 89, 29, 29));
@@ -182,16 +182,16 @@ foreach ($calificacionesInput as $calificacion) {
   $calificacionCiclo[$nombreCiclo][] = $calificacion;
 }
 
-uksort($calificacionCiclo, function($a, $b) {
-    $yearA = substr($a, 0, 4);
-    $yearB = substr($b, 0, 4);
-    $periodoA = substr($a, 4);
-    $periodoB = substr($b, 4);
+uksort($calificacionCiclo, function ($a, $b) {
+  $yearA = substr($a, 0, 4);
+  $yearB = substr($b, 0, 4);
+  $periodoA = substr($a, 4);
+  $periodoB = substr($b, 4);
 
-    if ($yearB !== $yearA) {
-        return $yearA <=> $yearB;
-    }
-    return $periodoA <=> $periodoB;
+  if ($yearB !== $yearA) {
+    return $yearA <=> $yearB;
+  }
+  return $periodoA <=> $periodoB;
 });
 
 foreach ($calificacionCiclo as $ciclos => $ciclo) {
@@ -199,7 +199,18 @@ foreach ($calificacionCiclo as $ciclos => $ciclo) {
     $pdf->Ln(20);
   }
 
-  $ciclo = $pdf->array_sort($ciclo, 'consecutivo', SORT_ASC);
+  $tieneConsecutivos = false;
+  foreach ($ciclo as $cal) {
+    if (isset($cal['consecutivo']) && $cal['consecutivo'] > 0) {
+      $tieneConsecutivos = true;
+      break;
+    }
+  }
+
+  if ($tieneConsecutivos) {
+    $ciclo = $pdf->array_sort($ciclo, 'consecutivo', SORT_ASC);
+  }
+
   $pdf->SetFillColor(166, 166, 166);
   $pdf->SetFont("Garet", "", 9);
   $pdf->Cell(176, 5, safe_text(mb_strtoupper('CICLO ESCOLAR ' . $ciclos)), 1, 1, "C", true);
