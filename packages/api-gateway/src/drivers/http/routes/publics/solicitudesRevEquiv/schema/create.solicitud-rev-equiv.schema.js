@@ -58,6 +58,7 @@ const createEquivalenciaSchema = {
             },
             required: [
               'tipoInstitucionId',
+              'paisId',
               'estadoId',
               'nombre',
               'nombreCarrera',
@@ -78,7 +79,7 @@ const createEquivalenciaSchema = {
               required: ['tipoInstitucionId', 'nombre'],
             },
             else: {
-              required: ['tipoInstitucionId', 'nombreCarrera', 'acuerdoRvoe', 'nombre', 'nivel'],
+              required: ['tipoInstitucionId', 'nombreCarrera', 'nivel'],
             },
           },
           asignaturasAntecedentesEquivalentes: {
@@ -115,6 +116,7 @@ const createEquivalenciaSchema = {
       'tipoTramiteId',
       'estatusSolicitudRevEquivId',
       'interesado',
+      'fecha',
     ],
   },
   response: {
