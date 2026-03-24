@@ -299,6 +299,10 @@ const tipoDocumentoObj = [
     id: 75,
     name: 'CERTIFICADO_ELECTRONICO_PDF',
   },
+  {
+    id: 76,
+    name: 'COPIA_REVALIDACION',
+  },
 ];
 
 module.exports = tipoDocumentoObj;
