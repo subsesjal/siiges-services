@@ -117,6 +117,7 @@ const createEquivalenciaSchema = {
       'estatusSolicitudRevEquivId',
       'interesado',
       'fecha',
+      'folioPago',
     ],
   },
   response: {
