@@ -498,7 +498,7 @@ async function GenerarCertificado(certificado) {
   const promedioValorY = promedioTipoY + 23;
   doc.setFont('Garet', 'normal');
   doc.setFontSize(6);
-  const promedioValor = `PROMEDIO: ${certificado?.promedioGeneral || 'N/A'}`;
+  const promedioValor = certificado?.promedioGeneral;
   const promedioValorWidth = doc.getTextWidth(promedioValor);
   doc.text(promedioValor, subColPromedioX
     + ((subColWidth - 10) - promedioValorWidth) / 2, promedioValorY);

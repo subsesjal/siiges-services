@@ -3,27 +3,16 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function createFirmaDocumento(req, reply) {
   try {
-    const { folioInterno } = req.query;
+    Logger.info('[solicitudes]: Creating firma documento (masiva)');
 
-    Logger.info('[solicitudes]: Creating firma documento');
+    const documentos = req.body;
 
-    const { body } = req;
-    const data = {
-      pkcs7: body.pkcs7,
-      objetoPorFirmar: body.objetoPorFirmar,
-      tipoDocumento: body.tipoDocumento,
-      folioInterno,
-    };
-
-    const documento = await this.solicitudFolioServices.createFirmaDocumento(
-      data,
-      { folioInterno },
-    );
+    const results = await this.solicitudFolioServices.createFirmaDocumento(documentos);
 
     return reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')
-      .send({ data: documento });
+      .send({ data: results });
   } catch (error) {
     return errorHandler(error, reply);
   }
