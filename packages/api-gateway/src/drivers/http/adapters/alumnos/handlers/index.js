@@ -11,6 +11,7 @@ const findAlumnosGrupo = require('./find-group.handlers.alumnos-grupo.adapters')
 const deleteAlumnoInscrito = require('./delete.handlers.alumno-inscrito.adapters');
 const findAlumnosCount = require('./find-all.handlers.alumno-count.adapters');
 const findAlumnosExtra = require('./find-group.handlers.alumnos-extra.adapters');
+const findOneAlumnoPersona = require('./find-one-alumno-persona.handler');
 
 module.exports = {
   createAlumno,
@@ -26,4 +27,5 @@ module.exports = {
   deleteAlumnoInscrito,
   findAlumnosCount,
   findAlumnosExtra,
+  findOneAlumnoPersona,
 };
