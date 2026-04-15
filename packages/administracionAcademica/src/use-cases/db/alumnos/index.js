@@ -1,5 +1,5 @@
 const {
-  alumnos, programas, grupos, validaciones,
+  alumnos, programas, grupos, validaciones, persona,
 } = require('../../../adapters/db');
 
 const createAlumno = require('./create.alumno.use-cases');
@@ -16,6 +16,7 @@ const updateCalificaciones = require('./update.calificaciones.use-cases');
 const findCalificacionesAlumno = require('./find-group.calificaciones-alumno.use-cases');
 const findAllAlumnosCount = require('./find-all.alumno-count.use-cases');
 const findAlumnosExtra = require('./find-group.alumnos-extra.use-cases');
+const findGroupAlumnosPersona = require('./find-group-alumnos-persona.use-cases');
 
 module.exports = {
   createAlumno: createAlumno(
@@ -96,5 +97,9 @@ module.exports = {
   findAlumnosExtra: findAlumnosExtra(
     alumnos.findAllCalificacionesQuery,
     alumnos.findAllGruposQuery,
+  ),
+  findGroupAlumnosPersona: findGroupAlumnosPersona(
+    persona.findAllQuery,
+    alumnos.findAllAlumnosQuery,
   ),
 };
