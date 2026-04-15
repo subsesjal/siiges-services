@@ -92,14 +92,34 @@ const firmarUnDocumento = async (
     nombreFirmante: autoridad.nombre,
   });
 
-  const firmaResponse = await firmarDocumentoExterno(
-    pkcs7,
-    catalogo.claveDocumento,
-    catalogo.tipoServicio,
-    tokenExterno.accessToken,
-  );
+  let firmaResponse;
+  try {
+    firmaResponse = await firmarDocumentoExterno(
+      pkcs7,
+      catalogo.claveDocumento,
+      catalogo.tipoServicio,
+      tokenExterno.accessToken,
+    );
+  } catch (err) {
+    const errorMsg = err.response?.data
+      ? JSON.stringify(err.response.data)
+      : err.message;
 
-  Logger.info(`[firma-documento] Respuesta para ${folioInterno}: ${JSON.stringify(firmaResponse)}`);
+    Logger.warn(`[firma-documento] Error al firmar ${folioInterno}: ${errorMsg}`);
+
+    documentoFirmado = await updateDocumentoFirmadoQuery(
+      { id: documentoFirmado.id },
+      {
+        estatusFirmado: 'rechazado',
+        firmaResponse: errorMsg,
+      },
+    );
+
+    return {
+      folioInterno: documentoFirmado.folioInterno,
+      estatusFirmado: documentoFirmado.estatusFirmado,
+    };
+  }
 
   if (!firmaResponse || firmaResponse.error || !firmaResponse.identificadorunico) {
     Logger.warn(`[firma-documento] Firma rechazada para ${folioInterno}`);
