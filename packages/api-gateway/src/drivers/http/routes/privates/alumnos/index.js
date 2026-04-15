@@ -127,6 +127,14 @@ async function asignaturaRouter(fastify, opts, next) {
     },
     alumnosAdapter.findAlumnosExtra,
   );
+  await fastify.get(
+    '/persona',
+    {
+      // schema: alumnosSchema.findOneAlumnoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    alumnosAdapter.findOneAlumnoPersona,
+  );
 
   next();
 }
