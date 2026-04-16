@@ -62,35 +62,26 @@ $usuarioNombre = trim(
     ($usuario["persona"]['apellidoMaterno'] ?? '')
 );
 
-$institucionNombre = $institucion["nombre"];
-$programaNombre = $programa["nombre"];
+$institucionNombre = $institucion["nombre"] ?? "";
+$programaNombre = $programa["nombre"] ?? "";
+
+$cicloNombre = $ciclo["nombre"] ?? "";
+$modalidadNombre = $modalidad["nombre"] ?? "";
 
 $cicloTxt = [
-    "Semestral",
-    "Cuatrimestral",
-    "Anual",
+    "SEMESTRALES",
+    "CUATRIMESTRALES",
+    "ANUALES",
+    "SEMESTRALES",
+    "CUATRIMESTRALES"
 ];
 
-$modalidadTxt = [
-    "Escolarizada",
-    "No Escolarizada",
-    "Mixta",
-    "Dual",
-];
-
-$ciclos = [
-    "Semestrales",
-    "Cuatrimestrales",
-    "Anuales",
-];
-
-$tipo = $programa["cicloId"];
-$modalidad = $programa["modalidadId"];
-$ciclo = $programa["cicloId"];
+$cicloId = ($ciclo["id"] ?? 1) - 1;
+$periodoNombre = $cicloTxt[$cicloId] ?? "";
 
 $pdf->MultiCell(0, 5, safe_iconv(
     "$prefijo C. $usuarioNombre de $institucionNombre declara, bajo protesta de decir verdad, que los datos proporcionados en la solicitud $folio cuentan con un inmueble con las condiciones de seguridad, higiénicas necesarias para impartir el plan de estudios para el programa " .
-    ($cicloTxt[$tipo] ?? '') . " $programaNombre modalidad " . ($modalidadTxt[$modalidad] ?? '') . " en períodos " . ($ciclos[$ciclo] ?? '') .
+    "$cicloNombre $programaNombre modalidad $modalidadNombre en períodos $periodoNombre" .
     ", asimismo ACEPTA cumplir y se compromete con las siguientes obligaciones derivadas del otorgamiento del Reconocimiento de Validez Oficial de Estudios."
 ), 0, "J");
 
