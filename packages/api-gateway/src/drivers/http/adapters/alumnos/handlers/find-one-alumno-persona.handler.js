@@ -4,7 +4,8 @@ const errorHandler = require('../../../utils/errorHandler');
 async function findGroupAlumnosPersona(req, reply) {
   try {
     const {
-      curp, nombre, apellidoPaterno, apellidoMaterno, matricula,
+      curp, nombre, apellidoPaterno, apellidoMaterno,
+      matricula, acuerdoRvoe, cct,
     } = req.query;
 
     Logger.info(`[Alumno]: Searching Alumnos with params: ${JSON.stringify(req.query)}`);
@@ -15,6 +16,8 @@ async function findGroupAlumnosPersona(req, reply) {
       apellidoPaterno,
       apellidoMaterno,
       matricula,
+      acuerdoRvoe,
+      cct,
     });
 
     return reply

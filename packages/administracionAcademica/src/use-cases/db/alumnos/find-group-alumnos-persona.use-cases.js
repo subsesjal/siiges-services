@@ -1,12 +1,19 @@
 const { checkers } = require('@siiges-services/shared');
 const { Op } = require('sequelize');
 
-const findGroupAlumnosPersona = (findAllPersonasQuery, findAllAlumnosQuery) => async ({
+const findGroupAlumnosPersona = (
+  findAllPersonasQuery,
+  findAllAlumnosQuery,
+  findAllProgramasQuery,
+  findPlantelQuery,
+) => async ({
   curp,
   nombre,
   apellidoPaterno,
   apellidoMaterno,
   matricula,
+  acuerdoRvoe,
+  cct,
 }) => {
   const wherePersona = {};
   const whereAlumno = {};
@@ -18,7 +25,10 @@ const findGroupAlumnosPersona = (findAllPersonasQuery, findAllAlumnosQuery) => a
   if (matricula) whereAlumno.matricula = { [Op.like]: `%${matricula}%` };
 
   checkers.throwErrorIfDataIsFalsy(
-    Object.keys(wherePersona).length > 0 || Object.keys(whereAlumno).length > 0,
+    Object.keys(wherePersona).length > 0
+      || Object.keys(whereAlumno).length > 0
+      || acuerdoRvoe
+      || cct,
     'persona',
     'sin parámetros de búsqueda',
   );
@@ -46,11 +56,36 @@ const findGroupAlumnosPersona = (findAllPersonasQuery, findAllAlumnosQuery) => a
     },
   ];
 
-  // Si hay filtros de persona, primero buscar los persona_ids
+  // Filtro por CCT — buscar planteles y obtener sus ids
+  if (cct) {
+    const planteles = await findPlantelQuery(
+      { claveCentroTrabajo: { [Op.like]: `%${cct}%` } },
+    );
+    checkers.throwErrorIfDataIsFalsy(planteles?.length, 'planteles', cct);
+    const plantelIds = planteles.map((p) => p.id);
+
+    // Buscar programas de esos planteles
+    const whereProgramaCct = { plantelId: { [Op.in]: plantelIds } };
+    if (acuerdoRvoe) whereProgramaCct.acuerdoRvoe = { [Op.like]: `%${acuerdoRvoe}%` };
+
+    const programas = await findAllProgramasQuery(whereProgramaCct);
+    checkers.throwErrorIfDataIsFalsy(programas?.length, 'programas', cct);
+    const programaIds = programas.map((p) => p.id);
+    whereAlumno.programaId = { [Op.in]: programaIds };
+  } else if (acuerdoRvoe) {
+    // Solo acuerdoRvoe sin CCT
+    const programas = await findAllProgramasQuery(
+      { acuerdoRvoe: { [Op.like]: `%${acuerdoRvoe}%` } },
+    );
+    checkers.throwErrorIfDataIsFalsy(programas?.length, 'programas', acuerdoRvoe);
+    const programaIds = programas.map((p) => p.id);
+    whereAlumno.programaId = { [Op.in]: programaIds };
+  }
+
+  // Filtro por persona
   if (Object.keys(wherePersona).length > 0) {
     const personas = await findAllPersonasQuery(wherePersona);
     checkers.throwErrorIfDataIsFalsy(personas?.length, 'personas', JSON.stringify(wherePersona));
-
     const personaIds = personas.map((p) => p.id);
     whereAlumno.personaId = { [Op.in]: personaIds };
   }

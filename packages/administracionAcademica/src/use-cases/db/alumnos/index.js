@@ -101,5 +101,7 @@ module.exports = {
   findGroupAlumnosPersona: findGroupAlumnosPersona(
     persona.findAllQuery,
     alumnos.findAllAlumnosQuery,
+    programas.findAllProgramasQuery,
+    programas.findPlantelQuery,
   ),
 };
