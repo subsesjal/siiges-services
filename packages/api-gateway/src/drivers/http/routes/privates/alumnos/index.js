@@ -130,7 +130,7 @@ async function asignaturaRouter(fastify, opts, next) {
   await fastify.get(
     '/persona',
     {
-      // schema: alumnosSchema.findOneAlumnoSchema,
+      schema: alumnosSchema.findGroupAlumnosPersonaSchema,
       onRequest: [fastify.authenticate],
     },
     alumnosAdapter.findOneAlumnoPersona,

@@ -12,6 +12,7 @@ const findAlumnosGrupoSchema = require('./find-group.alumnos-grupo.schema');
 const { deleteAlumnoInscritoSchema } = require('./delete.alumno-inscrito.schema');
 const findAlumnosCountSchema = require('./find-all.alumnos-count.schema');
 const findAlumnosExtraSchema = require('./find-group.alumnos-extra.schema');
+const findGroupAlumnosPersonaSchema = require('./find-group-alumnos-persona.schema');
 
 module.exports = {
   createAlumnoSchema,
@@ -28,4 +29,5 @@ module.exports = {
   deleteAlumnoInscritoSchema,
   findAlumnosCountSchema,
   findAlumnosExtraSchema,
+  findGroupAlumnosPersonaSchema,
 };
