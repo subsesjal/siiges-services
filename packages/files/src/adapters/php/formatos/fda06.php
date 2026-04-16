@@ -73,8 +73,8 @@ $cicloTxt = [
     "SEMESTRALES",
     "CUATRIMESTRALES",
     "ANUALES",
-    "SEMESTRALES",
-    "CUATRIMESTRALES"
+    "SEMESTRALES FLEXIBLES",
+    "CUATRIMESTRALES FLEXIBLES",
 ];
 
 $cicloId = ($ciclo["id"] ?? 1) - 1;
