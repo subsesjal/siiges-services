@@ -56,7 +56,6 @@ const findGroupAlumnosPersona = (
     },
   ];
 
-  // Filtro por CCT — buscar planteles y obtener sus ids
   if (cct) {
     const planteles = await findPlantelQuery(
       { claveCentroTrabajo: { [Op.like]: `%${cct}%` } },
@@ -64,7 +63,6 @@ const findGroupAlumnosPersona = (
     checkers.throwErrorIfDataIsFalsy(planteles?.length, 'planteles', cct);
     const plantelIds = planteles.map((p) => p.id);
 
-    // Buscar programas de esos planteles
     const whereProgramaCct = { plantelId: { [Op.in]: plantelIds } };
     if (acuerdoRvoe) whereProgramaCct.acuerdoRvoe = { [Op.like]: `%${acuerdoRvoe}%` };
 
@@ -73,7 +71,6 @@ const findGroupAlumnosPersona = (
     const programaIds = programas.map((p) => p.id);
     whereAlumno.programaId = { [Op.in]: programaIds };
   } else if (acuerdoRvoe) {
-    // Solo acuerdoRvoe sin CCT
     const programas = await findAllProgramasQuery(
       { acuerdoRvoe: { [Op.like]: `%${acuerdoRvoe}%` } },
     );
@@ -82,7 +79,6 @@ const findGroupAlumnosPersona = (
     whereAlumno.programaId = { [Op.in]: programaIds };
   }
 
-  // Filtro por persona
   if (Object.keys(wherePersona).length > 0) {
     const personas = await findAllPersonasQuery(wherePersona);
     checkers.throwErrorIfDataIsFalsy(personas?.length, 'personas', JSON.stringify(wherePersona));
