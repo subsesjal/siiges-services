@@ -9,6 +9,9 @@ const buildFileFDA06 = (
     include: [
       { association: 'programaTurnos' },
       { association: 'trayectoria' },
+      { association: 'ciclo' },
+      { association: 'nivel' },
+      { association: 'modalidad' },
       {
         association: 'plantel',
         include: [{
