@@ -2,11 +2,11 @@ const { checkers, Logger } = require('@siiges-services/shared');
 const axios = require('axios');
 const { config } = require('../../../../config/environment');
 
-const SERVICIO_FIRMA_CERTIFICADO = 'firma_certificado';
+const SERVICIO_FIRMA_DOCUMENTO = 'firma_documento';
 
 const TIPO_DOCUMENTO_CATALOGO = {
   certificado: 'D001',
-  certificadoElectronico: 'D001',
+  titulo: 'D002',
 };
 
 const getBasicAuthHeader = () => {
@@ -33,7 +33,7 @@ const obtenerTokenExterno = async () => {
     }).toString(),
   });
 
-  Logger.info('[firma-certificado] Token obtenido exitosamente');
+  Logger.info('[firma-documento] Token obtenido exitosamente');
   return response.data;
 };
 
@@ -64,83 +64,65 @@ const isTokenExpired = (tokenExterno) => {
   return now >= fechaExpiracion;
 };
 
-const createFirmaDocumento = (
-  findOneCatalogoFirmaElectronicaQuery,
-  findOneTokenExternoQuery,
-  createTokenExternoQuery,
-  updateTokenExternoQuery,
+const firmarUnDocumento = async (
+  documento,
+  catalogo,
+  tokenExterno,
   createDocumentoFirmadoQuery,
   updateDocumentoFirmadoQuery,
-) => async (data, { folioInterno }) => {
-  const { pkcs7, objetoPorFirmar, tipoDocumento } = data;
+) => {
+  const {
+    pkcs7,
+    folioInterno,
+    objetoPorFirmar,
+    autoridad,
+  } = documento;
 
-  const claveDocumentoCatalogo = TIPO_DOCUMENTO_CATALOGO[tipoDocumento];
+  Logger.info(`[firma-documento] Procesando documento: ${folioInterno}`);
 
-  if (!claveDocumentoCatalogo) {
-    throw new Error(`Tipo de documento no soportado: ${tipoDocumento}`);
-  }
-
-  Logger.info(`[firma-certificado] Tipo documento: ${tipoDocumento} -> Clave catálogo: ${claveDocumentoCatalogo}`);
-
-  const catalogo = await findOneCatalogoFirmaElectronicaQuery({
-    claveDocumento: claveDocumentoCatalogo,
-  });
-  checkers.throwErrorIfDataIsFalsy(catalogo, 'catalogo-firma-electronica', claveDocumentoCatalogo);
-
-  Logger.info('[firma-certificado] Guardando documento antes de firmar');
   let documentoFirmado = await createDocumentoFirmadoQuery({
     catalogoFirmaElectronicaId: catalogo.id,
     objetoPorFirmar: JSON.stringify(objetoPorFirmar),
     pkcs7,
     folioInterno,
     estatusFirmado: 'pendiente',
+    tipoFirmante: autoridad.tipoFirmante,
+    cargoFirmante: autoridad.cargoFirmante,
+    curpFirmante: autoridad.curp,
+    nombreFirmante: autoridad.nombre,
   });
 
-  let tokenExterno = await findOneTokenExternoQuery({
-    servicio: SERVICIO_FIRMA_CERTIFICADO,
-    activo: true,
-  });
+  let firmaResponse;
+  try {
+    firmaResponse = await firmarDocumentoExterno(
+      pkcs7,
+      catalogo.claveDocumento,
+      catalogo.tipoServicio,
+      tokenExterno.accessToken,
+    );
+  } catch (err) {
+    const errorMsg = err.response?.data
+      ? JSON.stringify(err.response.data)
+      : err.message;
 
-  if (isTokenExpired(tokenExterno)) {
-    Logger.info('[firma-certificado] Token expirado o no existe, solicitando nuevo token');
+    Logger.warn(`[firma-documento] Error al firmar ${folioInterno}: ${errorMsg}`);
 
-    const tokenResponse = await obtenerTokenExterno();
+    documentoFirmado = await updateDocumentoFirmadoQuery(
+      { id: documentoFirmado.id },
+      {
+        estatusFirmado: 'rechazado',
+        firmaResponse: errorMsg,
+      },
+    );
 
-    const tokenData = {
-      servicio: SERVICIO_FIRMA_CERTIFICADO,
-      accessToken: tokenResponse.access_token,
-      tokenType: tokenResponse.token_type,
-      expiresIn: String(tokenResponse.expires_in),
-      fechaObtencion: new Date(),
-      fechaExpiracion: new Date(Date.now() + tokenResponse.expires_in * 1000),
-      activo: true,
+    return {
+      folioInterno: documentoFirmado.folioInterno,
+      estatusFirmado: documentoFirmado.estatusFirmado,
     };
-
-    if (tokenExterno) {
-      tokenExterno = await updateTokenExternoQuery(
-        { id: tokenExterno.id },
-        tokenData,
-      );
-    } else {
-      tokenExterno = await createTokenExternoQuery(tokenData);
-    }
-
-    Logger.info('[firma-certificado] Token almacenado exitosamente');
   }
 
-  Logger.info('[firma-certificado] Enviando documento a firmar');
-
-  const firmaResponse = await firmarDocumentoExterno(
-    pkcs7,
-    catalogo.claveDocumento,
-    catalogo.tipoServicio,
-    tokenExterno.accessToken,
-  );
-
-  Logger.info(`[firma-certificado] Respuesta recibida: ${JSON.stringify(firmaResponse)}`);
-
   if (!firmaResponse || firmaResponse.error || !firmaResponse.identificadorunico) {
-    Logger.warn(`[firma-certificado] Servicio respondió con error o sin identificador: ${JSON.stringify(firmaResponse)}`);
+    Logger.warn(`[firma-documento] Firma rechazada para ${folioInterno}`);
 
     documentoFirmado = await updateDocumentoFirmadoQuery(
       { id: documentoFirmado.id },
@@ -177,12 +159,91 @@ const createFirmaDocumento = (
     },
   );
 
-  Logger.info(`[firma-certificado] Documento firmado exitosamente: ${documentoFirmado.id}`);
+  Logger.info(`[firma-documento] Documento firmado exitosamente: ${folioInterno}`);
 
   return {
     folioInterno: documentoFirmado.folioInterno,
     estatusFirmado: documentoFirmado.estatusFirmado,
   };
+};
+
+const createFirmaDocumento = (
+  findOneCatalogoFirmaElectronicaQuery,
+  findOneTokenExternoQuery,
+  createTokenExternoQuery,
+  updateTokenExternoQuery,
+  createDocumentoFirmadoQuery,
+  updateDocumentoFirmadoQuery,
+) => async (documentos) => {
+  if (!Array.isArray(documentos) || documentos.length === 0) {
+    throw new Error('Se requiere al menos un documento para firmar');
+  }
+
+  const primerDocumento = documentos[0];
+  const { tipoDocumento } = primerDocumento;
+
+  const claveDocumentoCatalogo = TIPO_DOCUMENTO_CATALOGO[tipoDocumento];
+
+  if (!claveDocumentoCatalogo) {
+    throw new Error(`Tipo de documento no soportado: ${tipoDocumento}`);
+  }
+
+  Logger.info(`[firma-documento] Tipo documento: ${tipoDocumento} -> Clave catálogo: ${claveDocumentoCatalogo}`);
+  Logger.info(`[firma-documento] Procesando ${documentos.length} documento(s)`);
+
+  const catalogo = await findOneCatalogoFirmaElectronicaQuery({
+    claveDocumento: claveDocumentoCatalogo,
+  });
+  checkers.throwErrorIfDataIsFalsy(catalogo, 'catalogo-firma-electronica', claveDocumentoCatalogo);
+
+  let tokenExterno = await findOneTokenExternoQuery({
+    servicio: SERVICIO_FIRMA_DOCUMENTO,
+    activo: true,
+  });
+
+  if (isTokenExpired(tokenExterno)) {
+    Logger.info('[firma-documento] Token expirado o no existe, solicitando nuevo token');
+
+    const tokenResponse = await obtenerTokenExterno();
+
+    const tokenData = {
+      servicio: SERVICIO_FIRMA_DOCUMENTO,
+      accessToken: tokenResponse.access_token,
+      tokenType: tokenResponse.token_type,
+      expiresIn: String(tokenResponse.expires_in),
+      fechaObtencion: new Date(),
+      fechaExpiracion: new Date(Date.now() + tokenResponse.expires_in * 1000),
+      activo: true,
+    };
+
+    if (tokenExterno) {
+      tokenExterno = await updateTokenExternoQuery(
+        { id: tokenExterno.id },
+        tokenData,
+      );
+    } else {
+      tokenExterno = await createTokenExternoQuery(tokenData);
+    }
+
+    Logger.info('[firma-documento] Token almacenado exitosamente');
+  }
+
+  const resultados = await Promise.all(
+    documentos.map((documento) => firmarUnDocumento(
+      documento,
+      catalogo,
+      tokenExterno,
+      createDocumentoFirmadoQuery,
+      updateDocumentoFirmadoQuery,
+    )),
+  );
+
+  const exitosos = resultados.filter((r) => r.estatusFirmado === 'exitoso').length;
+  const rechazados = resultados.filter((r) => r.estatusFirmado === 'rechazado').length;
+
+  Logger.info(`[firma-documento] Proceso completado: ${exitosos} exitosos, ${rechazados} rechazados`);
+
+  return resultados;
 };
 
 module.exports = createFirmaDocumento;
