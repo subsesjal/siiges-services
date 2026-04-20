@@ -16,6 +16,7 @@ const { reportFolioDocumentoAlumno } = require('./report.handlers.folio-document
 const { reportFolioDocumentoAlumnoCSV } = require('./report.handlers.folio-documento-alumno-csv.adapters');
 const { createFirmaDocumento } = require('./create.firma-documento.solicitud-folio.adapters');
 const { envioNotificacion } = require('./reenvio.handlers.folios-alumnos.adapters');
+const { findOneRepresentanteLegal } = require('./find-one.handlers.solicitud-folio.representante-legal.adapters');
 
 module.exports = {
   createSolicitudFolio,
@@ -34,4 +35,5 @@ module.exports = {
   reportFolioDocumentoAlumnoCSV,
   createFirmaDocumento,
   envioNotificacion,
+  findOneRepresentanteLegal,
 };
