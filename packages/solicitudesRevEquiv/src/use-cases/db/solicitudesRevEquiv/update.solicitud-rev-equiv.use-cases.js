@@ -15,7 +15,10 @@ const updateSolicitudRevEquiv = (
     },
   ];
 
-  const solicitud = await findOneSolicitudRevEquivQuery(identifierObj, { include });
+  const solicitud = await findOneSolicitudRevEquivQuery(identifierObj, {
+    include,
+    strict: false,
+  });
 
   checkers.throwErrorIfDataIsFalsy(
     solicitud,
@@ -54,7 +57,14 @@ const updateSolicitudRevEquiv = (
 
   await solicitud.update(solicitudData);
 
-  return findOneSolicitudRevEquivQuery(identifierObj, { include });
+  const segundoFind = await findOneSolicitudRevEquivQuery(
+    identifierObj,
+    {
+      include,
+      strict: false,
+    },
+  );
+  return segundoFind;
 };
 
 module.exports = updateSolicitudRevEquiv;
