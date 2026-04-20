@@ -3,6 +3,7 @@ const axios = require('axios');
 const { config } = require('../../../../config/environment');
 
 const SERVICIO_FIRMA_DOCUMENTO = 'firma_documento';
+const BATCH_SIZE = 5;
 
 const TIPO_DOCUMENTO_CATALOGO = {
   certificado: 'D001',
@@ -189,7 +190,7 @@ const createFirmaDocumento = (
   }
 
   Logger.info(`[firma-documento] Tipo documento: ${tipoDocumento} -> Clave catálogo: ${claveDocumentoCatalogo}`);
-  Logger.info(`[firma-documento] Procesando ${documentos.length} documento(s)`);
+  Logger.info(`[firma-documento] Procesando ${documentos.length} documento(s) en lotes de ${BATCH_SIZE}`);
 
   const catalogo = await findOneCatalogoFirmaElectronicaQuery({
     claveDocumento: claveDocumentoCatalogo,
@@ -228,15 +229,24 @@ const createFirmaDocumento = (
     Logger.info('[firma-documento] Token almacenado exitosamente');
   }
 
-  const resultados = await Promise.all(
-    documentos.map((documento) => firmarUnDocumento(
-      documento,
-      catalogo,
-      tokenExterno,
-      createDocumentoFirmadoQuery,
-      updateDocumentoFirmadoQuery,
-    )),
-  );
+  const resultados = [];
+
+  for (let i = 0; i < documentos.length; i += BATCH_SIZE) {
+    const lote = documentos.slice(i, i + BATCH_SIZE);
+
+    // eslint-disable-next-line no-await-in-loop
+    const resultadosLote = await Promise.all(
+      lote.map((documento) => firmarUnDocumento(
+        documento,
+        catalogo,
+        tokenExterno,
+        createDocumentoFirmadoQuery,
+        updateDocumentoFirmadoQuery,
+      )),
+    );
+
+    resultados.push(...resultadosLote);
+  }
 
   const exitosos = resultados.filter((r) => r.estatusFirmado === 'exitoso').length;
   const rechazados = resultados.filter((r) => r.estatusFirmado === 'rechazado').length;

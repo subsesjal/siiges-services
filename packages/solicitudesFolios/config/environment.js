@@ -11,6 +11,10 @@ apiBaseUrl: dotenv.getEnvironmentVar('API_BASE_URL'),
     username: dotenv.getEnvironmentVar('FIRMA_ELECTRONICA_USERNAME'),
     password: dotenv.getEnvironmentVar('FIRMA_ELECTRONICA_PASSWORD'),
   },
+  apiTitulos: {
+    baseUrl: dotenv.getEnvironmentVar('URL_API_TITULO'),
+    apiKey: dotenv.getEnvironmentVar('API_KEY_REPRESENTANTES'),
+  },
 };
 
 module.exports = {

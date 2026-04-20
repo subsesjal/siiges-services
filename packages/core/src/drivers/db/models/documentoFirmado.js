@@ -78,6 +78,12 @@ const DocumentoFirmadoSchema = {
     field: 'curp_firmante',
     comment: 'CURP del firmante',
   },
+  nombreFirmante: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'nombre_firmante',
+    comment: 'Nombre completo del firmante',
+  },
   objetoFirmado: {
     allowNull: true,
     type: DataTypes.TEXT,

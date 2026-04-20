@@ -40,6 +40,15 @@ async function trayectoriaRouter(fastify, opts, next) {
     solicitudesFoliosAdapter.updateSolicitudFolio,
   );
 
+  await fastify.get(
+    '/representantes-legales/:curp',
+    {
+      schema: solicitudSchemas.findOneRepresentanteLegalSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesFoliosAdapter.findOneRepresentanteLegal,
+  );
+
   await fastify.post(
     '/:solicitudFolioId/observaciones',
     {
