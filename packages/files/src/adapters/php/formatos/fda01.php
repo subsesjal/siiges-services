@@ -16,10 +16,9 @@ class PDF extends FPDF
   function Header()
   {
     $this->Image(realpath(__DIR__ ."/../images/encabezado.png"), 60, 15, 75);
-    $this->AddFont('Nutmeg', '', 'Nutmeg-Regular.php');
-    $this->AddFont('Nutmegb', '', 'Nutmeg-Bold.php');
-    $this->AddFont('Nutmegbk', '', 'Nutmeg-Book.php');
-    $this->SetFont("Nutmegb", "", 11);
+    $this->AddFont('Garet', '', 'Garet-Regular.php');
+    $this->AddFont('Garetb', '', 'Garet-Bold.php');
+    $this->SetFont("Garetb", "", 11);
     $this->Ln(25);
     $this->SetTextColor(255, 255, 255);
     $this->SetFillColor(115, 199, 209);
@@ -32,7 +31,7 @@ class PDF extends FPDF
   function Footer()
   {
     $this->SetY(-30);
-    $this->SetFont("Nutmegbk", "", 7);
+    $this->SetFont("Garetb", "", 7);
     $this->SetTextColor(0, 0, 0);
     $this->Ln(5);
     $this->Image(realpath(__DIR__ ."/../images/direccion_sicyt.png"), 60, 245, 60);
@@ -77,7 +76,7 @@ $pdf = new PDF();
 
 $pdf->AliasNbPages();
 $pdf->AddPage("P", "Letter");
-$pdf->SetFont("Nutmegb", "", 11);
+$pdf->SetFont("Garetb", "", 11);
 $pdf->SetMargins(20, 20, 20);
 $pdf->Ln();
 $pdf->SetTextColor(115, 199, 209);
@@ -89,7 +88,7 @@ $pdf->Ln(5);
 $pdf->Cell(0, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', "AT´N: DIRECTOR GENERAL DE INCORPORACIÓN Y SERVICIOS ESCOLARES."), 0, 1, "R");
 
 $pdf->Ln(5);
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $fechaRaw = $solicitud["fecha"] ?? null;
 $fechaFormateada = $fechaRaw ? date("d/m/Y", strtotime($fechaRaw)) : "";
 
@@ -125,9 +124,9 @@ $pdf->Ln(5);
 
 $pdf->MultiCell(0, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT',"Quedo enterado de todas las disposiciones establecidas en la Ley General de Educación, La Ley General de Educación Superior, la Ley de Educación del Estado Libre y Soberano de Jalisco, la Ley de Educación Superior del Estado de Jalisco, así como del Instructivo para la obtención de Reconocimiento de Validez Oficial de Estudios de Educación Superior del Estado de Jalisco."), 0, "J");
 $pdf->Ln(30);
-$pdf->SetFont("Nutmegb", "", 11);
+$pdf->SetFont("Garetb", "", 11);
 $pdf->Cell(0, 5, (iconv('UTF-8', 'ISO-8859-1//TRANSLIT',mb_strtoupper("Bajo protesta de decir verdad"))), 0, 1, "C");
-$pdf->SetFont("Nutmeg", "", 11);
+$pdf->SetFont("Garet", "", 11);
 $pdf->Cell(0, 5, iconv('UTF-8', 'ISO-8859-1//TRANSLIT',mb_strtoupper($usuario["nombre"] . " " . $usuario["apellidoPaterno"] . " " . $usuario["apellidoMaterno"])), 0, 1, "C");
 
 echo $pdf->Output('S');

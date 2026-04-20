@@ -99,7 +99,7 @@ $pdf->AliasNbPages();
 $pdf->AddPage("P", "Letter");
 $pdf->SetMargins(20, 20, 20);
 
-$pdf->SetFont("Nutmegb", "", 11);
+$pdf->SetFont("Garetb", "", 11);
 $pdf->Ln(25);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFillColor(115, 199, 209);
@@ -112,7 +112,7 @@ $pdf->Cell(0, 5, safe_iconv("ACUERDO DE RECONOCIMIENTO DE VALIDEZ OFICIAL DE EST
 $pdf->SetTextColor(0, 0, 0);
 $pdf->Ln(5);
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $fechaRaw = $solicitud["fecha"] ?? date("Y-m-d");
 $fechaFormateadaSurte = date("d/m/Y", strtotime($fechaSurteEfecto));
 $fechaFormateadaVigencia = date("d/m/Y", strtotime($vigencia));
@@ -252,9 +252,9 @@ $pdf->MultiCell(0, 5, safe_iconv(
 $pdf->Ln(5);
 
 $pdf->Ln(25);
-$pdf->SetFont("Nutmeg", "", 11);
+$pdf->SetFont("Garet", "", 11);
 $pdf->Cell(0, 5, safe_iconv("MTRA. FANNY GUADALUPE VALDIVIA MÁRQUEZ"), 0, 1, "C");
-$pdf->SetFont("Nutmegb", "", 11);
+$pdf->SetFont("Garetb", "", 11);
 $pdf->Cell(0, 5, safe_iconv("Subsecretaria de Educación Superior"), 0, 1, "C");
 
 $pdf->Output("I", "FDA02.pdf");

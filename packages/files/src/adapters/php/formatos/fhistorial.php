@@ -60,7 +60,7 @@ $pdf->AliasNbPages();
 
 $pdf->AddPage("P", "Letter");
 $pdf->SetMargins(20, 20, 20);
-$pdf->SetFont("Nutmeg", "", 11);
+$pdf->SetFont("Garet", "", 11);
 
 $pdf->Ln(30);
 $pdf->SetTextColor(115, 199, 209);
@@ -69,7 +69,7 @@ $pdf->Ln(5);
 $pdf->SetTextColor(0, 0, 0);
 
 // Tabla de encabezado Datos generales de la institución y programa
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $dataPrograma = array(
   [
     "name" => safe_text("NOMBRE DE LA INSTITUCIÓN"),
@@ -108,11 +108,11 @@ foreach ($dataPrograma as $item) {
 $pdf->Ln(10);
 // Datos del alumno
 $pdf->SetFillColor(166, 166, 166);
-$pdf->SetFont("Nutmegb", "", 9);
+$pdf->SetFont("Garetb", "", 9);
 $pdf->Cell(176, 5, safe_text("DATOS DEL ALUMNO"), 1, 1, "C", true);
 
 // add table heading using standard cells
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->SetFillColor(191, 191, 191);
 $pdf->Cell(29, 5, safe_text("MATRÍCULA"), 1, 0, "C", true);
 $pdf->Cell(89, 5, safe_text("NOMBRE DEL ALUMNO"), 1, 0, "C", true); // Ajustado a 89
@@ -135,7 +135,7 @@ $pdf->SetWidths(array(29, 89, 29, 29));
 //set line height
 $pdf->SetLineHeight(5);
 $pdf->SetColors([]);
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 
 foreach ($dataDetalleDomicilioInstitucion1 as $item) {
   // write data using Row() method containing array of values
@@ -202,10 +202,10 @@ foreach ($calificacionCiclo as $ciclos => $ciclo) {
 
   $ciclo = $pdf->array_sort($ciclo, 'consecutivo', SORT_ASC);
   $pdf->SetFillColor(166, 166, 166);
-  $pdf->SetFont("Nutmeg", "", 9);
+  $pdf->SetFont("Garet", "", 9);
   $pdf->Cell(176, 5, safe_text(mb_strtoupper('CICLO ESCOLAR ' . $ciclos)), 1, 1, "C", true);
 
-  $pdf->SetFont("Nutmegb", "", 7);
+  $pdf->SetFont("Garetb", "", 7);
 
   $pdf->SetFillColor(191, 191, 191);
   $pdf->Cell(16, 8, safe_text("CLAVE"), 1, 0, "C", true);
@@ -248,7 +248,7 @@ foreach ($calificacionCiclo as $ciclos => $ciclo) {
     //set line height
     $pdf->SetLineHeight(5);
     $pdf->SetColors([]);
-    $pdf->SetFont("Nutmeg", "", 7);
+    $pdf->SetFont("Garet", "", 7);
 
     //Imprime la fila
     foreach ($dataCalificacionAsignatura as $item) {
@@ -297,13 +297,13 @@ if ($pdf->checkNewPage()) {
   $pdf->Ln(20);
 }
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->SetFillColor(191, 191, 191);
 $pdf->Cell(50, 5, safe_text("CRÉDITOS OBTENIDOS"), 1, 0, "C", true);
 $pdf->Cell(50, 5, safe_text("PROMEDIO"), 1, 0, "C", true);
 $pdf->Ln();
 
-$pdf->SetFont("Nutmeg", "", 9);
+$pdf->SetFont("Garet", "", 9);
 $pdf->SetFillColor(255, 255, 255);
 $pdf->Cell(50, 5, safe_text($total_creditos . " de " . ($programa["creditos"] ?? '')), 1, 0, "C", true);
 $pdf->Cell(50, 5, safe_text($promedio_calificacion), 1, 0, "C", true);
@@ -317,7 +317,7 @@ if ($pdf->checkNewPage()) {
 
 // Fecha
 $fecha = $pdf->convertirFecha(date("Y-m-d"));
-$pdf->SetFont("Nutmegbk", "", 8);
+$pdf->SetFont("Garet", "", 8);
 $pdf->MultiCell(176, 3, safe_text("El presente historial consigna las calificaciones que hasta la fecha han sido registradas en el  Sistema Integral de Información para la Gestión de la Educación Superior (SIIGES), el cumplimiento parcial o total del plan de estudios, los créditos obtenidos y la calificación total o parcial serán acreditados solamente por un certificado autorizado.
 
 La información del presente cumple fines informativos, único para la consulta de la Institución y la Dirección de Servicios Escolares, fecha de consulta " . $fecha), 0, "J");
