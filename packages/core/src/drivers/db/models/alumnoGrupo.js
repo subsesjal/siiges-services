@@ -62,6 +62,7 @@ const AlumnoGrupoSchema = {
 class AlumnoGrupo extends Model {
   static associate(models) {
     this.belongsTo(models.Alumno, { as: 'alumno' });
+    this.belongsTo(models.Grupo, { as: 'grupo' });
   }
 
   static config(sequelize) {
