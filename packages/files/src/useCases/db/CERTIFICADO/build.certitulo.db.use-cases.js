@@ -22,7 +22,15 @@ const buildFileCertitulo = (
   const include = [
     {
       association: 'solicitudFolioAlumno',
+      include: [
+        {
+          association: 'solicitudFolio',
+          include: [{ association: 'tipoSolicitudFolio' }],
+        },
+      ],
     },
+    { association: 'libro' },
+    { association: 'foja' },
     {
       association: 'alumno',
       include: [
@@ -106,13 +114,29 @@ const buildFileCertitulo = (
       };
     }
 
+    let calificacionProcesada = c.calificacion;
+    if (typeof c.calificacion === 'string' && c.calificacion.includes('(')) {
+      calificacionProcesada = c.calificacion.substring(0, 2).trim();
+    }
+
     calificacionesPorGrado[gradoId].asignaturas.push({
       asignaturaId: c.asignaturaId,
       nombre: c.asignatura?.nombre || '',
       periodo: cicloNombre,
-      calificacion: c.calificacion,
+      calificacion: calificacionProcesada,
       tipo: c.tipo,
       fechaExamen: c.fechaExamen,
+    });
+  });
+
+  Object.values(calificacionesPorGrado).forEach((grado) => {
+    grado.asignaturas.sort((a, b) => {
+      const nombreCompare = (a.nombre || '').localeCompare(b.nombre || '');
+      if (nombreCompare !== 0) return nombreCompare;
+
+      const tipoA = a.tipo === 2 || a.tipo === '2' ? 2 : 1;
+      const tipoB = b.tipo === 2 || b.tipo === '2' ? 2 : 1;
+      return tipoA - tipoB;
     });
   });
 
@@ -121,8 +145,13 @@ const buildFileCertitulo = (
   );
 
   const calificacionesNumericas = calificaciones
-    .map((c) => Number(c.calificacion))
-    .filter((n) => !Number.isNaN(n) && n > 0);
+    .map((c) => {
+      const cal = typeof c.calificacion === 'string' && c.calificacion.includes('(')
+        ? null
+        : Number(c.calificacion);
+      return cal;
+    })
+    .filter((n) => n !== null && !Number.isNaN(n) && n > 0);
 
   const promedioGeneral = calificacionesNumericas.length > 0
     ? (
@@ -162,6 +191,7 @@ const buildFileCertitulo = (
     fechaExpedicion: formatDateDMY(folioDocAlumno?.solicitudFolioAlumno?.fechaExpedicion),
     cct: folioDocAlumno.alumno.programa.plantel.claveCentroTrabajo,
     rvoe: folioDocAlumno.alumno.programa.acuerdoRvoe,
+    fechaRvoe: formatDateDMY(folioDocAlumno.alumno.programa.fechaSurteEfecto),
     totalAsignaturas: calificaciones.length,
     promedioGeneral,
     director:
@@ -170,12 +200,22 @@ const buildFileCertitulo = (
     grados: gradosOrdenados,
     identificadorUnico: documentoFirmado?.identificadorUnico,
     secuenciaDocumento: documentoFirmado?.secuenciaDocumento,
-    fechaFirmado: formatDateDMY(documentoFirmado.fechaFirmado),
+    fechaFirmado: formatDateDMY(documentoFirmado?.fechaFirmado),
     firmaDigital: documentoFirmado?.hashObjetoFirmado,
+    tipoCertificado: folioDocAlumno?.solicitudFolioAlumno
+      ?.solicitudFolio?.tipoSolicitudFolio?.descripcion,
+    libro: folioDocAlumno.libro?.nombre,
+    foja: folioDocAlumno.foja?.nombre,
     sitioVerificacion: `https://portalvalidacion.jalisco.gob.mx/#/resultado/${documentoFirmado?.uriValidacion}`,
     nombreFirmante,
     cargoFirmante,
     firmaElectronica: documentoFirmado?.firmaDigital,
+    creditosPrograma: folioDocAlumno.alumno.programa?.creditos,
+    calificacionMinima: folioDocAlumno.alumno.programa?.calificacionMinima,
+    calificacionMaxima: folioDocAlumno.alumno.programa?.calificacionMaxima,
+    calificacionAprobatoria: folioDocAlumno.alumno.programa?.calificacionAprobatoria,
+    claveInstitucionDGP: folioDocAlumno?.solicitudFolioAlumno?.solicitudFolio?.claveInstitucionDGP,
+    claveCarreraDGP: folioDocAlumno?.solicitudFolioAlumno?.solicitudFolio?.claveCarreraDGP,
   };
 
   const file = await GenerarCertificado(certificado, tipoDocumento);
