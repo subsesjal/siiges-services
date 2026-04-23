@@ -14,6 +14,7 @@ const findGroupAlumnosPersona = (
   matricula,
   acuerdoRvoe,
   cct,
+  institucionId,
 }) => {
   const wherePersona = {};
   const whereAlumno = {};
@@ -28,7 +29,8 @@ const findGroupAlumnosPersona = (
     Object.keys(wherePersona).length > 0
       || Object.keys(whereAlumno).length > 0
       || acuerdoRvoe
-      || cct,
+      || cct
+      || institucionId,
     'persona',
     'sin parámetros de búsqueda',
   );
@@ -56,34 +58,33 @@ const findGroupAlumnosPersona = (
     },
   ];
 
-  if (cct) {
-    const planteles = await findPlantelQuery(
-      { claveCentroTrabajo: { [Op.like]: `%${cct}%` } },
-    );
-    checkers.throwErrorIfDataIsFalsy(planteles?.length, 'planteles', cct);
+  if (cct || institucionId) {
+    const wherePlantel = {};
+    if (cct) wherePlantel.claveCentroTrabajo = { [Op.like]: `%${cct}%` };
+    if (institucionId) wherePlantel.institucionId = institucionId;
+
+    const planteles = await findPlantelQuery(wherePlantel);
+    checkers.throwErrorIfDataIsFalsy(planteles?.length, 'planteles', JSON.stringify(wherePlantel));
     const plantelIds = planteles.map((p) => p.id);
 
-    const whereProgramaCct = { plantelId: { [Op.in]: plantelIds } };
-    if (acuerdoRvoe) whereProgramaCct.acuerdoRvoe = { [Op.like]: `%${acuerdoRvoe}%` };
+    const whereProgramas = { plantelId: { [Op.in]: plantelIds } };
+    if (acuerdoRvoe) whereProgramas.acuerdoRvoe = { [Op.like]: `%${acuerdoRvoe}%` };
 
-    const programas = await findAllProgramasQuery(whereProgramaCct);
-    checkers.throwErrorIfDataIsFalsy(programas?.length, 'programas', cct);
-    const programaIds = programas.map((p) => p.id);
-    whereAlumno.programaId = { [Op.in]: programaIds };
+    const programas = await findAllProgramasQuery(whereProgramas);
+    checkers.throwErrorIfDataIsFalsy(programas?.length, 'programas', JSON.stringify(whereProgramas));
+    whereAlumno.programaId = { [Op.in]: programas.map((p) => p.id) };
   } else if (acuerdoRvoe) {
     const programas = await findAllProgramasQuery(
       { acuerdoRvoe: { [Op.like]: `%${acuerdoRvoe}%` } },
     );
     checkers.throwErrorIfDataIsFalsy(programas?.length, 'programas', acuerdoRvoe);
-    const programaIds = programas.map((p) => p.id);
-    whereAlumno.programaId = { [Op.in]: programaIds };
+    whereAlumno.programaId = { [Op.in]: programas.map((p) => p.id) };
   }
 
   if (Object.keys(wherePersona).length > 0) {
     const personas = await findAllPersonasQuery(wherePersona);
     checkers.throwErrorIfDataIsFalsy(personas?.length, 'personas', JSON.stringify(wherePersona));
-    const personaIds = personas.map((p) => p.id);
-    whereAlumno.personaId = { [Op.in]: personaIds };
+    whereAlumno.personaId = { [Op.in]: personas.map((p) => p.id) };
   }
 
   const alumnos = await findAllAlumnosQuery(whereAlumno, { include, strict: false });
