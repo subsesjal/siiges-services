@@ -5,7 +5,7 @@ async function findGroupAlumnosPersona(req, reply) {
   try {
     const {
       curp, nombre, apellidoPaterno, apellidoMaterno,
-      matricula, acuerdoRvoe, cct,
+      matricula, acuerdoRvoe, cct, institucionId,
     } = req.query;
 
     Logger.info(`[Alumno]: Searching Alumnos with params: ${JSON.stringify(req.query)}`);
@@ -18,6 +18,7 @@ async function findGroupAlumnosPersona(req, reply) {
       matricula,
       acuerdoRvoe,
       cct,
+      institucionId,
     });
 
     return reply
