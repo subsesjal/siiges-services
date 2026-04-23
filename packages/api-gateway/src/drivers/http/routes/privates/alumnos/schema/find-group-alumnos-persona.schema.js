@@ -16,6 +16,7 @@ const findGroupAlumnosPersonaSchema = {
       matricula: { type: 'string' },
       acuerdoRvoe: { type: 'string' },
       cct: { type: 'string' },
+      institucionId: { type: 'integer' },
     },
   },
   response: {
