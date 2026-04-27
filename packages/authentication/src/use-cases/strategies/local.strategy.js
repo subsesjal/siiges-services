@@ -15,6 +15,10 @@ const localStrategy = (adapter, findOneUserQuery) => async (identifierObj) => {
     throw boom.unauthorized();
   }
 
+  if (!usuarioFound.dataValues.avisoPrivacidad) {
+    throw boom.forbidden('El usuario no ha aceptado el aviso de privacidad y los términos y condiciones de uso.');
+  }
+
   if (usuarioFound.dataValues.actualizado
     ? !adapter.matchHmacPassword(contrasena, usuarioFound.dataValues.contrasena)
     : !adapter.matchHashPassword(contrasena, usuarioFound.dataValues.contrasena)
