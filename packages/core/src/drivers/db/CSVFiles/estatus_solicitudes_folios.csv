@@ -6,3 +6,7 @@ id,nombre,descripcion,created_at
 5,CANCELADA,Solicitud cancelada,2018-08-08 0:00:00
 6,ENVIADO A TITULACION,Envío a aplicación de titulación,2018-08-08 0:00:00
 7,ENVIO PARCIAL A TITULACION,Envío parcial a aplicación de titulación,2018-08-08 0:00:00
+8,FIRMA PARCIAL CERTIFICADO IES,Firma parcial de certificado por parte del IES,2018-08-08 0:00:00
+9,FIRMA CERTIFICADO IES,Firma de certificado por parte del IES,2018-08-08 0:00:00
+10,FIRMA PARCIAL CERTIFICADO SICYT,Firma parcial de certificado por parte del SICYT,2018-08-08 0:00:00
+11,FIRMA CERTIFICADO SICYT,Firma de certificado por parte del SICYT,2018-08-08 0:00:00

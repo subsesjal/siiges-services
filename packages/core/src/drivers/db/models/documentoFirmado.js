@@ -60,6 +60,30 @@ const DocumentoFirmadoSchema = {
     field: 'datos_firmante',
     comment: 'Información del certificado del firmante',
   },
+  tipoFirmante: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'tipo_firmante',
+    comment: 'Tipo de firmante (persona física o moral)',
+  },
+  cargoFirmante: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'cargo_firmante',
+    comment: 'Cargo o posición del firmante dentro de la organización',
+  },
+  curpFirmante: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'curp_firmante',
+    comment: 'CURP del firmante',
+  },
+  nombreFirmante: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'nombre_firmante',
+    comment: 'Nombre completo del firmante',
+  },
   objetoFirmado: {
     allowNull: true,
     type: DataTypes.TEXT,
