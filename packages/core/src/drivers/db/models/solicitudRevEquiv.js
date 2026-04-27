@@ -44,6 +44,11 @@ const SolicitudRevEquivSchema = {
     allowNull: false,
     type: DataTypes.DATEONLY,
   },
+  folioPago: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    field: 'folio_pago',
+  },
   folioSolicitud: {
     allowNull: false,
     type: DataTypes.STRING,
