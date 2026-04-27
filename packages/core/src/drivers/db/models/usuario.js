@@ -53,6 +53,12 @@ const UsuarioSchema = {
     type: Sequelize.BOOLEAN,
     defaultValue: true,
   },
+  avisoPrivacidad: {
+    field: 'aviso_privacidad',
+    allowNull: false,
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
   tokenNotificaciones: {
     type: DataTypes.STRING,
     field: 'token_notificaciones',
