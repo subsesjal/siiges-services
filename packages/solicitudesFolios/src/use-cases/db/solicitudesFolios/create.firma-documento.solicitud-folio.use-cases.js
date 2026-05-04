@@ -1,14 +1,9 @@
-const { checkers, Logger } = require('@siiges-services/shared');
+const { Logger } = require('@siiges-services/shared');
 const axios = require('axios');
 const { config } = require('../../../../config/environment');
 
 const SERVICIO_FIRMA_DOCUMENTO = 'firma_documento';
 const BATCH_SIZE = 5;
-
-const TIPO_DOCUMENTO_CATALOGO = {
-  certificado: 'D001',
-  titulo: 'D002',
-};
 
 const getBasicAuthHeader = () => {
   const { clientId, clientSecret } = config.firmaElectronica;
@@ -168,35 +163,15 @@ const firmarUnDocumento = async (
   };
 };
 
-const createFirmaDocumento = (
-  findOneCatalogoFirmaElectronicaQuery,
+const procesarDocumentos = async (
+  documentos,
+  catalogo,
   findOneTokenExternoQuery,
   createTokenExternoQuery,
   updateTokenExternoQuery,
   createDocumentoFirmadoQuery,
   updateDocumentoFirmadoQuery,
-) => async (documentos) => {
-  if (!Array.isArray(documentos) || documentos.length === 0) {
-    throw new Error('Se requiere al menos un documento para firmar');
-  }
-
-  const primerDocumento = documentos[0];
-  const { tipoDocumento } = primerDocumento;
-
-  const claveDocumentoCatalogo = TIPO_DOCUMENTO_CATALOGO[tipoDocumento];
-
-  if (!claveDocumentoCatalogo) {
-    throw new Error(`Tipo de documento no soportado: ${tipoDocumento}`);
-  }
-
-  Logger.info(`[firma-documento] Tipo documento: ${tipoDocumento} -> Clave catálogo: ${claveDocumentoCatalogo}`);
-  Logger.info(`[firma-documento] Procesando ${documentos.length} documento(s) en lotes de ${BATCH_SIZE}`);
-
-  const catalogo = await findOneCatalogoFirmaElectronicaQuery({
-    claveDocumento: claveDocumentoCatalogo,
-  });
-  checkers.throwErrorIfDataIsFalsy(catalogo, 'catalogo-firma-electronica', claveDocumentoCatalogo);
-
+) => {
   let tokenExterno = await findOneTokenExternoQuery({
     servicio: SERVICIO_FIRMA_DOCUMENTO,
     activo: true,
@@ -254,6 +229,49 @@ const createFirmaDocumento = (
   Logger.info(`[firma-documento] Proceso completado: ${exitosos} exitosos, ${rechazados} rechazados`);
 
   return resultados;
+};
+
+const createFirmaDocumento = (
+  findOneCatalogoFirmaElectronicaQuery,
+  findOneTokenExternoQuery,
+  createTokenExternoQuery,
+  updateTokenExternoQuery,
+  createDocumentoFirmadoQuery,
+  updateDocumentoFirmadoQuery,
+) => async (documentos) => {
+  if (!Array.isArray(documentos) || documentos.length === 0) {
+    throw new Error('Se requiere al menos un documento para firmar');
+  }
+
+  const primerDocumento = documentos[0];
+  const { tipoDocumento } = primerDocumento;
+
+  if (!tipoDocumento) {
+    throw new Error('El campo tipoDocumento es requerido');
+  }
+
+  Logger.info(`[firma-documento] Buscando catálogo para tipoDocumento: ${tipoDocumento}`);
+
+  const catalogo = await findOneCatalogoFirmaElectronicaQuery({
+    claveDocumento: tipoDocumento,
+  });
+
+  if (!catalogo) {
+    throw new Error(`No se encontró configuración en catálogo para tipo de documento: ${tipoDocumento}`);
+  }
+
+  Logger.info(`[firma-documento] Catálogo encontrado: ${catalogo.nombre} -> ${catalogo.claveDocumento}`);
+  Logger.info(`[firma-documento] Procesando ${documentos.length} documento(s) en lotes de ${BATCH_SIZE}`);
+
+  return procesarDocumentos(
+    documentos,
+    catalogo,
+    findOneTokenExternoQuery,
+    createTokenExternoQuery,
+    updateTokenExternoQuery,
+    createDocumentoFirmadoQuery,
+    updateDocumentoFirmadoQuery,
+  );
 };
 
 module.exports = createFirmaDocumento;
