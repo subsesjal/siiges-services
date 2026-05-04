@@ -29,7 +29,6 @@ const obtenerTokenExterno = async () => {
     }).toString(),
   });
 
-  Logger.info('[firma-documento] Token obtenido exitosamente');
   return response.data;
 };
 
@@ -74,8 +73,6 @@ const firmarUnDocumento = async (
     autoridad,
   } = documento;
 
-  Logger.info(`[firma-documento] Procesando documento: ${folioInterno}`);
-
   let documentoFirmado = await createDocumentoFirmadoQuery({
     catalogoFirmaElectronicaId: catalogo.id,
     objetoPorFirmar: JSON.stringify(objetoPorFirmar),
@@ -118,8 +115,6 @@ const firmarUnDocumento = async (
   }
 
   if (!firmaResponse || firmaResponse.error || !firmaResponse.identificadorunico) {
-    Logger.warn(`[firma-documento] Firma rechazada para ${folioInterno}`);
-
     documentoFirmado = await updateDocumentoFirmadoQuery(
       { id: documentoFirmado.id },
       {
@@ -178,8 +173,6 @@ const procesarDocumentos = async (
   });
 
   if (isTokenExpired(tokenExterno)) {
-    Logger.info('[firma-documento] Token expirado o no existe, solicitando nuevo token');
-
     const tokenResponse = await obtenerTokenExterno();
 
     const tokenData = {
@@ -200,8 +193,6 @@ const procesarDocumentos = async (
     } else {
       tokenExterno = await createTokenExternoQuery(tokenData);
     }
-
-    Logger.info('[firma-documento] Token almacenado exitosamente');
   }
 
   const resultados = [];
@@ -250,8 +241,6 @@ const createFirmaDocumento = (
     throw new Error('El campo tipoDocumento es requerido');
   }
 
-  Logger.info(`[firma-documento] Buscando catálogo para tipoDocumento: ${tipoDocumento}`);
-
   const catalogo = await findOneCatalogoFirmaElectronicaQuery({
     claveDocumento: tipoDocumento,
   });
@@ -259,9 +248,6 @@ const createFirmaDocumento = (
   if (!catalogo) {
     throw new Error(`No se encontró configuración en catálogo para tipo de documento: ${tipoDocumento}`);
   }
-
-  Logger.info(`[firma-documento] Catálogo encontrado: ${catalogo.nombre} -> ${catalogo.claveDocumento}`);
-  Logger.info(`[firma-documento] Procesando ${documentos.length} documento(s) en lotes de ${BATCH_SIZE}`);
 
   return procesarDocumentos(
     documentos,
