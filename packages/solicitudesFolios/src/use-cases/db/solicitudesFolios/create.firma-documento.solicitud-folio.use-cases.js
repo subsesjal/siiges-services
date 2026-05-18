@@ -13,11 +13,11 @@ const getBasicAuthHeader = () => {
 };
 
 const obtenerTokenExterno = async () => {
-  const { baseUrl, username, password } = config.firmaElectronica;
+  const { urlToken, username, password } = config.firmaElectronica;
 
   const response = await axios({
     method: 'POST',
-    url: `${baseUrl}/fe_desarrollo/feauth/token`,
+    url: urlToken,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       Authorization: getBasicAuthHeader(),
@@ -98,11 +98,11 @@ const validarFirmante = async (
 };
 
 const firmarDocumentoExterno = async (pkcs7, claveDocumento, tipoServicio, accessToken) => {
-  const { baseUrl } = config.firmaElectronica;
+  const { urlFirma } = config.firmaElectronica;
 
   const response = await axios({
     method: 'POST',
-    url: `${baseUrl}/fe/rest/firmadocumento`,
+    url: urlFirma,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       Authorization: `Bearer ${accessToken}`,
