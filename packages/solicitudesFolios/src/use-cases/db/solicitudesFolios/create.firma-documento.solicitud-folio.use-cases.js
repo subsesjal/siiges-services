@@ -13,11 +13,11 @@ const getBasicAuthHeader = () => {
 };
 
 const obtenerTokenExterno = async () => {
-  const { baseUrl, username, password } = config.firmaElectronica;
+  const { urlToken, username, password } = config.firmaElectronica;
 
   const response = await axios({
     method: 'POST',
-    url: `${baseUrl}/feauth/token`,
+    url: urlToken,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       Authorization: getBasicAuthHeader(),
@@ -32,12 +32,77 @@ const obtenerTokenExterno = async () => {
   return response.data;
 };
 
+const buscarFirmanteEnApiTitulo = async (curp) => {
+  try {
+    const { baseUrl, apiKey } = config.apiTitulos;
+
+    const response = await axios({
+      method: 'GET',
+      url: `${baseUrl}/representantes-legales/${curp}`,
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+      },
+    });
+
+    const firmanteData = response.data?.data || response.data;
+
+    if (firmanteData?.curp) {
+      return firmanteData;
+    }
+    return null;
+  } catch (err) {
+    Logger.error(`[firma-documento] Data: ${JSON.stringify(err.response?.data)}`);
+    return null;
+  }
+};
+
+const validarFirmante = async (
+  autoridad,
+  programaId,
+  findOneFirmanteQuery,
+  createOneFirmanteQuery,
+) => {
+  const { tipoFirmante, curp } = autoridad;
+
+  let firmante = await findOneFirmanteQuery({ curpFirmante: curp });
+
+  if (firmante) {
+    return { valido: true, firmante };
+  }
+
+  if (tipoFirmante === 'sicyt') {
+    return { valido: false, error: 'Firmante SICYT no autorizado' };
+  }
+
+  const firmanteExterno = await buscarFirmanteEnApiTitulo(curp);
+
+  if (!firmanteExterno) {
+    return { valido: false, error: 'Firmante no encontrado en el sistema de título' };
+  }
+
+  try {
+    firmante = await createOneFirmanteQuery({
+      primerNombre: firmanteExterno.nombre || '',
+      segundoNombre: '',
+      apellidoPaterno: firmanteExterno.primerApellido || '',
+      apellidoMaterno: firmanteExterno.segundoApellido || '',
+      curpFirmante: curp,
+      programaId,
+    });
+  } catch (err) {
+    Logger.error(`[firma-documento] Error al guardar firmante: ${err.message}`);
+  }
+
+  return { valido: true, firmante };
+};
+
 const firmarDocumentoExterno = async (pkcs7, claveDocumento, tipoServicio, accessToken) => {
-  const { baseUrl } = config.firmaElectronica;
+  const { urlFirma } = config.firmaElectronica;
 
   const response = await axios({
     method: 'POST',
-    url: `${baseUrl}/rest/firmadocumento`,
+    url: urlFirma,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       Authorization: `Bearer ${accessToken}`,
@@ -59,12 +124,13 @@ const isTokenExpired = (tokenExterno) => {
   return now >= fechaExpiracion;
 };
 
-const firmarUnDocumento = async (
+const firmarUnDocumentoIes = async (
   documento,
   catalogo,
   tokenExterno,
   createDocumentoFirmadoQuery,
   updateDocumentoFirmadoQuery,
+  findOneDocumentoFirmadoQuery,
 ) => {
   const {
     pkcs7,
@@ -73,17 +139,26 @@ const firmarUnDocumento = async (
     autoridad,
   } = documento;
 
-  let documentoFirmado = await createDocumentoFirmadoQuery({
-    catalogoFirmaElectronicaId: catalogo.id,
-    objetoPorFirmar: JSON.stringify(objetoPorFirmar),
-    pkcs7,
-    folioInterno,
-    estatusFirmado: 'pendiente',
-    tipoFirmante: autoridad.tipoFirmante,
-    cargoFirmante: autoridad.cargoFirmante,
-    curpFirmante: autoridad.curp,
-    nombreFirmante: autoridad.nombre,
-  });
+  let documentoFirmado = await findOneDocumentoFirmadoQuery({ folioInterno });
+
+  if (documentoFirmado) {
+    if (documentoFirmado.firmaDigitalIes) {
+      return {
+        folioInterno,
+        estatusFirmado: 'exitoso',
+        mensaje: 'Ya firmado por IES',
+      };
+    }
+  } else {
+    documentoFirmado = await createDocumentoFirmadoQuery({
+      catalogoFirmaElectronicaId: catalogo.id,
+      objetoPorFirmar: JSON.stringify(objetoPorFirmar),
+      folioInterno,
+      pkcs7Ies: pkcs7,
+      curpFirmanteIes: autoridad.curp,
+      nombreFirmanteIes: autoridad.nombre,
+    });
+  }
 
   let firmaResponse;
   try {
@@ -98,74 +173,192 @@ const firmarUnDocumento = async (
       ? JSON.stringify(err.response.data)
       : err.message;
 
-    Logger.warn(`[firma-documento] Error al firmar ${folioInterno}: ${errorMsg}`);
-
-    documentoFirmado = await updateDocumentoFirmadoQuery(
+    await updateDocumentoFirmadoQuery(
       { id: documentoFirmado.id },
       {
-        estatusFirmado: 'rechazado',
-        firmaResponse: errorMsg,
+        pkcs7Ies: pkcs7,
+        curpFirmanteIes: autoridad.curp,
+        nombreFirmanteIes: autoridad.nombre,
+        firmaResponseIes: errorMsg,
       },
     );
 
     return {
-      folioInterno: documentoFirmado.folioInterno,
-      estatusFirmado: documentoFirmado.estatusFirmado,
+      folioInterno,
+      estatusFirmado: 'rechazado',
     };
   }
 
   if (!firmaResponse || firmaResponse.error || !firmaResponse.identificadorunico) {
-    documentoFirmado = await updateDocumentoFirmadoQuery(
+    await updateDocumentoFirmadoQuery(
       { id: documentoFirmado.id },
       {
-        estatusFirmado: 'rechazado',
-        firmaResponse: JSON.stringify(firmaResponse),
+        pkcs7Ies: pkcs7,
+        curpFirmanteIes: autoridad.curp,
+        nombreFirmanteIes: autoridad.nombre,
+        firmaResponseIes: JSON.stringify(firmaResponse),
       },
     );
 
     return {
-      folioInterno: documentoFirmado.folioInterno,
-      estatusFirmado: documentoFirmado.estatusFirmado,
+      folioInterno,
+      estatusFirmado: 'rechazado',
     };
   }
 
-  documentoFirmado = await updateDocumentoFirmadoQuery(
+  await updateDocumentoFirmadoQuery(
     { id: documentoFirmado.id },
     {
-      identificadorUnico: firmaResponse.identificadorunico,
-      hashObjetoFirmado: firmaResponse.hashobjetofirmado,
-      secuenciaDocumento: firmaResponse.secuenciadocumento,
-      datosFirmante: firmaResponse.datosfirmante,
-      objetoFirmado: firmaResponse.objetofirmado,
-      firmaResponse: JSON.stringify(firmaResponse),
-      uriValidacion: firmaResponse.urivalidacion,
-      tipoDocumento: firmaResponse.tipodocumento,
-      identificadorDocumento: firmaResponse.identificadordocumento,
-      dependenciaDocumento: firmaResponse.dependenciadocumento,
-      firmaDigital: firmaResponse.firmadigital,
-      estatusFirmado: 'exitoso',
-      fechaFirmado: firmaResponse.fechafirmado
+      pkcs7Ies: pkcs7,
+      curpFirmanteIes: autoridad.curp,
+      nombreFirmanteIes: autoridad.nombre,
+      datosFirmanteIes: firmaResponse.datosfirmante,
+      firmaResponseIes: JSON.stringify(firmaResponse),
+      fechaFirmadoIes: firmaResponse.fechafirmado
         ? new Date(firmaResponse.fechafirmado)
         : new Date(),
+      identificadorUnicoIes: firmaResponse.identificadorunico,
+      hashObjetoFirmadoIes: firmaResponse.hashobjetofirmado,
+      firmaDigitalIes: firmaResponse.firmadigital,
+      secuenciaDocumentoIes: firmaResponse.secuenciadocumento,
+      objetoFirmadoIes: firmaResponse.objetofirmado,
+      uriValidacionIes: firmaResponse.urivalidacion,
+      tipoDocumentoIes: firmaResponse.tipodocumento,
+      identificadorDocumentoIes: firmaResponse.identificadordocumento,
+      dependenciaDocumentoIes: firmaResponse.dependenciadocumento,
     },
   );
 
-  Logger.info(`[firma-documento] Documento firmado exitosamente: ${folioInterno}`);
+  return {
+    folioInterno,
+    estatusFirmado: 'exitoso',
+  };
+};
+
+const firmarUnDocumentoSicyt = async (
+  documento,
+  catalogo,
+  tokenExterno,
+  updateDocumentoFirmadoQuery,
+  findOneDocumentoFirmadoQuery,
+) => {
+  const {
+    pkcs7,
+    folioInterno,
+    autoridad,
+  } = documento;
+
+  const documentoFirmado = await findOneDocumentoFirmadoQuery({ folioInterno });
+
+  if (!documentoFirmado) {
+    return {
+      folioInterno,
+      estatusFirmado: 'rechazado',
+      mensaje: 'No existe registro previo de firma IES',
+    };
+  }
+
+  if (!documentoFirmado.firmaDigitalIes) {
+    return {
+      folioInterno,
+      estatusFirmado: 'rechazado',
+      mensaje: 'Requiere firma IES primero',
+    };
+  }
+
+  if (documentoFirmado.firmaDigitalSicyt) {
+    return {
+      folioInterno,
+      estatusFirmado: 'exitoso',
+      mensaje: 'Ya firmado por SICYT',
+    };
+  }
+
+  let firmaResponse;
+  try {
+    firmaResponse = await firmarDocumentoExterno(
+      pkcs7,
+      catalogo.claveDocumento,
+      catalogo.tipoServicio,
+      tokenExterno.accessToken,
+    );
+  } catch (err) {
+    const errorMsg = err.response?.data
+      ? JSON.stringify(err.response.data)
+      : err.message;
+
+    await updateDocumentoFirmadoQuery(
+      { id: documentoFirmado.id },
+      {
+        pkcs7Sicyt: pkcs7,
+        curpFirmanteSicyt: autoridad.curp,
+        nombreFirmanteSicyt: autoridad.nombre,
+        firmaResponseSicyt: errorMsg,
+      },
+    );
+
+    return {
+      folioInterno,
+      estatusFirmado: 'rechazado',
+    };
+  }
+
+  if (!firmaResponse || firmaResponse.error || !firmaResponse.identificadorunico) {
+    await updateDocumentoFirmadoQuery(
+      { id: documentoFirmado.id },
+      {
+        pkcs7Sicyt: pkcs7,
+        curpFirmanteSicyt: autoridad.curp,
+        nombreFirmanteSicyt: autoridad.nombre,
+        firmaResponseSicyt: JSON.stringify(firmaResponse),
+      },
+    );
+
+    return {
+      folioInterno,
+      estatusFirmado: 'rechazado',
+    };
+  }
+
+  await updateDocumentoFirmadoQuery(
+    { id: documentoFirmado.id },
+    {
+      pkcs7Sicyt: pkcs7,
+      curpFirmanteSicyt: autoridad.curp,
+      nombreFirmanteSicyt: autoridad.nombre,
+      datosFirmanteSicyt: firmaResponse.datosfirmante,
+      firmaResponseSicyt: JSON.stringify(firmaResponse),
+      fechaFirmadoSicyt: firmaResponse.fechafirmado
+        ? new Date(firmaResponse.fechafirmado)
+        : new Date(),
+      identificadorUnicoSicyt: firmaResponse.identificadorunico,
+      hashObjetoFirmadoSicyt: firmaResponse.hashobjetofirmado,
+      firmaDigitalSicyt: firmaResponse.firmadigital,
+      secuenciaDocumentoSicyt: firmaResponse.secuenciadocumento,
+      objetoFirmadoSicyt: firmaResponse.objetofirmado,
+      uriValidacionSicyt: firmaResponse.urivalidacion,
+      tipoDocumentoSicyt: firmaResponse.tipodocumento,
+      identificadorDocumentoSicyt: firmaResponse.identificadordocumento,
+      dependenciaDocumentoSicyt: firmaResponse.dependenciadocumento,
+    },
+  );
 
   return {
-    folioInterno: documentoFirmado.folioInterno,
-    estatusFirmado: documentoFirmado.estatusFirmado,
+    folioInterno,
+    estatusFirmado: 'exitoso',
   };
 };
 
 const procesarDocumentos = async (
   documentos,
   catalogo,
+  tipoFirmante,
   findOneTokenExternoQuery,
   createTokenExternoQuery,
   updateTokenExternoQuery,
   createDocumentoFirmadoQuery,
   updateDocumentoFirmadoQuery,
+  findOneDocumentoFirmadoQuery,
 ) => {
   let tokenExterno = await findOneTokenExternoQuery({
     servicio: SERVICIO_FIRMA_DOCUMENTO,
@@ -202,13 +395,25 @@ const procesarDocumentos = async (
 
     // eslint-disable-next-line no-await-in-loop
     const resultadosLote = await Promise.all(
-      lote.map((documento) => firmarUnDocumento(
-        documento,
-        catalogo,
-        tokenExterno,
-        createDocumentoFirmadoQuery,
-        updateDocumentoFirmadoQuery,
-      )),
+      lote.map((documento) => {
+        if (tipoFirmante === 'ies') {
+          return firmarUnDocumentoIes(
+            documento,
+            catalogo,
+            tokenExterno,
+            createDocumentoFirmadoQuery,
+            updateDocumentoFirmadoQuery,
+            findOneDocumentoFirmadoQuery,
+          );
+        }
+        return firmarUnDocumentoSicyt(
+          documento,
+          catalogo,
+          tokenExterno,
+          updateDocumentoFirmadoQuery,
+          findOneDocumentoFirmadoQuery,
+        );
+      }),
     );
 
     resultados.push(...resultadosLote);
@@ -229,35 +434,61 @@ const createFirmaDocumento = (
   updateTokenExternoQuery,
   createDocumentoFirmadoQuery,
   updateDocumentoFirmadoQuery,
+  findOneFirmanteQuery,
+  createOneFirmanteQuery,
+  findOneDocumentoFirmadoQuery,
 ) => async (documentos) => {
   if (!Array.isArray(documentos) || documentos.length === 0) {
-    throw new Error('Se requiere al menos un documento para firmar');
+    return { error: true, message: 'Se requiere al menos un documento para firmar' };
   }
 
   const primerDocumento = documentos[0];
-  const { tipoDocumento } = primerDocumento;
+  const { tipoDocumento, autoridad, programaId } = primerDocumento;
 
   if (!tipoDocumento) {
-    throw new Error('El campo tipoDocumento es requerido');
+    return { error: true, message: 'El campo tipoDocumento es requerido' };
   }
 
+  if (!autoridad || !autoridad.curp) {
+    return { error: true, message: 'El campo autoridad.curp es requerido' };
+  }
+
+  const { tipoFirmante } = autoridad;
+
   const catalogo = await findOneCatalogoFirmaElectronicaQuery({
-    claveDocumento: tipoDocumento,
+    nombreDocumento: tipoDocumento,
   });
 
   if (!catalogo) {
-    throw new Error(`No se encontró configuración en catálogo para tipo de documento: ${tipoDocumento}`);
+    return { error: true, message: `No se encontró configuración en catálogo para tipo de documento: ${tipoDocumento}` };
   }
 
-  return procesarDocumentos(
+  const { valido, error } = await validarFirmante(
+    autoridad,
+    programaId,
+    findOneFirmanteQuery,
+    createOneFirmanteQuery,
+  );
+
+  if (!valido) {
+    return { error: true, message: error || 'Firmante no válido' };
+  }
+
+  Logger.info(`[firma-documento] Procesando ${documentos.length} documento(s) en lotes de ${BATCH_SIZE}`);
+
+  const resultados = await procesarDocumentos(
     documentos,
     catalogo,
+    tipoFirmante,
     findOneTokenExternoQuery,
     createTokenExternoQuery,
     updateTokenExternoQuery,
     createDocumentoFirmadoQuery,
     updateDocumentoFirmadoQuery,
+    findOneDocumentoFirmadoQuery,
   );
+
+  return { error: false, resultados };
 };
 
 module.exports = createFirmaDocumento;

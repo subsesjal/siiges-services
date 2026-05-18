@@ -75,10 +75,10 @@ const createFileXML = (
     fechaInicioAntecedente: titulo.Antecedente?.$?.fechaInicio,
     fechaTerminacionAntecedente: titulo.Antecedente?.$?.fechaTerminacion,
     noCedula: titulo.Antecedente?.$?.noCedula,
-    folioDigital: titulo.Autenticacion?.$?.folioDigital,
-    fechaAutenticacion: titulo.Autenticacion?.$?.fechaAutenticacion,
-    selloTitulo: titulo.Autenticacion?.$?.selloTitulo,
-    noCertificadoAutoridad: titulo.Autenticacion?.$?.noCertificadoAutoridad,
+    folioDigital: titulo.$?.folioControl,
+    fechaAutenticacion: titulo.Expedicion?.$?.fechaExpedicion,
+    selloTitulo: firma?.sello,
+    noCertificadoAutoridad: firma?.noCertificadoResponsable,
     selloAutenticacion: titulo.Autenticacion?.$?.selloAutenticacion,
   });
 
