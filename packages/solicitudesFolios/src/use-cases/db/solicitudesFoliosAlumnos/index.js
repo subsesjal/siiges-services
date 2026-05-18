@@ -28,6 +28,7 @@ module.exports = {
   ),
   findAllSolicitudFolioAlumnos: findAllSolicitudFolioAlumnos(
     solicitudesFoliosAlumnos.findAllSolicitudFolioAlumnosQuery,
+    solicitudesFoliosAlumnos.findAllDocumentosFirmadosQuery,
   ),
   deleteSolicitudFolioAlumno: deleteSolicitudFolioAlumno(
     solicitudesFoliosAlumnos.findOneSolicitudFolioAlumnoQuery,
@@ -49,6 +50,6 @@ module.exports = {
   ),
   reportFolioDocumentoAlumno: reportFolioDocumentoAlumno(
     solicitudesFoliosAlumnos.reportFolioDocumentoAlumnoQuery,
-    solicitudesFoliosAlumnos.findAllDocumentosFirmadoQuery,
+    solicitudesFoliosAlumnos.findAllDocumentosFirmadosQuery,
   ),
 };

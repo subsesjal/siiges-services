@@ -30,5 +30,8 @@ module.exports = {
     solicitudesFolios.updateTokenExternoQuery,
     solicitudesFolios.createDocumentoFirmadoQuery,
     solicitudesFolios.updateDocumentoFirmadoQuery,
+    solicitudesFolios.findOneFirmanteQuery,
+    solicitudesFolios.createOneFirmanteQuery,
+    solicitudesFolios.findOneDocumentoFirmadoQuery,
   ),
 };

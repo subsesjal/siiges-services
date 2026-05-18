@@ -17,6 +17,7 @@ const buildFileCertitulo = (
   findOneFolioDocumentoAlumnoQuery,
   findAllCalificacionesQuery,
   findOneDocumentoFirmadoQuery,
+  updateDocumentoFirmadoQuery,
   GenerarCertificado,
 ) => async (folioDocAlumnoId, tipoDocumento) => {
   const include = [
@@ -73,6 +74,19 @@ const buildFileCertitulo = (
     documentoFirmado = await findOneDocumentoFirmadoQuery({
       folioInterno: folioDocAlumno.folioDocumento,
     });
+  }
+
+  if (documentoFirmado?.fechaExpedicion) {
+    const error = new Error('El certificado ya fue generado anteriormente');
+    error.statusCode = 400;
+    throw error;
+  }
+
+  if (documentoFirmado) {
+    await updateDocumentoFirmadoQuery(
+      { id: documentoFirmado.id },
+      { fechaExpedicion: new Date() },
+    );
   }
 
   const includeCalificaciones = [
@@ -189,7 +203,7 @@ const buildFileCertitulo = (
     fechaTerminacion: formatDateDMY(folioDocAlumno?.solicitudFolioAlumno?.fechaTerminacion),
     fechaExamen: formatDateDMY(folioDocAlumno?.solicitudFolioAlumno?.fechaExamenProfesional
       || folioDocAlumno?.solicitudFolioAlumno?.fechaExencionExamenProfesional),
-    fechaExpedicion: formatDateDMY(folioDocAlumno?.solicitudFolioAlumno?.fechaExpedicion),
+    fechaExpedicion: formatDateDMY(new Date()),
     cct: folioDocAlumno.alumno.programa.plantel.claveCentroTrabajo,
     rvoe: folioDocAlumno.alumno.programa.acuerdoRvoe,
     fechaRvoe: formatDateDMY(folioDocAlumno.alumno.programa.fechaSurteEfecto),

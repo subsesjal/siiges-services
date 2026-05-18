@@ -176,6 +176,7 @@ const { SOLICITUD_ESTADO_SOLICITUD_TABLE, SolicitudEstatusSolicitudSchema } = re
 const { SOLICITUD_USUARIO_TABLE, SolicitudUsuarioSchema } = require('../models/solicitudes_usuarios');
 const { TESTIGO_TABLE, TestigoSchema } = require('../models/testigos');
 const { TITULO_ELECTRONICO_TABLE, TituloElectronicoSchema } = require('../models/titulosElectronicos');
+const { FIRMANTE_TABLE, FirmanteSchema } = require('../models/firmante');
 
 module.exports = {
   async up(queryInterface) {
@@ -373,6 +374,7 @@ module.exports = {
       DOCUMENTO_FIRMADO_TABLE,
       DocumentoFirmadoSchema,
     );
+    await queryInterface.createTable(FIRMANTE_TABLE, FirmanteSchema);
 
     // SIIGES 1.0
     await queryInterface.createTable(ACADEMIA_TABLE, AcademiaSchema);
@@ -573,6 +575,7 @@ module.exports = {
     await queryInterface.dropTable(CATALOGO_FIRMA_ELECTRONICA_TABLE);
     await queryInterface.dropTable(TOKEN_EXTERNO_TABLE);
     await queryInterface.dropTable(DOCUMENTO_FIRMADO_TABLE);
+    await queryInterface.dropTable(FIRMANTE_TABLE);
 
     // SIIGES 1.0
     await queryInterface.dropTable(ACADEMIA_TABLE);

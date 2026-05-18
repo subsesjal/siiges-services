@@ -68,6 +68,14 @@ const findAllSolicitudFolioAlumnoSchema = {
                   },
                 },
               },
+              estadoFirma: {
+                type: ['object', 'null'],
+                properties: {
+                  firmaIes: { type: 'boolean' },
+                  firmaSicyt: { type: 'boolean' },
+                  fechaExpedicion: { type: ['string', 'null'], format: 'date-time' },
+                },
+              },
             },
           },
         },

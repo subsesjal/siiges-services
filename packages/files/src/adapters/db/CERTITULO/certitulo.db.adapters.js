@@ -10,10 +10,12 @@ const {
 const {
   findOneQuery,
   findAllQuery,
+  updateQuery,
 } = queries;
 
 module.exports = {
   findOneFolioDocumentoAlumnoQuery: findOneQuery(FolioDocumentoAlumno),
   findAllCalificacionesQuery: findAllQuery(Calificacion),
   findOneDocumentoFirmadoQuery: findOneQuery(DocumentoFirmado),
+  updateDocumentoFirmadoQuery: updateQuery(DocumentoFirmado),
 };
