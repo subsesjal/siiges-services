@@ -29,36 +29,6 @@ const DocumentoFirmadoSchema = {
     type: DataTypes.STRING,
     field: 'folio_interno',
   },
-  secuenciaDocumento: {
-    allowNull: true,
-    type: DataTypes.STRING,
-    field: 'secuencia_documento',
-  },
-  objetoFirmado: {
-    allowNull: true,
-    type: DataTypes.TEXT,
-    field: 'objeto_firmado',
-  },
-  uriValidacion: {
-    allowNull: true,
-    type: DataTypes.STRING,
-    field: 'uri_validacion',
-  },
-  tipoDocumento: {
-    allowNull: true,
-    type: DataTypes.STRING,
-    field: 'tipo_documento',
-  },
-  identificadorDocumento: {
-    allowNull: true,
-    type: DataTypes.STRING,
-    field: 'identificador_documento',
-  },
-  dependenciaDocumento: {
-    allowNull: true,
-    type: DataTypes.STRING,
-    field: 'dependencia_documento',
-  },
   pkcs7Ies: {
     allowNull: true,
     type: DataTypes.TEXT,
@@ -104,6 +74,36 @@ const DocumentoFirmadoSchema = {
     type: DataTypes.TEXT,
     field: 'firma_digital_ies',
   },
+  secuenciaDocumentoIes: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'secuencia_documento_ies',
+  },
+  objetoFirmadoIes: {
+    allowNull: true,
+    type: DataTypes.TEXT,
+    field: 'objeto_firmado_ies',
+  },
+  uriValidacionIes: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'uri_validacion_ies',
+  },
+  tipoDocumentoIes: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'tipo_documento_ies',
+  },
+  identificadorDocumentoIes: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'identificador_documento_ies',
+  },
+  dependenciaDocumentoIes: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'dependencia_documento_ies',
+  },
   pkcs7Sicyt: {
     allowNull: true,
     type: DataTypes.TEXT,
@@ -148,6 +148,36 @@ const DocumentoFirmadoSchema = {
     allowNull: true,
     type: DataTypes.TEXT,
     field: 'firma_digital_sicyt',
+  },
+  secuenciaDocumentoSicyt: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'secuencia_documento_sicyt',
+  },
+  objetoFirmadoSicyt: {
+    allowNull: true,
+    type: DataTypes.TEXT,
+    field: 'objeto_firmado_sicyt',
+  },
+  uriValidacionSicyt: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'uri_validacion_sicyt',
+  },
+  tipoDocumentoSicyt: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'tipo_documento_sicyt',
+  },
+  identificadorDocumentoSicyt: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'identificador_documento_sicyt',
+  },
+  dependenciaDocumentoSicyt: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'dependencia_documento_sicyt',
   },
   fechaExpedicion: {
     allowNull: true,
