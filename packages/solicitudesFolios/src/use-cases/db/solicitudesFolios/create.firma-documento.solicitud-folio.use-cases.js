@@ -91,7 +91,7 @@ const validarFirmante = async (
       programaId,
     });
   } catch (err) {
-    Logger.warn(`[firma-documento] Error al guardar firmante: ${err.message}`);
+    Logger.error(`[firma-documento] Error al guardar firmante: ${err.message}`);
   }
 
   return { valido: true, firmante };
@@ -220,12 +220,12 @@ const firmarUnDocumentoIes = async (
       identificadorUnicoIes: firmaResponse.identificadorunico,
       hashObjetoFirmadoIes: firmaResponse.hashobjetofirmado,
       firmaDigitalIes: firmaResponse.firmadigital,
-      secuenciaDocumento: firmaResponse.secuenciadocumento,
-      objetoFirmado: firmaResponse.objetofirmado,
-      uriValidacion: firmaResponse.urivalidacion,
-      tipoDocumento: firmaResponse.tipodocumento,
-      identificadorDocumento: firmaResponse.identificadordocumento,
-      dependenciaDocumento: firmaResponse.dependenciadocumento,
+      secuenciaDocumentoIes: firmaResponse.secuenciadocumento,
+      objetoFirmadoIes: firmaResponse.objetofirmado,
+      uriValidacionIes: firmaResponse.urivalidacion,
+      tipoDocumentoIes: firmaResponse.tipodocumento,
+      identificadorDocumentoIes: firmaResponse.identificadordocumento,
+      dependenciaDocumentoIes: firmaResponse.dependenciadocumento,
     },
   );
 
@@ -334,6 +334,12 @@ const firmarUnDocumentoSicyt = async (
       identificadorUnicoSicyt: firmaResponse.identificadorunico,
       hashObjetoFirmadoSicyt: firmaResponse.hashobjetofirmado,
       firmaDigitalSicyt: firmaResponse.firmadigital,
+      secuenciaDocumentoSicyt: firmaResponse.secuenciadocumento,
+      objetoFirmadoSicyt: firmaResponse.objetofirmado,
+      uriValidacionSicyt: firmaResponse.urivalidacion,
+      tipoDocumentoSicyt: firmaResponse.tipodocumento,
+      identificadorDocumentoSicyt: firmaResponse.identificadordocumento,
+      dependenciaDocumentoSicyt: firmaResponse.dependenciadocumento,
     },
   );
 
