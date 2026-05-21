@@ -24,9 +24,9 @@ const findGroupAlumnosPrograma = (
       include: [{
         association: 'grupo',
         include: [{
-          association: 'grado'
-        }]
-      }]
+          association: 'grado',
+        }],
+      }],
     },
   ];
 

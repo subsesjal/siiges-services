@@ -5,21 +5,25 @@ const { persona } = require('../../usuarios/schema/properties/persona');
 
 const createAlumnoFolioSchema = {
   tags: ['Solicitudes Folios'],
-  description: 'Given an object with solicitud folio required data, then save the first time a new solicitudes_folios_alumnos in database.',
+  description: 'Given an array of alumnos, save them as solicitudes_folios_alumnos in database.',
   params: {
     type: 'object',
     properties: {
       solicitudFolioId: { type: 'integer' },
-      alumnoId: { type: 'integer' },
     },
-    required: ['solicitudFolioId', 'alumnoId'],
+    required: ['solicitudFolioId'],
   },
   body: {
-    type: 'object',
-    properties: {
-      ...solicitudFolioAlumno,
+    type: 'array',
+    items: {
+      type: 'object',
+      properties: {
+        alumnoId: { type: 'integer' },
+        ...solicitudFolioAlumno,
+      },
+      required: ['alumnoId', 'fechaTerminacion'],
     },
-    required: ['fechaTerminacion'],
+    minItems: 1,
   },
   response: {
     201: {
@@ -28,21 +32,31 @@ const createAlumnoFolioSchema = {
         data: {
           type: 'object',
           properties: {
-            id: { type: 'integer' },
-            ...solicitudFolioAlumno,
-            ...responseProperties,
-            alumno: {
-              type: 'object',
-              properties: {
-                id: { type: 'integer' },
-                ...alumno,
-                ...responseProperties,
-                persona: {
-                  type: 'object',
-                  properties: {
-                    id: { type: 'integer' },
-                    ...persona,
-                    ...responseProperties,
+            agregados: { type: 'integer' },
+            rechazados: { type: 'integer' },
+            resultados: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  alumnoId: { type: 'integer' },
+                  estatus: { type: 'string' },
+                  mensaje: { type: 'string' },
+                  alumno: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...alumno,
+                      ...responseProperties,
+                      persona: {
+                        type: 'object',
+                        properties: {
+                          id: { type: 'integer' },
+                          ...persona,
+                          ...responseProperties,
+                        },
+                      },
+                    },
                   },
                 },
               },

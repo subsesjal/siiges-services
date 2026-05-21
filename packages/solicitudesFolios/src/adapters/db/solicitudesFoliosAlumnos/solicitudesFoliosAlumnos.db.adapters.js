@@ -6,6 +6,7 @@ const {
   Alumno,
   FolioDocumentoAlumno,
   DocumentoFirmado,
+  Programa,
 } = models;
 
 const {
@@ -31,4 +32,7 @@ module.exports = {
   reportFolioDocumentoAlumnoQuery: findAllQuery(FolioDocumentoAlumno),
   findAllDocumentosFirmadosQuery: findAllQuery(DocumentoFirmado),
   countSolicitudFolioAlumnosQuery: countQuery(SolicitudFolioAlumno),
+  findAllFolioDocumentoAlumnosQuery: findAllQuery(FolioDocumentoAlumno),
+  findOneProgramaQuery: findOneQuery(Programa),
+  findAllAlumnosQuery: findAllQuery(Alumno),
 };
