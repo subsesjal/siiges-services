@@ -10,6 +10,7 @@ const findAllSolicitudFolioAlumnos = require('./find-all.solicitud-folio-alumnos
 const deleteSolicitudFolioAlumno = require('./delete.solicitud-folio-alumno.use-cases');
 const assignFoliosAlumnos = require('./assign.folios-alumnos.use-cases');
 const reportFolioDocumentoAlumno = require('./report.folio-documento-alumno.use-cases');
+const findAllSolicitudFolioAlumnosFirmar = require('./find-all.solicitud-folio-alumnos-firmar.use-cases');
 
 module.exports = {
   createSolicitudFolioAlumno: createSolicitudFolioAlumno(
@@ -50,6 +51,14 @@ module.exports = {
   ),
   reportFolioDocumentoAlumno: reportFolioDocumentoAlumno(
     solicitudesFoliosAlumnos.reportFolioDocumentoAlumnoQuery,
+    solicitudesFoliosAlumnos.findAllDocumentosFirmadosQuery,
+  ),
+  findAllSolicitudFolioAlumnosFirmar: findAllSolicitudFolioAlumnosFirmar(
+    solicitudesFoliosAlumnos.findOneProgramaQuery,
+    solicitudesFoliosAlumnos.findOneAlumnoQuery,
+    solicitudesFoliosAlumnos.findAllAlumnosQuery,
+    solicitudesFoliosAlumnos.findAllSolicitudFolioAlumnosQuery,
+    solicitudesFoliosAlumnos.findAllFolioDocumentoAlumnosQuery,
     solicitudesFoliosAlumnos.findAllDocumentosFirmadosQuery,
   ),
 };

@@ -13,6 +13,7 @@ const reportSolicitudFolioAlumnoSchema = require('./report.solicitud-folio-alumn
 const createFirmaDocumentoSchema = require('./create.firma-documento.solicitud-folio.schema');
 const envioNotificacionSchema = require('./envio-notificacion.schema');
 const findOneRepresentanteLegalSchema = require('./find-one.representante.schema');
+const findAllSolicitudFolioAlumnosFirmarSchema = require('./find-all.solicitud-folio-alumnos-firmar.schema');
 
 module.exports = {
   createSolicitudFolioSchema,
@@ -30,4 +31,5 @@ module.exports = {
   createFirmaDocumentoSchema,
   envioNotificacionSchema,
   findOneRepresentanteLegalSchema,
+  findAllSolicitudFolioAlumnosFirmarSchema,
 };
