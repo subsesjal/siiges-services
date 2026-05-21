@@ -1,19 +1,19 @@
-const { alumno } = require('./properties/alumno');
+const { alumno } = require('../../alumnos/schema/properties/alumno');
 const { persona } = require('../../usuarios/schema/properties/persona');
-const { situacion } = require('./properties/situacion');
-const { equivalencia } = require('./properties/equivalencia');
-const { validacion } = require('./properties/validacion');
-const { situacionesValidacion } = require('./properties/situacionValidacion');
-const { alumnoGrupo } = require('./properties/alumnoGrupo');
+const { situacion } = require('../../alumnos/schema/properties/situacion');
+const { equivalencia } = require('../../alumnos/schema/properties/equivalencia');
+const { validacion } = require('../../alumnos/schema/properties/validacion');
+const { situacionesValidacion } = require('../../alumnos/schema/properties/situacionValidacion');
+const { alumnoGrupo } = require('../../alumnos/schema/properties/alumnoGrupo');
 const { grupo } = require('../../grupos/schema/properties/grupo');
 const { grado } = require('../../grupos/schema/properties/grado');
 const { responseProperties } = require('./properties/responseProperties');
 
-const findProgramaAlumnosSchema = {
+const findAllSolicitudFolioAlumnosFirmar = {
   tags: ['Alumnos'],
   description: 'Return an array of Alumnos grouped by programa.',
   params: {
-    title: 'findProgramaAlumnosSchema',
+    title: 'findAllSolicitudFolioAlumnosFirmar',
     type: 'object',
     properties: {
       programaId: { type: 'integer' },
@@ -24,6 +24,8 @@ const findProgramaAlumnosSchema = {
     type: 'object',
     properties: {
       matricula: { type: 'string' },
+      situacionId: { type: 'integer' },
+      tipoDocumentoId: { type: 'integer' },
     },
   },
   response: {
@@ -184,4 +186,4 @@ const findProgramaAlumnosSchema = {
   },
 };
 
-module.exports = findProgramaAlumnosSchema;
+module.exports = findAllSolicitudFolioAlumnosFirmar;

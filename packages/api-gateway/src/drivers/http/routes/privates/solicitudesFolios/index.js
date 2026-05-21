@@ -78,7 +78,7 @@ async function trayectoriaRouter(fastify, opts, next) {
   );
 
   await fastify.post(
-    '/:solicitudFolioId/alumnos/:alumnoId',
+    '/:solicitudFolioId/alumnos',
     {
       schema: solicitudSchemas.createSolicitudFolioAlumnoSchema,
       onRequest: [fastify.authenticate],
@@ -156,6 +156,15 @@ async function trayectoriaRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     solicitudesFoliosAdapter.reportFolioDocumentoAlumnoCSV,
+  );
+
+  await fastify.get(
+    '/alumnos/programas/:programaId',
+    {
+      schema: solicitudSchemas.findAllSolicitudFolioAlumnosFirmarSchema,
+      onRequest: [fastify.authenticate],
+    },
+    solicitudesFoliosAdapter.findAllSolicitudFolioAlumnosFirmar,
   );
 
   next();
