@@ -1,5 +1,4 @@
 const { checkers, Logger } = require('@siiges-services/shared');
-const boom = require('@hapi/boom');
 
 const hasInvalidSituacionValidacion = (validacion) => {
   const invalidSituations = [2, 4];
@@ -13,8 +12,11 @@ const createSolicitudFolioAlumno = (
   findOneSolicitudFolioAlumnoQuery,
   countSolicitudFolioAlumnosQuery,
 ) => async (data) => {
-  const solicitudFolio = await findOneSolicitudFolioQuery({ id: data.solicitudFolioId });
-  checkers.throwErrorIfDataIsFalsy(solicitudFolio, 'solicitudes-folios', data.solicitudFolioId);
+  const { solicitudFolioId, alumnos } = data;
+
+  const solicitudFolio = await findOneSolicitudFolioQuery({ id: solicitudFolioId });
+  checkers.throwErrorIfDataIsFalsy(solicitudFolio, 'solicitudes-folios', solicitudFolioId);
+
   const fechaExpedicion = new Date(solicitudFolio.createdAt);
   fechaExpedicion.setHours(0, 0, 0, 0);
 
@@ -30,45 +32,72 @@ const createSolicitudFolioAlumno = (
     { association: 'validacion' },
   ];
 
-  const alumno = await findOneAlumnoQuery(
-    { id: data.alumnoId },
-    {
-      include: alumnoInclude,
-      strict: false,
-    },
-  );
-  checkers.throwErrorIfDataIsFalsy(alumno, 'alumno', data.alumnoId);
-
-  if (hasInvalidSituacionValidacion(alumno.validacion)) {
-    Logger.error('[titulacion] Alumno validation status is not valid');
-    throw boom.conflict('Alumno validation status is not valid');
-  }
-
-  const totalAlumnos = await countSolicitudFolioAlumnosQuery({
-    solicitudFolioId: data.solicitudFolioId,
-  }, { isDeleting: false });
-
-  const consecutivo = totalAlumnos + 1;
-
-  const result = await createAlumnoFolioQuery({
-    ...data,
-    consecutivo,
-    fechaRegistro,
-    fechaExpedicion,
-  });
-  const include = [
-    {
-      association: 'alumno',
-      include: [{ association: 'persona' }],
-    },
-  ];
-
-  const solicitudFolioAlumno = await findOneSolicitudFolioAlumnoQuery(
-    { id: result.id },
-    { include },
+  const consecutivoInicial = await countSolicitudFolioAlumnosQuery(
+    { solicitudFolioId },
+    { isDeleting: false },
   );
 
-  return solicitudFolioAlumno;
+  const resultados = await Promise.all(
+    alumnos.map(async (alumnoData, index) => {
+      const { alumnoId, ...restData } = alumnoData;
+
+      try {
+        const alumno = await findOneAlumnoQuery(
+          { id: alumnoId },
+          { include: alumnoInclude, strict: false },
+        );
+
+        if (!alumno) {
+          return {
+            alumnoId,
+            estatus: 'rechazado',
+            mensaje: 'Alumno no encontrado',
+          };
+        }
+
+        if (hasInvalidSituacionValidacion(alumno.validacion)) {
+          return {
+            alumnoId,
+            estatus: 'rechazado',
+            mensaje: 'Alumno no validado',
+          };
+        }
+
+        const consecutivo = consecutivoInicial + index + 1;
+
+        await createAlumnoFolioQuery({
+          solicitudFolioId,
+          alumnoId,
+          consecutivo,
+          fechaRegistro,
+          fechaExpedicion,
+          ...restData,
+        });
+
+        return {
+          alumnoId,
+          estatus: 'agregado',
+          mensaje: 'Alumno agregado exitosamente',
+        };
+      } catch (error) {
+        Logger.error(`[createSolicitudFolioAlumno] Error con alumno ${alumnoId}: ${error.message}`);
+        return {
+          alumnoId,
+          estatus: 'rechazado',
+          mensaje: error.message || 'Error al agregar alumno',
+        };
+      }
+    }),
+  );
+
+  const agregados = resultados.filter((r) => r.estatus === 'agregado').length;
+  const rechazados = resultados.filter((r) => r.estatus === 'rechazado').length;
+
+  return {
+    agregados,
+    rechazados,
+    resultados,
+  };
 };
 
 module.exports = createSolicitudFolioAlumno;
