@@ -72,7 +72,7 @@ async function agregarFooter(doc, certificado) {
   const blockX = 57;
   const blockWidth = 500;
 
-  const footerY = height - 180;
+  const footerY = height - 190;
 
   const grayColor = [120, 120, 120];
   const blackColor = [0, 0, 0];
@@ -102,17 +102,17 @@ async function agregarFooter(doc, certificado) {
   const creditosLines = doc.splitTextToSize(creditosTexto, blockWidth);
   doc.text(creditosLines, blockX, currentY);
 
-  currentY += (creditosLines.length * 7) + 10;
+  currentY += (creditosLines.length * 7) + 20;
 
   const datosVerificacion = {
-    identificadorDocumento: certificado?.identificadorUnico,
-    noSecuencia: certificado?.secuenciaDocumento,
-    fechaFirmado: certificado?.fechaFirmado,
-    selloDigital: certificado?.firmaDigital,
+    identificadorDocumento: certificado?.identificadorDocumento,
     sitioVerificacion: certificado?.sitioVerificacion,
-    nombreFirmante: certificado?.nombreFirmante,
-    cargoFirmante: certificado?.cargoFirmante,
-    firmaElectronica: certificado?.firmaElectronica,
+    noSecuenciaIes: certificado?.secuenciaDocumentoIes,
+    fechaFirmadoIes: certificado?.fechaFirmadoIes,
+    firmaElectronicaIes: certificado?.firmaElectronicaIes,
+    noSecuenciaSicyt: certificado?.secuenciaDocumentoSicyt,
+    fechaFirmadoSicyt: certificado?.fechaFirmadoSicyt,
+    firmaElectronicaSicyt: certificado?.firmaElectronicaSicyt,
   };
 
   const leftColumnX = blockX - 20;
@@ -122,58 +122,81 @@ async function agregarFooter(doc, certificado) {
   const fundamentoX = qrX + qrSize + 9;
   const fundamentoWidth = blockWidth - (fundamentoX - blockX) + 15;
 
-  let y = currentY;
+  const firmaTextWidth = qrX - leftColumnX - 12;
+
+  const offsetColumnaIzquierda = 10;
+
+  let y = currentY - offsetColumnaIzquierda;
 
   doc.setFont('Garet', 'bold');
   doc.setFontSize(7);
   doc.setTextColor(...blackColor);
   doc.text('Datos de verificación', leftColumnX, y);
-  y += 10;
+  y += 8;
 
   doc.setFont('Garet', 'normal');
   doc.setFontSize(5);
   doc.setTextColor(...grayColor);
   doc.text(`Identificador de documento: ${datosVerificacion.identificadorDocumento}`, leftColumnX, y);
-  y += 8;
-
-  doc.text(`No. de secuencia: ${datosVerificacion.noSecuencia}`, leftColumnX, y);
-  y += 8;
-
-  doc.text(`Fecha de firmado: ${datosVerificacion.fechaFirmado}`, leftColumnX, y);
-  y += 11;
-
-  doc.text('Sello digital:', leftColumnX, y);
-  y += 5;
-  doc.setFontSize(4);
-  const selloLines = doc.splitTextToSize(datosVerificacion.selloDigital, leftColumnWidth);
-  doc.text(selloLines, leftColumnX, y);
-  y += selloLines.length * 4 + 4;
+  y += 6;
 
   doc.setFontSize(5);
   const sitioLines = doc.splitTextToSize(`Sitio de verificación: ${datosVerificacion.sitioVerificacion}`, leftColumnWidth);
   doc.text(sitioLines, leftColumnX, y);
-  y += sitioLines.length * 5 + 8;
+  y += sitioLines.length * 6 + 4;
+
+  doc.setFont('Garet', 'bold');
+  doc.setFontSize(7);
+  doc.setTextColor(...blackColor);
+  doc.text('Validó / Firma electrónica', leftColumnX, y);
+  y += 8;
+
+  doc.setFont('Garet', 'normal');
+  doc.setFontSize(5);
+  doc.setTextColor(...grayColor);
+  doc.text('Directora de la institución', leftColumnX, y);
+  y += 6;
+
+  doc.text(`No. de secuencia: ${datosVerificacion.noSecuenciaIes}`, leftColumnX, y);
+  y += 6;
+
+  doc.text(`Fecha de firmado: ${datosVerificacion.fechaFirmadoIes}`, leftColumnX, y);
+  y += 6;
+
+  doc.text('Firma electrónica:', leftColumnX, y);
+  y += 5;
+  doc.setFontSize(3.5);
+  const firmaIesLines = doc.splitTextToSize(datosVerificacion.firmaElectronicaIes, firmaTextWidth);
+  doc.text(firmaIesLines, leftColumnX, y);
+  y += firmaIesLines.length * 3.5 + 7;
 
   doc.setFont('Garet', 'bold');
   doc.setFontSize(7);
   doc.setTextColor(...blackColor);
   doc.text('Autorizó / Firma electrónica', leftColumnX, y);
-  y += 10;
+  y += 8;
 
   doc.setFont('Garet', 'normal');
   doc.setFontSize(5);
   doc.setTextColor(...grayColor);
-  doc.text(datosVerificacion.nombreFirmante, leftColumnX, y);
-  y += 8;
+  doc.text('Mtra. Fanny Guadalupe Valdivia Márquez', leftColumnX, y);
+  y += 6;
 
-  doc.text(datosVerificacion.cargoFirmante, leftColumnX, y);
-  y += 11;
+  doc.text('Subsecretaria de Educación Superior', leftColumnX, y);
+  y += 6;
+
+  doc.text(`No. de secuencia: ${datosVerificacion.noSecuenciaSicyt}`, leftColumnX, y);
+  y += 6;
+
+  doc.text(`Fecha de firmado: ${datosVerificacion.fechaFirmadoSicyt}`, leftColumnX, y);
+  y += 6;
 
   doc.text('Firma electrónica:', leftColumnX, y);
   y += 5;
   doc.setFontSize(3.5);
-  const firmaLines = doc.splitTextToSize(datosVerificacion.firmaElectronica, leftColumnWidth);
-  doc.text(firmaLines, leftColumnX, y);
+  const firmaSicytLines = doc
+    .splitTextToSize(datosVerificacion.firmaElectronicaSicyt, firmaTextWidth);
+  doc.text(firmaSicytLines, leftColumnX, y);
 
   await agregarQR(doc, datosVerificacion.sitioVerificacion, qrX, currentY + 10, qrSize);
 

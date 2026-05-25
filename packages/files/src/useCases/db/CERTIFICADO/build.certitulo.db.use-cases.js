@@ -187,7 +187,8 @@ const buildFileCertitulo = (
     };
   };
 
-  const { nombreFirmante, cargoFirmante } = parsearDatosFirmante(documentoFirmado?.datosFirmante);
+  const firmanteIes = parsearDatosFirmante(documentoFirmado?.datosFirmanteIes);
+  const firmanteSicyt = parsearDatosFirmante(documentoFirmado?.datosFirmanteSicyt);
 
   const certificado = {
     folioControl: folioDocAlumno.folioDocumento,
@@ -213,24 +214,28 @@ const buildFileCertitulo = (
       folioDocAlumno.alumno.programa.plantel.director
       || 'DIRECTOR DEL PLANTEL',
     grados: gradosOrdenados,
-    identificadorUnico: documentoFirmado?.identificadorUnico,
-    secuenciaDocumento: documentoFirmado?.secuenciaDocumento,
-    fechaFirmado: formatDateDMY(documentoFirmado?.fechaFirmado),
-    firmaDigital: documentoFirmado?.hashObjetoFirmado,
     tipoCertificado: folioDocAlumno?.solicitudFolioAlumno
       ?.solicitudFolio?.tipoSolicitudFolio?.descripcion,
     libro: folioDocAlumno.libro?.nombre,
     foja: folioDocAlumno.foja?.nombre,
-    sitioVerificacion: `https://portalvalidacion.jalisco.gob.mx/#/resultado/${documentoFirmado?.uriValidacion}`,
-    nombreFirmante,
-    cargoFirmante,
-    firmaElectronica: documentoFirmado?.firmaDigital,
     creditosPrograma: folioDocAlumno.alumno.programa?.creditos,
     calificacionMinima: folioDocAlumno.alumno.programa?.calificacionMinima,
     calificacionMaxima: folioDocAlumno.alumno.programa?.calificacionMaxima,
     calificacionAprobatoria: folioDocAlumno.alumno.programa?.calificacionAprobatoria,
     claveInstitucionDGP: folioDocAlumno?.solicitudFolioAlumno?.solicitudFolio?.claveInstitucionDGP,
     claveCarreraDGP: folioDocAlumno?.solicitudFolioAlumno?.solicitudFolio?.claveCarreraDGP,
+    identificadorDocumento: documentoFirmado?.identificadorDocumentoSicyt,
+    sitioVerificacion: `https://portalvalidacion.jalisco.gob.mx/#/resultado/${documentoFirmado?.uriValidacionSicyt}`,
+    nombreFirmanteIes: firmanteIes.nombreFirmante,
+    cargoFirmanteIes: firmanteIes.cargoFirmante,
+    secuenciaDocumentoIes: documentoFirmado?.secuenciaDocumentoIes,
+    fechaFirmadoIes: formatDateDMY(documentoFirmado?.fechaFirmadoIes),
+    firmaElectronicaIes: documentoFirmado?.firmaDigitalIes,
+    nombreFirmanteSicyt: firmanteSicyt.nombreFirmante,
+    cargoFirmanteSicyt: firmanteSicyt.cargoFirmante,
+    secuenciaDocumentoSicyt: documentoFirmado?.secuenciaDocumentoSicyt,
+    fechaFirmadoSicyt: formatDateDMY(documentoFirmado?.fechaFirmadoSicyt),
+    firmaElectronicaSicyt: documentoFirmado?.firmaDigitalSicyt,
   };
 
   const file = await GenerarCertificado(certificado, tipoDocumento);
