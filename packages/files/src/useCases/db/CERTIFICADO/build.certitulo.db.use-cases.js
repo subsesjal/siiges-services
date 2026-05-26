@@ -175,20 +175,6 @@ const buildFileCertitulo = (
     ).toFixed(1)
     : 'N/A';
 
-  const parsearDatosFirmante = (datosFirmante) => {
-    if (!datosFirmante) return { nombreFirmante: 'N/A', cargoFirmante: 'N/A' };
-
-    const nombreMatch = datosFirmante.match(/O=([^,]+)/);
-    const cargoMatch = datosFirmante.match(/OU=([^,]+)/);
-
-    return {
-      nombreFirmante: nombreMatch ? nombreMatch[1].trim() : 'N/A',
-      cargoFirmante: cargoMatch ? cargoMatch[1].trim() : 'N/A',
-    };
-  };
-
-  const { nombreFirmante, cargoFirmante } = parsearDatosFirmante(documentoFirmado?.datosFirmante);
-
   const certificado = {
     folioControl: folioDocAlumno.folioDocumento,
     nombreAlumno: folioDocAlumno.alumno.persona.nombre,
@@ -213,24 +199,28 @@ const buildFileCertitulo = (
       folioDocAlumno.alumno.programa.plantel.director
       || 'DIRECTOR DEL PLANTEL',
     grados: gradosOrdenados,
-    identificadorUnico: documentoFirmado?.identificadorUnico,
-    secuenciaDocumento: documentoFirmado?.secuenciaDocumento,
-    fechaFirmado: formatDateDMY(documentoFirmado?.fechaFirmado),
-    firmaDigital: documentoFirmado?.hashObjetoFirmado,
     tipoCertificado: folioDocAlumno?.solicitudFolioAlumno
       ?.solicitudFolio?.tipoSolicitudFolio?.descripcion,
     libro: folioDocAlumno.libro?.nombre,
     foja: folioDocAlumno.foja?.nombre,
-    sitioVerificacion: `https://portalvalidacion.jalisco.gob.mx/#/resultado/${documentoFirmado?.uriValidacion}`,
-    nombreFirmante,
-    cargoFirmante,
-    firmaElectronica: documentoFirmado?.firmaDigital,
     creditosPrograma: folioDocAlumno.alumno.programa?.creditos,
     calificacionMinima: folioDocAlumno.alumno.programa?.calificacionMinima,
     calificacionMaxima: folioDocAlumno.alumno.programa?.calificacionMaxima,
     calificacionAprobatoria: folioDocAlumno.alumno.programa?.calificacionAprobatoria,
     claveInstitucionDGP: folioDocAlumno?.solicitudFolioAlumno?.solicitudFolio?.claveInstitucionDGP,
     claveCarreraDGP: folioDocAlumno?.solicitudFolioAlumno?.solicitudFolio?.claveCarreraDGP,
+    identificadorDocumento: documentoFirmado?.identificadorDocumentoSicyt,
+    sitioVerificacion: `https://portalvalidacion.jalisco.gob.mx/#/resultado/${documentoFirmado?.uriValidacionSicyt}`,
+    nombreFirmanteIes: documentoFirmado?.nombreFirmanteIes,
+    cargoFirmanteIes: documentoFirmado?.cargoFirmanteIes,
+    secuenciaDocumentoIes: documentoFirmado?.secuenciaDocumentoIes,
+    fechaFirmadoIes: formatDateDMY(documentoFirmado?.fechaFirmadoIes),
+    firmaElectronicaIes: documentoFirmado?.firmaDigitalIes,
+    nombreFirmanteSicyt: documentoFirmado?.nombreFirmanteSicyt,
+    cargoFirmanteSicyt: documentoFirmado?.cargoFirmanteSicyt,
+    secuenciaDocumentoSicyt: documentoFirmado?.secuenciaDocumentoSicyt,
+    fechaFirmadoSicyt: formatDateDMY(documentoFirmado?.fechaFirmadoSicyt),
+    firmaElectronicaSicyt: documentoFirmado?.firmaDigitalSicyt,
   };
 
   const file = await GenerarCertificado(certificado, tipoDocumento);
