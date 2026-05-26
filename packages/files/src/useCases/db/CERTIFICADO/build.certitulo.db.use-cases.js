@@ -175,21 +175,6 @@ const buildFileCertitulo = (
     ).toFixed(1)
     : 'N/A';
 
-  const parsearDatosFirmante = (datosFirmante) => {
-    if (!datosFirmante) return { nombreFirmante: 'N/A', cargoFirmante: 'N/A' };
-
-    const nombreMatch = datosFirmante.match(/O=([^,]+)/);
-    const cargoMatch = datosFirmante.match(/OU=([^,]+)/);
-
-    return {
-      nombreFirmante: nombreMatch ? nombreMatch[1].trim() : 'N/A',
-      cargoFirmante: cargoMatch ? cargoMatch[1].trim() : 'N/A',
-    };
-  };
-
-  const firmanteIes = parsearDatosFirmante(documentoFirmado?.datosFirmanteIes);
-  const firmanteSicyt = parsearDatosFirmante(documentoFirmado?.datosFirmanteSicyt);
-
   const certificado = {
     folioControl: folioDocAlumno.folioDocumento,
     nombreAlumno: folioDocAlumno.alumno.persona.nombre,
@@ -226,13 +211,13 @@ const buildFileCertitulo = (
     claveCarreraDGP: folioDocAlumno?.solicitudFolioAlumno?.solicitudFolio?.claveCarreraDGP,
     identificadorDocumento: documentoFirmado?.identificadorDocumentoSicyt,
     sitioVerificacion: `https://portalvalidacion.jalisco.gob.mx/#/resultado/${documentoFirmado?.uriValidacionSicyt}`,
-    nombreFirmanteIes: firmanteIes.nombreFirmante,
-    cargoFirmanteIes: firmanteIes.cargoFirmante,
+    nombreFirmanteIes: documentoFirmado?.nombreFirmanteIes,
+    cargoFirmanteIes: documentoFirmado?.cargoFirmanteIes,
     secuenciaDocumentoIes: documentoFirmado?.secuenciaDocumentoIes,
     fechaFirmadoIes: formatDateDMY(documentoFirmado?.fechaFirmadoIes),
     firmaElectronicaIes: documentoFirmado?.firmaDigitalIes,
-    nombreFirmanteSicyt: firmanteSicyt.nombreFirmante,
-    cargoFirmanteSicyt: firmanteSicyt.cargoFirmante,
+    nombreFirmanteSicyt: documentoFirmado?.nombreFirmanteSicyt,
+    cargoFirmanteSicyt: documentoFirmado?.cargoFirmanteSicyt,
     secuenciaDocumentoSicyt: documentoFirmado?.secuenciaDocumentoSicyt,
     fechaFirmadoSicyt: formatDateDMY(documentoFirmado?.fechaFirmadoSicyt),
     firmaElectronicaSicyt: documentoFirmado?.firmaDigitalSicyt,

@@ -49,6 +49,12 @@ const FirmanteSchema = {
     field: 'curp_firmante',
     defaultValue: null,
   },
+  cargo: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'cargo',
+    defaultValue: null,
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,

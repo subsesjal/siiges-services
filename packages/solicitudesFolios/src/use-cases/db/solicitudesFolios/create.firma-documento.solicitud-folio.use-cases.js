@@ -5,6 +5,19 @@ const { config } = require('../../../../config/environment');
 const SERVICIO_FIRMA_DOCUMENTO = 'firma_documento';
 const BATCH_SIZE = 5;
 
+const CARGO_DEFAULT_IES = 'DIRECTOR';
+
+const normalizarCargo = (cargo) => {
+  if (!cargo || typeof cargo !== 'string') return null;
+
+  return cargo
+    .trim()
+    .toLowerCase()
+    .split(/\s+/)
+    .map((palabra) => palabra.charAt(0).toUpperCase() + palabra.slice(1))
+    .join(' ');
+};
+
 const getBasicAuthHeader = () => {
   const { clientId, clientSecret } = config.firmaElectronica;
   const credentials = `${clientId}:${clientSecret}`;
@@ -81,6 +94,9 @@ const validarFirmante = async (
     return { valido: false, error: 'Firmante no encontrado en el sistema de título' };
   }
 
+  const cargoApi = firmanteExterno.instituciones?.[0]?.cargo;
+  const cargo = normalizarCargo(cargoApi) || CARGO_DEFAULT_IES;
+
   try {
     firmante = await createOneFirmanteQuery({
       primerNombre: firmanteExterno.nombre || '',
@@ -88,6 +104,7 @@ const validarFirmante = async (
       apellidoPaterno: firmanteExterno.primerApellido || '',
       apellidoMaterno: firmanteExterno.segundoApellido || '',
       curpFirmante: curp,
+      cargo,
       programaId,
     });
   } catch (err) {
@@ -128,6 +145,7 @@ const firmarUnDocumentoIes = async (
   documento,
   catalogo,
   tokenExterno,
+  firmante,
   createDocumentoFirmadoQuery,
   updateDocumentoFirmadoQuery,
   findOneDocumentoFirmadoQuery,
@@ -138,6 +156,8 @@ const firmarUnDocumentoIes = async (
     objetoPorFirmar,
     autoridad,
   } = documento;
+
+  const cargoFirmante = firmante?.cargo || null;
 
   let documentoFirmado = await findOneDocumentoFirmadoQuery({ folioInterno });
 
@@ -157,6 +177,7 @@ const firmarUnDocumentoIes = async (
       pkcs7Ies: pkcs7,
       curpFirmanteIes: autoridad.curp,
       nombreFirmanteIes: autoridad.nombre,
+      cargoFirmanteIes: cargoFirmante,
     });
   }
 
@@ -179,6 +200,7 @@ const firmarUnDocumentoIes = async (
         pkcs7Ies: pkcs7,
         curpFirmanteIes: autoridad.curp,
         nombreFirmanteIes: autoridad.nombre,
+        cargoFirmanteIes: cargoFirmante,
         firmaResponseIes: errorMsg,
       },
     );
@@ -196,6 +218,7 @@ const firmarUnDocumentoIes = async (
         pkcs7Ies: pkcs7,
         curpFirmanteIes: autoridad.curp,
         nombreFirmanteIes: autoridad.nombre,
+        cargoFirmanteIes: cargoFirmante,
         firmaResponseIes: JSON.stringify(firmaResponse),
       },
     );
@@ -212,6 +235,7 @@ const firmarUnDocumentoIes = async (
       pkcs7Ies: pkcs7,
       curpFirmanteIes: autoridad.curp,
       nombreFirmanteIes: autoridad.nombre,
+      cargoFirmanteIes: cargoFirmante,
       datosFirmanteIes: firmaResponse.datosfirmante,
       firmaResponseIes: JSON.stringify(firmaResponse),
       fechaFirmadoIes: firmaResponse.fechafirmado
@@ -239,6 +263,7 @@ const firmarUnDocumentoSicyt = async (
   documento,
   catalogo,
   tokenExterno,
+  firmante,
   updateDocumentoFirmadoQuery,
   findOneDocumentoFirmadoQuery,
 ) => {
@@ -247,6 +272,9 @@ const firmarUnDocumentoSicyt = async (
     folioInterno,
     autoridad,
   } = documento;
+
+  // Cargo del firmante en el momento de la firma (se congela en el documento).
+  const cargoFirmante = firmante?.cargo || null;
 
   const documentoFirmado = await findOneDocumentoFirmadoQuery({ folioInterno });
 
@@ -293,6 +321,7 @@ const firmarUnDocumentoSicyt = async (
         pkcs7Sicyt: pkcs7,
         curpFirmanteSicyt: autoridad.curp,
         nombreFirmanteSicyt: autoridad.nombre,
+        cargoFirmanteSicyt: cargoFirmante,
         firmaResponseSicyt: errorMsg,
       },
     );
@@ -310,6 +339,7 @@ const firmarUnDocumentoSicyt = async (
         pkcs7Sicyt: pkcs7,
         curpFirmanteSicyt: autoridad.curp,
         nombreFirmanteSicyt: autoridad.nombre,
+        cargoFirmanteSicyt: cargoFirmante,
         firmaResponseSicyt: JSON.stringify(firmaResponse),
       },
     );
@@ -326,6 +356,7 @@ const firmarUnDocumentoSicyt = async (
       pkcs7Sicyt: pkcs7,
       curpFirmanteSicyt: autoridad.curp,
       nombreFirmanteSicyt: autoridad.nombre,
+      cargoFirmanteSicyt: cargoFirmante,
       datosFirmanteSicyt: firmaResponse.datosfirmante,
       firmaResponseSicyt: JSON.stringify(firmaResponse),
       fechaFirmadoSicyt: firmaResponse.fechafirmado
@@ -353,6 +384,7 @@ const procesarDocumentos = async (
   documentos,
   catalogo,
   tipoFirmante,
+  firmante,
   findOneTokenExternoQuery,
   createTokenExternoQuery,
   updateTokenExternoQuery,
@@ -401,6 +433,7 @@ const procesarDocumentos = async (
             documento,
             catalogo,
             tokenExterno,
+            firmante,
             createDocumentoFirmadoQuery,
             updateDocumentoFirmadoQuery,
             findOneDocumentoFirmadoQuery,
@@ -410,6 +443,7 @@ const procesarDocumentos = async (
           documento,
           catalogo,
           tokenExterno,
+          firmante,
           updateDocumentoFirmadoQuery,
           findOneDocumentoFirmadoQuery,
         );
@@ -463,7 +497,7 @@ const createFirmaDocumento = (
     return { error: true, message: `No se encontró configuración en catálogo para tipo de documento: ${tipoDocumento}` };
   }
 
-  const { valido, error } = await validarFirmante(
+  const { valido, error, firmante } = await validarFirmante(
     autoridad,
     programaId,
     findOneFirmanteQuery,
@@ -480,6 +514,7 @@ const createFirmaDocumento = (
     documentos,
     catalogo,
     tipoFirmante,
+    firmante,
     findOneTokenExternoQuery,
     createTokenExternoQuery,
     updateTokenExternoQuery,

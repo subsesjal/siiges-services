@@ -113,6 +113,9 @@ async function agregarFooter(doc, certificado) {
     noSecuenciaSicyt: certificado?.secuenciaDocumentoSicyt,
     fechaFirmadoSicyt: certificado?.fechaFirmadoSicyt,
     firmaElectronicaSicyt: certificado?.firmaElectronicaSicyt,
+    nombreFirmanteSicyt: certificado?.nombreFirmanteSicyt,
+    cargoFirmanteSicyt: certificado?.cargoFirmanteSicyt,
+    nombreFirmanteIes: certificado?.nombreFirmanteIes,
   };
 
   const leftColumnX = blockX - 20;
@@ -154,7 +157,7 @@ async function agregarFooter(doc, certificado) {
   doc.setFont('Garet', 'normal');
   doc.setFontSize(5);
   doc.setTextColor(...grayColor);
-  doc.text('Directora de la institución', leftColumnX, y);
+  doc.text(datosVerificacion.nombreFirmanteIes || 'N/A', leftColumnX, y);
   y += 6;
 
   doc.text(`No. de secuencia: ${datosVerificacion.noSecuenciaIes}`, leftColumnX, y);
@@ -179,10 +182,10 @@ async function agregarFooter(doc, certificado) {
   doc.setFont('Garet', 'normal');
   doc.setFontSize(5);
   doc.setTextColor(...grayColor);
-  doc.text('Mtra. Fanny Guadalupe Valdivia Márquez', leftColumnX, y);
+  doc.text(datosVerificacion.nombreFirmanteSicyt || 'N/A', leftColumnX, y);
   y += 6;
 
-  doc.text('Subsecretaria de Educación Superior', leftColumnX, y);
+  doc.text(datosVerificacion.cargoFirmanteSicyt || 'N/A', leftColumnX, y);
   y += 6;
 
   doc.text(`No. de secuencia: ${datosVerificacion.noSecuenciaSicyt}`, leftColumnX, y);
