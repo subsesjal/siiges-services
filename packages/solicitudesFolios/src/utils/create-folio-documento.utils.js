@@ -42,7 +42,7 @@ const createFolioDocumento = async ({
 
   const letraTipoSolicitud = SOLICITUDES_MAP[tipoSolicitudFolio] || '';
 
-  const folio = `${letraNivel}${letraTipoDocumento}${letraTipoSolicitud}${libro.nombre}${año}-${nuevoConsecutivo}`;
+  const folio = `S-${letraNivel}${letraTipoDocumento}${letraTipoSolicitud}${libro.nombre}${año}-${nuevoConsecutivo}`;
 
   return folio;
 };
