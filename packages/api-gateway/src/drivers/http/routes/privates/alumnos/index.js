@@ -136,6 +136,15 @@ async function asignaturaRouter(fastify, opts, next) {
     alumnosAdapter.findOneAlumnoPersona,
   );
 
+  await fastify.get(
+    '/matricula-activa/count',
+    {
+      schema: alumnosSchema.findMatriculaActivaSchema,
+      onRequest: [fastify.authenticate],
+    },
+    alumnosAdapter.findMatriculaActiva,
+  );
+
   next();
 }
 
