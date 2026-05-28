@@ -72,3 +72,5 @@ jobs:
           URL_TITULACION: https://siiges.titulacion.jalisco.gob.mx
           API_KEY_REPRESENTANTES: 9c6b7be770jnjnj32n4jbj3234jbtj32knk5n230ae10ad6d757fb139
           URL_API_TITULO: https://titulo.com/api/v1
+          FIRMA_ELECTRONICA_TOKEN_URL: https://ws.jalisco.gob.mx/fe_desarrollo/feauth/token
+          FIRMA_ELECTRONICA_FIRMA_URL: https://ws.jalisco.gob.mx/fe/rest/firmadocumento
