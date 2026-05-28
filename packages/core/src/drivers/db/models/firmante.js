@@ -20,34 +20,24 @@ const FirmanteSchema = {
     },
   },
   primerNombre: {
-    allowNull: false,
     type: DataTypes.STRING,
     field: 'primer_nombre',
-    defaultValue: null,
   },
   segundoNombre: {
-    allowNull: false,
     type: DataTypes.STRING,
     field: 'segundo_nombre',
-    defaultValue: null,
   },
   apellidoPaterno: {
-    allowNull: false,
     type: DataTypes.STRING,
     field: 'apellido_paterno',
-    defaultValue: null,
   },
   apellidoMaterno: {
-    allowNull: false,
     type: DataTypes.STRING,
     field: 'apellido_materno',
-    defaultValue: null,
   },
   curpFirmante: {
-    allowNull: false,
     type: DataTypes.STRING,
     field: 'curp_firmante',
-    defaultValue: null,
   },
   createdAt: {
     allowNull: false,
