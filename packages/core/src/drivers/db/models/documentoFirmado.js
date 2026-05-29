@@ -44,6 +44,11 @@ const DocumentoFirmadoSchema = {
     type: DataTypes.STRING,
     field: 'nombre_firmante_ies',
   },
+  cargoFirmanteIes: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'cargo_firmante_ies',
+  },
   datosFirmanteIes: {
     allowNull: true,
     type: DataTypes.TEXT,
@@ -118,6 +123,11 @@ const DocumentoFirmadoSchema = {
     allowNull: true,
     type: DataTypes.STRING,
     field: 'nombre_firmante_sicyt',
+  },
+  cargoFirmanteSicyt: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'cargo_firmante_sicyt',
   },
   datosFirmanteSicyt: {
     allowNull: true,
