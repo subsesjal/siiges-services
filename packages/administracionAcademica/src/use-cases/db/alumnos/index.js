@@ -106,7 +106,6 @@ module.exports = {
     programas.findPlantelQuery,
   ),
   findAllMatriculaActiva: findAllMatriculaActiva(
-    programas.findPlantelQuery,
     programas.findAllProgramasQuery,
     alumnos.findAllAlumnosQuery,
   ),

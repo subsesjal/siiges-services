@@ -1,32 +1,29 @@
 const { Op } = require('sequelize');
 
 const findAllMatriculaActiva = (
-  findPlantelQuery,
   findAllProgramasQuery,
   findAllAlumnosQuery,
 ) => async ({ institucionId, plantelId, programaId }) => {
   const wherePlantel = { institucionId };
   if (plantelId) wherePlantel.id = plantelId;
 
-  const planteles = await findPlantelQuery(wherePlantel, { attributes: ['id'] });
-  if (!planteles?.length) return { totalGeneral: 0, programas: [] };
-
-  const plantelIds = planteles.map((p) => p.id);
-
-  const wherePrograma = { plantelId: { [Op.in]: plantelIds } };
+  const wherePrograma = {
+    acuerdoRvoe: { [Op.and]: [{ [Op.ne]: null }, { [Op.ne]: '' }] },
+  };
   if (programaId) wherePrograma.id = programaId;
 
   const programas = await findAllProgramasQuery(wherePrograma, {
     include: [
       {
         association: 'plantel',
+        where: wherePlantel,
         include: [
           { association: 'institucion' },
           { association: 'domicilio' },
         ],
       },
     ],
-    strict: false,
+    strict: true,
   });
 
   if (!programas?.length) return { totalGeneral: 0, programas: [] };
