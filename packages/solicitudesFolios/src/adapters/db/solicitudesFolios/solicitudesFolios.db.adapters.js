@@ -8,6 +8,7 @@ const {
   CatalogoFirmaElectronica,
   DocumentoFirmado,
   TokenExterno,
+  Firmante,
 } = models;
 
 const {
@@ -41,4 +42,6 @@ module.exports = {
   createTokenExternoQuery: createQuery(TokenExterno),
   findOneTokenExternoQuery: findOneQuery(TokenExterno),
   updateTokenExternoQuery: updateAndFindQuery(TokenExterno),
+  findOneFirmanteQuery: findOneQuery(Firmante),
+  createOneFirmanteQuery: createQuery(Firmante),
 };

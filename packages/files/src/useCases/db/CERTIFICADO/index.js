@@ -7,6 +7,7 @@ module.exports = {
     certitulosAdapter.findOneFolioDocumentoAlumnoQuery,
     certitulosAdapter.findAllCalificacionesQuery,
     certitulosAdapter.findOneDocumentoFirmadoQuery,
+    certitulosAdapter.updateDocumentoFirmadoQuery,
     GenerarCertificado,
   ),
 };
