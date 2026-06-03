@@ -73,7 +73,11 @@ const SolicitudFolioSchema = {
     type: DataTypes.STRING,
     field: 'clave_carrera_dgp',
   },
-
+  estadoCuenta: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    field: 'estado_cuenta',
+  },
   observaciones: {
     allowNull: true,
     type: DataTypes.TEXT,
