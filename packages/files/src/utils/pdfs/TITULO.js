@@ -17,6 +17,19 @@ function formatearFecha(fechaString) {
   return `${dia}/${mes}/${anio}`;
 }
 
+function formatearFechaDatetime(fecha) {
+  if (!fecha) return '';
+
+  const d = new Date(fecha);
+  if (Number.isNaN(d.getTime())) return '';
+
+  const dia = String(d.getDate()).padStart(2, '0');
+  const mes = String(d.getMonth() + 1).padStart(2, '0');
+  const anio = d.getFullYear();
+
+  return `${dia}/${mes}/${anio}`;
+}
+
 async function agregarQR(doc, tituloElectronico, yBase) {
   const urlFront = process.env.BASE_URL_FRONT;
   const url = `${urlFront}/tituloElectronico/${tituloElectronico?.folioControl}/consultarFolio`;
@@ -250,7 +263,7 @@ async function GenerarTitulo(tituloElectronico, xmlString) {
   doc.text('Fecha de autenticación:', 57, y);
   doc.setFont('Nutmeg', 'normal');
   doc.setTextColor(150);
-  doc.text(formatearFecha(tituloElectronico?.fechaAutenticacion), 57 + doc.getTextWidth('Fecha de autenticación:') + 4, y);
+  doc.text(formatearFechaDatetime(tituloElectronico?.fechaAutenticacion), 57 + doc.getTextWidth('Fecha de autenticación:') + 4, y);
 
   y += 8;
   doc.setFont('Nutmeg', 'bold');
