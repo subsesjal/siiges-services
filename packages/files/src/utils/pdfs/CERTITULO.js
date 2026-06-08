@@ -55,6 +55,20 @@ function numeroALetras(num) {
   return resultado;
 }
 
+function calificacionALetras(calificacion, esDecimal) {
+  const letra = numeroALetras(calificacion);
+  if (!letra) return '';
+
+  if (esDecimal) {
+    const num = Number(calificacion);
+    if (num !== 10 && Number.isInteger(num)) {
+      return `${letra} PUNTO CERO`;
+    }
+  }
+
+  return letra;
+}
+
 async function agregarQR(doc, url, xPos, yPos, size = 80) {
   const qrDataUrl = await QRCode.toDataURL(url, {
     errorCorrectionLevel: 'H',
@@ -344,19 +358,20 @@ async function GenerarCertificado(certificado) {
     doc.line(57, y, 557, y);
   };
 
-  doc.setFontSize(9);
+  doc.setFontSize(8);
   const centerX = width / 2;
-  doc.text('SECRETARÍA DE INNOVACIÓN, CIENCIA Y TECNOLOGÍA DE JALISCO', centerX, 70, { align: 'center' });
+  doc.text('SECRETARÍA DE INNOVACIÓN, CIENCIA Y TECNOLOGÍA DEL ESTADO DE JALISCO', centerX, 70, { align: 'center' });
   doc.text('SUBSECRETARÍA DE EDUCACIÓN SUPERIOR', centerX, 82, { align: 'center' });
   doc.setFont('Garet', 'bold');
   doc.text('CERTIFICADO DE ESTUDIOS', centerX, 94, { align: 'center' });
 
-  doc.setFontSize(8.5);
+  doc.setFontSize(8);
   doc.setFont('Garet', 'normal');
   doc.text(
     'Con base en el artículo 16 de la Ley de Educación Superior del Estado de Jalisco, se expide el presente CERTIFICADO a:',
-    57,
+    centerX,
     130,
+    { align: 'center' },
   );
 
   const baseY = 135;
@@ -364,7 +379,7 @@ async function GenerarCertificado(certificado) {
   const blockWidth = 500;
   doc.setFillColor(252, 133, 32);
   doc.rect(blockX, baseY, blockWidth, 14, 'F');
-  drawCenteredBlockTitle('Datos del titulado', blockX, blockWidth, baseY + 10);
+  drawCenteredBlockTitle('Datos del estudiante', blockX, blockWidth, baseY + 10);
 
   const datosY = baseY + 26;
   const colWidths = [160, 160, 160];
@@ -386,7 +401,7 @@ async function GenerarCertificado(certificado) {
   const colX2 = [blockX, blockX + colWidths2[0]];
 
   const programaBox = centerTextInBox(
-    certificado?.carrera || '',
+    `${certificado?.nombreNivel.toUpperCase() || ''} EN ${certificado?.carrera.toUpperCase() || ''}`,
     colX2[1],
     colWidths2[1],
     colY2,
@@ -418,7 +433,7 @@ async function GenerarCertificado(certificado) {
 
   doc.setFillColor(252, 133, 32);
   doc.rect(colIzqX, dobleColumnaY, colIzqWidth, 16, 'F');
-  drawCenteredBlockTitle('Datos de la institución educativa', colIzqX, colIzqWidth, dobleColumnaY + 10);
+  drawCenteredBlockTitle('Datos de la institución educativa', colIzqX, colIzqWidth, dobleColumnaY + 11);
 
   const institDatoY = dobleColumnaY + 26;
   centerTextInBox(certificado?.nombrePlantel || '', colIzqX, colIzqWidth, institDatoY, 8, false);
@@ -437,15 +452,15 @@ async function GenerarCertificado(certificado) {
   doc.text(certificado?.rvoe || 'N/A', colIzqX + colIzqWidth, institExtraY, { align: 'right' });
   institExtraY += 12;
 
-  doc.text('FECHA DEL RVOE:', colIzqX, institExtraY);
+  doc.text('Fecha del RVOE:', colIzqX, institExtraY);
   doc.text(certificado?.fechaRvoe || 'N/A', colIzqX + colIzqWidth, institExtraY, { align: 'right' });
   institExtraY += 12;
 
-  doc.text('CLAVE DE INSTITUCIÓN:', colIzqX, institExtraY);
+  doc.text('Clave de Institución:', colIzqX, institExtraY);
   doc.text(certificado?.claveInstitucionDGP || 'N/A', colIzqX + colIzqWidth, institExtraY, { align: 'right' });
   institExtraY += 12;
 
-  doc.text('CLAVE DE CARRERA:', colIzqX, institExtraY);
+  doc.text('Clave de carrera:', colIzqX, institExtraY);
   doc.text(certificado?.claveCarreraDGP || 'N/A', colIzqX + colIzqWidth, institExtraY, { align: 'right' });
 
   const colDerX = colIzqX + colIzqWidth + 20;
@@ -453,7 +468,7 @@ async function GenerarCertificado(certificado) {
 
   doc.setFillColor(252, 133, 32);
   doc.rect(colDerX, dobleColumnaY, colDerWidth, 16, 'F');
-  drawCenteredBlockTitle('Datos de expedición', colDerX, colDerWidth, dobleColumnaY + 10);
+  drawCenteredBlockTitle('Datos de expedición', colDerX, colDerWidth, dobleColumnaY + 11);
 
   const expDatoY = dobleColumnaY + 26;
 
@@ -514,7 +529,7 @@ async function GenerarCertificado(certificado) {
   doc.setFontSize(5);
   const promedioText = 'Promedio General del Certificado';
   const promedioLines = doc.splitTextToSize(promedioText, subColWidth - 14);
-  let promedioTextY = promedioTipoY + 6;
+  let promedioTextY = promedioTipoY + 7;
   promedioLines.forEach((line) => {
     const lineWidth = doc.getTextWidth(line);
     doc.text(line, subColPromedioX + ((subColWidth - 10) - lineWidth) / 2, promedioTextY);
@@ -534,10 +549,10 @@ async function GenerarCertificado(certificado) {
   doc.setFillColor(252, 133, 32);
   doc.rect(subColTipoX, promedioTipoY, subColWidth - 10, 16, 'F');
   doc.setFont('Garet', 'bold');
-  doc.setFontSize(6);
+  doc.setFontSize(5.5);
   const tipoText = 'Tipo de Certificado';
   const tipoLines = doc.splitTextToSize(tipoText, subColWidth - 14);
-  let tipoTextY = promedioTipoY + 6;
+  let tipoTextY = promedioTipoY + 7;
   tipoLines.forEach((line) => {
     const lineWidth = doc.getTextWidth(line);
     doc.text(line, subColTipoX + ((subColWidth - 10) - lineWidth) / 2, tipoTextY);
@@ -565,7 +580,7 @@ async function GenerarCertificado(certificado) {
   const textoDescriptivoY = datosCertificadoY + 20;
   doc.setFont('Garet', 'normal');
   doc.setFontSize(6);
-  const textoDescriptivo = `Cursó y aprobó las asignaturas que se consignan en el plan de estudios de la ${certificado?.carrera?.toUpperCase() || ''}.`;
+  const textoDescriptivo = `Cursó y aprobó las asignaturas que se consignan en el plan de estudios ${certificado?.nivelId === 6 ? 'del' : 'de la'} ${certificado?.nombreNivel?.toUpperCase() || ''} EN ${certificado?.carrera?.toUpperCase() || ''}.`;
   const textoDescriptivoLines = doc.splitTextToSize(textoDescriptivo, blockWidth);
   doc.text(textoDescriptivoLines, blockX, textoDescriptivoY);
 
@@ -665,7 +680,8 @@ async function GenerarCertificado(certificado) {
       const calNumWidth = doc.getTextWidth(calNum);
       doc.text(calNum, xNum + (colNumAncho / 2) - (calNumWidth / 2), yPos);
 
-      const calLetra = asig.calificacionLetra || numeroALetras(asig.calificacion) || '';
+      const esDecimal = certificado?.calificacionDecimal === 1;
+      const calLetra = asig.calificacionLetra || calificacionALetras(asig.calificacion, esDecimal) || '';
       doc.text(String(calLetra), xLetra + 2, yPos);
 
       yPos += altoFila * Math.max(1, nombreAsigLines.length);
