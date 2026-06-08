@@ -21,7 +21,7 @@ const createAlumnoFolioSchema = {
         alumnoId: { type: 'integer' },
         ...solicitudFolioAlumno,
       },
-      required: ['alumnoId', 'fechaTerminacion'],
+      required: ['alumnoId'],
     },
     minItems: 1,
   },
