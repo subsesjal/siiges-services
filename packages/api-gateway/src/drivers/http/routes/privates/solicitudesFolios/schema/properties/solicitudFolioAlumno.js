@@ -7,8 +7,9 @@ const solicitudFolioAlumno = {
   fundamentoServicioSocialId: { type: 'integer' },
   cumplioServicioSocial: { type: 'boolean' },
   folioActa: { type: 'string' },
-  fechaInicio: { type: 'string', format: 'date-time' },
-  fechaTerminacion: { type: 'string', format: 'date-time' },
+  fechaInicio: { type: ['string', 'null'] },
+  fechaRegistro: { type: 'string', format: 'date-time' },
+  fechaTerminacion: { type: ['string', 'null'] },
   fechaExamenProfesional: { type: 'string', format: 'date-time' },
 };
 

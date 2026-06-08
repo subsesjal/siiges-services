@@ -1,5 +1,18 @@
 const { Op } = require('sequelize');
 
+const formatDateDMY = (value) => {
+  if (!value) return null;
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+
+  const day = String(date.getUTCDate()).padStart(2, '0');
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+  const year = date.getUTCFullYear();
+
+  return `${day}/${month}/${year}`;
+};
+
 const findAllSolicitudFolioAlumnos = (
   findAllSolicitudFolioAlumnosQuery,
   findAllDocumentosFirmadosQuery,
@@ -7,7 +20,13 @@ const findAllSolicitudFolioAlumnos = (
   const include = [
     {
       association: 'alumno',
-      include: [{ association: 'persona' }],
+      include: [
+        { association: 'persona' },
+        {
+          association: 'alumnoGrupos',
+          include: [{ association: 'grupo' }],
+        },
+      ],
     },
     {
       association: 'folioDocumentoAlumno',
@@ -28,10 +47,30 @@ const findAllSolicitudFolioAlumnos = (
     .filter(Boolean);
 
   if (foliosInternos.length === 0) {
-    return solicitudesFoliosAlumnos.map((sfa) => ({
-      ...sfa.toJSON(),
-      estadoFirma: { firmaIes: false, firmaSicyt: false, fechaExpedicion: null },
-    }));
+    return solicitudesFoliosAlumnos.map((sfa) => {
+      const sfaData = sfa.toJSON ? sfa.toJSON() : sfa;
+      const grupos = sfaData.alumno?.alumnoGrupos?.map((ag) => ag.grupo).filter(Boolean) || [];
+
+      const fechaTerminacionRaw = grupos
+        .map((g) => g.generacionFechaFin)
+        .filter(Boolean)
+        .sort((a, b) => new Date(b) - new Date(a))[0] || null;
+
+      const fechaInicioRaw = grupos
+        .map((g) => g.generacionFechaInicio)
+        .filter(Boolean)
+        .sort((a, b) => new Date(a) - new Date(b))[0] || null;
+
+      const fechaTerminacion = formatDateDMY(fechaTerminacionRaw);
+      const fechaInicio = formatDateDMY(fechaInicioRaw);
+
+      return {
+        ...sfaData,
+        estadoFirma: { firmaIes: false, firmaSicyt: false, fechaExpedicion: null },
+        fechaTerminacion,
+        fechaInicio,
+      };
+    });
   }
 
   const documentosFirmados = await findAllDocumentosFirmadosQuery(
@@ -58,9 +97,26 @@ const findAllSolicitudFolioAlumnos = (
       fechaExpedicion: null,
     };
 
+    const grupos = sfaData.alumno?.alumnoGrupos?.map((ag) => ag.grupo).filter(Boolean) || [];
+
+    const fechaTerminacionRaw = grupos
+      .map((g) => g.generacionFechaFin)
+      .filter(Boolean)
+      .sort((a, b) => new Date(b) - new Date(a))[0] || null;
+
+    const fechaInicioRaw = grupos
+      .map((g) => g.generacionFechaInicio)
+      .filter(Boolean)
+      .sort((a, b) => new Date(a) - new Date(b))[0] || null;
+
+    const fechaTerminacion = formatDateDMY(fechaTerminacionRaw);
+    const fechaInicio = formatDateDMY(fechaInicioRaw);
+
     return {
       ...sfaData,
       estadoFirma,
+      fechaTerminacion,
+      fechaInicio,
     };
   });
 
