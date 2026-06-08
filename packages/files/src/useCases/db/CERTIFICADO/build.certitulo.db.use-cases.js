@@ -37,6 +37,10 @@ const buildFileCertitulo = (
       include: [
         { association: 'persona' },
         {
+          association: 'alumnoGrupos',
+          include: [{ association: 'grupo' }],
+        },
+        {
           association: 'programa',
           include: [
             {
@@ -52,6 +56,7 @@ const buildFileCertitulo = (
                 { association: 'institucion' },
               ],
             },
+            { association: 'nivel' },
           ],
         },
       ],
@@ -175,6 +180,18 @@ const buildFileCertitulo = (
     ).toFixed(1)
     : 'N/A';
 
+  const grupos = folioDocAlumno.alumno.alumnoGrupos?.map((ag) => ag.grupo).filter(Boolean) || [];
+
+  const fechaInicioRaw = grupos
+    .map((g) => g.generacionFechaInicio)
+    .filter(Boolean)
+    .sort((a, b) => new Date(a) - new Date(b))[0] || null;
+
+  const fechaTerminacionRaw = grupos
+    .map((g) => g.generacionFechaFin)
+    .filter(Boolean)
+    .sort((a, b) => new Date(b) - new Date(a))[0] || null;
+
   const certificado = {
     folioControl: folioDocAlumno.folioDocumento,
     nombreAlumno: folioDocAlumno.alumno.persona.nombre,
@@ -183,10 +200,13 @@ const buildFileCertitulo = (
     curp: folioDocAlumno.alumno.persona.curp,
     matricula: folioDocAlumno.alumno.matricula,
     carrera: folioDocAlumno.alumno.programa.nombre,
+    nivelId: folioDocAlumno.alumno.programa.nivelId,
+    nombreNivel: folioDocAlumno.alumno.programa.nivel?.descripcion,
+    calificacionDecimal: folioDocAlumno.alumno.programa?.calificacionDecimal,
     nombrePlantel: folioDocAlumno.alumno.programa.plantel.institucion.nombre,
     municipio: folioDocAlumno.alumno.programa.plantel.domicilio.municipio.nombre,
-    fechaInicio: formatDateDMY(folioDocAlumno?.solicitudFolioAlumno?.fechaInicio),
-    fechaTerminacion: formatDateDMY(folioDocAlumno?.solicitudFolioAlumno?.fechaTerminacion),
+    fechaInicio: formatDateDMY(fechaInicioRaw),
+    fechaTerminacion: formatDateDMY(fechaTerminacionRaw),
     fechaExamen: formatDateDMY(folioDocAlumno?.solicitudFolioAlumno?.fechaExamenProfesional
       || folioDocAlumno?.solicitudFolioAlumno?.fechaExencionExamenProfesional),
     fechaExpedicion: formatDateDMY(new Date()),
