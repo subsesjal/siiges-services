@@ -81,17 +81,18 @@ const buildFileCertitulo = (
     });
   }
 
-  if (documentoFirmado?.fechaExpedicion) {
-    const error = new Error('El certificado ya fue generado anteriormente');
-    error.statusCode = 400;
-    throw error;
-  }
+  let fechaExpedicionFinal;
 
-  if (documentoFirmado) {
+  if (documentoFirmado?.fechaExpedicion) {
+    fechaExpedicionFinal = documentoFirmado.fechaExpedicion;
+  } else if (documentoFirmado) {
+    fechaExpedicionFinal = new Date();
     await updateDocumentoFirmadoQuery(
       { id: documentoFirmado.id },
-      { fechaExpedicion: new Date() },
+      { fechaExpedicion: fechaExpedicionFinal },
     );
+  } else {
+    fechaExpedicionFinal = new Date();
   }
 
   const includeCalificaciones = [
@@ -209,7 +210,7 @@ const buildFileCertitulo = (
     fechaTerminacion: formatDateDMY(fechaTerminacionRaw),
     fechaExamen: formatDateDMY(folioDocAlumno?.solicitudFolioAlumno?.fechaExamenProfesional
       || folioDocAlumno?.solicitudFolioAlumno?.fechaExencionExamenProfesional),
-    fechaExpedicion: formatDateDMY(new Date()),
+    fechaExpedicion: formatDateDMY(fechaExpedicionFinal),
     cct: folioDocAlumno.alumno.programa.plantel.claveCentroTrabajo,
     rvoe: folioDocAlumno.alumno.programa.acuerdoRvoe,
     fechaRvoe: formatDateDMY(folioDocAlumno.alumno.programa.fechaSurteEfecto),
