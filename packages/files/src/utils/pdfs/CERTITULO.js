@@ -605,25 +605,25 @@ async function GenerarCertificado(certificado) {
   const xNumDer = xTipoDer + colTipoAncho;
   const xLetraDer = xNumDer + colNumAncho;
 
-  const dibujarHeaders = (mostrarColumnaDerecha = true) => {
+  const dibujarHeaders = (yPos, mostrarColumnaDerecha = true) => {
     doc.setFont('Garet', 'bold');
     doc.setFontSize(5);
 
-    doc.text('ASIGNATURAS', xAsignaturaIzq + 2, tablaY);
-    doc.text('PERIODO', xPeriodoIzq + (colPeriodoAncho / 2) - (doc.getTextWidth('PERIODO') / 2), tablaY);
-    doc.text('TIPO', xTipoIzq + (colTipoAncho / 2) - (doc.getTextWidth('TIPO') / 2), tablaY);
-    doc.text('NÚM', xNumIzq + (colNumAncho / 2) - (doc.getTextWidth('NÚM') / 2), tablaY);
+    doc.text('ASIGNATURAS', xAsignaturaIzq + 2, yPos);
+    doc.text('PERIODO', xPeriodoIzq + (colPeriodoAncho / 2) - (doc.getTextWidth('PERIODO') / 2), yPos);
+    doc.text('TIPO', xTipoIzq + (colTipoAncho / 2) - (doc.getTextWidth('TIPO') / 2), yPos);
+    doc.text('NÚM', xNumIzq + (colNumAncho / 2) - (doc.getTextWidth('NÚM') / 2), yPos);
     doc.setFontSize(4);
-    doc.text('CALIFICACIÓN\nLETRA', xLetraIzq + 2, tablaY - 1);
+    doc.text('CALIFICACIÓN\nLETRA', xLetraIzq + 2, yPos - 1);
 
     if (mostrarColumnaDerecha) {
       doc.setFontSize(5);
-      doc.text('ASIGNATURAS', xAsignaturaDer + 2, tablaY);
-      doc.text('PERIODO', xPeriodoDer + (colPeriodoAncho / 2) - (doc.getTextWidth('PERIODO') / 2), tablaY);
-      doc.text('TIPO', xTipoDer + (colTipoAncho / 2) - (doc.getTextWidth('TIPO') / 2), tablaY);
-      doc.text('NÚM', xNumDer + (colNumAncho / 2) - (doc.getTextWidth('NÚM') / 2), tablaY);
+      doc.text('ASIGNATURAS', xAsignaturaDer + 2, yPos);
+      doc.text('PERIODO', xPeriodoDer + (colPeriodoAncho / 2) - (doc.getTextWidth('PERIODO') / 2), yPos);
+      doc.text('TIPO', xTipoDer + (colTipoAncho / 2) - (doc.getTextWidth('TIPO') / 2), yPos);
+      doc.text('NÚM', xNumDer + (colNumAncho / 2) - (doc.getTextWidth('NÚM') / 2), yPos);
       doc.setFontSize(4);
-      doc.text('CALIFICACIÓN\nLETRA', xLetraDer + 2, tablaY - 1);
+      doc.text('CALIFICACIÓN\nLETRA', xLetraDer + 2, yPos - 1);
     }
   };
 
@@ -631,9 +631,6 @@ async function GenerarCertificado(certificado) {
   const grados = ordenarGradosYAsignaturas(gradosOriginales);
   const margenInferior = 220;
   const altoFila = 5.5;
-
-  const hayColumnaDerecha = grados.length > 1;
-  dibujarHeaders(hayColumnaDerecha);
 
   const calcularAlturaGrado = (grado) => {
     const asignaturas = grado.asignaturas || [];
@@ -722,40 +719,33 @@ async function GenerarCertificado(certificado) {
 
     const nuevoTablaY = nuevoTextoDescriptivoY + 15;
 
-    doc.setFont('Garet', 'bold');
-    doc.setFontSize(5);
-
-    doc.text('ASIGNATURAS', xAsignaturaIzq + 2, nuevoTablaY);
-    doc.text('PERIODO', xPeriodoIzq + (colPeriodoAncho / 2) - (doc.getTextWidth('PERIODO') / 2), nuevoTablaY);
-    doc.text('TIPO', xTipoIzq + (colTipoAncho / 2) - (doc.getTextWidth('TIPO') / 2), nuevoTablaY);
-    doc.text('NÚM', xNumIzq + (colNumAncho / 2) - (doc.getTextWidth('NÚM') / 2), nuevoTablaY);
-    doc.setFontSize(4);
-    doc.text('CALIFICACIÓN\nLETRA', xLetraIzq + 2, nuevoTablaY - 1);
-
-    if (mostrarColumnaDerecha) {
-      doc.setFontSize(5);
-      doc.text('ASIGNATURAS', xAsignaturaDer + 2, nuevoTablaY);
-      doc.text('PERIODO', xPeriodoDer + (colPeriodoAncho / 2) - (doc.getTextWidth('PERIODO') / 2), nuevoTablaY);
-      doc.text('TIPO', xTipoDer + (colTipoAncho / 2) - (doc.getTextWidth('TIPO') / 2), nuevoTablaY);
-      doc.text('NÚM', xNumDer + (colNumAncho / 2) - (doc.getTextWidth('NÚM') / 2), nuevoTablaY);
-      doc.setFontSize(4);
-      doc.text('CALIFICACIÓN\nLETRA', xLetraDer + 2, nuevoTablaY - 1);
-    }
+    dibujarHeaders(nuevoTablaY, mostrarColumnaDerecha);
 
     return nuevoTablaY + 8;
   };
 
+  const mitad = Math.ceil(grados.length / 2);
+  const gradosIzquierda = grados.slice(0, mitad);
+  const gradosDerecha = grados.slice(mitad);
+
+  const hayColumnaDerecha = gradosDerecha.length > 0;
+  dibujarHeaders(tablaY, hayColumnaDerecha);
+
   let yPosIzq = tablaY + 8;
   let yPosDer = tablaY + 8;
-  let indiceCorte = -1;
 
-  grados.some((grado, i) => {
+  let necesitaNuevaPagina = false;
+  let indiceCorteIzq = gradosIzquierda.length;
+
+  for (let i = 0; i < gradosIzquierda.length; i += 1) {
+    const grado = gradosIzquierda[i];
     const alturaGrado = calcularAlturaGrado(grado);
     const yFinal = yPosIzq + alturaGrado;
 
     if (yFinal > (height - margenInferior)) {
-      indiceCorte = i;
-      return true;
+      necesitaNuevaPagina = true;
+      indiceCorteIzq = i;
+      break;
     }
 
     yPosIzq = dibujarGrado(
@@ -767,62 +757,58 @@ async function GenerarCertificado(certificado) {
       xLetraIzq,
       yPosIzq,
     );
-    return false;
-  });
+  }
 
-  if (indiceCorte !== -1) {
-    let faseCompleta = false;
+  let indiceCorteDer = gradosDerecha.length;
 
-    await grados.slice(indiceCorte).reduce(async (promesaAnterior, grado, idx) => {
-      await promesaAnterior;
+  for (let i = 0; i < gradosDerecha.length; i += 1) {
+    const grado = gradosDerecha[i];
+    const alturaGrado = calcularAlturaGrado(grado);
+    const yFinal = yPosDer + alturaGrado;
 
-      if (faseCompleta) return;
+    if (yFinal > (height - margenInferior)) {
+      necesitaNuevaPagina = true;
+      indiceCorteDer = i;
+      break;
+    }
 
-      const i = indiceCorte + idx;
-      const alturaGrado = calcularAlturaGrado(grado);
-      const yFinal = yPosDer + alturaGrado;
+    yPosDer = dibujarGrado(
+      grado,
+      xAsignaturaDer,
+      xPeriodoDer,
+      xTipoDer,
+      xNumDer,
+      xLetraDer,
+      yPosDer,
+    );
+  }
 
-      if (yFinal > (height - margenInferior)) {
-        const gradosRestantes = grados.length - i;
-        const hayMasParaDerecha = gradosRestantes > 1;
+  if (necesitaNuevaPagina) {
+    const gradosPendientesIzq = gradosIzquierda.slice(indiceCorteIzq);
+    const gradosPendientesDer = gradosDerecha.slice(indiceCorteDer);
+    const gradosPendientes = [...gradosPendientesIzq, ...gradosPendientesDer];
 
-        const newY = await addNewPage(hayMasParaDerecha);
-        yPosIzq = newY;
-        yPosDer = newY;
-        indiceCorte = i;
-        faseCompleta = true;
-        return;
-      }
+    let indexPendiente = 0;
 
-      yPosDer = dibujarGrado(
-        grado,
-        xAsignaturaDer,
-        xPeriodoDer,
-        xTipoDer,
-        xNumDer,
-        xLetraDer,
-        yPosDer,
-      );
-    }, Promise.resolve());
+    while (indexPendiente < gradosPendientes.length) {
+      const gradosRestantes = gradosPendientes.length - indexPendiente;
+      const hayMasParaDerecha = gradosRestantes > 1;
 
-    if (indiceCorte < grados.length) {
+      // eslint-disable-next-line no-await-in-loop
+      const newY = await addNewPage(hayMasParaDerecha);
+      yPosIzq = newY;
+      yPosDer = newY;
+
       let columnaActual = 'izquierda';
 
-      await grados.slice(indiceCorte).reduce(async (promesaAnterior, grado, idx) => {
-        await promesaAnterior;
-
-        const i = indiceCorte + idx;
+      while (indexPendiente < gradosPendientes.length) {
+        const grado = gradosPendientes[indexPendiente];
         const alturaGrado = calcularAlturaGrado(grado);
 
         if (columnaActual === 'izquierda') {
           const yFinal = yPosIzq + alturaGrado;
           if (yFinal > (height - margenInferior)) {
-            const gradosRestantes = grados.length - i;
-            const hayMasParaDerecha = gradosRestantes > 1;
-
-            const newY = await addNewPage(hayMasParaDerecha);
-            yPosIzq = newY;
-            yPosDer = newY;
+            break;
           }
           yPosIzq = dibujarGrado(
             grado,
@@ -837,12 +823,7 @@ async function GenerarCertificado(certificado) {
         } else {
           const yFinal = yPosDer + alturaGrado;
           if (yFinal > (height - margenInferior)) {
-            const gradosRestantes = grados.length - i;
-            const hayMasParaDerecha = gradosRestantes > 1;
-
-            const newY = await addNewPage(hayMasParaDerecha);
-            yPosIzq = newY;
-            yPosDer = newY;
+            break;
           }
           yPosDer = dibujarGrado(
             grado,
@@ -855,7 +836,9 @@ async function GenerarCertificado(certificado) {
           );
           columnaActual = 'izquierda';
         }
-      }, Promise.resolve());
+
+        indexPendiente += 1;
+      }
     }
   }
 
