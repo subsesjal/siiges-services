@@ -1,5 +1,6 @@
 const alumnos = require('./db/alumnos');
 const titulosElectronicos = require('./db/titulosElectronicos');
+const certificadosElectronicos = require('./db/certificadosElectronicos');
 
 const {
   findAllProgramas,
@@ -54,4 +55,5 @@ module.exports = {
   ...grados,
   ...validaciones,
   ...titulosElectronicos,
+  ...certificadosElectronicos,
 };
