@@ -35,6 +35,7 @@ const estadosAdapter = require('./estados/handlers');
 const paisesAdapter = require('./paises/handlers');
 const nivelesAdapter = require('./niveles/handlers');
 const titulosAdapter = require('./administracionAcademica/titulosElectronicos/handlers');
+const certificadosAdapter = require('./administracionAcademica/certificadosElectronicos/handlers');
 
 module.exports = {
   diligenciasAdapter,
@@ -73,4 +74,5 @@ module.exports = {
   nivelesAdapter,
   noticiasAdapter,
   titulosAdapter,
+  certificadosAdapter,
 };
