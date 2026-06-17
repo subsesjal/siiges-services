@@ -1,3 +1,5 @@
+const { responseProperties } = require('./properties/responseProperties');
+
 const findMatriculaActivaSchema = {
   tags: ['Alumnos'],
   description: 'Regresa la matrícula activa agrupada por programa para una institución.',
@@ -27,10 +29,31 @@ const findMatriculaActivaSchema = {
                   programa: { type: 'string' },
                   acuerdoRvoe: { type: 'string' },
                   plantelId: { type: 'integer' },
-                  plantel: { type: 'object' },
+                  plantel: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      institucionId: { type: 'integer' },
+                      claveCentroTrabajo: { type: 'string' },
+                      domicilio: {
+                        type: 'object',
+                        properties: {
+                          id: { type: 'integer' },
+                          calle: { type: 'string' },
+                          numeroExterior: { type: 'string' },
+                          numeroInterior: { type: 'string' },
+                          colonia: { type: 'string' },
+                          codigoPostal: { type: 'integer' },
+                          ...responseProperties,
+                        },
+                      },
+                      ...responseProperties,
+                    },
+                  },
                   institucionId: { type: 'integer' },
                   institucion: { type: 'string' },
                   totalAlumnos: { type: 'integer' },
+                  ...responseProperties,
                 },
               },
             },
