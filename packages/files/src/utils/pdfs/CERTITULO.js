@@ -401,7 +401,7 @@ async function GenerarCertificado(certificado) {
   const colX2 = [blockX, blockX + colWidths2[0]];
 
   const programaBox = centerTextInBox(
-    `${certificado?.nombreNivel.toUpperCase() || ''} EN ${certificado?.carrera.toUpperCase() || ''}`,
+    `${certificado?.nombreNivel.toUpperCase() || ''}EN ${certificado?.carrera.toUpperCase() || ''}`,
     colX2[1],
     colWidths2[1],
     colY2,
@@ -580,7 +580,7 @@ async function GenerarCertificado(certificado) {
   const textoDescriptivoY = datosCertificadoY + 20;
   doc.setFont('Garet', 'normal');
   doc.setFontSize(6);
-  const textoDescriptivo = `Cursó y aprobó las asignaturas que se consignan en el plan de estudios ${certificado?.nivelId === 6 ? 'del' : 'de la'} ${certificado?.nombreNivel?.toUpperCase() || ''} EN ${certificado?.carrera?.toUpperCase() || ''}.`;
+  const textoDescriptivo = `Cursó y aprobó las asignaturas que se consignan en el plan de estudios ${certificado?.nivelId === 6 ? 'del' : 'de la'} ${certificado?.nombreNivel?.toUpperCase() || ''}EN ${certificado?.carrera?.toUpperCase() || ''}.`;
   const textoDescriptivoLines = doc.splitTextToSize(textoDescriptivo, blockWidth);
   doc.text(textoDescriptivoLines, blockX, textoDescriptivoY);
 
