@@ -6,6 +6,7 @@ const grados = require('./grados/grados.db.adapter');
 const validaciones = require('./validaciones/validacion.db.adapter');
 const equivalencias = require('./equivalencias/equivalencias.db.adapter');
 const persona = require('./persona/persona.db.adapter');
+const certificadoElectronico = require('./certificadoElectronico/certificadoElectronico.db.adapter');
 
 module.exports = {
   alumnos,
@@ -16,4 +17,5 @@ module.exports = {
   validaciones,
   equivalencias,
   persona,
+  certificadoElectronico,
 };
