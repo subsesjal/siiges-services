@@ -513,9 +513,11 @@ if (is_array($asignaturas) && count($asignaturas)) {
       $totalIndep += $horInd;
       $totalCred += $credit;
 
-      $totDocCarrera += $horDoc;
-      $totIndCarrera += $horInd;
-      $totCredCarrera += $credit;
+      if ((int) ($asig['tipo'] ?? 1) === 1) {
+        $totDocCarrera += $horDoc;
+        $totIndCarrera += $horInd;
+        $totCredCarrera += $credit;
+      }
 
       $pdf->RowBlanco([
         safe_iconv($getAreaName($asig['areaId'] ?? null)),
