@@ -18,6 +18,7 @@ const findAllAlumnosCount = require('./find-all.alumno-count.use-cases');
 const findAlumnosExtra = require('./find-group.alumnos-extra.use-cases');
 const findGroupAlumnosPersona = require('./find-group-alumnos-persona.use-cases');
 const findAllMatriculaActiva = require('./find-all.matricula-activa.use-cases');
+const findAlumnosInactivos = require('./find.alumnos-inactivos.use-cases');
 
 module.exports = {
   createAlumno: createAlumno(
@@ -106,6 +107,10 @@ module.exports = {
     programas.findPlantelQuery,
   ),
   findAllMatriculaActiva: findAllMatriculaActiva(
+    programas.findAllProgramasQuery,
+    alumnos.findAllAlumnosQuery,
+  ),
+  findAllAlumnosInactivos: findAlumnosInactivos(
     programas.findAllProgramasQuery,
     alumnos.findAllAlumnosQuery,
   ),
