@@ -20,9 +20,9 @@ const findOneAlumnos = (findOneAlumnosQuery) => async (identifierObj) => {
       include: [{
         association: 'grupo',
         include: [{
-          association: 'grado'
-        }]
-      }]
+          association: 'grado',
+        }],
+      }],
     },
   ];
 
