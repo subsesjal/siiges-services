@@ -6,6 +6,7 @@ const SITUACION_INACTIVO = 2;
 const findAllAlumnosInactivos = (
   findAllProgramasQuery,
   findAllAlumnosQuery,
+  findOneValidacionQuery,
 ) => async ({ institucionId, plantelId, programaId }) => {
   Logger.info('[alumnos]: buscar alumnos inactivos');
 
@@ -45,7 +46,7 @@ const findAllAlumnosInactivos = (
     },
   );
 
-  return alumnos.map((a) => {
+  return Promise.all(alumnos.map(async (a) => {
     const programa = programaById[a.programaId];
     const persona = a.persona || {};
     const nombreCompleto = [
@@ -53,6 +54,39 @@ const findAllAlumnosInactivos = (
       persona.apellidoPaterno,
       persona.apellidoMaterno,
     ].filter(Boolean).join(' ');
+
+    const validacionData = await findOneValidacionQuery(
+      { alumnoId: a.id },
+      {
+        include: [
+          { association: 'tipo' },
+          { association: 'situacionValidacion' },
+          { association: 'estado' },
+          { association: 'nivel' },
+        ],
+        strict: false,
+      },
+    );
+
+    const validacion = validacionData ? {
+      id: validacionData.id,
+      institucionProcedencia: validacionData.nombreInstitucionEmisora,
+      estadoProcedencia: validacionData.estado?.nombre,
+      cct: validacionData.claveCentroTrabajoEmisor,
+      nivelEstudios: validacionData.nivel?.nombre,
+      fechaInicioAntecedentes: validacionData.fechaInicioAntecedente,
+      fechaFinAntecedentes: validacionData.fechaFinAntecedente,
+      folio: validacionData.folio,
+      fechaExpedicion: validacionData.fechaExpedicion,
+      situacionDocumento: validacionData.estatus,
+      tipoValidacion: validacionData.tipo?.nombre,
+      situacionValidacion: validacionData.situacionValidacion?.nombre,
+      fechaValidacion: validacionData.fechaValidacion,
+      cedulaProfesional: validacionData.cedulaProfesional,
+      archivoValidacion: validacionData.archivoValidacion,
+      observaciones: validacionData.observaciones,
+      usuarioId: validacionData.usuarioId,
+    } : null;
 
     return {
       id: a.id,
@@ -68,8 +102,9 @@ const findAllAlumnosInactivos = (
       plantel: programa?.plantel?.nombre,
       institucionId: programa?.plantel?.institucionId,
       institucion: programa?.plantel?.institucion?.nombre,
+      validacion,
     };
-  });
+  }));
 };
 
 module.exports = findAllAlumnosInactivos;

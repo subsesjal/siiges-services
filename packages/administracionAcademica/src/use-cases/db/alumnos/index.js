@@ -75,6 +75,7 @@ module.exports = {
   findAlumnosInscritos: findAlumnosInscritos(
     alumnos.findAllAlumnoGrupoQuery,
     alumnos.findAllCalificacionesQuery,
+    validaciones.findOneValidacionQuery,
   ),
   findAlumnosGrupoAsignatura: findAlumnosGrupoAsignatura(
     alumnos.findAllCalificacionesQuery,
@@ -113,5 +114,6 @@ module.exports = {
   findAllAlumnosInactivos: findAlumnosInactivos(
     programas.findAllProgramasQuery,
     alumnos.findAllAlumnosQuery,
+    validaciones.findOneValidacionQuery,
   ),
 };
