@@ -4,6 +4,7 @@ const findAllProgramas = require('./find-all.programas.use-cases');
 const { findPlantelProgramas } = require('./find-plantel.programas.use-cases');
 const findInstitucionProgramas = require('./find-institucion.programas.use-cases');
 const findOnePrograma = require('./find-one.programa.use-cases');
+const findOneProgramaRvoe = require('./find-one.programa-rvoe.use-cases');
 
 module.exports = {
   findAllProgramas: findAllProgramas(
@@ -26,5 +27,8 @@ module.exports = {
   findOnePrograma: findOnePrograma(
     programas.findOneProgramaQuery,
     programas.includeProgramasQuery,
+  ),
+  findOneProgramaRvoe: findOneProgramaRvoe(
+    programas.findOneProgramaQuery,
   ),
 };

@@ -7,6 +7,7 @@ const {
   findPlantelProgramas,
   findInstitucionProgramas,
   findOnePrograma,
+  findOneProgramaRvoe,
 } = require('./db/programas');
 
 const {
@@ -56,4 +57,5 @@ module.exports = {
   ...validaciones,
   ...titulosElectronicos,
   ...certificadosElectronicos,
+  findOneProgramaRvoe,
 };
