@@ -6,6 +6,8 @@ const { addGaretFonts } = require('../garet-fonts');
 
 const img7 = fs.readFileSync(path.join(__dirname, '/images/img7.png'), { encoding: 'base64' });
 
+const REGEX_OPTATIVA_NUMERADA = /\bOPTATIVA\s*([0-9]+|[IVXLCDM]+)\b/i;
+
 function numeroALetras(num) {
   const letras = {
     0: 'CERO',
@@ -297,6 +299,49 @@ function ordenarGradosYAsignaturas(grados) {
       asignaturas: asignaturasOrdenadas,
     };
   });
+}
+
+function identificarOptativas(grados) {
+  const asignaturasOptativas = [];
+
+  const gradosProcesados = grados
+    .map((grado) => {
+      const asignaturasDelGrado = [];
+
+      (grado.asignaturas || []).forEach((asig) => {
+        const catalogoTipoEsDos = asig.catalogoTipo === 2 || asig.catalogoTipo === '2';
+        const catalogoTipoEsUno = asig.catalogoTipo === 1 || asig.catalogoTipo === '1';
+        const nombreAsig = (asig.nombre || '').toUpperCase();
+        const esOptativaPorNombre = catalogoTipoEsUno && REGEX_OPTATIVA_NUMERADA.test(nombreAsig);
+
+        if (catalogoTipoEsDos) {
+          asignaturasOptativas.push(asig);
+        } else if (esOptativaPorNombre) {
+          asignaturasDelGrado.push({ ...asig, ocultarDatosPorOptativa: true });
+          asignaturasOptativas.push(asig);
+        } else {
+          asignaturasDelGrado.push(asig);
+        }
+      });
+
+      return {
+        ...grado,
+        asignaturas: asignaturasDelGrado,
+      };
+    })
+    .filter((grado) => (grado.asignaturas || []).length > 0);
+
+  if (asignaturasOptativas.length === 0) {
+    return gradosProcesados;
+  }
+
+  return [
+    ...gradosProcesados,
+    {
+      gradoNombre: 'OPTATIVA',
+      asignaturas: asignaturasOptativas,
+    },
+  ];
 }
 
 async function GenerarCertificado(certificado) {
@@ -628,8 +673,9 @@ async function GenerarCertificado(certificado) {
   };
 
   const gradosOriginales = certificado?.grados || [];
-  const grados = ordenarGradosYAsignaturas(gradosOriginales);
-  const margenInferior = 220;
+  const gradosOrdenados = ordenarGradosYAsignaturas(gradosOriginales);
+  const grados = identificarOptativas(gradosOrdenados);
+  const margenInferior = 225;
   const altoFila = 5.5;
 
   const calcularAlturaGrado = (grado) => {
@@ -658,27 +704,34 @@ async function GenerarCertificado(certificado) {
         doc.text(line, xAsignatura + 8, yPos + (idx * altoFila));
       });
 
-      const periodo = String(asig.periodo || '');
+      const ocultarDatos = asig.ocultarDatosPorOptativa === true;
+
+      const periodo = ocultarDatos ? '-----' : String(asig.periodo || '');
       const periodoWidth = doc.getTextWidth(periodo);
       doc.text(periodo, xPeriodo + (colPeriodoAncho / 2) - (periodoWidth / 2), yPos);
 
-      let tipoTexto = 'ORD';
-      if (asig.tipo === 2 || asig.tipo === '2') {
-        tipoTexto = 'EXTRA';
-      } else if (asig.tipo === 1 || asig.tipo === '1') {
-        tipoTexto = 'ORD';
-      } else {
-        tipoTexto = String(asig.tipo || 'ORD');
+      let tipoTexto = '-----';
+      if (!ocultarDatos) {
+        if (asig.tipo === 2 || asig.tipo === '2') {
+          tipoTexto = 'EXTRA';
+        } else if (asig.tipo === 1 || asig.tipo === '1') {
+          tipoTexto = 'ORD';
+        } else {
+          tipoTexto = String(asig.tipo || 'ORD');
+        }
       }
       const tipoWidth = doc.getTextWidth(tipoTexto);
       doc.text(tipoTexto, xTipo + (colTipoAncho / 2) - (tipoWidth / 2), yPos);
 
-      const calNum = String(asig.calificacion || '');
+      const calNum = ocultarDatos ? '--' : String(asig.calificacion || '');
       const calNumWidth = doc.getTextWidth(calNum);
       doc.text(calNum, xNum + (colNumAncho / 2) - (calNumWidth / 2), yPos);
 
-      const esDecimal = certificado?.calificacionDecimal === 1;
-      const calLetra = asig.calificacionLetra || calificacionALetras(asig.calificacion, esDecimal) || '';
+      let calLetra = '---------------';
+      if (!ocultarDatos) {
+        const esDecimal = certificado?.calificacionDecimal === 1;
+        calLetra = asig.calificacionLetra || calificacionALetras(asig.calificacion, esDecimal) || '';
+      }
       doc.text(String(calLetra), xLetra + 2, yPos);
 
       yPos += altoFila * Math.max(1, nombreAsigLines.length);
@@ -687,6 +740,10 @@ async function GenerarCertificado(certificado) {
     yPos += 2;
     return yPos;
   };
+
+  const PAGINA_SIGUIENTE_DATOS_CERT_Y = 125;
+  const PAGINA_SIGUIENTE_TEXTO_DESC_Y = PAGINA_SIGUIENTE_DATOS_CERT_Y + 20;
+  const PAGINA_SIGUIENTE_TABLA_Y = PAGINA_SIGUIENTE_TEXTO_DESC_Y + 15;
 
   const addNewPage = async (mostrarColumnaDerecha = true) => {
     await agregarFooter(doc, certificado);
@@ -702,7 +759,7 @@ async function GenerarCertificado(certificado) {
     doc.text('CERTIFICADO DE ESTUDIOS', centerX, 94, { align: 'center' });
     doc.setFont('Garet', 'normal');
 
-    const nuevoDatosCertificadoY = 125;
+    const nuevoDatosCertificadoY = PAGINA_SIGUIENTE_DATOS_CERT_Y;
 
     doc.setFillColor(252, 133, 32);
     doc.rect(blockX, nuevoDatosCertificadoY, blockWidth, 14, 'F');
@@ -712,134 +769,115 @@ async function GenerarCertificado(certificado) {
     doc.text(datosCertText, blockX
       + (blockWidth - datosCertWidth) / 2, nuevoDatosCertificadoY + 10);
 
-    const nuevoTextoDescriptivoY = nuevoDatosCertificadoY + 20;
+    const nuevoTextoDescriptivoY = PAGINA_SIGUIENTE_TEXTO_DESC_Y;
     doc.setFont('Garet', 'normal');
     doc.setFontSize(6);
     doc.text(textoDescriptivoLines, blockX, nuevoTextoDescriptivoY);
 
-    const nuevoTablaY = nuevoTextoDescriptivoY + 15;
+    const nuevoTablaY = PAGINA_SIGUIENTE_TABLA_Y;
 
     dibujarHeaders(nuevoTablaY, mostrarColumnaDerecha);
 
     return nuevoTablaY + 8;
   };
 
-  const mitad = Math.ceil(grados.length / 2);
-  const gradosIzquierda = grados.slice(0, mitad);
-  const gradosDerecha = grados.slice(mitad);
+  const construirPaginas = () => {
+    const paginas = [];
+    let indice = 0;
+    let esPrimeraPagina = true;
 
-  const hayColumnaDerecha = gradosDerecha.length > 0;
-  dibujarHeaders(tablaY, hayColumnaDerecha);
+    while (indice < grados.length) {
+      const yInicio = esPrimeraPagina ? (tablaY + 8) : (PAGINA_SIGUIENTE_TABLA_Y + 8);
+      const pagina = { izquierda: [], derecha: [] };
+      let yIzq = yInicio;
+      let yDer = yInicio;
 
-  let yPosIzq = tablaY + 8;
-  let yPosDer = tablaY + 8;
-
-  let necesitaNuevaPagina = false;
-  let indiceCorteIzq = gradosIzquierda.length;
-
-  for (let i = 0; i < gradosIzquierda.length; i += 1) {
-    const grado = gradosIzquierda[i];
-    const alturaGrado = calcularAlturaGrado(grado);
-    const yFinal = yPosIzq + alturaGrado;
-
-    if (yFinal > (height - margenInferior)) {
-      necesitaNuevaPagina = true;
-      indiceCorteIzq = i;
-      break;
-    }
-
-    yPosIzq = dibujarGrado(
-      grado,
-      xAsignaturaIzq,
-      xPeriodoIzq,
-      xTipoIzq,
-      xNumIzq,
-      xLetraIzq,
-      yPosIzq,
-    );
-  }
-
-  let indiceCorteDer = gradosDerecha.length;
-
-  for (let i = 0; i < gradosDerecha.length; i += 1) {
-    const grado = gradosDerecha[i];
-    const alturaGrado = calcularAlturaGrado(grado);
-    const yFinal = yPosDer + alturaGrado;
-
-    if (yFinal > (height - margenInferior)) {
-      necesitaNuevaPagina = true;
-      indiceCorteDer = i;
-      break;
-    }
-
-    yPosDer = dibujarGrado(
-      grado,
-      xAsignaturaDer,
-      xPeriodoDer,
-      xTipoDer,
-      xNumDer,
-      xLetraDer,
-      yPosDer,
-    );
-  }
-
-  if (necesitaNuevaPagina) {
-    const gradosPendientesIzq = gradosIzquierda.slice(indiceCorteIzq);
-    const gradosPendientesDer = gradosDerecha.slice(indiceCorteDer);
-    const gradosPendientes = [...gradosPendientesIzq, ...gradosPendientesDer];
-
-    let indexPendiente = 0;
-
-    while (indexPendiente < gradosPendientes.length) {
-      const gradosRestantes = gradosPendientes.length - indexPendiente;
-      const hayMasParaDerecha = gradosRestantes > 1;
-
-      // eslint-disable-next-line no-await-in-loop
-      const newY = await addNewPage(hayMasParaDerecha);
-      yPosIzq = newY;
-      yPosDer = newY;
-
-      let columnaActual = 'izquierda';
-
-      while (indexPendiente < gradosPendientes.length) {
-        const grado = gradosPendientes[indexPendiente];
+      while (indice < grados.length) {
+        const grado = grados[indice];
         const alturaGrado = calcularAlturaGrado(grado);
+        const seAgota = (yIzq + alturaGrado) > (height - margenInferior);
 
-        if (columnaActual === 'izquierda') {
-          const yFinal = yPosIzq + alturaGrado;
-          if (yFinal > (height - margenInferior)) {
-            break;
+        if (seAgota) {
+          if (pagina.izquierda.length === 0) {
+            pagina.izquierda.push(grado);
+            indice += 1;
           }
-          yPosIzq = dibujarGrado(
-            grado,
-            xAsignaturaIzq,
-            xPeriodoIzq,
-            xTipoIzq,
-            xNumIzq,
-            xLetraIzq,
-            yPosIzq,
-          );
-          columnaActual = 'derecha';
-        } else {
-          const yFinal = yPosDer + alturaGrado;
-          if (yFinal > (height - margenInferior)) {
-            break;
-          }
-          yPosDer = dibujarGrado(
-            grado,
-            xAsignaturaDer,
-            xPeriodoDer,
-            xTipoDer,
-            xNumDer,
-            xLetraDer,
-            yPosDer,
-          );
-          columnaActual = 'izquierda';
+          break;
         }
 
-        indexPendiente += 1;
+        pagina.izquierda.push(grado);
+        yIzq += alturaGrado;
+        indice += 1;
       }
+
+      while (indice < grados.length) {
+        const grado = grados[indice];
+        const alturaGrado = calcularAlturaGrado(grado);
+        const seAgota = (yDer + alturaGrado) > (height - margenInferior);
+
+        if (seAgota) {
+          if (pagina.derecha.length === 0) {
+            pagina.derecha.push(grado);
+            indice += 1;
+          }
+          break;
+        }
+
+        pagina.derecha.push(grado);
+        yDer += alturaGrado;
+        indice += 1;
+      }
+
+      paginas.push(pagina);
+      esPrimeraPagina = false;
     }
+
+    return paginas;
+  };
+
+  const paginas = construirPaginas();
+
+  for (let p = 0; p < paginas.length; p += 1) {
+    const pagina = paginas[p];
+    const hayColumnaDerecha = pagina.derecha.length > 0;
+
+    let yIzqActual;
+    let yDerActual;
+
+    if (p === 0) {
+      dibujarHeaders(tablaY, hayColumnaDerecha);
+      yIzqActual = tablaY + 8;
+      yDerActual = tablaY + 8;
+    } else {
+      // eslint-disable-next-line no-await-in-loop
+      const nuevoY = await addNewPage(hayColumnaDerecha);
+      yIzqActual = nuevoY;
+      yDerActual = nuevoY;
+    }
+
+    pagina.izquierda.forEach((grado) => {
+      yIzqActual = dibujarGrado(
+        grado,
+        xAsignaturaIzq,
+        xPeriodoIzq,
+        xTipoIzq,
+        xNumIzq,
+        xLetraIzq,
+        yIzqActual,
+      );
+    });
+
+    pagina.derecha.forEach((grado) => {
+      yDerActual = dibujarGrado(
+        grado,
+        xAsignaturaDer,
+        xPeriodoDer,
+        xTipoDer,
+        xNumDer,
+        xLetraDer,
+        yDerActual,
+      );
+    });
   }
 
   await agregarFooter(doc, certificado);

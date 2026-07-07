@@ -146,6 +146,8 @@ const buildFileCertitulo = (
       periodo: cicloNombre,
       calificacion: calificacionProcesada,
       tipo: c.tipo,
+      catalogoTipo: c.asignatura?.tipo,
+      catalogoGradoId: c.asignatura?.gradoId,
       fechaExamen: c.fechaExamen,
     });
   });
