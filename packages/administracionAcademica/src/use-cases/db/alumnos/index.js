@@ -114,6 +114,5 @@ module.exports = {
   findAllAlumnosInactivos: findAlumnosInactivos(
     programas.findAllProgramasQuery,
     alumnos.findAllAlumnosQuery,
-    validaciones.findOneValidacionQuery,
   ),
 };
