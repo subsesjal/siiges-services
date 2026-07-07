@@ -309,12 +309,13 @@ function identificarOptativas(grados) {
       const asignaturasDelGrado = [];
 
       (grado.asignaturas || []).forEach((asig) => {
-        const catalogoTipoEsDos = asig.catalogoTipo === 2 || asig.catalogoTipo === '2';
-        const catalogoTipoEsUno = asig.catalogoTipo === 1 || asig.catalogoTipo === '1';
+        const catalogoTipoEsOptativa = asig.catalogoTipo === 2 || asig.catalogoTipo === '2';
+        const catalogoTipoEsOrdinario = asig.catalogoTipo === 1 || asig.catalogoTipo === '1';
         const nombreAsig = (asig.nombre || '').toUpperCase();
-        const esOptativaPorNombre = catalogoTipoEsUno && REGEX_OPTATIVA_NUMERADA.test(nombreAsig);
+        const esOptativaPorNombre = catalogoTipoEsOrdinario
+        && REGEX_OPTATIVA_NUMERADA.test(nombreAsig);
 
-        if (catalogoTipoEsDos) {
+        if (catalogoTipoEsOptativa) {
           asignaturasOptativas.push(asig);
         } else if (esOptativaPorNombre) {
           asignaturasDelGrado.push({ ...asig, ocultarDatosPorOptativa: true });
