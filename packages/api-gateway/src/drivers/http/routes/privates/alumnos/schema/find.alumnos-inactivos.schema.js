@@ -1,3 +1,16 @@
+const { alumno } = require('./properties/alumno');
+const { persona } = require('../../usuarios/schema/properties/persona');
+const { validacion } = require('./properties/validacion');
+const { situacionesValidacion } = require('./properties/situacionValidacion');
+const { tipoValidaciones } = require('./properties/tipoValidacion');
+const { estado } = require('../../usuarios/schema/properties/estado');
+const { nivel } = require('../../grupos/schema/properties/nivel');
+const { programa } = require('../../programas/schema/properties/programa');
+const { plantel } = require('../../instituciones/schema/properties/plantel');
+const { institucion } = require('../../instituciones/schema/properties/institucion');
+const { domicilio } = require('../../usuarios/schema/properties/domicilio');
+const { responseProperties } = require('./properties/responseProperties');
+
 const findAlumnosInactivosSchema = {
   tags: ['Alumnos'],
   description: 'Obtiene el listado de alumnos inactivos por institución.',
@@ -18,21 +31,90 @@ const findAlumnosInactivosSchema = {
           type: 'array',
           items: {
             type: 'object',
-            additionalProperties: true,
             properties: {
               id: { type: 'integer' },
-              matricula: { type: 'string' },
-              situacionId: { type: 'integer' },
-              nombreCompleto: { type: 'string' },
-              curp: { type: ['string', 'null'] },
-              fechaRegistro: { type: ['string', 'null'] },
-              programaId: { type: 'integer' },
-              programa: { type: 'string' },
-              acuerdoRvoe: { type: ['string', 'null'] },
-              plantelId: { type: 'integer' },
-              plantel: { type: 'string' },
-              institucionId: { type: 'integer' },
-              institucion: { type: 'string' },
+              ...alumno,
+              ...responseProperties,
+              persona: {
+                type: 'object',
+                properties: {
+                  ...persona,
+                  ...responseProperties,
+                },
+              },
+              programa: {
+                type: 'object',
+                properties: {
+                  ...programa,
+                  acuerdoRvoe: { type: ['string', 'null'] },
+                  plantelId: { type: 'integer' },
+                  ...responseProperties,
+                  plantel: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...plantel,
+                      ...responseProperties,
+                      institucion: {
+                        type: 'object',
+                        properties: {
+                          id: { type: 'integer' },
+                          ...institucion,
+                          ...responseProperties,
+                        },
+                      },
+                      domicilio: {
+                        type: 'object',
+                        properties: {
+                          id: { type: 'integer' },
+                          ...domicilio,
+                          ...responseProperties,
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+              validacion: {
+                type: ['object', 'null'],
+                properties: {
+                  id: { type: 'integer' },
+                  ...validacion,
+                  ...responseProperties,
+                  tipo: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...tipoValidaciones,
+                      ...responseProperties,
+                    },
+                  },
+                  situacionValidacion: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...situacionesValidacion,
+                      ...responseProperties,
+                    },
+                  },
+                  estado: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...estado,
+                      ...responseProperties,
+                    },
+                  },
+                  nivel: {
+                    type: 'object',
+                    properties: {
+                      id: { type: 'integer' },
+                      ...nivel,
+                      ...responseProperties,
+                    },
+                  },
+                },
+              },
             },
           },
         },
