@@ -1,15 +1,41 @@
 const { Logger } = require('@siiges-services/shared');
+const { config } = require('@siiges-services/notificaciones');
 const errorHandler = require('../../../utils/errorHandler');
 
-async function sendEmailNotification(notificacionServices, emailDestination, idUser, userName) {
-  Logger.info('[notification]: Sending notification');
+const ESTATUS_REVISION_DOCUMENTACION = 2;
+
+async function sendEmailSolicitudTerminada(
+  notificacionServices,
+  institucionServices,
+  solicitud,
+  usuario,
+) {
+  Logger.info('[notification]: Sending solicitud terminada notification');
+
+  let nombreInstitucion = '';
+  try {
+    const institucion = await institucionServices.findOneInstitucionUsuario({
+      usuarioId: usuario.dataValues.id,
+    });
+    nombreInstitucion = institucion?.dataValues?.nombre || '';
+  } catch (error) {
+    Logger.warn('[notification]: no se encontró institución para el correo de solicitud terminada');
+  }
+
   await notificacionServices.sendNotificationEmail({
-    usuarioId: idUser,
-    email: emailDestination,
-    asunto: 'SIGES: Confirmación de Recepción de Solicitud para Creación de Solicitud',
-    template: 'createSolicitud',
+    usuarioId: usuario.dataValues.id,
+    email: config.emailDireccionIncorporacion,
+    bcc: config.emailSoporteSiiges,
+    asunto: 'SIGES: Solicitud enviada a revisión de documentación',
+    template: 'solicitudTerminada',
     params: {
-      user: userName,
+      nombre_usuario: usuario.dataValues.usuario,
+      folio: solicitud.dataValues.folio || '',
+      nombre_programa: solicitud.dataValues.programa?.nombre || '',
+      nombre_institucion: nombreInstitucion,
+      fecha_completado: new Date().toLocaleDateString('es-MX', { timeZone: 'America/Mexico_City' }),
+      estatus: 'REVISIÓN DE DOCUMENTACIÓN',
+      anio: new Date().getFullYear(),
     },
   });
 }
@@ -26,10 +52,19 @@ async function updateSolicitudPrograma(req, reply) {
       data,
     );
     const usuario = await this.usuarioServices.findOneUser({ id: solicitud.dataValues.usuarioId });
-    const { correo } = usuario.dataValues;
-    const { id } = usuario.dataValues;
-    const nombreUsuario = usuario.dataValues.usuario;
-    sendEmailNotification(this.notificacionServices, correo, id, nombreUsuario);
+
+    const estatusSolicitudId = Number(
+      data.estatusSolicitudId ?? data.programa?.estatusSolicitudId,
+    );
+    if (estatusSolicitudId === ESTATUS_REVISION_DOCUMENTACION) {
+      sendEmailSolicitudTerminada(
+        this.notificacionServices,
+        this.institucionServices,
+        solicitud,
+        usuario,
+      );
+    }
+
     return reply
       .code(200)
       .header('Content-Type', 'application/json; charset=utf-8')

@@ -18,7 +18,7 @@ const updateSolicitudPrograma = (
   const solicitudUpdated = await updateSolicitudQuery(identifierObj, changesSolicitud);
 
   const programa = await findOneProgramaQuery({ solicitudId: solicitudUpdated.id });
-  checkers.throwErrorIfDataIsFalsy(programa, 'programas', { solcitudId: solicitudUpdated.id });
+  checkers.throwErrorIfDataIsFalsy(programa, 'programas', { solicitudId: solicitudUpdated.id });
 
   const programaUpdated = await updateProgramaQuery({ id: programa.id }, changesPrograma);
 

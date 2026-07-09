@@ -4,7 +4,7 @@ const services = require('./services');
 const db = require('./db');
 
 const sendNotificationEmail = async ({
-  usuarioId, email, asunto, template, params,
+  usuarioId, email, bcc, asunto, template, params,
 }) => {
   // Save the notification on DB
   const notificationData = {
@@ -19,7 +19,7 @@ const sendNotificationEmail = async ({
   try {
     const notificacion = await db.createNotificacion(notificationData);
     // Send email notification
-    const nodemailerService = await services.sendEmail(notificationData);
+    const nodemailerService = await services.sendEmail({ ...notificationData, bcc });
 
     if (nodemailerService.error) {
       throw new Error(nodemailerService.error);

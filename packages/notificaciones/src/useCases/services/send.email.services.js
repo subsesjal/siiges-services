@@ -7,7 +7,7 @@ const { config } = require('../../../config/environment');
 const { addDetailsHtml } = require('../utils/add-template-html');
 
 const sendEmail = async ({
-  email, asunto, template, data,
+  email, bcc, asunto, template, data,
 }) => {
   Logger.info('[notificaciones]: send email', {
     email, asunto, template, data,
@@ -38,6 +38,10 @@ const sendEmail = async ({
     subject: asunto,
     html: emailHtml,
   };
+
+  if (bcc) {
+    mailOptions.bcc = bcc;
+  }
 
   const transporter = nodemailer.createTransport({
     service: config.serviceEmail,
