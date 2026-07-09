@@ -4,6 +4,7 @@ const programa = {
   nivelId: { type: 'integer' },
   solicitudId: { type: 'integer' },
   modalidadId: { type: 'integer' },
+  permisoAlumno: { type: 'integer' },
   plantelId: { type: 'integer' },
   duracionPeriodos: { type: 'integer' },
   objetivos: { type: 'string' },

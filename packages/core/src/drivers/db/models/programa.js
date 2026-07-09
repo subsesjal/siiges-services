@@ -204,6 +204,10 @@ const ProgramaSchema = {
     type: DataTypes.BOOLEAN,
     field: 'calificacion_decimal',
   },
+  permisoAlumno: {
+    type: DataTypes.INTEGER,
+    field: 'permiso_alumno',
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
