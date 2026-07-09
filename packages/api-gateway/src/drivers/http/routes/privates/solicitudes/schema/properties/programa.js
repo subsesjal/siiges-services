@@ -5,6 +5,7 @@ const programa = {
   solicitudId: { type: 'integer' },
   modalidadId: { type: 'integer' },
   plantelId: { type: 'integer' },
+  permisoAlumno: { type: 'boolean' },
   duracionPeriodos: { type: 'integer' },
   objetivos: { type: 'string' },
   antecedentes: { type: 'string' },
