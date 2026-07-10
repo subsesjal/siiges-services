@@ -1,6 +1,19 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
+async function sendEmailNotification(notificacionServices, emailDestination, idUser, userName) {
+  Logger.info('[notification]: Sending notification');
+  await notificacionServices.sendNotificationEmail({
+    usuarioId: idUser,
+    email: emailDestination,
+    asunto: 'SIGES: Confirmación de Recepción de Solicitud para Creación de Solicitud',
+    template: 'createSolicitud',
+    params: {
+      user: userName,
+    },
+  });
+}
+
 async function createSolicitudPrograma(req, reply) {
   Logger.info('[solicitudes]: Crear solicitud por tipo de solicitud programa');
   try {
@@ -29,6 +42,22 @@ async function createSolicitudPrograma(req, reply) {
       default:
         break;
     }
+
+    const usuarioId = solicitud?.dataValues?.usuarioId || data.usuarioId;
+    if (usuarioId) {
+      try {
+        const usuario = await this.usuarioServices.findOneUser({ id: usuarioId });
+        sendEmailNotification(
+          this.notificacionServices,
+          usuario.dataValues.correo,
+          usuario.dataValues.id,
+          usuario.dataValues.usuario,
+        );
+      } catch (error) {
+        Logger.warn('[notification]: no se pudo enviar el correo de creación de solicitud');
+      }
+    }
+
     return reply
       .code(201)
       .header('Content-Type', 'application/json; charset=utf-8')

@@ -64,3 +64,5 @@ jobs:
           TIME_MAIL: 3600000
           PATH_FILE: ${{ github.workspace }}
           LOGGING: true
+          EMAIL_SOPORTE_SIIGES: mail@mail.gob.mx
+          EMAIL_DIRECCION_INCORPORACION: mail@correo.gob.mx
