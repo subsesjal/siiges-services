@@ -40,6 +40,9 @@ module.exports = {
     alumnos.updateAlumnoQuery,
     alumnos.updateAlumnoTipoTramiteQuery,
     alumnos.updatePersonaQuery,
+    programas.findOneProgramaQuery,
+    alumnos.findAllAsignaturasQuery,
+    alumnos.findAllCalificacionesQuery,
   ),
   findGroupAlumnosPrograma: findGroupAlumnosPrograma(
     programas.findOneProgramaQuery,

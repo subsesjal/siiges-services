@@ -5,6 +5,7 @@ const {
   FolioDocumentoAlumno,
   Calificacion,
   DocumentoFirmado,
+  Asignatura,
 } = models;
 
 const {
@@ -18,4 +19,5 @@ module.exports = {
   findAllCalificacionesQuery: findAllQuery(Calificacion),
   findOneDocumentoFirmadoQuery: findOneQuery(DocumentoFirmado),
   updateDocumentoFirmadoQuery: updateQuery(DocumentoFirmado),
+  findAllAsignaturasQuery: findAllQuery(Asignatura),
 };

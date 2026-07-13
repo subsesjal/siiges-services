@@ -45,4 +45,5 @@ module.exports = {
   deleteCalificacionQuery: deleteAndFindQuery(Calificacion),
   findAllCount: findAllQuery(Alumno),
   findAllGruposQuery: findAllQuery(Grupo),
+  findAllAsignaturasQuery: findAllQuery(Asignatura),
 };
