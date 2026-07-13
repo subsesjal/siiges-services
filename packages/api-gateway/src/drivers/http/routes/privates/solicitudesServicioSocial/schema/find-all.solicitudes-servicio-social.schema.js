@@ -2,6 +2,7 @@ const { solicitudServicioSocial } = require('./properties/solicitudServicioSocia
 const { estatusSolicitudServicioSocial } = require('./properties/estatusSolicitudServicioSocial');
 const { cicloEscolar } = require('../../ciclosEscolares/schema/properties/cicloEscolar');
 const { domicilio } = require('../../usuarios/schema/properties/domicilio');
+const { programa } = require('../../programas/schema/properties/programa');
 const { responseProperties } = require('./properties/responseProperties');
 
 const findAllSolicitudesServicioSocialSchema = {
@@ -40,6 +41,14 @@ const findAllSolicitudesServicioSocialSchema = {
                 properties: {
                   id: { type: 'integer' },
                   ...domicilio,
+                  ...responseProperties,
+                },
+              },
+              programa: {
+                type: 'object',
+                properties: {
+                  id: { type: 'integer' },
+                  ...programa,
                   ...responseProperties,
                 },
               },
