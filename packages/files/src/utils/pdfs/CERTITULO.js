@@ -6,8 +6,6 @@ const { addGaretFonts } = require('../garet-fonts');
 
 const img7 = fs.readFileSync(path.join(__dirname, '/images/img7.png'), { encoding: 'base64' });
 
-const REGEX_OPTATIVA_NUMERADA = /\bOPTATIVA\s*([0-9]+|[IVXLCDM]+)\b/i;
-
 function numeroALetras(num) {
   const letras = {
     0: 'CERO',
@@ -299,50 +297,6 @@ function ordenarGradosYAsignaturas(grados) {
       asignaturas: asignaturasOrdenadas,
     };
   });
-}
-
-function identificarOptativas(grados) {
-  const asignaturasOptativas = [];
-
-  const gradosProcesados = grados
-    .map((grado) => {
-      const asignaturasDelGrado = [];
-
-      (grado.asignaturas || []).forEach((asig) => {
-        const catalogoTipoEsOptativa = asig.catalogoTipo === 2 || asig.catalogoTipo === '2';
-        const catalogoTipoEsOrdinario = asig.catalogoTipo === 1 || asig.catalogoTipo === '1';
-        const nombreAsig = (asig.nombre || '').toUpperCase();
-        const esOptativaPorNombre = catalogoTipoEsOrdinario
-        && REGEX_OPTATIVA_NUMERADA.test(nombreAsig);
-
-        if (catalogoTipoEsOptativa) {
-          asignaturasOptativas.push(asig);
-        } else if (esOptativaPorNombre) {
-          asignaturasDelGrado.push({ ...asig, ocultarDatosPorOptativa: true });
-          asignaturasOptativas.push(asig);
-        } else {
-          asignaturasDelGrado.push(asig);
-        }
-      });
-
-      return {
-        ...grado,
-        asignaturas: asignaturasDelGrado,
-      };
-    })
-    .filter((grado) => (grado.asignaturas || []).length > 0);
-
-  if (asignaturasOptativas.length === 0) {
-    return gradosProcesados;
-  }
-
-  return [
-    ...gradosProcesados,
-    {
-      gradoNombre: 'OPTATIVA',
-      asignaturas: asignaturasOptativas,
-    },
-  ];
 }
 
 async function GenerarCertificado(certificado) {
@@ -674,8 +628,7 @@ async function GenerarCertificado(certificado) {
   };
 
   const gradosOriginales = certificado?.grados || [];
-  const gradosOrdenados = ordenarGradosYAsignaturas(gradosOriginales);
-  const grados = identificarOptativas(gradosOrdenados);
+  const grados = ordenarGradosYAsignaturas(gradosOriginales);
   const margenInferior = 225;
   const altoFila = 5.5;
 
@@ -689,6 +642,7 @@ async function GenerarCertificado(certificado) {
 
     doc.setFont('Garet', 'bold');
     doc.setFontSize(5);
+    doc.setTextColor(0, 0, 0);
     const gradoNombre = (grado.gradoNombre || '').toUpperCase();
     doc.text(gradoNombre, xAsignatura + 2, yPos);
     yPos += altoFila;
@@ -697,6 +651,7 @@ async function GenerarCertificado(certificado) {
     asignaturas.forEach((asig) => {
       doc.setFont('Garet', 'normal');
       doc.setFontSize(4.5);
+      doc.setTextColor(0, 0, 0);
 
       const nombreAsig = (asig.nombre || '').toUpperCase();
       const nombreAsigLines = doc.splitTextToSize(nombreAsig, colAsignaturaAncho - 4);
@@ -705,35 +660,64 @@ async function GenerarCertificado(certificado) {
         doc.text(line, xAsignatura + 8, yPos + (idx * altoFila));
       });
 
-      const ocultarDatos = asig.ocultarDatosPorOptativa === true;
+      const sinCalificacion = asig.sinCalificacion === true;
+      const soloAprobado = asig.mostrarSoloAprobado === true;
 
-      const periodo = ocultarDatos ? '-----' : String(asig.periodo || '');
+      if (sinCalificacion) {
+        doc.setTextColor(200, 0, 0);
+      } else {
+        doc.setTextColor(0, 0, 0);
+      }
+
+      let periodo;
+      if (sinCalificacion) {
+        periodo = 'ERROR';
+      } else if (soloAprobado) {
+        periodo = 'ACREDITADO';
+      } else {
+        periodo = String(asig.periodo || '');
+      }
       const periodoWidth = doc.getTextWidth(periodo);
       doc.text(periodo, xPeriodo + (colPeriodoAncho / 2) - (periodoWidth / 2), yPos);
 
-      let tipoTexto = '-----';
-      if (!ocultarDatos) {
-        if (asig.tipo === 2 || asig.tipo === '2') {
-          tipoTexto = 'EXTRA';
-        } else if (asig.tipo === 1 || asig.tipo === '1') {
-          tipoTexto = 'ORD';
-        } else {
-          tipoTexto = String(asig.tipo || 'ORD');
-        }
+      let tipoTexto;
+      if (sinCalificacion) {
+        tipoTexto = 'ERROR';
+      } else if (soloAprobado) {
+        tipoTexto = '';
+      } else if (asig.tipo === 2 || asig.tipo === '2') {
+        tipoTexto = 'EXTRA';
+      } else if (asig.tipo === 1 || asig.tipo === '1') {
+        tipoTexto = 'ORD';
+      } else {
+        tipoTexto = String(asig.tipo || 'ORD');
       }
       const tipoWidth = doc.getTextWidth(tipoTexto);
       doc.text(tipoTexto, xTipo + (colTipoAncho / 2) - (tipoWidth / 2), yPos);
 
-      const calNum = ocultarDatos ? '--' : String(asig.calificacion || '');
+      let calNum;
+      if (sinCalificacion) {
+        calNum = 'ERROR';
+      } else if (soloAprobado) {
+        calNum = '';
+      } else {
+        calNum = String(asig.calificacion || '');
+      }
       const calNumWidth = doc.getTextWidth(calNum);
       doc.text(calNum, xNum + (colNumAncho / 2) - (calNumWidth / 2), yPos);
 
-      let calLetra = '---------------';
-      if (!ocultarDatos) {
+      let calLetra;
+      if (sinCalificacion) {
+        calLetra = 'ERROR';
+      } else if (soloAprobado) {
+        calLetra = '';
+      } else {
         const esDecimal = certificado?.calificacionDecimal === 1;
         calLetra = asig.calificacionLetra || calificacionALetras(asig.calificacion, esDecimal) || '';
       }
       doc.text(String(calLetra), xLetra + 2, yPos);
+
+      doc.setTextColor(0, 0, 0);
 
       yPos += altoFila * Math.max(1, nombreAsigLines.length);
     });
