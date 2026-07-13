@@ -16,6 +16,7 @@ const formatDateDMY = (value) => {
 const buildFileCertitulo = (
   findOneFolioDocumentoAlumnoQuery,
   findAllCalificacionesQuery,
+  findAllAsignaturasQuery,
   findOneDocumentoFirmadoQuery,
   updateDocumentoFirmadoQuery,
   GenerarCertificado,
@@ -99,10 +100,7 @@ const buildFileCertitulo = (
     { association: 'asignatura' },
     {
       association: 'grupo',
-      include: [
-        { association: 'cicloEscolar' },
-        { association: 'grado' },
-      ],
+      include: [{ association: 'cicloEscolar' }],
     },
   ];
 
@@ -111,19 +109,26 @@ const buildFileCertitulo = (
     { include: includeCalificaciones, strict: false },
   );
 
-  checkers.throwErrorIfDataIsFalsy(
-    calificaciones,
-    'calificacion',
-    folioDocAlumno.alumno.id,
-  );
+  const asignaturasPrograma = await findAllAsignaturasQuery({ programaId: folioDocAlumno.alumno.programaId, tipo: 1 }, { include: [{ association: 'grado' }], strict: false });
+
+  const calificacionesPorAsignaturaId = {};
+  calificaciones.forEach((c) => {
+    calificacionesPorAsignaturaId[c.asignaturaId] = c;
+  });
+
+  const procesarCalificacionCruda = (valor) => {
+    if (typeof valor === 'string' && valor.includes('(')) {
+      return valor.substring(0, 2).trim();
+    }
+    return valor;
+  };
 
   const calificacionesPorGrado = {};
 
-  calificaciones.forEach((c) => {
-    const gradoId = c.grupo?.grado?.id || 'SIN_GRADO';
-    const gradoNombre = c.grupo?.grado?.nombre || 'SIN GRADO';
-    const gradoNumero = c.grupo?.grado?.numeroGrado || 0;
-    const cicloNombre = c.grupo?.cicloEscolar?.nombre || 'SIN CICLO';
+  asignaturasPrograma.forEach((asignatura) => {
+    const gradoId = asignatura.grado?.id || asignatura.gradoId || 'SIN_GRADO';
+    const gradoNombre = asignatura.grado?.nombre || 'SIN GRADO';
+    const gradoNumero = asignatura.grado?.numeroGrado || 0;
 
     if (!calificacionesPorGrado[gradoId]) {
       calificacionesPorGrado[gradoId] = {
@@ -134,21 +139,17 @@ const buildFileCertitulo = (
       };
     }
 
-    let calificacionProcesada = c.calificacion;
-    if (typeof c.calificacion === 'string' && c.calificacion.includes('(')) {
-      calificacionProcesada = c.calificacion.substring(0, 2).trim();
-    }
+    const calificacionAlumno = calificacionesPorAsignaturaId[asignatura.id];
 
     calificacionesPorGrado[gradoId].asignaturas.push({
-      asignaturaId: c.asignaturaId,
-      nombre: c.asignatura?.nombre || '',
-      clave: c.asignatura?.clave || '',
-      periodo: cicloNombre,
-      calificacion: calificacionProcesada,
-      tipo: c.tipo,
-      catalogoTipo: c.asignatura?.tipo,
-      catalogoGradoId: c.asignatura?.gradoId,
-      fechaExamen: c.fechaExamen,
+      asignaturaId: asignatura.id,
+      nombre: asignatura.nombre || '',
+      clave: asignatura.clave || '',
+      periodo: calificacionAlumno?.grupo?.cicloEscolar?.nombre || 'SIN CICLO',
+      calificacion: calificacionAlumno
+        ? procesarCalificacionCruda(calificacionAlumno.calificacion) : null,
+      tipo: calificacionAlumno?.tipo,
+      sinCalificacion: !calificacionAlumno,
     });
   });
 
@@ -163,25 +164,42 @@ const buildFileCertitulo = (
     });
   });
 
-  const gradosOrdenados = Object.values(calificacionesPorGrado).sort(
-    (a, b) => a.gradoNumero - b.gradoNumero,
-  );
+  const gradosOrdenados = Object.values(calificacionesPorGrado)
+    .sort((a, b) => a.gradoNumero - b.gradoNumero);
+
+  const asignaturasOptativas = calificaciones
+    .filter((c) => {
+      const tipoCatalogo = c.asignatura?.tipo;
+      return tipoCatalogo === 2 || tipoCatalogo === '2';
+    })
+    .map((c) => ({
+      asignaturaId: c.asignaturaId,
+      nombre: c.asignatura?.nombre || '',
+      clave: c.asignatura?.clave || '',
+      periodo: c.grupo?.cicloEscolar?.nombre || 'SIN CICLO',
+      calificacion: procesarCalificacionCruda(c.calificacion),
+      tipo: c.tipo,
+      mostrarSoloAprobado: true,
+    }));
+
+  if (asignaturasOptativas.length > 0) {
+    gradosOrdenados.push({
+      gradoId: 'OPTATIVA',
+      gradoNombre: 'OPTATIVAS ASIGNADAS',
+      gradoNumero: gradosOrdenados.length > 0
+        ? Math.max(...gradosOrdenados.map((g) => g.gradoNumero)) + 1 : 1,
+      asignaturas: asignaturasOptativas,
+    });
+  }
 
   const calificacionesNumericas = calificaciones
     .map((c) => {
-      const cal = typeof c.calificacion === 'string' && c.calificacion.includes('(')
-        ? null
-        : Number(c.calificacion);
+      const cal = typeof c.calificacion === 'string' && c.calificacion.includes('(') ? null : Number(c.calificacion);
       return cal;
     })
     .filter((n) => n !== null && !Number.isNaN(n) && n > 0);
 
-  const promedioGeneral = calificacionesNumericas.length > 0
-    ? (
-      calificacionesNumericas.reduce((sum, n) => sum + n, 0)
-      / calificacionesNumericas.length
-    ).toFixed(1)
-    : 'N/A';
+  const promedioGeneral = calificacionesNumericas.length > 0 ? (calificacionesNumericas.reduce((sum, n) => sum + n, 0) / calificacionesNumericas.length).toFixed(1) : 'N/A';
 
   const grupos = folioDocAlumno.alumno.alumnoGrupos?.map((ag) => ag.grupo).filter(Boolean) || [];
 
