@@ -64,5 +64,14 @@ jobs:
           TIME_MAIL: 3600000
           PATH_FILE: ${{ github.workspace }}
           LOGGING: true
+          FIRMA_ELECTRONICA_TOKEN_URL: https://ws.jal.gob.mx/n/feauth/token
+          FIRMA_ELECTRONICA_FIRMA_URL: https://ws.jal.gob.mx/fp/firmadocumento
+          FIRMA_ELECTRONICA_CLIENT_ID: fo
+          FIRMA_ELECTRONICA_CLIENT_SECRET: Fr3sT
+          FIRMA_ELECTRONICA_USERNAME: o12nikc
+          FIRMA_ELECTRONICA_PASSWORD: marzo.19
+          URL_TITULACION: https://titulacion.jal.gob.mx
+          API_KEY_REPRESENTANTES: 9c6b7be770jnjnj32n4jbj3234jbtj32knk5n230ae10ad6d757fb139
+          URL_API_TITULO: https://titulo.com/api/v1
           EMAIL_SOPORTE_SIIGES: mail@mail.gob.mx
           EMAIL_DIRECCION_INCORPORACION: mail@correo.gob.mx
