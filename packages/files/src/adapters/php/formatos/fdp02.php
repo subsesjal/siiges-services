@@ -507,7 +507,7 @@ if (is_array($asignaturas) && count($asignaturas)) {
     foreach ($lista as $asig) {
       $horDoc = (int) ($asig['horasDocente'] ?? 0);
       $horInd = (int) ($asig['horasIndependiente'] ?? 0);
-      $credit = (int) ($asig['creditos'] ?? 0);
+      $credit = (string) ($asig['creditos'] ?? 0);
 
       $totalDoc += $horDoc;
       $totalIndep += $horInd;
