@@ -45,8 +45,8 @@ function GenerarReporteAlumnosInactivos(alumnos) {
     alumno?.persona?.curp || 'No disponible',
     formatearFecha(alumno?.validacion?.fechaInicioAntecedente),
     formatearFecha(alumno?.validacion?.fechaFinAntecedente),
-    formatearFecha(alumno?.createdAt),
     formatearFecha(alumno?.validacion?.fechaExpedicion),
+    formatearFecha(alumno?.createdAt),
     alumno?.validacion?.tipo?.descripcion || 'No disponible',
   ]) || [['No hay alumnos inactivos disponibles']];
 
@@ -57,8 +57,8 @@ function GenerarReporteAlumnosInactivos(alumnos) {
       'CURP',
       'Fecha de Inicio de Antecedentes',
       'Fecha de Fin de Antecedentes',
-      'Fecha de Creación',
       'Fecha de Expedición',
+      'Fecha de Creación',
       'Tipo de Validación',
     ]],
     body: alumnosData,
