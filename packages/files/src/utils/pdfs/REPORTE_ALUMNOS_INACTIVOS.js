@@ -28,12 +28,24 @@ function GenerarReporteAlumnosInactivos(alumnos) {
   currentPositionY += 20;
 
   const institucion = alumnos?.[0]?.programa?.plantel?.institucion?.nombre || 'No disponible';
+  const claveCentroTrabajo = alumnos?.[0]?.programa?.plantel?.claveCentroTrabajo || 'No disponible';
+  const acuerdoRvoe = alumnos?.[0]?.programa?.acuerdoRvoe;
+  const nombrePrograma = alumnos?.[0]?.programa?.nombre;
+  const rvoePrograma = acuerdoRvoe && nombrePrograma
+    ? `${acuerdoRvoe} - ${nombrePrograma}`
+    : 'No disponible';
   const fechaReporte = new Date().toLocaleDateString('es-MX');
 
   doc.autoTable({
     startY: currentPositionY,
-    head: [['Institución', 'Fecha de Reporte', 'Total de Alumnos']],
-    body: [[institucion, fechaReporte, alumnos?.length || 0]],
+    head: [[
+      'Institución',
+      'Clave Centro de Trabajo',
+      'RVOE - Nombre del Programa',
+      'Fecha de Reporte',
+      'Total de Alumnos',
+    ]],
+    body: [[institucion, claveCentroTrabajo, rvoePrograma, fechaReporte, alumnos?.length || 0]],
     theme: 'grid',
     styles: { fontSize: 10 },
     headStyles: { fillColor: [172, 178, 183], textColor: [0, 0, 0] },
