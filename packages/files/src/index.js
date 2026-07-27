@@ -6,6 +6,7 @@ const {
   findOneFile,
   getFileIdentifierObj,
   uploadFile,
+  generarReporteAlumnosInactivos,
 } = require('./useCases');
 
 module.exports = {
@@ -13,4 +14,5 @@ module.exports = {
   findOneFile,
   getFileIdentifierObj,
   uploadFile,
+  generarReporteAlumnosInactivos,
 };
