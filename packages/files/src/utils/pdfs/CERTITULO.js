@@ -117,14 +117,6 @@ async function agregarFooter(doc, certificado) {
 
   currentY += (creditosLines.length * 7) + 20;
 
-  const tieneDatosVerificacion = Boolean(
-    certificado?.identificadorDocumento || certificado?.sitfcioVerificacion,
-  );
-
-  if (!tieneDatosVerificacion) {
-    return;
-  }
-
   const datosVerificacion = {
     identificadorDocumento: certificado?.identificadorDocumento,
     sitioVerificacion: certificado?.sitioVerificacion,
