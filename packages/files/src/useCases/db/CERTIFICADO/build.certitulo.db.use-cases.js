@@ -111,17 +111,48 @@ const buildFileCertitulo = (
 
   const asignaturasPrograma = await findAllAsignaturasQuery({ programaId: folioDocAlumno.alumno.programaId, tipo: 1 }, { include: [{ association: 'grado' }], strict: false });
 
-  const calificacionesPorAsignaturaId = {};
-  calificaciones.forEach((c) => {
-    calificacionesPorAsignaturaId[c.asignaturaId] = c;
-  });
-
   const procesarCalificacionCruda = (valor) => {
     if (typeof valor === 'string' && valor.includes('(')) {
       return valor.substring(0, 2).trim();
     }
     return valor;
   };
+
+  // Agrupa TODAS las calificaciones del alumno por asignaturaId (puede haber
+  // más de una: ordinario reprobado + extraordinario aprobado, por ejemplo).
+  // Esto se usa para PINTAR la tabla: cada calificación capturada se muestra
+  // como su propia fila, sin perder el ordinario reprobado.
+  const calificacionesTodasPorAsignaturaId = {};
+  calificaciones.forEach((c) => {
+    if (!calificacionesTodasPorAsignaturaId[c.asignaturaId]) {
+      calificacionesTodasPorAsignaturaId[c.asignaturaId] = [];
+    }
+    calificacionesTodasPorAsignaturaId[c.asignaturaId].push(c);
+  });
+
+  // Ordena cada grupo para que el ordinario (tipo=1) se muestre antes que el
+  // extraordinario (tipo=2), si ambos existen.
+  Object.values(calificacionesTodasPorAsignaturaId).forEach((lista) => {
+    lista.sort((a, b) => {
+      const tipoA = a.tipo === 2 || a.tipo === '2' ? 2 : 1;
+      const tipoB = b.tipo === 2 || b.tipo === '2' ? 2 : 1;
+      return tipoA - tipoB;
+    });
+  });
+
+  // Calificación VIGENTE por asignatura: si existe extraordinario, esa es la
+  // que cuenta como resultado final de la materia; si no, el ordinario. Esto
+  // se usa SOLO para el promedio general, nunca para decidir qué se pinta.
+  const calificacionVigentePorAsignaturaId = {};
+  calificaciones.forEach((c) => {
+    const existente = calificacionVigentePorAsignaturaId[c.asignaturaId];
+    const esExtra = c.tipo === 2 || c.tipo === '2';
+    const existenteEsExtra = existente && (existente.tipo === 2 || existente.tipo === '2');
+
+    if (!existente || (esExtra && !existenteEsExtra)) {
+      calificacionVigentePorAsignaturaId[c.asignaturaId] = c;
+    }
+  });
 
   const calificacionesPorGrado = {};
 
@@ -139,18 +170,35 @@ const buildFileCertitulo = (
       };
     }
 
-    const calificacionAlumno = calificacionesPorAsignaturaId[asignatura.id];
+    const calificacionesDeEstaAsignatura = calificacionesTodasPorAsignaturaId[asignatura.id] || [];
 
-    calificacionesPorGrado[gradoId].asignaturas.push({
-      asignaturaId: asignatura.id,
-      nombre: asignatura.nombre || '',
-      clave: asignatura.clave || '',
-      periodo: calificacionAlumno?.grupo?.cicloEscolar?.nombre || 'SIN CICLO',
-      calificacion: calificacionAlumno
-        ? procesarCalificacionCruda(calificacionAlumno.calificacion) : null,
-      tipo: calificacionAlumno?.tipo,
-      sinCalificacion: !calificacionAlumno,
-    });
+    if (calificacionesDeEstaAsignatura.length === 0) {
+      // Sin ninguna calificación capturada: una sola fila marcada como error.
+      calificacionesPorGrado[gradoId].asignaturas.push({
+        asignaturaId: asignatura.id,
+        nombre: asignatura.nombre || '',
+        clave: asignatura.clave || '',
+        periodo: 'SIN CICLO',
+        calificacion: null,
+        tipo: undefined,
+        sinCalificacion: true,
+      });
+    } else {
+      // Una fila por cada intento capturado (ordinario y/o extraordinario),
+      // para que el ordinario reprobado se siga mostrando junto al
+      // extraordinario, si existe.
+      calificacionesDeEstaAsignatura.forEach((c) => {
+        calificacionesPorGrado[gradoId].asignaturas.push({
+          asignaturaId: asignatura.id,
+          nombre: asignatura.nombre || '',
+          clave: asignatura.clave || '',
+          periodo: c.grupo?.cicloEscolar?.nombre || 'SIN CICLO',
+          calificacion: procesarCalificacionCruda(c.calificacion),
+          tipo: c.tipo,
+          sinCalificacion: false,
+        });
+      });
+    }
   });
 
   Object.values(calificacionesPorGrado).forEach((grado) => {
@@ -192,14 +240,29 @@ const buildFileCertitulo = (
     });
   }
 
-  const calificacionesNumericas = calificaciones
-    .map((c) => {
-      const cal = typeof c.calificacion === 'string' && c.calificacion.includes('(') ? null : Number(c.calificacion);
+  // El promedio se calcula por ASIGNATURA OBLIGATORIA ÚNICA del catálogo,
+  // usando su calificación vigente (extraordinario si existe, si no
+  // ordinario) — nunca contando ORD y EXTRA como dos valores separados, y
+  // nunca incluyendo optativas.
+  const calificacionesNumericasObligatorias = asignaturasPrograma
+    .map((asignatura) => {
+      const vigente = calificacionVigentePorAsignaturaId[asignatura.id];
+      if (!vigente) return null;
+
+      const calProcesada = procesarCalificacionCruda(vigente.calificacion);
+      const cal = typeof calProcesada === 'string' && calProcesada.includes('(')
+        ? null
+        : Number(calProcesada);
       return cal;
     })
     .filter((n) => n !== null && !Number.isNaN(n) && n > 0);
 
-  const promedioGeneral = calificacionesNumericas.length > 0 ? (calificacionesNumericas.reduce((sum, n) => sum + n, 0) / calificacionesNumericas.length).toFixed(1) : 'N/A';
+  const promedioGeneral = calificacionesNumericasObligatorias.length > 0
+    ? (
+      calificacionesNumericasObligatorias.reduce((sum, n) => sum + n, 0)
+      / calificacionesNumericasObligatorias.length
+    ).toFixed(1)
+    : 'N/A';
 
   const grupos = folioDocAlumno.alumno.alumnoGrupos?.map((ag) => ag.grupo).filter(Boolean) || [];
 
@@ -234,7 +297,7 @@ const buildFileCertitulo = (
     cct: folioDocAlumno.alumno.programa.plantel.claveCentroTrabajo,
     rvoe: folioDocAlumno.alumno.programa.acuerdoRvoe,
     fechaRvoe: formatDateDMY(folioDocAlumno.alumno.programa.fechaSurteEfecto),
-    totalAsignaturas: calificaciones.length,
+    totalAsignaturas: asignaturasPrograma.length,
     promedioGeneral,
     director:
       folioDocAlumno.alumno.programa.plantel.director
@@ -251,7 +314,9 @@ const buildFileCertitulo = (
     claveInstitucionDGP: folioDocAlumno?.solicitudFolioAlumno?.solicitudFolio?.claveInstitucionDGP,
     claveCarreraDGP: folioDocAlumno?.solicitudFolioAlumno?.solicitudFolio?.claveCarreraDGP,
     identificadorDocumento: documentoFirmado?.identificadorDocumentoSicyt,
-    sitioVerificacion: `https://portalvalidacion.jalisco.gob.mx/#/resultado/${documentoFirmado?.uriValidacionSicyt}`,
+    sitioVerificacion: documentoFirmado
+      ? `https://portalvalidacion.jalisco.gob.mx/#/resultado/${documentoFirmado.uriValidacionSicyt}`
+      : null,
     nombreFirmanteIes: documentoFirmado?.nombreFirmanteIes,
     cargoFirmanteIes: documentoFirmado?.cargoFirmanteIes,
     secuenciaDocumentoIes: documentoFirmado?.secuenciaDocumentoIes,
