@@ -3,6 +3,7 @@ const { persona } = require('../../usuarios/schema/properties/persona');
 const { situacion } = require('./properties/situacion');
 const { equivalencia } = require('./properties/equivalencia');
 const { validacion } = require('./properties/validacion');
+const { tipoValidaciones } = require('./properties/tipoValidacion');
 const { situacionesValidacion } = require('./properties/situacionValidacion');
 const { alumnoGrupo } = require('./properties/alumnoGrupo');
 const { grupo } = require('../../grupos/schema/properties/grupo');
@@ -68,6 +69,14 @@ const findProgramaAlumnosSchema = {
                       properties: {
                         id: { type: 'integer' },
                         ...situacionesValidacion,
+                        ...responseProperties,
+                      },
+                    },
+                    tipo: {
+                      type: 'object',
+                      properties: {
+                        id: { type: 'integer' },
+                        ...tipoValidaciones,
                         ...responseProperties,
                       },
                     },
