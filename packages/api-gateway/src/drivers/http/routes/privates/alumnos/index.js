@@ -30,6 +30,15 @@ async function asignaturaRouter(fastify, opts, next) {
   );
 
   await fastify.patch(
+    '/activacion-masiva',
+    {
+      schema: alumnosSchema.updateAlumnosSituacionSchema,
+      onRequest: [fastify.authenticate],
+    },
+    alumnosAdapter.updateAlumnosSituacion,
+  );
+
+  await fastify.patch(
     '/:alumnoId',
     {
       schema: alumnosSchema.updateAlumnoSchema,

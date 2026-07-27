@@ -117,6 +117,14 @@ async function agregarFooter(doc, certificado) {
 
   currentY += (creditosLines.length * 7) + 20;
 
+  const tieneDatosVerificacion = Boolean(
+    certificado?.identificadorDocumento || certificado?.sitfcioVerificacion,
+  );
+
+  if (!tieneDatosVerificacion) {
+    return;
+  }
+
   const datosVerificacion = {
     identificadorDocumento: certificado?.identificadorDocumento,
     sitioVerificacion: certificado?.sitioVerificacion,
@@ -697,7 +705,7 @@ async function GenerarCertificado(certificado) {
       if (sinCalificacion) {
         periodo = 'ERROR';
       } else if (soloAprobado) {
-        periodo = 'ACREDITADO';
+        periodo = '     ACREDITADO';
       } else {
         periodo = String(asig.periodo || '');
       }
