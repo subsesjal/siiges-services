@@ -33,6 +33,77 @@ function safe_text($text) {
   return $converted;
 }
 
+const NOMBRE_GRUPO_OPTATIVAS = 'OPTATIVAS ASIGNADAS';
+
+const ANCHOS_COLUMNAS_NORMAL = [16, 17, 65, 22, 16, 13, 27];
+const ALINEACIONES_COLUMNAS_NORMAL = ['C', 'C', 'L', 'C', 'C', 'C', 'C'];
+
+const ANCHOS_COLUMNAS_OPTATIVAS = [16, 17, 65, 38, 13, 27];
+const ALINEACIONES_COLUMNAS_OPTATIVAS = ['C', 'C', 'L', 'C', 'C', 'C'];
+
+const INDICE_NOMBRE_ASIGNATURA = 2;
+
+function wrapTextFPDF($pdf, $text, $maxWidth) {
+  $palabras = explode(' ', (string) $text);
+  $lineas = [];
+  $lineaActual = '';
+  $paddingInterno = 2;
+
+  foreach ($palabras as $palabra) {
+    $lineaPrueba = $lineaActual === '' ? $palabra : $lineaActual . ' ' . $palabra;
+    if ($pdf->GetStringWidth(safe_text($lineaPrueba)) <= ($maxWidth - $paddingInterno)) {
+      $lineaActual = $lineaPrueba;
+    } else {
+      if ($lineaActual !== '') {
+        $lineas[] = $lineaActual;
+      }
+      $lineaActual = $palabra;
+    }
+  }
+
+  if ($lineaActual !== '') {
+    $lineas[] = $lineaActual;
+  }
+
+  if (empty($lineas)) {
+    $lineas[] = '';
+  }
+
+  return $lineas;
+}
+
+function dibujarFilaCalificacion($pdf, $valores, $coloresPorColumna, $anchos, $alineaciones) {
+  $lineHeight = 5;
+  $pdf->SetFont("Garet", "", 7);
+
+  $lineasNombre = wrapTextFPDF($pdf, $valores[INDICE_NOMBRE_ASIGNATURA], $anchos[INDICE_NOMBRE_ASIGNATURA]);
+  $rowHeight = count($lineasNombre) * $lineHeight;
+
+  $startX = $pdf->GetX();
+  $startY = $pdf->GetY();
+  $x = $startX;
+
+  foreach ($valores as $i => $texto) {
+    $color = $coloresPorColumna[$i] ?? [0, 0, 0];
+    $align = $alineaciones[$i] ?? 'C';
+    $ancho = $anchos[$i];
+
+    $pdf->SetXY($x, $startY);
+    $pdf->SetTextColor($color[0], $color[1], $color[2]);
+
+    if ($i === INDICE_NOMBRE_ASIGNATURA) {
+      $pdf->MultiCell($ancho, $lineHeight, safe_text($texto), 1, $align, false);
+    } else {
+      $pdf->Cell($ancho, $rowHeight, safe_text($texto), 1, 0, $align, false);
+    }
+
+    $x += $ancho;
+  }
+
+  $pdf->SetTextColor(0, 0, 0);
+  $pdf->SetXY($startX, $startY + $rowHeight);
+}
+
 // Leer datos JSON desde stdin
 $data = json_decode(file_get_contents('php://stdin'), true);
 
@@ -48,6 +119,7 @@ $pdf = new PDF();
 
 $alumno = $data['alumno'] ?? [];
 $calificacionesInput = $data['calificaciones'] ?? [];
+$asignaturasPrograma = $data['asignaturasPrograma'] ?? [];
 $programa = $alumno['programa'] ?? [];
 $nivel = $programa['nivel'] ?? [];
 $modalidad = $programa['modalidad'] ?? [];
@@ -151,136 +223,222 @@ $pdf->Ln(10);
 $total_creditos = 0;
 $total_calificaciones = 0;
 $total_materias = 0;
-$calificacionCiclo = [];
 
+$calificacionesPorAsignaturaId = [];
 foreach ($calificacionesInput as $calificacion) {
-  $asignatura = $calificacion['asignatura'] ?? [];
-  $grupo = $calificacion['grupo'] ?? [];
-  $cicloEscolar = $grupo['cicloEscolar'] ?? [];
-
-  // Agregar campo tipo_txt (como en el código original)
-  $tipoTxt = match ($asignatura['tipo'] ?? '') {
-    '1' => 'Ordinario',
-    '2' => 'Extraordinario',
-    default => 'Desconocido'
-  };
-  $asignatura['tipo_txt'] = $tipoTxt;
-
-  // Agregar consecutivo
-  $calificacion['consecutivo'] = (int) ($asignatura['consecutivo'] ?? 0);
-
-  // Insertar datos enriquecidos
-  $calificacion['asignatura'] = $asignatura;
-  $calificacion['ciclo_escolar'] = $cicloEscolar;
-
-  $nombreCiclo = $cicloEscolar['nombre'] ?? 'Sin Ciclo';
-
-  if (!isset($calificacionCiclo[$nombreCiclo])) {
-    $calificacionCiclo[$nombreCiclo] = [];
+  $asignaturaId = $calificacion['asignaturaId'] ?? null;
+  if ($asignaturaId === null) {
+    continue;
   }
-
-  $calificacionCiclo[$nombreCiclo][] = $calificacion;
+  if (!isset($calificacionesPorAsignaturaId[$asignaturaId])) {
+    $calificacionesPorAsignaturaId[$asignaturaId] = [];
+  }
+  $calificacionesPorAsignaturaId[$asignaturaId][] = $calificacion;
 }
 
-uksort($calificacionCiclo, function ($a, $b) {
-  $yearA = substr($a, 0, 4);
-  $yearB = substr($b, 0, 4);
-  $periodoA = substr($a, 4);
-  $periodoB = substr($b, 4);
+$calificacionCiclo = [];
 
-  if ($yearB !== $yearA) {
-    return $yearA <=> $yearB;
+foreach ($asignaturasPrograma as $asignaturaCat) {
+  $grado = $asignaturaCat['grado'] ?? [];
+  $gradoId = $grado['id'] ?? ($asignaturaCat['gradoId'] ?? 'SIN_GRADO');
+  $gradoNombre = $grado['nombre'] ?? 'SIN GRADO';
+  $gradoNumero = $grado['numeroGrado'] ?? 0;
+
+  if (!isset($calificacionCiclo[$gradoId])) {
+    $calificacionCiclo[$gradoId] = [
+      'nombreGrupo' => $gradoNombre,
+      'numeroGrado' => $gradoNumero,
+      'filas' => [],
+    ];
   }
-  return $periodoA <=> $periodoB;
+
+  $calificacionesDeEstaAsignatura = $calificacionesPorAsignaturaId[$asignaturaCat['id']] ?? [];
+
+  if (empty($calificacionesDeEstaAsignatura)) {
+    $calificacionCiclo[$gradoId]['filas'][] = [
+      'asignatura' => $asignaturaCat,
+      'calificacion' => null,
+      'tipo' => null,
+      'fechaExamen' => null,
+      'sinCalificacion' => true,
+      'soloAcreditado' => false,
+    ];
+  } else {
+    foreach ($calificacionesDeEstaAsignatura as $cal) {
+      $calificacionValor = $cal['calificacion'] ?? null;
+      $calificacionVacia = ($calificacionValor === null || trim((string) $calificacionValor) === '');
+
+      $calificacionCiclo[$gradoId]['filas'][] = [
+        'asignatura' => $asignaturaCat,
+        'calificacion' => $calificacionVacia ? null : $calificacionValor,
+        'tipo' => $calificacionVacia ? null : ($cal['tipo'] ?? null),
+        'fechaExamen' => $calificacionVacia ? null : ($cal['fechaExamen'] ?? null),
+        'sinCalificacion' => $calificacionVacia,
+        'soloAcreditado' => false,
+      ];
+    }
+  }
+}
+
+$filasOptativas = [];
+foreach ($calificacionesInput as $calificacion) {
+  $asignatura = $calificacion['asignatura'] ?? [];
+  $tipoCatalogo = $asignatura['tipo'] ?? null;
+  $esOptativaDeCatalogo = ($tipoCatalogo === 2 || $tipoCatalogo === '2');
+
+  if ($esOptativaDeCatalogo) {
+    $filasOptativas[] = [
+      'asignatura' => $asignatura,
+      'calificacion' => $calificacion['calificacion'] ?? null,
+      'tipo' => $calificacion['tipo'] ?? null,
+      'fechaExamen' => $calificacion['fechaExamen'] ?? null,
+      'sinCalificacion' => false,
+      'soloAcreditado' => true,
+    ];
+  }
+}
+
+if (!empty($filasOptativas)) {
+  $calificacionCiclo[NOMBRE_GRUPO_OPTATIVAS] = [
+    'nombreGrupo' => NOMBRE_GRUPO_OPTATIVAS,
+    'numeroGrado' => PHP_INT_MAX,
+    'filas' => $filasOptativas,
+  ];
+}
+
+uasort($calificacionCiclo, function ($a, $b) {
+  return $a['numeroGrado'] <=> $b['numeroGrado'];
 });
 
-foreach ($calificacionCiclo as $ciclos => $ciclo) {
+foreach ($calificacionCiclo as $grupoKey => $grupoData) {
   if ($pdf->checkNewPage()) {
     $pdf->Ln(20);
   }
 
+  $filas = $grupoData['filas'];
+
   $tieneConsecutivos = false;
-  foreach ($ciclo as $cal) {
-    if (isset($cal['consecutivo']) && $cal['consecutivo'] > 0) {
+  foreach ($filas as $fila) {
+    $consecutivo = (int) ($fila['asignatura']['consecutivo'] ?? 0);
+    if ($consecutivo > 0) {
       $tieneConsecutivos = true;
       break;
     }
   }
 
   if ($tieneConsecutivos) {
-    $ciclo = $pdf->array_sort($ciclo, 'consecutivo', SORT_ASC);
+    usort($filas, function ($a, $b) {
+      $ca = (int) ($a['asignatura']['consecutivo'] ?? 0);
+      $cb = (int) ($b['asignatura']['consecutivo'] ?? 0);
+      return $ca <=> $cb;
+    });
   }
+
+  $esGrupoOptativas = ($grupoKey === NOMBRE_GRUPO_OPTATIVAS);
+
+  $anchos = $esGrupoOptativas ? ANCHOS_COLUMNAS_OPTATIVAS : ANCHOS_COLUMNAS_NORMAL;
+  $alineaciones = $esGrupoOptativas ? ALINEACIONES_COLUMNAS_OPTATIVAS : ALINEACIONES_COLUMNAS_NORMAL;
+
+  $tituloSeccion = $esGrupoOptativas
+    ? mb_strtoupper(NOMBRE_GRUPO_OPTATIVAS)
+    : mb_strtoupper($grupoData['nombreGrupo']);
 
   $pdf->SetFillColor(166, 166, 166);
   $pdf->SetFont("Garet", "", 9);
-  $pdf->Cell(176, 5, safe_text(mb_strtoupper('CICLO ESCOLAR ' . $ciclos)), 1, 1, "C", true);
+  $pdf->Cell(176, 5, safe_text($tituloSeccion), 1, 1, "C", true);
 
   $pdf->SetFont("Garetb", "", 7);
-
   $pdf->SetFillColor(191, 191, 191);
-  $pdf->Cell(16, 8, safe_text("CLAVE"), 1, 0, "C", true);
-  $pdf->Cell(17, 8, safe_text("SERIACIÓN"), 1, 0, "C", true);
-  $pdf->Cell(65, 8, safe_text("ASIGNATURA O UNIDAD DE APRENDIZAJE"), 1, 0, "C", true);
-  $pdf->Cell(22, 8, safe_text("TIPO"), 1, 0, "C", true);
-  $pdf->Cell(16, 8, safe_text("CALI."), 1, 0, "C", true);
-  $pdf->Cell(13, 8, safe_text("CRED."), 1, 0, "C", true);
-  $pdf->MultiCell(27, 4, safe_text("FECHA DE ACREDITACIÓN"), 1, "C", true);
+
+  if ($esGrupoOptativas) {
+    $pdf->Cell($anchos[0], 8, safe_text("CLAVE"), 1, 0, "C", true);
+    $pdf->Cell($anchos[1], 8, safe_text("SERIACIÓN"), 1, 0, "C", true);
+    $pdf->Cell($anchos[2], 8, safe_text("ASIGNATURA O UNIDAD DE APRENDIZAJE"), 1, 0, "C", true);
+    $pdf->Cell($anchos[3], 8, safe_text("CALI."), 1, 0, "C", true);
+    $pdf->Cell($anchos[4], 8, safe_text("CRED."), 1, 0, "C", true);
+    $pdf->MultiCell($anchos[5], 4, safe_text("FECHA DE ACREDITACIÓN"), 1, "C", true);
+  } else {
+    $pdf->Cell($anchos[0], 8, safe_text("CLAVE"), 1, 0, "C", true);
+    $pdf->Cell($anchos[1], 8, safe_text("SERIACIÓN"), 1, 0, "C", true);
+    $pdf->Cell($anchos[2], 8, safe_text("ASIGNATURA O UNIDAD DE APRENDIZAJE"), 1, 0, "C", true);
+    $pdf->Cell($anchos[3], 8, safe_text("TIPO"), 1, 0, "C", true);
+    $pdf->Cell($anchos[4], 8, safe_text("CALI."), 1, 0, "C", true);
+    $pdf->Cell($anchos[5], 8, safe_text("CRED."), 1, 0, "C", true);
+    $pdf->MultiCell($anchos[6], 4, safe_text("FECHA DE ACREDITACIÓN"), 1, "C", true);
+  }
 
   $pdf->Ln(0);
 
-  foreach ($ciclo as $calificaciones => $detalle) {
+  foreach ($filas as $detalle) {
+    $asignaturaDetalle = $detalle['asignatura'];
+    $sinCalificacion = $detalle['sinCalificacion'] ?? false;
+    $soloAcreditado = $detalle['soloAcreditado'] ?? false;
 
-    $area_txt = "";
-    switch ($detalle["tipo"]) {
-      case 1:
-        $tipo_txt = "Ordinario";
-        break;
-      case 2:
-        $tipo_txt = "Extraordinario";
-        break;
+    if ($sinCalificacion) {
+      $tipo_txt = 'ERROR';
+    } else {
+      $tipo_txt = match ($detalle['tipo'] ?? '') {
+        1, '1' => 'Ordinario',
+        2, '2' => 'Extraordinario',
+        default => 'Desconocido'
+      };
     }
 
-    $dataCalificacionAsignatura = array(
-      [
-        "clave_asignatura" => safe_text($detalle["asignatura"]["clave"] ?? ''),
-        "seriacion_asignatura" => safe_text($detalle["asignatura"]["seriacion"] ?? ''),
-        "nombre_asignatura" => safe_text($detalle["asignatura"]["nombre"] ?? ''),
-        "tipo_asignaura" => safe_text($tipo_txt),
-        "calificacion" => safe_text($detalle["calificacion"] ?? ''),
-        "creditos" => safe_text($detalle["asignatura"]["creditos"] ?? ''),
-        "fecha_examen" => safe_text($detalle["fechaExamen"] ?? ''),
-      ]
-    );
+    if ($sinCalificacion) {
+      $calificacionTexto = 'ERROR';
+    } elseif ($soloAcreditado) {
+      $calificacionTexto = 'ACREDITADO';
+    } else {
+      $calificacionTexto = $detalle['calificacion'] ?? '';
+    }
 
-    //set widht for each column (6 columns)
-    $pdf->SetWidths(array(16, 17, 65, 22, 16, 13, 27));
+    $fechaTexto = $sinCalificacion ? 'ERROR' : ($detalle['fechaExamen'] ?? '');
 
-    //set line height
-    $pdf->SetLineHeight(5);
-    $pdf->SetColors([]);
-    $pdf->SetFont("Garet", "", 7);
+    $rojo = [200, 0, 0];
+    $negro = [0, 0, 0];
 
-    //Imprime la fila
-    foreach ($dataCalificacionAsignatura as $item) {
-      // write data using Row() method containing array of values
-      $pdf->Row(array(
-        $item['clave_asignatura'],
-        $item['seriacion_asignatura'],
-        $item['nombre_asignatura'],
-        $item['tipo_asignaura'],
-        $item['calificacion'],
-        $item['creditos'],
-        $item['fecha_examen']
-      ));
-
-      if ($pdf->checkNewPage()) {
-        $pdf->Ln(20);
+    if ($esGrupoOptativas) {
+      $valoresFila = [
+        $asignaturaDetalle["clave"] ?? '',
+        $asignaturaDetalle["seriacion"] ?? '',
+        $asignaturaDetalle["nombre"] ?? '',
+        $calificacionTexto,
+        $asignaturaDetalle["creditos"] ?? '',
+        $fechaTexto,
+      ];
+      $coloresFila = [$negro, $negro, $negro, $negro, $negro, $negro];
+    } else {
+      $valoresFila = [
+        $asignaturaDetalle["clave"] ?? '',
+        $asignaturaDetalle["seriacion"] ?? '',
+        $asignaturaDetalle["nombre"] ?? '',
+        $tipo_txt,
+        $calificacionTexto,
+        $asignaturaDetalle["creditos"] ?? '',
+        $fechaTexto,
+      ];
+      $coloresFila = [$negro, $negro, $negro, $negro, $negro, $negro, $negro];
+      if ($sinCalificacion) {
+        $coloresFila[3] = $rojo;
+        $coloresFila[4] = $rojo;
+        $coloresFila[6] = $rojo;
       }
     }
 
-    if (is_numeric($detalle["calificacion"]) && $detalle["calificacion"] >= $programa["calificacionAprobatoria"]) {
-      $total_creditos += (float) ($detalle["asignatura"]["creditos"] ?? 0);
-      $total_calificaciones += (float) ($detalle["calificacion"] ?? 0);
+    dibujarFilaCalificacion($pdf, $valoresFila, $coloresFila, $anchos, $alineaciones);
+
+    if ($pdf->checkNewPage()) {
+      $pdf->Ln(20);
+    }
+
+    if (
+      !$esGrupoOptativas
+      && !$sinCalificacion
+      && is_numeric($detalle['calificacion'])
+      && $detalle['calificacion'] >= $programa["calificacionAprobatoria"]
+    ) {
+      $total_creditos += (float) ($asignaturaDetalle["creditos"] ?? 0);
+      $total_calificaciones += (float) ($detalle['calificacion'] ?? 0);
       $total_materias += 1;
     }
   }
