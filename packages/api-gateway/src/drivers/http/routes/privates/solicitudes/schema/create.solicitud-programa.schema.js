@@ -29,8 +29,10 @@ const createSolicitudProgramaSchema = {
             },
           },
         },
+        required: ['nivelId', 'cicloId', 'modalidadId', 'plantelId', 'programaTurnos'],
       },
     },
+    required: ['tipoSolicitudId', 'estatusSolicitudId', 'programa'],
     additionalProperties: false,
   },
   response: {

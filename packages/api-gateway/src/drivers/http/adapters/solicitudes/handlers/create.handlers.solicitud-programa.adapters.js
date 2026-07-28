@@ -1,4 +1,5 @@
 const { Logger } = require('@siiges-services/shared');
+const boom = require('@hapi/boom');
 const errorHandler = require('../../../utils/errorHandler');
 
 async function sendEmailNotification(notificacionServices, emailDestination, idUser, userName) {
@@ -17,7 +18,19 @@ async function sendEmailNotification(notificacionServices, emailDestination, idU
 async function createSolicitudPrograma(req, reply) {
   Logger.info('[solicitudes]: Crear solicitud por tipo de solicitud programa');
   try {
-    const { ...data } = req.body;
+    const { user } = req;
+    if (!user?.id) {
+      throw boom.unauthorized('No se pudo determinar el usuario autenticado');
+    }
+
+    if (user.rol !== 'representante') {
+      throw boom.forbidden('Solo un usuario representante puede crear solicitudes');
+    }
+
+    const data = {
+      ...req.body,
+      usuarioId: user.id,
+    };
     const { solicitudId, plantelId } = req.params;
     const { tipoSolicitudId } = data;
 

@@ -1,5 +1,7 @@
 // External dependencies
-const { models, queries } = require('@siiges-services/core');
+const { models, queries, drivers } = require('@siiges-services/core');
+
+const { sequelize } = drivers;
 
 const {
   Solicitud,
@@ -34,6 +36,43 @@ const {
 
 module.exports = {
   createSolicitudProgramaQuery: createQuery(Solicitud),
+  createSolicitudProgramaAtomicQuery: async (data) => sequelize.transaction(async (transaction) => {
+    const { programa = {}, ...solicitudData } = data;
+    const { programaTurnos = [], ...programaData } = programa;
+
+    const newSolicitud = await Solicitud.create(
+      {
+        ...solicitudData,
+        programa: programaData,
+      },
+      {
+        include: [{ association: 'programa' }],
+        transaction,
+      },
+    );
+
+    if (programaTurnos.length) {
+      await Promise.all(programaTurnos.map((turnoId) => ProgramaTurno.create(
+        {
+          turnoId,
+          programaId: newSolicitud.programa.id,
+        },
+        { transaction },
+      )));
+    }
+
+    await newSolicitud.reload({
+      include: [
+        {
+          association: 'programa',
+          include: [{ association: 'programaTurnos' }],
+        },
+      ],
+      transaction,
+    });
+
+    return newSolicitud;
+  }),
   updateAndFindSolicitudQuery: updateAndFindQuery(Solicitud),
   findOneSolicitudQuery: findOneQuery(Solicitud),
   findOneNivelQuery: findOneQuery(Nivel),
