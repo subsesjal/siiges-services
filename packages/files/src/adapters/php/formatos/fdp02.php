@@ -418,7 +418,7 @@ $getAreaName = function ($id) use ($AREA_NAMES) {
   return $AREA_NAMES[$id] ?? '';
 };
 
-$getSemesterTitle = function (int $gradoId) use ($gradoTxt, $cicloTxtSingular, $ciclo) {
+$getSemesterTitleFallback = function (int $gradoId) use ($gradoTxt, $cicloTxtSingular, $ciclo) {
   $iGrado = max(0, min(count($gradoTxt) - 1, $gradoId - 1));
   $pref = $gradoTxt[$iGrado];
 
@@ -449,10 +449,14 @@ if (is_array($asignaturas) && count($asignaturas)) {
   });
 
   $porSem = [];
+  $nombreGradoPorId = [];
   foreach ($asignaturas as $asig) {
     $g = (int) ($asig['gradoId'] ?? 0);
     if ($g) {
       $porSem[$g][] = $asig;
+      if (!isset($nombreGradoPorId[$g])) {
+        $nombreGradoPorId[$g] = $asig['grado']['nombre'] ?? null;
+      }
     }
   }
 
@@ -487,9 +491,11 @@ if (is_array($asignaturas) && count($asignaturas)) {
       $pdf->Ln(5);
     }
 
+    $tituloGrado = $nombreGradoPorId[$gradoId] ?? $getSemesterTitleFallback($gradoId);
+
     $pdf->SetFillColor(255, 161, 61);
     $pdf->SetFont("Garetb", "", 9);
-    $pdf->Cell(174, 6, safe_iconv(mb_strtoupper($getSemesterTitle($gradoId))), 1, 1, "C", true);
+    $pdf->Cell(174, 6, safe_iconv(mb_strtoupper($tituloGrado)), 1, 1, "C", true);
 
     $pdf->SetFont("Garet", "", 6);
     $pdf->SetFillColor(255, 213, 176);

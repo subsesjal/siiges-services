@@ -1,9 +1,9 @@
 const { certitulosAdapter } = require('../../../adapters/db');
-const { buildFileCertitulo } = require('./build.certitulo.db.use-cases');
+const { buildFileCertificado } = require('./build.certificado.db.use-cases');
 const { GenerarCertificado } = require('../../../utils/pdfs');
 
 module.exports = {
-  buildFileCertitulo: buildFileCertitulo(
+  buildFileCertificado: buildFileCertificado(
     certitulosAdapter.findOneFolioDocumentoAlumnoQuery,
     certitulosAdapter.findAllCalificacionesQuery,
     certitulosAdapter.findAllAsignaturasQuery,

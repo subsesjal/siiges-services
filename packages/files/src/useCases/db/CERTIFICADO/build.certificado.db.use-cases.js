@@ -13,7 +13,7 @@ const formatDateDMY = (value) => {
   return `${day}/${month}/${year}`;
 };
 
-const buildFileCertitulo = (
+const buildFileCertificado = (
   findOneFolioDocumentoAlumnoQuery,
   findAllCalificacionesQuery,
   findAllAsignaturasQuery,
@@ -334,4 +334,4 @@ const buildFileCertitulo = (
   return Buffer.from(file);
 };
 
-module.exports = { buildFileCertitulo };
+module.exports = { buildFileCertificado };

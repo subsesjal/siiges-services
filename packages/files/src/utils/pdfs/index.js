@@ -13,7 +13,7 @@ const { GenerarHistorial } = require('./HISTORIAL');
 const { GenerarBeca } = require('./BECA');
 const { GenerarServicio } = require('./SERVICIO_SOCIAL');
 const { GenerarTitulo } = require('./TITULO');
-const { GenerarCertificado } = require('./CERTITULO');
+const { GenerarCertificado } = require('./CERTIFICADO');
 const { GenerarReporteAlumnosInactivos } = require('./REPORTE_ALUMNOS_INACTIVOS');
 
 module.exports = {
