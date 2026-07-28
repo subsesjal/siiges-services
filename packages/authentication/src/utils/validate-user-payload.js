@@ -21,10 +21,17 @@ Pass ${typeof userPayload.dataValues.rol.nombre} instead`);
 Pass ${typeof userPayload.usuario} instead`);
   }
 
+  if (typeof userPayload.estatus !== 'boolean') {
+    Logger.error('[auth/signUserToken] estatus must be a boolean');
+    throw boom.badData(`[signUserToken] "estatus" is not boolean. \
+Pass ${typeof userPayload.estatus} instead`);
+  }
+
   return {
     id: userPayload.id,
     rol: userPayload.dataValues.rol.nombre,
     usuario: userPayload.usuario,
+    estatus: userPayload.estatus,
   };
 }
 
