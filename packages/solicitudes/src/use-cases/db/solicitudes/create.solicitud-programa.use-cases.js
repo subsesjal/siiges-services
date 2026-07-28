@@ -6,15 +6,36 @@ const ROL_REPRESENTANTE = 3;
 
 const createNuevaSolicitudPrograma = (
   findOneUsuarioQuery,
+  findOnePlantelQuery,
   countSolicitudesQuery,
-  createSolicitudProgramaQuery,
-  createProgramaTurnoQuery,
+  createSolicitudProgramaAtomicQuery,
 ) => async (data) => {
   const { usuarioId, tipoSolicitudId } = data;
+  const programaData = data?.programa;
+
+  if (!programaData) {
+    throw boom.badRequest('[solicitudes]: Programa is required');
+  }
+
+  const requiredProgramaFields = ['nivelId', 'cicloId', 'modalidadId', 'plantelId', 'programaTurnos'];
+  const missingFields = requiredProgramaFields.filter((field) => {
+    if (field === 'programaTurnos') {
+      return !Array.isArray(programaData.programaTurnos) || !programaData.programaTurnos.length;
+    }
+    return !programaData[field];
+  });
+
+  if (missingFields.length) {
+    throw boom.badRequest(`[solicitudes]: Missing required programa fields: ${missingFields.join(', ')}`);
+  }
 
   const usuario = await findOneUsuarioQuery({ id: usuarioId });
 
   checkers.throwErrorIfDataIsFalsy(usuario, 'usuarios', usuarioId);
+
+  if (!usuario.estatus) {
+    throw boom.badRequest('[solicitudes]: The user is not active');
+  }
 
   if (usuario.rolId !== ROL_REPRESENTANTE) {
     throw boom.badRequest(
@@ -25,26 +46,25 @@ const createNuevaSolicitudPrograma = (
       '[solicitudes]: Tipo Solicitud is not correct',
     );
   } else {
+    const plantel = await findOnePlantelQuery({ id: programaData.plantelId }, {
+      include: [{ association: 'institucion' }],
+      strict: false,
+    });
+
+    checkers.throwErrorIfDataIsFalsy(plantel, 'planteles', programaData.plantelId);
+
+    const plantelUsuarioId = plantel?.institucion?.usuarioId;
+    if (!plantelUsuarioId || plantelUsuarioId !== usuarioId) {
+      throw boom.forbidden('[solicitudes]: Plantel is not linked to authenticated representative');
+    }
+
     const totalSolicitudes = await countSolicitudesQuery();
     const folioSolcitud = createFolioSolicitud(totalSolicitudes, data.programa.nivelId);
 
     const newData = { folio: folioSolcitud, ...data };
 
-    const include = [{ association: 'programa' }];
-    const newSolicitud = await createSolicitudProgramaQuery(newData, include);
+    const newSolicitud = await createSolicitudProgramaAtomicQuery(newData);
     checkers.throwErrorIfDataIsFalsy(newSolicitud, 'solicitudes', newSolicitud.id);
-
-    const newProgramaTurnosArray = await Promise.all(
-      data.programa.programaTurnos.map(async (programaTurno) => {
-        const newProgramaTurno = await createProgramaTurnoQuery({
-          turnoId: programaTurno,
-          programaId: newSolicitud.programa.id,
-        });
-        return newProgramaTurno.dataValues;
-      }),
-    );
-
-    newSolicitud.dataValues.programa.dataValues.programaTurnos = newProgramaTurnosArray;
 
     return newSolicitud;
   }
