@@ -8,6 +8,7 @@ const {
   SolicitudBecaAlumno,
   SolicitudServicioSocial,
   SolicitudServicioSocialAlumno,
+  Asignatura,
 } = models;
 
 const {
@@ -22,4 +23,5 @@ module.exports = {
   findAllSolicitudBecaAlumnoQuery: findAllQuery(SolicitudBecaAlumno),
   findOneSolicitudServSocQuery: findOneQuery(SolicitudServicioSocial),
   findAllSolicitudServSocAlumnoQuery: findAllQuery(SolicitudServicioSocialAlumno),
+  findAllAsignaturasQuery: findAllQuery(Asignatura),
 };

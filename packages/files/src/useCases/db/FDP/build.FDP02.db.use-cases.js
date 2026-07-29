@@ -10,7 +10,10 @@ const buildFileFDP02 = (
       { association: 'ciclo' },
       { association: 'nivel' },
       { association: 'modalidad' },
-      { association: 'asignaturas' },
+      {
+        association: 'asignaturas',
+        include: [{ association: 'grado' }],
+      },
       {
         association: 'plantel',
         include: [{
