@@ -41,6 +41,10 @@ const findProgramaAlumnosSchema = {
               properties: {
                 id: { type: 'integer' },
                 ...alumno,
+                archivoValidacionUbicacion: { type: ['string', 'null'] },
+                archivoCertificadoUbicacion: { type: ['string', 'null'] },
+                archivoNacimientoUbicacion: { type: ['string', 'null'] },
+                archivoCurpUbicacion: { type: ['string', 'null'] },
                 ...responseProperties,
                 persona: {
                   type: 'object',
