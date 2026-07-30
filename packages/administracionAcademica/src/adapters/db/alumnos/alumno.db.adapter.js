@@ -17,6 +17,7 @@ const {
   Calificacion,
   AlumnoGrupo,
   Grupo,
+  File,
 } = models;
 
 module.exports = {
@@ -46,4 +47,5 @@ module.exports = {
   findAllCount: findAllQuery(Alumno),
   findAllGruposQuery: findAllQuery(Grupo),
   findAllAsignaturasQuery: findAllQuery(Asignatura),
+  findAllFilesQuery: findAllQuery(File),
 };
