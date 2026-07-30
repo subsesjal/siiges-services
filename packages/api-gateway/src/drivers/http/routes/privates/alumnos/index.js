@@ -39,6 +39,15 @@ async function asignaturaRouter(fastify, opts, next) {
   );
 
   await fastify.patch(
+    '/egreso-masivo',
+    {
+      schema: alumnosSchema.updateAlumnosEgresoSchema,
+      onRequest: [fastify.authenticate],
+    },
+    alumnosAdapter.updateAlumnosEgreso,
+  );
+
+  await fastify.patch(
     '/:alumnoId',
     {
       schema: alumnosSchema.updateAlumnoSchema,
