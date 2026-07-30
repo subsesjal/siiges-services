@@ -16,6 +16,7 @@ const findMatriculaActiva = require('./find-all.handlers.matricula-activa.adapte
 const findAlumnosInactivos = require('./find.handlers.alumnos-inactivos.adapters');
 const findAlumnosInactivosPdf = require('./find.handlers.alumnos-inactivos-pdf.adapters');
 const updateAlumnosSituacion = require('./update.handlers.alumnos-situacion.adapters');
+const updateAlumnosEgreso = require('./update-alumnos-egreso.handlers.alumno.adapters');
 
 module.exports = {
   createAlumno,
@@ -36,4 +37,5 @@ module.exports = {
   findAlumnosInactivos,
   findAlumnosInactivosPdf,
   updateAlumnosSituacion,
+  updateAlumnosEgreso,
 };
