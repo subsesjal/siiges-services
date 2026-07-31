@@ -1,3 +1,9 @@
+const {
+  TIPOS_DOCUMENTO_REQUERIDOS,
+  buildDocumentosPorAlumno,
+  tieneDocumentosCompletos,
+} = require('./documentos-requeridos.helpers');
+
 const EGRESADO_SITUACION_ID = 3;
 const ASIGNATURA_TIPO_REGULAR = 1;
 const SITUACION_VALIDACION_AUTENTICO = 1;
@@ -86,6 +92,7 @@ const updateAlumnosEgreso = (
   findOneProgramaQuery,
   findAllAsignaturasQuery,
   findAllCalificacionesQuery,
+  findAllFilesQuery,
   updateAlumnoQuery,
 ) => async ({ alumnoIds }) => {
   const alumnosEncontrados = await findAllAlumnosQuery(
@@ -115,22 +122,27 @@ const updateAlumnosEgreso = (
 
   if (porValidar.length > 0) {
     const programaIds = [...new Set(porValidar.map((alumno) => alumno.programaId))];
+    const porValidarIds = porValidar.map((alumno) => alumno.id);
 
-    const [programaCaches, calificacionesPorAlumno] = await Promise.all([
+    const [programaCaches, calificacionesPorAlumno, archivos] = await Promise.all([
       buildProgramaCaches(programaIds, findOneProgramaQuery, findAllAsignaturasQuery),
-      buildCalificacionesPorAlumno(
-        porValidar.map((alumno) => alumno.id),
-        findAllCalificacionesQuery,
+      buildCalificacionesPorAlumno(porValidarIds, findAllCalificacionesQuery),
+      findAllFilesQuery(
+        { entidadId: porValidarIds, tipoDocumentoId: TIPOS_DOCUMENTO_REQUERIDOS },
+        { attributes: ['entidadId', 'tipoDocumentoId'] },
       ),
     ]);
 
+    const documentosPorAlumno = buildDocumentosPorAlumno(archivos);
+
     porValidar.forEach((alumno) => {
       const programaCache = programaCaches.get(alumno.programaId);
-      const cumple = programaCache
+      const documentosOk = tieneDocumentosCompletos(alumno.id, documentosPorAlumno);
+      const requisitosAcademicosOk = programaCache
         ? checkAlumnoEgreso(alumno, programaCache, calificacionesPorAlumno)
         : false;
 
-      if (cumple) {
+      if (documentosOk && requisitosAcademicosOk) {
         egresables.push(alumno.id);
       } else {
         noEgresables.push(alumno.id);

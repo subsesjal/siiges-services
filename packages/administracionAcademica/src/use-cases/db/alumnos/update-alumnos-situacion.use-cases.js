@@ -1,37 +1,11 @@
+const {
+  TIPOS_DOCUMENTO_REQUERIDOS,
+  buildDocumentosPorAlumno,
+  tieneDocumentosCompletos,
+} = require('./documentos-requeridos.helpers');
+
 const SITUACION_ACTIVO_ID = 1;
 const SITUACION_VALIDACION_AUTENTICO = 1;
-
-const TIPO_DOCUMENTO_VALIDACION_ALUMNO = 40;
-const TIPO_DOCUMENTO_CERTIFICADO = 41;
-const TIPO_DOCUMENTO_NACIMIENTO = 42;
-const TIPO_DOCUMENTO_CURP = 43;
-
-const TIPOS_DOCUMENTO_REQUERIDOS = [
-  TIPO_DOCUMENTO_VALIDACION_ALUMNO,
-  TIPO_DOCUMENTO_CERTIFICADO,
-  TIPO_DOCUMENTO_NACIMIENTO,
-  TIPO_DOCUMENTO_CURP,
-];
-
-const buildDocumentosPorAlumno = (archivos) => {
-  const documentosPorAlumno = new Map();
-
-  archivos.forEach((file) => {
-    if (!documentosPorAlumno.has(file.entidadId)) {
-      documentosPorAlumno.set(file.entidadId, new Set());
-    }
-    documentosPorAlumno.get(file.entidadId).add(file.tipoDocumentoId);
-  });
-
-  return documentosPorAlumno;
-};
-
-const tieneDocumentosCompletos = (alumnoId, documentosPorAlumno) => {
-  const tiposEncontrados = documentosPorAlumno.get(alumnoId);
-  if (!tiposEncontrados) return false;
-
-  return TIPOS_DOCUMENTO_REQUERIDOS.every((tipoId) => tiposEncontrados.has(tipoId));
-};
 
 const updateAlumnosSituacion = (
   findAllAlumnosQuery,
