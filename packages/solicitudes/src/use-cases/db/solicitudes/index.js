@@ -24,9 +24,9 @@ const updateEquivalencia = require('./update.equivalencia.use-cases');
 module.exports = {
   createNuevaSolicitudPrograma: createNuevaSolicitudPrograma(
     solicitudes.findOneUsuarioQuery,
+    solicitudes.findOnePlantelQuery,
     solicitudes.countSolicitudesQuery,
-    solicitudes.createSolicitudProgramaQuery,
-    solicitudes.createProgramaTurnoQuery,
+    solicitudes.createSolicitudProgramaAtomicQuery,
   ),
   createRefrendoSolicitudPrograma: createRefrendoSolicitudPrograma(
     solicitudes.findOneSolicitudProgramaQuery,
