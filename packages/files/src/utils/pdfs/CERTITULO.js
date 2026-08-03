@@ -96,8 +96,7 @@ async function agregarFooter(doc, certificado) {
   doc.setTextColor(...blackColor);
 
   const tipoCertificadoTexto = certificado?.tipoCertificado?.toUpperCase();
-  const totalAsignaturas = certificado?.grados
-    ?.reduce((total, grado) => total + (grado.asignaturas?.length || 0), 0) || 0;
+  const totalAsignaturas = certificado?.totalAsignaturas || 0;
   const promedioTexto = certificado?.promedioGeneral || 'N/A';
   const calificacionMinima = certificado?.calificacionMinima;
   const calificacionMaxima = certificado?.calificacionMaxima;
@@ -117,6 +116,14 @@ async function agregarFooter(doc, certificado) {
   doc.text(creditosLines, blockX, currentY);
 
   currentY += (creditosLines.length * 7) + 20;
+
+  const tieneDatosVerificacion = Boolean(
+    certificado?.identificadorDocumento || certificado?.sitfcioVerificacion,
+  );
+
+  if (!tieneDatosVerificacion) {
+    return;
+  }
 
   const datosVerificacion = {
     identificadorDocumento: certificado?.identificadorDocumento,
@@ -326,7 +333,10 @@ async function GenerarCertificado(certificado) {
     doc.setFont('Garet', bold ? 'bold' : 'normal');
     doc.setFontSize(size);
 
-    const lines = doc.splitTextToSize(text, boxWidth);
+    const lines = doc.splitTextToSize(text, boxWidth).filter((line) => line.trim().length > 0);
+
+    if (lines.length === 0) return { height: 0, lastY: y };
+
     const lineHeight = size * 1.2;
     const totalHeight = lines.length * lineHeight;
 
@@ -344,6 +354,27 @@ async function GenerarCertificado(certificado) {
     });
 
     return { height: totalHeight, lastY };
+  };
+
+  const centerTextInBoxAdaptativo = (
+    text,
+    x,
+    boxWidth,
+    y,
+    preferredSize = 8,
+    fallbackSize = 6,
+    bold = false,
+  ) => {
+    if (!text) return { height: 0, lastY: y };
+
+    doc.setFont('Garet', bold ? 'bold' : 'normal');
+    doc.setFontSize(preferredSize);
+    const lineasConTamanoPreferido = doc.splitTextToSize(text, boxWidth)
+      .filter((line) => line.trim().length > 0);
+
+    const tamanoFinal = lineasConTamanoPreferido.length <= 1 ? preferredSize : fallbackSize;
+
+    return centerTextInBox(text, x, boxWidth, y, tamanoFinal, bold);
   };
 
   const drawCenteredBlockTitle = (text, xStart, boxWidth, y, fontSize = 8) => {
@@ -370,11 +401,11 @@ async function GenerarCertificado(certificado) {
   doc.text(
     'Con base en el artículo 16 de la Ley de Educación Superior del Estado de Jalisco, se expide el presente CERTIFICADO a:',
     centerX,
-    130,
+    125,
     { align: 'center' },
   );
 
-  const baseY = 135;
+  const baseY = 130;
   const blockX = 57;
   const blockWidth = 500;
   doc.setFillColor(252, 133, 32);
@@ -436,11 +467,12 @@ async function GenerarCertificado(certificado) {
   drawCenteredBlockTitle('Datos de la institución educativa', colIzqX, colIzqWidth, dobleColumnaY + 11);
 
   const institDatoY = dobleColumnaY + 26;
-  centerTextInBox(certificado?.nombrePlantel || '', colIzqX, colIzqWidth, institDatoY, 8, false);
-  doc.line(colIzqX, institDatoY + 4, colIzqX + colIzqWidth, institDatoY + 4);
-  centerTextInBox('Nombre o denominación', colIzqX, colIzqWidth, institDatoY + 15, 8);
+  const nombrePlantelBox = centerTextInBoxAdaptativo(certificado?.nombrePlantel || '', colIzqX, colIzqWidth, institDatoY, 8, 6, false);
+  const lineYInstitucion = nombrePlantelBox.lastY + 4;
+  doc.line(colIzqX, lineYInstitucion, colIzqX + colIzqWidth, lineYInstitucion);
+  centerTextInBox('Nombre o denominación', colIzqX, colIzqWidth, lineYInstitucion + 11, 8);
 
-  let institExtraY = institDatoY + 25;
+  let institExtraY = lineYInstitucion + 21;
   doc.setFont('Garet', 'normal');
   doc.setFontSize(7);
 
@@ -566,7 +598,7 @@ async function GenerarCertificado(certificado) {
   const tipoValorWidth = doc.getTextWidth(tipoValor);
   doc.text(tipoValor, subColTipoX + ((subColWidth - 10) - tipoValorWidth) / 2, tipoValorY);
 
-  const datosCertificadoY = Math.max(institExtraY, promedioValorY) + 5;
+  const datosCertificadoY = Math.max(institExtraY, promedioValorY) + 10;
 
   doc.setFillColor(252, 133, 32);
   doc.rect(blockX, datosCertificadoY, blockWidth, 14, 'F');
@@ -673,7 +705,7 @@ async function GenerarCertificado(certificado) {
       if (sinCalificacion) {
         periodo = 'ERROR';
       } else if (soloAprobado) {
-        periodo = 'ACREDITADO';
+        periodo = '     ACREDITADO';
       } else {
         periodo = String(asig.periodo || '');
       }
