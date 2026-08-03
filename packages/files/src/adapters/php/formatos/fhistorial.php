@@ -139,7 +139,6 @@ $pdf->Cell(0, 5, safe_text("HISTORIAL ACADÉMICO"), 0, 1, "L");
 $pdf->Ln(5);
 $pdf->SetTextColor(0, 0, 0);
 
-// Tabla de encabezado Datos generales de la institución y programa
 $pdf->SetFont("Garet", "", 9);
 $dataPrograma = array(
   [
@@ -160,16 +159,13 @@ $dataPrograma = array(
   ],
 );
 
-//set widht for each column (6 columns)
 $pdf->SetWidths(array(80, 95));
 
-//set line height
 $pdf->SetLineHeight(5);
 
 $pdf->SetColors([[191, 191, 191], []]);
 
 foreach ($dataPrograma as $item) {
-  // write data using Row() method containing array of values
   $pdf->Row(array(
     $item['name'],
     $item['description']
@@ -177,20 +173,17 @@ foreach ($dataPrograma as $item) {
 }
 
 $pdf->Ln(10);
-// Datos del alumno
 $pdf->SetFillColor(166, 166, 166);
 $pdf->SetFont("Garetb", "", 9);
 $pdf->Cell(176, 5, safe_text("DATOS DEL ALUMNO"), 1, 1, "C", true);
 
-// add table heading using standard cells
 $pdf->SetFont("Garet", "", 9);
 $pdf->SetFillColor(191, 191, 191);
 $pdf->Cell(29, 5, safe_text("MATRÍCULA"), 1, 0, "C", true);
-$pdf->Cell(89, 5, safe_text("NOMBRE DEL ALUMNO"), 1, 0, "C", true); // Ajustado a 89
+$pdf->Cell(89, 5, safe_text("NOMBRE DEL ALUMNO"), 1, 0, "C", true);
 $pdf->Cell(29, 5, safe_text("ESTATUS"), 1, 0, "C", true);
 $pdf->Cell(29, 5, safe_text("VALIDACIÓN"), 1, 1, "C", true);
 
-// Tabla de domicilio de la institucion
 $dataDetalleDomicilioInstitucion1 = array(
   [
     "matricula" => safe_text(mb_strtoupper($alumno["matricula"] ?? '')),
@@ -200,16 +193,13 @@ $dataDetalleDomicilioInstitucion1 = array(
   ]
 );
 
-//set widht for each column (6 columns)
 $pdf->SetWidths(array(29, 89, 29, 29));
 
-//set line height
 $pdf->SetLineHeight(5);
 $pdf->SetColors([]);
 $pdf->SetFont("Garet", "", 9);
 
 foreach ($dataDetalleDomicilioInstitucion1 as $item) {
-  // write data using Row() method containing array of values
   $pdf->Row(array(
     $item['matricula'],
     $item['nombre_alumno'],
@@ -235,6 +225,8 @@ foreach ($calificacionesInput as $calificacion) {
   }
   $calificacionesPorAsignaturaId[$asignaturaId][] = $calificacion;
 }
+
+$calificacionAprobatoria = (float) ($programa["calificacionAprobatoria"] ?? 0);
 
 $calificacionCiclo = [];
 
@@ -264,9 +256,28 @@ foreach ($asignaturasPrograma as $asignaturaCat) {
       'soloAcreditado' => false,
     ];
   } else {
+    $tieneExtraordinario = false;
+    $ordinarioReprobado = false;
+
     foreach ($calificacionesDeEstaAsignatura as $cal) {
       $calificacionValor = $cal['calificacion'] ?? null;
       $calificacionVacia = ($calificacionValor === null || trim((string) $calificacionValor) === '');
+      $tipoCal = $cal['tipo'] ?? null;
+      $esOrdinario = ($tipoCal === 1 || $tipoCal === '1');
+      $esExtraordinario = ($tipoCal === 2 || $tipoCal === '2');
+
+      if ($esExtraordinario) {
+        $tieneExtraordinario = true;
+      }
+
+      if (
+        $esOrdinario
+        && !$calificacionVacia
+        && is_numeric($calificacionValor)
+        && (float) $calificacionValor < $calificacionAprobatoria
+      ) {
+        $ordinarioReprobado = true;
+      }
 
       $calificacionCiclo[$gradoId]['filas'][] = [
         'asignatura' => $asignaturaCat,
@@ -274,6 +285,17 @@ foreach ($asignaturasPrograma as $asignaturaCat) {
         'tipo' => $calificacionVacia ? null : ($cal['tipo'] ?? null),
         'fechaExamen' => $calificacionVacia ? null : ($cal['fechaExamen'] ?? null),
         'sinCalificacion' => $calificacionVacia,
+        'soloAcreditado' => false,
+      ];
+    }
+
+    if ($ordinarioReprobado && !$tieneExtraordinario) {
+      $calificacionCiclo[$gradoId]['filas'][] = [
+        'asignatura' => $asignaturaCat,
+        'calificacion' => null,
+        'tipo' => null,
+        'fechaExamen' => null,
+        'sinCalificacion' => true,
         'soloAcreditado' => false,
       ];
     }
@@ -447,7 +469,6 @@ foreach ($calificacionCiclo as $grupoKey => $grupoData) {
 }
 $promedio_calificacion = 0;
 
-// print_r($pdf->programa);
 if ($total_materias != 0) {
   $promedio_calificacion = $total_calificaciones / $total_materias;
 
@@ -483,7 +504,6 @@ if ($pdf->checkNewPage()) {
   $pdf->Ln(20);
 }
 
-// Fecha
 $fecha = $pdf->convertirFecha(date("Y-m-d"));
 $pdf->SetFont("Garet", "", 8);
 $pdf->MultiCell(176, 3, safe_text("El presente historial consigna las calificaciones que hasta la fecha han sido registradas en el  Sistema Integral de Información para la Gestión de la Educación Superior (SIIGES), el cumplimiento parcial o total del plan de estudios, los créditos obtenidos y la calificación total o parcial serán acreditados solamente por un certificado autorizado.
