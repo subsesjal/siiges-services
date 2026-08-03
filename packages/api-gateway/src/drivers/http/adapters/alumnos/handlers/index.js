@@ -14,7 +14,7 @@ const findAlumnosExtra = require('./find-group.handlers.alumnos-extra.adapters')
 const findOneAlumnoPersona = require('./find-one-alumno-persona.handler');
 const findMatriculaActiva = require('./find-all.handlers.matricula-activa.adapters');
 const findAlumnosInactivos = require('./find.handlers.alumnos-inactivos.adapters');
-const findAlumnosInactivosPdf = require('./find.handlers.alumnos-inactivos-pdf.adapters');
+const findAlumnosInactivosCsv = require('./find.handlers.alumnos-inactivos-csv.adapters');
 const updateAlumnosSituacion = require('./update.handlers.alumnos-situacion.adapters');
 
 module.exports = {
@@ -34,6 +34,6 @@ module.exports = {
   findOneAlumnoPersona,
   findMatriculaActiva,
   findAlumnosInactivos,
-  findAlumnosInactivosPdf,
+  findAlumnosInactivosCsv,
   updateAlumnosSituacion,
 };
