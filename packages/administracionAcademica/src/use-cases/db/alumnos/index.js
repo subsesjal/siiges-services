@@ -45,6 +45,7 @@ module.exports = {
     programas.findOneProgramaQuery,
     alumnos.findAllAsignaturasQuery,
     alumnos.findAllCalificacionesQuery,
+    alumnos.findAllFilesQuery,
   ),
   findGroupAlumnosPrograma: findGroupAlumnosPrograma(
     programas.findOneProgramaQuery,
@@ -131,6 +132,7 @@ module.exports = {
     programas.findOneProgramaQuery,
     alumnos.findAllAsignaturasQuery,
     alumnos.findAllCalificacionesQuery,
+    alumnos.findAllFilesQuery,
     alumnos.updateAlumnoQuery,
   ),
 };
