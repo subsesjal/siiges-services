@@ -1,6 +1,6 @@
-const findAlumnosInactivosPdfSchema = {
+const findAlumnosInactivosCsvSchema = {
   tags: ['Alumnos'],
-  description: 'Obtiene el reporte en PDF de alumnos inactivos por institución.',
+  description: 'Obtiene el reporte en CSV de alumnos inactivos por institución.',
   querystring: {
     type: 'object',
     properties: {
@@ -12,4 +12,4 @@ const findAlumnosInactivosPdfSchema = {
   },
 };
 
-module.exports = { findAlumnosInactivosPdfSchema };
+module.exports = { findAlumnosInactivosCsvSchema };
