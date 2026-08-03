@@ -52,6 +52,7 @@ function ordenarCalificacionesPorCurricula(calificaciones) {
 const buildFileHistorial = (
   findOneAlumnoQuery,
   findAllCalificacionesQuery,
+  findAllAsignaturasQuery,
   createPhpFile,
 ) => async (alumnoId, tipoDocumento) => {
   Logger.info('[files.buildFileHistorial.use-case]: Generando archivo de historial académico');
@@ -112,12 +113,19 @@ const buildFileHistorial = (
 
   checkers.throwErrorIfDataIsFalsy(calificaciones, 'calificaciones', alumnoId);
 
+  const asignaturasPrograma = await findAllAsignaturasQuery(
+    { programaId: alumno.programaId, tipo: 1 },
+    { include: [{ association: 'grado' }], strict: false },
+  );
+
   const calificacionesJSON = calificaciones.map((calificacion) => calificacion.toJSON());
   const calificacionesOrdenadas = ordenarCalificacionesPorCurricula(calificacionesJSON);
+  const asignaturasProgramaJSON = asignaturasPrograma.map((asignatura) => asignatura.toJSON());
 
   const file = await createPhpFile({
     alumno: alumno.toJSON(),
     calificaciones: calificacionesOrdenadas,
+    asignaturasPrograma: asignaturasProgramaJSON,
   }, tipoDocumento);
 
   return Buffer.from(file);
