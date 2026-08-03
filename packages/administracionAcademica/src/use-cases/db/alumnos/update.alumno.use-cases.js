@@ -1,20 +1,46 @@
 const boom = require('@hapi/boom');
 const { checkers } = require('@siiges-services/shared');
+const { checkDocumentosAlumno } = require('./documentos-requeridos.helpers');
 
 const EGRESADO_SITUACION_ID = 3;
+const SITUACION_ACTIVO_ID = 1;
 const ASIGNATURA_TIPO_REGULAR = 1;
 const SITUACION_VALIDACION_AUTENTICO = 1;
+
+const validateActivacionRequirements = async (alumno, findAllFilesQuery) => {
+  if (!alumno.validacion || alumno.validacion.situacionValidacionId
+    !== SITUACION_VALIDACION_AUTENTICO) {
+    throw boom.badRequest(
+      'Este alumno no se puede activar: Su validación no está en estatus Auténtico.',
+    );
+  }
+
+  const documentosOk = await checkDocumentosAlumno(alumno.id, findAllFilesQuery);
+  if (!documentosOk) {
+    throw boom.badRequest(
+      'Este alumno no se puede activar: Le faltan documentos requeridos (certificado, acta de nacimiento, CURP o archivo de validación).',
+    );
+  }
+};
 
 const validateEgresoRequirements = async (
   alumno,
   findOneProgramaQuery,
   findAllAsignaturasQuery,
   findAllCalificacionesQuery,
+  findAllFilesQuery,
 ) => {
   if (!alumno.validacion || alumno.validacion.situacionValidacionId
     !== SITUACION_VALIDACION_AUTENTICO) {
     throw boom.badRequest(
       'Este alumno no se puede validar como Egresado: Su validación no está en estatus Auténtico.',
+    );
+  }
+
+  const documentosOk = await checkDocumentosAlumno(alumno.id, findAllFilesQuery);
+  if (!documentosOk) {
+    throw boom.badRequest(
+      'Este alumno no se puede validar como Egresado: Le faltan documentos requeridos (certificado, acta de nacimiento, CURP o archivo de validación).',
     );
   }
 
@@ -77,13 +103,17 @@ const updateAlumno = (
   findOneProgramaQuery,
   findAllAsignaturasQuery,
   findAllCalificacionesQuery,
+  findAllFilesQuery,
 ) => async (identifierObj, changes) => {
   const { id } = identifierObj;
   const requiereValidacionEgreso = changes.situacionId === EGRESADO_SITUACION_ID;
+  const requiereValidacionActivacion = changes.situacionId === SITUACION_ACTIVO_ID;
 
   const alumno = await findOneAlumnoQuery(
     identifierObj,
-    requiereValidacionEgreso ? { include: ['validacion'] } : undefined,
+    (requiereValidacionEgreso || requiereValidacionActivacion)
+      ? { include: ['validacion'] }
+      : undefined,
   );
   checkers.throwErrorIfDataIsFalsy(alumno, 'alumnos', id);
 
@@ -93,7 +123,12 @@ const updateAlumno = (
       findOneProgramaQuery,
       findAllAsignaturasQuery,
       findAllCalificacionesQuery,
+      findAllFilesQuery,
     );
+  }
+
+  if (requiereValidacionActivacion && alumno.situacionId !== SITUACION_ACTIVO_ID) {
+    await validateActivacionRequirements(alumno, findAllFilesQuery);
   }
 
   let personaUpdated;
@@ -109,14 +144,12 @@ const updateAlumno = (
     const existingAlumnoTipoTramite = await findOneAlumnoTipoTramiteQuery({ alumnoId: alumno.id });
 
     if (existingAlumnoTipoTramite) {
-      // Update the existing alumnoTipoTramite record
       const updatedAlumnoTipoTramite = await updateAlumnoTipoTramiteQuery(
         existingAlumnoTipoTramite.id,
         { tipoTramiteId: changes.alumnoTipoTramite },
       );
       alumnoUpdated.dataValues.alumnoTipoTramite = updatedAlumnoTipoTramite.dataValues;
     } else {
-      // Create a new alumnoTipoTramite record
       const newAlumnoTipoTramite = await createAlumnoTipoTramiteQuery({
         alumnoId: alumno.id,
         tipoTramiteId: changes.alumnoTipoTramite,

@@ -20,6 +20,7 @@ const findGroupAlumnosPersona = require('./find-group-alumnos-persona.use-cases'
 const findAllMatriculaActiva = require('./find-all.matricula-activa.use-cases');
 const findAlumnosInactivos = require('./find.alumnos-inactivos.use-cases');
 const updateAlumnosSituacion = require('./update-alumnos-situacion.use-cases');
+const updateAlumnosEgreso = require('./update-alumnos-egreso.use-cases');
 
 module.exports = {
   createAlumno: createAlumno(
@@ -44,11 +45,13 @@ module.exports = {
     programas.findOneProgramaQuery,
     alumnos.findAllAsignaturasQuery,
     alumnos.findAllCalificacionesQuery,
+    alumnos.findAllFilesQuery,
   ),
   findGroupAlumnosPrograma: findGroupAlumnosPrograma(
     programas.findOneProgramaQuery,
     alumnos.findOneAlumnoQuery,
     alumnos.findAllAlumnosQuery,
+    alumnos.findAllFilesQuery,
   ),
   deleteAlumno: deleteAlumno(
     alumnos.findOneAlumnoQuery,
@@ -121,6 +124,15 @@ module.exports = {
   ),
   updateAlumnosSituacion: updateAlumnosSituacion(
     alumnos.findAllAlumnosQuery,
+    alumnos.findAllFilesQuery,
+    alumnos.updateAlumnoQuery,
+  ),
+  updateAlumnosEgreso: updateAlumnosEgreso(
+    alumnos.findAllAlumnosQuery,
+    programas.findOneProgramaQuery,
+    alumnos.findAllAsignaturasQuery,
+    alumnos.findAllCalificacionesQuery,
+    alumnos.findAllFilesQuery,
     alumnos.updateAlumnoQuery,
   ),
 };
