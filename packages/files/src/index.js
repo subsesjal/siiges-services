@@ -6,7 +6,8 @@ const {
   findOneFile,
   getFileIdentifierObj,
   uploadFile,
-  generarReporteAlumnosInactivos,
+  generarReporteAlumnosInactivosCsv,
+  generarReporteAlumnosInactivosPdf,
 } = require('./useCases');
 
 module.exports = {
@@ -14,5 +15,6 @@ module.exports = {
   findOneFile,
   getFileIdentifierObj,
   uploadFile,
-  generarReporteAlumnosInactivos,
+  generarReporteAlumnosInactivosCsv,
+  generarReporteAlumnosInactivosPdf,
 };
