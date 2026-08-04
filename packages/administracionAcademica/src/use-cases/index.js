@@ -15,6 +15,7 @@ const {
   findGroupCicloEscolar,
   findOneCicloEscolar,
   updateCicloEscolar,
+  findCatalogoCicloEscolar,
 } = require('./db/ciclosEscolares');
 
 const {
@@ -56,4 +57,5 @@ module.exports = {
   ...validaciones,
   ...titulosElectronicos,
   ...certificadosElectronicos,
+  findCatalogoCicloEscolar,
 };
