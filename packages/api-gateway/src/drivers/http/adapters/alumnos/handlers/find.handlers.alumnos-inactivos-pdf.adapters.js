@@ -1,25 +1,25 @@
 const { Logger } = require('@siiges-services/shared');
 const errorHandler = require('../../../utils/errorHandler');
 
-async function findAlumnosInactivosCsv(req, reply) {
+async function findAlumnosInactivosPdf(req, reply) {
   try {
     const { institucionId, plantelId, programaId } = req.query;
-    Logger.info('[Alumno]: Generando reporte CSV de alumnos inactivos');
+    Logger.info('[Alumno]: Generando reporte PDF de alumnos inactivos');
     const alumnos = await this.administracionAcademicaServices.findAllAlumnosInactivos({
       institucionId: Number(institucionId),
       plantelId: plantelId ? Number(plantelId) : undefined,
       programaId: programaId ? Number(programaId) : undefined,
     });
-    const csv = await this.filesServices.generarReporteAlumnosInactivosCsv(alumnos);
+    const pdf = await this.filesServices.generarReporteAlumnosInactivosPdf(alumnos);
 
     return reply
       .code(200)
-      .header('Content-Type', 'text/csv; charset=utf-8')
-      .header('Content-Disposition', 'attachment; filename="reporte-alumnos-inactivos.csv"')
-      .send(csv);
+      .header('Content-Type', 'application/pdf')
+      .header('Content-Disposition', 'attachment; filename="reporte-alumnos-inactivos.pdf"')
+      .send(pdf);
   } catch (error) {
     return errorHandler(error, reply);
   }
 }
 
-module.exports = findAlumnosInactivosCsv;
+module.exports = findAlumnosInactivosPdf;
