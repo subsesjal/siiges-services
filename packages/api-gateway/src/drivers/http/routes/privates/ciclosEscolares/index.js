@@ -6,6 +6,7 @@ const {
   findGroupCicloEscolarSchema,
   findOneCicloEscolarSchema,
   updateCicloEscolarSchema,
+  findCatalogoCicloEscolarSchema,
 } = require('./schema');
 
 async function cicloEscolarRouter(fastify, opts, next) {
@@ -33,6 +34,14 @@ async function cicloEscolarRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     ciclosEscolaresAdapter.findGroupCicloEscolar,
+  );
+  await fastify.get(
+    '/catalogo',
+    {
+      schema: findCatalogoCicloEscolarSchema,
+      onRequest: [fastify.authenticate],
+    },
+    ciclosEscolaresAdapter.findCatalogoCicloEscolar,
   );
   await fastify.delete(
     '/:cicloEscolarId',

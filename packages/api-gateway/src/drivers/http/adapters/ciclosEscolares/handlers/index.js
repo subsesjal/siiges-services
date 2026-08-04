@@ -3,6 +3,7 @@ const { deleteCicloEscolar } = require('./delete.handlers.ciclo-escolar.adapters
 const { updateCicloEscolar } = require('./update.handlers.ciclo-escolar.adapters');
 const { findGroupCicloEscolar } = require('./find-group.handlers.ciclo-escolar.adapters');
 const { findOneCicloEscolar } = require('./find-one.handlers.ciclo-escolar.adapters');
+const { findCatalogoCicloEscolar } = require('./find-catalogo.handlers.ciclo-escolar.adapters');
 
 module.exports = {
   createCicloEscolar,
@@ -10,4 +11,5 @@ module.exports = {
   updateCicloEscolar,
   findGroupCicloEscolar,
   findOneCicloEscolar,
+  findCatalogoCicloEscolar,
 };
