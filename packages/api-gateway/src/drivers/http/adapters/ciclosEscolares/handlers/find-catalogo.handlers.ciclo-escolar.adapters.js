@@ -3,9 +3,11 @@ const errorHandler = require('../../../utils/errorHandler');
 
 async function findCatalogoCicloEscolar(request, reply) {
   try {
+    const { all } = request.query;
+
     Logger.info('[Ciclo escolar]: find catalogo Ciclo Escolar');
     const ciclosEscolares = await this.administracionAcademicaServices
-      .findCatalogoCicloEscolar();
+      .findCatalogoCicloEscolar(all === 'true');
 
     return reply
       .code(200)
