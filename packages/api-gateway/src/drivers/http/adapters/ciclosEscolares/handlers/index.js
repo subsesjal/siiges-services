@@ -4,6 +4,8 @@ const { updateCicloEscolar } = require('./update.handlers.ciclo-escolar.adapters
 const { findGroupCicloEscolar } = require('./find-group.handlers.ciclo-escolar.adapters');
 const { findOneCicloEscolar } = require('./find-one.handlers.ciclo-escolar.adapters');
 const { findCatalogoCicloEscolar } = require('./find-catalogo.handlers.ciclo-escolar.adapters');
+const { updateCatalogoCicloEscolar } = require('./update-catalogo.handlers.ciclo-escolar.adapters');
+const { createCatalogoCicloEscolar } = require('./create-catalogo.handlers.ciclo-escolar.adapters');
 
 module.exports = {
   createCicloEscolar,
@@ -12,4 +14,6 @@ module.exports = {
   findGroupCicloEscolar,
   findOneCicloEscolar,
   findCatalogoCicloEscolar,
+  updateCatalogoCicloEscolar,
+  createCatalogoCicloEscolar,
 };
