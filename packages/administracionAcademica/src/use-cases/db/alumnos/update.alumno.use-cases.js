@@ -83,7 +83,9 @@ const validateEgresoRequirements = async (
   const creditosRequeridos = parseFloat(programa.creditos);
   let creditosCursados = 0;
   aprobadasPorAsignatura.forEach(({ asignatura }) => {
-    creditosCursados += parseFloat(asignatura.creditos);
+    if (asignatura.tipo === ASIGNATURA_TIPO_REGULAR) {
+      creditosCursados += parseFloat(asignatura.creditos);
+    }
   });
 
   if (creditosCursados !== creditosRequeridos) {
