@@ -4,6 +4,12 @@ const { responseProperties } = require('./properties/responseProperties');
 const findCatalogoCicloEscolarSchema = {
   tags: ['Ciclo Escolar'],
   description: 'Get the Ciclo Escolar catalog.',
+  querystring: {
+    type: 'object',
+    properties: {
+      all: { type: 'string', enum: ['true', 'false'] },
+    },
+  },
   response: {
     200: {
       type: 'object',
