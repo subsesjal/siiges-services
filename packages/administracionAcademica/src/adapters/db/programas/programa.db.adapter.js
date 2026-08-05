@@ -1,36 +1,23 @@
 const { models, queries } = require('@siiges-services/core');
 const { Op } = require('sequelize');
 
-const {
-  findAllQuery,
-  findOneQuery,
-} = queries;
+const { findAllQuery, findOneQuery } = queries;
 
-const {
-  Programa,
-  Plantel,
-} = models;
+const { Programa, Plantel } = models;
 
-const include = [{
-  association: 'solicitud',
-  where: { estatusSolicitudId: 11 },
-},
-{
-  association: 'plantel',
-  include: [
-    { association: 'institucion' },
-    { association: 'domicilio' },
-  ],
-},
-{ association: 'nivel' },
-{ association: 'modalidad' },
-{ association: 'ciclo' },
-{
-  association: 'programaTurnos',
-  include: [
-    { association: 'turno' },
-  ],
-},
+const include = [
+  {
+    association: 'solicitud',
+    where: { estatusSolicitudId: 11 },
+  },
+  {
+    association: 'plantel',
+    include: [{ association: 'institucion' }, { association: 'domicilio' }],
+  },
+  { association: 'nivel' },
+  { association: 'modalidad' },
+  { association: 'ciclo' },
+  { association: 'programaTurnos' },
 ];
 
 const where = {
