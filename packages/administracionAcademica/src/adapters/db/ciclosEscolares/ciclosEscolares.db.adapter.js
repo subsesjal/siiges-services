@@ -20,6 +20,9 @@ module.exports = {
   findOneCicloEscolarQuery: findOneQuery(CicloEscolar),
   findGroupCicloEscolarQuery: findAllQuery(CicloEscolar),
   findCatalogoCicloEscolarQuery: findAllQuery(CatalogoCicloEscolar),
+  findOneCatalogoCicloEscolarQuery: findOneQuery(CatalogoCicloEscolar),
+  createCatalogoCicloEscolarQuery: createQuery(CatalogoCicloEscolar),
+  updateCatalogoCicloEscolarQuery: updateAndFindQuery(CatalogoCicloEscolar),
   updateCicloEscolarQuery: updateAndFindQuery(CicloEscolar),
   deleteCicloEscolarQuery: deleteAndFindQuery(CicloEscolar),
 };

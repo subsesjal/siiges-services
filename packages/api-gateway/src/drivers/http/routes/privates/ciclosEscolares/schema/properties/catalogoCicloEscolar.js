@@ -5,4 +5,9 @@ const catalogoCicloEscolar = {
   ciclosActivos: { type: 'boolean' },
 };
 
-module.exports = { catalogoCicloEscolar };
+const updateCatalogoCicloEscolarBody = {
+  tipo: { type: 'integer', enum: [1, 2] },
+  ciclosActivos: { type: 'boolean' },
+};
+
+module.exports = { catalogoCicloEscolar, updateCatalogoCicloEscolarBody };
