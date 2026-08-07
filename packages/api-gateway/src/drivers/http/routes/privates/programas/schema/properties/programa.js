@@ -8,6 +8,7 @@ const programa = {
   perfilEgresoConocimientos: { type: 'string' },
   perfilEgresoHabilidades: { type: 'string' },
   perfilEgresoActitudes: { type: 'string' },
+  permisoAlumno: { type: 'boolean' },
 };
 
 module.exports = { programa };

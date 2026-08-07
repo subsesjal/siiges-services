@@ -5,6 +5,8 @@ const {
   findInstitucionProgramasSchema,
   findOneProgramaSchema,
   findOneProgramaRvoeSchema,
+  updateProgramaSchema,
+  updateManyProgramasSchema,
 } = require('./schema');
 
 async function programasRouter(fastify, opts, next) {
@@ -42,6 +44,24 @@ async function programasRouter(fastify, opts, next) {
       onRequest: [fastify.authenticate],
     },
     programasAdapter.findInstitucionProgramas,
+  );
+
+  await fastify.patch(
+    '/bulk',
+    {
+      schema: updateManyProgramasSchema,
+      onRequest: [fastify.authenticate],
+    },
+    programasAdapter.updateManyProgramas,
+  );
+
+  await fastify.patch(
+    '/:programaId',
+    {
+      schema: updateProgramaSchema,
+      onRequest: [fastify.authenticate],
+    },
+    programasAdapter.updatePrograma,
   );
 
   await fastify.get(
