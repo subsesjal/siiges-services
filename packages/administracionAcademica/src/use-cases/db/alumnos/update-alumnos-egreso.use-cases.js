@@ -40,7 +40,7 @@ const checkAlumnoEgreso = (alumno, programaCache, calificacionesPorAlumno) => {
     }
   });
 
-  return creditosCursados === creditosRequeridos;
+  return creditosCursados >= creditosRequeridos;
 };
 
 const buildProgramaCaches = async (
