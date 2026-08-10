@@ -38,7 +38,7 @@ const checkAlumnoEgreso = (alumno, programaCache, calificacionesPorAlumno) => {
     creditosCursados += parseFloat(asignatura.creditos);
   });
 
-  return creditosCursados === creditosRequeridos;
+  return creditosCursados >= creditosRequeridos;
 };
 
 const buildProgramaCaches = async (

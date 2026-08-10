@@ -86,9 +86,9 @@ const validateEgresoRequirements = async (
     creditosCursados += parseFloat(asignatura.creditos);
   });
 
-  if (creditosCursados !== creditosRequeridos) {
+  if (creditosCursados < creditosRequeridos) {
     throw boom.badRequest(
-      `Este alumno no se puede validar como Egresado: Los créditos cursados (${creditosCursados}) no coinciden con los créditos requeridos por el RVOE (${creditosRequeridos}).`,
+      `Este alumno no se puede validar como Egresado: Los créditos cursados (${creditosCursados}) son menores a los créditos requeridos por el RVOE (${creditosRequeridos}).`,
     );
   }
 };
