@@ -171,6 +171,15 @@ async function asignaturaRouter(fastify, opts, next) {
   );
 
   await fastify.get(
+    '/matricula-inactiva/csv',
+    {
+      schema: alumnosSchema.findAlumnosInactivosCsvSchema,
+      onRequest: [fastify.authenticate],
+    },
+    alumnosAdapter.findAlumnosInactivosCsv,
+  );
+
+  await fastify.get(
     '/matricula-inactiva/pdf',
     {
       schema: alumnosSchema.findAlumnosInactivosPdfSchema,

@@ -1,5 +1,6 @@
 const { buildIdentifierObj, buildFile } = require('./features');
 const { GenerarReporteAlumnosInactivos } = require('../utils/pdfs');
+const { GenerarReporteAlumnosInactivosCSV } = require('../utils/csvs');
 
 const deleteFile = require('./delete.files.use-cases');
 const uploadFile = require('./upload.files.use-cases');
@@ -16,5 +17,10 @@ module.exports = {
     buildFile,
   ),
   deleteFile,
-  generarReporteAlumnosInactivos: generarReporteAlumnosInactivos(GenerarReporteAlumnosInactivos),
+  generarReporteAlumnosInactivosCsv: generarReporteAlumnosInactivos(
+    GenerarReporteAlumnosInactivosCSV,
+  ),
+  generarReporteAlumnosInactivosPdf: generarReporteAlumnosInactivos(
+    GenerarReporteAlumnosInactivos,
+  ),
 };
