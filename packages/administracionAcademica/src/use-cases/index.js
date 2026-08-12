@@ -8,6 +8,8 @@ const {
   findInstitucionProgramas,
   findOnePrograma,
   findOneProgramaRvoe,
+  updatePrograma,
+  updateManyProgramas,
 } = require('./db/programas');
 
 const {
@@ -64,4 +66,6 @@ module.exports = {
   findCatalogoCicloEscolar,
   updateCatalogoCicloEscolar,
   createCatalogoCicloEscolar,
+  updatePrograma,
+  updateManyProgramas,
 };

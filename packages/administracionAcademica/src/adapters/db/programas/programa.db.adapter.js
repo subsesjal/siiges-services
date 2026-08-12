@@ -4,6 +4,7 @@ const { Op } = require('sequelize');
 const {
   findAllQuery,
   findOneQuery,
+  updateAndFindQuery,
 } = queries;
 
 const {
@@ -45,4 +46,5 @@ module.exports = {
   findPlantelQuery: findAllQuery(Plantel),
   includeProgramasQuery: include,
   whereProgramasQuery: where,
+  updateProgramaQuery: updateAndFindQuery(Programa),
 };
