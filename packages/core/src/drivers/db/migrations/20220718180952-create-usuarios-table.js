@@ -139,6 +139,7 @@ const { ALUMNO_TITULO_ELECTRONICO_TABLE, AlumnoTituloElectronicoSchema } = requi
 const { DOCUMENTO_FIRMADO_TABLE, DocumentoFirmadoSchema } = require('../models/documentoFirmado');
 const { TOKEN_EXTERNO_TABLE, TokenExternoSchema } = require('../models/tokenExterno');
 const { CATALOGO_FIRMA_ELECTRONICA_TABLE, CatalogoFirmaElectronicaSchema } = require('../models/catalogoFirmaElectronica');
+const { CATALOGO_CICLO_ESCOLAR_TABLE, CatalogoCicloEscolarSchema } = require('../models/catalogoCicloEscolar');
 
 // SIIGES 1.0
 const { ACADEMIA_TABLE, AcademiaSchema } = require('../models/academias');
@@ -375,6 +376,7 @@ module.exports = {
       DocumentoFirmadoSchema,
     );
     await queryInterface.createTable(FIRMANTE_TABLE, FirmanteSchema);
+    await queryInterface.createTable(CATALOGO_CICLO_ESCOLAR_TABLE, CatalogoCicloEscolarSchema);
 
     // SIIGES 1.0
     await queryInterface.createTable(ACADEMIA_TABLE, AcademiaSchema);
@@ -576,6 +578,7 @@ module.exports = {
     await queryInterface.dropTable(TOKEN_EXTERNO_TABLE);
     await queryInterface.dropTable(DOCUMENTO_FIRMADO_TABLE);
     await queryInterface.dropTable(FIRMANTE_TABLE);
+    await queryInterface.dropTable(CATALOGO_CICLO_ESCOLAR_TABLE);
 
     // SIIGES 1.0
     await queryInterface.dropTable(ACADEMIA_TABLE);

@@ -7,6 +7,8 @@ const {
   findPlantelProgramas,
   findInstitucionProgramas,
   findOnePrograma,
+  updatePrograma,
+  updateManyProgramas,
 } = require('./db/programas');
 
 const {
@@ -15,6 +17,9 @@ const {
   findGroupCicloEscolar,
   findOneCicloEscolar,
   updateCicloEscolar,
+  findCatalogoCicloEscolar,
+  updateCatalogoCicloEscolar,
+  createCatalogoCicloEscolar,
 } = require('./db/ciclosEscolares');
 
 const {
@@ -56,4 +61,9 @@ module.exports = {
   ...validaciones,
   ...titulosElectronicos,
   ...certificadosElectronicos,
+  findCatalogoCicloEscolar,
+  updateCatalogoCicloEscolar,
+  createCatalogoCicloEscolar,
+  updatePrograma,
+  updateManyProgramas,
 };
