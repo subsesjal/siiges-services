@@ -8,6 +8,7 @@ const {
   uploadFile,
   generarReporteAlumnosInactivosCsv,
   generarReporteAlumnosInactivosPdf,
+  generarReporteAlumnosExtraordinariosPdf,
 } = require('./useCases');
 
 module.exports = {
@@ -17,4 +18,5 @@ module.exports = {
   uploadFile,
   generarReporteAlumnosInactivosCsv,
   generarReporteAlumnosInactivosPdf,
+  generarReporteAlumnosExtraordinariosPdf,
 };
