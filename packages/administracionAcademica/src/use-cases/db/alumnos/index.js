@@ -124,6 +124,7 @@ module.exports = {
     alumnos.findAllAlumnosQuery,
   ),
   findAllAlumnosExtraordinarios: findAllAlumnosExtraordinarios(
+    programas.findAllProgramasQuery,
     alumnos.findAllGruposQuery,
     alumnos.findAllCalificacionesQuery,
   ),
