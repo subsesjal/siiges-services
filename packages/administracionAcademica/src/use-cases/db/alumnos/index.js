@@ -19,6 +19,7 @@ const findAlumnosExtra = require('./find-group.alumnos-extra.use-cases');
 const findGroupAlumnosPersona = require('./find-group-alumnos-persona.use-cases');
 const findAllMatriculaActiva = require('./find-all.matricula-activa.use-cases');
 const findAlumnosInactivos = require('./find.alumnos-inactivos.use-cases');
+const findAllAlumnosExtraordinarios = require('./find.alumnos-extraordinarios.use-cases');
 const updateAlumnosSituacion = require('./update-alumnos-situacion.use-cases');
 const updateAlumnosEgreso = require('./update-alumnos-egreso.use-cases');
 
@@ -121,6 +122,10 @@ module.exports = {
   findAllAlumnosInactivos: findAlumnosInactivos(
     programas.findAllProgramasQuery,
     alumnos.findAllAlumnosQuery,
+  ),
+  findAllAlumnosExtraordinarios: findAllAlumnosExtraordinarios(
+    alumnos.findAllGruposQuery,
+    alumnos.findAllCalificacionesQuery,
   ),
   updateAlumnosSituacion: updateAlumnosSituacion(
     alumnos.findAllAlumnosQuery,
