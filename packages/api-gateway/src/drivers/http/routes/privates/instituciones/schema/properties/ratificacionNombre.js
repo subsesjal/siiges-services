@@ -7,6 +7,7 @@ const ratificacionNombre = {
   nombrePropuesto3: { type: 'string' },
   nombreSolicitado: { type: 'string' },
   nombreAutorizado: { type: 'string' },
+  fechaAutorizacion: { type: 'string', format: 'date-time' },
   esNombreAutorizado: { type: 'boolean' },
 };
 

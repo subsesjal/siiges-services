@@ -10,6 +10,7 @@ const programa = {
   objetivos: { type: 'string' },
   antecedentes: { type: 'string' },
   creditos: { type: 'string' },
+  creditosOrdinarios: { type: 'string' },
   minimoHorasOptativas: { type: 'integer' },
   minimoCreditosOptativas: { type: 'string' },
   vigencia: { type: 'string', format: 'date-time' },
