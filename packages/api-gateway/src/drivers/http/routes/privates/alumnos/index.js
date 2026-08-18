@@ -188,6 +188,15 @@ async function asignaturaRouter(fastify, opts, next) {
     alumnosAdapter.findAlumnosInactivosPdf,
   );
 
+  await fastify.get(
+    '/matricula-extraordinaria/pdf',
+    {
+      schema: alumnosSchema.findAlumnosExtraordinariosPdfSchema,
+      onRequest: [fastify.authenticate],
+    },
+    alumnosAdapter.findAlumnosExtraordinariosPdf,
+  );
+
   next();
 }
 
