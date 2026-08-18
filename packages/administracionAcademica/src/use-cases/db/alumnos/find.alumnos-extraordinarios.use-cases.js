@@ -1,12 +1,33 @@
+const { Op } = require('sequelize');
 const { Logger } = require('@siiges-services/shared');
 
 const TIPO_EXTRAORDINARIO = 2;
 
 const findAllAlumnosExtraordinarios = (
+  findAllProgramasQuery,
   findAllGruposQuery,
   findAllCalificacionesQuery,
-) => async ({ cicloEscolarId }) => {
+) => async ({
+  institucionId, plantelId, programaId, cicloEscolarId,
+}) => {
   Logger.info('[alumnos]: buscar alumnos extraordinarios');
+
+  const wherePlantel = { institucionId };
+  if (plantelId) wherePlantel.id = plantelId;
+
+  const wherePrograma = {
+    acuerdoRvoe: { [Op.and]: [{ [Op.ne]: null }, { [Op.ne]: '' }] },
+  };
+  if (programaId) wherePrograma.id = programaId;
+
+  const programas = await findAllProgramasQuery(wherePrograma, {
+    include: [{ association: 'plantel', where: wherePlantel }],
+    strict: true,
+  });
+
+  if (!programas?.length) return [];
+
+  const programaIds = programas.map((p) => p.id);
 
   const grupos = await findAllGruposQuery({ cicloEscolarId });
   const grupoIds = grupos.map(({ id }) => id);
@@ -21,9 +42,13 @@ const findAllAlumnosExtraordinarios = (
   return findAllCalificacionesQuery(
     whereCalificacion,
     {
+      order: [
+        [{ model: 'alumno', as: 'alumno' }, 'matricula', 'ASC'],
+      ],
       include: [
         {
           association: 'alumno',
+          where: { programaId: { [Op.in]: programaIds } },
           include: [
             { association: 'persona' },
             {
