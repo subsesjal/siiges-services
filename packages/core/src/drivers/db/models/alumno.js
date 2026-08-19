@@ -51,6 +51,11 @@ const AlumnoSchema = {
       key: 'id',
     },
   },
+  alumnoCicloIngreso: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'alumno_ciclo_ingreso',
+  },
   matricula: {
     allowNull: false,
     type: DataTypes.STRING,
