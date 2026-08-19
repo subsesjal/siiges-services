@@ -274,6 +274,7 @@ foreach ($asignaturasPrograma as $asignaturaCat) {
 
   $tieneExtraordinario = false;
   $ordinarioReprobado = false;
+  $tieneAprobado = false;
 
   foreach ($calificacionesDeEstaAsignatura as $cal) {
     $calificacionValor = $cal['calificacion'] ?? null;
@@ -286,13 +287,12 @@ foreach ($asignaturasPrograma as $asignaturaCat) {
       $tieneExtraordinario = true;
     }
 
-    if (
-      $esOrdinario
-      && !$calificacionVacia
-      && is_numeric($calificacionValor)
-      && (float) $calificacionValor < $calificacionAprobatoria
-    ) {
-      $ordinarioReprobado = true;
+    if (!$calificacionVacia && is_numeric($calificacionValor)) {
+      if ((float) $calificacionValor >= $calificacionAprobatoria) {
+        $tieneAprobado = true;
+      } elseif ($esOrdinario) {
+        $ordinarioReprobado = true;
+      }
     }
 
     $nombreCiclo = $cal['grupo']['cicloEscolar']['nombre'] ?? 'SIN CICLO';
@@ -315,7 +315,7 @@ foreach ($asignaturasPrograma as $asignaturaCat) {
     ];
   }
 
-  if ($ordinarioReprobado && !$tieneExtraordinario) {
+  if ($ordinarioReprobado && !$tieneExtraordinario && !$tieneAprobado) {
     $filasPendientes[] = [
       'asignatura' => $asignaturaCat,
       'calificacion' => null,
