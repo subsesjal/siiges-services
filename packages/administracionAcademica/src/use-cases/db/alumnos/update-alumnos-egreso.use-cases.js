@@ -7,6 +7,7 @@ const {
 const EGRESADO_SITUACION_ID = 3;
 const ASIGNATURA_TIPO_REGULAR = 1;
 const SITUACION_VALIDACION_AUTENTICO = 1;
+const EGRESO_MASIVO_BATCH_SIZE = 10;
 
 const checkAlumnoEgreso = (alumno, programaCache, calificacionesPorAlumno) => {
   if (!alumno.validacion || alumno.validacion.situacionValidacionId
@@ -87,6 +88,57 @@ const buildCalificacionesPorAlumno = async (alumnoIds, findAllCalificacionesQuer
   return calificacionesPorAlumno;
 };
 
+const chunkArray = (array, size) => {
+  const chunks = [];
+  for (let i = 0; i < array.length; i += size) {
+    chunks.push(array.slice(i, i + size));
+  }
+  return chunks;
+};
+
+const procesarLote = async (
+  lote,
+  programaCaches,
+  findAllCalificacionesQuery,
+  findAllFilesQuery,
+  updateAlumnoQuery,
+) => {
+  const loteIds = lote.map((alumno) => alumno.id);
+
+  const [calificacionesPorAlumno, archivos] = await Promise.all([
+    buildCalificacionesPorAlumno(loteIds, findAllCalificacionesQuery),
+    findAllFilesQuery(
+      { entidadId: loteIds, tipoDocumentoId: TIPOS_DOCUMENTO_REQUERIDOS },
+      { attributes: ['entidadId', 'tipoDocumentoId'] },
+    ),
+  ]);
+
+  const documentosPorAlumno = buildDocumentosPorAlumno(archivos);
+
+  const loteEgresables = [];
+  const loteNoEgresables = [];
+
+  lote.forEach((alumno) => {
+    const programaCache = programaCaches.get(alumno.programaId);
+    const documentosOk = tieneDocumentosCompletos(alumno.id, documentosPorAlumno);
+    const requisitosAcademicosOk = programaCache
+      ? checkAlumnoEgreso(alumno, programaCache, calificacionesPorAlumno)
+      : false;
+
+    if (documentosOk && requisitosAcademicosOk) {
+      loteEgresables.push(alumno.id);
+    } else {
+      loteNoEgresables.push(alumno.id);
+    }
+  });
+
+  if (loteEgresables.length > 0) {
+    await updateAlumnoQuery({ id: loteEgresables }, { situacionId: EGRESADO_SITUACION_ID });
+  }
+
+  return { egresables: loteEgresables, noEgresables: loteNoEgresables };
+};
+
 const updateAlumnosEgreso = (
   findAllAlumnosQuery,
   findOneProgramaQuery,
@@ -122,36 +174,32 @@ const updateAlumnosEgreso = (
 
   if (porValidar.length > 0) {
     const programaIds = [...new Set(porValidar.map((alumno) => alumno.programaId))];
-    const porValidarIds = porValidar.map((alumno) => alumno.id);
+    const programaCaches = await buildProgramaCaches(
+      programaIds,
+      findOneProgramaQuery,
+      findAllAsignaturasQuery,
+    );
 
-    const [programaCaches, calificacionesPorAlumno, archivos] = await Promise.all([
-      buildProgramaCaches(programaIds, findOneProgramaQuery, findAllAsignaturasQuery),
-      buildCalificacionesPorAlumno(porValidarIds, findAllCalificacionesQuery),
-      findAllFilesQuery(
-        { entidadId: porValidarIds, tipoDocumentoId: TIPOS_DOCUMENTO_REQUERIDOS },
-        { attributes: ['entidadId', 'tipoDocumentoId'] },
-      ),
-    ]);
+    const lotes = chunkArray(porValidar, EGRESO_MASIVO_BATCH_SIZE);
 
-    const documentosPorAlumno = buildDocumentosPorAlumno(archivos);
+    await lotes.reduce(async (previousPromise, lote) => {
+      await previousPromise;
 
-    porValidar.forEach((alumno) => {
-      const programaCache = programaCaches.get(alumno.programaId);
-      const documentosOk = tieneDocumentosCompletos(alumno.id, documentosPorAlumno);
-      const requisitosAcademicosOk = programaCache
-        ? checkAlumnoEgreso(alumno, programaCache, calificacionesPorAlumno)
-        : false;
-
-      if (documentosOk && requisitosAcademicosOk) {
-        egresables.push(alumno.id);
-      } else {
-        noEgresables.push(alumno.id);
+      try {
+        const resultado = await procesarLote(
+          lote,
+          programaCaches,
+          findAllCalificacionesQuery,
+          findAllFilesQuery,
+          updateAlumnoQuery,
+        );
+        egresables.push(...resultado.egresables);
+        noEgresables.push(...resultado.noEgresables);
+      } catch (error) {
+        const loteIds = lote.map((alumno) => alumno.id);
+        noEgresables.push(...loteIds);
       }
-    });
-  }
-
-  if (egresables.length > 0) {
-    await updateAlumnoQuery({ id: egresables }, { situacionId: EGRESADO_SITUACION_ID });
+    }, Promise.resolve());
   }
 
   return {

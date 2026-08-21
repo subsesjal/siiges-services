@@ -582,6 +582,8 @@ foreach ($calificacionCiclo as $grupoKey => $grupoData) {
         $cuentaCredito = true;
       } elseif (is_numeric($detalle['calificacion']) && (float) $detalle['calificacion'] >= $calificacionAprobatoria) {
         $cuentaCredito = true;
+        $total_calificaciones += (float) $detalle['calificacion'];
+        $total_materias += 1;
       }
 
       if ($cuentaCredito) {
@@ -672,13 +674,13 @@ if ($pdf->checkNewPage()) {
 $pdf->SetFont("Garet", "", 9);
 $pdf->SetFillColor(191, 191, 191);
 $pdf->Cell(50, 5, safe_text("CRÉDITOS OBTENIDOS"), 1, 0, "C", true);
-// $pdf->Cell(50, 5, safe_text("PROMEDIO"), 1, 0, "C", true);
+$pdf->Cell(50, 5, safe_text("PROMEDIO"), 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->SetFont("Garet", "", 9);
 $pdf->SetFillColor(255, 255, 255);
 $pdf->Cell(50, 5, safe_text($total_creditos . " de " . ($programa["creditos"] ?? '')), 1, 0, "C", true);
-// $pdf->Cell(50, 5, safe_text($promedio_calificacion), 1, 0, "C", true);
+$pdf->Cell(50, 5, safe_text($promedio_calificacion), 1, 0, "C", true);
 $pdf->Ln();
 
 $pdf->Ln(15);
