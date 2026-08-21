@@ -4,6 +4,7 @@ const alumno = {
   situacionId: { type: 'integer' },
   programaId: { type: 'integer' },
   tipoTramiteId: { type: 'integer' },
+  alumnoCicloIngreso: { type: 'string' },
   matricula: { type: 'string' },
   estatus: { type: 'integer' },
   adeudoMaterias: { type: 'integer' },
