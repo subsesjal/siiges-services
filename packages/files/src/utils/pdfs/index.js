@@ -15,6 +15,7 @@ const { GenerarServicio } = require('./SERVICIO_SOCIAL');
 const { GenerarTitulo } = require('./TITULO');
 const { GenerarCertificado } = require('./CERTIFICADO');
 const { GenerarReporteAlumnosInactivos } = require('./REPORTE_ALUMNOS_INACTIVOS');
+const { GenerarReporteAlumnosExtraordinarios } = require('./REPORTE_ALUMNOS_EXTRAORDINARIOS');
 
 module.exports = {
   GenerarFDA02,
@@ -34,4 +35,5 @@ module.exports = {
   GenerarTitulo,
   GenerarCertificado,
   GenerarReporteAlumnosInactivos,
+  GenerarReporteAlumnosExtraordinarios,
 };
