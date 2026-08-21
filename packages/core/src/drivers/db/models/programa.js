@@ -72,6 +72,9 @@ const ProgramaSchema = {
   creditos: {
     type: DataTypes.STRING,
   },
+  creditosOrdinarios: {
+    type: DataTypes.STRING,
+  },
   minimoHorasOptativas: {
     type: DataTypes.INTEGER,
     field: 'minimo_horas_optativas',
