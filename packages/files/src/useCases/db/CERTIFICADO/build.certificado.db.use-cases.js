@@ -100,7 +100,10 @@ const buildFileCertificado = (
     { association: 'asignatura' },
     {
       association: 'grupo',
-      include: [{ association: 'cicloEscolar' }],
+      include: [
+        { association: 'cicloEscolar' },
+        { association: 'grado' },
+      ],
     },
   ];
 
@@ -118,10 +121,6 @@ const buildFileCertificado = (
     return valor;
   };
 
-  // Agrupa TODAS las calificaciones del alumno por asignaturaId (puede haber
-  // más de una: ordinario reprobado + extraordinario aprobado, por ejemplo).
-  // Esto se usa para PINTAR la tabla: cada calificación capturada se muestra
-  // como su propia fila, sin perder el ordinario reprobado.
   const calificacionesTodasPorAsignaturaId = {};
   calificaciones.forEach((c) => {
     if (!calificacionesTodasPorAsignaturaId[c.asignaturaId]) {
@@ -130,8 +129,6 @@ const buildFileCertificado = (
     calificacionesTodasPorAsignaturaId[c.asignaturaId].push(c);
   });
 
-  // Ordena cada grupo para que el ordinario (tipo=1) se muestre antes que el
-  // extraordinario (tipo=2), si ambos existen.
   Object.values(calificacionesTodasPorAsignaturaId).forEach((lista) => {
     lista.sort((a, b) => {
       const tipoA = a.tipo === 2 || a.tipo === '2' ? 2 : 1;
@@ -140,9 +137,6 @@ const buildFileCertificado = (
     });
   });
 
-  // Calificación VIGENTE por asignatura: si existe extraordinario, esa es la
-  // que cuenta como resultado final de la materia; si no, el ordinario. Esto
-  // se usa SOLO para el promedio general, nunca para decidir qué se pinta.
   const calificacionVigentePorAsignaturaId = {};
   calificaciones.forEach((c) => {
     const existente = calificacionVigentePorAsignaturaId[c.asignaturaId];
@@ -173,7 +167,6 @@ const buildFileCertificado = (
     const calificacionesDeEstaAsignatura = calificacionesTodasPorAsignaturaId[asignatura.id] || [];
 
     if (calificacionesDeEstaAsignatura.length === 0) {
-      // Sin ninguna calificación capturada: una sola fila marcada como error.
       calificacionesPorGrado[gradoId].asignaturas.push({
         asignaturaId: asignatura.id,
         nombre: asignatura.nombre || '',
@@ -184,9 +177,6 @@ const buildFileCertificado = (
         sinCalificacion: true,
       });
     } else {
-      // Una fila por cada intento capturado (ordinario y/o extraordinario),
-      // para que el ordinario reprobado se siga mostrando junto al
-      // extraordinario, si existe.
       calificacionesDeEstaAsignatura.forEach((c) => {
         calificacionesPorGrado[gradoId].asignaturas.push({
           asignaturaId: asignatura.id,
@@ -199,6 +189,40 @@ const buildFileCertificado = (
         });
       });
     }
+  });
+
+  const asignaturaIdsOptativas = new Set();
+
+  calificaciones.forEach((c) => {
+    const tipoCatalogo = c.asignatura?.tipo;
+    const esOptativaDeCatalogo = tipoCatalogo === 2 || tipoCatalogo === '2';
+    if (!esOptativaDeCatalogo) return;
+
+    asignaturaIdsOptativas.add(c.asignaturaId);
+
+    const gradoReal = c.grupo?.grado;
+    const gradoId = gradoReal?.id || 'SIN_GRADO';
+    const gradoNombre = gradoReal?.nombre || 'SIN GRADO';
+    const gradoNumero = gradoReal?.numeroGrado || 0;
+
+    if (!calificacionesPorGrado[gradoId]) {
+      calificacionesPorGrado[gradoId] = {
+        gradoId,
+        gradoNombre,
+        gradoNumero,
+        asignaturas: [],
+      };
+    }
+
+    calificacionesPorGrado[gradoId].asignaturas.push({
+      asignaturaId: c.asignaturaId,
+      nombre: c.asignatura?.nombre || '',
+      clave: c.asignatura?.clave || '',
+      periodo: c.grupo?.cicloEscolar?.nombre || 'SIN CICLO',
+      calificacion: procesarCalificacionCruda(c.calificacion),
+      tipo: c.tipo,
+      sinCalificacion: false,
+    });
   });
 
   Object.values(calificacionesPorGrado).forEach((grado) => {
@@ -215,38 +239,9 @@ const buildFileCertificado = (
   const gradosOrdenados = Object.values(calificacionesPorGrado)
     .sort((a, b) => a.gradoNumero - b.gradoNumero);
 
-  const asignaturasOptativas = calificaciones
-    .filter((c) => {
-      const tipoCatalogo = c.asignatura?.tipo;
-      return tipoCatalogo === 2 || tipoCatalogo === '2';
-    })
-    .map((c) => ({
-      asignaturaId: c.asignaturaId,
-      nombre: c.asignatura?.nombre || '',
-      clave: c.asignatura?.clave || '',
-      periodo: c.grupo?.cicloEscolar?.nombre || 'SIN CICLO',
-      calificacion: procesarCalificacionCruda(c.calificacion),
-      tipo: c.tipo,
-      mostrarSoloAprobado: true,
-    }));
-
-  if (asignaturasOptativas.length > 0) {
-    gradosOrdenados.push({
-      gradoId: 'OPTATIVA',
-      gradoNombre: 'OPTATIVAS ASIGNADAS',
-      gradoNumero: gradosOrdenados.length > 0
-        ? Math.max(...gradosOrdenados.map((g) => g.gradoNumero)) + 1 : 1,
-      asignaturas: asignaturasOptativas,
-    });
-  }
-
-  // El promedio se calcula por ASIGNATURA OBLIGATORIA ÚNICA del catálogo,
-  // usando su calificación vigente (extraordinario si existe, si no
-  // ordinario) — nunca contando ORD y EXTRA como dos valores separados, y
-  // nunca incluyendo optativas.
-  const calificacionesNumericasObligatorias = asignaturasPrograma
-    .map((asignatura) => {
-      const vigente = calificacionVigentePorAsignaturaId[asignatura.id];
+  const obtenerCalificacionesNumericasVigentes = (asignaturaIds) => asignaturaIds
+    .map((asignaturaId) => {
+      const vigente = calificacionVigentePorAsignaturaId[asignaturaId];
       if (!vigente) return null;
 
       const calProcesada = procesarCalificacionCruda(vigente.calificacion);
@@ -257,12 +252,33 @@ const buildFileCertificado = (
     })
     .filter((n) => n !== null && !Number.isNaN(n) && n > 0);
 
-  const promedioGeneral = calificacionesNumericasObligatorias.length > 0
-    ? (
-      calificacionesNumericasObligatorias.reduce((sum, n) => sum + n, 0)
-      / calificacionesNumericasObligatorias.length
-    ).toFixed(1)
-    : 'N/A';
+  const calificacionesNumericasObligatorias = obtenerCalificacionesNumericasVigentes(
+    asignaturasPrograma.map((asignatura) => asignatura.id),
+  );
+  const calificacionesNumericasOptativas = obtenerCalificacionesNumericasVigentes(
+    Array.from(asignaturaIdsOptativas),
+  );
+  const calificacionesNumericasTotales = [
+    ...calificacionesNumericasObligatorias,
+    ...calificacionesNumericasOptativas,
+  ];
+
+  let promedioGeneral = 'N/A';
+  if (calificacionesNumericasTotales.length > 0) {
+    const promedioNumerico = calificacionesNumericasTotales.reduce((sum, n) => sum + n, 0)
+      / calificacionesNumericasTotales.length;
+    const calificacionMaximaNum = Number(folioDocAlumno.alumno.programa?.calificacionMaxima);
+
+    const esNotaPerfecta = !Number.isNaN(calificacionMaximaNum)
+      && Math.abs(promedioNumerico - calificacionMaximaNum) < 0.005;
+
+    if (esNotaPerfecta) {
+      promedioGeneral = String(calificacionMaximaNum);
+    } else {
+      const promedioTruncado = Math.trunc(promedioNumerico * 100) / 100;
+      promedioGeneral = promedioTruncado.toFixed(2);
+    }
+  }
 
   const grupos = folioDocAlumno.alumno.alumnoGrupos?.map((ag) => ag.grupo).filter(Boolean) || [];
 
