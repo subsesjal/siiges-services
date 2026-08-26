@@ -432,7 +432,7 @@ async function GenerarCertificado(certificado) {
   const colX2 = [blockX, blockX + colWidths2[0]];
 
   const programaBox = centerTextInBox(
-    `${certificado?.nombreNivel.toUpperCase() || ''}EN ${certificado?.carrera.toUpperCase() || ''}`,
+    `${certificado?.nombreNivel.toUpperCase() || ''} EN ${certificado?.carrera.toUpperCase() || ''}`,
     colX2[1],
     colWidths2[1],
     colY2,
@@ -693,7 +693,6 @@ async function GenerarCertificado(certificado) {
       });
 
       const sinCalificacion = asig.sinCalificacion === true;
-      const soloAprobado = asig.mostrarSoloAprobado === true;
 
       if (sinCalificacion) {
         doc.setTextColor(200, 0, 0);
@@ -701,22 +700,13 @@ async function GenerarCertificado(certificado) {
         doc.setTextColor(0, 0, 0);
       }
 
-      let periodo;
-      if (sinCalificacion) {
-        periodo = 'ERROR';
-      } else if (soloAprobado) {
-        periodo = '     ACREDITADO';
-      } else {
-        periodo = String(asig.periodo || '');
-      }
+      const periodo = sinCalificacion ? 'ERROR' : String(asig.periodo || '');
       const periodoWidth = doc.getTextWidth(periodo);
       doc.text(periodo, xPeriodo + (colPeriodoAncho / 2) - (periodoWidth / 2), yPos);
 
       let tipoTexto;
       if (sinCalificacion) {
         tipoTexto = 'ERROR';
-      } else if (soloAprobado) {
-        tipoTexto = '';
       } else if (asig.tipo === 2 || asig.tipo === '2') {
         tipoTexto = 'EXTRA';
       } else if (asig.tipo === 1 || asig.tipo === '1') {
@@ -727,22 +717,13 @@ async function GenerarCertificado(certificado) {
       const tipoWidth = doc.getTextWidth(tipoTexto);
       doc.text(tipoTexto, xTipo + (colTipoAncho / 2) - (tipoWidth / 2), yPos);
 
-      let calNum;
-      if (sinCalificacion) {
-        calNum = 'ERROR';
-      } else if (soloAprobado) {
-        calNum = '';
-      } else {
-        calNum = String(asig.calificacion || '');
-      }
+      const calNum = sinCalificacion ? 'ERROR' : String(asig.calificacion || '');
       const calNumWidth = doc.getTextWidth(calNum);
       doc.text(calNum, xNum + (colNumAncho / 2) - (calNumWidth / 2), yPos);
 
       let calLetra;
       if (sinCalificacion) {
         calLetra = 'ERROR';
-      } else if (soloAprobado) {
-        calLetra = '';
       } else {
         const esDecimal = certificado?.calificacionDecimal === 1;
         calLetra = asig.calificacionLetra || calificacionALetras(asig.calificacion, esDecimal) || '';
