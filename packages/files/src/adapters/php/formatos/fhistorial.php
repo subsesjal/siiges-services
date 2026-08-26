@@ -648,18 +648,21 @@ foreach ($calificacionCiclo as $grupoKey => $grupoData) {
 
   $pdf->Ln(15);
 }
-$promedio_calificacion = 0;
+
+$promedio_calificacion = 'N/A';
 
 if ($total_materias != 0) {
-  $promedio_calificacion = $total_calificaciones / $total_materias;
+  $promedioNumerico = $total_calificaciones / $total_materias;
+  $calificacionMaximaNum = (float) ($programa['calificacionMaxima'] ?? 0);
 
-  if (!empty($programa['calificacionDecimal']) && $programa['calificacionDecimal'] === true) {
-    $promedio_calificacion = floor($promedio_calificacion * 10) / 10;
-    if (fmod($promedio_calificacion, 1) == 0.0) {
-      $promedio_calificacion = (int) $promedio_calificacion;
-    }
+  $esNotaPerfecta = $calificacionMaximaNum > 0
+    && abs($promedioNumerico - $calificacionMaximaNum) < 0.005;
+
+  if ($esNotaPerfecta) {
+    $promedio_calificacion = (string) $calificacionMaximaNum;
   } else {
-    $promedio_calificacion = round($promedio_calificacion, 0);
+    $promedioTruncado = floor($promedioNumerico * 100) / 100;
+    $promedio_calificacion = number_format($promedioTruncado, 2, '.', '');
   }
 }
 
