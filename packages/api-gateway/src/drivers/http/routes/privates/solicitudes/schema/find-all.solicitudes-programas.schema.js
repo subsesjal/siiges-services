@@ -14,6 +14,12 @@ const findAllSolicitudesProgramasSchema = {
     estatusSolicitudId: {
       type: 'string',
     },
+    limit: {
+      type: 'integer',
+    },
+    offset: {
+      type: 'integer',
+    },
   },
   response: {
     200: {
@@ -83,6 +89,15 @@ const findAllSolicitudesProgramasSchema = {
                 },
               },
             },
+          },
+        },
+        filterOptions: {
+          type: 'object',
+          properties: {
+            currentPageItems: { type: 'integer' },
+            totalItems: { type: 'integer' },
+            currentPage: { type: 'integer' },
+            totalPages: { type: 'integer' },
           },
         },
       },
