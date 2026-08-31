@@ -7,6 +7,12 @@ const findOnePrograma = require('./find-one.programa.use-cases');
 const findOneProgramaRvoe = require('./find-one.programa-rvoe.use-cases');
 const updatePrograma = require('./update-one.programa.use-cases');
 const updateManyProgramas = require('./update-many.programas.use-cases');
+const {
+  findRvoePublic,
+  findMunicipiosJalisco,
+  findInstitucionesByMunicipio,
+  findPlantelesByInstitucion,
+} = require('./find-rvoe-public.use-cases');
 
 module.exports = {
   findAllProgramas: findAllProgramas(
@@ -39,5 +45,20 @@ module.exports = {
   ),
   updateManyProgramas: updateManyProgramas(
     programas.updateProgramaQuery,
+  ),
+  findRvoePublic: findRvoePublic(
+    programas.findAllProgramasQuery,
+    programas.includePublicRvoeQuery,
+    programas.wherePublicRvoeQuery,
+  ),
+  findMunicipiosJalisco: findMunicipiosJalisco(
+    programas.findMunicipiosQuery,
+  ),
+  findInstitucionesByMunicipio: findInstitucionesByMunicipio(
+    programas.findPlantelesQuery,
+    programas.findInstitucionesQuery,
+  ),
+  findPlantelesByInstitucion: findPlantelesByInstitucion(
+    programas.findPlantelesQuery,
   ),
 };

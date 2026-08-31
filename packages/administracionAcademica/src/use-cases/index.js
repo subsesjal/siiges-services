@@ -10,6 +10,10 @@ const {
   findOneProgramaRvoe,
   updatePrograma,
   updateManyProgramas,
+  findRvoePublic,
+  findMunicipiosJalisco,
+  findInstitucionesByMunicipio,
+  findPlantelesByInstitucion,
 } = require('./db/programas');
 
 const {
@@ -68,4 +72,8 @@ module.exports = {
   createCatalogoCicloEscolar,
   updatePrograma,
   updateManyProgramas,
+  findRvoePublic,
+  findMunicipiosJalisco,
+  findInstitucionesByMunicipio,
+  findPlantelesByInstitucion,
 };

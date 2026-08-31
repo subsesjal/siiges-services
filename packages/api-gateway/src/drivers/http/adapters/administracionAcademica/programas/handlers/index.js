@@ -5,6 +5,12 @@ const findOnePrograma = require('./find-one.handlers.programa.adapters');
 const findOneProgramaRvoe = require('./find-one.handlers.programa-rvoe.adapters');
 const updatePrograma = require('./update-one.handlers.programa.adapters');
 const updateManyProgramas = require('./update-many.handlers.programas.adapters');
+const {
+  findRvoePublic,
+  findMunicipiosJalisco,
+  findInstitucionesByMunicipio,
+  findPlantelesByInstitucion,
+} = require('./find-rvoe-public.handlers.programas.adapters');
 
 module.exports = {
   findAllProgramas,
@@ -14,4 +20,8 @@ module.exports = {
   findOneProgramaRvoe,
   updatePrograma,
   updateManyProgramas,
+  findRvoePublic,
+  findMunicipiosJalisco,
+  findInstitucionesByMunicipio,
+  findPlantelesByInstitucion,
 };
