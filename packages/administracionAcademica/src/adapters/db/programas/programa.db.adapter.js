@@ -10,6 +10,8 @@ const {
 const {
   Programa,
   Plantel,
+  Municipio,
+  Institucion,
 } = models;
 
 const include = [{
@@ -39,12 +41,45 @@ const where = {
   fechaSurteEfecto: { [Op.lte]: new Date() },
 };
 
+const includePublicRvoe = [{
+  association: 'solicitud',
+  where: { estatusSolicitudId: 11 },
+},
+{
+  association: 'plantel',
+  include: [
+    {
+      association: 'institucion',
+    },
+    {
+      association: 'domicilio',
+      include: [
+        {
+          association: 'municipio',
+        },
+      ],
+    },
+  ],
+},
+{ association: 'nivel' },
+];
+
+const wherePublicRvoe = {
+  acuerdoRvoe: { [Op.or]: { [Op.ne]: null, [Op.ne]: '' } },
+  fechaSurteEfecto: { [Op.lte]: new Date() },
+};
+
 module.exports = {
   findAllProgramasQuery: findAllQuery(Programa),
   findOneProgramaQuery: findOneQuery(Programa),
   findPlantelProgramasQuery: findAllQuery(Programa),
   findPlantelQuery: findAllQuery(Plantel),
+  findMunicipiosQuery: findAllQuery(Municipio),
+  findInstitucionesQuery: findAllQuery(Institucion),
+  findPlantelesQuery: findAllQuery(Plantel),
   includeProgramasQuery: include,
   whereProgramasQuery: where,
+  includePublicRvoeQuery: includePublicRvoe,
+  wherePublicRvoeQuery: wherePublicRvoe,
   updateProgramaQuery: updateAndFindQuery(Programa),
 };
