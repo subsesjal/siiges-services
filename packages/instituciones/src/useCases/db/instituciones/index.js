@@ -22,7 +22,10 @@ const findFormacionRector = findOneFormacionRector(
 );
 
 module.exports = {
-  findAllInstituciones: findAllInstituciones(institucionAdapter.findAllInstitucionesQuery),
+  findAllInstituciones: findAllInstituciones(
+    institucionAdapter.findAllInstitucionesQuery,
+    institucionAdapter.findAllPlantelesQuery,
+  ),
   findAllTipoInstituciones: findAllTipoInstituciones(
     institucionAdapter.findAllTipoInstitucionesQuery,
   ),

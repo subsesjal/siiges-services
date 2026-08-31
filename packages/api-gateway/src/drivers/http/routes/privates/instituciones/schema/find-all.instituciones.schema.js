@@ -17,6 +17,10 @@ const findAllInstitucionesSchema = {
     esNombreAutorizado: {
       type: 'boolean',
     },
+    municipioId: {
+      type: 'integer',
+      description: 'Filter instituciones by municipio',
+    },
   },
   response: {
     200: {
