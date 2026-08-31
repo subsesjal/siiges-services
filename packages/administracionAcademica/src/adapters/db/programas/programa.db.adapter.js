@@ -10,8 +10,6 @@ const {
 const {
   Programa,
   Plantel,
-  Municipio,
-  Institucion,
 } = models;
 
 const include = [{
@@ -74,9 +72,6 @@ module.exports = {
   findOneProgramaQuery: findOneQuery(Programa),
   findPlantelProgramasQuery: findAllQuery(Programa),
   findPlantelQuery: findAllQuery(Plantel),
-  findMunicipiosQuery: findAllQuery(Municipio),
-  findInstitucionesQuery: findAllQuery(Institucion),
-  findPlantelesQuery: findAllQuery(Plantel),
   includeProgramasQuery: include,
   whereProgramasQuery: where,
   includePublicRvoeQuery: includePublicRvoe,
