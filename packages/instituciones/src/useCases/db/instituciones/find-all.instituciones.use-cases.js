@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
-const findAllInstituciones = (findAllInstitucionesQuery) => async ({ queryParams }) => {
-  const { esNombreAutorizado, tipoInstitucionId } = queryParams;
+const findAllInstituciones = (findAllInstitucionesQuery, findPlantelesQuery) => async ({ queryParams }) => {
+  const { esNombreAutorizado, tipoInstitucionId, municipioId } = queryParams;
 
   const includeValidate = esNombreAutorizado !== undefined ? [{
     association: 'ratificacionesNombre', limit: 1, order: [['createdAt', 'DESC']], where: { esNombreAutorizado },
@@ -21,6 +21,17 @@ const findAllInstituciones = (findAllInstitucionesQuery) => async ({ queryParams
     include,
     strict: true,
   });
+
+  if (municipioId) {
+    const planteles = await findPlantelesQuery(null, {
+      attributes: ['institucionId'],
+      include: [{ association: 'domicilio', where: { municipioId } }],
+      subQuery: false,
+    });
+
+    const institucionIds = [...new Set(planteles.map((p) => p.institucionId))];
+    instituciones = instituciones.filter((inst) => institucionIds.includes(inst.id));
+  }
 
   if (esNombreAutorizado) {
     instituciones = instituciones.filter((obj) => {
