@@ -18,6 +18,7 @@ const findRvoePublicSchema = {
             type: 'object',
             properties: {
               id: { type: 'integer' },
+              nivel: { type: 'string' },
               nombrePrograma: { type: 'string' },
               acuerdoRvoe: { type: 'string' },
               fechaCreacion: { type: 'string' },
