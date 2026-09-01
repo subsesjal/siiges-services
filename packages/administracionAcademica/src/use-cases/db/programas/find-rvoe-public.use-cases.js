@@ -8,6 +8,7 @@ const findRvoePublic = (
   const programas = await findAllProgramasQuery(
     null,
     {
+      attributes: ['id', 'nombre', 'acuerdoRvoe', 'fechaSurteEfecto', 'vigencia'],
       query: {
         ...wherePublicRvoeQuery,
         plantelId,
