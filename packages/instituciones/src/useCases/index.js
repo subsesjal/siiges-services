@@ -52,6 +52,7 @@ const {
   findOneFormacionRector,
   updateFormacionRector,
   findInstitucionesByMunicipio,
+  findPlantelesByInstitucionPublic,
 } = require('./db/instituciones');
 
 const {
@@ -117,4 +118,5 @@ module.exports = {
   updateFormacionDirector,
   findAllNiveles,
   findInstitucionesByMunicipio,
+  findPlantelesByInstitucionPublic,
 };
