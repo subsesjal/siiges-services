@@ -6,6 +6,7 @@ const {
 
 } = require('../../privates/instituciones/schema');
 const { findAllTipoInstitucionesSchema } = require('../../privates/instituciones/schema');
+const { findInstitucionesByMunicipioSchema } = require('./schema');
 
 async function institucionRouter(fastify, opts, next) {
   await fastify.get(
@@ -30,6 +31,14 @@ async function institucionRouter(fastify, opts, next) {
       schema: findAllTipoInstitucionesSchema,
     },
     institucionesAdapter.findAllTipoInstituciones,
+  );
+
+  await fastify.get(
+    '/municipio',
+    {
+      schema: findInstitucionesByMunicipioSchema,
+    },
+    institucionesAdapter.findInstitucionesByMunicipio,
   );
 
   next();
