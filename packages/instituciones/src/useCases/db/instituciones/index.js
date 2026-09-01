@@ -10,6 +10,7 @@ const deleteInstitucion = require('./delete.instituciones.use-cases');
 const findAllTipoInstituciones = require('./find-all.tipoInstituciones.use-cases');
 const createOneInstitucionesDgp = require('./create-one.institucionesDgp.use-cases');
 const findInstitucionesByMunicipio = require('./find-instituciones-by-municipio.use-cases');
+const findPlantelesByInstitucionPublic = require('./find-planteles-by-institucion-public.use-cases');
 const {
   createFormacionRector,
   findAllFormacionRector,
@@ -30,6 +31,9 @@ module.exports = {
   findInstitucionesByMunicipio: findInstitucionesByMunicipio(
     institucionAdapter.findAllPlantelesQuery,
     institucionAdapter.findAllInstitucionesQuery,
+  ),
+  findPlantelesByInstitucionPublic: findPlantelesByInstitucionPublic(
+    institucionAdapter.findAllPlantelesQuery,
   ),
   findAllTipoInstituciones: findAllTipoInstituciones(
     institucionAdapter.findAllTipoInstitucionesQuery,
