@@ -4,7 +4,7 @@ const { findInstitucionesByMunicipioSchema, findPlantelesByInstitucionPublicSche
 
 async function institucionRouter(fastify, opts, next) {
   await fastify.get(
-    '/municipio',
+    '/',
     {
       schema: findInstitucionesByMunicipioSchema,
     },
