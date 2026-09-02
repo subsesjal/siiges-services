@@ -39,6 +39,34 @@ const where = {
   fechaSurteEfecto: { [Op.lte]: new Date() },
 };
 
+const includePublicRvoe = [{
+  association: 'solicitud',
+  where: { estatusSolicitudId: 11 },
+},
+{
+  association: 'plantel',
+  include: [
+    {
+      association: 'institucion',
+    },
+    {
+      association: 'domicilio',
+      include: [
+        {
+          association: 'municipio',
+        },
+      ],
+    },
+  ],
+},
+{ association: 'nivel' },
+];
+
+const wherePublicRvoe = {
+  acuerdoRvoe: { [Op.or]: { [Op.ne]: null, [Op.ne]: '' } },
+  fechaSurteEfecto: { [Op.lte]: new Date() },
+};
+
 module.exports = {
   findAllProgramasQuery: findAllQuery(Programa),
   findOneProgramaQuery: findOneQuery(Programa),
@@ -46,5 +74,7 @@ module.exports = {
   findPlantelQuery: findAllQuery(Plantel),
   includeProgramasQuery: include,
   whereProgramasQuery: where,
+  includePublicRvoeQuery: includePublicRvoe,
+  wherePublicRvoeQuery: wherePublicRvoe,
   updateProgramaQuery: updateAndFindQuery(Programa),
 };

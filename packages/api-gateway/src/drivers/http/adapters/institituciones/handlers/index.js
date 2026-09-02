@@ -23,6 +23,8 @@ const { deleteSaludInstitucion } = require('./delete.handlers.salud-institucion.
 const { updateSaludInstitucion } = require('./update.handlers.salud-institucion.adapters');
 const findAllTipoInstituciones = require('./find-all.handlers.tipoInstituciones.adapters');
 const createInstitucionDgp = require('./create-one.handlers.institucionesDgp.adapters');
+const { findInstitucionesByMunicipio } = require('./find-instituciones-by-municipio.adapters');
+const { findPlantelesByInstitucionPublic } = require('./find-planteles-by-institucion-public.adapters');
 const {
   createFormacionRector,
   findAllFormacionRector,
@@ -60,4 +62,6 @@ module.exports = {
   findAllFormacionRector,
   findOneFormacionRector,
   updateFormacionRector,
+  findInstitucionesByMunicipio,
+  findPlantelesByInstitucionPublic,
 };
