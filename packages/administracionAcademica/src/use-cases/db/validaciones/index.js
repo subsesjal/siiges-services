@@ -1,7 +1,7 @@
 const { createAlumnoValidacion } = require('./create.alumno-validacion.use-cases');
 const { findOneAlumnoValidacion } = require('./find-one.alumno-validacion.use-cases');
 const { updateAlumnoValidacion } = require('./update.alumno-validacion.use-cases');
-const { validaciones } = require('../../../adapters/db');
+const { validaciones, alumnos } = require('../../../adapters/db');
 
 module.exports = {
   createAlumnoValidacion: createAlumnoValidacion(
@@ -25,5 +25,7 @@ module.exports = {
     validaciones.findOneUsuarioQuery,
     validaciones.findOneEstadoQuery,
     validaciones.findOneNivelQuery,
+    alumnos.findAllFilesQuery,
+    alumnos.updateAlumnoQuery,
   ),
 };
