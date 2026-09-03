@@ -286,8 +286,8 @@ const buildFileCertificado = (
     .filter(Boolean)
     .sort((a, b) => new Date(a) - new Date(b))[0] || null;
 
-  const fechaTerminacionRaw = grupos
-    .map((g) => g.generacionFechaFin)
+  const fechaTerminacionRaw = calificaciones
+    .map((c) => c.fechaExamen)
     .filter(Boolean)
     .sort((a, b) => new Date(b) - new Date(a))[0] || null;
 
