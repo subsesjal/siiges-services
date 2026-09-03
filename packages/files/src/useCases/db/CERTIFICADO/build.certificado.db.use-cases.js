@@ -171,6 +171,7 @@ const buildFileCertificado = (
         asignaturaId: asignatura.id,
         nombre: asignatura.nombre || '',
         clave: asignatura.clave || '',
+        consecutivo: asignatura.consecutivo || 0,
         periodo: 'SIN CICLO',
         calificacion: null,
         tipo: undefined,
@@ -182,6 +183,7 @@ const buildFileCertificado = (
           asignaturaId: asignatura.id,
           nombre: asignatura.nombre || '',
           clave: asignatura.clave || '',
+          consecutivo: asignatura.consecutivo || 0,
           periodo: c.grupo?.cicloEscolar?.nombre || 'SIN CICLO',
           calificacion: procesarCalificacionCruda(c.calificacion),
           tipo: c.tipo,
@@ -191,39 +193,35 @@ const buildFileCertificado = (
     }
   });
 
-  const asignaturaIdsOptativas = new Set();
+  const asignaturasOptativas = [];
 
   calificaciones.forEach((c) => {
     const tipoCatalogo = c.asignatura?.tipo;
     const esOptativaDeCatalogo = tipoCatalogo === 2 || tipoCatalogo === '2';
     if (!esOptativaDeCatalogo) return;
 
-    asignaturaIdsOptativas.add(c.asignaturaId);
-
-    const gradoReal = c.grupo?.grado;
-    const gradoId = gradoReal?.id || 'SIN_GRADO';
-    const gradoNombre = gradoReal?.nombre || 'SIN GRADO';
-    const gradoNumero = gradoReal?.numeroGrado || 0;
-
-    if (!calificacionesPorGrado[gradoId]) {
-      calificacionesPorGrado[gradoId] = {
-        gradoId,
-        gradoNombre,
-        gradoNumero,
-        asignaturas: [],
-      };
-    }
-
-    calificacionesPorGrado[gradoId].asignaturas.push({
+    asignaturasOptativas.push({
       asignaturaId: c.asignaturaId,
       nombre: c.asignatura?.nombre || '',
       clave: c.asignatura?.clave || '',
+      consecutivo: c.asignatura?.consecutivo || 0,
       periodo: c.grupo?.cicloEscolar?.nombre || 'SIN CICLO',
       calificacion: procesarCalificacionCruda(c.calificacion),
       tipo: c.tipo,
       sinCalificacion: false,
     });
   });
+
+  if (asignaturasOptativas.length > 0) {
+    calificacionesPorGrado.OPTATIVA = {
+      gradoId: 'OPTATIVA',
+      gradoNombre: 'OPTATIVAS ASIGNADAS',
+      gradoNumero: Object.values(calificacionesPorGrado).length > 0
+        ? Math.max(...Object.values(calificacionesPorGrado).map((g) => g.gradoNumero)) + 1
+        : 1,
+      asignaturas: asignaturasOptativas,
+    };
+  }
 
   Object.values(calificacionesPorGrado).forEach((grado) => {
     grado.asignaturas.sort((a, b) => {
@@ -252,11 +250,12 @@ const buildFileCertificado = (
     })
     .filter((n) => n !== null && !Number.isNaN(n) && n > 0);
 
+  const asignaturaIdsOptativas = asignaturasOptativas.map((a) => a.asignaturaId);
   const calificacionesNumericasObligatorias = obtenerCalificacionesNumericasVigentes(
     asignaturasPrograma.map((asignatura) => asignatura.id),
   );
   const calificacionesNumericasOptativas = obtenerCalificacionesNumericasVigentes(
-    Array.from(asignaturaIdsOptativas),
+    asignaturaIdsOptativas,
   );
   const calificacionesNumericasTotales = [
     ...calificacionesNumericasObligatorias,

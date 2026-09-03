@@ -430,6 +430,7 @@ $getSemesterTitleFallback = function (int $gradoId) use ($gradoTxt, $cicloTxtSin
 };
 
 $asignaturas = $programa['asignaturas'] ?? [];
+$creditos = $programa['creditos'] ?? 0; 
 
 $totDocCarrera = 0;
 $totIndCarrera = 0;
@@ -562,7 +563,7 @@ if (is_array($asignaturas) && count($asignaturas)) {
     ],
     [
       "label" => "TOTAL DE CRÉDITOS DE LA CARRERA",
-      "value" => $totCredCarrera . " CRÉDITOS",
+      "value" => $creditos . " CRÉDITOS",
     ],
   ];
 
