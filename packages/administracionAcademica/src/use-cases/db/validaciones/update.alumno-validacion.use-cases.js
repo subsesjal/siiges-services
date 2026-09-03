@@ -1,4 +1,9 @@
+const boom = require('@hapi/boom');
 const { checkers } = require('@siiges-services/shared');
+const { checkDocumentosAlumno } = require('../alumnos/documentos-requeridos.helpers');
+
+const SITUACION_VALIDACION_AUTENTICO = 1;
+const SITUACION_ACTIVO_ID = 1;
 
 const updateAlumnoValidacion = (
   findOneSituacionesValidacionQuery,
@@ -8,6 +13,8 @@ const updateAlumnoValidacion = (
   findOneUsuarioQuery,
   findOneEstadoQuery,
   findOneNivelQuery,
+  findAllFilesQuery,
+  updateAlumnoQuery,
 ) => async ({ alumnoId, ...data }) => {
   const include = [
     {
@@ -61,7 +68,22 @@ const updateAlumnoValidacion = (
 
   await checkers.findValidator(queryFunctions);
 
-  return updateValidacionesQuery({ alumnoId }, data, { include });
+  if (situacionValidacionId === SITUACION_VALIDACION_AUTENTICO) {
+    const documentosOk = await checkDocumentosAlumno(alumnoId, findAllFilesQuery);
+    if (!documentosOk) {
+      throw boom.badRequest(
+        'Este alumno no se puede validar como Auténtico: Le faltan documentos requeridos (certificado, acta de nacimiento, CURP o archivo de validación).',
+      );
+    }
+  }
+
+  const validacionUpdated = await updateValidacionesQuery({ alumnoId }, data, { include });
+
+  if (situacionValidacionId === SITUACION_VALIDACION_AUTENTICO) {
+    await updateAlumnoQuery({ id: alumnoId }, { situacionId: SITUACION_ACTIVO_ID });
+  }
+
+  return validacionUpdated;
 };
 
 module.exports = { updateAlumnoValidacion };
