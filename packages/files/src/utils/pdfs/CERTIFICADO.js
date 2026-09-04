@@ -281,7 +281,17 @@ function ordenarGradosYAsignaturas(grados) {
 
     let asignaturasOrdenadas = [...(grado.asignaturas || [])];
 
-    if (esOptativa || esFlexible) {
+    const tieneConsecutivos = asignaturasOrdenadas.some(
+      (asig) => Number(asig.consecutivo || 0) > 0,
+    );
+
+    if (tieneConsecutivos) {
+      asignaturasOrdenadas.sort((a, b) => {
+        const ca = Number(a.consecutivo || 0);
+        const cb = Number(b.consecutivo || 0);
+        return ca - cb;
+      });
+    } else if (esOptativa || esFlexible) {
       // Mantiene el orden de captura (orden actual)
     } else {
       // Rígida: ordenar por clave de materia
@@ -612,7 +622,7 @@ async function GenerarCertificado(certificado) {
   const textoDescriptivoY = datosCertificadoY + 20;
   doc.setFont('Garet', 'normal');
   doc.setFontSize(6);
-  const textoDescriptivo = `Cursó y aprobó las asignaturas que se consignan en el plan de estudios ${certificado?.nivelId === 6 ? 'del' : 'de la'} ${certificado?.nombreNivel?.toUpperCase() || ''}EN ${certificado?.carrera?.toUpperCase() || ''}.`;
+  const textoDescriptivo = `Cursó y aprobó las asignaturas que se consignan en el plan de estudios ${certificado?.nivelId === 6 ? 'del' : 'de la'} ${certificado?.nombreNivel?.toUpperCase() || ''} EN ${certificado?.carrera?.toUpperCase() || ''}.`;
   const textoDescriptivoLines = doc.splitTextToSize(textoDescriptivo, blockWidth);
   doc.text(textoDescriptivoLines, blockX, textoDescriptivoY);
 
