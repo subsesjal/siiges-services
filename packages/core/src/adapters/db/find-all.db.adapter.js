@@ -9,12 +9,24 @@ const findAllQuery = (model) => async (identifierObj, dbParams = {}) => {
     isDeleting = false,
     query = undefined,
     order = undefined,
+    pagination = undefined,
   } = dbParams;
-  return model.findAll({
+  const options = {
     attributes,
     order,
     where: getWhere(identifierObj, isDeleting, query),
     include: createInclude(include, strict),
+  };
+
+  if (!pagination) {
+    return model.findAll(options);
+  }
+
+  return model.findAndCountAll({
+    ...options,
+    limit: pagination.limit,
+    offset: pagination.offset,
+    distinct: pagination.distinct,
   });
 };
 

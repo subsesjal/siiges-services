@@ -6,6 +6,26 @@ const { rol } = require('./properties/rol');
 const getAllUsuariosSchema = {
   tags: ['Usuario'],
   description: 'Return a list of users.',
+  querystring: {
+    type: 'object',
+    properties: {
+      page: {
+        type: 'integer', minimum: 0, default: 0,
+      },
+      limit: {
+        type: 'integer', minimum: 1, maximum: 100, default: 10,
+      },
+      search: {
+        type: 'string', default: '',
+      },
+      sortBy: {
+        type: 'string',
+        enum: ['id', 'nombre', 'usuario', 'correo', 'rol', 'estatus', 'fecha'],
+        default: 'id',
+      },
+      sortOrder: { type: 'string', enum: ['asc', 'desc'], default: 'asc' },
+    },
+  },
   response: {
     200: {
       type: 'object',
@@ -35,6 +55,19 @@ const getAllUsuariosSchema = {
               },
             },
           },
+        },
+        pagination: {
+          type: 'object',
+          properties: {
+            page: { type: 'integer' },
+            limit: { type: 'integer' },
+            total: { type: 'integer' },
+            totalPages: { type: 'integer' },
+            sortBy: { type: 'string' },
+            sortOrder: { type: 'string' },
+            search: { type: 'string' },
+          },
+          required: ['page', 'limit', 'total', 'totalPages', 'sortBy', 'sortOrder', 'search'],
         },
       },
     },
