@@ -42,6 +42,7 @@ const {
 module.exports = {
   findOneInstitucionQuery: findOneQuery(Institucion),
   findAllInstitucionesQuery: findAllQuery(Institucion),
+  findAllPlantelesQuery: findAllQuery(Plantel),
   createInstitucionDgpQuery: createQuery(InstitucionDgp),
   findOneInstitucionDgpQuery: findOneQuery(InstitucionDgp),
   updateInstitucionDgpQuery: updateQuery(InstitucionDgp),
