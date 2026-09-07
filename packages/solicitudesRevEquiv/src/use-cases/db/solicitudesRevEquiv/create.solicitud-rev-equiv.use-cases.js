@@ -26,9 +26,16 @@ const createEquivalencia = (
     searchType: 'date',
   });
 
-  const count = padNumber(totalSolicitudes, 4);
+  const count = padNumber(totalSolicitudes + 1, 3);
   const prefix = TIPO_TRAMITE_PREFIX[inputData.tipoTramiteId] || 'XX';
-  const folio = `F${prefix}${year}${count}`;
+
+  let folio;
+
+  if (prefix.startsWith('EQ')) {
+    folio = `${count}-${year}`;
+  } else {
+    folio = `F${prefix}${year}${count}`;
+  }
   inputData.folioSolicitud = folio;
   const createInclude = [
     {
