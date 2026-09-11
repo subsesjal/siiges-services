@@ -2,6 +2,7 @@ const { Sequelize } = require('sequelize');
 
 const config = require('../../../config/config');
 const setupModels = require('./models');
+const registerAuditHooks = require('../hooks/audit-log.hooks');
 
 const { mysql } = config;
 const {
@@ -23,5 +24,6 @@ const sequelize = new Sequelize(URI, {
 });
 
 setupModels(sequelize);
+registerAuditHooks(sequelize);
 
 module.exports = sequelize;

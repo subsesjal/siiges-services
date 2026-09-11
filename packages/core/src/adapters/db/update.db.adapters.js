@@ -11,6 +11,7 @@ const updateQuery = (model) => async (identifierObj, changes, dbParams = {}) => 
     entryChanges,
     {
       where: getWhere(identifierObj, isDeleting),
+      individualHooks: true,
     },
   );
 

@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // External dependencies
 const path = require('path');
+const crypto = require('crypto');
 const Fastify = require('fastify');
 const multipart = require('@fastify/multipart'); // Enables file uploads
 const fastifyStatic = require('@fastify/static'); // Serves static files
@@ -9,7 +10,7 @@ const helmet = require('@fastify/helmet'); // Adds security headers
 const cors = require('@fastify/cors'); // Enables Cross-Origin Resource Sharing
 
 // Internal dependencies
-const { Logger } = require('@siiges-services/shared');
+const { Logger, auditContext } = require('@siiges-services/shared');
 const { validateApiKey } = require('./utils/auth.handler'); // Middleware to validate API key
 const { config } = require('../../../config/environment'); // Environment config (ports, host, whitelist, etc.)
 const { maxFileSize } = require('./utils/constants'); // Constant for max upload size
@@ -24,6 +25,15 @@ const fastify = Fastify({
     plugins: [multipart.ajvFilePlugin], // File upload validation
   },
   logger: process.env.NODE_ENV === 'development', // Use logger only in dev
+});
+
+fastify.addHook('onRequest', (request, reply, done) => {
+  auditContext.run({
+    usuarioId: null,
+    usuario: null,
+    endpoint: `${request.method} ${request.url}`,
+    requestId: crypto.randomUUID(),
+  }, done);
 });
 
 // Register security headers middleware
