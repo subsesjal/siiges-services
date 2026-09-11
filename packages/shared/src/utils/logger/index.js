@@ -1,6 +1,6 @@
 // External depenendecies
-const Winston = require('winston');
 const { join } = require('path');
+const Winston = require('winston');
 const { getEnvironment } = require('../../adapters/nodejs');
 const { isProdEnvironment } = require('../checkers');
 
