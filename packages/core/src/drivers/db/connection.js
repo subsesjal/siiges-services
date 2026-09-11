@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize');
 
 const config = require('../../../config/config');
 const setupModels = require('./models');
-const registerAuditHooks = require('../hooks/audit-log.hooks');
+const registerAuditHooks = require('./hooks/audit-log.hooks');
 
 const { mysql } = config;
 const {
@@ -20,6 +20,12 @@ const sequelize = new Sequelize(URI, {
     ssl: {
       rejectUnauthorized: false,
     },
+  },
+  pool: {
+    max: 15,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
   },
 });
 
