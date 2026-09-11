@@ -1,6 +1,7 @@
 const { auditContext } = require('@siiges-services/shared');
 
 const EXCLUDED_MODELS = [
+  // Ruido técnico / efectos secundarios automáticos
   'Bitacora',
   'Sesion',
   'TokenRecoveryPassword',
@@ -8,6 +9,22 @@ const EXCLUDED_MODELS = [
   'TokenServiciosExternos',
   'Notificacion',
   'Respaldo',
+  // Catálogos administrados directo en BD (fuera del alcance de esta auditoría,
+  'Estado', 'Municipio', 'Pais',
+  'Area', 'Nivel', 'Grado', 'Turno', 'Modalidad', 'TipoModalidad',
+  'ModalidadServicioSocial', 'ModalidadTitulacion', 'Ciclo', 'CicloEscolar',
+  'CatalogoCicloEscolar', 'Seccion',
+  'TipoAlumnoBeca', 'TipoDocumento', 'TipoEgreso', 'TipoInmueble',
+  'TipoInstalacion', 'TipoInstitucion', 'TipoPresupuesto', 'TipoProyecto',
+  'TipoRecursoPresupuesto', 'TipoSolicitud', 'TipoSolicitudFolio',
+  'TipoTramite', 'TipoValidacion',
+  'EstatusAlumnoBeca', 'EstatusCalificacion', 'EstatusInspeccion',
+  'EstatusSolicitud', 'EstatusSolicitudBeca', 'EstatusSolicitudFolio',
+  'EstatusSolicitudRevEquiv', 'EstatusSolicitudServicioSocial',
+  'EstatusVigilancia',
+  'Situacion', 'SituacionValidacion',
+  'Cargo', 'Rol', 'Modulo', 'ModuloRol', 'Perfil',
+  'Escala', 'Espejo', 'OrganoColegiado',
 ];
 
 const SENSITIVE_FIELD_PATTERN = /password|contrasena|token|secret/i;
