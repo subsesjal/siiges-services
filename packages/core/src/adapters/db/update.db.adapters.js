@@ -1,17 +1,21 @@
 // Internal dependencies
 const findOneQuery = require('./find-one.db.adapter');
 const { getWhere } = require('../utils');
+const EXCLUDED_MODELS = require('../../drivers/db/hooks/audit-excluded-models'); // AJUSTAR ruta real
 
 const updateQuery = (model) => async (identifierObj, changes, dbParams = {}) => {
   const { isDeleting = false } = dbParams;
   const updatedAt = new Date().toISOString();
   const entryChanges = { ...changes, updatedAt };
 
+  const seDebeAuditar = !EXCLUDED_MODELS.includes(model.name);
+  const { individualHooks = seDebeAuditar } = dbParams;
+
   await model.update(
     entryChanges,
     {
       where: getWhere(identifierObj, isDeleting),
-      individualHooks: true,
+      individualHooks,
     },
   );
 
