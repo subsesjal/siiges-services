@@ -1,6 +1,7 @@
 const PluginLoader = require('fastify-plugin');
 const boom = require('@hapi/boom');
 const fastifyJwt = require('@fastify/jwt');
+const { auditContext } = require('@siiges-services/shared');
 const errorHandler = require('../utils/errorHandler');
 const { config } = require('../../../../config/environment');
 
@@ -11,6 +12,14 @@ const myCustomMessages = {
   authorizationTokenUntrusted: 'El token de autorización no es confiable',
   authorizationTokenUnsigned: 'El token de autorización no está firmado',
   authorizationTokenInvalid: (err) => `El token de autorización no es válido: ${err.message}`,
+};
+
+const syncAuditContext = (request) => {
+  const store = auditContext.getStore();
+  if (store && request.user) {
+    store.usuarioId = request.user.id;
+    store.usuario = request.user.usuario;
+  }
 };
 
 const jwtVerifyPlugin = async (fastify) => {
@@ -25,6 +34,7 @@ const jwtVerifyPlugin = async (fastify) => {
   fastify.decorate('authenticate', async (request, reply) => {
     try {
       await request.jwtVerify();
+      syncAuditContext(request);
     } catch (err) {
       reply.send(err);
     }
@@ -33,6 +43,7 @@ const jwtVerifyPlugin = async (fastify) => {
   fastify.decorate('authorizeRole', (expectedRoles = []) => async (request, reply) => {
     try {
       await request.jwtVerify();
+      syncAuditContext(request);
       const { rol, id } = request.user;
 
       if (!expectedRoles.includes(rol)) {

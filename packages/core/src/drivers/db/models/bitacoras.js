@@ -11,7 +11,7 @@ const BitacoraSchema = {
     type: DataTypes.INTEGER,
   },
   usuarioId: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.INTEGER,
     field: 'usuario_id',
     references: {
@@ -30,6 +30,26 @@ const BitacoraSchema = {
   lugar: {
     allowNull: false,
     type: DataTypes.STRING,
+  },
+  registroId: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'registro_id',
+  },
+  datosAnteriores: {
+    allowNull: true,
+    type: DataTypes.JSON,
+    field: 'datos_anteriores',
+  },
+  datosNuevos: {
+    allowNull: true,
+    type: DataTypes.JSON,
+    field: 'datos_nuevos',
+  },
+  requestId: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    field: 'request_id',
   },
   createdAt: {
     allowNull: false,

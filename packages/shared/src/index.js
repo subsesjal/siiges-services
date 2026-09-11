@@ -1,5 +1,5 @@
 const {
-  checkers, Logger, constants, validate,
+  checkers, Logger, constants, validate, auditContext,
 } = require('./utils');
 const { dotenv, nodejs } = require('./adapters');
 
@@ -10,4 +10,5 @@ module.exports = {
   Logger,
   nodejs,
   validate,
+  auditContext,
 };
