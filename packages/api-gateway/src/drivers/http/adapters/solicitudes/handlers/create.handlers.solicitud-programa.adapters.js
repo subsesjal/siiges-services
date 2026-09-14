@@ -52,6 +52,24 @@ async function createSolicitudPrograma(req, reply) {
           data,
         );
         break;
+      case 4:
+        solicitud = await this.solicitudServices.createCambioRepresentanteSolicitudPrograma(
+          { solicitudId },
+          data,
+        );
+        break;
+      case 5:
+        solicitud = await this.solicitudServices.createActualizacionSolicitudPrograma(
+          { solicitudId },
+          data,
+        );
+        break;
+      case 6:
+        solicitud = await this.solicitudServices.createCambioNombreSolicitudPrograma(
+          { solicitudId },
+          data,
+        );
+        break;
       default:
         break;
     }

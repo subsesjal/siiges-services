@@ -1,5 +1,8 @@
 const createSolicitudProgramaSchema = require('./create.solicitud-programa.schema');
 const createSolicitudRefrendoSchema = require('./create.solicitud-refrendo.schema');
+const createCambioRepresentanteLegalSchema = require('./create.cambio-representante-legal.schema');
+const createActualizacionSchema = require('./create.actualizacion.schema');
+const createCambioNombreInstitucionSchema = require('./create.cambio-nombre-institucion.schema');
 const findAllSolicitudesProgramasSchema = require('./find-all.solicitudes-programas.schema');
 const findOneSolicitudProgramaSchema = require('./find-one.solicitud-programa.schema');
 const findOneSolicitudDetalleSchema = require('./find-one.solicitud-detalle.schema');
@@ -15,6 +18,9 @@ const deleteSolicitudSchema = require('./delete.solicitud.schema');
 module.exports = {
   createSolicitudProgramaSchema,
   createSolicitudRefrendoSchema,
+  createCambioRepresentanteLegalSchema,
+  createActualizacionSchema,
+  createCambioNombreInstitucionSchema,
   findAllSolicitudesProgramasSchema,
   findOneSolicitudProgramaSchema,
   findOneSolicitudDetalleSchema,
