@@ -2,3 +2,6 @@ id,nombre,descripcion,created_at
 1,Nueva solicitud,Trámite para un nuevo RVOE,2018-08-08 0:00:00
 2,Refrendo del plan de estudios,Refrendo a planes y programas de estudios,2018-08-08 0:00:00
 3,Cambio domicilio,Cambio de domicilio de un RVOE ya existente,2018-08-08 0:00:00
+4,Cambio de representante legal,Cambio de representante legal de la institución,2026-09-14 0:00:00
+5,Actualización,Actualización de datos del RVOE,2026-09-14 0:00:00
+6,Cambio de nombre de institución,Cambio de nombre de una institución con RVOE existente,2026-09-14 0:00:00
