@@ -35,13 +35,13 @@ const findAllSolicitudesRevEquivSchema = {
                   ...interesado,
                   ...responseProperties,
                   persona: {
-                    type: 'object',
+                    type: ['object', 'null'],
                     properties: {
                       id: { type: 'integer' },
                       ...persona,
                       ...responseProperties,
                       domicilio: {
-                        type: 'object',
+                        type: ['object', 'null'],
                         properties: {
                           id: { type: 'integer' },
                           ...domicilio,
@@ -51,7 +51,7 @@ const findAllSolicitudesRevEquivSchema = {
                     },
                   },
                   institucionProcedencia: {
-                    type: 'object',
+                    type: ['object', 'null'],
                     properties: {
                       id: { type: 'integer' },
                       ...institucionProcedencia,
@@ -59,7 +59,7 @@ const findAllSolicitudesRevEquivSchema = {
                     },
                   },
                   institucionDestino: {
-                    type: 'object',
+                    type: ['object', 'null'],
                     properties: {
                       id: { type: 'integer' },
                       ...institucionDestino,
@@ -71,19 +71,19 @@ const findAllSolicitudesRevEquivSchema = {
                           ...institucionDestinoPrograma,
                           ...responseProperties,
                           programa: {
-                            type: 'object',
+                            type: ['object', 'null'],
                             properties: {
                               id: { type: 'integer' },
                               ...programa,
                               ...responseProperties,
                               plantel: {
-                                type: 'object',
+                                type: ['object', 'null'],
                                 properties: {
                                   id: { type: 'integer' },
                                   ...plantel,
                                   ...responseProperties,
                                   institucion: {
-                                    type: 'object',
+                                    type: ['object', 'null'],
                                     properties: {
                                       id: { type: 'integer' },
                                       ...institucion,
@@ -91,7 +91,7 @@ const findAllSolicitudesRevEquivSchema = {
                                     },
                                   },
                                   domicilio: {
-                                    type: 'object',
+                                    type: ['object', 'null'],
                                     properties: {
                                       id: { type: 'integer' },
                                       ...domicilio,
@@ -119,7 +119,7 @@ const findAllSolicitudesRevEquivSchema = {
                             ...asignaturaEquivalentePrograma,
                             ...responseProperties,
                             asignatura: {
-                              type: 'object',
+                              type: ['object', 'null'],
                               properties: {
                                 ...asignatura,
                                 ...responseProperties,
