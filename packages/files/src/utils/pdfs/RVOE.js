@@ -71,6 +71,9 @@ function GenerarRVOE(solicitud) {
     1: 'RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS',
     2: 'REFRENDO DEL PLAN Y PROGRAMA DE ESTUDIO',
     3: 'CAMBIO DE DOMICILIO',
+    4: 'CAMBIO DE REPRESENTANTE LEGAL',
+    5: 'ACTUALIZACIÓN',
+    6: 'CAMBIO DE NOMBRE DE INSTITUCIÓN',
   };
   const tipoSolicitud = TIPO_SOLICITUD_MAPPING[solicitud.tipoSolicitudId] || 'TIPO DE SOLICITUD DESCONOCIDO';
   const fechaFormateada = formatearFecha(solicitud.createdAt);

@@ -126,3 +126,6 @@ Dockerfile
 #PM2 files
 ecosystem.config.js
 web.config
+
+#Contexto local (no va en PRs)
+CONTEXTO-*.md

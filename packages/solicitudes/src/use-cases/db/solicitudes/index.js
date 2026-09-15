@@ -4,6 +4,9 @@ const {
 
 const createNuevaSolicitudPrograma = require('./create.solicitud-programa.use-cases');
 const createRefrendoSolicitudPrograma = require('./create.solicitud-refrendo-programa.use-cases');
+const createCambioRepresentanteSolicitudPrograma = require('./create.solicitud-cambio-representante-programa.use-cases');
+const createActualizacionSolicitudPrograma = require('./create.solicitud-actualizacion-programa.use-cases');
+const createCambioNombreSolicitudPrograma = require('./create.solicitud-cambio-nombre-programa.use-cases');
 const findAllSolicitudesProgramas = require('./find-all.solicitudes-programas.use-cases');
 const findOneSolicitudPrograma = require('./find-one.solicitud-programa.use-cases');
 const findOneSolicitudDetalle = require('./find-one.solicitud-detalle.use-cases');
@@ -29,6 +32,21 @@ module.exports = {
     solicitudes.createSolicitudProgramaAtomicQuery,
   ),
   createRefrendoSolicitudPrograma: createRefrendoSolicitudPrograma(
+    solicitudes.findOneSolicitudProgramaQuery,
+    solicitudes.countSolicitudesQuery,
+    solicitudes.createSolicitudProgramaQuery,
+  ),
+  createCambioRepresentanteSolicitudPrograma: createCambioRepresentanteSolicitudPrograma(
+    solicitudes.findOneSolicitudProgramaQuery,
+    solicitudes.countSolicitudesQuery,
+    solicitudes.createSolicitudProgramaQuery,
+  ),
+  createActualizacionSolicitudPrograma: createActualizacionSolicitudPrograma(
+    solicitudes.findOneSolicitudProgramaQuery,
+    solicitudes.countSolicitudesQuery,
+    solicitudes.createSolicitudProgramaQuery,
+  ),
+  createCambioNombreSolicitudPrograma: createCambioNombreSolicitudPrograma(
     solicitudes.findOneSolicitudProgramaQuery,
     solicitudes.countSolicitudesQuery,
     solicitudes.createSolicitudProgramaQuery,
