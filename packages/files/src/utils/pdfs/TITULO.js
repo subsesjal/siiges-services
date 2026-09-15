@@ -316,7 +316,7 @@ async function GenerarTitulo(tituloElectronico, xmlString) {
     '00001000000506574908': 'JOSÉ ROSALÍO MUÑOZ CASTRO',
   };
 
-  const nombreAutoridad = firmantesAutoridad[tituloElectronico?.noCertificadoAutoridad] || 'NOMBRE DESCONOCIDO';
+  const nombreAutoridad = firmantesAutoridad[tituloElectronico?.noCertificadoAutoridad] || 'FANNY GUADALUPE VALDIVIA MÁRQUEZ';
 
   doc.setFont('Nutmeg', 'bold');
   doc.setTextColor(0);
