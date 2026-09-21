@@ -4,15 +4,10 @@ const EXCLUDED_MODELS = require('./audit-excluded-models');
 
 const SENSITIVE_FIELD_PATTERN = /password|contrasena|token|secret/i;
 
-// Campos con PII que NO deben duplicarse en texto plano en la bitácora,
-// aunque el modelo sí se audite (a diferencia del regex, esto es por nombre exacto).
 const FIELD_EXCLUSIONS = {
   Persona: ['curp', 'rfc', 'ine', 'telefono', 'celular', 'fechaNacimiento', 'fotografia'],
 };
 
-// Cualquier valor largo (payloads de firma XML/base64, TEXT grandes, etc.)
-// se trunca a un hash + longitud en vez de duplicarse completo, sin importar
-// si conocemos el nombre del campo de antemano.
 const MAX_FIELD_LENGTH = 500;
 
 const sanitizarValor = (modelName, key, value) => {
@@ -45,32 +40,43 @@ const snapshotAnterior = (instance) => {
 
 const registerAuditHooks = (sequelize) => {
   const saveLog = async (data) => {
+    await sequelize.models.Bitacora.create(data);
+  };
+
+  const conManejoDeErrores = (nombreHook, fn) => async (instance, options) => {
     try {
-      const store = auditContext.getStore();
-      await sequelize.models.Bitacora.create({
-        usuarioId: store?.usuarioId || null,
-        lugar: (store?.endpoint || 'proceso interno').slice(0, 255),
-        requestId: store?.requestId || null,
-        ...data,
-      });
+      await fn(instance, options);
     } catch (err) {
-      Logger.error(`[audit-log] No se pudo guardar el log: ${err.message}`, { data });
+      Logger.error(`[audit-log] Fallo en hook ${nombreHook} para ${instance?.constructor?.name}: ${err.message}`, {
+        stack: err.stack,
+        registroId: instance?.id,
+      });
     }
   };
 
-  const logCreate = async (instance) => {
+  const armarBase = () => {
+    const store = auditContext.getStore();
+    return {
+      usuarioId: store?.usuarioId || null,
+      lugar: (store?.endpoint || 'proceso interno').slice(0, 255),
+      requestId: store?.requestId || null,
+    };
+  };
+
+  const logCreate = conManejoDeErrores('afterCreate', async (instance) => {
     const entidad = instance.constructor.name;
     if (EXCLUDED_MODELS.includes(entidad)) return;
     await saveLog({
+      ...armarBase(),
       accion: 'CREATE',
       entidad,
       registroId: instance.id,
       datosAnteriores: null,
       datosNuevos: sanitizar(entidad, instance.toJSON()),
     });
-  };
+  });
 
-  const logUpdate = async (instance) => {
+  const logUpdate = conManejoDeErrores('afterUpdate', async (instance) => {
     const entidad = instance.constructor.name;
     if (EXCLUDED_MODELS.includes(entidad)) return;
 
@@ -83,6 +89,7 @@ const registerAuditHooks = (sequelize) => {
 
     if (esBajaLogica) {
       await saveLog({
+        ...armarBase(),
         accion: 'DELETE',
         entidad,
         registroId: instance.id,
@@ -100,25 +107,27 @@ const registerAuditHooks = (sequelize) => {
     });
 
     await saveLog({
+      ...armarBase(),
       accion: 'UPDATE',
       entidad,
       registroId: instance.id,
       datosAnteriores: sanitizar(entidad, anteriores),
       datosNuevos: sanitizar(entidad, nuevos),
     });
-  };
+  });
 
-  const logDestroy = async (instance) => {
+  const logDestroy = conManejoDeErrores('beforeDestroy', async (instance) => {
     const entidad = instance.constructor.name;
     if (EXCLUDED_MODELS.includes(entidad)) return;
     await saveLog({
+      ...armarBase(),
       accion: 'DELETE',
       entidad,
       registroId: instance.id,
       datosAnteriores: sanitizar(entidad, instance.toJSON()),
       datosNuevos: null,
     });
-  };
+  });
 
   sequelize.addHook('afterCreate', logCreate);
   sequelize.addHook('afterUpdate', logUpdate);
