@@ -29,6 +29,7 @@ const createCambioRepresentanteSolicitudPrograma = (
   findOneSolicitudQuery,
   countSolicitudesQuery,
   createSolicitudProgramaQuery,
+  findOneEstatusSolicitudQuery,
 ) => async (identifierObj, data) => {
   const { tipoSolicitudId } = data;
   const { solicitudId } = identifierObj;
@@ -38,6 +39,10 @@ const createCambioRepresentanteSolicitudPrograma = (
       '[Solicitudes]: El tipo de solicitud no es un cambio de representante legal',
     );
   }
+
+  const estatusSolicitud = await findOneEstatusSolicitudQuery({ id: 1 });
+  checkers.throwErrorIfDataIsFalsy(estatusSolicitud, 'estatus_solicitudes', 1);
+
   const include = [{
     association: 'programa',
     include: [
@@ -67,6 +72,7 @@ const createCambioRepresentanteSolicitudPrograma = (
     folio: folioSolcitud,
     tipoSolicitudId: 4,
     estatusSolicitudId: 1,
+    usuarioId: data.usuarioId,
   };
 
   const newSolicitud = await createSolicitudProgramaQuery({

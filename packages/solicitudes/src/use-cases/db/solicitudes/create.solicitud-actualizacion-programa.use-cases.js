@@ -29,6 +29,7 @@ const createActualizacionSolicitudPrograma = (
   findOneSolicitudQuery,
   countSolicitudesQuery,
   createSolicitudProgramaQuery,
+  findOneEstatusSolicitudQuery,
 ) => async (identifierObj, data) => {
   const { tipoSolicitudId } = data;
   const { solicitudId } = identifierObj;
@@ -38,6 +39,10 @@ const createActualizacionSolicitudPrograma = (
       '[Solicitudes]: El tipo de solicitud no es una actualización',
     );
   }
+
+  const estatusSolicitud = await findOneEstatusSolicitudQuery({ id: 1 });
+  checkers.throwErrorIfDataIsFalsy(estatusSolicitud, 'estatus_solicitudes', 1);
+
   const include = [{
     association: 'programa',
     include: [
@@ -67,6 +72,7 @@ const createActualizacionSolicitudPrograma = (
     folio: folioSolcitud,
     tipoSolicitudId: 5,
     estatusSolicitudId: 1,
+    usuarioId: data.usuarioId,
   };
 
   const newSolicitud = await createSolicitudProgramaQuery({

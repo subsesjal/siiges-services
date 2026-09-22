@@ -29,6 +29,7 @@ const createCambioNombreSolicitudPrograma = (
   findOneSolicitudQuery,
   countSolicitudesQuery,
   createSolicitudProgramaQuery,
+  findOneEstatusSolicitudQuery,
 ) => async (identifierObj, data) => {
   const { tipoSolicitudId } = data;
   const { solicitudId } = identifierObj;
@@ -38,6 +39,10 @@ const createCambioNombreSolicitudPrograma = (
       '[Solicitudes]: El tipo de solicitud no es un cambio de nombre de institución',
     );
   }
+
+  const estatusSolicitud = await findOneEstatusSolicitudQuery({ id: 1 });
+  checkers.throwErrorIfDataIsFalsy(estatusSolicitud, 'estatus_solicitudes', 1);
+
   const include = [{
     association: 'programa',
     include: [
@@ -67,6 +72,7 @@ const createCambioNombreSolicitudPrograma = (
     folio: folioSolcitud,
     tipoSolicitudId: 6,
     estatusSolicitudId: 1,
+    usuarioId: data.usuarioId,
   };
 
   const newSolicitud = await createSolicitudProgramaQuery({
