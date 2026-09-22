@@ -1,29 +1,7 @@
 const { checkers } = require('@siiges-services/shared');
 const boom = require('@hapi/boom');
+const removeIds = require('../../../utils/remove-ids.utils');
 const { createFolioSolicitud } = require('../../../utils/create-folio.utils');
-
-function removeIds(obj) {
-  if (typeof obj !== 'object' || obj === null || obj instanceof Date) {
-    return obj;
-  }
-
-  if (Array.isArray(obj)) {
-    return obj.map(removeIds);
-  }
-
-  const keysToRemove = ['id', 'createdAt', 'updatedAt', 'deletedAt', 'acuerdoRvoe', 'fechaSurteEfecto'];
-
-  const newObj = Object.keys(obj)
-    .filter((key) => !keysToRemove.includes(key))
-    .reduce((acc, key) => {
-      if (typeof obj[key] === 'object') {
-        return { ...acc, [key]: removeIds(obj[key]) };
-      }
-      return { ...acc, [key]: obj[key] };
-    }, {});
-
-  return newObj;
-}
 
 const createActualizacionSolicitudPrograma = (
   findOneSolicitudQuery,
@@ -61,7 +39,9 @@ const createActualizacionSolicitudPrograma = (
 
   const solicitudData = solicitud.toJSON();
 
-  const solicitudDataWithoutIds = removeIds(solicitudData);
+  const solicitudDataWithoutIds = removeIds(solicitudData, {
+    keep: ['acuerdoRvoe', 'fechaSurteEfecto'],
+  });
 
   const totalSolicitudes = await countSolicitudesQuery();
   const folioSolcitud = createFolioSolicitud(totalSolicitudes, solicitudDataWithoutIds
