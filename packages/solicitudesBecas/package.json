@@ -26,5 +26,13 @@
   },
   "bugs": {
     "url": "https://github.com/robertotorres-dev/siiges-services/issues"
+  },
+  "dependencies": {
+    "@hapi/boom": "^10.0.0",
+    "@siiges-services/core": "^1.0.0",
+    "@siiges-services/shared": "^0.0.1",
+    "axios": "^1.7.7",
+    "google-auth-library": "^9.14.0",
+    "papaparse": "^5.4.1"
   }
 }
