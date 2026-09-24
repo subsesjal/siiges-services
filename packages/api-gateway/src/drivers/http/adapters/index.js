@@ -30,6 +30,7 @@ const presupuestosAdapter = require('./presupuestos/handlers');
 const solicitudesFoliosAdapter = require('./solicitudesFolios/handlers');
 const solicitudesRevEquiv = require('./solicitudesRevEquiv/handlers');
 const solicitudesBecasAdapter = require('./solicitudesBecas/handlers');
+const beneficiariosBecasAdapter = require('./beneficiariosBecas/handlers');
 const solicitudesServSocAdapter = require('./solicitudesServSoc/handlers');
 const estadosAdapter = require('./estados/handlers');
 const paisesAdapter = require('./paises/handlers');
@@ -68,6 +69,7 @@ module.exports = {
   solicitudesFoliosAdapter,
   solicitudesRevEquiv,
   solicitudesBecasAdapter,
+  beneficiariosBecasAdapter,
   solicitudesServSocAdapter,
   estadosAdapter,
   paisesAdapter,

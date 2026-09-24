@@ -133,6 +133,7 @@ const { SectorServicioSocial, SectorServicioSocialSchema } = require('./sectorSe
 const { ModalidadServicioSocial, ModalidadServicioSocialSchema } = require('./modalidadServicioSocial');
 const { EstatusSolicitudServicioSocial, EstatusSolicitudServicioSocialSchema } = require('./estatusSolicitudServicioSocial');
 const { TokenRecoveryPassword, TokenRecoveryPasswordSchema } = require('./tokenRecoveryPassword');
+const { UsuarioBeneficiarioBeca, UsuarioBeneficiarioBecaSchema } = require('./usuarioBeneficiarioBeca');
 const { AutorizacionReconocimiento, AutorizacionReconocimientoSchema } = require('./autorizacionReconocimiento');
 const { Cargo, CargoSchema } = require('./cargo');
 const { AlumnoTituloElectronico, AlumnoTituloElectronicoSchema } = require('./alumnosTitulosElectronicos');
@@ -368,6 +369,10 @@ function setupModels(sequelize) {
   TipoAlumnoBeca.init(TipoAlumnoBecaSchema, TipoAlumnoBeca.config(sequelize));
   EstatusAlumnoBeca.init(EstatusAlumnoBecaSchema, EstatusAlumnoBeca.config(sequelize));
   EstatusSolicitudBeca.init(EstatusSolicitudBecaSchema, EstatusSolicitudBeca.config(sequelize));
+  UsuarioBeneficiarioBeca.init(
+    UsuarioBeneficiarioBecaSchema,
+    UsuarioBeneficiarioBeca.config(sequelize),
+  );
   TokenRecoveryPassword.init(TokenRecoveryPasswordSchema, TokenRecoveryPassword.config(sequelize));
   DocumentoFirmado.init(DocumentoFirmadoSchema, DocumentoFirmado.config(sequelize));
   TokenExterno.init(TokenExternoSchema, TokenExterno.config(sequelize));
@@ -575,6 +580,7 @@ function setupModels(sequelize) {
   TipoAlumnoBeca.associate(sequelize.models);
   EstatusAlumnoBeca.associate(sequelize.models);
   EstatusSolicitudBeca.associate(sequelize.models);
+  UsuarioBeneficiarioBeca.associate(sequelize.models);
   TokenRecoveryPassword.associate(sequelize.models);
   Firmante.associate(sequelize.models);
   CatalogoCicloEscolar.associate(sequelize.models);
