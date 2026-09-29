@@ -78,7 +78,7 @@ const createFileXML = (
     folioDigital: titulo.$?.folioControl,
     fechaAutenticacion: titulo.Expedicion?.$?.fechaExpedicion,
     selloTitulo: firma?.sello,
-    noCertificadoAutoridad: firma?.noCertificadoAutoridad,
+    noCertificadoAutoridad: firma?.noCertificadoAutoridad || '00001000000516507690',
     selloAutenticacion: titulo.Autenticacion?.$?.selloAutenticacion,
   });
 
