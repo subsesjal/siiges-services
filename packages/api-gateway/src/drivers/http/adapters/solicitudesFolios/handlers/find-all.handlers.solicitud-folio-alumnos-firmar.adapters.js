@@ -3,13 +3,20 @@ const errorHandler = require('../../../utils/errorHandler');
 async function findAllSolicitudFolioAlumnosFirmar(req, reply) {
   try {
     const { programaId } = req.params;
-    const { matricula, situacionId, tipoDocumentoId } = req.query;
+    const {
+      matricula,
+      situacionId,
+      tipoDocumentoId,
+      parcial,
+    } = req.query;
+    const situacionIds = [].concat(situacionId ?? []).map(Number);
 
     const alumno = await this.solicitudFolioServices.findAllSolicitudFolioAlumnosFirmar({
       matricula,
       programaId,
-      situacionId: situacionId ? Number(situacionId) : undefined,
+      situacionIds,
       tipoDocumentoId: tipoDocumentoId ? Number(tipoDocumentoId) : undefined,
+      parcial: Boolean(parcial),
     });
 
     return reply
