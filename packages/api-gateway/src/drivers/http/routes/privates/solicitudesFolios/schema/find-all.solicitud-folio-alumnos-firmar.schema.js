@@ -24,8 +24,9 @@ const findAllSolicitudFolioAlumnosFirmar = {
     type: 'object',
     properties: {
       matricula: { type: 'string' },
-      situacionId: { type: 'integer' },
+      situacionId: { type: 'array', items: { type: 'integer' } },
       tipoDocumentoId: { type: 'integer' },
+      parcial: { type: 'boolean' },
     },
   },
   response: {

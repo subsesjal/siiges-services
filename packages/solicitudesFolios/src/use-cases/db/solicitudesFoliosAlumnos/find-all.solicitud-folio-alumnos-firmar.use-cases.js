@@ -2,6 +2,7 @@ const { checkers } = require('@siiges-services/shared');
 const { Op } = require('sequelize');
 
 const ESTATUS_EN_PROCESO = [1, 2, 4];
+const SITUACION_EGRESADO = 3;
 
 const findAllSolicitudFolioAlumnosFirmar = (
   findOneProgramaQuery,
@@ -12,7 +13,11 @@ const findAllSolicitudFolioAlumnosFirmar = (
   findAllDocumentosFirmadosQuery,
 ) => async (identifierObj) => {
   const {
-    programaId, matricula, situacionId, tipoDocumentoId,
+    programaId,
+    matricula,
+    situacionIds = [],
+    tipoDocumentoId,
+    parcial = false,
   } = identifierObj;
 
   const include = [
@@ -49,8 +54,8 @@ const findAllSolicitudFolioAlumnosFirmar = (
   }
 
   const whereClause = { programaId };
-  if (situacionId) {
-    whereClause.situacionId = situacionId;
+  if (situacionIds.length) {
+    whereClause.situacionId = situacionIds;
   }
 
   const alumnos = await findAllAlumnosQuery(whereClause, {
@@ -58,7 +63,9 @@ const findAllSolicitudFolioAlumnosFirmar = (
     strict: false,
   });
 
-  if (situacionId !== 3 || !tipoDocumentoId) {
+  const esEgresados = situacionIds.length === 1 && situacionIds[0] === SITUACION_EGRESADO;
+
+  if (!tipoDocumentoId || !(esEgresados || parcial)) {
     return alumnos;
   }
 
@@ -86,14 +93,19 @@ const findAllSolicitudFolioAlumnosFirmar = (
       && ESTATUS_EN_PROCESO.includes(s.solicitudFolio?.estatusSolicitudFolioId))
     .map((s) => s.alumnoId);
 
-  const alumnosConFolio = await findAllFolioDocumentoAlumnosQuery(
-    {
-      alumnoId: { [Op.in]: alumnosIds },
-      tipoDocumentoId,
-    },
-    { attributes: ['alumnoId'], strict: false },
-  );
-  const idsConFolio = alumnosConFolio.map((f) => f.alumnoId);
+  // En parcial un alumno puede tener varios certificados,
+  // por lo que no se excluye a quien ya tiene folio del mismo tipo.
+  let idsConFolio = [];
+  if (!parcial) {
+    const alumnosConFolio = await findAllFolioDocumentoAlumnosQuery(
+      {
+        alumnoId: { [Op.in]: alumnosIds },
+        tipoDocumentoId,
+      },
+      { attributes: ['alumnoId'], strict: false },
+    );
+    idsConFolio = alumnosConFolio.map((f) => f.alumnoId);
+  }
 
   let alumnosFiltrados = alumnos.filter(
     (alumno) => !idsEnSolicitudEnProceso.includes(alumno.id)
