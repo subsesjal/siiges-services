@@ -97,12 +97,13 @@ async function agregarFooter(doc, certificado) {
 
   const tipoCertificadoTexto = certificado?.tipoCertificado?.toUpperCase();
   const totalAsignaturas = certificado?.totalAsignaturas || 0;
+  const asignaturasAcreditadas = certificado?.asignaturasAcreditadas ?? totalAsignaturas;
   const promedioTexto = certificado?.promedioGeneral || 'N/A';
   const calificacionMinima = certificado?.calificacionMinima;
   const calificacionMaxima = certificado?.calificacionMaxima;
   const calificacionAprobatoria = certificado?.calificacionAprobatoria;
 
-  const resumenTexto = `El presente certificado ${tipoCertificadoTexto} ampara ${totalAsignaturas} asignaturas de un total de ${totalAsignaturas} obteniendo un promedio de ${promedioTexto}. La escala de calificaciones es de ${calificacionMinima} a ${calificacionMaxima} y la mínima aprobatoria es de ${calificacionAprobatoria}.`;
+  const resumenTexto = `El presente certificado ${tipoCertificadoTexto} ampara ${asignaturasAcreditadas} asignaturas de un total de ${totalAsignaturas} obteniendo un promedio de ${promedioTexto}. La escala de calificaciones es de ${calificacionMinima} a ${calificacionMaxima} y la mínima aprobatoria es de ${calificacionAprobatoria}.`;
 
   const resumenLines = doc.splitTextToSize(resumenTexto, blockWidth);
   doc.text(resumenLines, blockX, footerY);
@@ -110,7 +111,10 @@ async function agregarFooter(doc, certificado) {
   let currentY = footerY + (resumenLines.length * 7) + 3;
 
   const creditosPrograma = certificado?.creditosPrograma;
-  const creditosTexto = `Las presentes asignaturas conforman un total de ${creditosPrograma} créditos de un mínimo de ${creditosPrograma} créditos requeridos.`;
+  const creditosObtenidos = certificado?.creditosObtenidos != null
+    ? Number(certificado.creditosObtenidos).toFixed(2)
+    : creditosPrograma;
+  const creditosTexto = `Las presentes asignaturas conforman un total de ${creditosObtenidos} créditos de un mínimo de ${creditosPrograma} créditos requeridos.`;
 
   const creditosLines = doc.splitTextToSize(creditosTexto, blockWidth);
   doc.text(creditosLines, blockX, currentY);
@@ -321,6 +325,13 @@ async function GenerarCertificado(certificado) {
   const doc = new JsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
   addGaretFonts(doc);
 
+  const esCertificadoParcial = String(certificado?.tipoCertificado || '')
+    .trim().toUpperCase() === 'PARCIAL';
+  const tituloCertificado = esCertificadoParcial
+    ? 'CERTIFICADO PARCIAL DE ESTUDIOS'
+    : 'CERTIFICADO DE ESTUDIOS';
+  const marcaSinCalificacion = esCertificadoParcial ? '***' : 'ERROR';
+
   const width = doc.internal.pageSize.getWidth();
   const height = doc.internal.pageSize.getHeight();
 
@@ -404,7 +415,7 @@ async function GenerarCertificado(certificado) {
   doc.text('SECRETARÍA DE INNOVACIÓN, CIENCIA Y TECNOLOGÍA DEL ESTADO DE JALISCO', centerX, 70, { align: 'center' });
   doc.text('SUBSECRETARÍA DE EDUCACIÓN SUPERIOR', centerX, 82, { align: 'center' });
   doc.setFont('Garet', 'bold');
-  doc.text('CERTIFICADO DE ESTUDIOS', centerX, 94, { align: 'center' });
+  doc.text(tituloCertificado, centerX, 94, { align: 'center' });
 
   doc.setFontSize(8);
   doc.setFont('Garet', 'normal');
@@ -547,8 +558,13 @@ async function GenerarCertificado(certificado) {
   doc.text(certificado?.fechaInicio || 'N/A', colExpIzqX + colExpIzqWidth, expExtraY, { align: 'right' });
   expExtraY += 12;
 
-  doc.text('Fecha de terminación', colExpIzqX, expExtraY);
-  doc.text(certificado?.fechaTerminacion || 'N/A', colExpIzqX + colExpIzqWidth, expExtraY, { align: 'right' });
+  const etiquetaFechaFin = esCertificadoParcial ? 'Fecha de parcial' : 'Fecha de terminación';
+  const valorFechaFin = esCertificadoParcial
+    ? certificado?.fechaSolicitudFolio
+    : certificado?.fechaTerminacion;
+
+  doc.text(etiquetaFechaFin, colExpIzqX, expExtraY);
+  doc.text(valorFechaFin || 'N/A', colExpIzqX + colExpIzqWidth, expExtraY, { align: 'right' });
 
   const colExpDerX = colDerX + colExpIzqWidth;
   const colExpDerWidth = 140;
@@ -704,19 +720,19 @@ async function GenerarCertificado(certificado) {
 
       const sinCalificacion = asig.sinCalificacion === true;
 
-      if (sinCalificacion) {
+      if (sinCalificacion && !esCertificadoParcial) {
         doc.setTextColor(200, 0, 0);
       } else {
         doc.setTextColor(0, 0, 0);
       }
 
-      const periodo = sinCalificacion ? 'ERROR' : String(asig.periodo || '');
+      const periodo = sinCalificacion ? marcaSinCalificacion : String(asig.periodo || '');
       const periodoWidth = doc.getTextWidth(periodo);
       doc.text(periodo, xPeriodo + (colPeriodoAncho / 2) - (periodoWidth / 2), yPos);
 
       let tipoTexto;
       if (sinCalificacion) {
-        tipoTexto = 'ERROR';
+        tipoTexto = marcaSinCalificacion;
       } else if (asig.tipo === 2 || asig.tipo === '2') {
         tipoTexto = 'EXTRA';
       } else if (asig.tipo === 1 || asig.tipo === '1') {
@@ -727,13 +743,13 @@ async function GenerarCertificado(certificado) {
       const tipoWidth = doc.getTextWidth(tipoTexto);
       doc.text(tipoTexto, xTipo + (colTipoAncho / 2) - (tipoWidth / 2), yPos);
 
-      const calNum = sinCalificacion ? 'ERROR' : String(asig.calificacion || '');
+      const calNum = sinCalificacion ? marcaSinCalificacion : String(asig.calificacion || '');
       const calNumWidth = doc.getTextWidth(calNum);
       doc.text(calNum, xNum + (colNumAncho / 2) - (calNumWidth / 2), yPos);
 
       let calLetra;
       if (sinCalificacion) {
-        calLetra = 'ERROR';
+        calLetra = marcaSinCalificacion;
       } else {
         const esDecimal = certificado?.calificacionDecimal === 1;
         calLetra = asig.calificacionLetra || calificacionALetras(asig.calificacion, esDecimal) || '';
@@ -764,7 +780,7 @@ async function GenerarCertificado(certificado) {
     doc.text('SECRETARÍA DE INNOVACIÓN, CIENCIA Y TECNOLOGÍA DE JALISCO', centerX, 70, { align: 'center' });
     doc.text('SUBSECRETARÍA DE EDUCACIÓN SUPERIOR', centerX, 82, { align: 'center' });
     doc.setFont('Garet', 'bold');
-    doc.text('CERTIFICADO DE ESTUDIOS', centerX, 94, { align: 'center' });
+    doc.text(tituloCertificado, centerX, 94, { align: 'center' });
     doc.setFont('Garet', 'normal');
 
     const nuevoDatosCertificadoY = PAGINA_SIGUIENTE_DATOS_CERT_Y;
