@@ -39,7 +39,7 @@ function valorVacio($valor) {
   return $valor === null || trim((string) $valor) === '';
 }
 
-const CLAVES_CALIFICACION_INFORMATIVA = ['RC', 'NS', 'NC'];
+const CLAVES_CALIFICACION_INFORMATIVA = ['RC', 'NS', 'NC', 'NP', 'SD'];
 
 function claveCalificacionInformativa($valor) {
   if (valorVacio($valor) || is_numeric($valor)) {
