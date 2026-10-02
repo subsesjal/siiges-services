@@ -36,6 +36,7 @@ const createFileXML = (
   const curpXML = titulo.Profesionista?.$?.curp;
   const rvoeXML = titulo.Carrera?.$?.numeroRvoe;
   const firma = titulo.FirmaResponsables?.FirmaResponsable?.$;
+  const autenticacion = titulo.Autenticacion?.$;
 
   const buildPayload = (programa) => ({
     institucionId: programa?.plantel?.institucionId,
@@ -75,10 +76,10 @@ const createFileXML = (
     fechaInicioAntecedente: titulo.Antecedente?.$?.fechaInicio,
     fechaTerminacionAntecedente: titulo.Antecedente?.$?.fechaTerminacion,
     noCedula: titulo.Antecedente?.$?.noCedula,
-    folioDigital: titulo.$?.folioControl,
-    fechaAutenticacion: titulo.Expedicion?.$?.fechaExpedicion,
-    selloTitulo: firma?.sello,
-    noCertificadoAutoridad: firma?.noCertificadoAutoridad,
+    folioDigital: autenticacion?.folioDigital,
+    fechaAutenticacion: autenticacion?.fechaAutenticacion,
+    selloTitulo: autenticacion?.selloTitulo,
+    noCertificadoAutoridad: autenticacion?.noCertificadoAutoridad,
     selloAutenticacion: titulo.Autenticacion?.$?.selloAutenticacion,
   });
 
